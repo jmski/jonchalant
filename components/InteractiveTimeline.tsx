@@ -30,7 +30,6 @@ export default function InteractiveTimeline({
   onItemClick,
 }: InteractiveTimelineProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -88,7 +87,6 @@ export default function InteractiveTimeline({
           {sortedItems.map((item, index) => {
             const color = categoryColors[item.category];
             const isHovered = hoveredId === item.id;
-            const isSelected = selectedId === item.id;
 
             return (
               <div
@@ -96,10 +94,6 @@ export default function InteractiveTimeline({
                 className="relative group"
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                onClick={() => {
-                  setSelectedId(item.id);
-                  onItemClick?.(item);
-                }}
               >
                 {/* Timeline dot */}
                 <div className="flex justify-center mb-4">
@@ -107,10 +101,10 @@ export default function InteractiveTimeline({
                     className="relative w-4 h-4 rounded-full cursor-pointer transition-all duration-300"
                     style={{
                       backgroundColor: color.border,
-                      boxShadow: isHovered || isSelected
+                      boxShadow: isHovered
                         ? `0 0 20px ${color.border}, 0 0 40px ${color.border}80`
                         : `0 0 0 2px rgba(10, 6, 20, 1)`,
-                      transform: isHovered || isSelected ? 'scale(1.8)' : 'scale(1)',
+                      transform: isHovered ? 'scale(1.8)' : 'scale(1)',
                     }}
                   >
                     {/* Inner glow */}
@@ -118,7 +112,7 @@ export default function InteractiveTimeline({
                       className="absolute inset-1 rounded-full"
                       style={{
                         background: `radial-gradient(circle at center, ${color.border}, transparent)`,
-                        opacity: isHovered || isSelected ? 0.8 : 0.4,
+                        opacity: isHovered ? 0.8 : 0.4,
                       }}
                     />
                   </div>
@@ -128,8 +122,8 @@ export default function InteractiveTimeline({
                 <div
                   className="text-center text-sm font-bold mb-3 transition-all duration-300"
                   style={{
-                    color: isHovered || isSelected ? color.border : 'var(--text-secondary)',
-                    textShadow: isHovered || isSelected
+                    color: isHovered ? color.border : 'var(--text-secondary)',
+                    textShadow: isHovered
                       ? `0 0 10px ${color.border}80`
                       : 'none',
                   }}
@@ -141,13 +135,13 @@ export default function InteractiveTimeline({
                 <div
                   className="relative p-4 rounded-lg border transition-all duration-300 cursor-pointer group/card overflow-hidden"
                   style={{
-                    backgroundColor: isHovered || isSelected ? color.bg : 'rgba(22, 33, 62, 0.4)',
-                    borderColor: isHovered || isSelected ? color.border : 'rgba(45, 34, 80, 0.6)',
+                    backgroundColor: isHovered ? color.bg : 'rgba(22, 33, 62, 0.4)',
+                    borderColor: isHovered ? color.border : 'rgba(45, 34, 80, 0.6)',
                     borderWidth: '1px',
-                    transform: isHovered || isSelected
+                    transform: isHovered
                       ? 'translateY(-8px) scale(1.05)'
                       : 'translateY(0) scale(1)',
-                    boxShadow: isHovered || isSelected
+                    boxShadow: isHovered
                       ? `0 20px 40px rgba(0, 217, 255, 0.1), 0 0 20px ${color.border}40`
                       : '0 4px 6px rgba(0, 0, 0, 0.1)',
                   }}
@@ -167,7 +161,7 @@ export default function InteractiveTimeline({
                     <div
                       className="inline-block px-2 py-1 rounded text-xs font-semibold mb-2 transition-all duration-300"
                       style={{
-                        backgroundColor: isHovered || isSelected
+                        backgroundColor: isHovered
                           ? `${color.border}30`
                           : `${color.border}15`,
                         color: color.border,
@@ -181,7 +175,7 @@ export default function InteractiveTimeline({
                     <h3
                       className="text-sm font-bold mb-2 line-clamp-2 transition-all duration-300"
                       style={{
-                        color: isHovered || isSelected
+                        color: isHovered
                           ? '#ffffff'
                           : 'var(--text-heading)',
                       }}
@@ -190,7 +184,7 @@ export default function InteractiveTimeline({
                     </h3>
 
                     {/* Description - only show on hover/select */}
-                    {(isHovered || isSelected) && (
+                    {isHovered && (
                       <p
                         className="text-xs line-clamp-3 transition-all duration-300"
                         style={{ color: 'var(--text-body)' }}
@@ -200,7 +194,7 @@ export default function InteractiveTimeline({
                     )}
 
                     {/* Image preview */}
-                    {item.image && (isHovered || isSelected) && (
+                    {item.image && isHovered && (
                       <div className="mt-2 h-24 rounded overflow-hidden border border-opacity-30">
                         <img
                           src={item.image}
@@ -213,7 +207,7 @@ export default function InteractiveTimeline({
                 </div>
 
                 {/* Connecting line from dot to card */}
-                {(isHovered || isSelected) && (
+                {isHovered && (
                   <div
                     className="absolute w-0.5 left-1/2 -translate-x-1/2 transition-all duration-300"
                     style={{

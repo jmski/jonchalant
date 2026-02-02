@@ -80,18 +80,18 @@ export default function AnimatedStatCard({ stat }: AnimatedStatCardProps) {
 
       {stat.totalViews > 0 && (
         <div className="py-3 border-t" style={{ borderColor: 'var(--border-color)' }}>
-          <p className="text-2xl font-bold mb-1" style={{ color: 'var(--text-light)' }}>
+          <div className="text-2xl font-bold mb-1" style={{ color: 'var(--text-light)' }}>
             <AnimatedValue value={stat.totalViews} />
-          </p>
+          </div>
           <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Total Views</p>
         </div>
       )}
 
       {stat.avgEngagementRate > 0 && (
         <div className="py-3 border-t" style={{ borderColor: 'var(--border-color)' }}>
-          <p className="text-lg font-bold group-hover:transition-colors" style={{ color: 'var(--text-accent-secondary)' }}>
+          <div className="text-lg font-bold group-hover:transition-colors" style={{ color: 'var(--text-accent-secondary)' }}>
             <AnimatedValue value={stat.avgEngagementRate} decimals={1} duration={1.5} />%
-          </p>
+          </div>
           <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Avg Engagement</p>
         </div>
       )}

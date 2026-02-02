@@ -4,14 +4,12 @@ import { useState, useEffect } from 'react';
 interface GlitchTextProps {
   text: string;
   className?: string;
-  intensity?: 'low' | 'medium' | 'high';
   autoGlitch?: boolean;
 }
 
 export default function GlitchText({
   text,
   className = '',
-  intensity = 'medium',
   autoGlitch = false,
 }: GlitchTextProps) {
   const [isGlitching, setIsGlitching] = useState(autoGlitch);
@@ -27,17 +25,8 @@ export default function GlitchText({
     return () => clearInterval(interval);
   }, [autoGlitch]);
 
-  const glitchDuration = {
-    low: 0.3,
-    medium: 0.4,
-    high: 0.6,
-  }[intensity];
-
-  const glitchOffset = {
-    low: 2,
-    medium: 4,
-    high: 6,
-  }[intensity];
+  const glitchDuration = 0.4;
+  const glitchOffset = 4;
 
   return (
     <div

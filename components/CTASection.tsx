@@ -22,9 +22,9 @@ export default function CTASection({
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-display" style={{ background: 'var(--text-gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
             {title}
           </h2>
-          <p className="mb-8 max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          <div className="mb-8 max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             {description}
-          </p>
+          </div>
           <MagneticButton
             href={buttonLink}
             className="inline-block px-8 py-3 rounded-lg font-bold transition-all duration-300 hover:shadow-lg transform hover:scale-105"
