@@ -21,6 +21,8 @@
   },
   "chat.tools.terminal.autoApprove": {
     "npm install": true,
-    "timeout": true
+    "timeout": true,
+    "mkdir": true,
+    "mv": true
   }
 }

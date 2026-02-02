@@ -43,7 +43,7 @@ export default function PortfolioCard({
 
       {/* Image */}
       {image && (
-        <div className="relative w-full h-48 overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <div className="relative w-full h-48 overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--bg-secondary)' }}>
           <Image
             src={image}
             alt={title}
@@ -51,11 +51,11 @@ export default function PortfolioCard({
             height={400}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
-          {/* Enhanced overlay with gradient animation */}
+          {/* Enhanced overlay with theme-aware accent gradient */}
           <div 
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{
-              background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(249, 115, 22, 0.1) 100%)',
+              background: 'linear-gradient(135deg, var(--light-accent-primary, rgba(255, 215, 0, 0.2)) 0%, var(--light-accent-secondary, rgba(0, 217, 255, 0.1)) 100%)',
             }}
           />
           
@@ -65,11 +65,15 @@ export default function PortfolioCard({
             </div>
           )}
 
-          {/* Arrow icon reveal */}
+          {/* Arrow icon reveal with theme-aware background */}
           <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
             <div 
-              className="w-10 h-10 rounded-lg flex items-center justify-center text-lg"
-              style={{ background: 'var(--bg-primary)' }}
+              className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold transition-all duration-300"
+              style={{ 
+                background: 'var(--bg-tertiary)',
+                color: 'var(--text-accent-bright)',
+                border: '1px solid var(--border-color-light)'
+              }}
             >
               →
             </div>
@@ -78,16 +82,16 @@ export default function PortfolioCard({
       )}
 
       {/* Content */}
-      <div className="p-6" style={{ background: 'linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary))' }}>
-        <h3 className="text-lg font-bold mb-2 group-hover:transition-colors group-hover:duration-300" style={{ color: 'var(--text-accent-bright)' }}>
+      <div className="p-6 transition-all duration-300" style={{ background: 'linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary))' }}>
+        <h3 className="text-lg font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--text-accent-bright)' }}>
           {title}
         </h3>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-body)' }}>
+        <p className="text-sm leading-relaxed transition-colors duration-300" style={{ color: 'var(--text-body)' }}>
           {description}
         </p>
         {link && (
           <div className="mt-4 flex items-center gap-2 text-sm font-semibold opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all duration-300" style={{ color: 'var(--text-accent-bright)' }}>
-            Learn more <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+            Learn more <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
           </div>
         )}
       </div>
@@ -96,7 +100,7 @@ export default function PortfolioCard({
 
   if (link) {
     return (
-      <a href={link} className="no-underline">
+      <a href={link} className="no-underline block transition-all duration-300">
         {content}
       </a>
     );

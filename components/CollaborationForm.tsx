@@ -179,10 +179,10 @@ export default function CollaborationForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full font-bold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 transform disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:-translate-y-1 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
         style={{
           background: 'var(--cta-gradient)',
-          color: 'var(--btn-primary-text)',
+          color: 'var(--btn-primary-text, white)',
         }}
       >
         {status === 'loading' ? 'Sending...' : 'Send Inquiry'}

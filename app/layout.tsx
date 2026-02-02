@@ -16,6 +16,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        {/* FOUC Prevention: Apply stored theme before page renders */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const stored = localStorage.getItem('jonchalon-theme') || 'default';
+                document.documentElement.setAttribute('data-theme', stored);
+              })();
+            `,
+          }}
+        />
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
@@ -39,6 +50,13 @@ export default function RootLayout({
         )}
       </head>
       <body className="antialiased dark:text-slate-50" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-light)' }}>
+        {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-accent-primary focus:text-slate-900 focus:font-semibold"
+        >
+          Skip to main content
+        </a>
         <ThemeProvider>
           {children}
         </ThemeProvider>

@@ -14,7 +14,14 @@ export function useTheme() {
   // Initialize theme from localStorage or system preference
   useEffect(() => {
     const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-    const initialTheme = storedTheme || DEFAULT_THEME;
+    let initialTheme = storedTheme || DEFAULT_THEME;
+
+    // If no stored theme, check system preference for reduced motion / color scheme
+    if (!storedTheme) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      initialTheme = prefersDark ? 'midnight' : 'executive';
+    }
+
     setTheme(initialTheme);
     applyTheme(initialTheme);
     setMounted(true);

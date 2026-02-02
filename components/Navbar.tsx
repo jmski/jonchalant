@@ -48,9 +48,12 @@ function ThemeButton({ theme, isActive, onClick }: { theme: Theme; isActive: boo
     <button
       onClick={onClick}
       className={`w-6 h-6 rounded transition-all duration-200 hover:scale-110 ${
-        isActive ? 'ring-2 ring-offset-2 ring-slate-400' : 'opacity-50 hover:opacity-75'
+        isActive ? 'ring-2 ring-offset-2' : 'opacity-50 hover:opacity-75'
       }`}
-      style={{ backgroundColor: getThemeColor() }}
+      style={{ 
+        backgroundColor: getThemeColor(),
+        ...(isActive && { ringColor: getThemeColor() })
+      }}
       aria-label={`Switch to ${theme} theme`}
       title={`${theme === 'default' ? 'Default' : theme === 'executive' ? 'Executive' : 'Midnight'} theme`}
     />
