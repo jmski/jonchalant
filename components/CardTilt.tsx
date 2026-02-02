@@ -5,13 +5,11 @@ import { ReactNode } from 'react';
 interface CardTiltProps {
   children: ReactNode;
   className?: string;
-  intensity?: number;
 }
 
 export default function CardTilt({
   children,
   className = '',
-  intensity = 15,
 }: CardTiltProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -26,8 +24,8 @@ export default function CardTilt({
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    const rotateX = ((mouseY - centerY) / centerY) * intensity;
-    const rotateY = ((centerX - mouseX) / centerX) * intensity;
+    const rotateX = ((mouseY - centerY) / centerY) * 15;
+    const rotateY = ((centerX - mouseX) / centerX) * 15;
 
     setRotation({ x: rotateX, y: rotateY });
   };

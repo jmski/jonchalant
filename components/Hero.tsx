@@ -1,5 +1,4 @@
 'use client';
-import { useState, useEffect } from 'react';
 import VideoEmbed from '@/components/VideoEmbed';
 import CursorGlow from '@/components/CursorGlow';
 import StageLighting from '@/components/StageLighting';
@@ -25,13 +24,6 @@ export default function Hero({
   secondaryCtaText = 'Explore Work',
   secondaryCtaLink = '/dance',
 }: HeroProps) {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <>
@@ -60,7 +52,7 @@ export default function Hero({
       )}
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-24 lg:py-32" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-24 lg:py-32">
         {/* Accent badge */}
         <div className="mb-8 flex justify-center">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm" style={{ backgroundColor: 'var(--badge-gold-bg)', border: '1px solid var(--badge-gold-border)', color: 'var(--badge-gold-text)' }}>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Jon | Choreographer & Content Creator",
@@ -57,9 +57,10 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <ThemeProvider>
+        <Navbar />
+        <main id="main-content">
           {children}
-        </ThemeProvider>
+        </main>
       </body>
     </html>
   );
