@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import ScrollFade from "@/components/ScrollFade";
 import CTASection from "@/components/CTASection";
 
@@ -87,8 +86,6 @@ export default async function MediaKit() {
   
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <Navbar />
-      
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="py-20 sm:py-28">

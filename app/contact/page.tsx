@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Navbar from "@/components/Navbar";
 import ScrollFade from "@/components/ScrollFade";
 
 const contactData = {
@@ -45,8 +44,6 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <Navbar />
-      
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="py-20 sm:py-28">
@@ -163,9 +160,10 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+                className="w-full font-bold py-3 px-6 rounded-lg transition-all duration-300"
                 style={{
                   background: 'var(--cta-gradient)',
+                  color: 'var(--btn-primary-text)',
                 }}
               >
                 Send Message

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
+import { useTheme, type Theme } from '@/lib/useTheme';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -11,6 +12,12 @@ const NAV_LINKS = [
   { label: 'Media Kit', href: '/media-kit' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
+];
+
+const THEMES: Array<{ id: Theme; label: string }> = [
+  { id: 'default', label: 'Default' },
+  { id: 'executive', label: 'Executive' },
+  { id: 'midnight', label: 'Midnight' },
 ];
 
 function MenuIcon() {
@@ -29,13 +36,35 @@ function CloseIcon() {
   );
 }
 
+function ThemeButton({ theme, isActive, onClick }: { theme: Theme; isActive: boolean; onClick: () => void }) {
+  const getThemeColor = () => {
+    if (theme === 'default') return 'var(--accent-primary)';
+    if (theme === 'executive') return 'var(--accent-primary)';
+    if (theme === 'midnight') return 'var(--accent-secondary)';
+    return 'var(--text-secondary)';
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={`w-6 h-6 rounded transition-all duration-200 hover:scale-110 ${
+        isActive ? 'ring-2 ring-offset-2 ring-slate-400' : 'opacity-50 hover:opacity-75'
+      }`}
+      style={{ backgroundColor: getThemeColor() }}
+      aria-label={`Switch to ${theme} theme`}
+      title={`${theme === 'default' ? 'Default' : theme === 'executive' ? 'Executive' : 'Midnight'} theme`}
+    />
+  );
+}
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, changeTheme } = useTheme();
   const toggleMenu = useCallback(() => setIsOpen(prev => !prev), []);
   const closeMenu = useCallback(() => setIsOpen(false), []);
 
   return (
-    <nav className="sticky top-0 z-40 border-b backdrop-blur-sm bg-opacity-95" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-subtle)' }}>
+    <nav className="sticky top-0 z-40 border-b backdrop-blur-sm bg-opacity-95" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -47,7 +76,7 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation Links - Desktop */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 ml-16">
             {NAV_LINKS.map(link => (
               <Link
                 key={link.href}
@@ -56,6 +85,18 @@ export default function Navbar() {
               >
                 {link.label}
               </Link>
+            ))}
+          </div>
+
+          {/* Theme Toggle - Desktop */}
+          <div className="hidden md:flex items-center gap-2 ml-auto mr-6">
+            {THEMES.map(({ id, label }) => (
+              <ThemeButton
+                key={id}
+                theme={id}
+                isActive={theme === id}
+                onClick={() => changeTheme(id)}
+              />
             ))}
           </div>
 
@@ -73,7 +114,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-4 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+          <div className="md:hidden pb-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
             {NAV_LINKS.map(link => (
               <Link
                 key={link.href}
@@ -84,6 +125,20 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {/* Theme Toggle - Mobile */}
+            <div className="flex gap-2 mt-4 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+              {THEMES.map(({ id, label }) => (
+                <ThemeButton
+                  key={id}
+                  theme={id}
+                  isActive={theme === id}
+                  onClick={() => {
+                    changeTheme(id);
+                    closeMenu();
+                  }}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>

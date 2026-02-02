@@ -18,11 +18,11 @@ interface InteractiveTimelineProps {
 }
 
 const categoryColors = {
-  choreography: { bg: 'rgba(0, 217, 255, 0.1)', border: '#00d9ff', label: 'Choreography' },
-  performance: { bg: 'rgba(255, 215, 0, 0.1)', border: '#ffd700', label: 'Performance' },
-  freestyle: { bg: 'rgba(255, 0, 110, 0.1)', border: '#ff006e', label: 'Freestyle' },
-  breakthrough: { bg: 'rgba(147, 51, 234, 0.1)', border: '#9333ea', label: 'Breakthrough' },
-  collaboration: { bg: 'rgba(34, 197, 94, 0.1)', border: '#22c55e', label: 'Collaboration' },
+  choreography: { bg: 'var(--category-choreography-bg)', border: 'var(--category-choreography-border)', label: 'Choreography' },
+  performance: { bg: 'var(--category-performance-bg)', border: 'var(--category-performance-border)', label: 'Performance' },
+  freestyle: { bg: 'var(--category-freestyle-bg)', border: 'var(--category-freestyle-border)', label: 'Freestyle' },
+  breakthrough: { bg: 'var(--category-breakthrough-bg)', border: 'var(--category-breakthrough-border)', label: 'Breakthrough' },
+  collaboration: { bg: 'var(--category-collaboration-bg)', border: 'var(--category-collaboration-border)', label: 'Collaboration' },
 };
 
 export default function InteractiveTimeline({

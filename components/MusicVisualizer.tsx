@@ -113,7 +113,7 @@ export default function MusicVisualizer({
       style={{
         display: 'block',
         borderRadius: '8px',
-        background: 'rgba(10, 6, 20, 0.3)',
+        backgroundColor: 'var(--bg-secondary)',
       }}
     />
   );

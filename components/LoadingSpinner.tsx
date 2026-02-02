@@ -21,7 +21,7 @@ export default function LoadingSpinner({
     <div
       className={`rounded-full animate-spin ${sizeClass} ${className}`}
       style={{
-        borderColor: 'rgba(212, 165, 116, 0.2)',
+        borderColor: 'var(--border-subtle)',
         borderTopColor: 'var(--accent-primary)',
       }}
     />
@@ -29,7 +29,7 @@ export default function LoadingSpinner({
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center" style={{ backgroundColor: 'rgba(10, 14, 39, 0.8)', zIndex: 50 }}>
+      <div className="fixed inset-0 flex items-center justify-center" style={{ backgroundColor: 'var(--overlay-dark)', zIndex: 50 }}>
         {spinner}
       </div>
     );

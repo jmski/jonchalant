@@ -43,7 +43,7 @@ export default function PortfolioCard({
 
       {/* Image */}
       {image && (
-        <div className="relative w-full h-48 overflow-hidden bg-slate-800">
+        <div className="relative w-full h-48 overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
           <Image
             src={image}
             alt={title}

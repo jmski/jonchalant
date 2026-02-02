@@ -4,7 +4,8 @@ export default function SectionDivider({ variant = 'wave' }: { variant?: 'wave' 
       <div className="w-full h-20 overflow-hidden" style={{ background: 'linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary))' }}>
         <svg
           viewBox="0 0 1200 120"
-          className="w-full h-full text-slate-800"
+          className="w-full h-full"
+          style={{ color: 'var(--text-secondary)' }}
           preserveAspectRatio="none"
         >
           <path
@@ -27,7 +28,8 @@ export default function SectionDivider({ variant = 'wave' }: { variant?: 'wave' 
       <div className="w-full h-16 overflow-hidden" style={{ background: 'linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary))' }}>
         <svg
           viewBox="0 0 1200 100"
-          className="w-full h-full text-slate-800"
+          className="w-full h-full"
+          style={{ color: 'var(--text-secondary)' }}
           preserveAspectRatio="none"
         >
           <polygon points="0,0 1200,0 1200,100 0,80" fill="currentColor" opacity="0.4" />

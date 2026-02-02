@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import PortfolioCard from '@/components/PortfolioCard';
 import ScrollFade from '@/components/ScrollFade';
@@ -34,8 +33,6 @@ export default async function Home() {
   return (
     <PageTransition>
       <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
-        <Navbar />
-
       {/* Hero Section */}
       <Hero
         headline={homeData.headline}

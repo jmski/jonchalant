@@ -39,9 +39,10 @@ export default function Toast({
 
   return (
     <div
-      className="fixed bottom-6 right-6 max-w-sm rounded-lg p-4 text-white shadow-lg transition-all duration-300 animate-slideInUp"
+      className="fixed bottom-6 right-6 max-w-sm rounded-lg p-4 shadow-lg transition-all duration-300 animate-slideInUp"
       style={{
         background: bgColors[type],
+        color: 'var(--btn-primary-text)',
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(100px)',
       }}

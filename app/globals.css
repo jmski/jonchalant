@@ -1,87 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  /* ========== PRIMARY ACCENT COLORS - BTS-Inspired Tech Luxury ========== */
-  --accent-primary: #ffd700; /* Gold - luxury, spotlight, performance */
-  --accent-secondary: #00d9ff; /* Electric cyan - energy, modern movement */
-  --accent-tertiary: #ff006e; /* Neon pink - bold creativity, artistic statement */
+  /* ========== PRIMARY ACCENT COLORS ========== */
+  --accent-primary: #ffd700; /* Gold */
+  --accent-secondary: #00d9ff; /* Cyan */
+  --accent-tertiary: #ff006e; /* Pink */
 
-  /* ========== TEXT COLORS - Dark Mode First ========== */
-  --text-heading: #ffffff; /* Pure white for headings - maximum impact */
-  --text-body: #e0e7ff; /* Light lavender for body text */
-  --text-secondary: #a5b4fc; /* Soft indigo gray */
-  --text-muted: #818cf8; /* Medium indigo */
-  --text-accent: #ffd700; /* Gold text for accents */
-  --text-accent-bright: #00d9ff; /* Cyan for interactive elements */
-  --text-accent-secondary: #ff006e; /* Pink for secondary accents */
-  --text-light: #ffffff; /* Pure white text */
-  --text-white: #ffffff; /* Pure white */
-  --text-success: #10b981; /* Green for success */
-  --text-error: #ff006e; /* Pink for errors */
+  /* ========== TEXT COLORS ========== */
+  --text-heading: #ffffff;
+  --text-body: #e0e7ff;
+  --text-secondary: #a5b4fc;
+  --text-accent: #ffd700;
+  --text-accent-bright: #00d9ff;
+  --text-accent-secondary: #ff006e;
+  --text-success: #10b981;
+  --text-error: #ff006e;
 
-  /* ========== BACKGROUND COLORS - BTS Dark Purple Palette ========== */
-  --bg-primary: #0a0614; /* Deep purple - main background */
-  --bg-secondary: #16213e; /* Rich purple-navy - cards, elevated surfaces */
-  --bg-tertiary: #1a0f2e; /* Darker purple for sections */
-  --bg-muted: #0f0820; /* Deep purple-black */
-  --bg-light: #ffffff; /* Pure white (used sparingly) */
-  --bg-hover: #1d1642; /* Hover state background - lighter purple */
+  /* ========== BACKGROUND COLORS ========== */
+  --bg-primary: #0a0614;
+  --bg-secondary: #16213e;
+  --bg-tertiary: #1a0f2e;
 
-  /* ========== SECTION BACKGROUNDS ========== */
-  --section-bg-dark: #1a0f2e; /* For contrast sections */
-  --section-bg-light: #16213e; /* Light sections */
-
-  /* ========== BORDER & DIVIDER COLORS ========== */
-  --border-color: #2d2250; /* Subtle purple borders on dark bg */
-  --border-color-light: #4d3d75; /* Lighter borders for contrast */
-  --border-muted: #1a0f2e; /* Darker borders */
-  --border-accent: #ffd700; /* Gold borders for accents */
-  --border-accent-secondary: #00d9ff; /* Cyan borders */
+  /* ========== BORDER COLORS ========== */
+  --border-color: #2d2250;
+  --border-color-light: #4d3d75;
+  --border-accent: #ffd700;
+  --border-accent-secondary: #00d9ff;
 
   /* ========== CARD STYLING ========== */
-  --card-bg: #16213e; /* Card backgrounds */
-  --card-border: #2d2250; /* Card borders */
-  --card-hover-bg: #1d1642; /* Card hover background */
-  --card-hover-border: #00d9ff; /* Card hover border - cyan glow */
+  --card-bg: #16213e;
+  --card-border: #2d2250;
 
-  /* ========== BUTTON STYLING ========== */
-  --btn-primary-bg: #ffd700; /* Primary button background */
-  --btn-primary-text: #0a0614; /* Primary button text - dark purple */
-  --btn-primary-hover: #ffed4e; /* Primary button hover - lighter gold */
-  --btn-secondary-bg: transparent; /* Secondary button background */
-  --btn-secondary-border: #2d2250; /* Secondary button border */
-  --btn-secondary-text: #e0e7ff; /* Secondary button text */
-  --btn-secondary-hover-text: #00d9ff; /* Secondary button hover text - cyan */
-  --btn-secondary-hover-border: #00d9ff; /* Secondary button hover border - cyan */
-
-  /* ========== FORM STYLING ========== */
-  --form-input-bg: #0f0820; /* Form input backgrounds */
-  --form-input-border: #2d2250; /* Form input borders */
-  --form-input-text: #ffffff; /* Form input text */
-  --form-input-placeholder: #818cf8; /* Form input placeholder */
-  --form-input-focus-border: #00d9ff; /* Form input focus border - cyan */
-  --form-input-focus-shadow: rgba(
-    0,
-    217,
-    255,
-    0.2
-  ); /* Form input focus shadow - cyan */
-
-  /* ========== CTA GRADIENT - BTS Tech Luxury ========== */
-  --cta-gradient-start: rgb(0, 217, 255);
-  --cta-gradient-end: rgb(255, 107, 255);
-  --cta-gradient: linear-gradient(
-    to right,
-    var(--cta-gradient-start),
-    var(--cta-gradient-end)
-  );
-  --text-gradient-heading: linear-gradient(to right, #00d9ff, #ff006e);
-  --cta-text-light: rgb(255, 255, 255); /* Pure white text on gradient */
-  --cta-text-accent: rgb(255, 215, 0); /* Gold text for buttons on dark bg */
-  --cta-bg-light: rgba(0, 217, 255, 0.15); /* Cyan background (subtle) */
-  --cta-border-light: rgb(0, 217, 255); /* Cyan border */
-
-  /* ========== SHADOWS - Enhanced for BTS Luxury ========== */
+  /* ========== SHADOWS ========== */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.8);
@@ -89,46 +39,257 @@
   --shadow-accent-lg: 0 0 30px rgba(0, 217, 255, 0.4);
 
   /* ========== UTILITY COLORS ========== */
-  --color-success: #10b981; /* Green - for success messages */
-  --color-success-light: #d1fae5; /* Light green - for success backgrounds */
-  --color-success-dark: #064e3b; /* Dark green - for success text on light bg */
-  --color-error: #ff006e; /* Pink - for errors */
-  --color-error-light: #fce7f3; /* Light pink - for error backgrounds */
-  --color-error-dark: #831843; /* Dark pink - for error text on light bg */
-  --color-warning: #ffd700; /* Gold - for warnings */
+  --color-success: #10b981;
+  --color-success-light: #d1fae5;
+  --color-success-dark: #064e3b;
+  --color-error: #ff006e;
+  --color-error-light: #fce7f3;
+  --color-error-dark: #831843;
+  --color-warning: #ffd700;
 
-  /* ========== GLITCH & EFFECT COLORS ========== */
-  --glitch-red: rgb(255, 0, 0); /* Red glitch layer */
-  --glitch-cyan: rgb(0, 255, 255); /* Cyan glitch layer */
-  --glitch-magenta: #f0f; /* Magenta text shadow */
-
-  /* ========== BADGE & ACCENT COLORS ========== */
-  --badge-gold-bg: rgba(255, 215, 0, 0.2); /* Gold badge background */
-  --badge-gold-border: rgba(255, 215, 0, 0.4); /* Gold badge border */
-  --badge-gold-text: #fef3c7; /* Light yellow text */
-  --badge-cyan-bg: rgba(0, 217, 255, 0.1); /* Cyan badge background */
-  --badge-cyan-border: rgba(0, 217, 255, 0.2); /* Cyan badge border */
-
-  /* ========== GRADIENT HEADINGS ========== */
+  /* ========== GRADIENTS ========== */
   --gradient-heading: linear-gradient(to right, #00d9ff, #ff006e);
   --gradient-accent: linear-gradient(to right, #ffd700, #00d9ff);
+  --cta-gradient: linear-gradient(
+    to right,
+    rgb(0, 217, 255),
+    rgb(255, 107, 255)
+  );
 
-  /* ========== INPUT STYLING FOR LIGHT MODE ========== */
-  --input-light-bg: #f8fafc;
-  --input-light-border: #e2e8f0;
-  --input-light-text: #1e293b;
-  --input-light-placeholder: #94a3b8;
+  /* ========== TEXT UTILITIES ========== */
+  --text-light: var(--text-body);
+  --text-muted: var(--text-secondary);
+
+  /* ========== BACKGROUND UTILITIES ========== */
+  --bg-muted: var(--bg-tertiary);
+  --border-subtle: var(--border-color-light);
+
+  /* ========== BADGE COLORS ========== */
+  --badge-gold-bg: rgba(255, 215, 0, 0.1);
+  --badge-gold-border: rgba(255, 215, 0, 0.3);
+  --badge-gold-text: var(--text-accent);
+
+  /* ========== GRADIENT TEXT ========== */
+  --text-gradient-heading: var(--gradient-heading);
+
+  /* ========== OVERLAY UTILITIES ========== */
+  --overlay-dark: rgba(10, 14, 39, 0.8);
+  --overlay-dark-medium: rgba(26, 31, 58, 0.5);
+
+  /* ========== LIGHTING EFFECTS ========== */
+  --light-cyan: rgba(0, 217, 255, 0.4);
+  --light-cyan-medium: rgba(0, 217, 255, 0.2);
+  --light-cyan-glow: rgba(0, 217, 255, 0.3);
+  --light-gold: rgba(255, 215, 0, 0.6);
+  --light-gold-medium: rgba(255, 215, 0, 0.2);
+  --light-pink: rgba(255, 0, 110, 0.2);
+  --light-pink-subtle: rgba(255, 0, 110, 0.05);
+
+  /* ========== CATEGORY COLORS ========== */
+  --category-choreography-bg: rgba(0, 217, 255, 0.1);
+  --category-choreography-border: #00d9ff;
+  --category-performance-bg: rgba(255, 215, 0, 0.1);
+  --category-performance-border: #ffd700;
+  --category-freestyle-bg: rgba(255, 0, 110, 0.1);
+  --category-freestyle-border: #ff006e;
+  --category-breakthrough-bg: rgba(147, 51, 234, 0.1);
+  --category-breakthrough-border: #9333ea;
+  --category-collaboration-bg: rgba(34, 197, 94, 0.1);
+  --category-collaboration-border: #22c55e;
 
   /* ========== FONTS ========== */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Poppins", Roboto, sans-serif;
   --font-display: "Poppins", "Inter", sans-serif;
+}
 
-  /* ========== NEUTRALS ========== */
-  --slate-900: #0a0614; /* Deep purple */
-  --slate-700: #16213e; /* Purple-navy */
-  --slate-500: #818cf8; /* Indigo */
-  --white: #ffffff; /* Pure white */
+/* ========== EXECUTIVE THEME ========== */
+html[data-theme="executive"] {
+  /* Base & Surface Layering - distinct hierarchy */
+  --bg-primary: #f0f4f8; /* Light grayish-blue base */
+  --bg-secondary: #ffffff; /* Pure white for surfaces (cards, nav) */
+  --bg-tertiary: #e8ecf1; /* Subtle divider/section background */
+
+  /* Typography - high contrast */
+  --text-heading: #0f172a; /* Deep charcoal for headings (WCAG AAA) */
+  --text-body: #1e293b; /* Dark slate for body text (WCAG AAA) */
+  --text-secondary: #475569; /* Medium-dark slate for secondary (7.2:1 ratio) */
+  --text-accent: #4f46e5; /* Deep indigo for accents */
+  --text-accent-bright: #4f46e5; /* Accent highlight */
+  --text-accent-secondary: #4f46e5;
+
+  /* Accents & Borders - with visual hierarchy */
+  --primary-color: #4f46e5; /* Deep indigo (primary CTA) */
+  --primary-hover: #4338ca; /* Darker indigo for hover */
+  --accent-primary: #4f46e5; /* Indigo for primary elements */
+  --accent-secondary: #06b6d4; /* Cyan for secondary interactive */
+  --accent-tertiary: #ec4899; /* Pink for tertiary emphasis */
+  --border-color: #cbd5e1; /* Medium gray (visible but subtle) */
+  --border-accent: #4f46e5; /* Indigo borders for interactive */
+  --border-accent-secondary: #06b6d4;
+
+  /* Card & Input Styling */
+  --card-bg: #ffffff; /* Pure white cards */
+  --card-border: #cbd5e1; /* Visible subtle border */
+  --input-bg: #f8fafc; /* Slightly off-white for inputs */
+  --input-border: #cbd5e1; /* Medium gray for input borders */
+  --input-border-focus: #4f46e5; /* Indigo on focus */
+
+  /* Shadows - delicate but visible */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.15);
+  --shadow-accent: 0 0 20px rgba(79, 70, 229, 0.15);
+  --shadow-accent-lg: 0 0 30px rgba(79, 70, 229, 0.2);
+
+  /* Utility Colors */
+  --color-success: #059669;
+  --color-success-light: #d1fae5;
+  --color-success-dark: #064e3b;
+  --color-error: #dc2626;
+  --color-error-light: #fee2e2;
+  --color-error-dark: #7f1d1d;
+  --color-warning: #d97706;
+
+  /* Gradients - updated for new accent colors */
+  --gradient-heading: linear-gradient(to right, #4f46e5, #06b6d4);
+  --gradient-accent: linear-gradient(to right, #4f46e5, #06b6d4);
+  --cta-gradient: linear-gradient(to right, rgb(79, 70, 229), rgb(79, 70, 229));
+
+  /* ========== TEXT UTILITIES ========== */
+  --text-light: var(--text-body);
+  --text-muted: var(--text-secondary);
+
+  /* ========== BACKGROUND UTILITIES ========== */
+  --bg-muted: var(--bg-tertiary);
+  --border-subtle: #e2e8f0;
+
+  /* ========== BADGE COLORS ========== */
+  --badge-gold-bg: rgba(79, 70, 229, 0.1);
+  --badge-gold-border: rgba(79, 70, 229, 0.3);
+  --badge-gold-text: var(--accent-primary);
+
+  /* ========== GRADIENT TEXT ========== */
+  --text-gradient-heading: var(--gradient-heading);
+
+  /* ========== OVERLAY UTILITIES ========== */
+  --overlay-dark: rgba(240, 244, 248, 0.9);
+  --overlay-dark-medium: rgba(232, 236, 241, 0.7);
+
+  /* ========== LIGHTING EFFECTS ========== */
+  --light-cyan: rgba(6, 182, 212, 0.2);
+  --light-cyan-medium: rgba(6, 182, 212, 0.1);
+  --light-cyan-glow: rgba(6, 182, 212, 0.15);
+  --light-gold: rgba(79, 70, 229, 0.15);
+  --light-gold-medium: rgba(79, 70, 229, 0.08);
+  --light-pink: rgba(236, 72, 153, 0.15);
+  --light-pink-subtle: rgba(236, 72, 153, 0.08);
+
+  /* ========== CATEGORY COLORS ========== */
+  --category-choreography-bg: rgba(6, 182, 212, 0.1);
+  --category-choreography-border: #06b6d4;
+  --category-performance-bg: rgba(79, 70, 229, 0.1);
+  --category-performance-border: #4f46e5;
+  --category-freestyle-bg: rgba(236, 72, 153, 0.1);
+  --category-freestyle-border: #ec4899;
+  --category-breakthrough-bg: rgba(147, 51, 234, 0.1);
+  --category-breakthrough-border: #9333ea;
+  --category-collaboration-bg: rgba(34, 197, 94, 0.1);
+  --category-collaboration-border: #22c55e;
+}
+
+/* ========== MIDNIGHT THEME ========== */
+html[data-theme="midnight"] {
+  /* Backgrounds */
+  --bg-primary: #2a1f1a;
+  --bg-secondary: #3d2d26;
+  --bg-tertiary: #4a3530;
+
+  /* Typography */
+  --text-heading: #f5e6d3;
+  --text-body: #f5e6d3;
+  --text-secondary: #d4c5b9;
+  --text-accent: #ff8c42;
+  --text-accent-bright: #ff8c42;
+  --text-accent-secondary: #ff8c42;
+
+  /* Accents & Borders */
+  --primary-color: #ff8c42;
+  --primary-hover: #e87b33;
+  --accent-primary: #ff8c42;
+  --accent-secondary: #ff8c42;
+  --accent-tertiary: #ff8c42;
+  --border-color: #4a3530;
+  --border-accent: #ff8c42;
+  --border-accent-secondary: #ff8c42;
+
+  /* Card & Shadows */
+  --card-bg: #3d2d26;
+  --card-border: #4a3530;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.8);
+  --shadow-accent: 0 0 20px rgba(255, 140, 66, 0.25);
+  --shadow-accent-lg: 0 0 30px rgba(255, 140, 66, 0.35);
+
+  /* Utility Colors */
+  --color-success: #6ee7b7;
+  --color-success-light: #d1fae5;
+  --color-success-dark: #064e3b;
+  --color-error: #ff6b6b;
+  --color-error-light: #fce7f3;
+  --color-error-dark: #831843;
+  --color-warning: #ffd700;
+
+  /* Gradients */
+  --gradient-heading: linear-gradient(to right, #2dd4bf, #14b8a6);
+  --gradient-accent: linear-gradient(to right, #2dd4bf, #14b8a6);
+  --cta-gradient: linear-gradient(
+    to right,
+    rgb(45, 212, 191),
+    rgb(20, 184, 166)
+  );
+
+  /* ========== TEXT UTILITIES ========== */
+  --text-light: var(--text-body);
+  --text-muted: var(--text-secondary);
+
+  /* ========== BACKGROUND UTILITIES ========== */
+  --bg-muted: var(--bg-tertiary);
+  --border-subtle: #4a3530;
+
+  /* ========== BADGE COLORS ========== */
+  --badge-gold-bg: rgba(255, 140, 66, 0.1);
+  --badge-gold-border: rgba(255, 140, 66, 0.3);
+  --badge-gold-text: var(--accent-primary);
+
+  /* ========== GRADIENT TEXT ========== */
+  --text-gradient-heading: var(--gradient-heading);
+
+  /* ========== OVERLAY UTILITIES ========== */
+  --overlay-dark: rgba(42, 31, 26, 0.8);
+  --overlay-dark-medium: rgba(61, 45, 38, 0.5);
+
+  /* ========== LIGHTING EFFECTS ========== */
+  --light-cyan: rgba(255, 140, 66, 0.3);
+  --light-cyan-medium: rgba(255, 140, 66, 0.15);
+  --light-cyan-glow: rgba(255, 140, 66, 0.2);
+  --light-gold: rgba(255, 140, 66, 0.4);
+  --light-gold-medium: rgba(255, 140, 66, 0.2);
+  --light-pink: rgba(255, 140, 66, 0.25);
+  --light-pink-subtle: rgba(255, 140, 66, 0.12);
+
+  /* ========== CATEGORY COLORS ========== */
+  --category-choreography-bg: rgba(255, 140, 66, 0.1);
+  --category-choreography-border: #ff8c42;
+  --category-performance-bg: rgba(255, 140, 66, 0.1);
+  --category-performance-border: #ff8c42;
+  --category-freestyle-bg: rgba(255, 140, 66, 0.1);
+  --category-freestyle-border: #ff8c42;
+  --category-breakthrough-bg: rgba(147, 51, 234, 0.1);
+  --category-breakthrough-border: #9333ea;
+  --category-collaboration-bg: rgba(34, 197, 94, 0.1);
+  --category-collaboration-border: #22c55e;
 }
 
 /* Display font class */
@@ -166,15 +327,12 @@
 
 /* Navigation link utilities */
 .nav-link {
+  @apply no-underline font-medium text-sm transition-colors;
   color: var(--text-secondary);
-  transition: color 0.3s ease;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
 }
 
 .nav-link:hover {
-  color: var(--text-accent);
+  color: var(--accent-primary);
 }
 
 /* Background utilities */
@@ -196,12 +354,12 @@
 }
 
 .border-accent {
-  border-color: var(--border-accent);
+  border-color: var(--accent-primary);
 }
 
 /* Gradient text utilities */
 .text-gradient-heading {
-  background: linear-gradient(to right, #f5f1ed, #fde047);
+  background: var(--gradient-heading);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -209,28 +367,31 @@
 
 /* Button base styles */
 .btn-primary-base {
-  background-color: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  @apply px-6 py-3;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .btn-primary-base:hover {
-  background-color: var(--btn-primary-hover);
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-accent-lg);
 }
 
+/* Secondary button base */
 .btn-secondary-base {
-  background-color: var(--btn-secondary-bg);
-  border: 2px solid var(--btn-secondary-border);
-  color: var(--btn-secondary-text);
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+  @apply px-6 py-3;
   transition: all 0.3s ease;
 }
 
 .btn-secondary-base:hover {
-  border-color: var(--btn-secondary-hover-border);
-  color: var(--btn-secondary-hover-text);
-  background-color: rgba(255, 215, 0, 0.1);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Force dark theme across all browsers */
@@ -243,7 +404,9 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-body);
   font-family: var(--font-sans);
-  transition: background-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Subtle animations */
@@ -424,269 +587,71 @@ body {
   animation: slideInFromRight 0.6s ease-out;
 }
 
-/* ========== CARD ENHANCEMENTS ========== */
-
-/* Enhanced card with gradient border */
-.card-enhanced {
-  position: relative;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: hidden;
-}
-
-.card-enhanced::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 12px;
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    rgba(212, 165, 116, 0.5),
-    rgba(255, 107, 53, 0.3)
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-enhanced:hover::before {
-  opacity: 1;
-}
-
-.card-enhanced:hover {
-  border-color: var(--accent-primary);
-  transform: translateY(-8px);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(212, 165, 116, 0.2),
-    0 0 50px rgba(255, 215, 0, 0.2);
-}
-
-/* Enhanced card with cyan glow */
-.card-enhanced-cyan {
-  position: relative;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: hidden;
-}
-
-.card-enhanced-cyan::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 12px;
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 217, 255, 0.5),
-    rgba(0, 217, 255, 0.3)
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-enhanced-cyan:hover::before {
-  opacity: 1;
-}
-
-.card-enhanced-cyan:hover {
-  border-color: var(--accent-secondary);
-  transform: translateY(-8px);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(0, 217, 255, 0.3),
-    0 0 50px rgba(0, 217, 255, 0.2);
-}
-
-/* Enhanced card with gold glow */
-.card-enhanced-gold {
-  position: relative;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: hidden;
-}
-
-.card-enhanced-gold::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 12px;
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 215, 0, 0.5),
-    rgba(255, 215, 0, 0.3)
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-enhanced-gold:hover::before {
-  opacity: 1;
-}
-
-.card-enhanced-gold:hover {
-  border-color: var(--accent-primary);
-  transform: translateY(-8px);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(255, 215, 0, 0.3),
-    0 0 50px rgba(255, 215, 0, 0.2);
-}
-
-/* Enhanced card with pink glow */
-.card-enhanced-pink {
-  position: relative;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: hidden;
-}
-
-.card-enhanced-pink::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 12px;
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 0, 110, 0.5),
-    rgba(255, 0, 110, 0.3)
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-enhanced-pink:hover::before {
-  opacity: 1;
-}
-
-.card-enhanced-pink:hover {
-  border-color: var(--accent-tertiary);
-  transform: translateY(-8px);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(255, 0, 110, 0.3),
-    0 0 50px rgba(255, 0, 110, 0.2);
-}
-
 /* Clean card style */
 .card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  @apply rounded-lg shadow-sm transition-all;
 }
 
 .card:hover {
   border-color: var(--accent-primary);
   box-shadow:
     var(--shadow-md),
-    0 0 20px rgba(255, 215, 0, 0.2);
+    0 0 12px rgba(79, 70, 229, 0.1);
   transform: translateY(-4px);
 }
 
 /* Card with cyan glow */
 .card-cyan {
-  border: 1px solid var(--border-color);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  @apply rounded-lg shadow-sm transition-all;
 }
 
 .card-cyan:hover {
   border-color: var(--accent-secondary);
   box-shadow:
-    0 0 20px rgba(0, 217, 255, 0.3),
-    0 0 40px rgba(0, 217, 255, 0.15);
+    0 0 20px rgba(6, 182, 212, 0.2),
+    var(--shadow-md);
   transform: translateY(-6px);
 }
 
 /* Card with gold glow */
 .card-gold {
-  border: 1px solid var(--border-color);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  @apply rounded-lg shadow-sm transition-all;
 }
 
 .card-gold:hover {
   border-color: var(--accent-primary);
   box-shadow:
-    0 0 20px rgba(255, 215, 0, 0.3),
-    0 0 40px rgba(255, 215, 0, 0.15);
+    0 0 20px rgba(79, 70, 229, 0.2),
+    var(--shadow-md);
   transform: translateY(-6px);
 }
 
 /* Card with pink glow */
 .card-pink {
-  border: 1px solid var(--border-color);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  @apply rounded-lg shadow-sm transition-all;
 }
 
 .card-pink:hover {
   border-color: var(--accent-tertiary);
   box-shadow:
-    0 0 20px rgba(255, 0, 110, 0.3),
-    0 0 40px rgba(255, 0, 110, 0.15);
+    0 0 20px rgba(236, 72, 153, 0.2),
+    var(--shadow-md);
   transform: translateY(-6px);
 }
 
 /* Primary button */
 .btn-primary {
-  background: var(--accent-primary);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border: none;
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  @apply px-6 py-3 rounded font-semibold cursor-pointer transition-all border-none;
   position: relative;
   overflow: hidden;
 }
@@ -705,9 +670,9 @@ body {
 }
 
 .btn-primary:hover {
-  background: #c99a68;
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212, 165, 116, 0.4);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.3);
 }
 
 .btn-primary:active {
@@ -716,11 +681,14 @@ body {
 
 /* ========== PHASE 5: GLOWING ELEMENTS ========== */
 
-/* Gold CTA Glow - Primary buttons and CTAs */
-.glow-gold {
+/* Glow effects - consolidated base */
+.glow-gold,
+.glow-cyan,
+.glow-pink {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* Gold CTA Glow */
 .glow-gold:hover {
   box-shadow:
     0 0 20px rgba(255, 215, 0, 0.5),
@@ -729,11 +697,7 @@ body {
   filter: brightness(1.1);
 }
 
-/* Cyan Interactive Glow - Secondary buttons and interactive elements */
-.glow-cyan {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
+/* Cyan Interactive Glow */
 .glow-cyan:hover {
   box-shadow:
     0 0 20px rgba(0, 217, 255, 0.5),
@@ -742,11 +706,7 @@ body {
   filter: brightness(1.1);
 }
 
-/* Pink Creative Glow - Creative sections and accent elements */
-.glow-pink {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
+/* Pink Creative Glow */
 .glow-pink:hover {
   box-shadow:
     0 0 20px rgba(255, 0, 110, 0.5),
@@ -755,7 +715,7 @@ body {
   filter: brightness(1.1);
 }
 
-/* Combined Glow Animations */
+/* Glow Pulse Animations */
 @keyframes glow-gold-pulse {
   0%,
   100% {
@@ -798,7 +758,6 @@ body {
   }
 }
 
-/* Persistent glow pulse animations */
 .glow-gold-pulse {
   animation: glow-gold-pulse 2.5s ease-in-out infinite;
 }
@@ -811,61 +770,18 @@ body {
   animation: glow-pink-pulse 2.5s ease-in-out infinite;
 }
 
-/* Enhanced button glows */
-.btn-primary {
-  background: var(--accent-primary);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.btn-primary:hover {
-  background: #c99a68;
-  transform: translateY(-2px);
-  box-shadow:
-    0 8px 24px rgba(212, 165, 116, 0.4),
-    0 0 20px rgba(255, 215, 0, 0.4);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-/* Secondary button with cyan glow */
+/* Secondary button with glow */
 .btn-secondary {
-  background: transparent;
+  background-color: transparent;
   color: var(--accent-secondary);
-  padding: 12px 24px;
+  @apply px-6 py-3 rounded font-semibold cursor-pointer transition-all;
   border: 2px solid var(--accent-secondary);
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
 }
 
 .btn-secondary:hover {
-  background: rgba(0, 217, 255, 0.1);
+  background-color: rgba(0, 217, 255, 0.1);
   box-shadow:
     0 0 20px rgba(0, 217, 255, 0.4),
     0 0 40px rgba(0, 217, 255, 0.2);
@@ -878,15 +794,9 @@ body {
 
 /* Badge */
 .badge {
-  display: inline-block;
-  background: var(--accent-secondary);
-  color: white;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  @apply inline-block px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all;
+  background-color: var(--accent-tertiary);
+  color: #ffffff;
   box-shadow: 0 4px 12px rgba(255, 0, 110, 0.3);
 }
 
@@ -899,8 +809,9 @@ body {
 
 /* Gold badge with glow */
 .badge-gold {
-  background: rgba(255, 215, 0, 0.15);
-  border: 1px solid var(--accent-primary);
+  @apply border transition-all;
+  background-color: rgba(255, 215, 0, 0.15);
+  border-color: var(--accent-primary);
   color: var(--accent-primary);
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
 }
@@ -913,8 +824,9 @@ body {
 
 /* Cyan badge with glow */
 .badge-cyan {
-  background: rgba(0, 217, 255, 0.15);
-  border: 1px solid var(--accent-secondary);
+  @apply border transition-all;
+  background-color: rgba(0, 217, 255, 0.15);
+  border-color: var(--accent-secondary);
   color: var(--accent-secondary);
   box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
 }
@@ -927,8 +839,9 @@ body {
 
 /* Pink badge with glow */
 .badge-pink {
-  background: rgba(255, 0, 110, 0.15);
-  border: 1px solid var(--accent-tertiary);
+  @apply border transition-all;
+  background-color: rgba(255, 0, 110, 0.15);
+  border-color: var(--accent-tertiary);
   color: var(--accent-tertiary);
   box-shadow: 0 0 15px rgba(255, 0, 110, 0.2);
 }
@@ -946,17 +859,15 @@ body {
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-  border-radius: 8px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  @apply shadow-sm transition-all;
 }
 
 .video-container:hover {
   border-color: var(--accent-primary);
-  box-shadow:
-    0 0 20px rgba(255, 215, 0, 0.3),
-    0 0 40px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   transform: translateY(-4px);
 }
 
@@ -972,8 +883,7 @@ body {
 /* Link styles */
 a {
   color: var(--accent-primary);
-  text-decoration: none;
-  transition: all 0.2s ease;
+  @apply no-underline transition-all;
   position: relative;
 }
 
@@ -989,11 +899,7 @@ a.link-underline::after {
   height: 2px;
   bottom: -2px;
   left: 0;
-  background: linear-gradient(
-    to right,
-    var(--accent-primary),
-    var(--accent-secondary)
-  );
+  background: var(--gradient-accent);
   transition: width 0.3s ease;
 }
 
@@ -1006,23 +912,33 @@ input,
 textarea,
 select {
   font-family: var(--font-sans);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 8px 12px;
-  transition: all 0.3s ease;
-  background: var(--bg-secondary);
+  background-color: var(--input-bg, var(--card-bg));
   color: var(--text-body);
+  border: 1.5px solid var(--input-border, var(--card-border));
+  @apply rounded px-3 py-2 transition-all;
+}
+
+/* Input placeholder styling */
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.65;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--input-border-focus, var(--accent-primary));
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--accent-primary);
+  border-color: var(--input-border-focus, var(--accent-primary));
   box-shadow:
-    0 0 0 3px rgba(212, 165, 116, 0.2),
-    inset 0 0 0 1px rgba(212, 165, 116, 0.1),
-    0 0 20px rgba(255, 215, 0, 0.2);
+    0 0 0 3px rgba(79, 70, 229, 0.1),
+    0 0 8px rgba(79, 70, 229, 0.2);
   transform: scale(1.01);
 }
 
@@ -1032,9 +948,8 @@ textarea.focus-cyan:focus,
 select.focus-cyan:focus {
   border-color: var(--accent-secondary);
   box-shadow:
-    0 0 0 3px rgba(0, 217, 255, 0.2),
-    inset 0 0 0 1px rgba(0, 217, 255, 0.1),
-    0 0 20px rgba(0, 217, 255, 0.2);
+    0 0 0 3px rgba(6, 182, 212, 0.1),
+    0 0 8px rgba(6, 182, 212, 0.2);
 }
 
 /* Form input with pink glow focus */
@@ -1043,9 +958,8 @@ textarea.focus-pink:focus,
 select.focus-pink:focus {
   border-color: var(--accent-tertiary);
   box-shadow:
-    0 0 0 3px rgba(255, 0, 110, 0.2),
-    inset 0 0 0 1px rgba(255, 0, 110, 0.1),
-    0 0 20px rgba(255, 0, 110, 0.2);
+    0 0 0 3px rgba(236, 72, 153, 0.1),
+    0 0 8px rgba(236, 72, 153, 0.2);
 }
 
 /* ========== GLOW & ANIMATION EFFECTS ========== */
@@ -1111,38 +1025,6 @@ select.focus-pink:focus {
 
 /* ========== DAY 3: PREMIUM ANIMATIONS ========== */
 
-/* Page transition fade-in */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
-}
-
-/* Slide up on scroll */
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.animate-slideInUp {
-  animation: slideInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
 /* Letter-by-letter reveal cursor */
 @keyframes textCursorBlink {
   0%,
@@ -1173,20 +1055,6 @@ select.focus-pink:focus {
 input:focus,
 textarea:focus {
   animation: inputFocus 0.6s ease-out;
-}
-
-/* Button click ripple effect */
-@keyframes ripple {
-  from {
-    box-shadow: 0 0 0 0 rgba(212, 165, 116, 0.7);
-  }
-  to {
-    box-shadow: 0 0 0 20px rgba(212, 165, 116, 0);
-  }
-}
-
-.btn-ripple:active {
-  animation: ripple 0.6s ease-out;
 }
 
 /* Checkbox toggle animation */
@@ -1289,21 +1157,6 @@ input[type="checkbox"]:checked {
   animation: wiggle 0.5s ease-in-out;
 }
 
-/* Float animation */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
 /* Focus outline glow */
 @keyframes focusGlow {
   0% {
@@ -1401,7 +1254,7 @@ input[type="number"],
 textarea,
 select {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border-color: var(--border-color);
+  @apply border-slate-700;
 }
 
 input[type="text"]:hover,
@@ -1410,7 +1263,7 @@ input[type="password"]:hover,
 input[type="number"]:hover,
 textarea:hover,
 select:hover {
-  border-color: var(--accent-primary);
+  @apply border-[#ffd700];
   transform: translateY(-2px);
 }
 
@@ -1420,7 +1273,7 @@ input[type="password"]:focus,
 input[type="number"]:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--accent-primary);
+  @apply border-[#ffd700];
   box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
   transform: scale(1.01);
 }
@@ -1440,15 +1293,13 @@ select:focus ~ label {
 input.input-success,
 textarea.input-success,
 select.input-success {
-  border-color: var(--color-success);
-  background-color: rgba(34, 197, 94, 0.05);
+  @apply border-emerald-500 bg-[rgba(34,197,94,0.05)];
 }
 
 input.input-error,
 textarea.input-error,
 select.input-error {
-  border-color: var(--color-error);
-  background-color: rgba(239, 68, 68, 0.05);
+  @apply border-rose-500 bg-[rgba(239,68,68,0.05)];
   animation: wiggle 0.3s ease-in-out;
 }
 
@@ -1773,7 +1624,7 @@ button[type="submit"]:active {
 /* Enhanced input validation styling */
 input.input-validating,
 textarea.input-validating {
-  border-color: var(--accent-primary);
+  @apply border-[#ffd700];
   animation: validationSuccess 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 

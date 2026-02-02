@@ -73,7 +73,7 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
           ))
         ) : (
           <div className="col-span-full text-center py-12">
-            <p className="text-slate-600 dark:text-slate-400">
+            <p style={{ color: 'var(--text-secondary)' }}>
               No videos in this category yet. Check back soon!
             </p>
           </div>

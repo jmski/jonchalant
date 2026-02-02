@@ -42,9 +42,9 @@ export default function Hero({
 
         {/* Animated background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 right-1/4 w-72 h-72 bg-yellow-400/5 rounded-full blur-3xl animate-pulse animation-delay-4000"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 opacity-5 rounded-full blur-3xl animate-pulse" style={{ backgroundColor: 'var(--accent-secondary)' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 opacity-5 rounded-full blur-3xl animate-pulse animation-delay-2000" style={{ backgroundColor: 'var(--accent-secondary)' }}></div>
+        <div className="absolute top-1/2 right-1/4 w-72 h-72 opacity-5 rounded-full blur-3xl animate-pulse animation-delay-4000" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
       </div>
 
       {/* Background video (optional) */}
@@ -55,7 +55,7 @@ export default function Hero({
             title="Hero Video"
             lazy={false}
           />
-          <div style={{ background: 'linear-gradient(to bottom, rgba(10, 14, 39, 0.8), rgba(26, 31, 58, 0.5), rgba(10, 14, 39, 0.8))', position: 'absolute', inset: 0 }}></div>
+          <div style={{ background: `linear-gradient(to bottom, var(--overlay-dark), var(--overlay-dark-medium), var(--overlay-dark))`, position: 'absolute', inset: 0 }}></div>
         </div>
       )}
 
@@ -86,10 +86,10 @@ export default function Hero({
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
           <MagneticButton
             href={ctaLink}
-            className="px-8 py-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            className="px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             magneticRange={60}
           >
-            <span style={{ background: 'var(--cta-gradient)', display: 'block', padding: '16px 32px', borderRadius: '8px' }}>
+            <span style={{ background: 'var(--cta-gradient)', display: 'block', padding: '16px 32px', borderRadius: '8px', color: 'var(--text-heading)' }}>
               {ctaText} <span className="text-xl">→</span>
             </span>
           </MagneticButton>

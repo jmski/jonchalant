@@ -67,9 +67,9 @@ export default function StageLighting() {
         <div
           className="absolute inset-0 rounded-full"
           style={{
-            background: 'radial-gradient(circle at center, rgba(0, 217, 255, 0.4) 0%, rgba(0, 217, 255, 0.2) 30%, rgba(0, 217, 255, 0) 70%)',
+            background: `radial-gradient(circle at center, var(--light-cyan) 0%, var(--light-cyan-medium) 30%, transparent 70%)`,
             filter: 'blur(40px)',
-            boxShadow: '0 0 60px rgba(0, 217, 255, 0.3)',
+            boxShadow: '0 0 60px var(--light-cyan-glow)',
           }}
         />
 
@@ -82,7 +82,7 @@ export default function StageLighting() {
             width: '100px',
             height: '100px',
             transform: 'translate(-50%, -50%)',
-            background: 'radial-gradient(circle at center, rgba(255, 215, 0, 0.6) 0%, rgba(255, 215, 0, 0.2) 50%, transparent 100%)',
+            background: `radial-gradient(circle at center, var(--light-gold) 0%, var(--light-gold-medium) 50%, transparent 100%)`,
             filter: 'blur(20px)',
           }}
         />
@@ -103,7 +103,7 @@ export default function StageLighting() {
         <div
           className="absolute inset-0 rounded-full"
           style={{
-            background: 'radial-gradient(circle at center, rgba(255, 0, 110, 0.2) 0%, rgba(255, 0, 110, 0.05) 40%, transparent 70%)',
+            background: 'radial-gradient(circle at center, var(--light-pink) 0%, var(--light-pink-subtle) 40%, transparent 70%)',
             filter: 'blur(35px)',
           }}
         />
@@ -113,7 +113,7 @@ export default function StageLighting() {
       <div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(10, 6, 20, 0.4) 100%)',
+          background: 'radial-gradient(ellipse at center, transparent 0%, var(--overlay-dark-medium) 100%)',
           pointerEvents: 'none',
         }}
       />

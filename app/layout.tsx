@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Jon | Choreographer & Content Creator",
@@ -37,8 +38,10 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body className="antialiased text-slate-50 dark:text-slate-50" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-light)' }}>
-        {children}
+      <body className="antialiased dark:text-slate-50" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-light)' }}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

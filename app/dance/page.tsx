@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import ScrollFade from "@/components/ScrollFade";
 import DanceFilter from "@/components/DanceFilter";
 import CTASection from "@/components/CTASection";
@@ -24,8 +23,6 @@ export default async function Dance() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <Navbar />
-      
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="py-20 sm:py-28">
