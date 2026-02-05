@@ -1,3 +1,4 @@
+import Breadcrumb from "@/components/Breadcrumb";
 import ScrollFade from "@/components/ScrollFade";
 import CTASection from "@/components/CTASection";
 import CollaborationForm from "@/components/CollaborationForm";
@@ -17,6 +18,7 @@ export default async function Collaborations() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <Breadcrumb />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="py-20 sm:py-28">

@@ -1,6 +1,5 @@
 'use client';
 import ScrollFade from "@/components/ScrollFade";
-import MagneticButton from "@/components/MagneticButton";
 
 interface CTASectionProps {
   title: string;
@@ -18,22 +17,32 @@ export default function CTASection({
   return (
     <div className="py-16 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
       <ScrollFade>
-        <div className="rounded-lg p-12 text-center border" style={{ background: 'linear-gradient(135deg, var(--bg-tertiary), var(--bg-muted))', borderColor: 'var(--border-accent)' }}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-display" style={{ background: 'var(--text-gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+        <div className="p-12 text-center border" style={{ background: 'linear-gradient(135deg, var(--bg-tertiary), var(--bg-muted))', borderColor: 'var(--border-accent)', borderRadius: '0px' }}>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-display" style={{ color: 'var(--accent-vibrant)' }}>
             {title}
           </h2>
-          <div className="mb-8 max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          <div className="mb-8 max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-body)' }}>
             {description}
           </div>
-          <MagneticButton
+          <a
             href={buttonLink}
-            className="inline-block px-8 py-3 rounded-lg font-bold transition-all duration-300 hover:shadow-lg transform hover:scale-105"
-            magneticRange={50}
+            className="inline-block px-8 py-3 font-bold"
+            style={{
+              display: 'inline-block',
+              padding: '12px 32px',
+              borderRadius: '0px',
+              backgroundColor: 'var(--accent-vibrant)',
+              color: 'var(--btn-primary-text)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              letterSpacing: '0.5px',
+              textTransform: 'uppercase',
+              textDecoration: 'none'
+            }}
           >
-            <span style={{ display: 'block', padding: '12px 32px', borderRadius: '8px', background: 'var(--cta-gradient)', color: 'var(--text-heading)' }}>
-              {buttonText}
-            </span>
-          </MagneticButton>
+            {buttonText}
+          </a>
         </div>
       </ScrollFade>
     </div>

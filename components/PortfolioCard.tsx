@@ -55,7 +55,8 @@ export default function PortfolioCard({
           <div 
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{
-              background: 'linear-gradient(135deg, var(--light-accent-primary, rgba(255, 215, 0, 0.2)) 0%, var(--light-accent-secondary, rgba(0, 217, 255, 0.1)) 100%)',
+              background: `linear-gradient(135deg, var(--accent-vibrant), var(--accent-vibrant-hover))`,
+              opacity: 0.15,
             }}
           />
           
@@ -68,11 +69,12 @@ export default function PortfolioCard({
           {/* Arrow icon reveal with theme-aware background */}
           <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
             <div 
-              className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center text-lg font-bold transition-all duration-300 border"
               style={{ 
-                background: 'var(--bg-tertiary)',
-                color: 'var(--text-accent-bright)',
-                border: '1px solid var(--border-color-light)'
+                background: 'var(--accent-vibrant)',
+                color: 'var(--btn-primary-text)',
+                border: '1px solid var(--accent-vibrant)',
+                borderRadius: '0px',
               }}
             >
               →

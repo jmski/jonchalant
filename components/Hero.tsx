@@ -78,20 +78,25 @@ export default function Hero({
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
           <MagneticButton
             href={ctaLink}
-            className="px-8 py-4 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:translate-y-0 flex items-center gap-2"
+            className="px-8 py-4 font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             magneticRange={60}
           >
-            <span style={{ background: 'var(--cta-gradient)', display: 'block', padding: '16px 32px', borderRadius: '8px', color: 'var(--text-heading)' }}>
+            <span style={{ background: 'var(--cta-gradient)', display: 'block', padding: '16px 32px', borderRadius: '0px', color: 'var(--btn-primary-text)', fontFamily: 'var(--font-mono)', fontSize: '0.875rem', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
               {ctaText} <span className="text-xl">→</span>
             </span>
           </MagneticButton>
           <a
             href={secondaryCtaLink}
-            className="px-8 py-4 border-2 font-semibold rounded-lg transition-all duration-300 hover:bg-accent-primary/10 backdrop-blur-sm focus:outline-none focus-visible:ring-2"
+            className="px-8 py-4 border font-semibold transition-all duration-300 focus:outline-none"
             style={{ 
               borderColor: 'var(--border-accent)', 
-              color: 'var(--text-secondary)',
-              boxShadow: 'var(--shadow-sm)'
+              color: 'var(--text-primary)',
+              borderRadius: '0px',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              letterSpacing: '0.5px',
+              textTransform: 'uppercase',
             }}
           >
             {secondaryCtaText}
