@@ -1,5 +1,5 @@
 import { HomeHero } from '@/components/hero';
-import { DeconstructedHamburger } from '@/components/sections';
+import { DeconstructedBrandBurger } from '@/components/sections';
 import { CTASection } from '@/components/sections';
 
 export default function Home() {
@@ -82,10 +82,8 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Deconstructed Hamburger - Visual Interest */}
-          <div className="border p-8 md:p-12 border-primary bg-primary">
-            <DeconstructedHamburger />
-          </div>
+          {/* Brand Stack - Visual Interest */}
+          <DeconstructedBrandBurger />
         </div>
       </section>
 

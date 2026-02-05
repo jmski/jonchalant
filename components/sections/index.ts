@@ -1,2 +1,2 @@
-export { default as DeconstructedHamburger } from './DeconstructedHamburger';
+export { default as DeconstructedBrandBurger } from './DeconstructedBrandBurger';
 export { default as CTASection } from './CTASection';
