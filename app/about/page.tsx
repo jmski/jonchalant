@@ -1,4 +1,4 @@
-import CTASection from "@/components/CTASection";
+import { CTASection } from "@/components/sections";
 
 export const metadata = {
   title: "About | Jon Chalon",

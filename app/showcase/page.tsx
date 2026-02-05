@@ -1,7 +1,7 @@
 
-import PortfolioCard from "@/components/PortfolioCard";
-import ScrollFade from "@/components/ScrollFade";
-import CTASection from "@/components/CTASection";
+import { PortfolioCard } from "@/components/content";
+import { ScrollFade } from "@/components/animations";
+import { CTASection } from "@/components/sections";
 import { sanityClient } from "@/lib/sanityClient";
 import { showcaseQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT } from "@/lib/pageContent";

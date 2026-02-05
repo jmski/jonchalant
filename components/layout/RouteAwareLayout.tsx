@@ -2,10 +2,10 @@
 
 import { usePathname } from 'next/navigation';
 import { useState, useCallback } from 'react';
-import Sidebar from '@/components/Sidebar';
-import SidebarToggle from '@/components/SidebarToggle';
-import SidebarOverlay from '@/components/SidebarOverlay';
-import BreadcrumbNav from '@/components/BreadcrumbNav';
+import { Sidebar } from '@/components/layout';
+import { SidebarToggle } from '@/components/layout';
+import { SidebarOverlay } from '@/components/layout';
+import { BreadcrumbNav } from '@/components/navigation';
 import { generateBreadcrumbs } from '@/lib/breadcrumbs';
 
 interface RouteAwareLayoutProps {

@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, RefObject } from 'react';
+import { useScrollTrigger } from '@/lib/hooks/useScrollTrigger';
 
 interface PlatformStats {
   platform: string;
@@ -23,22 +24,8 @@ function formatNumber(num: number, decimals = 0) {
 
 function AnimatedValue({ value, decimals = 0, duration = 2 }: { value: number; decimals?: number; duration?: number }) {
   const [count, setCount] = useState(0);
-  const [isInView, setIsInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isInView) {
-          setIsInView(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [isInView]);
+  const isInView = useScrollTrigger(ref as RefObject<HTMLElement>, 0.1);
 
   useEffect(() => {
     if (!isInView) return;

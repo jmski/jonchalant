@@ -1,6 +1,6 @@
-import ScrollFade from "@/components/ScrollFade";
-import CTASection from "@/components/CTASection";
-import CollaborationForm from "@/components/CollaborationForm";
+import { ScrollFade } from "@/components/animations";
+import { CTASection } from "@/components/sections";
+import { CollaborationForm } from "@/components/forms";
 import { sanityClient } from "@/lib/sanityClient";
 import { collaborationQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT } from "@/lib/pageContent";

@@ -1,6 +1,6 @@
-import ScrollFade from "@/components/ScrollFade";
-import DanceFilter from "@/components/DanceFilter";
-import CTASection from "@/components/CTASection";
+import { ScrollFade } from "@/components/animations";
+import { DanceFilter } from "@/components/content";
+import { CTASection } from "@/components/sections";
 import { sanityClient } from "@/lib/sanityClient";
 import { dancePortfolioQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT, DANCE_FILTER_CATEGORIES } from "@/lib/pageContent";

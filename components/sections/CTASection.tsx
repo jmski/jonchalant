@@ -1,5 +1,5 @@
 'use client';
-import ScrollFade from "@/components/ScrollFade";
+import { ScrollFade } from "@/components/animations";
 
 interface CTASectionProps {
   title: string;

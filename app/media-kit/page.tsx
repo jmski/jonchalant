@@ -1,5 +1,5 @@
-import ScrollFade from "@/components/ScrollFade";
-import CTASection from "@/components/CTASection";
+import { ScrollFade } from "@/components/animations";
+import { CTASection } from "@/components/sections";
 
 export const metadata = {
   title: "Media Kit | Jon",

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import ScrollFade from "@/components/ScrollFade";
+import { ScrollFade } from "@/components/animations";
 
 const contactData = {
   headline: 'Get in Touch',

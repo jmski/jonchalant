@@ -1,49 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useRef, RefObject } from 'react';
+import { usePointerPosition } from '@/lib/hooks/usePointerPosition';
 
 export default function StageLighting() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isClient, setIsClient] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setIsClient(true);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      setMousePosition({ x, y });
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!containerRef.current || e.touches.length === 0) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const touch = e.touches[0];
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-
-      setMousePosition({ x, y });
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('mousemove', handleMouseMove);
-      container.addEventListener('touchmove', handleTouchMove, { passive: true });
-
-      return () => {
-        container.removeEventListener('mousemove', handleMouseMove);
-        container.removeEventListener('touchmove', handleTouchMove);
-      };
-    }
-  }, []);
-
-  if (!isClient) return null;
+  const position = usePointerPosition(containerRef as RefObject<HTMLElement>, false);
 
   return (
     <div
@@ -55,8 +17,8 @@ export default function StageLighting() {
       <div
         className="absolute transition-all duration-75"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
+          left: `${position.x}px`,
+          top: `${position.y}px`,
           width: '400px',
           height: '400px',
           transform: 'translate(-50%, -50%)',
@@ -92,8 +54,8 @@ export default function StageLighting() {
       <div
         className="absolute transition-all duration-100"
         style={{
-          left: `${Math.max(100, Math.min(window.innerWidth - 100, mousePosition.x + 150))}px`,
-          top: `${Math.max(100, Math.min(window.innerHeight - 100, mousePosition.y - 150))}px`,
+          left: `${Math.max(100, Math.min(window.innerWidth - 100, position.x + 150))}px`,
+          top: `${Math.max(100, Math.min(window.innerHeight - 100, position.y - 150))}px`,
           width: '300px',
           height: '300px',
           transform: 'translate(-50%, -50%)',
@@ -122,8 +84,8 @@ export default function StageLighting() {
       <div
         className="absolute transition-all duration-75"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
+          left: `${position.x}px`,
+          top: `${position.y}px`,
           width: '500px',
           height: '500px',
           transform: 'translate(-50%, -50%)',
@@ -146,8 +108,8 @@ export default function StageLighting() {
       <div
         className="absolute transition-all duration-100"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
+          left: `${position.x}px`,
+          top: `${position.y}px`,
           width: '600px',
           height: '600px',
           transform: 'translate(-50%, -50%)',

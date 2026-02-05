@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, RefObject } from 'react';
+import { useScrollTrigger } from '@/lib/hooks/useScrollTrigger';
 
 interface AnimatedHeadlineProps {
   text: string;
@@ -15,22 +16,8 @@ export default function AnimatedHeadline({
   duration = 0.05,
 }: AnimatedHeadlineProps) {
   const [displayedChars, setDisplayedChars] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+  const isVisible = useScrollTrigger(ref as RefObject<HTMLElement>, 0.1);
 
   useEffect(() => {
     if (!isVisible || displayedChars >= text.length) return;

@@ -1,6 +1,6 @@
-import HomeHero from '@/components/HomeHero';
-import DeconstructedHamburger from '@/components/DeconstructedHamburger';
-import CTASection from '@/components/CTASection';
+import { HomeHero } from '@/components/hero';
+import { DeconstructedHamburger } from '@/components/sections';
+import { CTASection } from '@/components/sections';
 
 export default function Home() {
   return (

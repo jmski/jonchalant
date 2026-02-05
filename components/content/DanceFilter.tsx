@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import PortfolioCard from './PortfolioCard';
-import ScrollFade from './ScrollFade';
+import { PortfolioCard } from './index';
+import { ScrollFade } from '@/components/animations';
 
 interface DanceItem {
   _id: string;
