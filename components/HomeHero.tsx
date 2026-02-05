@@ -28,7 +28,6 @@ export default function HomeHero() {
     <section 
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center py-12 md:py-20 overflow-hidden"
-      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Subtle background elements */}
       <div className="absolute inset-0 opacity-5" style={{
