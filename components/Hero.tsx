@@ -70,7 +70,7 @@ export default function Hero({
         />
 
         {/* Subheadline */}
-        <p className="text-lg sm:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-light" style={{ color: 'var(--text-secondary)' }}>
+        <p className="text-lg sm:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-light text-secondary">
           {subheadline}
         </p>
 
@@ -104,7 +104,7 @@ export default function Hero({
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce" style={{ color: 'var(--text-muted)' }}>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce text-tertiary">
           <span className="text-sm font-medium">Scroll to explore</span>
           <svg
             className="w-5 h-5"

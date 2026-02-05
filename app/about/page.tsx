@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Breadcrumb from "@/components/Breadcrumb";
 import CTASection from "@/components/CTASection";
 
@@ -9,7 +8,7 @@ export const metadata = {
 
 export default function About() {
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+    <div className="bg-primary text-primary">
             <Breadcrumb />
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">

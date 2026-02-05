@@ -56,27 +56,24 @@ export default function HomeHero() {
 
         {/* Main headline */}
         <h1 
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-in fade-in slide-in-from-bottom-3 duration-700 delay-200"
-          style={{ color: 'var(--text-primary)' }}
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-in fade-in slide-in-from-bottom-3 duration-700 delay-200 text-primary"
         >
           Choreographer & <br />
-          <span style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          <span className="gradient-heading">
             Content Creator
           </span>
         </h1>
 
         {/* Subheadline */}
         <p 
-          className="text-lg sm:text-xl lg:text-2xl mb-4 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-3 duration-700 delay-300"
-          style={{ color: 'var(--text-secondary)' }}
+          className="text-lg sm:text-xl lg:text-2xl mb-4 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-3 duration-700 delay-300 text-secondary"
         >
           Professional dance portfolio, brand collaborations, and creative movement experiences
         </p>
 
         {/* Description */}
         <p 
-          className="text-base sm:text-lg mb-12 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-3 duration-700 delay-400"
-          style={{ color: 'var(--text-tertiary)' }}
+          className="text-base sm:text-lg mb-12 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-3 duration-700 delay-400 text-tertiary"
         >
           I combine technical precision with creative vision to deliver exceptional dance content, strategic collaborations, and memorable experiences for brands and audiences worldwide.
         </p>
@@ -110,22 +107,19 @@ export default function HomeHero() {
         <div className="mt-16 flex justify-center gap-8 animate-in fade-in slide-in-from-bottom-3 duration-700 delay-600">
           <Link 
             href="/dance"
-            className="text-sm uppercase tracking-widest font-semibold transition-colors duration-300 hover:text-accent-vibrant"
-            style={{ color: 'var(--text-tertiary)' }}
+            className="text-sm uppercase tracking-widest font-semibold transition-colors duration-300 hover:text-accent-vibrant text-tertiary"
           >
             Dance ↓
           </Link>
           <Link 
             href="/showcase"
-            className="text-sm uppercase tracking-widest font-semibold transition-colors duration-300 hover:text-accent-vibrant"
-            style={{ color: 'var(--text-tertiary)' }}
+            className="text-sm uppercase tracking-widest font-semibold transition-colors duration-300 hover:text-accent-vibrant text-tertiary"
           >
             Showcase ↓
           </Link>
           <Link 
             href="/about"
-            className="text-sm uppercase tracking-widest font-semibold transition-colors duration-300 hover:text-accent-vibrant"
-            style={{ color: 'var(--text-tertiary)' }}
+            className="text-sm uppercase tracking-widest font-semibold transition-colors duration-300 hover:text-accent-vibrant text-tertiary"
           >
             About ↓
           </Link>

@@ -16,7 +16,7 @@ export function FormLoadingState() {
           borderTopColor: 'var(--accent-vibrant)'
         }}
       />
-      <span style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
+      <span className="text-secondary mono-text">
         Sending your message...
       </span>
     </div>

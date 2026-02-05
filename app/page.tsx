@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import Breadcrumb from '@/components/Breadcrumb';
 import HomeHero from '@/components/HomeHero';
 import DeconstructedHamburger from '@/components/DeconstructedHamburger';
@@ -6,13 +5,12 @@ import CTASection from '@/components/CTASection';
 
 export default function Home() {
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-      <Navbar />
+    <div className="bg-primary text-primary">
       <Breadcrumb />
       
       {/* MAXIMALIST HERO SECTION */}
       <section 
-        className="relative overflow-hidden py-16 md:py-32"
+        className="relative overflow-hidden pt-0 pb-16 md:pb-32"
         style={{ 
           backgroundColor: 'var(--bg-primary)',
           backgroundImage: `
@@ -55,11 +53,7 @@ export default function Home() {
 
       {/* TECHNICAL VISUALIZATION SECTION */}
       <section 
-        className="py-12 md:py-20 border-t border-b"
-        style={{ 
-          backgroundColor: 'var(--bg-tertiary)',
-          borderColor: 'var(--border-color)'
-        }}
+        className="py-12 md:py-20 border-t border-b bg-tertiary border-primary"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -71,24 +65,19 @@ export default function Home() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="border relative group hover:shadow-lg transition-all duration-300"
-                style={{ 
-                  borderColor: 'var(--border-color)',
-                  backgroundColor: 'var(--bg-secondary)',
-                  padding: '1.5rem'
-                }}
+                className="border relative group hover:shadow-lg transition-all duration-300 border-primary bg-secondary card-padding"
               >
                 {/* Inner border */}
-                <div className="absolute inset-1 border pointer-events-none" style={{ borderColor: 'var(--border-accent)', opacity: 0.5 }} />
+                <div className="absolute inset-1 border pointer-events-none border-accent" style={{ opacity: 0.5 }} />
                 
                 <div className="relative z-10">
-                  <div className="text-4xl md:text-5xl font-bold mb-2" style={{ color: 'var(--accent-vibrant)' }}>
+                  <div className="text-4xl md:text-5xl font-bold mb-2 text-accent">
                     {stat.value}
                   </div>
-                  <div className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                  <div className="text-xs uppercase tracking-widest mb-3 text-tertiary mono-text">
                     {stat.label}
                   </div>
-                  <div className="text-2xl opacity-20" style={{ color: 'var(--accent-vibrant)' }}>
+                  <div className="text-2xl opacity-20 text-accent">
                     {stat.icon}
                   </div>
                 </div>
@@ -97,7 +86,7 @@ export default function Home() {
           </div>
 
           {/* Deconstructed Hamburger - Visual Interest */}
-          <div className="border p-8 md:p-12" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-primary)' }}>
+          <div className="border p-8 md:p-12 border-primary bg-primary">
             <DeconstructedHamburger />
           </div>
         </div>
@@ -106,7 +95,7 @@ export default function Home() {
       {/* MAXIMALIST CONTENT GRID - "More is More" */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12" style={{ color: 'var(--text-primary)' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">
             Featured Areas
           </h2>
 
@@ -114,8 +103,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {/* Dance Portfolio */}
             <div 
-              className="border group cursor-pointer hover:shadow-md transition-all duration-300"
-              style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-secondary)' }}
+              className="border group cursor-pointer hover:shadow-md transition-all duration-300 border-primary bg-secondary"
             >
               <div className="aspect-square bg-gradient-to-br from-blue-500/10 to-purple-500/10 flex items-center justify-center relative overflow-hidden">
                 {/* Layered grid pattern */}
@@ -129,15 +117,15 @@ export default function Home() {
                 }} />
                 
                 <div className="relative z-10 text-center">
-                  <div className="text-4xl mb-2" style={{ color: 'var(--accent-vibrant)' }}>▶</div>
-                  <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
+                  <div className="text-4xl mb-2 text-accent">▶</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-tertiary">
                     30+ Videos
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t" style={{ borderColor: 'var(--border-color)' }}>
-                <h3 className="font-bold mb-2 text-lg" style={{ color: 'var(--text-primary)' }}>Dance Portfolio</h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <div className="p-6 border-t border-primary">
+                <h3 className="font-bold mb-2 text-lg text-primary">Dance Portfolio</h3>
+                <p className="text-sm text-secondary">
                   Choreography, freestyle, performances & tutorials
                 </p>
               </div>
@@ -145,23 +133,22 @@ export default function Home() {
 
             {/* Showcase */}
             <div 
-              className="border group cursor-pointer hover:shadow-md transition-all duration-300"
-              style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-secondary)' }}
+              className="border group cursor-pointer hover:shadow-md transition-all duration-300 border-primary bg-secondary"
             >
               <div className="aspect-square bg-gradient-to-br from-amber-500/10 to-red-500/10 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10" style={{
                   backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--text-primary) 10px, var(--text-primary) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-4xl mb-2" style={{ color: 'var(--accent-vibrant)' }}>✦</div>
-                  <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
+                  <div className="text-4xl mb-2 text-accent">✦</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-tertiary">
                     Gunpla & Pokémon
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t" style={{ borderColor: 'var(--border-color)' }}>
-                <h3 className="font-bold mb-2 text-lg" style={{ color: 'var(--text-primary)' }}>Creative Showcase</h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <div className="p-6 border-t border-primary">
+                <h3 className="font-bold mb-2 text-lg text-primary">Creative Showcase</h3>
+                <p className="text-sm text-secondary">
                   Model builds, collections & digital media
                 </p>
               </div>
@@ -169,8 +156,7 @@ export default function Home() {
 
             {/* Collaborations */}
             <div 
-              className="border group cursor-pointer hover:shadow-md transition-all duration-300"
-              style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-secondary)' }}
+              className="border group cursor-pointer hover:shadow-md transition-all duration-300 border-primary bg-secondary"
             >
               <div className="aspect-square bg-gradient-to-br from-green-500/10 to-cyan-500/10 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10" style={{
@@ -178,15 +164,15 @@ export default function Home() {
                   backgroundSize: '40px 40px'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-4xl mb-2" style={{ color: 'var(--accent-vibrant)' }}>◆</div>
-                  <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
+                  <div className="text-4xl mb-2 text-accent">◆</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-tertiary">
                     Brand Ready
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t" style={{ borderColor: 'var(--border-color)' }}>
-                <h3 className="font-bold mb-2 text-lg" style={{ color: 'var(--text-primary)' }}>Collaborations</h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <div className="p-6 border-t border-primary">
+                <h3 className="font-bold mb-2 text-lg text-primary">Collaborations</h3>
+                <p className="text-sm text-secondary">
                   Partnerships, campaigns & brand opportunities
                 </p>
               </div>
@@ -194,8 +180,8 @@ export default function Home() {
           </div>
 
           {/* Dense Info Grid */}
-          <div className="border-t pt-12" style={{ borderColor: 'var(--border-color)' }}>
-            <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>What's Possible</h3>
+          <div className="border-t pt-12 border-primary">
+            <h3 className="text-xl font-bold mb-6 text-primary">What's Possible</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 'Music Videos',
@@ -209,16 +195,12 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="border p-3 text-center hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
-                  style={{ 
-                    borderColor: 'var(--border-accent)',
-                    backgroundColor: 'transparent'
-                  }}
+                  className="border p-3 text-center hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors border-accent"
                 >
-                  <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--accent-vibrant)' }}>
+                  <div className="text-xs font-bold uppercase tracking-widest text-accent">
                     ◆
                   </div>
-                  <div className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+                  <div className="text-sm mt-1 text-secondary">
                     {item}
                   </div>
                 </div>
@@ -230,8 +212,7 @@ export default function Home() {
 
       {/* LAYERED VISUAL SECTION */}
       <section 
-        className="py-16 md:py-24 relative"
-        style={{ backgroundColor: 'var(--bg-tertiary)' }}
+        className="py-16 md:py-24 relative bg-tertiary"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -265,10 +246,10 @@ export default function Home() {
               </svg>
               <div className="absolute inset-0 flex items-center justify-center text-center">
                 <div>
-                  <div className="text-5xl font-bold mb-2" style={{ color: 'var(--accent-vibrant)' }}>
+                  <div className="text-5xl font-bold mb-2 text-accent">
                     ◆
                   </div>
-                  <p className="text-sm uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
+                  <p className="text-sm uppercase tracking-widest text-tertiary">
                     Creative Convergence
                   </p>
                 </div>
@@ -277,7 +258,7 @@ export default function Home() {
 
             {/* Right: Feature list */}
             <div className="space-y-6">
-              <h3 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+              <h3 className="text-2xl font-bold text-primary">
                 Why Work Together
               </h3>
               <div className="space-y-4">
@@ -289,16 +270,15 @@ export default function Home() {
                 ].map((feature, idx) => (
                   <div key={idx} className="flex gap-4">
                     <div 
-                      className="text-2xl font-bold flex-shrink-0 w-8 h-8 flex items-center justify-center"
-                      style={{ color: 'var(--accent-vibrant)' }}
+                      className="text-2xl font-bold flex-shrink-0 w-8 h-8 flex items-center justify-center text-accent"
                     >
                       {idx + 1}
                     </div>
                     <div>
-                      <h4 className="font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
+                      <h4 className="font-bold mb-1 text-primary">
                         {feature.title}
                       </h4>
-                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                      <p className="text-sm text-secondary">
                         {feature.desc}
                       </p>
                     </div>
@@ -311,25 +291,20 @@ export default function Home() {
       </section>
 
       {/* Final CTA with maximalist styling */}
-      <section className="py-16 md:py-24 border-t" style={{ borderColor: 'var(--border-color)' }}>
+      <section className="py-16 md:py-24 border-t border-primary">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8 text-5xl opacity-40" style={{ color: 'var(--accent-vibrant)' }}>
+          <div className="mb-8 text-5xl opacity-40 text-accent">
             ◆ ▶ ◆
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
             Let's Create Something Extraordinary
           </h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-lg mb-8 max-w-2xl mx-auto text-secondary">
             From concept to execution, I'm ready to bring your movement and creative vision to life.
           </p>
           <a 
             href="/collaborations"
-            className="inline-block px-8 py-4 border-2 font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-lg"
-            style={{
-              borderColor: 'var(--accent-vibrant)',
-              color: 'var(--accent-vibrant)',
-              backgroundColor: 'transparent',
-            }}
+            className="inline-block px-8 py-4 border-2 font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-lg border-accent text-accent"
           >
             Start a Project →
           </a>

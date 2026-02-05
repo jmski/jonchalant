@@ -6,10 +6,10 @@ import { useCallback, useState, useEffect } from 'react';
 
 type Theme = 'default' | 'dark' | 'earthy';
 
-const THEMES: Array<{ id: Theme; label: string }> = [
-  { id: 'default', label: 'Paper' },
-  { id: 'dark', label: 'Blueprint' },
-  { id: 'earthy', label: 'Manual' },
+const THEMES: Array<{ id: Theme; label: string; color: string }> = [
+  { id: 'default', label: 'Paper', color: '#ffffff' },
+  { id: 'dark', label: 'Blueprint', color: '#0a0a0a' },
+  { id: 'earthy', label: 'Manual', color: '#e2ded0' },
 ];
 
 const SITE_SECTIONS = [
@@ -44,26 +44,25 @@ interface SidebarProps {
 
 function ThemeButton({
   theme,
+  color,
   isActive,
   onClick,
 }: {
   theme: Theme;
+  color: string;
   isActive: boolean;
   onClick: () => void;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`theme-button ${isActive ? 'active' : ''}`}
+      className={`theme-square ${isActive ? 'active' : ''}`}
       style={{
-        backgroundColor: isActive ? 'var(--accent-vibrant)' : 'transparent',
-        color: isActive ? 'white' : 'var(--text-primary)',
+        backgroundColor: color,
         borderColor: isActive ? 'var(--accent-vibrant)' : 'var(--border-color)',
       }}
-      aria-label={`Switch to ${theme} theme`}
-    >
-      {THEMES.find((t) => t.id === theme)?.label}
-    </button>
+      aria-label={`Switch to ${THEMES.find((t) => t.id === theme)?.label} theme`}
+    />
   );
 }
 
@@ -96,6 +95,20 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     <aside className={`sidebar ${isOpen ? 'mobile-open' : ''}`}>
       {/* Sidebar Header */}
       <div className="sidebar-header">
+        {/* Theme Selector */}
+        <div className="sidebar-theme-selector">
+          <div className="theme-buttons">
+            {THEMES.map((t) => (
+              <ThemeButton
+                key={t.id}
+                theme={t.id}
+                color={t.color}
+                isActive={theme === t.id}
+                onClick={() => changeTheme(t.id)}
+              />
+            ))}
+          </div>
+        </div>
         <h1>JONCHALON</h1>
       </div>
 

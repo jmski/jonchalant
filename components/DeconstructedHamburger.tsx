@@ -26,8 +26,7 @@ export default function DeconstructedHamburger() {
       {/* Technical Drawing Title */}
       <div className="text-center mb-12">
         <p 
-          className="text-xs md:text-sm uppercase tracking-widest mb-4"
-          style={{ color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}
+          className="text-xs md:text-sm uppercase tracking-widest mb-4 text-tertiary mono-text"
         >
           Technical Specification: Menu Assembly
         </p>
@@ -38,8 +37,7 @@ export default function DeconstructedHamburger() {
           Deconstructed Navigation
         </h2>
         <p 
-          className="text-sm md:text-base"
-          style={{ color: 'var(--text-secondary)' }}
+          className="text-sm md:text-base text-secondary"
         >
           Hover to assemble | Technical manual diagram view
         </p>
@@ -267,8 +265,7 @@ export default function DeconstructedHamburger() {
       {/* Interactive Hint */}
       <div className="mt-8 text-center">
         <p 
-          className="text-xs md:text-sm uppercase tracking-wider animate-pulse"
-          style={{ color: 'var(--accent-vibrant)' }}
+          className="text-xs md:text-sm uppercase tracking-wider animate-pulse text-accent"
         >
           {isAssembled ? '◆ ASSEMBLED ◆' : '➜ HOVER TO ASSEMBLE ➜'}
         </p>
@@ -276,18 +273,15 @@ export default function DeconstructedHamburger() {
 
       {/* Technical specs footer */}
       <div 
-        className="mt-12 max-w-lg text-center border-t pt-8"
-        style={{ borderColor: 'var(--border-color)' }}
+        className="mt-12 max-w-lg text-center border-t border-primary pt-8"
       >
         <p 
-          className="text-xs uppercase tracking-widest mb-3"
-          style={{ color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}
+          className="text-xs uppercase tracking-widest mb-3 text-tertiary mono-text"
         >
           Assembly Instructions
         </p>
         <ul 
-          className="text-sm space-y-2"
-          style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}
+          className="text-sm space-y-2 text-secondary mono-text"
         >
           <li>1. Position parts in technical drawing view (exploded)</li>
           <li>2. Hover diagram to trigger assembly sequence</li>

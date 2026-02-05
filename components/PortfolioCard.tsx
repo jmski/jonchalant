@@ -43,7 +43,7 @@ export default function PortfolioCard({
 
       {/* Image */}
       {image && (
-        <div className="relative w-full h-48 overflow-hidden transition-colors duration-300" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <div className="relative w-full h-48 overflow-hidden transition-colors duration-300 bg-secondary">
           <Image
             src={image}
             alt={title}
@@ -85,14 +85,14 @@ export default function PortfolioCard({
 
       {/* Content */}
       <div className="p-6 transition-all duration-300" style={{ background: 'linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary))' }}>
-        <h3 className="text-lg font-bold mb-2 transition-colors duration-300" style={{ color: 'var(--text-accent-bright)' }}>
+        <h3 className="text-lg font-bold mb-2 transition-colors duration-300 text-primary">
           {title}
         </h3>
-        <p className="text-sm leading-relaxed transition-colors duration-300" style={{ color: 'var(--text-body)' }}>
+        <p className="text-sm leading-relaxed transition-colors duration-300 text-secondary">
           {description}
         </p>
         {link && (
-          <div className="mt-4 flex items-center gap-2 text-sm font-semibold opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all duration-300" style={{ color: 'var(--text-accent-bright)' }}>
+          <div className="mt-4 flex items-center gap-2 text-sm font-semibold opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all duration-300 text-primary">
             Learn more <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
           </div>
         )}

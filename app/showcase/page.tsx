@@ -27,16 +27,16 @@ export default async function Showcase() {
   const pokemonShowcase = showcaseItems.filter((item: any) => item.category === "Pokémon");
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <div className="min-h-screen bg-primary">
       <Breadcrumb />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="py-20 sm:py-28">
           <ScrollFade>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent mb-6 font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent mb-6 font-display gradient-heading">
               {pageContent.headline}
             </h1>
-            <p className="text-xl max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-xl max-w-2xl leading-relaxed text-secondary">
               {pageContent.subheadline}
             </p>
           </ScrollFade>
@@ -46,10 +46,10 @@ export default async function Showcase() {
         <section className="mb-20">
           <ScrollFade>
             <div className="mb-8">
-              <h2 className="text-4xl font-bold bg-clip-text text-transparent mb-2 font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <h2 className="text-4xl font-bold bg-clip-text text-transparent mb-2 font-display gradient-heading">
                 {pageContent.gunplaTitle}
               </h2>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-secondary">
                 {pageContent.gunplaDescription}
               </p>
             </div>
@@ -72,10 +72,10 @@ export default async function Showcase() {
         <section className="mb-20">
           <ScrollFade>
             <div className="mb-8">
-              <h2 className="text-4xl font-bold bg-clip-text text-transparent mb-2 font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <h2 className="text-4xl font-bold bg-clip-text text-transparent mb-2 font-display gradient-heading">
                 {pageContent.pokemonTitle}
               </h2>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-secondary">
                 {pageContent.pokemonDescription}
               </p>
             </div>
