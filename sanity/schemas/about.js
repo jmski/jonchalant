@@ -3,52 +3,23 @@ export default {
   title: "About Page",
   type: "document",
   fields: [
-    {
-      name: "_type",
-      type: "string",
-      hidden: true,
-      initialValue: "about",
-    },
-    {
-      name: "headline",
-      type: "string",
-      title: "Headline",
-      description: "Main headline for the about page",
-    },
-    {
-      name: "tagline",
-      type: "string",
-      title: "Tagline",
-      description: "Short description under headline",
-    },
+    { name: "headline", type: "string", title: "Headline" },
+    { name: "tagline", type: "string", title: "Tagline" },
     {
       name: "bio",
       type: "array",
       title: "Full Biography",
-      description: "Tell your story in sections",
       of: [
         {
+          name: "bioSection", // 👈 ADD THIS
           type: "object",
+          title: "Bio Section", // 👈 ADD THIS for better UI
           fields: [
-            {
-              name: "heading",
-              type: "string",
-              title: "Section Heading",
-            },
-            {
-              name: "content",
-              type: "text",
-              title: "Content",
-            },
+            { name: "heading", type: "string", title: "Section Heading" },
+            { name: "content", type: "text", title: "Content" },
           ],
         },
       ],
-    },
-    {
-      name: "profileImage",
-      type: "image",
-      title: "Profile Image",
-      description: "Main profile photo",
     },
     {
       name: "philosophy",
@@ -56,18 +27,12 @@ export default {
       title: "Philosophy Points",
       of: [
         {
+          name: "philosophyItem", // 👈 ADD THIS
           type: "object",
+          title: "Philosophy Item",
           fields: [
-            {
-              name: "principle",
-              type: "string",
-              title: "Principle",
-            },
-            {
-              name: "description",
-              type: "text",
-              title: "Description",
-            },
+            { name: "principle", type: "string", title: "Principle" },
+            { name: "description", type: "text", title: "Description" },
           ],
         },
       ],
@@ -78,7 +43,9 @@ export default {
       title: "Areas of Expertise",
       of: [
         {
+          name: "expertiseArea", // 👈 ADD THIS
           type: "object",
+          title: "Expertise Area",
           fields: [
             {
               name: "category",

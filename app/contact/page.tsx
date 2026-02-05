@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Breadcrumb from "@/components/Breadcrumb";
 import ScrollFade from "@/components/ScrollFade";
 
 const contactData = {
@@ -44,6 +45,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <Breadcrumb />
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="py-20 sm:py-28">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import RouteAwareLayout from "@/components/RouteAwareLayout";
 
 export const metadata: Metadata = {
   title: "Jon | Choreographer & Content Creator",
@@ -14,8 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" data-theme="default" suppressHydrationWarning>
       <head>
+        <meta name="color-scheme" content="light dark" />
         {/* FOUC Prevention: Apply stored theme before page renders */}
         <script
           dangerouslySetInnerHTML={{
@@ -49,18 +50,24 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body className="antialiased dark:text-slate-50" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-light)' }}>
+      <body style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', margin: 0, padding: 0 }} suppressHydrationWarning>
         {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-accent-primary focus:text-slate-900 focus:font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4"
+          style={{ 
+            backgroundColor: 'var(--accent-vibrant)',
+            color: 'white',
+            fontWeight: 'bold'
+          }}
         >
           Skip to main content
         </a>
-        <Navbar />
-        <main id="main-content">
+        
+        {/* Route-Aware Layout: Home shows ToC, content pages show sidebar */}
+        <RouteAwareLayout>
           {children}
-        </main>
+        </RouteAwareLayout>
       </body>
     </html>
   );

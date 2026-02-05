@@ -5,9 +5,9 @@ export default {
   fields: [
     { name: "title", type: "string", title: "Title" },
     {
-      name: "type",
+      name: "collabType", // 👈 Renamed from "type" to avoid confusion
       type: "string",
-      title: "Type",
+      title: "Type", // You can keep the UI title as "Type"
       options: { list: ["Service", "Past Collab"] },
     },
     { name: "description", type: "text", title: "Description" },

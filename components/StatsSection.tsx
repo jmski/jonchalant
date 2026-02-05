@@ -24,12 +24,12 @@ export default async function StatsSection() {
 
   if (stats.length === 0) {
     return (
-      <section className="py-20" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <section className="py-20 bg-primary">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-5xl sm:text-6xl font-bold bg-clip-text text-transparent mb-12 text-center font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          <h2 className="text-5xl sm:text-6xl font-bold bg-clip-text text-transparent mb-12 text-center font-display gradient-heading">
             By The Numbers
           </h2>
-          <p className="text-center text-lg" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-center text-lg text-secondary">
             Platform metrics coming soon. Follow along to see the journey!
           </p>
         </div>
@@ -38,9 +38,9 @@ export default async function StatsSection() {
   }
 
   return (
-    <section className="py-20" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section className="py-20 bg-primary">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-5xl sm:text-6xl font-bold bg-clip-text text-transparent mb-12 text-center font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+        <h2 className="text-5xl sm:text-6xl font-bold bg-clip-text text-transparent mb-12 text-center font-display gradient-heading">
           By The Numbers
         </h2>
 
@@ -50,7 +50,7 @@ export default async function StatsSection() {
           ))}
         </div>
 
-        <p className="text-center text-sm mt-8" style={{ color: 'var(--text-muted)' }}>
+        <p className="text-center text-sm mt-8 text-tertiary">
           Stats update automatically from Sanity CMS
         </p>
       </div>
