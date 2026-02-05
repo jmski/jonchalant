@@ -1,4 +1,3 @@
-import Breadcrumb from '@/components/Breadcrumb';
 import HomeHero from '@/components/HomeHero';
 import DeconstructedHamburger from '@/components/DeconstructedHamburger';
 import CTASection from '@/components/CTASection';
@@ -6,8 +5,6 @@ import CTASection from '@/components/CTASection';
 export default function Home() {
   return (
     <div className="bg-primary text-primary">
-      <Breadcrumb />
-      
       {/* MAXIMALIST HERO SECTION */}
       <section 
         className="relative overflow-hidden pt-0 pb-16 md:pb-32"

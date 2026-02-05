@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Breadcrumb from "@/components/Breadcrumb";
 import ScrollFade from "@/components/ScrollFade";
 
 const contactData = {
@@ -44,13 +43,12 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <Breadcrumb />
+    <div className="min-h-screen page-wrapper">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="py-20 sm:py-28">
           <ScrollFade>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent mb-6 font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold gradient-heading-text mb-6 font-display">
               {contactData.headline}
             </h1>
             <p className="text-xl leading-relaxed max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
