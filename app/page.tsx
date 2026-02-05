@@ -1,4 +1,4 @@
-import HomeHero from '@/components/hero';
+import { HomeHero } from '@/components/hero';
 import { DeconstructedHamburger } from '@/components/sections';
 import { CTASection } from '@/components/sections';
 
@@ -44,7 +44,7 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <HomeHero headline={''} subheadline={''} />
+          <HomeHero />
         </div>
       </section>
 
