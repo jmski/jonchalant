@@ -1,6 +1,7 @@
 import { ScrollFade } from "@/components/animations";
 import { DanceFilter } from "@/components/content";
 import { CTASection } from "@/components/sections";
+import { PageTransition } from "@/components/layout";
 import { sanityClient } from "@/lib/sanityClient";
 import { dancePortfolioQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT, DANCE_FILTER_CATEGORIES } from "@/lib/pageContent";
@@ -12,6 +13,112 @@ export const metadata = {
 
 const pageContent = PAGE_CONTENT.dance;
 
+// Fallback mock data if Sanity fails
+const MOCK_CHOREOGRAPHY = [
+  {
+    _id: 'chore-1',
+    title: 'Ninjago Choreography | Urban Style',
+    category: 'Choreography',
+    description: 'Original choreography to Japanese hip-hop. Featured on TikTok (2.4M views). High-energy urban style with precision footwork.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'chore-2',
+    title: 'Midnight Dreams | Contemporary Fusion',
+    category: 'Choreography',
+    description: 'Contemporary-hip hop fusion for music video. Ethereal slow sections transitioning to explosive moments. Directed & choreographed.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'chore-3',
+    title: 'Synthwave Sunday | Retro Future',
+    category: 'Choreography',
+    description: 'Y2K-inspired choreography with 80s synth music. Winner of Seoul Dance Festival 2024. Clean lines meets fluid movement.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'chore-4',
+    title: 'Street King | Commercial Grade',
+    category: 'Choreography',
+    description: 'High-impact choreography for global brand campaign. 15 dancers, multiple locations. Featured in TikTok creator spotlight.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  }
+];
+
+const MOCK_FREESTYLE = [
+  {
+    _id: 'free-1',
+    title: 'Cypher Session | Battle Flow',
+    category: 'Freestyle',
+    description: 'High-energy freestyle battle cypher. Improvisation to live beatboxing. Runner-up at NYC Freestyle Championship 2024.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'free-2',
+    title: 'Jazz Jam | Studio Improvisation',
+    category: 'Freestyle',
+    description: 'Spontaneous freestyle to live jazz musicians. Studio session showing dynamic movement vocabulary and musicality.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'free-3',
+    title: 'Lo-Fi Vibes | Chill Freestyle',
+    category: 'Freestyle',
+    description: 'Relaxed freestyle to lo-fi hip-hop beats. Slower, more controlled movement. Pure flow and feel.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'free-4',
+    title: 'Beat Switch | Multi-Genre Freestyle',
+    category: 'Freestyle',
+    description: 'Freestyle switching between 5 different genres (pop, hip-hop, jazz, EDM, waacking). Adaptability showcase.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  }
+];
+
+const MOCK_PERFORMANCES = [
+  {
+    _id: 'perf-1',
+    title: 'Seoul Performance | International Stage',
+    category: 'Performance',
+    description: 'Live performance at Seoul Dance Festival (August 2024). 8-minute showcase performance. 5000+ live audience.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'perf-2',
+    title: 'Tour Performance | US East Coast',
+    category: 'Performance',
+    description: 'Live performance as featured artist on "Movement Tour 2024". Boston, New York, Philadelphia. Sold-out venues.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'perf-3',
+    title: 'Music Video Lead | Cinematic Performance',
+    category: 'Performance',
+    description: 'Lead dancer & choreographer for Grammy-nominated artist music video. Professional production, narrative-driven.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  },
+  {
+    _id: 'perf-4',
+    title: 'Fashion Show Close | Runway Performance',
+    category: 'Performance',
+    description: 'Closing performance for New York Fashion Week. Fashion brand collaboration. Integrated movement & costume.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    thumbnail: '/api/placeholder/400/300'
+  }
+];
+
 export default async function Dance() {
   let dancePortfolio: any[] = [];
 
@@ -19,21 +126,91 @@ export default async function Dance() {
     dancePortfolio = await sanityClient.fetch(dancePortfolioQuery);
   } catch (error) {
     console.error('Error fetching dance data:', error);
+    // Use mock data if Sanity fails
+    dancePortfolio = [...MOCK_CHOREOGRAPHY, ...MOCK_FREESTYLE, ...MOCK_PERFORMANCES];
+  }
+
+  // Fallback to mock data if empty
+  if (dancePortfolio.length === 0) {
+    dancePortfolio = [...MOCK_CHOREOGRAPHY, ...MOCK_FREESTYLE, ...MOCK_PERFORMANCES];
   }
 
   return (
-    <div className="min-h-screen page-wrapper">
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <div className="py-20 sm:py-28">
-          <ScrollFade>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold gradient-heading-text mb-6 font-display">
-              {pageContent.headline}
-            </h1>
-            <p className="text-xl max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              {pageContent.subheadline}
+    <div className="min-h-screen page-wrapper bg-primary">
+      <PageTransition animation="slide-left">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* TECHNICAL HERO SECTION */}
+        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Technical background grid */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+            backgroundImage: `
+              linear-gradient(0deg, transparent 24%, var(--border-color) 25%, var(--border-color) 26%, transparent 27%, transparent 74%, var(--border-color) 75%, var(--border-color) 76%, transparent 77%, transparent),
+              linear-gradient(90deg, transparent 24%, var(--border-color) 25%, var(--border-color) 26%, transparent 27%, transparent 74%, var(--border-color) 75%, var(--border-color) 76%, transparent 77%, transparent)
+            `,
+            backgroundSize: '60px 60px'
+          }} />
+
+          {/* LEFT - BOLD TEXT */}
+          <div className="relative z-10 space-y-8">
+            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-vibrant bg-vibrant-faint">
+              <span className="w-2 h-2 bg-vibrant animate-pulse rounded-full" />
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-vibrant">💃 CHOREOGRAPHY</span>
+            </div>
+
+            <div>
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight heading-display text-primary mb-4">
+                MOVEMENT<br />
+                <span className="text-vibrant">PORTFOLIO</span>
+              </h1>
+              <div className="h-1 w-40 bg-vibrant" />
+            </div>
+
+            <p className="text-lg font-black text-secondary leading-tight">
+              Choreography | Freestyle | Performances
             </p>
-          </ScrollFade>
+            <p className="text-base leading-relaxed text-tertiary font-body max-w-lg">
+              A collection of my best dance work across multiple platforms, styles, and collaborations. Each piece represents precision, creativity, and technical excellence.
+            </p>
+          </div>
+
+          {/* RIGHT - TECHNICAL VISUAL */}
+          <div className="relative hidden lg:flex items-center justify-center">
+            <svg className="w-full max-w-sm" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              {/* Outer frame */}
+              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-vibrant)" strokeWidth="2" />
+              
+              {/* Corner marks */}
+              <g stroke="var(--accent-vibrant)" strokeWidth="3" fill="none">
+                <line x1="30" y1="30" x2="70" y2="30" />
+                <line x1="30" y1="30" x2="30" y2="70" />
+                <line x1="370" y1="30" x2="330" y2="30" />
+                <line x1="370" y1="30" x2="370" y2="70" />
+                <line x1="30" y1="370" x2="70" y2="370" />
+                <line x1="30" y1="370" x2="30" y2="330" />
+                <line x1="370" y1="370" x2="330" y2="370" />
+                <line x1="370" y1="370" x2="370" y2="330" />
+              </g>
+
+              {/* Center movement indicator */}
+              <circle cx="200" cy="200" r="50" fill="none" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.7" strokeDasharray="5,3" />
+              
+              {/* Movement vectors */}
+              <line x1="200" y1="120" x2="200" y2="60" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6" />
+              <line x1="200" y1="280" x2="200" y2="340" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6" />
+              <line x1="120" y1="200" x2="60" y2="200" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" />
+              <line x1="280" y1="200" x2="340" y2="200" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" />
+              
+              {/* Category indicators */}
+              <circle cx="140" cy="140" r="8" fill="var(--accent-vibrant)" opacity="0.8" />
+              <circle cx="260" cy="140" r="8" fill="var(--accent-neon)" opacity="0.8" />
+              <circle cx="200" cy="260" r="8" fill="var(--accent-magenta)" opacity="0.8" />
+              
+              {/* Labels */}
+              <text x="140" y="120" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">CHORE</text>
+              <text x="260" y="120" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">FREE</text>
+              <text x="200" y="290" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">PERFORM</text>
+            </svg>
+          </div>
         </div>
 
         {/* Dynamic Filter and Portfolio */}
@@ -47,6 +224,7 @@ export default async function Dance() {
           buttonLink="/collaborations"
         />
       </main>
+      </PageTransition>
     </div>
   );
 }

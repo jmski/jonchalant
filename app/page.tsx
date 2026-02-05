@@ -1,10 +1,12 @@
 import { HomeHero } from '@/components/hero';
 import { DeconstructedBrandBurger } from '@/components/sections';
 import { CTASection } from '@/components/sections';
+import { PageTransition } from '@/components/layout';
 
 export default function Home() {
   return (
     <div className="bg-primary text-primary">
+      <PageTransition animation="fade">
       {/* MAXIMALIST HERO SECTION */}
       <section 
         className="relative overflow-hidden pt-0 pb-16 md:pb-32"
@@ -48,13 +50,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TECHNICAL VISUALIZATION SECTION */}
+      {/* BOLD STATS & METRICS SECTION - MAXIMALIST */}
       <section 
-        className="py-12 md:py-20 border-t border-b bg-tertiary border-primary"
+        className="py-16 md:py-24 border-t border-b border-primary relative"
+        style={{
+          backgroundColor: 'var(--bg-secondary)',
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 255, 255, 0.02) 0%, rgba(255, 0, 255, 0.02) 100%)'
+        }}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {/* Stats Cards with nested borders */}
+        {/* Decorative background elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 border-3 border-neon opacity-5" />
+        <div className="absolute bottom-0 left-1/4 w-48 h-48 border-2 border-magenta opacity-3" style={{ borderStyle: 'dashed' }} />
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {/* Stats Cards - BOLD NEW STYLE */}
             {[
               { label: 'CHOREOGRAPHY PIECES', value: '50+', icon: '▶' },
               { label: 'BRAND COLLABORATIONS', value: '30+', icon: '◆' },
@@ -62,22 +72,25 @@ export default function Home() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="border relative group hover:shadow-lg transition-all duration-300 border-primary bg-secondary card-padding"
+                className="relative group border-bold border-primary bg-primary transition-all duration-300 hover:shadow-bold card-padding-lg"
               >
-                {/* Inner border */}
-                <div className="absolute inset-1 border pointer-events-none border-accent" style={{ opacity: 0.5 }} />
+                {/* Top accent corner */}
+                <div className="absolute -top-3 -left-3 w-6 h-6 border-2 border-vibrant group-hover:scale-150 transition-transform" />
                 
-                <div className="relative z-10">
-                  <div className="text-4xl md:text-5xl font-bold mb-2 text-accent">
+                <div className="relative z-10 space-y-4">
+                  <div className="text-5xl md:text-6xl font-black mb-2 heading-display text-vibrant">
                     {stat.value}
                   </div>
-                  <div className="text-xs uppercase tracking-widest mb-3 text-tertiary mono-text">
+                  <div className="text-xs uppercase tracking-[0.2em] text-tertiary retro-label">
                     {stat.label}
                   </div>
-                  <div className="text-2xl opacity-20 text-accent">
+                  <div className="text-4xl opacity-30 select-none text-vibrant">
                     {stat.icon}
                   </div>
                 </div>
+                
+                {/* Bottom accent corner */}
+                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-2 border-vibrant" />
               </div>
             ))}
           </div>
@@ -87,116 +100,122 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MAXIMALIST CONTENT GRID - "More is More" */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">
-            Featured Areas
-          </h2>
+      {/* FEATURED AREAS - EDITORIAL ASYMMETRIC LAYOUT */}
+      <section className="py-20 md:py-32 relative" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        {/* Maximalist background decoration */}
+        <div className="absolute inset-0 opacity-3">
+          <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-neon rounded-full" />
+          <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-magenta" style={{ borderStyle: 'dashed' }} />
+        </div>
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="mb-16 pr-0 md:pr-12">
+            <span className="retro-label text-neon text-xs">→ PRIMARY FOCUS AREAS</span>
+            <h2 className="text-6xl sm:text-7xl lg:text-8xl font-black heading-display text-primary mt-4 mb-6 leading-none">
+              What I<br />Specialize In
+            </h2>
+            <div className="w-32 h-3 bg-vibrant" />
+          </div>
 
-          {/* 3-Column Dense Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {/* Dance Portfolio */}
+          {/* EDITORIAL ASYMMETRIC GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {/* Dance Portfolio - BOLD */}
             <div 
-              className="border group cursor-pointer hover:shadow-md transition-all duration-300 border-primary bg-secondary"
+              className="border-bold border-vibrant bg-vibrant-faint group cursor-pointer transition-all duration-300 hover:shadow-vibrant"
             >
-              <div className="aspect-square bg-gradient-to-br from-blue-500/10 to-purple-500/10 flex items-center justify-center relative overflow-hidden">
-                {/* Layered grid pattern */}
-                <div className="absolute inset-0 opacity-10" style={{
-                  backgroundImage: 'linear-gradient(45deg, transparent 48%, var(--text-primary) 49%, var(--text-primary) 51%, transparent 52%)',
-                  backgroundSize: '20px 20px'
+              <div className="aspect-square bg-linear-to-br from-vibrant/20 to-transparent flex items-center justify-center relative overflow-hidden">
+                {/* Diagonal lines pattern */}
+                <div className="absolute inset-0 opacity-20" style={{
+                  backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, var(--accent-vibrant) 10px, var(--accent-vibrant) 11px)'
                 }} />
-                <div className="absolute inset-0 opacity-5" style={{
-                  backgroundImage: 'radial-gradient(circle, var(--text-primary) 1px, transparent 1px)',
-                  backgroundSize: '30px 30px'
-                }} />
-                
                 <div className="relative z-10 text-center">
-                  <div className="text-4xl mb-2 text-accent">▶</div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-tertiary">
+                  <div className="text-6xl mb-3 text-vibrant font-black">▶</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-vibrant retro-label">
                     30+ Videos
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t border-primary">
-                <h3 className="font-bold mb-2 text-lg text-primary">Dance Portfolio</h3>
-                <p className="text-sm text-secondary">
+              <div className="p-6 border-t-3 border-vibrant">
+                <h3 className="font-black mb-3 text-xl text-primary heading-display">Dance Portfolio</h3>
+                <p className="text-sm text-secondary font-body">
                   Choreography, freestyle, performances & tutorials
                 </p>
               </div>
             </div>
 
-            {/* Showcase */}
+            {/* Showcase - NEON */}
             <div 
-              className="border group cursor-pointer hover:shadow-md transition-all duration-300 border-primary bg-secondary"
+              className="border-bold border-neon bg-neon-faint group cursor-pointer transition-all duration-300 hover:shadow-neon"
             >
-              <div className="aspect-square bg-gradient-to-br from-amber-500/10 to-red-500/10 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10" style={{
-                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--text-primary) 10px, var(--text-primary) 11px)'
+              <div className="aspect-square bg-linear-to-br from-neon/20 to-transparent flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 opacity-20" style={{
+                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--accent-neon) 10px, var(--accent-neon) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-4xl mb-2 text-accent">✦</div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-tertiary">
+                  <div className="text-6xl mb-3 text-neon font-black">✦</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-neon retro-label">
                     Gunpla & Pokémon
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t border-primary">
-                <h3 className="font-bold mb-2 text-lg text-primary">Creative Showcase</h3>
-                <p className="text-sm text-secondary">
+              <div className="p-6 border-t-3 border-neon">
+                <h3 className="font-black mb-3 text-xl text-primary heading-display">Creative Showcase</h3>
+                <p className="text-sm text-secondary font-body">
                   Model builds, collections & digital media
                 </p>
               </div>
             </div>
 
-            {/* Collaborations */}
+            {/* Collaborations - MAGENTA */}
             <div 
-              className="border group cursor-pointer hover:shadow-md transition-all duration-300 border-primary bg-secondary"
+              className="border-bold border-magenta bg-magenta-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
-              <div className="aspect-square bg-gradient-to-br from-green-500/10 to-cyan-500/10 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10" style={{
-                  backgroundImage: 'conic-gradient(from 0deg, transparent 0deg 90deg, var(--text-primary) 90deg 180deg)',
-                  backgroundSize: '40px 40px'
+              <div className="aspect-square bg-linear-to-br from-magenta/20 to-transparent flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 opacity-20" style={{
+                  backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 10px, var(--accent-magenta) 10px, var(--accent-magenta) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-4xl mb-2 text-accent">◆</div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-tertiary">
+                  <div className="text-6xl mb-3 text-magenta font-black">◆</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-magenta retro-label">
                     Brand Ready
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t border-primary">
-                <h3 className="font-bold mb-2 text-lg text-primary">Collaborations</h3>
-                <p className="text-sm text-secondary">
+              <div className="p-6 border-t-3 border-magenta">
+                <h3 className="font-black mb-3 text-xl text-primary heading-display">Collaborations</h3>
+                <p className="text-sm text-secondary font-body">
                   Partnerships, campaigns & brand opportunities
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Dense Info Grid */}
-          <div className="border-t pt-12 border-primary">
-            <h3 className="text-xl font-bold mb-6 text-primary">What's Possible</h3>
+          {/* What's Possible - Services Grid */}
+          <div className="border-t-4 border-primary pt-16">
+            <div className="mb-12">
+              <h3 className="text-lg font-black uppercase tracking-widest text-tertiary retro-label mb-3">→ Services & Offerings</h3>
+              <p className="text-2xl font-black text-primary heading-display">What We Can Create</p>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                'Music Videos',
-                'TikTok/Reels',
-                'Choreography',
-                'Brand Campaigns',
-                'Live Events',
-                'Workshops',
-                'Consulting',
-                'Content Direction',
-              ].map((item, idx) => (
+                { item: 'Music Videos', icon: '▶' },
+                { item: 'TikTok/Reels', icon: '⬜' },
+                { item: 'Choreography', icon: '💃' },
+                { item: 'Brand Campaigns', icon: '◆' },
+                { item: 'Live Events', icon: '🎪' },
+                { item: 'Workshops', icon: '📚' },
+                { item: 'Consulting', icon: '⚙️' },
+                { item: 'Content Direction', icon: '🎬' },
+              ].map((service, idx) => (
                 <div
                   key={idx}
-                  className="border p-3 text-center hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors border-accent"
+                  className="border-2 border-primary p-4 text-center hover:border-vibrant hover:bg-vibrant-faint transition-all duration-300 group"
                 >
-                  <div className="text-xs font-bold uppercase tracking-widest text-accent">
-                    ◆
+                  <div className="text-2xl mb-2 group-hover:scale-125 transition-transform">
+                    {service.icon}
                   </div>
-                  <div className="text-sm mt-1 text-secondary">
-                    {item}
+                  <div className="text-xs font-black uppercase tracking-widest text-primary group-hover:text-vibrant">
+                    {service.item}
                   </div>
                 </div>
               ))}
@@ -265,7 +284,7 @@ export default function Home() {
                 ].map((feature, idx) => (
                   <div key={idx} className="flex gap-4">
                     <div 
-                      className="text-2xl font-bold flex-shrink-0 w-8 h-8 flex items-center justify-center text-accent"
+                      className="text-2xl font-bold shrink-0 w-8 h-8 flex items-center justify-center text-accent"
                     >
                       {idx + 1}
                     </div>
@@ -314,6 +333,7 @@ export default function Home() {
         buttonLink="/collaborations"
       />
 
+      </PageTransition>
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); }

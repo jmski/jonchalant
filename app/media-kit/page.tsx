@@ -1,327 +1,373 @@
+'use client';
+
+'use client';
+
 import { ScrollFade } from "@/components/animations";
 import { CTASection } from "@/components/sections";
+import { PageTransition } from "@/components/layout";
 
-export const metadata = {
-  title: "Media Kit | Jon",
-  description: "Audience statistics, engagement metrics, and media information"
+const MEDIA_KIT_DATA = {
+  headline: 'MEDIA KIT',
+  subheadline: 'Audience statistics, engagement metrics, and collaboration potential',
+      keyMetrics: [
+    { label: 'Total Followers', value: '150K+', change: '+15% YoY', color: 'vibrant' },
+    { label: 'Avg Monthly Views', value: '2.5M', change: '+22% YoY', color: 'neon' },
+    { label: 'Engagement Rate', value: '4.8%', change: '+0.5% YoY', color: 'magenta' },
+    { label: 'Active Subscribers', value: '85K', change: '+18% YoY', color: 'vibrant' }
+  ],
+  platforms: [
+    { name: 'TikTok', handle: '@jonhandle', followers: '120K', avgViews: '2.1M', category: 'Dance Content', color: 'neon' },
+    { name: 'Instagram', handle: '@jonhandle', followers: '45K', avgViews: '8K', category: 'Photography & Reels', color: 'vibrant' },
+    { name: 'YouTube', handle: '@jonhandle', followers: '32K', avgViews: '125K', category: 'Long-form & Tutorials', color: 'magenta' }
+  ],
+  contentCategories: [
+    { name: 'Dance Choreography', percentage: 45, description: 'Original choreography and dance covers' },
+    { name: 'Tutorials', percentage: 25, description: 'Dance tutorials and how-to content' },
+    { name: 'Lifestyle', percentage: 20, description: 'Behind-the-scenes and daily life' },
+    { name: 'Collaborations', percentage: 10, description: 'Collaborations with other creators' }
+  ],
+  audience: {
+    age: [
+      { range: '13-17', percentage: 15 },
+      { range: '18-24', percentage: 45 },
+      { range: '25-34', percentage: 25 },
+      { range: '35+', percentage: 15 }
+    ],
+    gender: [
+      { label: 'Female', percentage: 68 },
+      { label: 'Male', percentage: 28 },
+      { label: 'Other', percentage: 4 }
+    ],
+    locations: [
+      { country: 'United States', percentage: 42 },
+      { country: 'Canada', percentage: 12 },
+      { country: 'United Kingdom', percentage: 10 },
+      { country: 'Australia', percentage: 8 },
+      { country: 'Other', percentage: 28 }
+    ]
+  }
 };
 
-interface Stat {
-  label: string;
-  value: string;
-  change: string;
-}
+const getColorVars = (color: string) => {
+  const colors: Record<string, { bg: string; border: string; text: string }> = {
+    vibrant: { bg: 'var(--bg-vibrant-faint)', border: 'var(--accent-vibrant)', text: 'var(--accent-vibrant)' },
+    neon: { bg: 'var(--bg-neon-faint)', border: 'var(--accent-neon)', text: 'var(--accent-neon)' },
+    magenta: { bg: 'var(--bg-magenta-faint)', border: 'var(--accent-magenta)', text: 'var(--accent-magenta)' }
+  };
+  return colors[color] || colors.vibrant;
+};
 
-interface Platform {
-  name: string;
-  handle: string;
-  followers: string;
-  avgViews: string;
-  category: string;
-}
-
-interface ContentCategory {
-  name: string;
-  percentage: number;
-  description: string;
-}
-
-interface AudienceDemographic {
-  age: Array<{ range: string; percentage: number }>;
-  gender: Array<{ label: string; percentage: number }>;
-  locations: Array<{ country: string; percentage: number }>;
-}
-
-interface MediaKitPageData {
-  headline: string;
-  subheadline: string;
-  keyMetrics: Stat[];
-  platforms: Platform[];
-  contentCategories: ContentCategory[];
-  audience: AudienceDemographic;
-}
-
-export default async function MediaKit() {
-  const fallbackData: MediaKitPageData = {
-      headline: 'Media Kit',
-      subheadline: 'Audience statistics and engagement metrics',
-      keyMetrics: [
-        { label: 'Total Followers', value: '150K+', change: '+15% YoY' },
-        { label: 'Avg Monthly Views', value: '2.5M', change: '+22% YoY' },
-        { label: 'Engagement Rate', value: '4.8%', change: '+0.5% YoY' },
-        { label: 'Active Subscribers', value: '85K', change: '+18% YoY' }
-      ],
-      platforms: [
-        { name: 'TikTok', handle: '@jonhandle', followers: '120K', avgViews: '2.1M', category: 'Dance Content' },
-        { name: 'Instagram', handle: '@jonhandle', followers: '45K', avgViews: '8K', category: 'Photography & Reels' },
-        { name: 'YouTube', handle: '@jonhandle', followers: '32K', avgViews: '125K', category: 'Long-form & Tutorials' }
-      ],
-      contentCategories: [
-        { name: 'Dance Choreography', percentage: 45, description: 'Original choreography and dance covers' },
-        { name: 'Tutorials', percentage: 25, description: 'Dance tutorials and how-to content' },
-        { name: 'Lifestyle', percentage: 20, description: 'Behind-the-scenes and daily life' },
-        { name: 'Collaborations', percentage: 10, description: 'Collaborations with other creators' }
-      ],
-      audience: {
-        age: [
-          { range: '13-17', percentage: 15 },
-          { range: '18-24', percentage: 45 },
-          { range: '25-34', percentage: 25 },
-          { range: '35+', percentage: 15 }
-        ],
-        gender: [
-          { label: 'Female', percentage: 68 },
-          { label: 'Male', percentage: 28 },
-          { label: 'Other', percentage: 4 }
-        ],
-        locations: [
-          { country: 'United States', percentage: 42 },
-          { country: 'Canada', percentage: 12 },
-          { country: 'United Kingdom', percentage: 10 },
-          { country: 'Australia', percentage: 8 },
-          { country: 'Other', percentage: 28 }
-        ]
-      }
-    };
-  
+export default function MediaKit() {
   return (
-    <div className="min-h-screen page-wrapper">
+    <div className="min-h-screen page-wrapper bg-primary">
+      <PageTransition animation="scale">
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="py-20 sm:py-28">
-          <ScrollFade>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold gradient-heading-text mb-6 font-display">
-              {fallbackData.headline}
+        {/* TECHNICAL HERO SECTION */}
+        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Technical background grid */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+            backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%, transparent)',
+            backgroundSize: '50px 50px'
+          }} />
+
+          {/* Left: Title */}
+          <div className="relative z-10">
+            <div className="retro-label text-neon uppercase text-xs tracking-widest mb-4">→ METRICS & INSIGHTS</div>
+            <h1 className="heading-display text-6xl sm:text-7xl lg:text-8xl font-black text-primary mb-6 leading-none">
+              MEDIA<br />KIT
             </h1>
-            <p className="text-xl max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
-              {fallbackData.subheadline}
+            <p className="text-lg text-secondary max-w-lg mb-8">
+              Comprehensive audience data, platform breakdown, and collaboration potential metrics
             </p>
-          </ScrollFade>
+            <div className="flex gap-4">
+              <div className="w-24 h-1 bg-neon" />
+              <div className="w-16 h-1 bg-magenta" />
+            </div>
+          </div>
+
+          {/* Right: Technical SVG Schematic */}
+          <div className="relative z-10 flex justify-end">
+            <svg width="300" height="300" viewBox="0 0 300 300" className="opacity-80">
+              {/* Outer ring */}
+              <circle cx="150" cy="150" r="140" fill="none" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6"/>
+              <circle cx="150" cy="150" r="120" fill="none" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.3"/>
+              
+              {/* Inner circle */}
+              <circle cx="150" cy="150" r="80" fill="none" stroke="var(--accent-neon)" strokeWidth="2"/>
+              <circle cx="150" cy="150" r="3" fill="var(--accent-neon)"/>
+              
+              {/* Quadrants with lines */}
+              <line x1="150" y1="70" x2="150" y2="40" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
+              <line x1="230" y1="150" x2="260" y2="150" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
+              <line x1="150" y1="230" x2="150" y2="260" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
+              <line x1="70" y1="150" x2="40" y2="150" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
+              
+              {/* Diagonal accents */}
+              <line x1="100" y1="100" x2="80" y2="80" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
+              <line x1="200" y1="100" x2="220" y2="80" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
+              <line x1="100" y1="200" x2="80" y2="220" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.4"/>
+              <line x1="200" y1="200" x2="220" y2="220" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.4"/>
+              
+              {/* Center data points */}
+              <circle cx="120" cy="150" r="8" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="180" cy="150" r="8" fill="none" stroke="var(--accent-magenta)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="150" cy="120" r="8" fill="none" stroke="var(--accent-neon)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="150" cy="180" r="8" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.7"/>
+            </svg>
+          </div>
         </div>
 
-        {/* Key Stats */}
-        <section className="mb-20">
-          <ScrollFade>
-            <h2 style={{ color: 'var(--text-heading)' }} className="text-4xl font-bold mb-8 font-display">
-              Key Metrics
-            </h2>
-          </ScrollFade>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {fallbackData.keyMetrics.map((stat, idx) => (
-              <ScrollFade key={idx} delay={idx * 100}>
-                <div
-                  className="p-8 border rounded-lg"
-                  style={{
-                    backgroundColor: 'var(--bg-secondary)',
-                    borderColor: 'var(--border)',
-                  }}
-                >
-                  <p style={{ color: 'var(--text-secondary)' }} className="text-sm font-medium mb-2">
+        {/* KEY METRICS CARDS */}
+        <section className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {MEDIA_KIT_DATA.keyMetrics.map((stat, idx) => {
+            const colors = getColorVars(stat.color);
+            return (
+              <div
+                key={idx}
+                className="border-bold relative group transition-all duration-300 hover:shadow-bold"
+                style={{ borderColor: colors.border, backgroundColor: colors.bg }}
+              >
+                {/* Top accent corner */}
+                <div className="absolute -top-3 -left-3 w-6 h-6 border-2" style={{ borderColor: colors.border }} />
+                
+                <div className="card-padding-lg relative z-10 space-y-4">
+                  <div style={{ color: colors.text }} className="text-xs uppercase tracking-[0.2em] retro-label">
                     {stat.label}
-                  </p>
-                  <p style={{ color: 'var(--text-heading)' }} className="text-4xl font-bold mb-2">
+                  </div>
+                  <div style={{ color: colors.text }} className="text-5xl font-black heading-display">
                     {stat.value}
-                  </p>
-                  <p style={{ color: 'var(--color-success)' }} className="text-sm">
+                  </div>
+                  <div style={{ color: colors.text }} className="text-sm font-bold">
                     {stat.change}
-                  </p>
+                  </div>
                 </div>
-              </ScrollFade>
-            ))}
-          </div>
+
+                {/* Bottom accent corner */}
+                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-2" style={{ borderColor: colors.border }} />
+              </div>
+            );
+          })}
         </section>
 
-        {/* Platform Breakdown */}
-        <section className="mb-20">
-          <ScrollFade>
-            <h2 style={{ color: 'var(--text-heading)' }} className="text-4xl font-bold mb-8 font-display">
-              Platform Presence
+        {/* PLATFORM BREAKDOWN */}
+        <section className="py-20 border-t border-primary">
+          <div className="mb-16">
+            <span className="retro-label text-magenta text-xs">→ PLATFORM PRESENCE</span>
+            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
+              Social Reach
             </h2>
-          </ScrollFade>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {fallbackData.platforms.map((platform, idx) => (
-              <ScrollFade key={idx} delay={idx * 100}>
+            {MEDIA_KIT_DATA.platforms.map((platform, idx) => {
+              const colors = getColorVars(platform.color);
+              return (
                 <div
-                  className="p-8 border rounded-lg"
-                  style={{
-                    borderColor: 'var(--border)',
-                  }}
+                  key={idx}
+                  className="border-bold group cursor-pointer transition-all duration-300 hover:shadow-bold"
+                  style={{ borderColor: colors.border, backgroundColor: colors.bg }}
                 >
-                  <h3 style={{ color: 'var(--text-heading)' }} className="text-2xl font-bold mb-2">
-                    {platform.name}
+                  <div className="card-padding-lg space-y-6">
+                    {/* Platform header */}
+                    <div>
+                      <div style={{ color: colors.text }} className="retro-label text-xs uppercase mb-2">
+                        {platform.name}
+                      </div>
+                      <div style={{ color: colors.text }} className="text-lg font-bold mono-text">
+                        {platform.handle}
+                      </div>
+                    </div>
+
+                    {/* Metrics grid */}
+                    <div className="space-y-4 border-t" style={{ borderColor: colors.border, paddingTop: '1.5rem' }}>
+                      <div>
+                        <div className="text-xs uppercase tracking-widest text-tertiary mb-2">Followers</div>
+                        <div style={{ color: colors.text }} className="text-3xl font-black">
+                          {platform.followers}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-xs uppercase tracking-widest text-tertiary mb-2">Avg Views</div>
+                        <div style={{ color: colors.text }} className="text-3xl font-black">
+                          {platform.avgViews}
+                        </div>
+                      </div>
+                      <div className="pt-4 border-t" style={{ borderColor: colors.border }}>
+                        <div style={{ color: colors.text }} className="text-sm font-bold">
+                          {platform.category}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* CONTENT DISTRIBUTION */}
+        <section className="py-20 border-t border-primary">
+          <div className="mb-12">
+            <span className="retro-label text-vibrant text-xs">→ CONTENT MIX</span>
+            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
+              Distribution
+            </h2>
+          </div>
+
+          <div className="space-y-8">
+            {MEDIA_KIT_DATA.contentCategories.map((category, idx) => (
+              <div key={idx} className="space-y-3">
+                <div className="flex justify-between items-baseline">
+                  <h3 className="text-xl font-bold text-primary">
+                    {category.name}
                   </h3>
-                  <p style={{ color: 'var(--text-secondary)' }} className="text-sm mb-4">
-                    {platform.handle}
-                  </p>
-                  <div className="space-y-3">
-                    <div>
-                      <p style={{ color: 'var(--text-muted)' }} className="text-xs font-medium uppercase tracking-wide">
-                        Followers
-                      </p>
-                      <p style={{ color: 'var(--text-heading)' }} className="text-lg font-bold">
-                        {platform.followers}
-                      </p>
-                    </div>
-                    <div>
-                      <p style={{ color: 'var(--text-muted)' }} className="text-xs font-medium uppercase tracking-wide">
-                        Avg Views
-                      </p>
-                      <p style={{ color: 'var(--text-heading)' }} className="text-lg font-bold">
-                        {platform.avgViews}
-                      </p>
-                    </div>
-                    <div className="pt-3" style={{ borderTopColor: 'var(--border)' }}>
-                      <p style={{ color: 'var(--text-accent-bright)' }} className="text-sm font-medium">
-                        {platform.category}
-                      </p>
-                    </div>
-                  </div>
+                  <span className="text-3xl font-black text-vibrant">
+                    {category.percentage}%
+                  </span>
                 </div>
-              </ScrollFade>
+                
+                {/* Progress bar */}
+                <div className="h-4 border-2 border-primary relative overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-vibrant to-neon transition-all duration-700"
+                    style={{ width: `${category.percentage}%` }}
+                  />
+                </div>
+                
+                <p className="text-secondary text-sm">
+                  {category.description}
+                </p>
+              </div>
             ))}
           </div>
         </section>
 
-        {/* Content Mix */}
-        <section className="mb-20">
-          <ScrollFade>
-            <h2 style={{ color: 'var(--text-heading)' }} className="text-4xl font-bold mb-8 font-display">
-              Content Distribution
+        {/* AUDIENCE DEMOGRAPHICS */}
+        <section className="py-20 border-t border-primary">
+          <div className="mb-12">
+            <span className="retro-label text-magenta text-xs">→ AUDIENCE INSIGHTS</span>
+            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
+              Demographics
             </h2>
-          </ScrollFade>
-          <div className="space-y-6">
-            {fallbackData.contentCategories.map((category, idx) => (
-              <ScrollFade key={idx} delay={idx * 100}>
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 style={{ color: 'var(--text-heading)' }} className="text-lg font-semibold">
-                      {category.name}
-                    </h3>
-                    <span style={{ color: 'var(--text-accent-bright)' }} className="text-lg font-bold">
-                      {category.percentage}%
-                    </span>
-                  </div>
-                  <div className="w-full rounded-full h-3" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-                    <div
-                      className="h-3 rounded-full"
-                      style={{
-                        width: `${category.percentage}%`,
-                        backgroundColor: 'var(--accent-vibrant)',
-                      }}
-                    />
-                  </div>
-                  <p style={{ color: 'var(--text-secondary)' }} className="text-sm mt-2">
-                    {category.description}
-                  </p>
-                </div>
-              </ScrollFade>
-            ))}
           </div>
-        </section>
 
-        {/* Audience Demographics */}
-        <section className="mb-20">
-          <ScrollFade>
-            <h2 style={{ color: 'var(--text-heading)' }} className="text-4xl font-bold mb-8 font-display">
-              Audience Demographics
-            </h2>
-          </ScrollFade>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Age */}
-            <ScrollFade delay={0}>
-              <div className="p-8 border rounded-lg" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
-                <h3 style={{ color: 'var(--text-heading)' }} className="text-xl font-bold mb-6">
-                  Age Distribution
-                </h3>
-                <div className="space-y-4">
-                  {fallbackData.audience.age.map((age, idx) => (
-                    <div key={idx}>
-                      <div className="flex justify-between mb-1">
-                        <span style={{ color: 'var(--text-secondary)' }} className="text-sm font-medium">
-                          {age.range}
-                        </span>
-                        <span style={{ color: 'var(--text-heading)' }} className="text-sm font-semibold">
-                          {age.percentage}%
-                        </span>
-                      </div>
-                      <div className="w-full rounded-full h-2" style={{ backgroundColor: 'var(--bg-muted)' }}>
-                        <div
-                          className="h-2 rounded-full"
-                          style={{
-                            width: `${age.percentage}%`,
-                            backgroundColor: 'var(--accent-vibrant)',
-                          }}
-                        />
-                      </div>
+            {/* Age Distribution */}
+            <div className="border-bold border-neon bg-neon-faint p-8">
+              <h3 className="text-xl font-black text-primary mb-8">Age Distribution</h3>
+              <div className="space-y-6">
+                {MEDIA_KIT_DATA.audience.age.map((age, idx) => (
+                  <div key={idx} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-bold text-secondary">{age.range}</span>
+                      <span className="text-neon font-black text-lg">{age.percentage}%</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="h-3 border border-neon bg-primary relative overflow-hidden">
+                      <div
+                        className="h-full bg-neon transition-all duration-500"
+                        style={{ width: `${age.percentage}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-            </ScrollFade>
+            </div>
 
-            {/* Gender */}
-            <ScrollFade delay={100}>
-              <div className="p-8 border rounded-lg" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
-                <h3 style={{ color: 'var(--text-heading)' }} className="text-xl font-bold mb-6">
-                  Gender
-                </h3>
-                <div className="space-y-4">
-                  {fallbackData.audience.gender.map((gender, idx) => (
-                    <div key={idx}>
-                      <div className="flex justify-between mb-1">
-                        <span style={{ color: 'var(--text-secondary)' }} className="text-sm font-medium">
-                          {gender.label}
-                        </span>
-                        <span style={{ color: 'var(--text-heading)' }} className="text-sm font-semibold">
-                          {gender.percentage}%
-                        </span>
-                      </div>
-                      <div className="w-full rounded-full h-2" style={{ backgroundColor: 'var(--bg-muted)' }}>
-                        <div
-                          className="h-2 rounded-full"
-                          style={{
-                            width: `${gender.percentage}%`,
-                            backgroundColor: 'var(--accent-vibrant)',
-                          }}
-                        />
-                      </div>
+            {/* Gender Distribution */}
+            <div className="border-bold border-vibrant bg-vibrant-faint p-8">
+              <h3 className="text-xl font-black text-primary mb-8">Gender</h3>
+              <div className="space-y-6">
+                {MEDIA_KIT_DATA.audience.gender.map((gender, idx) => (
+                  <div key={idx} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-bold text-secondary">{gender.label}</span>
+                      <span className="text-vibrant font-black text-lg">{gender.percentage}%</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="h-3 border border-vibrant bg-primary relative overflow-hidden">
+                      <div
+                        className="h-full bg-vibrant transition-all duration-500"
+                        style={{ width: `${gender.percentage}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-            </ScrollFade>
+            </div>
 
-            {/* Locations */}
-            <ScrollFade delay={200}>
-              <div className="p-8 border rounded-lg" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
-                <h3 style={{ color: 'var(--text-heading)' }} className="text-xl font-bold mb-6">
-                  Top Locations
-                </h3>
-                <div className="space-y-3">
-                  {fallbackData.audience.locations.map((location, idx) => (
-                    <div key={idx} className="flex justify-between items-center">
-                      <span style={{ color: 'var(--text-secondary)' }} className="text-sm font-medium">
-                        {location.country}
-                      </span>
-                      <span style={{ color: 'var(--text-heading)' }} className="text-sm font-semibold">
-                        {location.percentage}%
-                      </span>
-                    </div>
-                  ))}
-                </div>
+            {/* Top Locations */}
+            <div className="border-bold border-magenta bg-magenta-faint p-8">
+              <h3 className="text-xl font-black text-primary mb-8">Top Locations</h3>
+              <div className="space-y-4">
+                {MEDIA_KIT_DATA.audience.locations.map((location, idx) => (
+                  <div key={idx} className="flex justify-between items-center pb-3 border-b border-magenta">
+                    <span className="text-sm font-bold text-secondary">{location.country}</span>
+                    <span className="text-magenta font-black">{location.percentage}%</span>
+                  </div>
+                ))}
               </div>
-            </ScrollFade>
+            </div>
           </div>
         </section>
 
-        {/* Download Section */}
-        <CTASection
-          title="Download Full Media Kit"
-          description="Get a PDF version with complete statistics and collaboration packages."
-          buttonText="Download PDF"
-          buttonLink="#"
-        />
+        {/* COLLABORATION PACKAGES */}
+        <section className="py-20 border-t border-primary">
+          <div className="mb-12">
+            <span className="retro-label text-neon text-xs">→ OPPORTUNITIES</span>
+            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
+              Collaborate
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: 'Content Placement', price: 'Custom', features: ['Brand integration', 'Custom content', 'Performance report'] },
+              { title: 'Campaign Package', price: 'Premium', features: ['Multi-platform', 'Creative direction', 'Analytics dashboard'] },
+              { title: 'Exclusive Partnership', price: 'Enterprise', features: ['Long-term strategy', 'Dedicated support', 'Custom metrics'] },
+            ].map((pkg, idx) => {
+              const colors = getColorVars(['vibrant', 'neon', 'magenta'][idx]);
+              return (
+                <div
+                  key={idx}
+                  className="border-bold p-8 relative transition-all duration-300 hover:shadow-bold"
+                  style={{ borderColor: colors.border, backgroundColor: colors.bg }}
+                >
+                  <div style={{ color: colors.text }} className="text-sm uppercase tracking-widest retro-label mb-2">
+                    {pkg.title}
+                  </div>
+                  <div style={{ color: colors.text }} className="text-4xl font-black mb-6">
+                    {pkg.price}
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    {pkg.features.map((feature, fidx) => (
+                      <li key={fidx} className="flex items-center gap-3">
+                        <span style={{ color: colors.text }} className="text-lg font-black">▶</span>
+                        <span className="text-secondary text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    className="w-full border-2 font-bold py-3 px-4 transition-all duration-300"
+                    style={{ borderColor: colors.border, color: colors.text }}
+                  >
+                    GET STARTED
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* FINAL CTA */}
+        <section className="py-20 border-t border-primary">
+          <CTASection
+            title="Ready to Collaborate?"
+            description="Download the full media kit or let's discuss a custom collaboration package tailored to your brand."
+            buttonText="START CONVERSATION"
+            buttonLink="/contact"
+          />
+        </section>
       </main>
+      </PageTransition>
     </div>
   );
 }

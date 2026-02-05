@@ -1,3 +1,9 @@
+npm warn config optional Use `--omit=optional` to exclude optional dependencies, or
+npm warn config `--include=optional` to include them.
+npm warn config
+npm warn config       Default value does install optional deps unless otherwise omitted.
+npm warn Unknown project config "unsafe-perm". This will stop working in the next major version of npm.
+npm warn Unknown global config "msvs_version". This will stop working in the next major version of npm.
 
 > jonchalon@0.1.0 build
 > next build
@@ -6,28 +12,31 @@
 - Environments: .env.local
 
   Creating an optimized production build ...
-✓ Compiled successfully in 10.1s
-  Running TypeScript ...
-  Collecting page data using 7 workers ...
-  Generating static pages using 7 workers (0/11) ...
-  Generating static pages using 7 workers (2/11) 
-  Generating static pages using 7 workers (5/11) 
-  Generating static pages using 7 workers (8/11) 
-✓ Generating static pages using 7 workers (11/11) in 1212.1ms
-  Finalizing page optimization ...
 
-Route (app)
-┌ ○ /
-├ ○ /_not-found
-├ ○ /about
-├ ƒ /api/inquiries
-├ ○ /collaborations
-├ ○ /contact
-├ ○ /dance
-├ ○ /media-kit
-└ ○ /showcase
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./app/media-kit/page.tsx:7:14
+Ecmascript file had an error
+[0m [90m  5 |[39m [36mimport[39m { [33mPageTransition[39m } [36mfrom[39m [32m"@/components/layout"[39m[33m;[39m
+ [90m  6 |[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mexport[39m [36mconst[39m metadata [33m=[39m {
+ [90m    |[39m              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m   title[33m:[39m [32m"Media Kit | Jon"[39m[33m,[39m
+ [90m  9 |[39m   description[33m:[39m [32m"Audience statistics, engagement metrics, and media information"[39m
+ [90m 10 |[39m }[33m;[39m[0m
+
+You are attempting to export "metadata" from a component marked with "use client", which is disallowed. Either remove the export, or the "use client" directive. Read more: https://nextjs.org/docs/app/api-reference/directives/use-client
 
 
-○  (Static)   prerendered as static content
-ƒ  (Dynamic)  server-rendered on demand
 
+Import traces:
+  Client Component Browser:
+    ./app/media-kit/page.tsx [Client Component Browser]
+    ./app/media-kit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/media-kit/page.tsx [Client Component SSR]
+    ./app/media-kit/page.tsx [Server Component]
+
+
+    at <unknown> (./app/media-kit/page.tsx:7:14)
