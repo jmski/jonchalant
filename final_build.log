@@ -1,0 +1,14 @@
+npm warn config optional Use `--omit=optional` to exclude optional dependencies, or
+npm warn config `--include=optional` to include them.
+npm warn config
+npm warn config       Default value does install optional deps unless otherwise omitted.
+npm warn Unknown project config "unsafe-perm". This will stop working in the next major version of npm.
+npm warn Unknown global config "msvs_version". This will stop working in the next major version of npm.
+
+> jonchalon@0.1.0 build
+> next build
+
+▲ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
