@@ -162,7 +162,7 @@ export default function Contact() {
                 type="submit"
                 className="w-full font-bold py-3 px-6 rounded-lg transition-all duration-300"
                 style={{
-                  background: 'var(--cta-gradient)',
+                  backgroundColor: 'var(--accent-vibrant)',
                   color: 'var(--btn-primary-text)',
                 }}
               >

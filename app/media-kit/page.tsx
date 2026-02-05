@@ -206,7 +206,7 @@ export default async function MediaKit() {
                       className="h-3 rounded-full"
                       style={{
                         width: `${category.percentage}%`,
-                        background: 'var(--cta-gradient)',
+                        backgroundColor: 'var(--accent-vibrant)',
                       }}
                     />
                   </div>
@@ -249,7 +249,7 @@ export default async function MediaKit() {
                           className="h-2 rounded-full"
                           style={{
                             width: `${age.percentage}%`,
-                            background: 'var(--cta-gradient)',
+                            backgroundColor: 'var(--accent-vibrant)',
                           }}
                         />
                       </div>
@@ -281,7 +281,7 @@ export default async function MediaKit() {
                           className="h-2 rounded-full"
                           style={{
                             width: `${gender.percentage}%`,
-                            background: 'var(--cta-gradient)',
+                            backgroundColor: 'var(--accent-vibrant)',
                           }}
                         />
                       </div>

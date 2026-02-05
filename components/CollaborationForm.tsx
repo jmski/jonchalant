@@ -252,7 +252,7 @@ export default function CollaborationForm() {
         disabled={status === 'loading'}
         className="w-full font-bold py-3 px-6 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2"
         style={{
-          background: 'var(--cta-gradient)',
+          backgroundColor: 'var(--accent-vibrant)',
           color: 'var(--btn-primary-text)',
           border: '1px solid var(--accent-vibrant)',
           fontFamily: 'var(--font-mono)',
