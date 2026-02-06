@@ -1,7 +1,7 @@
-import Breadcrumb from "@/components/Breadcrumb";
-import ScrollFade from "@/components/ScrollFade";
-import CTASection from "@/components/CTASection";
-import CollaborationForm from "@/components/CollaborationForm";
+import { ScrollFade } from "@/components/animations";
+import { CTASection } from "@/components/sections";
+import { CollaborationForm } from "@/components/forms";
+import { PageTransition } from "@/components/layout";
 import { sanityClient } from "@/lib/sanityClient";
 import { collaborationQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT } from "@/lib/pageContent";
@@ -13,76 +13,337 @@ export const metadata = {
 
 const pageContent = PAGE_CONTENT.collaborations;
 
+// Mock collaboration examples
+const MOCK_COLLABORATIONS = [
+  {
+    _id: 'collab-1',
+    title: 'Music Video Direction',
+    category: 'Music Video',
+    description: 'Original choreography and lead performance for music videos. Professional production, narrative-driven storytelling.',
+    price: 'Custom Quote',
+    image: '/api/placeholder/500/300'
+  },
+  {
+    _id: 'collab-2',
+    title: 'TikTok/Reels Content',
+    category: 'Social Media',
+    description: 'Trending dance content, choreography tutorials, behind-the-scenes footage. Optimized for short-form platforms.',
+    price: '$500-$2,000 per video',
+    image: '/api/placeholder/500/300'
+  },
+  {
+    _id: 'collab-3',
+    title: 'Brand Campaign',
+    category: 'Brand Partnership',
+    description: 'Custom choreography for product launches, commercial videos, and brand activations. Multi-location shoots.',
+    price: '$3,000-$15,000',
+    image: '/api/placeholder/500/300'
+  },
+  {
+    _id: 'collab-4',
+    title: 'Live Performance',
+    category: 'Event',
+    description: 'Festival performances, concert tours, private events, corporate gatherings. Professional stage presence.',
+    price: 'Custom Quote',
+    image: '/api/placeholder/500/300'
+  },
+  {
+    _id: 'collab-5',
+    title: 'Choreography Teaching',
+    category: 'Education',
+    description: 'Workshop facilitation, masterclass instruction, online course creation. Train your team or audience.',
+    price: '$200-$500/hour',
+    image: '/api/placeholder/500/300'
+  },
+  {
+    _id: 'collab-6',
+    title: 'Podcast/Interview',
+    category: 'Media',
+    description: 'Guest appearances, interview features, podcast episodes discussing movement, performance, and creativity.',
+    price: 'Negotiable',
+    image: '/api/placeholder/500/300'
+  }
+];
+
+// Service categories
+const SERVICE_CATEGORIES = [
+  {
+    name: 'Music Videos',
+    items: [
+      'Original choreography',
+      'Lead performance',
+      'Multi-dancer coordination',
+      'Professional cinematography',
+      'Post-production integration'
+    ],
+    color: 'vibrant'
+  },
+  {
+    name: 'Social Content',
+    items: [
+      'TikTok/Reels choreography',
+      'Trending dance content',
+      'Tutorial series',
+      'Behind-the-scenes footage',
+      'Platform optimization'
+    ],
+    color: 'neon'
+  },
+  {
+    name: 'Brand Partnerships',
+    items: [
+      'Custom campaign choreography',
+      'Product promotion videos',
+      'Brand activation events',
+      'Commercial direction',
+      'Multi-location shoots'
+    ],
+    color: 'magenta'
+  },
+  {
+    name: 'Live Events',
+    items: [
+      'Festival performances',
+      'Concert tours',
+      'Private event choreography',
+      'Corporate entertainment',
+      'Stage presence coaching'
+    ],
+    color: 'vibrant'
+  }
+];
+
+const getColorVar = (color: string) => {
+  const colorMap: Record<string, string> = {
+    vibrant: 'var(--accent-vibrant)',
+    neon: 'var(--accent-neon)',
+    magenta: 'var(--accent-magenta)',
+    primary: 'var(--text-primary)'
+  };
+  return colorMap[color] || 'var(--text-primary)';
+};
+
 export default async function Collaborations() {
   let services: any[] = [];
 
+  try {
+    services = await sanityClient.fetch(collaborationQuery);
+  } catch (error) {
+    console.error('Error fetching collaboration data:', error);
+    services = MOCK_COLLABORATIONS;
+  }
+
+  // Fallback to mock data if empty
+  if (services.length === 0) {
+    services = MOCK_COLLABORATIONS;
+  }
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <Breadcrumb />
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero */}
-        <div className="py-20 sm:py-28">
-          <ScrollFade>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent mb-6 font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              {pageContent.headline}
-            </h1>
-            <p className="text-xl max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              {pageContent.subheadline}
+    <div className="min-h-screen page-wrapper bg-primary">
+      <PageTransition animation="scale">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* TECHNICAL HERO SECTION */}
+        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Technical background grid */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+            backgroundImage: `
+              linear-gradient(0deg, transparent 24%, var(--border-color) 25%, var(--border-color) 26%, transparent 27%, transparent 74%, var(--border-color) 75%, var(--border-color) 76%, transparent 77%, transparent),
+              linear-gradient(90deg, transparent 24%, var(--border-color) 25%, var(--border-color) 26%, transparent 27%, transparent 74%, var(--border-color) 75%, var(--border-color) 76%, transparent 77%, transparent)
+            `,
+            backgroundSize: '60px 60px'
+          }} />
+
+          {/* LEFT - BOLD TEXT */}
+          <div className="relative z-10 space-y-8">
+            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-magenta bg-magenta-faint">
+              <span className="w-2 h-2 bg-magenta animate-pulse rounded-full" />
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-magenta">🤝 LET'S CREATE</span>
+            </div>
+
+            <div>
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight heading-display text-primary mb-4">
+                WORK<br />
+                <span className="text-magenta">TOGETHER</span>
+              </h1>
+              <div className="h-1 w-40 bg-magenta" />
+            </div>
+
+            <p className="text-lg font-black text-secondary leading-tight">
+              Music Videos | Brands | Events | Content
             </p>
-          </ScrollFade>
+            <p className="text-base leading-relaxed text-tertiary font-body max-w-lg">
+              Strategic collaborations that blend movement, creativity, and storytelling. From TikTok trends to major brand campaigns, let's create something unforgettable together.
+            </p>
+
+            <div className="pt-4">
+              <a href="#collaboration-form" className="inline-flex items-center gap-2 px-8 py-4 font-black uppercase tracking-[0.1em] text-sm border-3 border-magenta text-magenta hover:bg-magenta hover:text-primary transition-all duration-300">
+                ⬇ SEND INQUIRY
+              </a>
+            </div>
+          </div>
+
+          {/* RIGHT - TECHNICAL VISUAL */}
+          <div className="relative hidden lg:flex items-center justify-center">
+            <svg className="w-full max-w-sm" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              {/* Outer frame */}
+              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-magenta)" strokeWidth="2" />
+              
+              {/* Corner marks */}
+              <g stroke="var(--accent-magenta)" strokeWidth="3" fill="none">
+                <line x1="30" y1="30" x2="70" y2="30" />
+                <line x1="30" y1="30" x2="30" y2="70" />
+                <line x1="370" y1="30" x2="330" y2="30" />
+                <line x1="370" y1="30" x2="370" y2="70" />
+                <line x1="30" y1="370" x2="70" y2="370" />
+                <line x1="30" y1="370" x2="30" y2="330" />
+                <line x1="370" y1="370" x2="330" y2="370" />
+                <line x1="370" y1="370" x2="370" y2="330" />
+              </g>
+
+              {/* Connection nodes */}
+              <g fill="var(--accent-magenta)" opacity="0.8">
+                <circle cx="100" cy="150" r="6" />
+                <circle cx="300" cy="150" r="6" />
+                <circle cx="200" cy="300" r="6" />
+              </g>
+
+              {/* Connection lines */}
+              <line x1="100" y1="150" x2="200" y2="300" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.5" />
+              <line x1="300" y1="150" x2="200" y2="300" stroke="var(--accent-neon)" strokeWidth="1.5" opacity="0.5" />
+              <line x1="100" y1="150" x2="300" y2="150" stroke="var(--accent-magenta)" strokeWidth="1.5" opacity="0.4" strokeDasharray="3,3" />
+              
+              {/* Center circle */}
+              <circle cx="200" cy="200" r="35" fill="none" stroke="var(--accent-magenta)" strokeWidth="2" opacity="0.6" />
+              
+              {/* Labels */}
+              <text x="100" y="175" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">YOU</text>
+              <text x="300" y="175" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">ME</text>
+              <text x="200" y="325" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">MAGIC</text>
+            </svg>
+          </div>
         </div>
 
-        {/* Services Grid */}
-        <section className="mb-20">
+        {/* SERVICE CATEGORIES - COLOR CODED */}
+        <section className="mb-24">
           <ScrollFade>
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent mb-12 font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Services & Collaboration Types
-            </h2>
+            <div className="mb-12">
+              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] text-primary mb-4">
+                Services & Collaboration Types
+              </h2>
+              <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
+                Flexible pricing and customizable packages based on your project scope and requirements.
+              </p>
+            </div>
           </ScrollFade>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {services.map((service, idx) => (
-              <ScrollFade key={service._id} delay={idx * 100}>
-                <div className="card-enhanced p-8">
-                  <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-accent-bright)' }}>
-                    {service.title}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {SERVICE_CATEGORIES.map((category, idx) => {
+              const colorVar = getColorVar(category.color);
+              return (
+                <ScrollFade key={idx} delay={idx * 100}>
+                  <div className="relative group">
+                    <div 
+                      className="border-t-4 pt-6 pb-8 px-8 transition-all duration-300 hover:shadow-lg"
+                      style={{ borderColor: colorVar, backgroundColor: 'rgba(255,255,255, 0.01)' }}
+                    >
+                      <h3 
+                        className="text-3xl font-black uppercase heading-display tracking-[0.1em] mb-6"
+                        style={{ color: colorVar }}
+                      >
+                        {category.name}
+                      </h3>
+                      <ul className="space-y-3">
+                        {category.items.map((item, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <span className="text-lg font-black mt-1" style={{ color: colorVar }}>✓</span>
+                            <span className="text-sm leading-relaxed text-tertiary font-body">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {/* Hover accent line */}
+                    <div 
+                      className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
+                      style={{ backgroundColor: colorVar }}
+                    />
+                  </div>
+                </ScrollFade>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* PAST COLLABORATIONS */}
+        <section className="mb-24">
+          <ScrollFade>
+            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
+              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4" style={{ color: 'var(--accent-magenta)' }}>
+                ▶ Recent Projects
+              </h2>
+              <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
+                A selection of successful brand partnerships and creative collaborations.
+              </p>
+            </div>
+          </ScrollFade>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.slice(0, 6).map((collab: any, idx: number) => (
+              <ScrollFade key={collab._id} delay={idx * 100}>
+                <div className="group relative border-2 border-tertiary p-6 hover:border-magenta transition-all duration-300">
+                  <h3 className="text-xl font-black uppercase tracking-[0.1em] text-primary mb-2">
+                    {collab.title}
                   </h3>
-                  <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
-                    {service.description}
+                  <p className="text-xs font-black uppercase tracking-[0.1em] text-magenta mb-4">
+                    {collab.category}
                   </p>
-                  {service.price && (
-                    <p className="text-lg font-semibold text-yellow-400">
-                      {service.price}
+                  <p className="text-sm leading-relaxed text-tertiary font-body mb-4">
+                    {collab.description}
+                  </p>
+                  {collab.price && (
+                    <p className="text-sm font-black text-vibrant">
+                      {collab.price}
                     </p>
                   )}
+                  {/* Hover underline */}
+                  <div 
+                    className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
+                    style={{ backgroundColor: 'var(--accent-magenta)' }}
+                  />
                 </div>
               </ScrollFade>
             ))}
           </div>
         </section>
 
-        {/* Get in Touch Section */}
-        <section className="mb-20">
+        {/* COLLABORATION FORM */}
+        <section id="collaboration-form" className="mb-20 py-12">
           <ScrollFade>
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent mb-8 font-display" style={{ background: 'var(--gradient-heading)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Get in Touch
-            </h2>
-            <p className="text-lg text-slate-300 mb-12 max-w-2xl">
-              Ready to collaborate? Fill out the form below with your project details.
-            </p>
+            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-vibrant)' }}>
+              <h2 
+                className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4"
+                style={{ color: 'var(--accent-vibrant)' }}
+              >
+                ▶ Let's Connect
+              </h2>
+              <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
+                Have a project in mind? Send your collaboration inquiry below. I respond to all inquiries within 48 hours.
+              </p>
+            </div>
           </ScrollFade>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl">
             <CollaborationForm />
           </div>
         </section>
 
-        {/* Info */}
+        {/* Final CTA */}
         <CTASection
-          title="Ready to Collaborate?"
-          description="Let's create something amazing together. Reach out using the form above or connect with me on social media."
-          buttonText="Get Started"
-          buttonLink="#contact-form"
+          title="Let's Create Something Extraordinary"
+          description="Ready to bring your vision to life? Let's collaborate and make magic happen."
+          buttonText="START CONVERSATION"
+          buttonLink="#collaboration-form"
         />
       </main>
+      </PageTransition>
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import Breadcrumb from "@/components/Breadcrumb";
-import CTASection from "@/components/CTASection";
+import { CTASection } from "@/components/sections";
+import { PageTransition } from "@/components/layout";
 
 export const metadata = {
   title: "About | Jon Chalon",
@@ -9,187 +9,208 @@ export const metadata = {
 export default function About() {
   return (
     <div className="bg-primary text-primary">
-            <Breadcrumb />
+      <PageTransition animation="blur">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        {/* TECHNICAL HERO SECTION */}
+        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Technical background grid */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+            backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(255, 95, 31, 0.1) 25%, rgba(255, 95, 31, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 95, 31, 0.1) 75%, rgba(255, 95, 31, 0.1) 76%, transparent 77%, transparent)',
+            backgroundSize: '50px 50px'
+          }} />
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-        {/* Hero Grid Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-center">
-          {/* Left: Text Content */}
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: 'var(--text-primary)', fontFamily: '"Silkscreen", monospace' }}>
-              Jon Chalon
+          {/* Left: Title */}
+          <div className="relative z-10">
+            <div className="retro-label text-vibrant uppercase text-xs tracking-widest mb-4">→ ORIGIN STORY</div>
+            <h1 className="heading-display text-6xl sm:text-7xl lg:text-8xl font-black text-primary mb-6 leading-none">
+              JON<br />CHALON
             </h1>
-            <div className="space-y-4 text-base sm:text-lg" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-serif)', lineHeight: '1.8' }}>
-              <p>
-                I'm a professional choreographer and digital creator based in [City]. With 8+ years of experience in movement direction, dance education, and online content creation, I specialize in bridging the gap between artistic vision and commercial collaboration.
-              </p>
-              <p>
-                My work spans contemporary dance choreography, brand-driven movement content, and digital media production. I bring both technical precision and creative innovation to every project, whether for established brands, emerging creators, or independent productions.
-              </p>
-            </div>
+            <p className="text-lg text-secondary max-w-lg">
+              Professional choreographer. Creator. Collaborator. Blending movement, technology, and otaku culture.
+            </p>
           </div>
 
-          {/* Right: Info Grid (retro-tech style) */}
-          <div className="space-y-4">
-            <div className="border" style={{ borderColor: 'var(--border-color)', padding: '1.5rem' }}>
-              <div className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
-                PROFESSIONAL SUMMARY
-              </div>
-              <ul className="space-y-3 text-sm">
-                <li className="flex justify-between">
-                  <span style={{ color: 'var(--text-tertiary)' }}>Experience:</span>
-                  <strong style={{ color: 'var(--accent-vibrant)' }}>8+ Years</strong>
-                </li>
-                <li className="flex justify-between">
-                  <span style={{ color: 'var(--text-tertiary)' }}>Specialization:</span>
-                  <strong style={{ color: 'var(--accent-vibrant)' }}>Choreography</strong>
-                </li>
-                <li className="flex justify-between">
-                  <span style={{ color: 'var(--text-tertiary)' }}>Projects:</span>
-                  <strong style={{ color: 'var(--accent-vibrant)' }}>50+</strong>
-                </li>
-                <li className="flex justify-between">
-                  <span style={{ color: 'var(--text-tertiary)' }}>Collaboration:</span>
-                  <strong style={{ color: 'var(--accent-vibrant)' }}>Global</strong>
-                </li>
-              </ul>
-            </div>
-
-            <div className="border" style={{ borderColor: 'var(--border-color)', padding: '1.5rem' }}>
-              <div className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
-                CORE COMPETENCIES
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Choreography', 'Movement Direction', 'Content Creation', 'Brand Strategy', 'Digital Media', 'Education'].map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-xs px-3 py-1.5 border rounded"
-                    style={{
-                      borderColor: 'var(--accent-vibrant)',
-                      color: 'var(--accent-vibrant)',
-                      fontFamily: 'var(--font-mono)',
-                      backgroundColor: 'transparent',
-                    }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+          {/* Right: Technical SVG Schematic */}
+          <div className="relative z-10 flex justify-end">
+            <svg width="300" height="300" viewBox="0 0 300 300" className="opacity-80">
+              {/* Outer Pentagon-like shape */}
+              <circle cx="150" cy="150" r="140" fill="none" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6"/>
+              <circle cx="150" cy="150" r="100" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.3"/>
+              
+              {/* Inner elements */}
+              <circle cx="150" cy="150" r="60" fill="none" stroke="var(--accent-vibrant)" strokeWidth="2"/>
+              <circle cx="150" cy="150" r="4" fill="var(--accent-vibrant)"/>
+              
+              {/* Radiating lines */}
+              <line x1="150" y1="90" x2="150" y2="40" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
+              <line x1="210" y1="150" x2="260" y2="150" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
+              <line x1="150" y1="210" x2="150" y2="260" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
+              <line x1="90" y1="150" x2="40" y2="150" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
+              
+              {/* Diagonal lines */}
+              <line x1="105" y1="105" x2="75" y2="75" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.4"/>
+              <line x1="195" y1="105" x2="225" y2="75" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.4"/>
+              <line x1="195" y1="195" x2="225" y2="225" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
+              <line x1="105" y1="195" x2="75" y2="225" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
+              
+              {/* Center nodes */}
+              <circle cx="120" cy="180" r="7" fill="none" stroke="var(--accent-neon)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="180" cy="120" r="7" fill="none" stroke="var(--accent-magenta)" strokeWidth="1.5" opacity="0.7"/>
+            </svg>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="my-16 border-t" style={{ borderColor: 'var(--border-color)' }} />
+        {/* BIO SECTION */}
+        <section className="py-20 border-t border-primary grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="space-y-6">
+            <p className="text-lg text-secondary leading-relaxed">
+              I'm a professional choreographer and digital creator with 8+ years of experience delivering high-impact movement content for brands, creators, and live productions. My work combines technical choreographic precision with creative innovation.
+            </p>
+            <p className="text-lg text-secondary leading-relaxed">
+              From TikTok viral choreography to music video direction, brand collaborations to educational workshops—I bring both artistic vision and strategic thinking to every project. I specialize in bridging the gap between artistic movement and commercial success.
+            </p>
+            <p className="text-lg text-secondary leading-relaxed">
+              Beyond choreography, I'm deeply invested in animation (Gunpla), Pokémon culture, and the intersection of internet aesthetics with professional content creation. These intersecting worlds inform my creative approach and help me connect with diverse audiences.
+            </p>
+          </div>
 
-        {/* Experience & Services Grid */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-12" style={{ color: 'var(--text-primary)' }}>
-            Services & Specializations
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Quick Stats Grid */}
+          <div className="space-y-4">
             {[
-              {
-                title: 'Choreography',
-                description: 'Custom choreography for music videos, commercials, live events, and digital content. Contemporary to experimental movement.',
-              },
-              {
-                title: 'Brand Partnerships',
-                description: 'Strategic collaborations with brands for authentic movement-based content. Product integration, campaigns, and sponsorships.',
-              },
-              {
-                title: 'Content Direction',
-                description: 'Creative direction for dance and movement content. From concept development through post-production. TikTok, Instagram, YouTube.',
-              },
-              {
-                title: 'Movement Consulting',
-                description: 'Art direction and movement expertise for film, TV, theater, and installation projects. Technical advising and talent direction.',
-              },
-              {
-                title: 'Workshop & Teaching',
-                description: 'Choreography workshops, movement intensive, technique classes, and creative coaching for performers and content creators.',
-              },
-              {
-                title: 'Creative Collaboration',
-                description: 'Cross-disciplinary projects combining dance with technology, music production, visual art, and multimedia.',
-              },
-            ].map((service, idx) => (
+              { label: 'Experience', value: '8+ Years', icon: '▶' },
+              { label: 'Projects', value: '50+', icon: '◆' },
+              { label: 'Followers', value: '150K+', icon: '●' },
+              { label: 'Global Reach', value: 'Yes', icon: '✦' },
+            ].map((stat, idx) => (
               <div
                 key={idx}
-                className="border p-6"
-                style={{
-                  borderColor: 'var(--border-color)',
-                  backgroundColor: 'var(--bg-tertiary)',
-                }}
+                className="border-bold border-vibrant bg-vibrant-faint group p-6"
               >
-                <h3 className="text-lg font-bold mb-3" style={{ color: 'var(--accent-vibrant)' }}>
-                  {service.title}
-                </h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  {service.description}
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="retro-label text-vibrant text-xs uppercase mb-2">
+                      {stat.label}
+                    </div>
+                    <div className="text-3xl font-black text-vibrant">
+                      {stat.value}
+                    </div>
+                  </div>
+                  <div className="text-4xl opacity-30">
+                    {stat.icon}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Divider */}
-        <div className="my-16 border-t" style={{ borderColor: 'var(--border-color)' }} />
+        {/* EXPERTISE SECTION */}
+        <section className="py-20 border-t border-primary">
+          <div className="mb-12">
+            <span className="retro-label text-neon text-xs">→ SPECIALIZATIONS</span>
+            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
+              What I Do
+            </h2>
+          </div>
 
-        {/* Philosophy Section */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-            Philosophy
-          </h2>
-
-          <div className="space-y-6" style={{ color: 'var(--text-secondary)', lineHeight: '1.8' }}>
-            <p>
-              I believe movement is a universal language that transcends boundaries. Whether choreographing for a major brand or creating digital content, my approach prioritizes authentic storytelling, technical excellence, and creative innovation.
-            </p>
-            <p>
-              Every project is an opportunity to push creative boundaries. I work collaboratively with brands, creators, and technical teams to bring compelling movement-based narratives to life. My process combines artistic intuition with strategic thinking to deliver measurable creative impact.
-            </p>
-            <p>
-              Beyond professional work, I'm passionate about dance education, emerging creator support, and exploring how traditional movement practices intersect with digital media. I also maintain active hobbies in model building (Gunpla) and Pokémon culture—bringing the same precision and enthusiasm to all creative endeavors.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { title: 'Choreography', desc: 'Custom movement design for music videos, commercials, performances, and digital content', color: 'vibrant' },
+              { title: 'Brand Partnerships', desc: 'Strategic collaborations with authentic movement-based content and product integration', color: 'neon' },
+              { title: 'Content Direction', desc: 'Creative vision for dance content across TikTok, Instagram, YouTube, and emerging platforms', color: 'magenta' },
+              { title: 'Movement Consulting', desc: 'Art direction and technical movement expertise for film, TV, theater, and installations', color: 'vibrant' },
+              { title: 'Workshops & Teaching', desc: 'Choreography workshops, intensives, technique classes, and creative coaching for creators', color: 'neon' },
+              { title: 'Creative Collaboration', desc: 'Cross-disciplinary projects blending dance with music, visual art, and multimedia', color: 'magenta' },
+            ].map((service, idx) => {
+              const colorMap: Record<string, string> = { vibrant: 'var(--accent-vibrant)', neon: 'var(--accent-neon)', magenta: 'var(--accent-magenta)' };
+              return (
+                <div
+                  key={idx}
+                  className="border-bold group cursor-pointer transition-all duration-300 hover:shadow-bold p-8"
+                  style={{ borderColor: colorMap[service.color], backgroundColor: `var(--bg-${service.color}-faint)` }}
+                >
+                  <div style={{ color: colorMap[service.color] }} className="retro-label text-xs uppercase mb-3">
+                    {service.title}
+                  </div>
+                  <p className="text-secondary text-sm leading-relaxed">
+                    {service.desc}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
-        {/* Divider */}
-        <div className="my-16 border-t" style={{ borderColor: 'var(--border-color)' }} />
+        {/* PHILOSOPHY SECTION */}
+        <section className="py-20 border-t border-primary">
+          <div className="mb-12">
+            <span className="retro-label text-magenta text-xs">→ APPROACH</span>
+            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none mb-12">
+              Philosophy
+            </h2>
+          </div>
 
-        {/* Quick Stats */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-          {[
-            { label: 'Projects', value: '50+' },
-            { label: 'Clients', value: '30+' },
-            { label: 'Years Active', value: '8+' },
-            { label: 'Collaborators', value: 'Global' },
-          ].map((stat, idx) => (
-            <div
-              key={idx}
-              className="border text-center p-6"
-              style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-tertiary)' }}
-            >
-              <div className="text-2xl sm:text-3xl font-bold" style={{ color: 'var(--accent-vibrant)' }}>
-                {stat.value}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: 'Technical Excellence', desc: 'Precision choreography meets production quality. Every movement matters.' },
+              { title: 'Authentic Storytelling', desc: 'Movement is narrative. I prioritize genuine creative expression over trends.' },
+              { title: 'Strategic Growth', desc: 'All creative work serves measurable impact. Metrics and artistry aren\'t mutually exclusive.' },
+            ].map((philosophy, idx) => (
+              <div key={idx} className="border-bold border-primary p-8 relative">
+                <div className="absolute -top-3 -left-3 w-6 h-6 border-2 border-primary" />
+                
+                <h3 className="heading-display text-2xl font-black text-primary mb-4">
+                  {philosophy.title}
+                </h3>
+                <p className="text-secondary text-sm leading-relaxed">
+                  {philosophy.desc}
+                </p>
+                
+                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-2 border-primary" />
               </div>
-              <div className="text-xs uppercase tracking-widest mt-2" style={{ color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </section>
 
-        {/* Call to Action */}
-        <CTASection
-          title="Ready to Collaborate?"
-          description="Let's discuss how movement and creativity can elevate your next project. Whether it's choreography, content direction, or strategic partnership—I'm here to make it happen."
-          buttonText="Start a Conversation"
-          buttonLink="/collaborations"
-        />
+        {/* HOBBIES SECTION */}
+        <section className="py-20 border-t border-primary">
+          <div className="mb-12">
+            <span className="retro-label text-neon text-xs">→ OUTSIDE THE STUDIO</span>
+            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
+              Also Known For
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="border-bold border-neon bg-neon-faint p-8">
+              <div className="text-5xl mb-4">🤖</div>
+              <h3 className="text-2xl font-black text-primary mb-4">Gunpla Building</h3>
+              <p className="text-secondary text-sm leading-relaxed">
+                Scale modeling enthusiast. I approach Gunpla with the same precision and attention to detail as choreography. The intricate assembly process mirrors creative composition—each piece has its role in the larger vision.
+              </p>
+            </div>
+
+            <div className="border-bold border-magenta bg-magenta-faint p-8">
+              <div className="text-5xl mb-4">🎴</div>
+              <h3 className="text-2xl font-black text-primary mb-4">Pokémon Collecting</h3>
+              <p className="text-secondary text-sm leading-relaxed">
+                Active collector and enthusiast. The Pokémon universe connects with my audience and influences my creative aesthetic. Nostalgia, design, and community matter. It's not just a hobby—it's cultural commentary.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 border-t border-primary">
+          <CTASection
+            title="Let's Work Together"
+            description="Whether you're looking for choreography, content direction, or creative partnership—I'm ready to bring your vision to life."
+            buttonText="START A CONVERSATION"
+            buttonLink="/contact"
+          />
+        </section>
       </main>
+      </PageTransition>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { FormLoadingState, FormSuccessState, FormErrorState } from './forms/FormFeedback';
+import { FormLoadingState, FormSuccessState, FormErrorState } from './FormFeedback';
 
 export default function CollaborationForm() {
   const [formData, setFormData] = useState({

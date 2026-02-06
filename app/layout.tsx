@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
-import RouteAwareLayout from "@/components/RouteAwareLayout";
+import { RouteAwareLayout } from "@/components/layout";
 
 export const metadata: Metadata = {
   title: "Jon | Choreographer & Content Creator",
