@@ -1,5 +1,4 @@
 import { HomeHero } from '@/components/hero';
-import { DeconstructedBrandBurger } from '@/components/sections';
 import { CTASection } from '@/components/sections';
 import { PageTransition } from '@/components/layout';
 
@@ -94,9 +93,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          {/* Brand Stack - Visual Interest */}
-          <DeconstructedBrandBurger />
         </div>
       </section>
 
