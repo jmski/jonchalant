@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
+import { getOptimizedImageProps } from '@/lib/imageConfig';
 
 interface PortfolioCardProps {
   title: string;
@@ -47,8 +48,7 @@ export default function PortfolioCard({
           <Image
             src={image}
             alt={title}
-            width={500}
-            height={400}
+            {...getOptimizedImageProps('PORTFOLIO_CARD')}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
           {/* Enhanced overlay with theme-aware accent gradient */}
