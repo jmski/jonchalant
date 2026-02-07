@@ -39,12 +39,17 @@ const BUDGET_RANGE = [
   { value: 'TBD', label: 'Budget TBD' },
 ];
 
-const STEP_LABELS = ['Project Details', 'Budget & Timeline', 'Contact Info'];
+const STEP_LABELS = ['Project Details', 'Budget & Timeline', 'Contact Info', 'Review'];
 
 export default function CollaborationForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Helper function to get label for dropdown values
+  const getLabelForValue = (value: string, options: Array<{ value: string; label: string }>) => {
+    return options.find(opt => opt.value === value)?.label || value;
+  };
 
   // Setup validation rules
   const validationRules = useMemo(() => ({
@@ -112,6 +117,8 @@ export default function CollaborationForm() {
           !!form.name &&
           !!form.email
         );
+      case 4:
+        return true; // Review step - no validation needed
       default:
         return false;
     }
@@ -119,14 +126,12 @@ export default function CollaborationForm() {
 
   const handleNextStep = () => {
     if (validateCurrentStep()) {
-      setCurrentStep(prev => Math.min(prev + 1, 3));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setCurrentStep(prev => Math.min(prev + 1, 4));
     }
   };
 
   const handlePrevStep = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -149,33 +154,56 @@ export default function CollaborationForm() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit form');
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.message || `Server error: ${response.status}`;
+        throw new Error(errorMessage);
       }
 
       setStatus('success');
       resetForm();
       setCurrentStep(1);
 
-      setTimeout(() => {
-        setStatus('idle');
-      }, 5000);
+      // Keep success state visible for user to see messages
     } catch (error) {
       setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+      if (error instanceof TypeError) {
+        // Network error
+        setErrorMessage('Network error. Please check your connection and try again.');
+      } else if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Something went wrong. Please try again.');
+      }
     }
+  };
+
+  // Reset form and return to step 1
+  const handleSuccessDismiss = () => {
+    setStatus('idle');
+    resetForm();
+    setCurrentStep(1);
+  };
+
+  // Navigate to home page
+  const handleReturnHome = () => {
+    window.location.href = '/';
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Form Progress Indicator */}
-      <FormProgress currentStep={currentStep} totalSteps={3} stepLabels={STEP_LABELS} />
+      <FormProgress currentStep={currentStep} totalSteps={4} stepLabels={STEP_LABELS} />
 
       {/* Loading State */}
       {status === 'loading' && <FormLoadingState />}
 
       {/* Success State */}
       {status === 'success' && (
-        <FormSuccessState message="🎉 Your inquiry is on the way! I'll review it and get back to you within 24 hours." />
+        <FormSuccessState 
+          message="Your inquiry has been submitted successfully! I'll review your collaboration request and get back to you within 24 hours."
+          onDismiss={handleSuccessDismiss}
+          onReturnHome={handleReturnHome}
+        />
       )}
 
       {/* Error State */}
@@ -325,23 +353,91 @@ export default function CollaborationForm() {
         </div>
       )}
 
+      {/* STEP 4: REVIEW SUBMISSION */}
+      {currentStep === 4 && (
+        <div className="space-y-6 animate-fadeIn">
+          <div>
+            <h3 className="text-2xl font-black uppercase heading-display mb-2 text-primary">
+              Review Your Inquiry
+            </h3>
+            <p className="text-tertiary">Double-check your information before sending</p>
+          </div>
+
+          {/* Review Card */}
+          <div className="border-2 border-primary rounded p-6 space-y-6">
+            {/* Project Details Summary */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                <span className="text-tertiary mono-text">Collaboration Type</span>
+                <span className="font-bold text-primary group-hover:text-vibrant">{getLabelForValue(form.collaborationType, COLLABORATION_TYPES)}</span>
+              </div>
+              <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                <span className="text-tertiary mono-text">Project Name</span>
+                <span className="font-bold text-primary">{form.projectName}</span>
+              </div>
+              <div className="hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                <span className="text-tertiary mono-text block mb-2">Project Description</span>
+                <p className="text-primary whitespace-pre-wrap">{form.message}</p>
+              </div>
+            </div>
+
+            {/* Budget & Timeline Summary */}
+            <div className="space-y-4 pt-4 border-t border-border-color">
+              <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                <span className="text-tertiary mono-text">Budget Range</span>
+                <span className="font-bold text-primary">{getLabelForValue(form.budget, BUDGET_RANGE)}</span>
+              </div>
+              <div className="flex items-center justify-between hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                <span className="text-tertiary mono-text">Timeline</span>
+                <span className="font-bold text-primary">{getLabelForValue(form.timeline, TIMELINE_OPTIONS)}</span>
+              </div>
+            </div>
+
+            {/* Contact Info Summary */}
+            <div className="space-y-4 pt-4 border-t border-border-color">
+              <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                <span className="text-tertiary mono-text">Name</span>
+                <span className="font-bold text-primary">{form.name}</span>
+              </div>
+              <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                <span className="text-tertiary mono-text">Email</span>
+                <span className="font-bold text-primary text-sm">{form.email}</span>
+              </div>
+              {form.company && (
+                <div className="flex items-center justify-between hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                  <span className="text-tertiary mono-text">Company</span>
+                  <span className="font-bold text-primary">{form.company}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Edit Steps Hint */}
+          <div className="text-center text-tertiary text-sm mono-text">
+            Click Previous to edit any information before submitting
+          </div>
+        </div>
+      )}
+
       {/* Navigation Buttons */}
       <div className="flex gap-4 pt-6 border-t border-primary">
         {currentStep > 1 && (
           <button
             type="button"
             onClick={handlePrevStep}
-            className="px-6 py-3 border-2 border-primary text-primary font-black uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-300"
+            disabled={status === 'loading'}
+            className="px-6 py-3 border-2 border-primary text-primary font-black uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             ← Previous
           </button>
         )}
 
-        {currentStep < 3 ? (
+        {currentStep < 4 ? (
           <button
             type="button"
             onClick={handleNextStep}
-            className="ml-auto px-6 py-3 bg-accent-vibrant text-white font-black uppercase tracking-widest hover:shadow-lg hover:scale-105 transition-all duration-300"
+            disabled={status === 'loading'}
+            className="ml-auto px-6 py-3 bg-accent-vibrant text-white font-black uppercase tracking-widest hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Next →
           </button>
@@ -351,7 +447,7 @@ export default function CollaborationForm() {
             disabled={status === 'loading'}
             className="ml-auto px-6 py-3 bg-accent-vibrant text-white font-black uppercase tracking-widest hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {status === 'loading' ? 'Submitting...' : '✨ Send Inquiry'}
+            {status === 'loading' ? '⏳ Submitting...' : '✨ Send Inquiry'}
           </button>
         )}
       </div>
