@@ -17,7 +17,7 @@ Design tokens are design decisions represented as data—reusable values for spa
 </div>
 
 // ✅ After: Design tokens
-<div style={{ 
+<div style={{
   width: `${DESIGN_TOKENS.SIZES.SVG.STAGE_BODY}px`,
   height: `${DESIGN_TOKENS.SIZES.SVG.STAGE_BODY}px`,
   animation: `pulse ${DESIGN_TOKENS.TIMING.ANIMATION.PULSE}ms ease-in-out infinite`,
@@ -29,12 +29,13 @@ Design tokens are design decisions represented as data—reusable values for spa
 ## File Location & Import
 
 ```tsx
-import { DESIGN_TOKENS } from '@/lib/design-tokens';
+import { DESIGN_TOKENS } from "@/lib/design-tokens";
 ```
 
 ## Token Categories
 
 ### 1. **Spacing** (`DESIGN_TOKENS.SPACING`)
+
 Standards for margins, padding, and gaps.
 
 ```tsx
@@ -49,6 +50,7 @@ SPACING: {
 ```
 
 **Usage:**
+
 ```tsx
 <div style={{ padding: DESIGN_TOKENS.SPACING.MD }}>
   {/* Standard padding */}
@@ -56,6 +58,7 @@ SPACING: {
 ```
 
 ### 2. **Sizing** (`DESIGN_TOKENS.SIZES`)
+
 Dimensions for SVGs, images, and elements.
 
 ```tsx
@@ -75,13 +78,18 @@ SIZES: {
 ```
 
 **Usage:**
+
 ```tsx
-<svg width={DESIGN_TOKENS.SIZES.SVG.STAGE_BODY} height={DESIGN_TOKENS.SIZES.SVG.STAGE_BODY}>
+<svg
+  width={DESIGN_TOKENS.SIZES.SVG.STAGE_BODY}
+  height={DESIGN_TOKENS.SIZES.SVG.STAGE_BODY}
+>
   {/* Consistent sizing */}
 </svg>
 ```
 
 ### 3. **Timing** (`DESIGN_TOKENS.TIMING`)
+
 Animation durations and easing functions.
 
 ```tsx
@@ -99,16 +107,20 @@ TIMING: {
 ```
 
 **Usage:**
+
 ```tsx
-<div style={{ 
-  transition: `all ${DESIGN_TOKENS.TIMING.DURATION_BASE}ms ease-in-out`,
-  animation: `pulse ${DESIGN_TOKENS.TIMING.ANIMATION.PULSE}ms infinite`,
-}}>
+<div
+  style={{
+    transition: `all ${DESIGN_TOKENS.TIMING.DURATION_BASE}ms ease-in-out`,
+    animation: `pulse ${DESIGN_TOKENS.TIMING.ANIMATION.PULSE}ms infinite`,
+  }}
+>
   {/* Consistent timing */}
 </div>
 ```
 
 ### 4. **Borders** (`DESIGN_TOKENS.BORDERS`)
+
 Border widths and border radius values.
 
 ```tsx
@@ -129,6 +141,7 @@ BORDERS: {
 ```
 
 **Usage:**
+
 ```tsx
 <svg>
   <rect strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
@@ -140,6 +153,7 @@ BORDERS: {
 ```
 
 ### 5. **Z-Index** (`DESIGN_TOKENS.Z_INDEX`)
+
 Stacking order for layered elements.
 
 ```tsx
@@ -155,13 +169,13 @@ Z_INDEX: {
 ```
 
 **Usage:**
+
 ```tsx
-<div style={{ zIndex: DESIGN_TOKENS.Z_INDEX.MODAL }}>
-  {/* Modal overlay */}
-</div>
+<div style={{ zIndex: DESIGN_TOKENS.Z_INDEX.MODAL }}>{/* Modal overlay */}</div>
 ```
 
 ### 6. **Colors** (`DESIGN_TOKENS.COLORS`)
+
 Color values organized by theme.
 
 ```tsx
@@ -183,6 +197,7 @@ COLORS: {
 ```
 
 ### 7. **Typography** (`DESIGN_TOKENS.TYPOGRAPHY`)
+
 Font families, weights, and sizes.
 
 ```tsx
@@ -208,37 +223,41 @@ TYPOGRAPHY: {
 ## Helper Functions
 
 ### `getCSSVar(category, key)`
+
 Generates CSS variable names from token paths.
 
 ```tsx
-getCSSVar('SPACING', 'LG')  // '--spacing-lg'
-getCSSVar('COLORS', 'ACCENT')  // '--colors-accent'
+getCSSVar("SPACING", "LG"); // '--spacing-lg'
+getCSSVar("COLORS", "ACCENT"); // '--colors-accent'
 ```
 
 ### `createTransition(duration, property, easing)`
+
 Creates consistent transition strings.
 
 ```tsx
-createTransition(DESIGN_TOKENS.TIMING.DURATION_BASE)
+createTransition(DESIGN_TOKENS.TIMING.DURATION_BASE);
 // Returns: 'all 250ms ease-in-out'
 
-createTransition(300, 'opacity')
+createTransition(300, "opacity");
 // Returns: 'opacity 300ms ease-in-out'
 ```
 
 ### `getStaggerDelay(index, increment)`
+
 Calculates staggered animation delays for item lists.
 
 ```tsx
 items.map((item, idx) => ({
-  style: { 
-    transitionDelay: `${getStaggerDelay(idx)}ms` 
-  }
-}))
+  style: {
+    transitionDelay: `${getStaggerDelay(idx)}ms`,
+  },
+}));
 // Index 0: 0ms, Index 1: 100ms, Index 2: 200ms, etc.
 ```
 
 ### `constrainPosition(position, dimension, viewport)`
+
 Constrains element position within safe bounds (used by StageLighting).
 
 ```tsx
@@ -249,6 +268,7 @@ const safeX = constrainPosition(cursorX, elementWidth, window.innerWidth);
 ## Updated Components
 
 ### 1. **StageLighting.tsx**
+
 - ✅ Replaced `400px`, `300px`, `500px`, `600px` with `DESIGN_TOKENS.SIZES.SVG.*`
 - ✅ Replaced `150px`, `100px` offsets with `DESIGN_TOKENS.POINTER.*`
 - ✅ Replaced `3s` animation with `DESIGN_TOKENS.TIMING.ANIMATION.PULSE`
@@ -256,11 +276,13 @@ const safeX = constrainPosition(cursorX, elementWidth, window.innerWidth);
 - ✅ Uses `DURATION_FAST` for transitions
 
 ### 2. **app/showcase/page.tsx**
+
 - ✅ Added `import { DESIGN_TOKENS }`
 - ✅ Replaced `viewBox="0 0 400 400"` with `viewBox={...DESIGN_TOKENS.SIZES.SVG.VISUALIZATION}`
 - ✅ Replaced `strokeWidth="2"` and `strokeWidth="3"` with `DESIGN_TOKENS.BORDERS.WIDTH.SM` and `.MD`
 
 ### 3. **app/collaborations/page.tsx**
+
 - ✅ Added `import { DESIGN_TOKENS }`
 - ✅ Replaced `viewBox="0 0 400 400"` with design tokens
 - ✅ Replaced stroke widths with border token values
@@ -268,8 +290,9 @@ const safeX = constrainPosition(cursorX, elementWidth, window.innerWidth);
 ## Common Usage Patterns
 
 ### Pattern 1: SVG Dimensions
+
 ```tsx
-<svg 
+<svg
   width={DESIGN_TOKENS.SIZES.SVG.STAGE_BODY}
   height={DESIGN_TOKENS.SIZES.SVG.STAGE_BODY}
 >
@@ -278,35 +301,42 @@ const safeX = constrainPosition(cursorX, elementWidth, window.innerWidth);
 ```
 
 ### Pattern 2: Animations
+
 ```tsx
-<div style={{
-  animation: `pulse ${DESIGN_TOKENS.TIMING.ANIMATION.PULSE}ms ease-in-out infinite`,
-  transition: `all ${DESIGN_TOKENS.TIMING.DURATION_BASE}ms ease-in-out`,
-}}>
+<div
+  style={{
+    animation: `pulse ${DESIGN_TOKENS.TIMING.ANIMATION.PULSE}ms ease-in-out infinite`,
+    transition: `all ${DESIGN_TOKENS.TIMING.DURATION_BASE}ms ease-in-out`,
+  }}
+>
   {/* Animated element */}
 </div>
 ```
 
 ### Pattern 3: Staggered Lists
+
 ```tsx
-{items.map((item, idx) => (
-  <div
-    key={idx}
-    style={{
-      transitionDelay: `${getStaggerDelay(idx)}ms`,
-    }}
-  >
-    {item}
-  </div>
-))}
+{
+  items.map((item, idx) => (
+    <div
+      key={idx}
+      style={{
+        transitionDelay: `${getStaggerDelay(idx)}ms`,
+      }}
+    >
+      {item}
+    </div>
+  ));
+}
 ```
 
 ### Pattern 4: Responsive Constraints
+
 ```tsx
 const x = constrainPosition(
   position.x + DESIGN_TOKENS.POINTER.OFFSET_X,
   DESIGN_TOKENS.SIZES.SVG.STAGE_GLOW_SM,
-  window.innerWidth
+  window.innerWidth,
 );
 ```
 
@@ -347,21 +377,31 @@ These values could be extracted to tokens in future updates:
 ## Troubleshooting
 
 ### Issue: "DESIGN_TOKENS is not defined"
+
 **Solution**: Add `import { DESIGN_TOKENS } from '@/lib/design-tokens'`
 
 ### Issue: Type mismatches in inline styles
+
 **Solution**: Ensure values are correct type:
+
 - Sizes: number (will be `px` in CSS)
 - Durations: number (milliseconds)
 - Easing: string
 - Border radius: string with unit
 
 ### Issue: Animation not applying
+
 **Solution**: Verify the animation name is defined in CSS:
+
 ```css
 @keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 ```
 
