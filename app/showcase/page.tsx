@@ -1,5 +1,6 @@
 
 import { PortfolioCard } from "@/components/content";
+import { EnhancedGallery } from "@/components/common";
 import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
@@ -188,24 +189,21 @@ export default async function Showcase() {
               </p>
             </div>
           </ScrollFade>
-          <ScrollStagger variant="slideInUp" staggerDelay={90}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {gunplaShowcase.map((item: any, idx: number) => (
-                <div key={item._id} className="group relative">
-                  <PortfolioCard
-                    title={item.title}
-                    category={item.category}
-                    description={item.description}
-                    image={item.image}
-                  />
-                  <div 
-                    className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
-                    style={{ backgroundColor: 'var(--accent-neon)' }}
-                  />
-                </div>
-              ))}
-            </div>
-          </ScrollStagger>
+          <EnhancedGallery
+            images={gunplaShowcase.map((item: any) => ({
+              src: item.image,
+              alt: item.title,
+              caption: item.description,
+              category: item.category,
+              thumbnail: item.image,
+            }))}
+            categories={['Gunpla']}
+            columns={3}
+            accentColor="neon"
+            enableFiltering={false}
+            enableLightbox={true}
+            enableLazyLoad={true}
+          />
         </section>
 
         {/* POKÉMON SECTION - MAGENTA */}
@@ -220,24 +218,21 @@ export default async function Showcase() {
               </p>
             </div>
           </ScrollFade>
-          <ScrollStagger variant="slideInUp" staggerDelay={90}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {pokemonShowcase.map((item: any, idx: number) => (
-                <div key={item._id} className="group relative">
-                  <PortfolioCard
-                    title={item.title}
-                    category={item.category}
-                    description={item.description}
-                    image={item.image}
-                  />
-                  <div 
-                    className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
-                    style={{ backgroundColor: 'var(--accent-magenta)' }}
-                  />
-                </div>
-              ))}
-            </div>
-          </ScrollStagger>
+          <EnhancedGallery
+            images={pokemonShowcase.map((item: any) => ({
+              src: item.image,
+              alt: item.title,
+              caption: item.description,
+              category: item.category,
+              thumbnail: item.image,
+            }))}
+            categories={['Pokémon']}
+            columns={3}
+            accentColor="magenta"
+            enableFiltering={false}
+            enableLightbox={true}
+            enableLazyLoad={true}
+          />
         </section>
 
         {/* CTA Section */}
