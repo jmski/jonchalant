@@ -8,3 +8,5 @@ export type { ValidationRule, FormValues } from './useFormValidation';
 
 export { usePointerPosition } from './usePointerPosition';
 export { useScrollTrigger } from './useScrollTrigger';
+export { useScrollAnimation, getAnimationClass } from './useScrollAnimation';
+export type { AnimationVariant } from './useScrollAnimation';

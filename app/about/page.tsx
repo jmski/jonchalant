@@ -1,5 +1,6 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import { ScrollFade, ScrollStagger } from "@/components/animations";
 
 export const metadata = {
   title: "About | Jon Chalon",
@@ -75,7 +76,8 @@ export default function About() {
           </div>
 
           {/* Quick Stats Grid */}
-          <div className="space-y-4">
+          <ScrollStagger variant="slideInUp" staggerDelay={100}>
+            <div className="space-y-4">
             {[
               { label: 'Experience', value: '8+ Years', icon: '▶' },
               { label: 'Projects', value: '50+', icon: '◆' },
@@ -101,7 +103,8 @@ export default function About() {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          </ScrollStagger>
         </section>
 
         {/* EXPERTISE SECTION */}
@@ -113,7 +116,8 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <ScrollStagger variant="slideInUp" staggerDelay={90}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Choreography', desc: 'Custom movement design for music videos, commercials, performances, and digital content', color: 'vibrant' },
               { title: 'Brand Partnerships', desc: 'Strategic collaborations with authentic movement-based content and product integration', color: 'neon' },
@@ -138,7 +142,8 @@ export default function About() {
                 </div>
               );
             })}
-          </div>
+            </div>
+          </ScrollStagger>
         </section>
 
         {/* PHILOSOPHY SECTION */}

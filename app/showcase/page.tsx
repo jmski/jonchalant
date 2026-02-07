@@ -1,6 +1,6 @@
 
 import { PortfolioCard } from "@/components/content";
-import { ScrollFade } from "@/components/animations";
+import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -188,10 +188,10 @@ export default async function Showcase() {
               </p>
             </div>
           </ScrollFade>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {gunplaShowcase.map((item: any, idx: number) => (
-              <ScrollFade key={item._id} delay={idx * 100}>
-                <div className="group relative">
+          <ScrollStagger variant="slideInUp" staggerDelay={90}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {gunplaShowcase.map((item: any, idx: number) => (
+                <div key={item._id} className="group relative">
                   <PortfolioCard
                     title={item.title}
                     category={item.category}
@@ -203,9 +203,9 @@ export default async function Showcase() {
                     style={{ backgroundColor: 'var(--accent-neon)' }}
                   />
                 </div>
-              </ScrollFade>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollStagger>
         </section>
 
         {/* POKÉMON SECTION - MAGENTA */}
@@ -220,10 +220,10 @@ export default async function Showcase() {
               </p>
             </div>
           </ScrollFade>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pokemonShowcase.map((item: any, idx: number) => (
-              <ScrollFade key={item._id} delay={idx * 100}>
-                <div className="group relative">
+          <ScrollStagger variant="slideInUp" staggerDelay={90}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {pokemonShowcase.map((item: any, idx: number) => (
+                <div key={item._id} className="group relative">
                   <PortfolioCard
                     title={item.title}
                     category={item.category}
@@ -235,9 +235,9 @@ export default async function Showcase() {
                     style={{ backgroundColor: 'var(--accent-magenta)' }}
                   />
                 </div>
-              </ScrollFade>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollStagger>
         </section>
 
         {/* CTA Section */}

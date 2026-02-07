@@ -1,4 +1,4 @@
-import { ScrollFade } from "@/components/animations";
+import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -248,12 +248,12 @@ export default async function Collaborations() {
             </div>
           </ScrollFade>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <ScrollStagger variant="slideInUp" staggerDelay={100}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {SERVICE_CATEGORIES.map((category, idx) => {
               const colorVar = getColorVar(category.color);
               return (
-                <ScrollFade key={idx} delay={idx * 100}>
-                  <div className="relative group">
+                <div key={idx} className="relative group">
                     <div 
                       className="border-t-4 pt-6 pb-8 px-8 transition-all duration-300 hover:shadow-lg"
                       style={{ borderColor: colorVar, backgroundColor: 'rgba(255,255,255, 0.01)' }}
@@ -278,11 +278,11 @@ export default async function Collaborations() {
                       className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
                       style={{ backgroundColor: colorVar }}
                     />
-                  </div>
-                </ScrollFade>
+                </div>
               );
             })}
-          </div>
+            </div>
+          </ScrollStagger>
         </section>
 
         {/* PAST COLLABORATIONS */}
