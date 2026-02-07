@@ -1,10 +1,13 @@
-import { ReactNode } from 'react';
+import { ReactNode, CSSProperties } from 'react';
 
 interface FormFeedbackProps {
   type: 'loading' | 'success' | 'error';
   message: string;
 }
 
+/**
+ * Loading state for form submission
+ */
 export function FormLoadingState() {
   return (
     <div className="flex items-center justify-center gap-2 py-4">
@@ -23,6 +26,9 @@ export function FormLoadingState() {
   );
 }
 
+/**
+ * Success state after form submission
+ */
 export function FormSuccessState({ message }: { message: string }) {
   return (
     <div 
@@ -50,6 +56,9 @@ export function FormSuccessState({ message }: { message: string }) {
   );
 }
 
+/**
+ * Error state after form submission
+ */
 export function FormErrorState({ message }: { message: string }) {
   return (
     <div 
@@ -77,14 +86,245 @@ export function FormErrorState({ message }: { message: string }) {
   );
 }
 
+/**
+ * Inline validation error message
+ */
 export function FormValidationError({ message }: { message: string }) {
   return (
     <p 
-      className="text-xs mt-1 flex items-center gap-1"
+      className="text-xs mt-1 flex items-center gap-1 animate-in fade-in slide-in-from-top-1 duration-200"
       style={{ color: 'var(--color-error)' }}
     >
       <span>⚠</span>
       {message}
     </p>
+  );
+}
+
+/**
+ * Success indicator for valid field
+ */
+export function FormFieldSuccess() {
+  return (
+    <div className="absolute right-3 top-1/2 -translate-y-1/2 animate-in fade-in duration-200">
+      <svg 
+        className="w-5 h-5"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        style={{ color: 'var(--color-success)' }}
+      >
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+      </svg>
+    </div>
+  );
+}
+
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+  label: string;
+  name: string;
+  error?: string;
+  state?: 'idle' | 'valid' | 'error';
+  required?: boolean;
+  hint?: string;
+  maxLength?: number;
+  showCharCount?: boolean;
+  isTextarea?: boolean;
+  rows?: number;
+}
+
+/**
+ * Enhanced input field with built-in validation display
+ */
+export function InputField({
+  label,
+  name,
+  error,
+  state = 'idle',
+  required = false,
+  hint,
+  maxLength,
+  showCharCount = false,
+  isTextarea = false,
+  rows = 4,
+  value = '',
+  className = '',
+  ...props
+}: InputFieldProps) {
+  const charCount = typeof value === 'string' ? value.length : 0;
+  const showError = state === 'error' && error;
+  const showSuccess = state === 'valid' && !error;
+
+  const baseInputClass = [
+    'w-full px-4 py-3 rounded transition-all duration-200',
+    'focus:outline-none focus:ring-2',
+    'font-body',
+    showError && 'border-2',
+    showSuccess && 'border-2',
+    !showError && !showSuccess && 'border',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const inputStyle: CSSProperties = {
+    backgroundColor: 'var(--form-input-bg)',
+    color: 'var(--form-input-text)',
+    borderColor: showError
+      ? 'var(--color-error)'
+      : showSuccess
+      ? 'var(--color-success)'
+      : 'var(--form-input-border)',
+    ...props.style,
+  };
+
+  const InputComponent = isTextarea ? 'textarea' : 'input';
+
+  return (
+    <div className="relative">
+      <label 
+        htmlFor={name}
+        className="block text-sm font-medium mb-2" 
+        style={{ color: 'var(--text-heading)' }}
+      >
+        {label}
+        {required && <span style={{ color: 'var(--color-error)' }}> *</span>}
+      </label>
+
+      <div className="relative">
+        <InputComponent
+          id={name}
+          name={name}
+          value={value}
+          maxLength={maxLength}
+          {...(isTextarea ? { rows } : {})}
+          aria-invalid={state === 'error'}
+          aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
+          className={`${baseInputClass} ${className} ${showSuccess ? 'pr-10' : ''}`}
+          style={inputStyle}
+          {...props}
+        />
+        {showSuccess && <FormFieldSuccess />}
+      </div>
+
+      {showError && (
+        <FormValidationError message={error} />
+      )}
+
+      {hint && !error && (
+        <p 
+          id={`${name}-hint`}
+          className="text-xs mt-1"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          {hint}
+        </p>
+      )}
+
+      {showCharCount && maxLength && (
+        <p 
+          className="text-xs mt-1 text-right"
+          style={{ color: charCount > maxLength * 0.9 ? 'var(--color-warning)' : 'var(--text-secondary)' }}
+        >
+          {charCount} / {maxLength}
+        </p>
+      )}
+    </div>
+  );
+}
+
+interface SelectFieldProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  label: string;
+  name: string;
+  options: Array<{ value: string; label: string }>;
+  error?: string;
+  state?: 'idle' | 'valid' | 'error';
+  required?: boolean;
+  hint?: string;
+  placeholder?: string;
+}
+
+/**
+ * Enhanced select field with built-in validation display
+ */
+export function SelectField({
+  label,
+  name,
+  options,
+  error,
+  state = 'idle',
+  required = false,
+  hint,
+  placeholder = 'Select an option...',
+  value = '',
+  className = '',
+  ...props
+}: SelectFieldProps) {
+  const showError = state === 'error' && error;
+  const showSuccess = state === 'valid' && !error;
+
+  const baseSelectClass = [
+    'w-full px-4 py-3 rounded transition-all duration-200',
+    'focus:outline-none focus:ring-2',
+    'font-body cursor-pointer',
+    'bg-[var(--form-input-bg)]',
+    showError && 'border-2',
+    showSuccess && 'border-2',
+    !showError && !showSuccess && 'border',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const selectStyle: CSSProperties = {
+    backgroundColor: 'var(--form-input-bg)',
+    color: 'var(--form-input-text)',
+    borderColor: showError
+      ? 'var(--color-error)'
+      : showSuccess
+      ? 'var(--color-success)'
+      : 'var(--form-input-border)',
+  };
+
+  return (
+    <div className="relative">
+      <label 
+        htmlFor={name}
+        className="block text-sm font-medium mb-2" 
+        style={{ color: 'var(--text-heading)' }}
+      >
+        {label}
+        {required && <span style={{ color: 'var(--color-error)' }}> *</span>}
+      </label>
+
+      <select
+        id={name}
+        name={name}
+        value={value}
+        aria-invalid={state === 'error'}
+        aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
+        className={`${baseSelectClass} ${className}`}
+        style={selectStyle}
+        {...props}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+
+      {showError && (
+        <FormValidationError message={error} />
+      )}
+
+      {hint && !error && (
+        <p 
+          id={`${name}-hint`}
+          className="text-xs mt-1"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          {hint}
+        </p>
+      )}
+    </div>
   );
 }

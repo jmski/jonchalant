@@ -1,6 +1,6 @@
 'use client';
 
-import { ScrollFade } from "@/components/animations";
+import { ScrollFade, ScrollStagger } from "@/components/animations";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { PageTransition } from "@/components/layout";
@@ -123,7 +123,8 @@ export default function MediaKit() {
         </div>
 
         {/* KEY METRICS CARDS */}
-        <section className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <ScrollStagger variant="slideInUp" staggerDelay={80}>
+          <section className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {MEDIA_KIT_DATA.keyMetrics.map((stat, idx) => {
             const colors = getColorVars(stat.color);
             return (
@@ -152,7 +153,8 @@ export default function MediaKit() {
               </div>
             );
           })}
-        </section>
+          </section>
+        </ScrollStagger>
 
         {/* PLATFORM BREAKDOWN */}
         <section className="py-20 border-t border-primary">
@@ -163,7 +165,8 @@ export default function MediaKit() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ScrollStagger variant="slideInUp" staggerDelay={100}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {MEDIA_KIT_DATA.platforms.map((platform, idx) => {
               const colors = getColorVars(platform.color);
               return (
@@ -207,7 +210,8 @@ export default function MediaKit() {
                 </div>
               );
             })}
-          </div>
+            </div>
+          </ScrollStagger>
         </section>
 
         {/* CONTENT DISTRIBUTION */}

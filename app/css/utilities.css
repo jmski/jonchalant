@@ -1,0 +1,339 @@
+/* ============================================================================
+   UTILITIES.CSS - Color, Spacing, and Layout Utilities
+   
+   Reusable utility classes for colors, spacing, typography, patterns, and effects.
+   ============================================================================ */
+
+/* COLOR UTILITIES */
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+.text-primary {
+  color: var(--text-primary);
+}
+.text-secondary {
+  color: var(--text-secondary);
+}
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+.text-muted {
+  color: var(--text-muted);
+}
+.border-primary {
+  border-color: var(--border-color);
+}
+.border-accent {
+  border-color: var(--border-accent);
+}
+.text-accent {
+  color: var(--accent-vibrant);
+}
+.bg-accent {
+  background-color: var(--accent-vibrant);
+}
+
+/* ACCENT COLOR UTILITIES */
+.text-neon {
+  color: var(--accent-neon);
+}
+.text-magenta {
+  color: var(--accent-magenta);
+}
+.text-vibrant {
+  color: var(--accent-vibrant);
+}
+.bg-neon-faint {
+  background-color: rgba(0, 255, 255, 0.05);
+}
+.bg-magenta-faint {
+  background-color: rgba(255, 0, 255, 0.05);
+}
+.bg-vibrant-faint {
+  background-color: rgba(255, 95, 31, 0.08);
+}
+.border-neon {
+  border-color: var(--accent-neon);
+}
+.border-vibrant {
+  border-color: var(--accent-vibrant);
+}
+.border-magenta {
+  border-color: var(--accent-magenta);
+}
+
+/* SPACING UTILITIES */
+.section-spacing {
+  padding: 4rem 0;
+}
+.section-spacing-lg {
+  padding: 6rem 0;
+}
+.card-padding {
+  padding: 1.5rem;
+}
+.card-padding-lg {
+  padding: 2rem;
+}
+
+/* TYPOGRAPHY UTILITIES */
+.mono-text {
+  font-family: var(--font-mono);
+}
+.mono-small {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.heading-bold {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.heading-retro {
+  font-family: var(--font-retro);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+.text-serif {
+  font-family: var(--font-serif);
+}
+.text-mono-tech {
+  font-family: var(--font-tech);
+  font-weight: 700;
+}
+
+/* GRADIENT UTILITIES */
+.gradient-heading {
+  background: var(--gradient-heading);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-neon {
+  background: var(--gradient-neon);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-glitch {
+  background: var(--gradient-glitch);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* BORDER UTILITIES */
+.border-bold {
+  border-width: 3px;
+}
+.border-thick {
+  border-width: 4px;
+}
+.border-double {
+  border: 3px solid var(--border-color);
+  box-shadow: inset 0 0 0 6px var(--bg-primary);
+}
+.border-dashed-bold {
+  border: 3px dashed var(--border-color);
+}
+
+/* SHADOW UTILITIES */
+.shadow-bold {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.shadow-neon {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+.shadow-vibrant {
+  box-shadow: 0 0 20px rgba(255, 95, 31, 0.3);
+}
+
+/* GLOW EFFECTS */
+.btn-glow {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+.btn-glow:hover {
+  box-shadow:
+    0 0 30px rgba(255, 255, 255, 0.2),
+    0 0 60px rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+.btn-glow-vibrant {
+  box-shadow:
+    0 0 20px rgba(255, 95, 31, 0.4),
+    0 0 40px rgba(255, 95, 31, 0.2);
+}
+.btn-glow-vibrant:hover {
+  box-shadow:
+    0 0 30px rgba(255, 95, 31, 0.6),
+    0 0 60px rgba(255, 95, 31, 0.4);
+}
+.btn-glow-neon {
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.4),
+    0 0 40px rgba(0, 255, 255, 0.2);
+}
+.btn-glow-neon:hover {
+  box-shadow:
+    0 0 30px rgba(0, 255, 255, 0.6),
+    0 0 60px rgba(0, 255, 255, 0.4);
+}
+.btn-glow-magenta {
+  box-shadow:
+    0 0 20px rgba(255, 0, 255, 0.4),
+    0 0 40px rgba(255, 0, 255, 0.2);
+}
+.btn-glow-magenta:hover {
+  box-shadow:
+    0 0 30px rgba(255, 0, 255, 0.6),
+    0 0 60px rgba(255, 0, 255, 0.4);
+}
+
+/* PATTERN UTILITIES */
+.pattern-grid {
+  background-image:
+    linear-gradient(var(--text-primary) 1px, transparent 1px),
+    linear-gradient(90deg, var(--text-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+.pattern-grid-lg {
+  background-image:
+    linear-gradient(var(--text-primary) 1px, transparent 1px),
+    linear-gradient(90deg, var(--text-primary) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.03;
+}
+.pattern-dots {
+  background-image: radial-gradient(
+    circle,
+    var(--text-primary) 20%,
+    transparent 20%
+  );
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+.pattern-diagonal {
+  background-image:
+    linear-gradient(45deg, var(--text-primary) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--text-primary) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--text-primary) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--text-primary) 75%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    0 20px,
+    20px -20px,
+    -20px 0;
+  opacity: 0.04;
+}
+.pattern-checkerboard {
+  background-image:
+    linear-gradient(45deg, var(--text-primary) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--text-primary) 75%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    20px 20px;
+  opacity: 0.05;
+}
+
+/* DIVIDER UTILITIES */
+.divider-accent {
+  position: relative;
+  margin: 3rem 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--text-secondary),
+    transparent
+  );
+}
+.divider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 3rem 0;
+}
+.divider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+.divider-dot:hover {
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+/* LAYOUT UTILITIES */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* VISIBILITY UTILITIES */
+.hidden-mobile {
+  display: none;
+}
+.hidden-desktop {
+  display: block;
+}
+
+/* PIXEL/RETRO STYLING */
+.pixel-border {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+.retro-label {
+  font-family: var(--font-retro);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.875rem;
+}
+
+/* GLITCH TEXT EFFECT */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+.glitch-text:hover {
+  animation: glitch-anim 0.3s ease-in-out;
+}

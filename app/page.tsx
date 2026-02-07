@@ -1,5 +1,12 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from '@/components/layout';
+import { ScrollFade, ScrollStagger } from '@/components/animations';
+import {
+  CornerBrackets,
+  DecorativeDivider,
+  PatternBackground,
+  LayeredPatternOverlay,
+} from '@/components/effects';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
@@ -69,19 +76,20 @@ export default function Home() {
         <div className="absolute bottom-0 left-1/4 w-48 h-48 border-2 border-magenta opacity-3" style={{ borderStyle: 'dashed' }} />
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {/* Stats Cards - BOLD NEW STYLE */}
-            {[
-              { label: 'CHOREOGRAPHY PIECES', value: '50+', icon: '▶' },
-              { label: 'BRAND COLLABORATIONS', value: '30+', icon: '◆' },
-              { label: 'YEARS EXPERIENCE', value: '8+', icon: '●' },
-            ].map((stat, idx) => (
+          <ScrollStagger variant="slideInUp" staggerDelay={100}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              {/* Stats Cards - BOLD NEW STYLE */}
+              {[
+                { label: 'CHOREOGRAPHY PIECES', value: '50+', icon: '▶' },
+                { label: 'BRAND COLLABORATIONS', value: '30+', icon: '◆' },
+                { label: 'YEARS EXPERIENCE', value: '8+', icon: '●' },
+              ].map((stat, idx) => (
               <div
                 key={idx}
-                className="relative group border-bold border-primary bg-primary transition-all duration-300 hover:shadow-bold card-padding-lg"
+                className="relative group border-bold border-primary bg-primary transition-all duration-300 hover:shadow-bold card-padding-lg overflow-hidden"
               >
-                {/* Top accent corner */}
-                <div className="absolute -top-3 -left-3 w-6 h-6 border-2 border-vibrant group-hover:scale-150 transition-transform" />
+                {/* Corner brackets */}
+                <CornerBrackets color="vibrant" size="sm" position="all" thickness={2} opacity={0.7} />
                 
                 <div className="relative z-10 space-y-4">
                   <div className="text-5xl md:text-6xl font-black mb-2 heading-display text-vibrant">
@@ -94,19 +102,31 @@ export default function Home() {
                     {stat.icon}
                   </div>
                 </div>
-                
-                {/* Bottom accent corner */}
-                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-2 border-vibrant" />
               </div>
             ))}
-          </div>
+            </div>
+          </ScrollStagger>
         </div>
       </section>
 
+      {/* Decorative Divider */}
+      <DecorativeDivider color="neon" variant="line-dots" dotCount={7} className="bg-primary" />
+
       {/* FEATURED AREAS - EDITORIAL ASYMMETRIC LAYOUT */}
-      <section className="py-20 md:py-32 relative" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        {/* Layered pattern background */}
+        <LayeredPatternOverlay
+          pattern1="grid"
+          pattern2="diagonal"
+          color1="neon"
+          color2="magenta"
+          opacity1={0.04}
+          opacity2={0.02}
+          rotation={-15}
+        />
+
         {/* Maximalist background decoration */}
-        <div className="absolute inset-0 opacity-3">
+        <div className="absolute inset-0 opacity-3 pointer-events-none">
           <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-neon rounded-full" />
           <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-magenta" style={{ borderStyle: 'dashed' }} />
         </div>
@@ -122,7 +142,8 @@ export default function Home() {
 
           {/* EDITORIAL ASYMMETRIC GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {/* Dance Portfolio - BOLD */}
+              {/* Dance Portfolio - BOLD */}
+              <ScrollFade variant="slideInUp" delay={0}>
             <div 
               className="border-bold border-vibrant bg-vibrant-faint group cursor-pointer transition-all duration-300 hover:shadow-vibrant"
             >
@@ -145,8 +166,10 @@ export default function Home() {
                 </p>
               </div>
             </div>
+            </ScrollFade>
 
             {/* Showcase - NEON */}
+            <ScrollFade variant="slideInUp" delay={80}>
             <div 
               className="border-bold border-neon bg-neon-faint group cursor-pointer transition-all duration-300 hover:shadow-neon"
             >
@@ -168,8 +191,10 @@ export default function Home() {
                 </p>
               </div>
             </div>
+            </ScrollFade>
 
             {/* Collaborations - MAGENTA */}
+            <ScrollFade variant="slideInUp" delay={160}>
             <div 
               className="border-bold border-magenta bg-magenta-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
@@ -191,6 +216,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
+            </ScrollFade>
           </div>
 
           {/* What's Possible - Services Grid */}
@@ -199,17 +225,18 @@ export default function Home() {
               <h3 className="text-lg font-black uppercase tracking-widest text-tertiary retro-label mb-3">→ Services & Offerings</h3>
               <p className="text-2xl font-black text-primary heading-display">What We Can Create</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { item: 'Music Videos', icon: '▶' },
-                { item: 'TikTok/Reels', icon: '⬜' },
-                { item: 'Choreography', icon: '💃' },
-                { item: 'Brand Campaigns', icon: '◆' },
-                { item: 'Live Events', icon: '🎪' },
-                { item: 'Workshops', icon: '📚' },
-                { item: 'Consulting', icon: '⚙️' },
-                { item: 'Content Direction', icon: '🎬' },
-              ].map((service, idx) => (
+            <ScrollStagger variant="scaleUp" staggerDelay={60}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { item: 'Music Videos', icon: '▶' },
+                  { item: 'TikTok/Reels', icon: '⬜' },
+                  { item: 'Choreography', icon: '💃' },
+                  { item: 'Brand Campaigns', icon: '◆' },
+                  { item: 'Live Events', icon: '🎪' },
+                  { item: 'Workshops', icon: '📚' },
+                  { item: 'Consulting', icon: '⚙️' },
+                  { item: 'Content Direction', icon: '🎬' },
+                ].map((service, idx) => (
                 <div
                   key={idx}
                   className="border-2 border-primary p-4 text-center hover:border-vibrant hover:bg-vibrant-faint transition-all duration-300 group"
@@ -222,7 +249,8 @@ export default function Home() {
                   </div>
                 </div>
               ))}
-            </div>
+              </div>
+            </ScrollStagger>
           </div>
         </div>
       </section>
@@ -327,7 +355,8 @@ export default function Home() {
           </a>
         </div>
       </section>
-
+      {/* Decorative Divider */}
+      <DecorativeDivider color="magenta" variant="line-dots" dotCount={5} className="bg-primary" />
       {/* CTA Section */}
       <CTASection 
         title="Ready to Collaborate?"

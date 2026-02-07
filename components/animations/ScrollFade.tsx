@@ -1,36 +1,66 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useScrollAnimation, AnimationVariant, getAnimationClass } from '@/lib/hooks/useScrollAnimation';
+import { CSSProperties } from 'react';
+import { DESIGN_TOKENS } from '@/lib/design-tokens';
 
 interface ScrollFadeProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  // New enhanced props
+  variant?: AnimationVariant;
+  threshold?: number;
+  duration?: number;
+  easing?: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear';
+  triggerOnce?: boolean;
+  repeat?: boolean;
 }
 
-export default function ScrollFade({ children, className = '', delay = 0 }: ScrollFadeProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+/**
+ * ScrollFade Component
+ * 
+ * Triggers animation when element enters viewport
+ * Supports multiple animation variants with customizable timing
+ * 
+ * @example
+ * <ScrollFade variant="slideInUp" delay={100}>
+ *   Content animates in when scrolled into view
+ * </ScrollFade>
+ */
+export default function ScrollFade({
+  children,
+  className = '',
+  delay = 0,
+  variant = 'slideInUp',
+  threshold = 0.1,
+  duration,
+  easing = 'ease-out',
+  triggerOnce = true,
+  repeat = false,
+}: ScrollFadeProps) {
+  const { ref, isAnimating } = useScrollAnimation({
+    variant,
+    delay,
+    threshold,
+    duration,
+    easing,
+    triggerOnce,
+    repeat,
+  });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.1 }
-    );
+  const animationClass = getAnimationClass(variant, isAnimating);
+  const transitionDuration = duration || DESIGN_TOKENS.TIMING.DURATION_BASE;
 
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [delay]);
+  const style: CSSProperties = {
+    transition: isAnimating ? `all ${transitionDuration}ms ${easing}` : 'none',
+  };
 
   return (
     <div
-      ref={ref}
-      className={`${isVisible ? 'animate-slideInUp' : 'opacity-0'} transition-all ${className}`}
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`${animationClass} transition-all ${className}`}
+      style={style}
     >
       {children}
     </div>

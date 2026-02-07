@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-import { ScrollFade } from "@/components/animations";
+import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
 
 // Below-fold dynamic import
@@ -111,7 +111,8 @@ export default function Contact() {
         </div>
 
         {/* CONTACT OPTIONS */}
-        <section className="py-20 border-t border-primary grid grid-cols-1 md:grid-cols-3 gap-8">
+        <ScrollStagger variant="slideInUp" staggerDelay={100}>
+          <section className="py-20 border-t border-primary grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             { method: 'Email', value: 'contact@jonchalon.com', icon: '✉', color: 'vibrant' },
             { method: 'Instagram', value: '@jonchalon', icon: '📸', color: 'neon' },
@@ -136,7 +137,8 @@ export default function Contact() {
               </div>
             );
           })}
-        </section>
+          </section>
+        </ScrollStagger>
 
         {/* FORM SECTION */}
         <section className="py-20 border-t border-primary">

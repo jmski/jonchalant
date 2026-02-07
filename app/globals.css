@@ -3,7 +3,58 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   GLOBALS.CSS - COMPREHENSIVE REFERENCE GUIDE
+   MODULAR CSS IMPORTS
+   
+   Organized into focused modules for better maintainability:
+   - variables.css: CSS custom properties and theme definitions
+   - animations.css: All @keyframes and animation utilities
+   - base.css: Global styles, typography, and form resets
+   - typography.css: Font families and text styling
+   - utilities.css: Color, spacing, pattern, and effect utilities
+   ============================================================================ */
+
+@import "./css/variables.css";
+@import "./css/animations.css";
+@import "./css/base.css";
+@import "./css/typography.css";
+@import "./css/utilities.css";
+
+/* ============================================================================
+   RESPONSIVE DESIGN OVERRIDES
+   
+   Mobile-first approach: define base styles, then enhance for larger screens
+   ============================================================================ */
+
+@media (min-width: 481px) {
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.25rem; }
+}
+
+@media (min-width: 768px) {
+  .hidden-mobile { display: block; }
+  .hidden-desktop { display: none; }
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.5rem; }
+  .section-spacing { padding: 6rem 0; }
+}
+
+@media (min-width: 1024px) {
+  .grid-auto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+}
+
+/* Article pages */
+.article-main h1:not([class*="text-"]),
+.main-content h1:not([class*="text-"]) {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+@media print {
+  html { background: white; color: black; }
+  body { background: white; color: black; }
+  a { color: #000080; text-decoration: underline; }
+  .hidden-print { display: none !important; }
+}
    
    A maintainable, utility-first CSS system designed for theme flexibility,
    responsive design, and component reusability.
@@ -755,6 +806,275 @@ p {
   animation-delay: 0.35s;
 }
 
+/* ========================================
+   SCROLL-TRIGGERED ANIMATIONS
+   Used with ScrollFade / ScrollStagger components
+   Triggered by IntersectionObserver
+   ======================================== */
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide In - Up */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In - Down */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In - Left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In - Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale Up */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Rotate In */
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+/* Zoom In */
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Blur In */
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Tailwind animation classes */
+@layer utilities {
+  @keyframes fadeIn-scroll {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInUp-scroll {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInDown-scroll {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft-scroll {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight-scroll {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleUp-scroll {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes rotateIn-scroll {
+    from {
+      opacity: 0;
+      transform: rotate(-10deg) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+  }
+
+  @keyframes zoomIn-scroll {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes blurIn-scroll {
+    from {
+      opacity: 0;
+      filter: blur(12px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    background-size: 1000px 100%;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn-scroll 0.5s ease-out forwards;
+  }
+
+  .animate-slideInUp {
+    animation: slideInUp-scroll 0.6s ease-out forwards;
+  }
+
+  .animate-slideInDown {
+    animation: slideInDown-scroll 0.6s ease-out forwards;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft-scroll 0.6s ease-out forwards;
+  }
+
+  .animate-slideInRight {
+    animation: slideInRight-scroll 0.6s ease-out forwards;
+  }
+
+  .animate-scaleUp {
+    animation: scaleUp-scroll 0.6s ease-out forwards;
+  }
+
+  .animate-rotateIn {
+    animation: rotateIn-scroll 0.6s ease-out forwards;
+  }
+
+  .animate-zoomIn {
+    animation: zoomIn-scroll 0.6s ease-out forwards;
+  }
+
+  .animate-blurIn {
+    animation: blurIn-scroll 0.6s ease-out forwards;
+  }
+}
+
 /* PIXEL/RETRO STYLING */
 .pixel-border {
   image-rendering: pixelated;
@@ -805,6 +1125,168 @@ p {
 }
 .hidden-desktop {
   display: block;
+}
+
+/* ========== PATTERN & GLOW EFFECTS ========== */
+
+/* Glow Effect for CTAs */
+.btn-glow {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2),
+              0 0 60px rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.btn-glow-vibrant {
+  box-shadow: 0 0 20px var(--accent-vibrant)40, 0 0 40px var(--accent-vibrant)20;
+}
+
+.btn-glow-vibrant:hover {
+  box-shadow: 0 0 30px var(--accent-vibrant)60, 0 0 60px var(--accent-vibrant)40;
+}
+
+.btn-glow-neon {
+  box-shadow: 0 0 20px var(--accent-neon)40, 0 0 40px var(--accent-neon)20;
+}
+
+.btn-glow-neon:hover {
+  box-shadow: 0 0 30px var(--accent-neon)60, 0 0 60px var(--accent-neon)40;
+}
+
+.btn-glow-magenta {
+  box-shadow: 0 0 20px var(--accent-magenta)40, 0 0 40px var(--accent-magenta)20;
+}
+
+.btn-glow-magenta:hover {
+  box-shadow: 0 0 30px var(--accent-magenta)60, 0 0 60px var(--accent-magenta)40;
+}
+
+/* Pattern utilities */
+.pattern-grid {
+  background-image:
+    linear-gradient(var(--text-primary) 1px, transparent 1px),
+    linear-gradient(90deg, var(--text-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+.pattern-grid-lg {
+  background-image:
+    linear-gradient(var(--text-primary) 1px, transparent 1px),
+    linear-gradient(90deg, var(--text-primary) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.03;
+}
+
+.pattern-dots {
+  background-image: radial-gradient(circle, var(--text-primary) 20%, transparent 20%);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+.pattern-diagonal {
+  background-image:
+    linear-gradient(45deg, var(--text-primary) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--text-primary) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--text-primary) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--text-primary) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+  opacity: 0.04;
+}
+
+.pattern-checkerboard {
+  background-image:
+    linear-gradient(45deg, var(--text-primary) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--text-primary) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.05;
+}
+
+/* Decorative divider */
+.divider-accent {
+  position: relative;
+  margin: 3rem 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--text-secondary), transparent);
+}
+
+.divider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 3rem 0;
+}
+
+.divider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.divider-dot:hover {
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+/* Corner brackets on cards */
+.card-bracketed {
+  position: relative;
+}
+
+.card-bracketed::before,
+.card-bracketed::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent-neon);
+}
+
+.card-bracketed::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.card-bracketed::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Accent borders */
+.border-accent-top {
+  border-top: 3px solid currentColor;
+  padding-top: 1rem;
+}
+
+.border-accent-left {
+  border-left: 3px solid currentColor;
+  padding-left: 1rem;
+}
+
+/* Layered effect */
+.layered {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.02);
+    pointer-events: none;
+  }
 }
 
 /* ========== COMPONENT STYLES DOCUMENTATION ========== 

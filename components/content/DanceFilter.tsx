@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { PortfolioCard } from './index';
-import { ScrollFade } from '@/components/animations';
+import { ScrollFade, ScrollStagger } from '@/components/animations';
 
 interface DanceItem {
   _id: string;
@@ -132,10 +132,10 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                 </h3>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {(activeCategory === 'All' ? categoryItems : displayItems).map((item, idx) => (
-                  <ScrollFade key={item._id} delay={idx * 100}>
-                    <div className="group relative">
+              <ScrollStagger variant="slideInUp" staggerDelay={80}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {(activeCategory === 'All' ? categoryItems : displayItems).map((item, idx) => (
+                    <div key={item._id} className="group relative">
                       <PortfolioCard
                         title={item.title}
                         category={item.category}
@@ -148,9 +148,9 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                         style={{ backgroundColor: colorVar }}
                       />
                     </div>
-                  </ScrollFade>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </ScrollStagger>
             </div>
           );
         })}

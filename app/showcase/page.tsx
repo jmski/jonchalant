@@ -1,6 +1,13 @@
 
 import { PortfolioCard } from "@/components/content";
-import { ScrollFade } from "@/components/animations";
+import { EnhancedGallery } from "@/components/common";
+import { ScrollFade, ScrollStagger } from "@/components/animations";
+import {
+  PatternBackground,
+  DecorativeDivider,
+  CornerBrackets,
+  LayeredPatternOverlay,
+} from "@/components/effects";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -29,28 +36,36 @@ const MOCK_GUNPLA = [
     title: 'RG Evangelion Unit-01',
     category: 'Gunpla',
     description: 'Detailed Real Grade build with custom weathering and LED lighting. Professional display photography.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/rg-evangelion-unit-01.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'gunpla-2',
     title: 'MG Unicorn Gundam',
     category: 'Gunpla',
     description: 'Master Grade with full transformation mechanics. Handpainted details and metallic accents.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/mg-unicorn-gundam.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'gunpla-3',
     title: 'HG Barbatos Lupus Rex',
     category: 'Gunpla',
     description: 'High Grade with custom painting and weathering effects. Action pose showcase.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/hg-barbatos-lupus-rex.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'gunpla-4',
     title: 'PG Strike Freedom',
     category: 'Gunpla',
     description: 'Perfect Grade with advanced LED system and mechanical detail customization.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/pg-strike-freedom.jpg',
+    width: 680,
+    height: 680
   }
 ];
 
@@ -60,28 +75,36 @@ const MOCK_POKEMON = [
     title: 'Charizard VMAX Gold Secret',
     category: 'Pokémon',
     description: 'PSA 8 graded. Vivid Voltage era premium collection piece.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/charizard-vmax-gold.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'poke-2',
     title: 'Pikachu Illustrator',
     category: 'Pokémon',
     description: 'Japanese promotional holographic. Vintage 1997 original.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/pikachu-illustrator.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'poke-3',
     title: 'Mewtwo EX Crystal',
     category: 'Pokémon',
     description: 'Crystal Type holographic. Neo Genesis era rare collectible.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/mewtwo-ex-crystal.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'poke-4',
     title: 'Blastoise Base Set',
     category: 'Pokémon',
     description: 'First Edition holographic. Shadowless condition. Mint center.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/blastoise-base-set.jpg',
+    width: 680,
+    height: 680
   }
 ];
 
@@ -177,10 +200,22 @@ export default async function Showcase() {
         </div>
 
         {/* GUNPLA SECTION - NEON CYAN */}
-        <section className="mb-24">
+        <section className="mb-24 relative">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="grid"
+            pattern2="diagonal"
+            color1="neon"
+            color2="magenta"
+            opacity1={0.035}
+            opacity2={0.025}
+            rotation={-20}
+            className="z-0"
+          />
+          <div className="relative z-10">
           <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-neon)' }}>
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4" style={{ color: 'var(--accent-neon)' }}>
+            <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-neon)' }}>
+              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4" style={{ color: 'var(--accent-neon)' }}>
                 ▶ GUNPLA BUILD GALLERY
               </h2>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
@@ -188,31 +223,44 @@ export default async function Showcase() {
               </p>
             </div>
           </ScrollFade>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {gunplaShowcase.map((item: any, idx: number) => (
-              <ScrollFade key={item._id} delay={idx * 100}>
-                <div className="group relative">
-                  <PortfolioCard
-                    title={item.title}
-                    category={item.category}
-                    description={item.description}
-                    image={item.image}
-                  />
-                  <div 
-                    className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
-                    style={{ backgroundColor: 'var(--accent-neon)' }}
-                  />
-                </div>
-              </ScrollFade>
-            ))}
+          <EnhancedGallery
+            images={gunplaShowcase.map((item: any) => ({
+              src: item.image,
+              alt: item.title,
+              caption: item.description,
+              category: item.category,
+              thumbnail: item.image,
+            }))}
+            categories={['Gunpla']}
+            columns={3}
+            accentColor="neon"
+            enableFiltering={false}
+            enableLightbox={true}
+            enableLazyLoad={true}
+          />
           </div>
         </section>
 
+        {/* Decorative Divider */}
+        <DecorativeDivider color="vibrant" variant="line-dots" dotCount={7} className="bg-primary" />
+
         {/* POKÉMON SECTION - MAGENTA */}
-        <section className="mb-20">
+        <section className="mb-20 relative">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="dots"
+            pattern2="checkerboard"
+            color1="magenta"
+            color2="neon"
+            opacity1={0.03}
+            opacity2={0.02}
+            rotation={45}
+            className="z-0"
+          />
+          <div className="relative z-10">
           <ScrollFade>
             <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4" style={{ color: 'var(--accent-magenta)' }}>
+              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4" style={{ color: 'var(--accent-magenta)' }}>
                 ▶ POKÉMON CARD COLLECTION
               </h2>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
@@ -220,25 +268,26 @@ export default async function Showcase() {
               </p>
             </div>
           </ScrollFade>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pokemonShowcase.map((item: any, idx: number) => (
-              <ScrollFade key={item._id} delay={idx * 100}>
-                <div className="group relative">
-                  <PortfolioCard
-                    title={item.title}
-                    category={item.category}
-                    description={item.description}
-                    image={item.image}
-                  />
-                  <div 
-                    className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
-                    style={{ backgroundColor: 'var(--accent-magenta)' }}
-                  />
-                </div>
-              </ScrollFade>
-            ))}
+          <EnhancedGallery
+            images={pokemonShowcase.map((item: any) => ({
+              src: item.image,
+              alt: item.title,
+              caption: item.description,
+              category: item.category,
+              thumbnail: item.image,
+            }))}
+            categories={['Pokémon']}
+            columns={3}
+            accentColor="magenta"
+            enableFiltering={false}
+            enableLightbox={true}
+            enableLazyLoad={true}
+          />
           </div>
         </section>
+
+        {/* Decorative Divider */}
+        <DecorativeDivider color="neon" variant="line-dots" dotCount={5} className="bg-primary" />
 
         {/* CTA Section */}
         <CTASection

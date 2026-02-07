@@ -1,6 +1,8 @@
 // Image & Media Components
 export { default as OptimizedImage } from './OptimizedImage';
 export { default as OptimizedGallery } from './OptimizedGallery';
+export { default as EnhancedGallery } from './EnhancedGallery';
+export { default as GalleryLightbox } from './GalleryLightbox';
 
 // Layout Components
 export { default as Card, CardHeader, CardContent, CardFooter } from './Card';
