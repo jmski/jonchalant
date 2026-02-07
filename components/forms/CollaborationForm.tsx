@@ -1,61 +1,73 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
-import { FormLoadingState, FormSuccessState, FormErrorState } from './FormFeedback';
+import { useState, FormEvent, useMemo } from 'react';
+import { useFormValidation, ValidationRules } from '@/lib/hooks/useFormValidation';
+import { FormLoadingState, FormSuccessState, FormErrorState, InputField, SelectField } from './FormFeedback';
+
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  collaborationType: string;
+  message: string;
+}
+
+const COLLABORATION_TYPES = [
+  { value: 'Sponsored Content', label: 'Sponsored Content' },
+  { value: 'Event Performance', label: 'Event Performance' },
+  { value: 'Content Creation', label: 'Content Creation' },
+  { value: 'Brand Partnership', label: 'Brand Partnership' },
+  { value: 'Other', label: 'Other' },
+];
 
 export default function CollaborationForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    collaborationType: '',
-    message: '',
-  });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
+  // Setup validation rules
+  const validationRules = useMemo(() => ({
+    name: [ValidationRules.required('Name')],
+    email: [
+      ValidationRules.required('Email'),
+      ValidationRules.email(),
+    ],
+    company: [],
+    collaborationType: [ValidationRules.required('Collaboration type')],
+    message: [
+      ValidationRules.required('Message'),
+      ValidationRules.minLength(10),
+    ],
+  }), []);
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!formData.email.includes('@')) {
-      newErrors.email = 'Please enter a valid email';
-    }
-    if (!formData.collaborationType) {
-      newErrors.collaborationType = 'Please select a collaboration type';
-    }
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: '',
-      }));
-    }
-  };
+  // Setup form validation hook
+  const {
+    form,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    getFieldError,
+    getFieldState,
+    resetForm,
+    isFormValid,
+  } = useFormValidation<FormData>({
+    initialValues: {
+      name: '',
+      email: '',
+      company: '',
+      collaborationType: '',
+      message: '',
+    },
+    validationRules,
+    validateOnChange: true,
+    validateOnBlur: true,
+  });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!validateForm()) {
+    // Validate form before submit
+    if (!isFormValid()) {
       return;
     }
 
@@ -68,7 +80,7 @@ export default function CollaborationForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(form),
       });
 
       if (!response.ok) {
@@ -76,14 +88,7 @@ export default function CollaborationForm() {
       }
 
       setStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        collaborationType: '',
-        message: '',
-      });
-      setErrors({});
+      resetForm();
 
       // Reset success message after 5 seconds
       setTimeout(() => {
@@ -110,147 +115,87 @@ export default function CollaborationForm() {
         <FormErrorState message={errorMessage} />
       )}
 
-      <div>
-        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-heading)' }}>
-          Your Name <span style={{ color: 'var(--color-error)' }}>*</span>
-        </label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="John Doe"
-          required
-          className="w-full px-4 py-3 border rounded transition-all duration-200 focus:outline-none focus:ring-2"
-          style={{
-            borderColor: errors.name ? 'var(--color-error)' : 'var(--form-input-border)',
-            backgroundColor: 'var(--form-input-bg)',
-            color: 'var(--form-input-text)',
-            outlineColor: 'var(--accent-vibrant)',
-          }}
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? 'name-error' : undefined}
-        />
-        {errors.name && (
-          <p id="name-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>
-            ⚠ {errors.name}
-          </p>
-        )}
-      </div>
+      {/* Name Field */}
+      <InputField
+        label="Your Name"
+        name="name"
+        type="text"
+        placeholder="John Doe"
+        value={form.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={getFieldError('name')}
+        state={getFieldState('name')}
+        required
+        hint="Your full name or preferred name"
+      />
 
-      <div>
-        <label style={{ color: 'var(--text-heading)' }} className="block text-sm font-medium mb-2">
-          Email <span style={{ color: 'var(--color-error)' }}>*</span>
-        </label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="you@company.com"
-          required
-          className="w-full px-4 py-3 border rounded transition-all duration-200 focus:outline-none focus:ring-2"
-          style={{
-            borderColor: errors.email ? 'var(--color-error)' : 'var(--form-input-border)',
-            backgroundColor: 'var(--form-input-bg)',
-            color: 'var(--form-input-text)',
-            outlineColor: 'var(--accent-vibrant)',
-          }}
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-        />
-        {errors.email && (
-          <p id="email-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>
-            ⚠ {errors.email}
-          </p>
-        )}
-      </div>
+      {/* Email Field */}
+      <InputField
+        label="Email"
+        name="email"
+        type="email"
+        placeholder="you@company.com"
+        value={form.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={getFieldError('email')}
+        state={getFieldState('email')}
+        required
+        hint="We'll use this to contact you about your inquiry"
+      />
 
-      <div>
-        <label style={{ color: 'var(--text-heading)' }} className="block text-sm font-medium mb-2">
-          Company / Brand
-        </label>
-        <input
-          type="text"
-          name="company"
-          value={formData.company}
-          onChange={handleChange}
-          placeholder="Your company name"
-          className="w-full px-4 py-3 border rounded transition-all duration-200 focus:outline-none focus:ring-2"
-          style={{
-            borderColor: 'var(--form-input-border)',
-            backgroundColor: 'var(--form-input-bg)',
-            color: 'var(--form-input-text)',
-            outlineColor: 'var(--accent-vibrant)',
-          }}
-        />
-      </div>
+      {/* Company Field */}
+      <InputField
+        label="Company / Brand"
+        name="company"
+        type="text"
+        placeholder="Your company name (optional)"
+        value={form.company}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={getFieldError('company')}
+        state={getFieldState('company')}
+        hint="Optional: Help us understand your brand better"
+      />
 
-      <div>
-        <label style={{ color: 'var(--text-heading)' }} className="block text-sm font-medium mb-2">
-          Collaboration Type <span style={{ color: 'var(--color-error)' }}>*</span>
-        </label>
-        <select
-          name="collaborationType"
-          value={formData.collaborationType}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-3 border rounded transition-all duration-200 focus:outline-none focus:ring-2"
-          style={{
-            borderColor: errors.collaborationType ? 'var(--color-error)' : 'var(--form-input-border)',
-            backgroundColor: 'var(--form-input-bg)',
-            color: 'var(--form-input-text)',
-            outlineColor: 'var(--accent-vibrant)',
-          }}
-          aria-invalid={!!errors.collaborationType}
-          aria-describedby={errors.collaborationType ? 'collab-error' : undefined}
-        >
-          <option value="">Select a collaboration type...</option>
-          <option value="Sponsored Content">Sponsored Content</option>
-          <option value="Event Performance">Event Performance</option>
-          <option value="Content Creation">Content Creation</option>
-          <option value="Brand Partnership">Brand Partnership</option>
-          <option value="Other">Other</option>
-        </select>
-        {errors.collaborationType && (
-          <p id="collab-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>
-            ⚠ {errors.collaborationType}
-          </p>
-        )}
-      </div>
+      {/* Collaboration Type Select */}
+      <SelectField
+        label="Collaboration Type"
+        name="collaborationType"
+        options={COLLABORATION_TYPES}
+        value={form.collaborationType}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={getFieldError('collaborationType')}
+        state={getFieldState('collaborationType')}
+        required
+        hint="What type of partnership are you interested in?"
+      />
 
-      <div>
-        <label style={{ color: 'var(--text-heading)' }} className="block text-sm font-medium mb-2">
-          Message <span style={{ color: 'var(--color-error)' }}>*</span>
-        </label>
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          rows={5}
-          placeholder="Tell me about your collaboration idea..."
-          required
-          className="w-full px-4 py-3 border rounded transition-all duration-200 focus:outline-none focus:ring-2"
-          style={{
-            borderColor: errors.message ? 'var(--color-error)' : 'var(--form-input-border)',
-            backgroundColor: 'var(--form-input-bg)',
-            color: 'var(--form-input-text)',
-            outlineColor: 'var(--accent-vibrant)',
-          }}
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? 'message-error' : undefined}
-        />
-        {errors.message && (
-          <p id="message-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>
-            ⚠ {errors.message}
-          </p>
-        )}
-      </div>
+      {/* Message Field */}
+      <InputField
+        label="Message"
+        name="message"
+        placeholder="Tell me about your collaboration idea..."
+        value={form.message}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={getFieldError('message')}
+        state={getFieldState('message')}
+        required
+        isTextarea
+        rows={5}
+        maxLength={1000}
+        showCharCount
+        hint="Minimum 10 characters. Tell me what you have in mind!"
+      />
 
+      {/* Submit Button */}
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full font-bold py-3 px-6 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2"
+        className="w-full font-bold py-3 px-6 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 hover:scale-105"
         style={{
           backgroundColor: 'var(--accent-vibrant)',
           color: 'var(--btn-primary-text)',
