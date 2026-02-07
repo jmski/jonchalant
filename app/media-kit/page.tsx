@@ -1,9 +1,8 @@
-'use client';
-
 import { ScrollFade, ScrollStagger } from "@/components/animations";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { PageTransition } from "@/components/layout";
+import { Heading } from "@/components/typography";
 
 // Below-fold dynamic import
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
@@ -78,9 +77,7 @@ export default function MediaKit() {
           {/* Left: Title */}
           <div className="relative z-10">
             <div className="retro-label text-neon uppercase text-xs tracking-widest mb-4">→ METRICS & INSIGHTS</div>
-            <h1 className="heading-display text-6xl sm:text-7xl lg:text-8xl font-black text-primary mb-6 leading-none">
-              MEDIA<br />KIT
-            </h1>
+            <Heading level={1} className="mb-6">MEDIA<br />KIT</Heading>
             <p className="text-lg text-secondary max-w-lg mb-8">
               Comprehensive audience data, platform breakdown, and collaboration potential metrics
             </p>
@@ -160,9 +157,7 @@ export default function MediaKit() {
         <section className="py-20 border-t border-primary">
           <div className="mb-16">
             <span className="retro-label text-magenta text-xs">→ PLATFORM PRESENCE</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
-              Social Reach
-            </h2>
+            <Heading level={2} className="mt-4">Social Reach</Heading>
           </div>
 
           <ScrollStagger variant="slideInUp" staggerDelay={100}>
@@ -218,9 +213,7 @@ export default function MediaKit() {
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
             <span className="retro-label text-vibrant text-xs">→ CONTENT MIX</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
-              Distribution
-            </h2>
+            <Heading level={2} className="mt-4">Distribution</Heading>
           </div>
 
           <div className="space-y-8">
@@ -255,15 +248,13 @@ export default function MediaKit() {
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
             <span className="retro-label text-magenta text-xs">→ AUDIENCE INSIGHTS</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
-              Demographics
-            </h2>
+            <Heading level={2} className="mt-4">Demographics</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Age Distribution */}
             <div className="border-bold border-neon bg-neon-faint p-8">
-              <h3 className="text-xl font-black text-primary mb-8">Age Distribution</h3>
+              <Heading level={3} className="mb-8">Age Distribution</Heading>
               <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.age.map((age, idx) => (
                   <div key={idx} className="space-y-2">
@@ -284,7 +275,7 @@ export default function MediaKit() {
 
             {/* Gender Distribution */}
             <div className="border-bold border-vibrant bg-vibrant-faint p-8">
-              <h3 className="text-xl font-black text-primary mb-8">Gender</h3>
+              <Heading level={3} className="mb-8">Gender</Heading>
               <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.gender.map((gender, idx) => (
                   <div key={idx} className="space-y-2">
@@ -305,7 +296,7 @@ export default function MediaKit() {
 
             {/* Top Locations */}
             <div className="border-bold border-magenta bg-magenta-faint p-8">
-              <h3 className="text-xl font-black text-primary mb-8">Top Locations</h3>
+              <Heading level={3} className="mb-8">Top Locations</Heading>
               <div className="space-y-4">
                 {MEDIA_KIT_DATA.audience.locations.map((location, idx) => (
                   <div key={idx} className="flex justify-between items-center pb-3 border-b border-magenta">
@@ -322,9 +313,7 @@ export default function MediaKit() {
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
             <span className="retro-label text-neon text-xs">→ OPPORTUNITIES</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
-              Collaborate
-            </h2>
+            <Heading level={2} className="mt-4">Collaborate</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

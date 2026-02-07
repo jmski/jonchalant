@@ -5,6 +5,29 @@
    scroll-triggered animations, and interactive effects.
    ============================================================================ */
 
+/* ============================================================================
+   ACCESSIBILITY: Respect prefers-reduced-motion preference
+   
+   Users who prefer reduced motion (accessibility settings or OS preferences)
+   will have all animations and transitions effectively disabled.
+   
+   Test with:
+   - Chrome DevTools: Rendering → Emulate CSS media feature: prefers-reduced-motion
+   - System Settings: Windows > Ease of Access > Display > Show animations
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* Disable all animations */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    
+    /* Disable all transitions */
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* GLITCH ANIMATION - Text effect */
 @keyframes glitch-anim {
   0%,

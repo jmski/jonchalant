@@ -1,4 +1,3 @@
-
 import { PortfolioCard } from "@/components/content";
 import { EnhancedGallery } from "@/components/common";
 import { ScrollFade, ScrollStagger } from "@/components/animations";
@@ -7,7 +6,9 @@ import {
   DecorativeDivider,
   CornerBrackets,
   LayeredPatternOverlay,
+  DecorativeCornerBracket,
 } from "@/components/effects";
+import { Heading } from "@/components/typography";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -150,10 +151,9 @@ export default async function Showcase() {
             </div>
 
             <div>
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight heading-display text-primary mb-4">
-                PASSION<br />
+              <Heading level={1} className="mb-4">PASSION<br />
                 <span className="text-neon">PROJECTS</span>
-              </h1>
+              </Heading>
               <div className="h-1 w-40 bg-neon" />
             </div>
 
@@ -215,9 +215,7 @@ export default async function Showcase() {
           <div className="relative z-10">
           <ScrollFade>
             <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-neon)' }}>
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4" style={{ color: 'var(--accent-neon)' }}>
-                ▶ GUNPLA BUILD GALLERY
-              </h2>
+              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-neon)' }}>▶ GUNPLA BUILD GALLERY</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Custom Gundam model engineering featuring Real Grade, Master Grade, and Perfect Grade builds with professional photography, LED customization, and hand-painted details.
               </p>
@@ -260,9 +258,7 @@ export default async function Showcase() {
           <div className="relative z-10">
           <ScrollFade>
             <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4" style={{ color: 'var(--accent-magenta)' }}>
-                ▶ POKÉMON CARD COLLECTION
-              </h2>
+              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-magenta)' }}>▶ POKÉMON CARD COLLECTION</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Premium trading card collection spanning vintage base sets, holographic rares, and modern chase cards. Japanese imports, graded specimens, and official promotional releases.
               </p>

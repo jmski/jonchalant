@@ -1,6 +1,7 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { ScrollFade, ScrollStagger } from "@/components/animations";
+import { Heading } from "@/components/typography";
 
 export const metadata = {
   title: "About | Jon Chalon",
@@ -23,9 +24,7 @@ export default function About() {
           {/* Left: Title */}
           <div className="relative z-10">
             <div className="retro-label text-vibrant uppercase text-xs tracking-widest mb-4">→ ORIGIN STORY</div>
-            <h1 className="heading-display text-6xl sm:text-7xl lg:text-8xl font-black text-primary mb-6 leading-none">
-              JON<br />CHALON
-            </h1>
+            <Heading level={1} className="mb-6">JON<br />CHALON</Heading>
             <p className="text-lg text-secondary max-w-lg">
               Professional choreographer. Creator. Collaborator. Blending movement, technology, and otaku culture.
             </p>
@@ -111,9 +110,7 @@ export default function About() {
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
             <span className="retro-label text-neon text-xs">→ SPECIALIZATIONS</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
-              What I Do
-            </h2>
+            <Heading level={2} className="mt-4">What I Do</Heading>
           </div>
 
           <ScrollStagger variant="slideInUp" staggerDelay={90}>
@@ -150,9 +147,7 @@ export default function About() {
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
             <span className="retro-label text-magenta text-xs">→ APPROACH</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none mb-12">
-              Philosophy
-            </h2>
+            <Heading level={2} className="mt-4 mb-12">Philosophy</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -181,15 +176,13 @@ export default function About() {
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
             <span className="retro-label text-neon text-xs">→ OUTSIDE THE STUDIO</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
-              Also Known For
-            </h2>
+            <Heading level={2} className="mt-4">Also Known For</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="border-bold border-neon bg-neon-faint p-8">
               <div className="text-5xl mb-4">🤖</div>
-              <h3 className="text-2xl font-black text-primary mb-4">Gunpla Building</h3>
+              <Heading level={3} className="mb-4">Gunpla Building</Heading>
               <p className="text-secondary text-sm leading-relaxed">
                 Scale modeling enthusiast. I approach Gunpla with the same precision and attention to detail as choreography. The intricate assembly process mirrors creative composition—each piece has its role in the larger vision.
               </p>
@@ -197,7 +190,7 @@ export default function About() {
 
             <div className="border-bold border-magenta bg-magenta-faint p-8">
               <div className="text-5xl mb-4">🎴</div>
-              <h3 className="text-2xl font-black text-primary mb-4">Pokémon Collecting</h3>
+              <Heading level={3} className="mb-4">Pokémon Collecting</Heading>
               <p className="text-secondary text-sm leading-relaxed">
                 Active collector and enthusiast. The Pokémon universe connects with my audience and influences my creative aesthetic. Nostalgia, design, and community matter. It's not just a hobby—it's cultural commentary.
               </p>

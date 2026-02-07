@@ -5,7 +5,9 @@ import {
   DecorativeDivider,
   LayeredPatternOverlay,
   AccentLine,
+  DecorativeCornerBracket,
 } from "@/components/effects";
+import { Heading } from "@/components/typography";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -195,10 +197,9 @@ export default async function Dance() {
             </div>
 
             <div>
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-tight heading-display text-primary mb-4">
-                MOVEMENT<br />
+              <Heading level={1} className="mb-4">MOVEMENT<br />
                 <span className="text-vibrant">PORTFOLIO</span>
-              </h1>
+              </Heading>
               <div className="h-1 w-40 bg-vibrant" />
             </div>
 
