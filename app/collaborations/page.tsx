@@ -33,7 +33,9 @@ const MOCK_COLLABORATIONS = [
     category: 'Music Video',
     description: 'Original choreography and lead performance for music videos. Professional production, narrative-driven storytelling.',
     price: 'Custom Quote',
-    image: '/api/placeholder/500/300'
+    image: '/images/collaborations/music-video-direction.jpg',
+    width: 800,
+    height: 480
   },
   {
     _id: 'collab-2',
@@ -41,7 +43,9 @@ const MOCK_COLLABORATIONS = [
     category: 'Social Media',
     description: 'Trending dance content, choreography tutorials, behind-the-scenes footage. Optimized for short-form platforms.',
     price: '$500-$2,000 per video',
-    image: '/api/placeholder/500/300'
+    image: '/images/collaborations/tiktok-reels-content.jpg',
+    width: 800,
+    height: 480
   },
   {
     _id: 'collab-3',
@@ -49,7 +53,9 @@ const MOCK_COLLABORATIONS = [
     category: 'Brand Partnership',
     description: 'Custom choreography for product launches, commercial videos, and brand activations. Multi-location shoots.',
     price: '$3,000-$15,000',
-    image: '/api/placeholder/500/300'
+    image: '/images/collaborations/brand-campaign.jpg',
+    width: 800,
+    height: 480
   },
   {
     _id: 'collab-4',
@@ -57,7 +63,9 @@ const MOCK_COLLABORATIONS = [
     category: 'Event',
     description: 'Festival performances, concert tours, private events, corporate gatherings. Professional stage presence.',
     price: 'Custom Quote',
-    image: '/api/placeholder/500/300'
+    image: '/images/collaborations/live-performance.jpg',
+    width: 800,
+    height: 480
   },
   {
     _id: 'collab-5',
@@ -65,7 +73,9 @@ const MOCK_COLLABORATIONS = [
     category: 'Education',
     description: 'Workshop facilitation, masterclass instruction, online course creation. Train your team or audience.',
     price: '$200-$500/hour',
-    image: '/api/placeholder/500/300'
+    image: '/images/collaborations/choreography-teaching.jpg',
+    width: 800,
+    height: 480
   },
   {
     _id: 'collab-6',
@@ -73,7 +83,9 @@ const MOCK_COLLABORATIONS = [
     category: 'Media',
     description: 'Guest appearances, interview features, podcast episodes discussing movement, performance, and creativity.',
     price: 'Negotiable',
-    image: '/api/placeholder/500/300'
+    image: '/images/collaborations/podcast-interview.jpg',
+    width: 800,
+    height: 480
   }
 ];
 

@@ -30,28 +30,36 @@ const MOCK_GUNPLA = [
     title: 'RG Evangelion Unit-01',
     category: 'Gunpla',
     description: 'Detailed Real Grade build with custom weathering and LED lighting. Professional display photography.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/rg-evangelion-unit-01.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'gunpla-2',
     title: 'MG Unicorn Gundam',
     category: 'Gunpla',
     description: 'Master Grade with full transformation mechanics. Handpainted details and metallic accents.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/mg-unicorn-gundam.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'gunpla-3',
     title: 'HG Barbatos Lupus Rex',
     category: 'Gunpla',
     description: 'High Grade with custom painting and weathering effects. Action pose showcase.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/hg-barbatos-lupus-rex.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'gunpla-4',
     title: 'PG Strike Freedom',
     category: 'Gunpla',
     description: 'Perfect Grade with advanced LED system and mechanical detail customization.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/gunpla/pg-strike-freedom.jpg',
+    width: 680,
+    height: 680
   }
 ];
 
@@ -61,28 +69,36 @@ const MOCK_POKEMON = [
     title: 'Charizard VMAX Gold Secret',
     category: 'Pokémon',
     description: 'PSA 8 graded. Vivid Voltage era premium collection piece.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/charizard-vmax-gold.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'poke-2',
     title: 'Pikachu Illustrator',
     category: 'Pokémon',
     description: 'Japanese promotional holographic. Vintage 1997 original.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/pikachu-illustrator.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'poke-3',
     title: 'Mewtwo EX Crystal',
     category: 'Pokémon',
     description: 'Crystal Type holographic. Neo Genesis era rare collectible.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/mewtwo-ex-crystal.jpg',
+    width: 680,
+    height: 680
   },
   {
     _id: 'poke-4',
     title: 'Blastoise Base Set',
     category: 'Pokémon',
     description: 'First Edition holographic. Shadowless condition. Mint center.',
-    image: '/api/placeholder/400/400'
+    image: '/images/showcase/pokemon/blastoise-base-set.jpg',
+    width: 680,
+    height: 680
   }
 ];
 

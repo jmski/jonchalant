@@ -28,7 +28,9 @@ const MOCK_CHOREOGRAPHY = [
     category: 'Choreography',
     description: 'Original choreography to Japanese hip-hop. Featured on TikTok (2.4M views). High-energy urban style with precision footwork.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/choreography/ninjago-urban-style.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'chore-2',
@@ -36,7 +38,9 @@ const MOCK_CHOREOGRAPHY = [
     category: 'Choreography',
     description: 'Contemporary-hip hop fusion for music video. Ethereal slow sections transitioning to explosive moments. Directed & choreographed.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/choreography/midnight-dreams-fusion.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'chore-3',
@@ -44,7 +48,9 @@ const MOCK_CHOREOGRAPHY = [
     category: 'Choreography',
     description: 'Y2K-inspired choreography with 80s synth music. Winner of Seoul Dance Festival 2024. Clean lines meets fluid movement.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/choreography/synthwave-sunday-retro.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'chore-4',
@@ -52,7 +58,9 @@ const MOCK_CHOREOGRAPHY = [
     category: 'Choreography',
     description: 'High-impact choreography for global brand campaign. 15 dancers, multiple locations. Featured in TikTok creator spotlight.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/choreography/street-king-commercial.jpg',
+    width: 800,
+    height: 600
   }
 ];
 
@@ -63,7 +71,9 @@ const MOCK_FREESTYLE = [
     category: 'Freestyle',
     description: 'High-energy freestyle battle cypher. Improvisation to live beatboxing. Runner-up at NYC Freestyle Championship 2024.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/freestyle/cypher-session-battle.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'free-2',
@@ -71,7 +81,9 @@ const MOCK_FREESTYLE = [
     category: 'Freestyle',
     description: 'Spontaneous freestyle to live jazz musicians. Studio session showing dynamic movement vocabulary and musicality.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/freestyle/jazz-jam-improv.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'free-3',
@@ -79,7 +91,9 @@ const MOCK_FREESTYLE = [
     category: 'Freestyle',
     description: 'Relaxed freestyle to lo-fi hip-hop beats. Slower, more controlled movement. Pure flow and feel.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/freestyle/lofi-vibes-chill.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'free-4',
@@ -87,7 +101,9 @@ const MOCK_FREESTYLE = [
     category: 'Freestyle',
     description: 'Freestyle switching between 5 different genres (pop, hip-hop, jazz, EDM, waacking). Adaptability showcase.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/freestyle/beat-switch-multitype.jpg',
+    width: 800,
+    height: 600
   }
 ];
 
@@ -98,7 +114,9 @@ const MOCK_PERFORMANCES = [
     category: 'Performance',
     description: 'Live performance at Seoul Dance Festival (August 2024). 8-minute showcase performance. 5000+ live audience.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/performances/seoul-festival-stage.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'perf-2',
@@ -106,7 +124,9 @@ const MOCK_PERFORMANCES = [
     category: 'Performance',
     description: 'Live performance as featured artist on "Movement Tour 2024". Boston, New York, Philadelphia. Sold-out venues.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/performances/tour-performance-eastcoast.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'perf-3',
@@ -114,7 +134,9 @@ const MOCK_PERFORMANCES = [
     category: 'Performance',
     description: 'Lead dancer & choreographer for Grammy-nominated artist music video. Professional production, narrative-driven.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/performances/music-video-cinematic.jpg',
+    width: 800,
+    height: 600
   },
   {
     _id: 'perf-4',
@@ -122,7 +144,9 @@ const MOCK_PERFORMANCES = [
     category: 'Performance',
     description: 'Closing performance for New York Fashion Week. Fashion brand collaboration. Integrated movement & costume.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/api/placeholder/400/300'
+    thumbnail: '/images/dance/performances/fashion-show-runway.jpg',
+    width: 800,
+    height: 600
   }
 ];
 

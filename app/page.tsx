@@ -1,6 +1,12 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from '@/components/layout';
 import { ScrollFade, ScrollStagger } from '@/components/animations';
+import {
+  CornerBrackets,
+  DecorativeDivider,
+  PatternBackground,
+  LayeredPatternOverlay,
+} from '@/components/effects';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
@@ -80,10 +86,10 @@ export default function Home() {
               ].map((stat, idx) => (
               <div
                 key={idx}
-                className="relative group border-bold border-primary bg-primary transition-all duration-300 hover:shadow-bold card-padding-lg"
+                className="relative group border-bold border-primary bg-primary transition-all duration-300 hover:shadow-bold card-padding-lg overflow-hidden"
               >
-                {/* Top accent corner */}
-                <div className="absolute -top-3 -left-3 w-6 h-6 border-2 border-vibrant group-hover:scale-150 transition-transform" />
+                {/* Corner brackets */}
+                <CornerBrackets color="vibrant" size="sm" position="all" thickness={2} opacity={0.7} />
                 
                 <div className="relative z-10 space-y-4">
                   <div className="text-5xl md:text-6xl font-black mb-2 heading-display text-vibrant">
@@ -96,9 +102,6 @@ export default function Home() {
                     {stat.icon}
                   </div>
                 </div>
-                
-                {/* Bottom accent corner */}
-                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-2 border-vibrant" />
               </div>
             ))}
             </div>
@@ -106,10 +109,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Decorative Divider */}
+      <DecorativeDivider color="neon" variant="line-dots" dotCount={7} className="bg-primary" />
+
       {/* FEATURED AREAS - EDITORIAL ASYMMETRIC LAYOUT */}
-      <section className="py-20 md:py-32 relative" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        {/* Layered pattern background */}
+        <LayeredPatternOverlay
+          pattern1="grid"
+          pattern2="diagonal"
+          color1="neon"
+          color2="magenta"
+          opacity1={0.04}
+          opacity2={0.02}
+          rotation={-15}
+        />
+
         {/* Maximalist background decoration */}
-        <div className="absolute inset-0 opacity-3">
+        <div className="absolute inset-0 opacity-3 pointer-events-none">
           <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-neon rounded-full" />
           <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-magenta" style={{ borderStyle: 'dashed' }} />
         </div>
@@ -338,7 +355,8 @@ export default function Home() {
           </a>
         </div>
       </section>
-
+      {/* Decorative Divider */}
+      <DecorativeDivider color="magenta" variant="line-dots" dotCount={5} className="bg-primary" />
       {/* CTA Section */}
       <CTASection 
         title="Ready to Collaborate?"
