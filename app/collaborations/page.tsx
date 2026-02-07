@@ -2,6 +2,7 @@ import { ScrollFade } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import { DESIGN_TOKENS } from '@/lib/design-tokens';
 
 // Below-fold dynamic imports
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
@@ -195,12 +196,12 @@ export default async function Collaborations() {
 
           {/* RIGHT - TECHNICAL VISUAL */}
           <div className="relative hidden lg:flex items-center justify-center">
-            <svg className="w-full max-w-sm" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-full max-w-sm" viewBox={`0 0 ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION} ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION}`} xmlns="http://www.w3.org/2000/svg">
               {/* Outer frame */}
-              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-magenta)" strokeWidth="2" />
+              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
               
               {/* Corner marks */}
-              <g stroke="var(--accent-magenta)" strokeWidth="3" fill="none">
+              <g stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
                 <line x1="30" y1="30" x2="70" y2="30" />
                 <line x1="30" y1="30" x2="30" y2="70" />
                 <line x1="370" y1="30" x2="330" y2="30" />
@@ -224,7 +225,7 @@ export default async function Collaborations() {
               <line x1="100" y1="150" x2="300" y2="150" stroke="var(--accent-magenta)" strokeWidth="1.5" opacity="0.4" strokeDasharray="3,3" />
               
               {/* Center circle */}
-              <circle cx="200" cy="200" r="35" fill="none" stroke="var(--accent-magenta)" strokeWidth="2" opacity="0.6" />
+              <circle cx="200" cy="200" r="35" fill="none" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
               
               {/* Labels */}
               <text x="100" y="175" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">YOU</text>

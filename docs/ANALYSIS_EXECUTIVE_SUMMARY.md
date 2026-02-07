@@ -29,8 +29,8 @@ Your portfolio is **well-structured** with:
 
 **Quick Wins:**
 
+- ✅ ~~Implement dynamic imports for below-fold~~ → **Done** (300ms FCP improvement)
 - ⚡ Add image optimization with `next/image` → **40-60% image speedup**
-- ⚡ Implement dynamic imports for below-fold → **300ms FCP improvement**
 - ⚡ Move animations to transform/opacity only → **60% animation smoothness increase**
 
 **Estimated Impact:** Current LCP ~3.2s → **2.0s** (37% faster)
@@ -41,7 +41,7 @@ Your portfolio is **well-structured** with:
 
 **Quick Wins:**
 
-- 📋 Extract magic numbers → `lib/design-tokens.ts`
+- ✅ ~~Extract magic numbers → `lib/design-tokens.ts`~~ → **Done** (StageLighting, showcase, collaborations updated)
 - 🧩 Create reusable `<Card>`, `<Heading>` components
 - 📦 Split `globals.css` into 7 smaller modules
 
@@ -225,10 +225,10 @@ Time to Implement  | Long-term Benefit
 
 **Phase 1: Foundation (4-5 hours)**
 
-- [ ] Design tokens
+- [x] Design tokens
 - [ ] Image optimization
 - [ ] Card + Heading components
-- [ ] Lazy loading
+- [x] Lazy loading (dynamic imports)
 
 **Phase 2: Enhancement (6-8 hours)**
 
