@@ -1,5 +1,6 @@
 import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
+import { CornerBrackets, DecorativeDivider, LayeredPatternOverlay, GlowingCTA } from "@/components/effects";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { DESIGN_TOKENS } from '@/lib/design-tokens';
@@ -200,7 +201,7 @@ export default async function Collaborations() {
             </p>
 
             <div className="pt-4">
-              <a href="#collaboration-form" className="inline-flex items-center gap-2 px-8 py-4 font-black uppercase tracking-[0.1em] text-sm border-3 border-magenta text-magenta hover:bg-magenta hover:text-primary transition-all duration-300">
+              <a href="#collaboration-form" className="inline-flex items-center gap-2 px-8 py-4 font-black uppercase tracking-widest text-sm border-3 border-magenta text-magenta hover:bg-magenta hover:text-primary transition-all duration-300">
                 ⬇ SEND INQUIRY
               </a>
             </div>
@@ -248,114 +249,161 @@ export default async function Collaborations() {
         </div>
 
         {/* SERVICE CATEGORIES - COLOR CODED */}
-        <section className="mb-24">
-          <ScrollFade>
-            <div className="mb-12">
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] text-primary mb-4">
-                Services & Collaboration Types
-              </h2>
-              <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
-                Flexible pricing and customizable packages based on your project scope and requirements.
-              </p>
-            </div>
-          </ScrollFade>
+        <section className="mb-24 relative">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="checkerboard"
+            pattern2="dots"
+            color1="vibrant"
+            color2="neon"
+            opacity1={0.02}
+            opacity2={0.015}
+            rotation={15}
+            className="z-0"
+          />
+          <div className="relative z-10">
+            <ScrollFade>
+              <div className="mb-12">
+                <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest text-primary mb-4">
+                  Services & Collaboration Types
+                </h2>
+                <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
+                  Flexible pricing and customizable packages based on your project scope and requirements.
+                </p>
+              </div>
+            </ScrollFade>
 
-          <ScrollStagger variant="slideInUp" staggerDelay={100}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {SERVICE_CATEGORIES.map((category, idx) => {
-              const colorVar = getColorVar(category.color);
-              return (
-                <div key={idx} className="relative group">
-                    <div 
-                      className="border-t-4 pt-6 pb-8 px-8 transition-all duration-300 hover:shadow-lg"
-                      style={{ borderColor: colorVar, backgroundColor: 'rgba(255,255,255, 0.01)' }}
-                    >
-                      <h3 
-                        className="text-3xl font-black uppercase heading-display tracking-[0.1em] mb-6"
-                        style={{ color: colorVar }}
+            <ScrollStagger variant="slideInUp" staggerDelay={100}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {SERVICE_CATEGORIES.map((category, idx) => {
+                const colorVar = getColorVar(category.color);
+                return (
+                  <div key={idx} className="relative group">
+                      <div 
+                        className="border-t-4 pt-6 pb-8 px-8 transition-all duration-300 hover:shadow-lg"
+                        style={{ borderColor: colorVar, backgroundColor: 'rgba(255,255,255, 0.01)' }}
                       >
-                        {category.name}
-                      </h3>
-                      <ul className="space-y-3">
-                        {category.items.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="text-lg font-black mt-1" style={{ color: colorVar }}>✓</span>
-                            <span className="text-sm leading-relaxed text-tertiary font-body">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    {/* Hover accent line */}
-                    <div 
-                      className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
-                      style={{ backgroundColor: colorVar }}
-                    />
-                </div>
-              );
-            })}
-            </div>
-          </ScrollStagger>
-        </section>
-
-        {/* PAST COLLABORATIONS */}
-        <section className="mb-24">
-          <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4" style={{ color: 'var(--accent-magenta)' }}>
-                ▶ Recent Projects
-              </h2>
-              <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
-                A selection of successful brand partnerships and creative collaborations.
-              </p>
-            </div>
-          </ScrollFade>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.slice(0, 6).map((collab: any, idx: number) => (
-              <ScrollFade key={collab._id} delay={idx * 100}>
-                <div className="group relative border-2 border-tertiary p-6 hover:border-magenta transition-all duration-300">
-                  <h3 className="text-xl font-black uppercase tracking-[0.1em] text-primary mb-2">
-                    {collab.title}
-                  </h3>
-                  <p className="text-xs font-black uppercase tracking-[0.1em] text-magenta mb-4">
-                    {collab.category}
-                  </p>
-                  <p className="text-sm leading-relaxed text-tertiary font-body mb-4">
-                    {collab.description}
-                  </p>
-                  {collab.price && (
-                    <p className="text-sm font-black text-vibrant">
-                      {collab.price}
-                    </p>
-                  )}
-                  {/* Hover underline */}
-                  <div 
-                    className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
-                    style={{ backgroundColor: 'var(--accent-magenta)' }}
-                  />
-                </div>
-              </ScrollFade>
-            ))}
+                        <h3 
+                          className="text-3xl font-black uppercase heading-display tracking-widest mb-6"
+                          style={{ color: colorVar }}
+                        >
+                          {category.name}
+                        </h3>
+                        <ul className="space-y-3">
+                          {category.items.map((item, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <span className="text-lg font-black mt-1" style={{ color: colorVar }}>✓</span>
+                              <span className="text-sm leading-relaxed text-tertiary font-body">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {/* Hover accent line */}
+                      <div 
+                        className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
+                        style={{ backgroundColor: colorVar }}
+                      />
+                  </div>
+                );
+              })}
+              </div>
+            </ScrollStagger>
           </div>
         </section>
 
-        {/* COLLABORATION FORM */}
-        <section id="collaboration-form" className="mb-20 py-12">
-          <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-vibrant)' }}>
-              <h2 
-                className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4"
-                style={{ color: 'var(--accent-vibrant)' }}
-              >
-                ▶ Let's Connect
-              </h2>
-              <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
-                Have a project in mind? Send your collaboration inquiry below. I respond to all inquiries within 48 hours.
-              </p>
+
+        {/* Decorative Divider */}
+        <DecorativeDivider color="neon" variant="line-dots" dotCount={7} className="bg-primary mb-24" />
+
+        {/* PAST COLLABORATIONS */}
+        <section className="mb-24 relative">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="grid"
+            pattern2="diagonal"
+            color1="magenta"
+            color2="vibrant"
+            opacity1={0.025}
+            opacity2={0.02}
+            rotation={-25}
+            className="z-0"
+          />
+          <div className="relative z-10">
+            <ScrollFade>
+              <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
+                <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4" style={{ color: 'var(--accent-magenta)' }}>
+                  ▶ Recent Projects
+                </h2>
+                <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
+                  A selection of successful brand partnerships and creative collaborations.
+                </p>
+              </div>
+            </ScrollFade>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.slice(0, 6).map((collab: any, idx: number) => (
+                <ScrollFade key={collab._id} delay={idx * 100}>
+                  <div className="group relative border-2 border-tertiary p-6 hover:border-magenta transition-all duration-300">
+                    <CornerBrackets position="all" size="md" color="magenta" /> 
+                    <h3 className="text-xl font-black uppercase tracking-widest text-primary mb-2">
+                      {collab.title}
+                    </h3>
+                    <p className="text-xs font-black uppercase tracking-widest text-magenta mb-4">
+                      {collab.category}
+                    </p>
+                    <p className="text-sm leading-relaxed text-tertiary font-body mb-4">
+                      {collab.description}
+                    </p>
+                    {collab.price && (
+                      <p className="text-sm font-black text-vibrant">
+                        {collab.price}
+                      </p>
+                    )}
+                    {/* Hover underline */}
+                    <div 
+                      className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
+                      style={{ backgroundColor: 'var(--accent-magenta)' }}
+                    />
+                  </div>
+                </ScrollFade>
+              ))}
             </div>
-          </ScrollFade>
-          <div className="max-w-3xl">
-            <CollaborationForm />
+          </div>
+        </section>
+
+        {/* Decorative Divider */}
+        <DecorativeDivider color="vibrant" variant="line-dots" dotCount={5} className="bg-primary mb-24" />
+
+        {/* COLLABORATION FORM */}
+        <section id="collaboration-form" className="mb-20 py-12 relative">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="dots"
+            pattern2="diagonal"
+            color1="neon"
+            color2="magenta"
+            opacity1={0.03}
+            opacity2={0.02}
+            rotation={30}
+            className="z-0"
+          />
+          <div className="relative z-10">
+            <ScrollFade>
+              <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-vibrant)' }}>
+                <h2 
+                  className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4"
+                  style={{ color: 'var(--accent-vibrant)' }}
+                >
+                  ▶ Let's Connect
+                </h2>
+                <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
+                  Have a project in mind? Send your collaboration inquiry below. I respond to all inquiries within 48 hours.
+                </p>
+              </div>
+            </ScrollFade>
+            <div className="max-w-3xl">
+              <CollaborationForm />
+            </div>
           </div>
         </section>
 

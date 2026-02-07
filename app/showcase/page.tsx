@@ -2,6 +2,12 @@
 import { PortfolioCard } from "@/components/content";
 import { EnhancedGallery } from "@/components/common";
 import { ScrollFade, ScrollStagger } from "@/components/animations";
+import {
+  PatternBackground,
+  DecorativeDivider,
+  CornerBrackets,
+  LayeredPatternOverlay,
+} from "@/components/effects";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -194,10 +200,22 @@ export default async function Showcase() {
         </div>
 
         {/* GUNPLA SECTION - NEON CYAN */}
-        <section className="mb-24">
+        <section className="mb-24 relative">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="grid"
+            pattern2="diagonal"
+            color1="neon"
+            color2="magenta"
+            opacity1={0.035}
+            opacity2={0.025}
+            rotation={-20}
+            className="z-0"
+          />
+          <div className="relative z-10">
           <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-neon)' }}>
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4" style={{ color: 'var(--accent-neon)' }}>
+            <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-neon)' }}>
+              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4" style={{ color: 'var(--accent-neon)' }}>
                 ▶ GUNPLA BUILD GALLERY
               </h2>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
@@ -220,13 +238,29 @@ export default async function Showcase() {
             enableLightbox={true}
             enableLazyLoad={true}
           />
+          </div>
         </section>
 
+        {/* Decorative Divider */}
+        <DecorativeDivider color="vibrant" variant="line-dots" dotCount={7} className="bg-primary" />
+
         {/* POKÉMON SECTION - MAGENTA */}
-        <section className="mb-20">
+        <section className="mb-20 relative">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="dots"
+            pattern2="checkerboard"
+            color1="magenta"
+            color2="neon"
+            opacity1={0.03}
+            opacity2={0.02}
+            rotation={45}
+            className="z-0"
+          />
+          <div className="relative z-10">
           <ScrollFade>
             <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
-              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-[0.1em] mb-4" style={{ color: 'var(--accent-magenta)' }}>
+              <h2 className="text-4xl sm:text-5xl font-black uppercase heading-display tracking-widest mb-4" style={{ color: 'var(--accent-magenta)' }}>
                 ▶ POKÉMON CARD COLLECTION
               </h2>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
@@ -249,7 +283,11 @@ export default async function Showcase() {
             enableLightbox={true}
             enableLazyLoad={true}
           />
+          </div>
         </section>
+
+        {/* Decorative Divider */}
+        <DecorativeDivider color="neon" variant="line-dots" dotCount={5} className="bg-primary" />
 
         {/* CTA Section */}
         <CTASection

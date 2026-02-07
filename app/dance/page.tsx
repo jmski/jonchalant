@@ -1,5 +1,11 @@
 import { ScrollFade } from "@/components/animations";
 import { DanceFilter } from "@/components/content";
+import {
+  PatternBackground,
+  DecorativeDivider,
+  LayeredPatternOverlay,
+  AccentLine,
+} from "@/components/effects";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -245,7 +251,25 @@ export default async function Dance() {
         </div>
 
         {/* Dynamic Filter and Portfolio */}
-        <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
+        <section className="py-12 relative mb-12">
+          {/* Pattern background */}
+          <LayeredPatternOverlay
+            pattern1="diagonal"
+            pattern2="dots"
+            color1="vibrant"
+            color2="neon"
+            opacity1={0.035}
+            opacity2={0.025}
+            rotation={-30}
+            className="z-0"
+          />
+          <div className="relative z-10">
+            <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
+          </div>
+        </section>
+
+        {/* Decorative Divider */}
+        <DecorativeDivider color="magenta" variant="line-dots" dotCount={5} className="bg-primary" />
 
         {/* CTA Section */}
         <CTASection
