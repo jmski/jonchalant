@@ -1,7 +1,14 @@
 import { ScrollFade } from "@/components/animations";
 import { DanceFilter } from "@/components/content";
-import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+// Below-fold dynamic imports
+const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+  loading: () => <div className="py-16 md:py-24">Loading...</div>,
+  ssr: true
+});
 import { sanityClient } from "@/lib/sanityClient";
 import { dancePortfolioQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT, DANCE_FILTER_CATEGORIES } from "@/lib/pageContent";

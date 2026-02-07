@@ -1,7 +1,13 @@
 import { HomeHero } from '@/components/hero';
-import { DeconstructedBrandBurger } from '@/components/sections';
-import { CTASection } from '@/components/sections';
 import { PageTransition } from '@/components/layout';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+// Below-fold dynamic imports
+const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+  loading: () => <div className="py-16 md:py-24">Loading...</div>,
+  ssr: true
+});
 
 export default function Home() {
   return (
@@ -94,9 +100,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          {/* Brand Stack - Visual Interest */}
-          <DeconstructedBrandBurger />
         </div>
       </section>
 

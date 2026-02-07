@@ -1,8 +1,16 @@
 
 import { PortfolioCard } from "@/components/content";
 import { ScrollFade } from "@/components/animations";
-import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import { DESIGN_TOKENS } from '@/lib/design-tokens';
+
+// Below-fold dynamic imports
+const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+  loading: () => <div className="py-16 md:py-24">Loading...</div>,
+  ssr: true
+});
 import { sanityClient } from "@/lib/sanityClient";
 import { showcaseQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT } from "@/lib/pageContent";
@@ -136,12 +144,12 @@ export default async function Showcase() {
 
           {/* RIGHT - TECHNICAL VISUAL */}
           <div className="relative hidden lg:flex items-center justify-center">
-            <svg className="w-full max-w-sm" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-full max-w-sm" viewBox={`0 0 ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION} ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION}`} xmlns="http://www.w3.org/2000/svg">
               {/* Outer frame */}
-              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-neon)" strokeWidth="2" />
+              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
               
               {/* Corner marks */}
-              <g stroke="var(--accent-neon)" strokeWidth="3" fill="none">
+              <g stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
                 <line x1="30" y1="30" x2="70" y2="30" />
                 <line x1="30" y1="30" x2="30" y2="70" />
                 <line x1="370" y1="30" x2="330" y2="30" />
@@ -153,13 +161,13 @@ export default async function Showcase() {
               </g>
 
               {/* Diagonal divisions */}
-              <line x1="30" y1="30" x2="370" y2="370" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4" />
-              <line x1="370" y1="30" x2="30" y2="370" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4" />
+              <line x1="30" y1="30" x2="370" y2="370" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
+              <line x1="370" y1="30" x2="30" y2="370" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
               
               {/* Category zones */}
-              <circle cx="120" cy="120" r="50" fill="none" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" />
-              <circle cx="280" cy="280" r="50" fill="none" stroke="var(--accent-magenta)" strokeWidth="2" opacity="0.6" />
-              <circle cx="200" cy="200" r="40" fill="none" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.5" strokeDasharray="5,3" />
+              <circle cx="120" cy="120" r="50" fill="none" stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
+              <circle cx="280" cy="280" r="50" fill="none" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
+              <circle cx="200" cy="200" r="40" fill="none" stroke="var(--accent-vibrant)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.5" strokeDasharray="5,3" />
               
               {/* Labels */}
               <text x="120" y="200" fontSize="10" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">MODELS</text>
