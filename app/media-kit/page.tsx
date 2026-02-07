@@ -1,10 +1,15 @@
 'use client';
 
-'use client';
-
 import { ScrollFade } from "@/components/animations";
-import { CTASection } from "@/components/sections";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 import { PageTransition } from "@/components/layout";
+
+// Below-fold dynamic import
+const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+  loading: () => <div className="py-16 md:py-24">Loading...</div>,
+  ssr: true
+});
 
 const MEDIA_KIT_DATA = {
   headline: 'MEDIA KIT',

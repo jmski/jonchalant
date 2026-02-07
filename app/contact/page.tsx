@@ -1,9 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 import { ScrollFade } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
-import { CTASection } from "@/components/sections";
+
+// Below-fold dynamic import
+const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+  loading: () => <div className="py-16 md:py-24">Loading...</div>,
+  ssr: true
+});
 
 const contactData = {
   headline: 'Get in Touch',

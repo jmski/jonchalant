@@ -1,7 +1,18 @@
 import { ScrollFade } from "@/components/animations";
-import { CTASection } from "@/components/sections";
-import { CollaborationForm } from "@/components/forms";
 import { PageTransition } from "@/components/layout";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+// Below-fold dynamic imports
+const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+  loading: () => <div className="py-16 md:py-24">Loading...</div>,
+  ssr: true
+});
+
+const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
+  loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
+  ssr: true
+});
 import { sanityClient } from "@/lib/sanityClient";
 import { collaborationQuery } from "@/lib/sanityQueries";
 import { PAGE_CONTENT } from "@/lib/pageContent";
