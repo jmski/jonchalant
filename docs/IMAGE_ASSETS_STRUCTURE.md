@@ -41,6 +41,7 @@ public/images/
 ## Image Specifications by Category
 
 ### Showcase Gallery Images (Gunpla & Pokémon)
+
 - **Dimensions**: 680x680px (1:1 square ratio)
 - **Quality**: 85% (WebP/JPEG)
 - **File Size Target**: 110-135KB each
@@ -48,11 +49,13 @@ public/images/
 - **Use Case**: Grid gallery display with lightbox modal
 
 **Responsive Sizes Configuration:**
+
 ```js
-sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw";
 ```
 
 ### Dance Portfolio Thumbnails
+
 - **Dimensions**: 800x600px (4:3 ratio for video format)
 - **Quality**: 85% (WebP/JPEG)
 - **File Size Target**: 140-150KB each
@@ -60,11 +63,13 @@ sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
 - **Use Case**: Video thumbnail display before playback
 
 **Responsive Sizes Configuration:**
+
 ```js
-sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw"
+sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw";
 ```
 
 ### Collaboration Service Images
+
 - **Dimensions**: 800x480px (16:9 widescreen ratio)
 - **Quality**: 85% (WebP/JPEG)
 - **File Size Target**: 125-140KB each
@@ -72,8 +77,9 @@ sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw"
 - **Use Case**: Service tier card display
 
 **Responsive Sizes Configuration:**
+
 ```js
-sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw";
 ```
 
 ## OptimizedImage Component Usage
@@ -81,7 +87,7 @@ sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
 All images across pages use the `OptimizedImage` component wrapper for automatic optimization:
 
 ```tsx
-import { OptimizedImage } from '@/components/common';
+import { OptimizedImage } from "@/components/common";
 
 <OptimizedImage
   src="/images/showcase/gunpla/rg-evangelion-unit-01.jpg"
@@ -91,24 +97,27 @@ import { OptimizedImage } from '@/components/common';
   quality={85}
   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
   priority={false}
-/>
+/>;
 ```
 
 ## Integration Points
 
 ### 1. Showcase Page (`app/showcase/page.tsx`)
+
 - **Component**: `EnhancedGallery` (uses OptimizedImage internally)
 - **Image Path Format**: `/images/showcase/gunpla/{filename}.jpg`
 - **Mock Data Path**: `MOCK_GUNPLA` and `MOCK_POKEMON` arrays
 - **Implementation**: Images are mapped directly in gallery render
 
 ### 2. Dance Page (`app/dance/page.tsx`)
+
 - **Component**: `DanceFilter` with embedded gallery
 - **Image Path Format**: `/images/dance/{category}/{filename}.jpg`
 - **Mock Data Path**: `MOCK_CHOREOGRAPHY` and `MOCK_FREESTYLE` arrays
 - **Implementation**: Thumbnail images displayed alongside video embeds
 
 ### 3. Collaborations Page (`app/collaborations/page.tsx`)
+
 - **Component**: Service grid cards
 - **Image Path Format**: `/images/collaborations/{filename}.jpg`
 - **Mock Data Path**: `MOCK_COLLABORATIONS` array
@@ -117,20 +126,23 @@ import { OptimizedImage } from '@/components/common';
 ## Performance Optimization
 
 ### Image Delivery
+
 - **Next.js Image Optimization**: Automatic WebP conversion, responsive sizing
 - **Lazy Loading**: All images use `priority={false}` (lazy load by default)
 - **Quality Settings**: 85% quality balances visual fidelity with file size
 - **Shimmer Animation**: `animate-shimmer` CSS class applied during load
 
 ### File Size Targets
-| Category | Image Count | Total Size | Avg per Image |
-|----------|------------|-----------|---------------|
-| Showcase | 8 | ~950KB | 119KB |
-| Dance | 8+ | ~1.1MB+ | 145KB |
-| Collaborations | 6 | ~785KB | 131KB |
-| **Total Portfolio** | **22+** | **2.8MB+** | **131KB** |
+
+| Category            | Image Count | Total Size | Avg per Image |
+| ------------------- | ----------- | ---------- | ------------- |
+| Showcase            | 8           | ~950KB     | 119KB         |
+| Dance               | 8+          | ~1.1MB+    | 145KB         |
+| Collaborations      | 6           | ~785KB     | 131KB         |
+| **Total Portfolio** | **22+**     | **2.8MB+** | **131KB**     |
 
 ### Estimated Page Load Impact
+
 - **Showcase Page**: 950KB images → ~280KB optimized (70% reduction)
 - **Dance Page**: 1.1MB images → ~320KB optimized (70% reduction)
 - **Collaborations Page**: 785KB images → ~230KB optimized (70% reduction)
@@ -161,15 +173,16 @@ import { OptimizedImage } from '@/components/common';
 
 All images are optimized for these breakpoints:
 
-| Breakpoint | Image Width Used |
-|-----------|-----------------|
-| Mobile (< 768px) | 100% viewport width |
+| Breakpoint              | Image Width Used      |
+| ----------------------- | --------------------- |
+| Mobile (< 768px)        | 100% viewport width   |
 | Tablet (768px - 1024px) | 50-60% viewport width |
-| Desktop (> 1024px) | 33-50% viewport width |
+| Desktop (> 1024px)      | 33-50% viewport width |
 
 ## Accessibility
 
 All images include:
+
 - ✅ Descriptive `alt` text for screen readers
 - ✅ Proper aspect ratio declarations (width/height props)
 - ✅ ARIA labels where applicable
@@ -178,12 +191,14 @@ All images include:
 ## Monitoring & Optimization
 
 ### Metrics to Track
+
 - **Largest Contentful Paint (LCP)**: Target < 2.5s
 - **Cumulative Layout Shift (CLS)**: Target < 0.1
 - **Image Load Time**: Target < 1.5s per image
 - **Total Image Size**: Target < 3MB portfolio-wide
 
 ### Tools
+
 - Next.js Image Optimizer
 - Lighthouse
 - WebPageTest

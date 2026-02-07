@@ -1,0 +1,260 @@
+/* ============================================================================
+   TYPOGRAPHY.CSS - Font Families, Scales, and Text Styles
+   
+   All typography rules: headings, paragraphs, links, text utilities.
+   ============================================================================ */
+
+/* TYPOGRAPHY - Headings h1-h6 and text elements */
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+h3,
+h4 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.375rem;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+h5,
+h6 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h5 {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+h6 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Paragraph styles */
+p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+p.intro {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Links - Default styling */
+a {
+  color: var(--accent-vibrant);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  color: var(--accent-vibrant-hover);
+  border-bottom-color: var(--accent-vibrant-hover);
+}
+
+/* Code/Pre blocks */
+code {
+  font-family: var(--font-tech);
+  background-color: var(--bg-tertiary);
+  color: var(--accent-neon);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+pre {
+  font-family: var(--font-tech);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* Text utilities */
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent-vibrant);
+}
+
+.text-mono {
+  font-family: var(--font-tech);
+}
+
+.gradient-heading {
+  background: var(--gradient-heading);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-neon {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-glitch {
+  background: var(--gradient-glitch);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Font weight utilities */
+.font-thin {
+  font-weight: 100;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+/* Text transformation utilities */
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.normal-case {
+  text-transform: none;
+}
+
+/* Letter spacing utilities */
+.tracking-tight {
+  letter-spacing: -0.015em;
+}
+
+.tracking-normal {
+  letter-spacing: 0em;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
+/* Line height utilities */
+.leading-tight {
+  line-height: 1.1;
+}
+
+.leading-normal {
+  line-height: 1.5;
+}
+
+.leading-relaxed {
+  line-height: 1.75;
+}
+
+.leading-loose {
+  line-height: 2;
+}
+
+/* Text alignment */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}

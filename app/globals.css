@@ -3,7 +3,58 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   GLOBALS.CSS - COMPREHENSIVE REFERENCE GUIDE
+   MODULAR CSS IMPORTS
+   
+   Organized into focused modules for better maintainability:
+   - variables.css: CSS custom properties and theme definitions
+   - animations.css: All @keyframes and animation utilities
+   - base.css: Global styles, typography, and form resets
+   - typography.css: Font families and text styling
+   - utilities.css: Color, spacing, pattern, and effect utilities
+   ============================================================================ */
+
+@import "./css/variables.css";
+@import "./css/animations.css";
+@import "./css/base.css";
+@import "./css/typography.css";
+@import "./css/utilities.css";
+
+/* ============================================================================
+   RESPONSIVE DESIGN OVERRIDES
+   
+   Mobile-first approach: define base styles, then enhance for larger screens
+   ============================================================================ */
+
+@media (min-width: 481px) {
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.25rem; }
+}
+
+@media (min-width: 768px) {
+  .hidden-mobile { display: block; }
+  .hidden-desktop { display: none; }
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.5rem; }
+  .section-spacing { padding: 6rem 0; }
+}
+
+@media (min-width: 1024px) {
+  .grid-auto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+}
+
+/* Article pages */
+.article-main h1:not([class*="text-"]),
+.main-content h1:not([class*="text-"]) {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+@media print {
+  html { background: white; color: black; }
+  body { background: white; color: black; }
+  a { color: #000080; text-decoration: underline; }
+  .hidden-print { display: none !important; }
+}
    
    A maintainable, utility-first CSS system designed for theme flexibility,
    responsive design, and component reusability.

@@ -1,0 +1,133 @@
+/* ============================================================================
+   VARIABLES.CSS - CSS Custom Properties & Theme Definitions
+   
+   Centralized color, typography, spacing, and timing variables for all themes.
+   ============================================================================ */
+
+/* SHARED VARIABLES - Available across all themes */
+:root {
+  --font-serif: "Georgia", "Garamond", serif;
+  --font-mono: "Departure Mono", "Courier New", monospace;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-tech: "JetBrains Mono", monospace;
+  --font-retro: "VT323", monospace;
+
+  /* Spacing & Layout */
+  --column-gap: 2rem;
+  --gutter: 1.5rem;
+
+  /* Transitions & Timing */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
+}
+
+/* ========== LIGHT THEME (DEFAULT) ========== */
+:root {
+  /* Base Colors */
+  --bg-primary: #fcfcfa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f5f5f3;
+  --text-primary: #111111;
+  --text-secondary: #333333;
+  --text-tertiary: #666666;
+  --border-color: #e5e5e5;
+  --border-accent: #d0d0d0;
+
+  /* Accent Colors */
+  --accent-vibrant: #ff5f1f;
+  --accent-vibrant-hover: #e55419;
+  --accent-primary: #111111;
+  --accent-secondary: #4a4a4a;
+
+  /* Editorial & Maximalist Accent Colors */
+  --accent-neon: #00ffff;
+  --accent-magenta: #ff00ff;
+  --accent-dark: #0a0a0a;
+  --accent-neon-light: #64ffff;
+
+  /* Status Colors */
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+  --color-success-dark: #15803d;
+  --color-error: #dc2626;
+  --color-error-light: #fee2e2;
+  --color-error-dark: #991b1b;
+
+  /* Utilities */
+  --reg-mark: #cccccc;
+  --overlay-dark: rgba(0, 0, 0, 0.4);
+  --overlay-dark-medium: rgba(0, 0, 0, 0.3);
+  --overlay-light: rgba(255, 95, 31, 0.1);
+  --text-muted: #999999;
+
+  /* Derived Variables */
+  --text-heading: var(--text-primary);
+  --text-body: var(--text-secondary);
+  --bg-muted: var(--bg-tertiary);
+  --form-input-bg: var(--bg-secondary);
+  --form-input-border: var(--border-color);
+  --btn-primary-text: var(--bg-primary);
+}
+
+/* ========== DARK THEME ========== */
+html[data-theme="dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #151515;
+  --bg-tertiary: #222222;
+  --text-primary: #f2f2f2;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: #a0a0a0;
+  --border-color: #222222;
+  --border-accent: #333333;
+  --accent-vibrant: #ff7043;
+  --accent-vibrant-hover: #ff9575;
+  --accent-primary: #f2f2f2;
+  --accent-secondary: #b0b0b0;
+  --accent-neon: #00ffff;
+  --accent-magenta: #ff00ff;
+  --accent-dark: #0a0a0a;
+  --accent-neon-light: #64ffff;
+  --reg-mark: #444444;
+  --color-success: #22c55e;
+  --color-success-light: #f0fdf4;
+  --color-success-dark: #16a34a;
+  --color-error: #ef4444;
+  --color-error-light: #fef2f2;
+  --color-error-dark: #dc2626;
+  --overlay-dark: rgba(0, 0, 0, 0.6);
+  --overlay-dark-medium: rgba(0, 0, 0, 0.5);
+  --text-muted: #666666;
+  color-scheme: dark;
+}
+
+/* ========== EARTHY THEME ========== */
+html[data-theme="earthy"] {
+  --bg-primary: #e2ded0;
+  --bg-secondary: #f0ede8;
+  --bg-tertiary: #e8e5dc;
+  --text-primary: #3c3633;
+  --text-secondary: #5a5550;
+  --text-tertiary: #8b8680;
+  --border-color: #b5a991;
+  --border-accent: #ccbbaa;
+  --accent-vibrant: #c85a3c;
+  --accent-vibrant-hover: #d97a47;
+  --accent-primary: #3c3633;
+  --accent-secondary: #8b8680;
+  --accent-neon: #00ffcc;
+  --accent-magenta: #cc00cc;
+  --accent-dark: #2a2520;
+  --accent-neon-light: #66ffdd;
+  --reg-mark: #998866;
+  --color-success: #2d8a5c;
+  --color-success-light: #e8f5f0;
+  --color-success-dark: #1a522e;
+  --color-error: #b84434;
+  --color-error-light: #f9e7e5;
+  --color-error-dark: #8a3b2f;
+  --overlay-dark: rgba(0, 0, 0, 0.35);
+  --overlay-dark-medium: rgba(0, 0, 0, 0.25);
+  --text-muted: #a09a90;
+}
