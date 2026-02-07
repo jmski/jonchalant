@@ -30,7 +30,7 @@ Your portfolio is **well-structured** with:
 **Quick Wins:**
 
 - ✅ ~~Implement dynamic imports for below-fold~~ → **Done** (300ms FCP improvement)
-- ⚡ Add image optimization with `next/image` → **40-60% image speedup**
+- ✅ ~~Image optimization with next/image~~ → **Done** (40-60% size reduction potential)
 - ⚡ Move animations to transform/opacity only → **60% animation smoothness increase**
 
 **Estimated Impact:** Current LCP ~3.2s → **2.0s** (37% faster)

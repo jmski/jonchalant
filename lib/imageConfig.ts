@@ -3,25 +3,37 @@
  * 
  * Centralizes responsive image sizing, quality settings, and optimization strategies
  * Used across all image components for consistency
+ * 
+ * Integrates with design-tokens.ts for sizing consistency
  */
+
+import { DESIGN_TOKENS } from './design-tokens';
 
 export const IMAGE_CONFIG = {
   /**
    * Default image dimensions
    * Used as fallbacks when specific sizes aren't provided
+   * Integrated with DESIGN_TOKENS.SIZES.IMAGE for consistency
    */
   DIMENSIONS: {
-    HERO: { width: 1200, height: 800 },
+    HERO: DESIGN_TOKENS.SIZES.IMAGE.HERO_IMAGE,
     PORTFOLIO_CARD: { width: 500, height: 400 },
     GALLERY_THUMB: { width: 300, height: 300 },
     GALLERY_FULL: { width: 1200, height: 900 },
     SHOWCASE_ITEM: { width: 600, height: 500 },
     BANNER: { width: 1920, height: 600 },
+    // Also expose design token placeholders
+    SQUARE: DESIGN_TOKENS.SIZES.IMAGE.PLACEHOLDER_SQUARE,
+    LANDSCAPE: DESIGN_TOKENS.SIZES.IMAGE.PLACEHOLDER_LANDSCAPE,
   },
 
   /**
    * Quality settings for different image types
    * Balance between quality and file size
+   * 
+   * Quality scale: 1-100 (higher = better quality, larger file)
+   * NextJS default: 75
+   * Recommended baseline: 85
    */
   QUALITY: {
     HERO: 90,           // High quality for hero images
@@ -83,11 +95,12 @@ export const IMAGE_CONFIG = {
 
   /**
    * Placeholder/fallback images
+   * Used when images fail to load or aren't available
    */
   PLACEHOLDERS: {
-    DEFAULT: '/api/placeholder/400/300',
+    DEFAULT: DESIGN_TOKENS.SIZES.IMAGE.PLACEHOLDER_DEFAULT,
     WIDE: '/api/placeholder/1200/400',
-    SQUARE: '/api/placeholder/400/400',
+    SQUARE: `/api/placeholder/${DESIGN_TOKENS.SIZES.IMAGE.PLACEHOLDER_SQUARE.width}/${DESIGN_TOKENS.SIZES.IMAGE.PLACEHOLDER_SQUARE.height}`,
     PORTRAIT: '/api/placeholder/300/400',
   },
 
