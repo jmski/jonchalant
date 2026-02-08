@@ -12,7 +12,7 @@ export default function About() {
   return (
     <div className="bg-primary text-primary">
       <PageTransition animation="blur">
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20" id="main-content">
         {/* TECHNICAL HERO SECTION */}
         <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Technical background grid */}

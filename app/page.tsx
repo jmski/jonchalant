@@ -351,7 +351,7 @@ export default function Home() {
             href="/collaborations"
             className="inline-block px-8 py-4 border-2 font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-lg border-accent text-accent"
           >
-            Start a Project →
+            Start a Project <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>

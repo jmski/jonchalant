@@ -139,7 +139,7 @@ export default async function Showcase() {
   return (
     <div className="min-h-screen page-wrapper bg-primary">
       <PageTransition animation="slide-right">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="main-content">
         {/* TECHNICAL HERO SECTION */}
         <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Technical background grid */}

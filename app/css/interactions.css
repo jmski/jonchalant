@@ -21,7 +21,7 @@
 
 .card.hoverable:hover {
   transform: translateY(-6px);
-  box-shadow: 
+  box-shadow:
     0 25px 50px rgba(0, 0, 0, 0.2),
     0 0 30px rgba(var(--accent-vibrant-rgb, 37, 99, 235), 0.15);
 }
@@ -102,7 +102,7 @@ select:focus:not(.no-ring) {
 }
 
 .gallery-item:hover::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.1);
@@ -132,7 +132,7 @@ select:focus:not(.no-ring) {
 }
 
 .btn-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
@@ -151,12 +151,13 @@ select:focus:not(.no-ring) {
 
 /* Loading State */
 .loading,
-[data-loading='true'] {
+[data-loading="true"] {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -166,14 +167,17 @@ select:focus:not(.no-ring) {
 
 /* Smooth Color Transitions */
 .transition-colors {
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 /* Enhanced Touch Targets (Minimum 48px) */
 button,
-a[role='button'],
-input[type='checkbox'],
-input[type='radio'],
+a[role="button"],
+input[type="checkbox"],
+input[type="radio"],
 select {
   min-height: 44px;
   min-width: 44px;
@@ -221,4 +225,29 @@ select {
     outline-width: 3px;
     outline-offset: 3px;
   }
+}
+
+/* Screen Reader Only (sr-only) - WCAG 2.1 Bypass Blocks */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }
