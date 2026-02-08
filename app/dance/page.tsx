@@ -230,18 +230,18 @@ export default async function Dance() {
               </g>
 
               {/* Center movement indicator */}
-              <circle cx="200" cy="200" r="50" fill="none" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.7" strokeDasharray="5,3" />
+              <circle cx="200" cy="200" r="50" fill="none" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.7" strokeDasharray="5,3" />
               
               {/* Movement vectors */}
               <line x1="200" y1="120" x2="200" y2="60" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6" />
               <line x1="200" y1="280" x2="200" y2="340" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6" />
-              <line x1="120" y1="200" x2="60" y2="200" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" />
-              <line x1="280" y1="200" x2="340" y2="200" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" />
+              <line x1="120" y1="200" x2="60" y2="200" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.6" />
+              <line x1="280" y1="200" x2="340" y2="200" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.6" />
               
               {/* Category indicators */}
               <circle cx="140" cy="140" r="8" fill="var(--accent-vibrant)" opacity="0.8" />
-              <circle cx="260" cy="140" r="8" fill="var(--accent-neon)" opacity="0.8" />
-              <circle cx="200" cy="260" r="8" fill="var(--accent-magenta)" opacity="0.8" />
+              <circle cx="260" cy="140" r="8" fill="var(--accent-secondary)" opacity="0.8" />
+              <circle cx="200" cy="260" r="8" fill="var(--accent-tertiary)" opacity="0.8" />
               
               {/* Labels */}
               <text x="140" y="120" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">CHORE</text>
@@ -258,7 +258,7 @@ export default async function Dance() {
             pattern1="diagonal"
             pattern2="dots"
             color1="vibrant"
-            color2="neon"
+            color2="secondary"
             opacity1={0.035}
             opacity2={0.025}
             rotation={-30}
@@ -270,7 +270,7 @@ export default async function Dance() {
         </section>
 
         {/* Decorative Divider */}
-        <DecorativeDivider color="magenta" variant="line-dots" dotCount={5} className="bg-primary" />
+        <DecorativeDivider color="tertiary" variant="line-dots" dotCount={5} className="bg-primary" />
 
         {/* CTA Section */}
         <CTASection

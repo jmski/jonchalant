@@ -113,7 +113,7 @@ const SERVICE_CATEGORIES = [
       'Behind-the-scenes footage',
       'Platform optimization'
     ],
-    color: 'neon'
+    color: 'secondary'
   },
   {
     name: 'Brand Partnerships',
@@ -142,8 +142,8 @@ const SERVICE_CATEGORIES = [
 const getColorVar = (color: string) => {
   const colorMap: Record<string, string> = {
     vibrant: 'var(--accent-vibrant)',
-    neon: 'var(--accent-neon)',
-    magenta: 'var(--accent-magenta)',
+    secondary: 'var(--accent-secondary)',
+    tertiary: 'var(--accent-tertiary)',
     primary: 'var(--text-primary)'
   };
   return colorMap[color] || 'var(--text-primary)';
@@ -181,16 +181,16 @@ export default async function Collaborations() {
 
           {/* LEFT - BOLD TEXT */}
           <div className="relative z-10 space-y-8">
-            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-magenta bg-magenta-faint">
-              <span className="w-2 h-2 bg-magenta animate-pulse rounded-full" />
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-magenta">🤝 LET'S CREATE</span>
+            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-tertiary bg-tertiary-faint">
+              <span className="w-2 h-2 bg-tertiary animate-pulse rounded-full" />
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-tertiary">🤝 LET'S CREATE</span>
             </div>
 
             <div>
               <Heading level={1} className="mb-4">WORK<br />
-                <span className="text-magenta">TOGETHER</span>
+                <span className="text-tertiary">TOGETHER</span>
               </Heading>
-              <div className="h-1 w-40 bg-magenta" />
+              <div className="h-1 w-40 bg-tertiary" />
             </div>
 
             <p className="text-lg font-black text-secondary leading-tight">
@@ -201,7 +201,7 @@ export default async function Collaborations() {
             </p>
 
             <div className="pt-4">
-              <a href="#collaboration-form" className="inline-flex items-center gap-2 px-8 py-4 font-black uppercase tracking-widest text-sm border-3 border-magenta text-magenta hover:bg-magenta hover:text-primary transition-all duration-300">
+              <a href="#collaboration-form" className="inline-flex items-center gap-2 px-8 py-4 font-black uppercase tracking-widest text-sm border-3 border-tertiary text-tertiary hover:bg-tertiary hover:text-primary transition-all duration-300">
                 ⬇ SEND INQUIRY
               </a>
             </div>
@@ -211,10 +211,10 @@ export default async function Collaborations() {
           <div className="relative hidden lg:flex items-center justify-center">
             <svg className="w-full max-w-sm" viewBox={`0 0 ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION} ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION}`} xmlns="http://www.w3.org/2000/svg">
               {/* Outer frame */}
-              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
+              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
               
               {/* Corner marks */}
-              <g stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
+              <g stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
                 <line x1="30" y1="30" x2="70" y2="30" />
                 <line x1="30" y1="30" x2="30" y2="70" />
                 <line x1="370" y1="30" x2="330" y2="30" />
@@ -226,7 +226,7 @@ export default async function Collaborations() {
               </g>
 
               {/* Connection nodes */}
-              <g fill="var(--accent-magenta)" opacity="0.8">
+              <g fill="var(--accent-tertiary)" opacity="0.8">
                 <circle cx="100" cy="150" r="6" />
                 <circle cx="300" cy="150" r="6" />
                 <circle cx="200" cy="300" r="6" />
@@ -234,11 +234,11 @@ export default async function Collaborations() {
 
               {/* Connection lines */}
               <line x1="100" y1="150" x2="200" y2="300" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.5" />
-              <line x1="300" y1="150" x2="200" y2="300" stroke="var(--accent-neon)" strokeWidth="1.5" opacity="0.5" />
-              <line x1="100" y1="150" x2="300" y2="150" stroke="var(--accent-magenta)" strokeWidth="1.5" opacity="0.4" strokeDasharray="3,3" />
+              <line x1="300" y1="150" x2="200" y2="300" stroke="var(--accent-secondary)" strokeWidth="1.5" opacity="0.5" />
+              <line x1="100" y1="150" x2="300" y2="150" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.4" strokeDasharray="3,3" />
               
               {/* Center circle */}
-              <circle cx="200" cy="200" r="35" fill="none" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
+              <circle cx="200" cy="200" r="35" fill="none" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
               
               {/* Labels */}
               <text x="100" y="175" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">YOU</text>
@@ -255,7 +255,7 @@ export default async function Collaborations() {
             pattern1="checkerboard"
             pattern2="dots"
             color1="vibrant"
-            color2="neon"
+            color2="secondary"
             opacity1={0.02}
             opacity2={0.015}
             rotation={15}
@@ -311,7 +311,7 @@ export default async function Collaborations() {
 
 
         {/* Decorative Divider */}
-        <DecorativeDivider color="neon" variant="line-dots" dotCount={7} className="bg-primary mb-24" />
+        <DecorativeDivider color="secondary" variant="line-dots" dotCount={7} className="bg-primary mb-24" />
 
         {/* PAST COLLABORATIONS */}
         <section className="mb-24 relative">
@@ -319,7 +319,7 @@ export default async function Collaborations() {
           <LayeredPatternOverlay
             pattern1="grid"
             pattern2="diagonal"
-            color1="magenta"
+            color1="tertiary"
             color2="vibrant"
             opacity1={0.025}
             opacity2={0.02}
@@ -328,8 +328,8 @@ export default async function Collaborations() {
           />
           <div className="relative z-10">
             <ScrollFade>
-              <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
-                <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-magenta)' }}>▶ Recent Projects</Heading>
+              <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-tertiary)' }}>
+                <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-tertiary)' }}>▶ Recent Projects</Heading>
                 <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                   A selection of successful brand partnerships and creative collaborations.
                 </p>
@@ -339,12 +339,12 @@ export default async function Collaborations() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.slice(0, 6).map((collab: any, idx: number) => (
                 <ScrollFade key={collab._id} delay={idx * 100}>
-                  <div className="group relative border-2 border-tertiary p-6 hover:border-magenta transition-all duration-300">
-                    <CornerBrackets position="all" size="md" color="magenta" /> 
+                  <div className="group relative border-2 border-tertiary p-6 hover:border-tertiary transition-all duration-300">
+                    <CornerBrackets position="all" size="md" color="tertiary" /> 
                     <h3 className="text-xl font-black uppercase tracking-widest text-primary mb-2">
                       {collab.title}
                     </h3>
-                    <p className="text-xs font-black uppercase tracking-widest text-magenta mb-4">
+                    <p className="text-xs font-black uppercase tracking-widest text-tertiary mb-4">
                       {collab.category}
                     </p>
                     <p className="text-sm leading-relaxed text-tertiary font-body mb-4">
@@ -358,7 +358,7 @@ export default async function Collaborations() {
                     {/* Hover underline */}
                     <div 
                       className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
-                      style={{ backgroundColor: 'var(--accent-magenta)' }}
+                      style={{ backgroundColor: 'var(--accent-tertiary)' }}
                     />
                   </div>
                 </ScrollFade>
@@ -376,8 +376,8 @@ export default async function Collaborations() {
           <LayeredPatternOverlay
             pattern1="dots"
             pattern2="diagonal"
-            color1="neon"
-            color2="magenta"
+            color1="secondary"
+            color2="tertiary"
             opacity1={0.03}
             opacity2={0.02}
             rotation={30}

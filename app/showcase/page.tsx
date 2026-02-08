@@ -177,10 +177,10 @@ export default async function Showcase() {
           <div className="relative hidden lg:flex items-center justify-center">
             <svg className="w-full max-w-sm" viewBox={`0 0 ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION} ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION}`} xmlns="http://www.w3.org/2000/svg">
               {/* Outer frame */}
-              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
+              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-secondary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
               
               {/* Corner marks */}
-              <g stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
+              <g stroke="var(--accent-secondary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
                 <line x1="30" y1="30" x2="70" y2="30" />
                 <line x1="30" y1="30" x2="30" y2="70" />
                 <line x1="370" y1="30" x2="330" y2="30" />
@@ -192,12 +192,12 @@ export default async function Showcase() {
               </g>
 
               {/* Diagonal divisions */}
-              <line x1="30" y1="30" x2="370" y2="370" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
-              <line x1="370" y1="30" x2="30" y2="370" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
+              <line x1="30" y1="30" x2="370" y2="370" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
+              <line x1="370" y1="30" x2="30" y2="370" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
               
               {/* Category zones */}
-              <circle cx="120" cy="120" r="50" fill="none" stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
-              <circle cx="280" cy="280" r="50" fill="none" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
+              <circle cx="120" cy="120" r="50" fill="none" stroke="var(--accent-secondary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
+              <circle cx="280" cy="280" r="50" fill="none" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
               <circle cx="200" cy="200" r="40" fill="none" stroke="var(--accent-vibrant)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.5" strokeDasharray="5,3" />
               
               {/* Labels */}
@@ -213,8 +213,8 @@ export default async function Showcase() {
           <LayeredPatternOverlay
             pattern1="grid"
             pattern2="diagonal"
-            color1="neon"
-            color2="magenta"
+            color1="secondary"
+            color2="tertiary"
             opacity1={0.035}
             opacity2={0.025}
             rotation={-20}
@@ -222,8 +222,8 @@ export default async function Showcase() {
           />
           <div className="relative z-10">
           <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-neon)' }}>
-              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-neon)' }}>▶ GUNPLA BUILD GALLERY</Heading>
+            <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-secondary)' }}>
+              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-secondary)' }}>▶ GUNPLA BUILD GALLERY</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Custom Gundam model engineering featuring Real Grade, Master Grade, and Perfect Grade builds with professional photography, LED customization, and hand-painted details.
               </p>
@@ -239,7 +239,7 @@ export default async function Showcase() {
             }))}
             categories={['Gunpla']}
             columns={3}
-            accentColor="neon"
+            accentColor="secondary"
             enableFiltering={false}
             enableLightbox={true}
             enableLazyLoad={true}
@@ -256,8 +256,8 @@ export default async function Showcase() {
           <LayeredPatternOverlay
             pattern1="dots"
             pattern2="checkerboard"
-            color1="magenta"
-            color2="neon"
+            color1="tertiary"
+            color2="secondary"
             opacity1={0.03}
             opacity2={0.02}
             rotation={45}
@@ -265,8 +265,8 @@ export default async function Showcase() {
           />
           <div className="relative z-10">
           <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
-              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-magenta)' }}>▶ POKÉMON CARD COLLECTION</Heading>
+            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-tertiary)' }}>
+              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-tertiary)' }}>▶ POKÉMON CARD COLLECTION</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Premium trading card collection spanning vintage base sets, holographic rares, and modern chase cards. Japanese imports, graded specimens, and official promotional releases.
               </p>
@@ -282,7 +282,7 @@ export default async function Showcase() {
             }))}
             categories={['Pokémon']}
             columns={3}
-            accentColor="magenta"
+            accentColor="tertiary"
             enableFiltering={false}
             enableLightbox={true}
             enableLazyLoad={true}
@@ -291,7 +291,7 @@ export default async function Showcase() {
         </section>
 
         {/* Decorative Divider */}
-        <DecorativeDivider color="neon" variant="line-dots" dotCount={5} className="bg-primary" />
+        <DecorativeDivider color="secondary" variant="line-dots" dotCount={5} className="bg-primary" />
 
         {/* CTA Section */}
         <CTASection

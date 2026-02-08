@@ -4,13 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useState, useEffect } from 'react';
 
-type Theme = 'default' | 'dark' | 'earthy';
-
-const THEMES: Array<{ id: Theme; label: string; color: string }> = [
-  { id: 'default', label: 'Paper', color: '#ffffff' },
-  { id: 'dark', label: 'Blueprint', color: '#0a0a0a' },
-  { id: 'earthy', label: 'Manual', color: '#e2ded0' },
-];
+type Theme = 'default' | 'dark';
 
 const SITE_SECTIONS = [
   {
@@ -42,27 +36,28 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
-function ThemeButton({
-  theme,
-  color,
-  isActive,
-  onClick,
+function ThemeToggle({
+  isLight,
+  onChange,
 }: {
-  theme: Theme;
-  color: string;
-  isActive: boolean;
-  onClick: () => void;
+  isLight: boolean;
+  onChange: (isLight: boolean) => void;
 }) {
   return (
     <button
-      onClick={onClick}
-      className={`theme-square ${isActive ? 'active' : ''}`}
-      style={{
-        backgroundColor: color,
-        borderColor: isActive ? 'var(--accent-vibrant)' : 'var(--border-color)',
-      }}
-      aria-label={`Switch to ${THEMES.find((t) => t.id === theme)?.label} theme`}
-    />
+      onClick={() => onChange(!isLight)}
+      className="theme-toggle"
+      aria-label={`Switch to ${isLight ? 'dark' : 'light'} theme`}
+      role="switch"
+      aria-checked={isLight}
+    >
+      {/* Toggle switch track and knob */}
+      <span className="toggle-track" />
+      <span className="toggle-knob" />
+      {/* Light and dark icons */}
+      <span className="toggle-icon toggle-icon-light">☀️</span>
+      <span className="toggle-icon toggle-icon-dark">🌙</span>
+    </button>
   );
 }
 
@@ -79,7 +74,8 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     setMounted(true);
   }, []);
 
-  const changeTheme = useCallback((newTheme: Theme) => {
+  const changeTheme = useCallback((isLight: boolean) => {
+    const newTheme: Theme = isLight ? 'default' : 'dark';
     setTheme(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('jonchalon-theme', newTheme);
@@ -97,17 +93,10 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
       <div className="sidebar-header">
         {/* Theme Selector */}
         <div className="sidebar-theme-selector">
-          <div className="theme-buttons">
-            {THEMES.map((t) => (
-              <ThemeButton
-                key={t.id}
-                theme={t.id}
-                color={t.color}
-                isActive={theme === t.id}
-                onClick={() => changeTheme(t.id)}
-              />
-            ))}
-          </div>
+          <ThemeToggle
+            isLight={theme === 'default'}
+            onChange={changeTheme}
+          />
         </div>
         <h1>JONCHALON</h1>
       </div>

@@ -23,29 +23,24 @@
   --transition-slow: 400ms ease-in-out;
 }
 
-/* ========== LIGHT THEME (DEFAULT) ========== */
+/* ========== LIGHT THEME (EDITORIAL / CLEAN PROFESSIONAL) ========== */
 :root {
   /* Base Colors */
-  --bg-primary: #fcfcfa;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f5f5f3;
-  --text-primary: #111111;
-  --text-secondary: #333333;
-  --text-tertiary: #666666;
-  --border-color: #e5e5e5;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f8f8;
+  --bg-tertiary: #f0f0f0;
+  --text-primary: #000000;
+  --text-secondary: #222222;
+  --text-tertiary: #555555;
+  --border-color: #e0e0e0;
   --border-accent: #d0d0d0;
 
-  /* Accent Colors */
-  --accent-vibrant: #ff5f1f;
-  --accent-vibrant-hover: #e55419;
-  --accent-primary: #111111;
-  --accent-secondary: #4a4a4a;
-
-  /* Editorial & Maximalist Accent Colors */
-  --accent-neon: #00ffff;
-  --accent-magenta: #ff00ff;
-  --accent-dark: #0a0a0a;
-  --accent-neon-light: #64ffff;
+  /* Accent Colors - Maximalist: Blue + Cyan + Magenta */
+  --accent-vibrant: #0052cc;
+  --accent-vibrant-hover: #003fa3;
+  --accent-secondary: #00bcd4;
+  --accent-secondary-light: #00dde9;
+  --accent-tertiary: #d946ef;
 
   /* Status Colors */
   --color-success: #16a34a;
@@ -81,14 +76,12 @@ html[data-theme="dark"] {
   --text-tertiary: #a0a0a0;
   --border-color: #222222;
   --border-accent: #333333;
-  --accent-vibrant: #ff7043;
-  --accent-vibrant-hover: #ff9575;
-  --accent-primary: #f2f2f2;
-  --accent-secondary: #b0b0b0;
-  --accent-neon: #00ffff;
-  --accent-magenta: #ff00ff;
-  --accent-dark: #0a0a0a;
-  --accent-neon-light: #64ffff;
+  /* Accent Colors - Maximalist: Orange + Purple + Lime */
+  --accent-vibrant: #ff6b35;
+  --accent-vibrant-hover: #ff8a5a;
+  --accent-secondary: #a855f7;
+  --accent-secondary-light: #c084fc;
+  --accent-tertiary: #76ff03;
   --reg-mark: #444444;
   --color-success: #22c55e;
   --color-success-light: #f0fdf4;
@@ -100,34 +93,4 @@ html[data-theme="dark"] {
   --overlay-dark-medium: rgba(0, 0, 0, 0.5);
   --text-muted: #666666;
   color-scheme: dark;
-}
-
-/* ========== EARTHY THEME ========== */
-html[data-theme="earthy"] {
-  --bg-primary: #e2ded0;
-  --bg-secondary: #f0ede8;
-  --bg-tertiary: #e8e5dc;
-  --text-primary: #3c3633;
-  --text-secondary: #5a5550;
-  --text-tertiary: #8b8680;
-  --border-color: #b5a991;
-  --border-accent: #ccbbaa;
-  --accent-vibrant: #c85a3c;
-  --accent-vibrant-hover: #d97a47;
-  --accent-primary: #3c3633;
-  --accent-secondary: #8b8680;
-  --accent-neon: #00ffcc;
-  --accent-magenta: #cc00cc;
-  --accent-dark: #2a2520;
-  --accent-neon-light: #66ffdd;
-  --reg-mark: #998866;
-  --color-success: #2d8a5c;
-  --color-success-light: #e8f5f0;
-  --color-success-dark: #1a522e;
-  --color-error: #b84434;
-  --color-error-light: #f9e7e5;
-  --color-error-dark: #8a3b2f;
-  --overlay-dark: rgba(0, 0, 0, 0.35);
-  --overlay-dark-medium: rgba(0, 0, 0, 0.25);
-  --text-muted: #a09a90;
 }

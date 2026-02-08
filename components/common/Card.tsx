@@ -10,7 +10,7 @@ import { DESIGN_TOKENS } from '@/lib/design-tokens';
 
 type CardVariant = 'default' | 'enhanced' | 'cta' | 'content' | 'accent' | 'outlined';
 type CardSize = 'sm' | 'md' | 'lg';
-type BorderColor = 'primary' | 'vibrant' | 'neon' | 'magenta' | 'none';
+type BorderColor = 'primary' | 'vibrant' | 'secondary' | 'tertiary' | 'none';
 
 interface CardProps {
   children: ReactNode;
@@ -44,8 +44,8 @@ function getBorderColor(color: BorderColor): string {
   const colorMap = {
     primary: 'var(--text-primary)',
     vibrant: 'var(--accent-vibrant)',
-    neon: 'var(--accent-neon)',
-    magenta: 'var(--accent-magenta)',
+    secondary: 'var(--accent-secondary)',
+    tertiary: 'var(--accent-tertiary)',
   };
   return colorMap[color] || 'var(--text-primary)';
 }

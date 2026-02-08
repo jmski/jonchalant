@@ -40,32 +40,34 @@
 }
 
 /* ACCENT COLOR UTILITIES */
-.text-neon {
-  color: var(--accent-neon);
+.text-secondary {
+  color: var(--accent-secondary);
 }
-.text-magenta {
-  color: var(--accent-magenta);
+.text-tertiary {
+  color: var(--accent-tertiary);
 }
 .text-vibrant {
   color: var(--accent-vibrant);
 }
-.bg-neon-faint {
-  background-color: rgba(0, 255, 255, 0.05);
+.bg-secondary-faint {
+  background-color: var(--accent-secondary);
+  opacity: 0.05;
 }
-.bg-magenta-faint {
-  background-color: rgba(255, 0, 255, 0.05);
+.bg-tertiary-faint {
+  background-color: var(--accent-tertiary);
+  opacity: 0.05;
 }
 .bg-vibrant-faint {
   background-color: rgba(255, 95, 31, 0.08);
 }
-.border-neon {
-  border-color: var(--accent-neon);
+.border-secondary {
+  border-color: var(--accent-secondary);
 }
 .border-vibrant {
   border-color: var(--accent-vibrant);
 }
-.border-magenta {
-  border-color: var(--accent-magenta);
+.border-tertiary {
+  border-color: var(--accent-tertiary);
 }
 
 /* SPACING UTILITIES */

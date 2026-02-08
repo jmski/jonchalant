@@ -15,14 +15,14 @@ const MEDIA_KIT_DATA = {
   subheadline: 'Audience statistics, engagement metrics, and collaboration potential',
       keyMetrics: [
     { label: 'Total Followers', value: '150K+', change: '+15% YoY', color: 'vibrant' },
-    { label: 'Avg Monthly Views', value: '2.5M', change: '+22% YoY', color: 'neon' },
-    { label: 'Engagement Rate', value: '4.8%', change: '+0.5% YoY', color: 'magenta' },
+    { label: 'Avg Monthly Views', value: '2.5M', change: '+22% YoY', color: 'secondary' },
+    { label: 'Engagement Rate', value: '4.8%', change: '+0.5% YoY', color: 'tertiary' },
     { label: 'Active Subscribers', value: '85K', change: '+18% YoY', color: 'vibrant' }
   ],
   platforms: [
-    { name: 'TikTok', handle: '@jonhandle', followers: '120K', avgViews: '2.1M', category: 'Dance Content', color: 'neon' },
+    { name: 'TikTok', handle: '@jonhandle', followers: '120K', avgViews: '2.1M', category: 'Dance Content', color: 'secondary' },
     { name: 'Instagram', handle: '@jonhandle', followers: '45K', avgViews: '8K', category: 'Photography & Reels', color: 'vibrant' },
-    { name: 'YouTube', handle: '@jonhandle', followers: '32K', avgViews: '125K', category: 'Long-form & Tutorials', color: 'magenta' }
+    { name: 'YouTube', handle: '@jonhandle', followers: '32K', avgViews: '125K', category: 'Long-form & Tutorials', color: 'tertiary' }
   ],
   contentCategories: [
     { name: 'Dance Choreography', percentage: 45, description: 'Original choreography and dance covers' },
@@ -55,8 +55,8 @@ const MEDIA_KIT_DATA = {
 const getColorVars = (color: string) => {
   const colors: Record<string, { bg: string; border: string; text: string }> = {
     vibrant: { bg: 'var(--bg-vibrant-faint)', border: 'var(--accent-vibrant)', text: 'var(--accent-vibrant)' },
-    neon: { bg: 'var(--bg-neon-faint)', border: 'var(--accent-neon)', text: 'var(--accent-neon)' },
-    magenta: { bg: 'var(--bg-magenta-faint)', border: 'var(--accent-magenta)', text: 'var(--accent-magenta)' }
+    secondary: { bg: 'var(--bg-secondary-faint)', border: 'var(--accent-secondary)', text: 'var(--accent-secondary)' },
+    tertiary: { bg: 'var(--bg-tertiary-faint)', border: 'var(--accent-tertiary)', text: 'var(--accent-tertiary)' }
   };
   return colors[color] || colors.vibrant;
 };
@@ -82,8 +82,8 @@ export default function MediaKit() {
               Comprehensive audience data, platform breakdown, and collaboration potential metrics
             </p>
             <div className="flex gap-4">
-              <div className="w-24 h-1 bg-neon" />
-              <div className="w-16 h-1 bg-magenta" />
+              <div className="w-24 h-1 bg-secondary" />
+              <div className="w-16 h-1 bg-tertiary" />
             </div>
           </div>
 
@@ -91,29 +91,29 @@ export default function MediaKit() {
           <div className="relative z-10 flex justify-end">
             <svg width="300" height="300" viewBox="0 0 300 300" className="opacity-80">
               {/* Outer ring */}
-              <circle cx="150" cy="150" r="140" fill="none" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6"/>
-              <circle cx="150" cy="150" r="120" fill="none" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.3"/>
+              <circle cx="150" cy="150" r="140" fill="none" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.6"/>
+              <circle cx="150" cy="150" r="120" fill="none" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.3"/>
               
               {/* Inner circle */}
-              <circle cx="150" cy="150" r="80" fill="none" stroke="var(--accent-neon)" strokeWidth="2"/>
-              <circle cx="150" cy="150" r="3" fill="var(--accent-neon)"/>
+              <circle cx="150" cy="150" r="80" fill="none" stroke="var(--accent-secondary)" strokeWidth="2"/>
+              <circle cx="150" cy="150" r="3" fill="var(--accent-secondary)"/>
               
               {/* Quadrants with lines */}
-              <line x1="150" y1="70" x2="150" y2="40" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
-              <line x1="230" y1="150" x2="260" y2="150" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
-              <line x1="150" y1="230" x2="150" y2="260" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
-              <line x1="70" y1="150" x2="40" y2="150" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.5"/>
+              <line x1="150" y1="70" x2="150" y2="40" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.5"/>
+              <line x1="230" y1="150" x2="260" y2="150" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.5"/>
+              <line x1="150" y1="230" x2="150" y2="260" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.5"/>
+              <line x1="70" y1="150" x2="40" y2="150" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.5"/>
               
               {/* Diagonal accents */}
-              <line x1="100" y1="100" x2="80" y2="80" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
-              <line x1="200" y1="100" x2="220" y2="80" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
+              <line x1="100" y1="100" x2="80" y2="80" stroke="var(--accent-tertiary)" strokeWidth="1" opacity="0.4"/>
+              <line x1="200" y1="100" x2="220" y2="80" stroke="var(--accent-tertiary)" strokeWidth="1" opacity="0.4"/>
               <line x1="100" y1="200" x2="80" y2="220" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.4"/>
               <line x1="200" y1="200" x2="220" y2="220" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.4"/>
               
               {/* Center data points */}
               <circle cx="120" cy="150" r="8" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.7"/>
-              <circle cx="180" cy="150" r="8" fill="none" stroke="var(--accent-magenta)" strokeWidth="1.5" opacity="0.7"/>
-              <circle cx="150" cy="120" r="8" fill="none" stroke="var(--accent-neon)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="180" cy="150" r="8" fill="none" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="150" cy="120" r="8" fill="none" stroke="var(--accent-secondary)" strokeWidth="1.5" opacity="0.7"/>
               <circle cx="150" cy="180" r="8" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.7"/>
             </svg>
           </div>
@@ -156,7 +156,7 @@ export default function MediaKit() {
         {/* PLATFORM BREAKDOWN */}
         <section className="py-20 border-t border-primary">
           <div className="mb-16">
-            <span className="retro-label text-magenta text-xs">→ PLATFORM PRESENCE</span>
+            <span className="retro-label text-secondary text-xs">→ PLATFORM PRESENCE</span>
             <Heading level={2} className="mt-4">Social Reach</Heading>
           </div>
 
@@ -231,8 +231,11 @@ export default function MediaKit() {
                 {/* Progress bar */}
                 <div className="h-4 border-2 border-primary relative overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-vibrant to-neon transition-all duration-700"
-                    style={{ width: `${category.percentage}%` }}
+                    className="h-full transition-all duration-700"
+                    style={{ 
+                      width: `${category.percentage}%`,
+                      background: `linear-gradient(to right, var(--accent-vibrant), var(--accent-secondary))`
+                    }}
                   />
                 </div>
                 
@@ -247,24 +250,24 @@ export default function MediaKit() {
         {/* AUDIENCE DEMOGRAPHICS */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-magenta text-xs">→ AUDIENCE INSIGHTS</span>
+            <span className="retro-label text-tertiary text-xs">→ AUDIENCE INSIGHTS</span>
             <Heading level={2} className="mt-4">Demographics</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Age Distribution */}
-            <div className="border-bold border-neon bg-neon-faint p-8">
+            <div className="border-bold border-secondary bg-secondary-faint p-8">
               <Heading level={3} className="mb-8">Age Distribution</Heading>
               <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.age.map((age, idx) => (
                   <div key={idx} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-bold text-secondary">{age.range}</span>
-                      <span className="text-neon font-black text-lg">{age.percentage}%</span>
+                      <span className="text-secondary font-black text-lg">{age.percentage}%</span>
                     </div>
-                    <div className="h-3 border border-neon bg-primary relative overflow-hidden">
+                    <div className="h-3 border border-secondary bg-primary relative overflow-hidden">
                       <div
-                        className="h-full bg-neon transition-all duration-500"
+                        className="h-full bg-secondary transition-all duration-500"
                         style={{ width: `${age.percentage}%` }}
                       />
                     </div>
@@ -295,13 +298,13 @@ export default function MediaKit() {
             </div>
 
             {/* Top Locations */}
-            <div className="border-bold border-magenta bg-magenta-faint p-8">
+            <div className="border-bold border-tertiary bg-tertiary-faint p-8">
               <Heading level={3} className="mb-8">Top Locations</Heading>
               <div className="space-y-4">
                 {MEDIA_KIT_DATA.audience.locations.map((location, idx) => (
-                  <div key={idx} className="flex justify-between items-center pb-3 border-b border-magenta">
+                  <div key={idx} className="flex justify-between items-center pb-3 border-b border-tertiary">
                     <span className="text-sm font-bold text-secondary">{location.country}</span>
-                    <span className="text-magenta font-black">{location.percentage}%</span>
+                    <span className="text-tertiary font-black">{location.percentage}%</span>
                   </div>
                 ))}
               </div>
@@ -322,7 +325,7 @@ export default function MediaKit() {
               { title: 'Campaign Package', price: 'Premium', features: ['Multi-platform', 'Creative direction', 'Analytics dashboard'] },
               { title: 'Exclusive Partnership', price: 'Enterprise', features: ['Long-term strategy', 'Dedicated support', 'Custom metrics'] },
             ].map((pkg, idx) => {
-              const colors = getColorVars(['vibrant', 'neon', 'magenta'][idx]);
+              const colors = getColorVars(['vibrant', 'secondary', 'tertiary'][idx]);
               return (
                 <div
                   key={idx}

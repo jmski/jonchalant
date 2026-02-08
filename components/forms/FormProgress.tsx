@@ -45,7 +45,7 @@ export default function FormProgress({
             className="absolute h-full bg-gradient-to-r transition-all duration-500 ease-out"
             style={{
               width: `${progressPercentage}%`,
-              background: 'linear-gradient(90deg, var(--accent-vibrant), var(--accent-neon))',
+              background: 'linear-gradient(90deg, var(--accent-vibrant), var(--accent-secondary))',
             }}
           />
         </div>

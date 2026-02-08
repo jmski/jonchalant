@@ -18,7 +18,7 @@ interface EnhancedGalleryProps {
   images: GalleryItem[];
   categories?: string[];
   columns?: 1 | 2 | 3 | 4;
-  accentColor?: 'vibrant' | 'neon' | 'magenta';
+  accentColor?: 'vibrant' | 'secondary' | 'tertiary';
   enableFiltering?: boolean;
   enableLightbox?: boolean;
   enableLazyLoad?: boolean;
@@ -81,17 +81,17 @@ export default function EnhancedGallery({
       bg: 'bg-vibrant-faint',
       hover: 'hover:shadow-vibrant',
     },
-    neon: {
-      text: 'text-neon',
-      border: 'border-neon',
-      bg: 'bg-neon-faint',
-      hover: 'hover:shadow-neon',
+    secondary: {
+      text: 'text-secondary',
+      border: 'border-secondary',
+      bg: 'bg-secondary-faint',
+      hover: 'hover:shadow-secondary',
     },
-    magenta: {
-      text: 'text-magenta',
-      border: 'border-magenta',
-      bg: 'bg-magenta-faint',
-      hover: 'hover:shadow-magenta',
+    tertiary: {
+      text: 'text-tertiary',
+      border: 'border-tertiary',
+      bg: 'bg-tertiary-faint',
+      hover: 'hover:shadow-tertiary',
     },
   };
 

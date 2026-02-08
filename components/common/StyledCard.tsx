@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 
 interface StyledCardProps {
   children: ReactNode;
-  variant?: 'default' | 'vibrant' | 'neon' | 'magenta';
+  variant?: 'default' | 'vibrant' | 'secondary' | 'tertiary';
   size?: 'sm' | 'md' | 'lg';
   hoverable?: boolean;
   accent?: boolean;
@@ -63,8 +63,8 @@ export default function StyledCard({
   const variantStyles: Record<string, string> = {
     default: 'border-primary bg-secondary',
     vibrant: 'border-vibrant bg-vibrant/5',
-    neon: 'border-neon bg-neon/5',
-    magenta: 'border-magenta bg-magenta/5',
+    secondary: 'border-secondary bg-secondary/5',
+    tertiary: 'border-tertiary bg-tertiary/5',
   };
 
   // Size styles

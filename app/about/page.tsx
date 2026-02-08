@@ -48,14 +48,14 @@ export default function About() {
               <line x1="90" y1="150" x2="40" y2="150" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
               
               {/* Diagonal lines */}
-              <line x1="105" y1="105" x2="75" y2="75" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.4"/>
-              <line x1="195" y1="105" x2="225" y2="75" stroke="var(--accent-neon)" strokeWidth="1" opacity="0.4"/>
-              <line x1="195" y1="195" x2="225" y2="225" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
-              <line x1="105" y1="195" x2="75" y2="225" stroke="var(--accent-magenta)" strokeWidth="1" opacity="0.4"/>
+              <line x1="105" y1="105" x2="75" y2="75" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.4"/>
+              <line x1="195" y1="105" x2="225" y2="75" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.4"/>
+              <line x1="195" y1="195" x2="225" y2="225" stroke="var(--accent-tertiary)" strokeWidth="1" opacity="0.4"/>
+              <line x1="105" y1="195" x2="75" y2="225" stroke="var(--accent-tertiary)" strokeWidth="1" opacity="0.4"/>
               
               {/* Center nodes */}
-              <circle cx="120" cy="180" r="7" fill="none" stroke="var(--accent-neon)" strokeWidth="1.5" opacity="0.7"/>
-              <circle cx="180" cy="120" r="7" fill="none" stroke="var(--accent-magenta)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="120" cy="180" r="7" fill="none" stroke="var(--accent-secondary)" strokeWidth="1.5" opacity="0.7"/>
+              <circle cx="180" cy="120" r="7" fill="none" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.7"/>
             </svg>
           </div>
         </div>
@@ -117,13 +117,13 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Choreography', desc: 'Custom movement design for music videos, commercials, performances, and digital content', color: 'vibrant' },
-              { title: 'Brand Partnerships', desc: 'Strategic collaborations with authentic movement-based content and product integration', color: 'neon' },
-              { title: 'Content Direction', desc: 'Creative vision for dance content across TikTok, Instagram, YouTube, and emerging platforms', color: 'magenta' },
+              { title: 'Brand Partnerships', desc: 'Strategic collaborations with authentic movement-based content and product integration', color: 'secondary' },
+              { title: 'Content Direction', desc: 'Creative vision for dance content across TikTok, Instagram, YouTube, and emerging platforms', color: 'tertiary' },
               { title: 'Movement Consulting', desc: 'Art direction and technical movement expertise for film, TV, theater, and installations', color: 'vibrant' },
-              { title: 'Workshops & Teaching', desc: 'Choreography workshops, intensives, technique classes, and creative coaching for creators', color: 'neon' },
-              { title: 'Creative Collaboration', desc: 'Cross-disciplinary projects blending dance with music, visual art, and multimedia', color: 'magenta' },
+              { title: 'Workshops & Teaching', desc: 'Choreography workshops, intensives, technique classes, and creative coaching for creators', color: 'secondary' },
+              { title: 'Creative Collaboration', desc: 'Cross-disciplinary projects blending dance with music, visual art, and multimedia', color: 'tertiary' },
             ].map((service, idx) => {
-              const colorMap: Record<string, string> = { vibrant: 'var(--accent-vibrant)', neon: 'var(--accent-neon)', magenta: 'var(--accent-magenta)' };
+              const colorMap: Record<string, string> = { vibrant: 'var(--accent-vibrant)', secondary: 'var(--accent-secondary)', tertiary: 'var(--accent-tertiary)' };
               return (
                 <div
                   key={idx}
@@ -146,7 +146,7 @@ export default function About() {
         {/* PHILOSOPHY SECTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-magenta text-xs">→ APPROACH</span>
+            <span className="retro-label text-tertiary text-xs">→ APPROACH</span>
             <Heading level={2} className="mt-4 mb-12">Philosophy</Heading>
           </div>
 
@@ -188,7 +188,7 @@ export default function About() {
               </p>
             </div>
 
-            <div className="border-bold border-magenta bg-magenta-faint p-8">
+            <div className="border-bold border-tertiary bg-tertiary-faint p-8">
               <div className="text-5xl mb-4">🎴</div>
               <Heading level={3} className="mb-4">Pokémon Collecting</Heading>
               <p className="text-secondary text-sm leading-relaxed">

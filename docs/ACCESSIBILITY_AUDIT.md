@@ -1,4 +1,5 @@
 # Accessibility Audit Report
+
 **Date:** February 7, 2026 | **Portfolio:** Jon | **Standard:** WCAG 2.1 Level AA
 
 ---
@@ -9,22 +10,23 @@ Your portfolio has a **solid accessibility foundation** with recent improvements
 
 **Overall Compliance Score:** 65/100 (Good)
 
-| Category | Score | Status |
-|----------|-------|--------|
-| **Semantic HTML** | 80/100 | ✅ Good |
+| Category                | Score  | Status                     |
+| ----------------------- | ------ | -------------------------- |
+| **Semantic HTML**       | 80/100 | ✅ Good                    |
 | **Keyboard Navigation** | 90/100 | ✅ Excellent (Post-update) |
-| **ARIA Labels & Roles** | 70/100 | ⚠️ Needs Work |
-| **Color & Contrast** | 60/100 | ❌ Critical |
-| **Form Accessibility** | 75/100 | ⚠️ Needs Work |
-| **Image Alt Text** | 50/100 | ❌ Critical |
-| **Focus Management** | 95/100 | ✅ Excellent (Post-update) |
-| **Motion & Animation** | 85/100 | ✅ Good |
+| **ARIA Labels & Roles** | 70/100 | ⚠️ Needs Work              |
+| **Color & Contrast**    | 60/100 | ❌ Critical                |
+| **Form Accessibility**  | 75/100 | ⚠️ Needs Work              |
+| **Image Alt Text**      | 50/100 | ❌ Critical                |
+| **Focus Management**    | 95/100 | ✅ Excellent (Post-update) |
+| **Motion & Animation**  | 85/100 | ✅ Good                    |
 
 ---
 
 ## ✅ What's Working Well
 
 ### 1. **Keyboard Navigation** (Excellent)
+
 - ✅ Gallery lightbox supports arrow keys + Escape
 - ✅ Multi-step form is fully keyboard accessible
 - ✅ Focus trap implemented in modals
@@ -32,18 +34,21 @@ Your portfolio has a **solid accessibility foundation** with recent improvements
 - ✅ Buttons have focus indicators
 
 ### 2. **Semantic HTML** (Good)
+
 - ✅ `<main>`, `<section>`, `<nav>` tags properly used
 - ✅ Heading hierarchy mostly correct (h1 → h2 → h3)
 - ✅ Form uses `<label>` with `htmlFor` attributes
 - ✅ Proper button semantics (not div-as-button)
 
 ### 3. **Focus Management** (Excellent)
+
 - ✅ Modal focus trap prevents escaping (new)
 - ✅ Focus restoration when modal closes (new)
 - ✅ Visual focus indicators on buttons and links
 - ✅ Reduced motion support implemented (new)
 
 ### 4. **Motion & Animation** (Good)
+
 - ✅ Respects `prefers-reduced-motion` media query
 - ✅ Animations use transform/opacity (optimal performance)
 - ✅ CSS transitions are smooth but not excessive
@@ -58,6 +63,7 @@ Your portfolio has a **solid accessibility foundation** with recent improvements
 **Problem:** Decorative SVGs and background images lack proper ARIA labels
 
 **Location:**
+
 - `components/hero/HomeHero.tsx` - SVG animation needs `aria-label`
 - `components/effects/DecorativePatterns.tsx` - SVG decorations lack `aria-hidden` or labels
 - Gallery images may not have alt text in all contexts
@@ -65,6 +71,7 @@ Your portfolio has a **solid accessibility foundation** with recent improvements
 **Impact:** Screen readers announce meaningless content
 
 **Fix:**
+
 ```tsx
 // For decorative SVGs (hide from screen readers)
 <svg aria-hidden="true" className="...">...</svg>
@@ -85,11 +92,13 @@ Your portfolio has a **solid accessibility foundation** with recent improvements
 **Problem:** Some color combinations fail WCAG AA (4.5:1 contrast ratio)
 
 **Likely Issues:**
+
 - Light text on light backgrounds in some themes
 - Accent colors (vibrant/neon/magenta) may not meet 4.5:1 ratio
 - Dark theme variant needs verification
 
 **Fix:**
+
 - Test with: [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - Update `app/css/variables.css` to ensure all color combinations meet 4.5:1
 - Test in all 3 themes (default, dark, earthy)
@@ -103,6 +112,7 @@ Your portfolio has a **solid accessibility foundation** with recent improvements
 **Problem:** Icon-only buttons (close, previous, next) may not be clear to screen readers
 
 **Location:**
+
 - GalleryLightbox close button ✅ Has `aria-label` (good!)
 - Gallery navigation arrows ✅ Have `aria-label` (good!)
 - Other icon buttons may be missing
@@ -122,9 +132,11 @@ Your portfolio has a **solid accessibility foundation** with recent improvements
 **Location:** `components/forms/FormFeedback.tsx`
 
 **Current State:**
+
 ```tsx
 aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 ```
+
 ✅ **Already correct!** Good implementation.
 
 ---
@@ -136,8 +148,9 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 **Impact:** Keyboard users must Tab through all navigation before reaching main content
 
 **Fix:** Add at top of layout:
+
 ```tsx
-<a 
+<a
   href="#main-content"
   className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:p-3 focus:bg-accent-vibrant focus:text-white"
 >
@@ -156,6 +169,7 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 **Problem:** Some links use generic text like "Click here" or just "→"
 
 **Current Example:**
+
 ```tsx
 <a href="/collaborations">
   <span>→</span> {/* Not clear what this links to */}
@@ -163,8 +177,12 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 ```
 
 **Fix:** Always use descriptive link text
+
 ```tsx
-<a href="/collaborations" aria-label="Explore brand collaboration opportunities">
+<a
+  href="/collaborations"
+  aria-label="Explore brand collaboration opportunities"
+>
   Collaborations <span aria-hidden="true">→</span>
 </a>
 ```
@@ -178,15 +196,15 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 **Problem:** Some pages missing clear `<main>` landmark
 
 **Check:**
+
 - ✅ Showcase page has `<main>`
 - ✅ Home page has `<section>` elements
 - ⚠️ Some pages might not have explicit `<main>` role
 
 **Fix:** Ensure every page has:
+
 ```tsx
-<main className="...">
-  {/* Page content */}
-</main>
+<main className="...">{/* Page content */}</main>
 ```
 
 **Time:** 10 minutes
@@ -197,43 +215,44 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 
 ### Navigation Components
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Sidebar | ✅ Good | Has aria-labels on theme buttons |
-| SidebarToggle | ✅ Good | Proper aria-label on button |
-| BreadcrumbNav | ✅ Good | `role="navigation"` + aria-label |
-| Theme Switcher | ✅ Good | Each theme button labeled |
+| Component      | Status  | Notes                            |
+| -------------- | ------- | -------------------------------- |
+| Sidebar        | ✅ Good | Has aria-labels on theme buttons |
+| SidebarToggle  | ✅ Good | Proper aria-label on button      |
+| BreadcrumbNav  | ✅ Good | `role="navigation"` + aria-label |
+| Theme Switcher | ✅ Good | Each theme button labeled        |
 
 ### Form Components
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| InputField | ✅ Good | Labels properly linked with htmlFor |
-| SelectField | ✅ Good | aria-describedby for errors |
-| FormProgress | ✅ Good | Step labels provide context |
-| CollaborationForm | ✅ Good | Multi-step validation feedback |
+| Component         | Status  | Notes                               |
+| ----------------- | ------- | ----------------------------------- |
+| InputField        | ✅ Good | Labels properly linked with htmlFor |
+| SelectField       | ✅ Good | aria-describedby for errors         |
+| FormProgress      | ✅ Good | Step labels provide context         |
+| CollaborationForm | ✅ Good | Multi-step validation feedback      |
 
 ### Gallery Components
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| GalleryLightbox | ✅ Excellent | Modal ARIA, focus trap, swipe help text ✨ |
-| EnhancedGallery | ✅ Good | Category filtering accessible |
-| Image Thumbnails | ✅ Good | aria-current on active item |
+| Component        | Status       | Notes                                      |
+| ---------------- | ------------ | ------------------------------------------ |
+| GalleryLightbox  | ✅ Excellent | Modal ARIA, focus trap, swipe help text ✨ |
+| EnhancedGallery  | ✅ Good      | Category filtering accessible              |
+| Image Thumbnails | ✅ Good      | aria-current on active item                |
 
 ### Other Components
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Heading | ✅ Good | Semantic h1-h6 elements |
+| Component      | Status       | Notes                         |
+| -------------- | ------------ | ----------------------------- |
+| Heading        | ✅ Good      | Semantic h1-h6 elements       |
 | SkeletonLoader | ✅ Excellent | role="status" + aria-label ✨ |
-| Buttons/Links | ✅ Good | Focus indicators present |
+| Buttons/Links  | ✅ Good      | Focus indicators present      |
 
 ---
 
 ## 🎯 Implementation Roadmap
 
 ### Priority 1: Critical (This Week)
+
 - [ ] Fix image alt text on all gallery items (15 min)
 - [ ] Verify color contrast in all 3 themes (30 min)
 - [ ] Test WCAG contrast with WebAIM (20 min)
@@ -241,6 +260,7 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 **Effort:** 1 hour | **Impact:** High
 
 ### Priority 2: Important (Next Week)
+
 - [ ] Add skip-to-main-content link (10 min)
 - [ ] Improve link text clarity (15 min)
 - [ ] Audit all SVG icons for aria-label (10 min)
@@ -249,6 +269,7 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 **Effort:** 45 minutes | **Impact:** Medium-High
 
 ### Priority 3: Nice-to-Have (Later)
+
 - [ ] Full accessibility audit with screen reader (1 hour)
 - [ ] User testing with keyboard-only users (2 hours)
 - [ ] Implement custom focus indicators for better visibility (30 min)
@@ -260,6 +281,7 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 ## 🧪 Testing Checklist
 
 ### Keyboard Testing
+
 - [ ] Navigate entire site with Tab key only
 - [ ] Verify Tab order makes sense (left-to-right, top-to-bottom)
 - [ ] Check Escape key closes modals
@@ -267,6 +289,7 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 - [ ] Test form submission with keyboard only
 
 ### Screen Reader Testing
+
 - [ ] Test with NVDA (Windows) or VoiceOver (Mac)
 - [ ] Verify all buttons have labels
 - [ ] Check form field labels are announced
@@ -274,12 +297,14 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 - [ ] Test modal dialog announcement
 
 ### Color & Contrast Testing
+
 - [ ] Use WebAIM Contrast Checker for all text colors
 - [ ] Test in all 3 theme variants
 - [ ] Verify focus indicators have sufficient contrast
 - [ ] Check links are visually distinct from text
 
 ### Mobile Accessibility
+
 - [ ] Test touch target sizes (minimum 48px)
 - [ ] Verify swipe gestures work on gallery
 - [ ] Check zoom/magnification works properly
@@ -290,17 +315,20 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 ## 📚 Resources & Tools
 
 **Testing Tools:**
+
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) - Test color contrast
 - [WAVE (WebAIM)](https://wave.webaim.org/) - Browser extension for accessibility issues
 - [axe DevTools](https://www.deque.com/axe/devtools/) - Automated accessibility testing
 - [NVDA Screen Reader](https://www.nvaccess.org/) - Free screen reader for Windows
 
 **WCAG 2.1 Guidelines:**
+
 - [Level A](https://www.w3.org/WAI/WCAG21/quickref/#level-a) - Essential
 - [Level AA](https://www.w3.org/WAI/WCAG21/quickref/#level-aa) - Standard (Target)
 - [Level AAA](https://www.w3.org/WAI/WCAG21/quickref/#level-aaa) - Enhanced
 
 **Documentation:**
+
 - [MDN Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
 - [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [WCAG 2.1 Success Criteria](https://www.w3.org/WAI/WCAG21/Understanding/)
@@ -320,6 +348,7 @@ aria-describedby={error ? `${name}-error` : hint ? `${name}-hint` : undefined}
 ## Post-Update Notes (Feb 7, 2026)
 
 **Excellent improvements just added:**
+
 - ✅ Focus trap hook (`useFocusTrap`) - forces focus within modals
 - ✅ Touch gesture hook (`useSwipeGesture`) - swipe navigation
 - ✅ Skeleton loaders (`SkeletonLoader`) - loading states with ARIA

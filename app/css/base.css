@@ -53,15 +53,15 @@ body::before {
 
 /* Text selection styles */
 ::selection {
-  background-color: rgba(255, 255, 0, 0.3);
+  background-color: transparent;
   color: inherit;
-  text-decoration: underline wavy #dc2626;
+  text-decoration: underline wavy var(--accent-vibrant);
 }
 
 ::-moz-selection {
-  background-color: rgba(255, 255, 0, 0.3);
+  background-color: transparent;
   color: inherit;
-  text-decoration: underline wavy #dc2626;
+  text-decoration: underline wavy var(--accent-vibrant);
 }
 
 /* Remove default margins from elements */
@@ -100,7 +100,7 @@ a:hover {
 code {
   font-family: var(--font-tech);
   background-color: var(--bg-tertiary);
-  color: var(--accent-neon);
+  color: var(--accent-secondary);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   font-size: 0.875em;

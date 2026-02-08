@@ -74,8 +74,8 @@ export default function Home() {
         }}
       >
         {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 border-3 border-neon opacity-5" />
-        <div className="absolute bottom-0 left-1/4 w-48 h-48 border-2 border-magenta opacity-3" style={{ borderStyle: 'dashed' }} />
+        <div className="absolute top-0 right-0 w-64 h-64 border-3 border-secondary opacity-5" />
+        <div className="absolute bottom-0 left-1/4 w-48 h-48 border-2 border-tertiary opacity-3" style={{ borderStyle: 'dashed' }} />
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollStagger variant="slideInUp" staggerDelay={100}>
@@ -112,7 +112,7 @@ export default function Home() {
       </section>
 
       {/* Decorative Divider */}
-      <DecorativeDivider color="neon" variant="line-dots" dotCount={7} className="bg-primary" />
+      <DecorativeDivider color="secondary" variant="line-dots" dotCount={7} className="bg-primary" />
 
       {/* FEATURED AREAS - EDITORIAL ASYMMETRIC LAYOUT */}
       <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
@@ -120,8 +120,8 @@ export default function Home() {
         <LayeredPatternOverlay
           pattern1="grid"
           pattern2="diagonal"
-          color1="neon"
-          color2="magenta"
+          color1="secondary"
+          color2="tertiary"
           opacity1={0.04}
           opacity2={0.02}
           rotation={-15}
@@ -129,13 +129,12 @@ export default function Home() {
 
         {/* Maximalist background decoration */}
         <div className="absolute inset-0 opacity-3 pointer-events-none">
-          <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-neon rounded-full" />
-          <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-magenta" style={{ borderStyle: 'dashed' }} />
-        </div>
+          <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-secondary rounded-full" />
+          <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-tertiary" style={{ borderStyle: 'dashed' }} />
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-16 pr-0 md:pr-12">
-            <span className="retro-label text-neon text-xs">→ PRIMARY FOCUS AREAS</span>
+            <span className="retro-label text-secondary text-xs">→ PRIMARY FOCUS AREAS</span>
             <Heading level={2} className="mt-4 mb-6">What I<br />Specialize In</Heading>
             <div className="w-32 h-3 bg-vibrant" />
           </div>
@@ -171,20 +170,20 @@ export default function Home() {
             {/* Showcase - NEON */}
             <ScrollFade variant="slideInUp" delay={80}>
             <div 
-              className="border-bold border-neon bg-neon-faint group cursor-pointer transition-all duration-300 hover:shadow-neon"
+              className="border-bold border-secondary bg-secondary-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
-              <div className="aspect-square bg-linear-to-br from-neon/20 to-transparent flex items-center justify-center relative overflow-hidden">
+              <div className="aspect-square bg-linear-to-br from-secondary/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20" style={{
-                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--accent-neon) 10px, var(--accent-neon) 11px)'
+                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--accent-secondary) 10px, var(--accent-secondary) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-6xl mb-3 text-neon font-black">✦</div>
-                  <div className="text-xs font-black uppercase tracking-widest text-neon retro-label">
+                  <div className="text-6xl mb-3 text-secondary font-black">✦</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-secondary retro-label">
                     Gunpla & Pokémon
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t-3 border-neon">
+              <div className="p-6 border-t-3 border-secondary">
                 <Heading level={3} className="mb-3">Creative Showcase</Heading>
                 <p className="text-sm text-secondary font-body">
                   Model builds, collections & digital media
@@ -196,20 +195,20 @@ export default function Home() {
             {/* Collaborations - MAGENTA */}
             <ScrollFade variant="slideInUp" delay={160}>
             <div 
-              className="border-bold border-magenta bg-magenta-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
+              className="border-bold border-tertiary bg-tertiary-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
-              <div className="aspect-square bg-linear-to-br from-magenta/20 to-transparent flex items-center justify-center relative overflow-hidden">
+              <div className="aspect-square bg-linear-to-br from-tertiary/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20" style={{
-                  backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 10px, var(--accent-magenta) 10px, var(--accent-magenta) 11px)'
+                  backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 10px, var(--accent-tertiary) 10px, var(--accent-tertiary) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-6xl mb-3 text-magenta font-black">◆</div>
-                  <div className="text-xs font-black uppercase tracking-widest text-magenta retro-label">
+                  <div className="text-6xl mb-3 text-tertiary font-black">◆</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-tertiary retro-label">
                     Brand Ready
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t-3 border-magenta">
+              <div className="p-6 border-t-3 border-tertiary">
                 <Heading level={3} className="mb-3">Collaborations</Heading>
                 <p className="text-sm text-secondary font-body">
                   Partnerships, campaigns & brand opportunities
@@ -217,6 +216,7 @@ export default function Home() {
               </div>
             </div>
             </ScrollFade>
+          </div>
           </div>
 
           {/* What's Possible - Services Grid */}
@@ -356,7 +356,7 @@ export default function Home() {
         </div>
       </section>
       {/* Decorative Divider */}
-      <DecorativeDivider color="magenta" variant="line-dots" dotCount={5} className="bg-primary" />
+      <DecorativeDivider color="tertiary" variant="line-dots" dotCount={5} className="bg-primary" />
       {/* CTA Section */}
       <CTASection 
         title="Ready to Collaborate?"

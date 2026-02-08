@@ -5,7 +5,7 @@ import React from 'react';
 interface DecorativeCornerBracketProps {
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   size?: 'sm' | 'md' | 'lg';
-  color?: 'vibrant' | 'neon' | 'magenta' | 'primary';
+  color?: 'vibrant' | 'secondary' | 'tertiary' | 'primary';
 }
 
 /**
