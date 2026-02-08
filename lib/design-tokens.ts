@@ -442,14 +442,14 @@ export function getResponsiveSpacing(mobile: string, desktop: string) {
  * @returns Shadow CSS string
  *
  * Usage:
- *   createShadow('md', 'rgba(255, 95, 31, 0.2)');
+ *   createShadow('MD', 'rgba(255, 95, 31, 0.2)');
  *   // returns '0 4px 6px rgba(255, 95, 31, 0.2)'
  */
 export function createShadow(
-  intensity: keyof typeof DESIGN_TOKENS.SHADOW = 'md',
+  intensity: keyof typeof DESIGN_TOKENS.SHADOW = 'MD',
   color?: string
 ): string {
-  const baseShadow = DESIGN_TOKENS.SHADOW[intensity] || DESIGN_TOKENS.SHADOW.md;
+  const baseShadow = DESIGN_TOKENS.SHADOW[intensity] || DESIGN_TOKENS.SHADOW.MD;
   if (!color) return baseShadow;
   
   // Extract shadow dimensions and replace alpha channel
@@ -463,11 +463,11 @@ export function createShadow(
  * @returns Style object for hover state
  *
  * Usage:
- *   const hoverStyles = createInteractiveState(1.05, 'md');
+ *   const hoverStyles = createInteractiveState(1.05, 'MD');
  */
 export function createInteractiveState(
   scale: number = 1.05,
-  shadowIntensity: keyof typeof DESIGN_TOKENS.SHADOW = 'md'
+  shadowIntensity: keyof typeof DESIGN_TOKENS.SHADOW = 'MD'
 ) {
   return {
     transform: `scale(${scale})`,

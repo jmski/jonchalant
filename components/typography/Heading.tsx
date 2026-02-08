@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -8,6 +8,7 @@ interface HeadingProps {
   accent?: boolean;
   className?: string;
   as?: HeadingLevel;
+  style?: CSSProperties;
 }
 
 /**
@@ -46,6 +47,7 @@ export default function Heading({
   accent = false,
   className = '',
   as,
+  style,
 }: HeadingProps) {
   const sizeMap: Record<HeadingLevel, string> = {
     1: 'text-6xl sm:text-7xl lg:text-8xl',
@@ -70,7 +72,7 @@ export default function Heading({
   const HeadingElement = tagName as any;
 
   return (
-    <HeadingElement className={baseClasses}>
+    <HeadingElement className={baseClasses} style={style}>
       {children}
     </HeadingElement>
   );
