@@ -1,0 +1,205 @@
+/* ============================================================================
+   LAYOUT.CSS - Layout Systems and Structural Components
+   
+   Grid layouts, container systems, sidebar, article grids, and page structures.
+   ============================================================================ */
+
+/* ========== LAYOUT SYSTEMS ========== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.article-main {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.article-aside {
+  grid-column: 2;
+  padding: 1.5rem;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.multi-column {
+  column-count: 2;
+  column-gap: var(--column-gap);
+  column-rule: 1px solid var(--border-color);
+}
+
+/* ========== SIDEBAR LAYOUT ========== */
+.layout-with-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.sidebar {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 2rem;
+  background-color: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h1 {
+  font-size: 1rem;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.sidebar-theme-selector {
+  margin-bottom: 1rem;
+}
+
+.theme-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  width: auto;
+}
+
+.sidebar-sections {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-links a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all var(--transition-fast);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.sidebar-links a:hover {
+  color: var(--accent-vibrant);
+  border-left-color: var(--accent-vibrant);
+}
+
+.sidebar-links a.active {
+  color: var(--accent-vibrant);
+  border-left-color: var(--accent-vibrant);
+  background-color: var(--bg-tertiary);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+.main-content {
+  grid-column: 1;
+  padding: 3rem;
+  overflow-y: auto;
+}
+
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-toggle:hover {
+  border-color: var(--accent-vibrant);
+  color: var(--accent-vibrant);
+}
+
+.sidebar.mobile-open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  z-index: 40;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-overlay.mobile-open {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 30;
+}

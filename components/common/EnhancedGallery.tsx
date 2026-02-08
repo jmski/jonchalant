@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { ScrollFade, ScrollStagger } from '@/components/animations';
 import GalleryLightbox from './GalleryLightbox';
 import { DESIGN_TOKENS } from '@/lib/design-tokens';
+import OptimizedImage from '@/lib/optimizedImage';
 
 interface GalleryItem {
   src: string;
@@ -167,13 +168,15 @@ export default function EnhancedGallery({
                     )}
 
                     {/* Image */}
-                    <img
-                      src={enableLazyLoad ? image.thumbnail || image.src : image.src}
+                    <OptimizedImage
+                      src={image.thumbnail || image.src}
                       alt={image.alt}
-                      onLoad={() => handleImageLoad(image.src)}
-                      className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 ${
-                        isLoaded ? 'opacity-100' : 'opacity-0'
-                      }`}
+                      width={400}
+                      height={300}
+                      quality={80}
+                      objectFit="cover"
+                      onLoadingComplete={() => handleImageLoad(image.src)}
+                      className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110`}
                     />
 
                     {/* Overlay on Hover */}

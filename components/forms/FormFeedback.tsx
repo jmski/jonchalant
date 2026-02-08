@@ -29,28 +29,69 @@ export function FormLoadingState() {
 /**
  * Success state after form submission
  */
-export function FormSuccessState({ message }: { message: string }) {
+export function FormSuccessState({ 
+  message,
+  onDismiss,
+  onReturnHome 
+}: { 
+  message: string
+  onDismiss?: () => void
+  onReturnHome?: () => void
+}) {
   return (
     <div 
-      className="p-4 rounded border-l-4 animate-in fade-in slide-in-from-left duration-300"
+      className="p-6 rounded-lg border-2 border-primary bg-secondary animate-in fade-in slide-in-from-left duration-500"
       style={{
-        backgroundColor: 'var(--color-success-light)',
-        borderLeftColor: 'var(--color-success)',
-        color: 'var(--color-success-dark)',
+        backgroundColor: 'rgba(var(--accent-vibrant-rgb), 0.05)',
       }}
     >
-      <div className="flex items-start gap-3">
-        <svg 
-          className="w-5 h-5 mt-0.5 flex-shrink-0"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-        </svg>
-        <div>
-          <p className="font-semibold text-sm">Success!</p>
-          <p className="text-sm mt-1">{message}</p>
+      <div className="flex flex-col items-start gap-4">
+        <div className="flex items-start gap-3">
+          <div className="text-4xl">🎉</div>
+          <div className="flex-1">
+            <p className="font-black text-xl uppercase heading-display text-primary mb-2">
+              Inquiry Sent Successfully!
+            </p>
+            <p className="text-secondary mb-3">{message}</p>
+            
+            {/* Timeline & Confirmation Info */}
+            <div className="space-y-2 text-sm mb-4">
+              <div className="flex items-center gap-2">
+                <span className="text-vibrant">⏱️</span>
+                <span className="text-tertiary"><strong>Response Timeline:</strong> 24 hours</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-vibrant">📧</span>
+                <span className="text-tertiary"><strong>Confirmation:</strong> Check your email for next steps</span>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* Action Buttons */}
+        {(onDismiss || onReturnHome) && (
+          <div className="flex gap-3 w-full">
+            {onDismiss && (
+              <button
+                onClick={onDismiss}
+                className="px-4 py-2 border-2 border-primary text-primary font-bold uppercase 
+                         text-sm tracking-widest hover:bg-primary hover:text-white 
+                         transition-all duration-300"
+              >
+                Continue Browsing
+              </button>
+            )}
+            {onReturnHome && (
+              <button
+                onClick={onReturnHome}
+                className="px-4 py-2 bg-vibrant text-white font-bold uppercase 
+                         text-sm tracking-widest hover:shadow-lg transition-all duration-300"
+              >
+                Return Home
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -71,7 +112,7 @@ export function FormErrorState({ message }: { message: string }) {
     >
       <div className="flex items-start gap-3">
         <svg 
-          className="w-5 h-5 mt-0.5 flex-shrink-0"
+          className="w-5 h-5 mt-0.5 shrink-0"
           fill="currentColor"
           viewBox="0 0 20 20"
         >

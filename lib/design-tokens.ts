@@ -273,6 +273,55 @@ export const DESIGN_TOKENS = {
     PADDING_X_DESKTOP: '1.5rem', // px-6+ desktop
   },
 
+  /* ========== PADDING & MARGIN SCALES ========== */
+  PADDING: {
+    XS: '0.25rem',  // 4px
+    SM: '0.5rem',   // 8px
+    MD: '1rem',     // 16px
+    LG: '1.5rem',   // 24px
+    XL: '2rem',     // 32px
+    XXL: '3rem',    // 48px
+  },
+  
+  MARGIN: {
+    XS: '0.25rem',  // 4px
+    SM: '0.5rem',   // 8px
+    MD: '1rem',     // 16px
+    LG: '1.5rem',   // 24px
+    XL: '2rem',     // 32px
+    XXL: '3rem',    // 48px
+    AUTO: 'auto',   // auto
+  },
+
+  /* ========== OPACITY VALUES ========== */
+  OPACITY: {
+    FAINT: 0.05,      // 5% - very subtle
+    SUBTLE: 0.1,      // 10% - light
+    MEDIUM: 0.3,      // 30% - visible
+    STRONG: 0.5,      // 50% - prominent
+    FULL: 1,          // 100% - opaque
+    DISABLED: 0.5,    // 50% - disabled state
+    HOVER: 0.08,      // 8% - hover overlay
+    FOCUS: 0.1,       // 10% - focus indicator
+  },
+
+  /* ========== TEXT DECORATION & STYLING ========== */
+  TEXT: {
+    LETTER_SPACING: {
+      TIGHT: '-0.02em',
+      NORMAL: '0em',
+      WIDE: '0.05em',
+      WIDER: '0.1em',
+      WIDEST: '0.2em',
+    },
+    TEXT_DECORATION: {
+      NONE: 'none',
+      UNDERLINE: 'underline',
+      OVERLINE: 'overline',
+      LINE_THROUGH: 'line-through',
+    },
+  },
+
   /* ========== GALLERY & GRID ========== */
   GALLERY: {
     COLUMNS_MOBILE: 1,
@@ -370,4 +419,102 @@ export function getStaggerDelay(index: number, increment: number = DESIGN_TOKENS
 export function constrainPosition(position: number, dimension: number, viewport: number): number {
   const { BOUNDS_MIN } = DESIGN_TOKENS.POINTER;
   return Math.max(BOUNDS_MIN, Math.min(viewport - dimension - BOUNDS_MIN, position));
+}
+
+/**
+ * Helper to create responsive spacing value
+ * @param mobile - Mobile spacing (px or rem)
+ * @param desktop - Desktop spacing (px or rem)
+ * @returns Object with responsive values
+ *
+ * Usage:
+ *   const spacing = getResponsiveSpacing('1rem', '2rem');
+ *   // { mobile: '1rem', desktop: '2rem' }
+ */
+export function getResponsiveSpacing(mobile: string, desktop: string) {
+  return { mobile, desktop };
+}
+
+/**
+ * Helper to create shadow with color
+ * @param intensity - Shadow intensity ('sm' | 'md' | 'lg' | 'xl')
+ * @param color - Shadow color (in rgba format or color name)
+ * @returns Shadow CSS string
+ *
+ * Usage:
+ *   createShadow('MD', 'rgba(255, 95, 31, 0.2)');
+ *   // returns '0 4px 6px rgba(255, 95, 31, 0.2)'
+ */
+export function createShadow(
+  intensity: keyof typeof DESIGN_TOKENS.SHADOW = 'MD',
+  color?: string
+): string {
+  const baseShadow = DESIGN_TOKENS.SHADOW[intensity] || DESIGN_TOKENS.SHADOW.MD;
+  if (!color) return baseShadow;
+  
+  // Extract shadow dimensions and replace alpha channel
+  return baseShadow.replace(/rgba\([^)]+\)/, color);
+}
+
+/**
+ * Helper to create hover/focus styles object
+ * @param scale - Scale factor (1.05 = 5% scale)
+ * @param shadowIntensity - Shadow intensity
+ * @returns Style object for hover state
+ *
+ * Usage:
+ *   const hoverStyles = createInteractiveState(1.05, 'MD');
+ */
+export function createInteractiveState(
+  scale: number = 1.05,
+  shadowIntensity: keyof typeof DESIGN_TOKENS.SHADOW = 'MD'
+) {
+  return {
+    transform: `scale(${scale})`,
+    boxShadow: DESIGN_TOKENS.SHADOW[shadowIntensity],
+    transition: createTransition(DESIGN_TOKENS.TIMING.DURATION_BASE),
+  };
+}
+
+/**
+ * Helper to get z-index value as string
+ * @param layer - Layer name from Z_INDEX
+ * @returns Z-index string
+ *
+ * Usage:
+ *   zIndex={getZIndex('MODAL')} // returns '50'
+ */
+export function getZIndex(layer: keyof typeof DESIGN_TOKENS.Z_INDEX): string {
+  return String(DESIGN_TOKENS.Z_INDEX[layer]);
+}
+
+/**
+ * Helper to create media query for responsive design
+ * @param breakpoint - Breakpoint name from BREAKPOINT
+ * @returns Media query string
+ *
+ * Usage:
+ *   const query = getMediaQuery('TABLET');
+ *   // returns '(min-width: 768px)'
+ */
+export function getMediaQuery(breakpoint: keyof typeof DESIGN_TOKENS.BREAKPOINT): string {
+  const px = DESIGN_TOKENS.BREAKPOINT[breakpoint];
+  return `(min-width: ${px}px)`;
+}
+
+/**
+ * Helper to calculate container padding based on breakpoint
+ * @param breakpoint - Current breakpoint
+ * @returns Padding value
+ *
+ * Usage:
+ *   const padding = getContainerPadding('MOBILE');
+ */
+export function getContainerPadding(breakpoint: 'MOBILE' | 'TABLET' | 'DESKTOP'): string {
+  const paddingMap = {
+    MOBILE: DESIGN_TOKENS.SECTION.PADDING_X,
+    TABLET: DESIGN_TOKENS.SECTION.PADDING_X,
+    DESKTOP: DESIGN_TOKENS.SECTION.PADDING_X_DESKTOP,
+  };
+  return paddingMap[breakpoint];
 }

@@ -6,7 +6,9 @@ import {
   DecorativeDivider,
   PatternBackground,
   LayeredPatternOverlay,
+  DecorativeCornerBracket,
 } from '@/components/effects';
+import { Heading } from '@/components/typography';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
@@ -134,9 +136,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-16 pr-0 md:pr-12">
             <span className="retro-label text-neon text-xs">→ PRIMARY FOCUS AREAS</span>
-            <h2 className="text-6xl sm:text-7xl lg:text-8xl font-black heading-display text-primary mt-4 mb-6 leading-none">
-              What I<br />Specialize In
-            </h2>
+            <Heading level={2} className="mt-4 mb-6">What I<br />Specialize In</Heading>
             <div className="w-32 h-3 bg-vibrant" />
           </div>
 
@@ -160,7 +160,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6 border-t-3 border-vibrant">
-                <h3 className="font-black mb-3 text-xl text-primary heading-display">Dance Portfolio</h3>
+                <Heading level={3} className="mb-3">Dance Portfolio</Heading>
                 <p className="text-sm text-secondary font-body">
                   Choreography, freestyle, performances & tutorials
                 </p>
@@ -185,7 +185,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6 border-t-3 border-neon">
-                <h3 className="font-black mb-3 text-xl text-primary heading-display">Creative Showcase</h3>
+                <Heading level={3} className="mb-3">Creative Showcase</Heading>
                 <p className="text-sm text-secondary font-body">
                   Model builds, collections & digital media
                 </p>
@@ -210,7 +210,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6 border-t-3 border-magenta">
-                <h3 className="font-black mb-3 text-xl text-primary heading-display">Collaborations</h3>
+                <Heading level={3} className="mb-3">Collaborations</Heading>
                 <p className="text-sm text-secondary font-body">
                   Partnerships, campaigns & brand opportunities
                 </p>
@@ -223,7 +223,7 @@ export default function Home() {
           <div className="border-t-4 border-primary pt-16">
             <div className="mb-12">
               <h3 className="text-lg font-black uppercase tracking-widest text-tertiary retro-label mb-3">→ Services & Offerings</h3>
-              <p className="text-2xl font-black text-primary heading-display">What We Can Create</p>
+              <Heading level={3}>What We Can Create</Heading>
             </div>
             <ScrollStagger variant="scaleUp" staggerDelay={60}>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

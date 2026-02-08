@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { DESIGN_TOKENS } from '@/lib/design-tokens';
+import OptimizedImage from '@/lib/optimizedImage';
 
 interface GalleryImage {
   src: string;
@@ -104,12 +105,17 @@ export default function GalleryLightbox({
           )}
 
           {/* Image */}
-          <img
+          <OptimizedImage
             key={currentImage.src}
             src={currentImage.src}
             alt={currentImage.alt}
-            onLoad={handleImageLoad}
-            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+            width={1200}
+            height={800}
+            quality={95}
+            objectFit="contain"
+            priority={!isLoading}
+            onLoadingComplete={() => setIsLoading(false)}
+            className="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
           />
         </div>
 
@@ -155,9 +161,13 @@ export default function GalleryLightbox({
                       : 'opacity-60 hover:opacity-100'
                   }`}
                 >
-                  <img
+                  <OptimizedImage
                     src={img.src}
                     alt={img.alt}
+                    width={48}
+                    height={48}
+                    quality={80}
+                    objectFit="cover"
                     className="w-full h-full object-cover rounded"
                   />
                 </button>

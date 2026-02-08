@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
+import { Heading } from "@/components/typography";
 
 // Below-fold dynamic import
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
@@ -66,9 +67,7 @@ export default function Contact() {
           {/* Left: Title */}
           <div className="relative z-10">
             <div className="retro-label text-magenta uppercase text-xs tracking-widest mb-4">→ LET'S TALK</div>
-            <h1 className="heading-display text-6xl sm:text-7xl lg:text-8xl font-black text-primary mb-6 leading-none">
-              GET IN<br />TOUCH
-            </h1>
+            <Heading level={1} className="mb-6">GET IN<br />TOUCH</Heading>
             <p className="text-lg text-secondary max-w-lg mb-8">
               Have a collaboration idea? Let's discuss how we can work together on your next project.
             </p>
