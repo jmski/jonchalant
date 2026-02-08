@@ -39,7 +39,8 @@ const MOCK_GUNPLA = [
     description: 'Detailed Real Grade build with custom weathering and LED lighting. Professional display photography.',
     image: '/images/showcase/gunpla/rg-evangelion-unit-01.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'RG Evangelion Unit-01 Gundam model with custom weathering and LED lighting'
   },
   {
     _id: 'gunpla-2',
@@ -48,7 +49,8 @@ const MOCK_GUNPLA = [
     description: 'Master Grade with full transformation mechanics. Handpainted details and metallic accents.',
     image: '/images/showcase/gunpla/mg-unicorn-gundam.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Master Grade Unicorn Gundam with transformation mechanics and hand-painted metallic details'
   },
   {
     _id: 'gunpla-3',
@@ -57,7 +59,8 @@ const MOCK_GUNPLA = [
     description: 'High Grade with custom painting and weathering effects. Action pose showcase.',
     image: '/images/showcase/gunpla/hg-barbatos-lupus-rex.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'High Grade Barbatos Lupus Rex in dynamic action pose with custom painting and weathering'
   },
   {
     _id: 'gunpla-4',
@@ -66,7 +69,8 @@ const MOCK_GUNPLA = [
     description: 'Perfect Grade with advanced LED system and mechanical detail customization.',
     image: '/images/showcase/gunpla/pg-strike-freedom.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Perfect Grade Strike Freedom Gundam with advanced LED system and detailed mechanical components'
   }
 ];
 
@@ -78,7 +82,8 @@ const MOCK_POKEMON = [
     description: 'PSA 8 graded. Vivid Voltage era premium collection piece.',
     image: '/images/showcase/pokemon/charizard-vmax-gold.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Charizard VMAX Gold Secret rare Pokémon trading card, PSA 8 graded'
   },
   {
     _id: 'poke-2',
@@ -87,7 +92,8 @@ const MOCK_POKEMON = [
     description: 'Japanese promotional holographic. Vintage 1997 original.',
     image: '/images/showcase/pokemon/pikachu-illustrator.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Pikachu Illustrator promotional holographic Pokémon card from 1997, vintage original'
   },
   {
     _id: 'poke-3',
@@ -96,7 +102,8 @@ const MOCK_POKEMON = [
     description: 'Crystal Type holographic. Neo Genesis era rare collectible.',
     image: '/images/showcase/pokemon/mewtwo-ex-crystal.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Mewtwo EX Crystal holographic Pokémon card from Neo Genesis set'
   },
   {
     _id: 'poke-4',
@@ -105,7 +112,8 @@ const MOCK_POKEMON = [
     description: 'First Edition holographic. Shadowless condition. Mint center.',
     image: '/images/showcase/pokemon/blastoise-base-set.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Blastoise Base Set First Edition holographic Pokémon card in mint shadowless condition'
   }
 ];
 
@@ -224,7 +232,7 @@ export default async function Showcase() {
           <EnhancedGallery
             images={gunplaShowcase.map((item: any) => ({
               src: item.image,
-              alt: item.title,
+              alt: item.altText || item.title,
               caption: item.description,
               category: item.category,
               thumbnail: item.image,
@@ -267,7 +275,7 @@ export default async function Showcase() {
           <EnhancedGallery
             images={pokemonShowcase.map((item: any) => ({
               src: item.image,
-              alt: item.title,
+              alt: item.altText || item.title,
               caption: item.description,
               category: item.category,
               thumbnail: item.image,

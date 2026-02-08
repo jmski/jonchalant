@@ -56,6 +56,8 @@ export function CornerBrackets({
         viewBox={`0 0 100% 100%`}
         preserveAspectRatio="none"
         style={{ stroke: strokeColor, strokeWidth: thickness, fill: 'none' }}
+        aria-hidden="true"
+        role="presentation"
       >
         {/* Top-left bracket */}
         {corners && showTop && showLeft && (

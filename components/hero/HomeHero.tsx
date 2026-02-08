@@ -123,7 +123,7 @@ export default function HomeHero() {
         <div className="relative hidden lg:flex items-center justify-center">
           <div className="relative w-full max-w-lg aspect-square">
             {/* Outer technical frame */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
               {/* Outer border */}
               <rect x="20" y="20" width="360" height="360" fill="none" stroke="var(--border-color)" strokeWidth="2" />
               
