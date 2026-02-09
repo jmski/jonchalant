@@ -256,18 +256,18 @@ export default function MediaKit() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Age Distribution */}
-            <div className="border-bold border-secondary bg-secondary-faint p-8">
+            <div className="border-bold border-vibrant bg-vibrant-faint p-8">
               <Heading level={3} className="mb-8">Age Distribution</Heading>
               <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.age.map((age, idx) => (
                   <div key={idx} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-bold text-secondary">{age.range}</span>
-                      <span className="text-secondary font-black text-lg">{age.percentage}%</span>
+                      <span className="text-vibrant font-black text-lg">{age.percentage}%</span>
                     </div>
-                    <div className="h-3 border border-secondary bg-primary relative overflow-hidden">
+                    <div className="h-3 border border-vibrant bg-primary relative overflow-hidden">
                       <div
-                        className="h-full bg-secondary transition-all duration-500"
+                        className="h-full bg-vibrant transition-all duration-500"
                         style={{ width: `${age.percentage}%` }}
                       />
                     </div>
@@ -277,18 +277,18 @@ export default function MediaKit() {
             </div>
 
             {/* Gender Distribution */}
-            <div className="border-bold border-vibrant bg-vibrant-faint p-8">
+            <div className="border-bold border-secondary bg-secondary-faint p-8">
               <Heading level={3} className="mb-8">Gender</Heading>
               <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.gender.map((gender, idx) => (
                   <div key={idx} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-bold text-secondary">{gender.label}</span>
-                      <span className="text-vibrant font-black text-lg">{gender.percentage}%</span>
+                      <span className="text-secondary font-black text-lg">{gender.percentage}%</span>
                     </div>
-                    <div className="h-3 border border-vibrant bg-primary relative overflow-hidden">
+                    <div className="h-3 border border-secondary bg-primary relative overflow-hidden">
                       <div
-                        className="h-full bg-vibrant transition-all duration-500"
+                        className="h-full bg-secondary transition-all duration-500"
                         style={{ width: `${gender.percentage}%` }}
                       />
                     </div>
