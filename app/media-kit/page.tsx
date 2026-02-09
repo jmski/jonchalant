@@ -265,9 +265,9 @@ export default function MediaKit() {
                       <span className="text-sm font-bold text-primary">{age.range}</span>
                       <span className="text-vibrant font-black text-lg">{age.percentage}%</span>
                     </div>
-                    <div className="h-3 border border-vibrant bg-primary relative overflow-hidden">
+                    <div className="h-4 border-2 border-vibrant relative overflow-hidden rounded-sm" style={{ backgroundColor: 'rgba(0, 82, 204, 0.1)' }}>
                       <div
-                        className="h-full bg-vibrant transition-all duration-500"
+                        className="h-full bg-vibrant transition-all duration-700 ease-out"
                         style={{ width: `${age.percentage}%` }}
                       />
                     </div>
@@ -286,9 +286,9 @@ export default function MediaKit() {
                       <span className="text-sm font-bold text-primary">{gender.label}</span>
                       <span className="text-secondary font-black text-lg">{gender.percentage}%</span>
                     </div>
-                    <div className="h-3 border border-secondary bg-primary relative overflow-hidden">
+                    <div className="h-4 border-2 border-secondary relative overflow-hidden rounded-sm" style={{ backgroundColor: 'rgba(0, 188, 212, 0.1)' }}>
                       <div
-                        className="h-full bg-secondary transition-all duration-500"
+                        className="h-full bg-secondary transition-all duration-700 ease-out"
                         style={{ width: `${gender.percentage}%` }}
                       />
                     </div>
@@ -300,11 +300,19 @@ export default function MediaKit() {
             {/* Top Locations */}
             <div className="border-l-4 border-tertiary bg-primary p-8">
               <Heading level={3} className="mb-8">Top Locations</Heading>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.locations.map((location, idx) => (
-                  <div key={idx} className="flex justify-between items-center pb-3 border-b border-tertiary">
-                    <span className="text-sm font-bold text-primary">{location.country}</span>
-                    <span className="text-tertiary font-black">{location.percentage}%</span>
+                  <div key={idx} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-bold text-primary">{location.country}</span>
+                      <span className="text-tertiary font-black text-lg">{location.percentage}%</span>
+                    </div>
+                    <div className="h-4 border-2 border-tertiary relative overflow-hidden rounded-sm" style={{ backgroundColor: 'rgba(217, 70, 239, 0.1)' }}>
+                      <div
+                        className="h-full bg-tertiary transition-all duration-700 ease-out"
+                        style={{ width: `${location.percentage}%` }}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

@@ -49,6 +49,9 @@
 .bg-accent {
   background-color: var(--accent-vibrant);
 }
+.bg-vibrant {
+  background-color: var(--accent-vibrant);
+}
 
 /* ACCENT COLOR UTILITIES */
 .text-secondary {
@@ -59,6 +62,12 @@
 }
 .text-vibrant {
   color: var(--accent-vibrant);
+}
+.bg-secondary {
+  background-color: var(--accent-secondary);
+}
+.bg-tertiary {
+  background-color: var(--accent-tertiary);
 }
 .border-secondary {
   border-color: var(--accent-secondary);
