@@ -131,6 +131,7 @@ export default function Home() {
         <div className="absolute inset-0 opacity-3 pointer-events-none">
           <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-secondary rounded-full" />
           <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-tertiary" style={{ borderStyle: 'dashed' }} />
+        </div>
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-16 pr-0 md:pr-12">
@@ -216,7 +217,6 @@ export default function Home() {
               </div>
             </div>
             </ScrollFade>
-          </div>
           </div>
 
           {/* What's Possible - Services Grid */}

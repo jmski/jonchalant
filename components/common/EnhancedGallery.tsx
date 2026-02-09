@@ -176,7 +176,7 @@ export default function EnhancedGallery({
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
                     )}
 
-                    {/* Image with smooth fade-in and blur placeholder */}
+                    {/* Image with smooth fade-in */}
                     <OptimizedImage
                       src={image.thumbnail || image.src}
                       alt={image.alt}
@@ -184,7 +184,6 @@ export default function EnhancedGallery({
                       height={300}
                       quality={80}
                       objectFit="cover"
-                      placeholder="blur"
                       onLoadingComplete={() => handleImageLoad(image.src)}
                       className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-focus-within:scale-110 ${
                         isLoaded ? 'animate-fadeIn' : ''

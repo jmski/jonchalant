@@ -132,12 +132,14 @@
 .sidebar-links a:hover {
   color: var(--accent-vibrant);
   border-left-color: var(--accent-vibrant);
+  text-decoration: none;
 }
 
 .sidebar-links a.active {
   color: var(--accent-vibrant);
   border-left-color: var(--accent-vibrant);
   background-color: var(--bg-tertiary);
+  text-decoration: none;
 }
 
 .sidebar-footer {

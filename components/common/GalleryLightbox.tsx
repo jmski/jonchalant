@@ -161,7 +161,6 @@ export default function GalleryLightbox({
               quality={95}
               objectFit="contain"
               priority={!isLoading}
-              placeholder="blur"
               onLoadingComplete={() => setIsLoading(false)}
               className="max-w-full max-h-[80vh] rounded-lg shadow-2xl animate-fadeIn"
               role="img"
