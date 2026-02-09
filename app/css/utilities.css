@@ -49,17 +49,6 @@
 .text-vibrant {
   color: var(--accent-vibrant);
 }
-.bg-secondary-faint {
-  background-color: var(--accent-secondary);
-  opacity: 0.05;
-}
-.bg-tertiary-faint {
-  background-color: var(--accent-tertiary);
-  opacity: 0.05;
-}
-.bg-vibrant-faint {
-  background-color: rgba(255, 95, 31, 0.08);
-}
 .border-secondary {
   border-color: var(--accent-secondary);
 }

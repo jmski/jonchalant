@@ -134,7 +134,7 @@ export default function Home() {
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-16 pr-0 md:pr-12">
-            <span className="retro-label text-secondary text-xs">→ PRIMARY FOCUS AREAS</span>
+            <span className="retro-label text-tertiary text-xs">→ PRIMARY FOCUS AREAS</span>
             <Heading level={2} className="mt-4 mb-6">What I<br />Specialize In</Heading>
             <div className="w-32 h-3 bg-vibrant" />
           </div>
@@ -144,7 +144,7 @@ export default function Home() {
               {/* Dance Portfolio - BOLD */}
               <ScrollFade variant="slideInUp" delay={0}>
             <div 
-              className="border-bold border-vibrant bg-vibrant-faint group cursor-pointer transition-all duration-300 hover:shadow-vibrant"
+              className="border-bold border-vibrant bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-vibrant"
             >
               <div className="aspect-square bg-linear-to-br from-vibrant/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 {/* Diagonal lines pattern */}
@@ -170,7 +170,7 @@ export default function Home() {
             {/* Showcase - NEON */}
             <ScrollFade variant="slideInUp" delay={80}>
             <div 
-              className="border-bold border-secondary bg-secondary-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
+              className="border-bold border-secondary bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
               <div className="aspect-square bg-linear-to-br from-secondary/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20" style={{
@@ -195,7 +195,7 @@ export default function Home() {
             {/* Collaborations - MAGENTA */}
             <ScrollFade variant="slideInUp" delay={160}>
             <div 
-              className="border-bold border-tertiary bg-tertiary-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
+              className="border-bold border-tertiary bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
               <div className="aspect-square bg-linear-to-br from-tertiary/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20" style={{
@@ -239,7 +239,7 @@ export default function Home() {
                 ].map((service, idx) => (
                 <div
                   key={idx}
-                  className="border-2 border-primary p-4 text-center hover:border-vibrant hover:bg-vibrant-faint transition-all duration-300 group"
+                  className="border-2 border-primary p-4 text-center hover:border-vibrant hover:bg-tertiary transition-all duration-300 group"
                 >
                   <div className="text-2xl mb-2 group-hover:scale-125 transition-transform">
                     {service.icon}

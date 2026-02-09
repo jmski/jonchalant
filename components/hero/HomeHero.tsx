@@ -49,7 +49,7 @@ export default function HomeHero() {
         <div className="space-y-8">
           {/* Status badge - interactive */}
           <div 
-            className="inline-flex items-center gap-3 px-5 py-3 border-2 border-vibrant bg-vibrant-faint group hover:border-secondary hover:bg-secondary-faint transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-3 px-5 py-3 border-2 border-vibrant bg-tertiary group hover:border-secondary hover:bg-tertiary transition-all duration-300 cursor-pointer"
             onMouseEnter={() => setGlitchActive(true)}
             onMouseLeave={() => setGlitchActive(false)}
           >

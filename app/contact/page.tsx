@@ -178,7 +178,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-sm uppercase tracking-widest retro-label text-neon mb-4 font-black">
+                  <label className="block text-sm uppercase tracking-widest retro-label text-tertiary mb-4 font-black">
                     Email Address
                   </label>
                   <input

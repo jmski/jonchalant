@@ -78,19 +78,19 @@ export default function EnhancedGallery({
     vibrant: {
       text: 'text-vibrant',
       border: 'border-vibrant',
-      bg: 'bg-vibrant-faint',
+      bg: 'bg-tertiary',
       hover: 'hover:shadow-vibrant',
     },
     secondary: {
       text: 'text-secondary',
       border: 'border-secondary',
-      bg: 'bg-secondary-faint',
+      bg: 'bg-tertiary',
       hover: 'hover:shadow-secondary',
     },
     tertiary: {
       text: 'text-tertiary',
       border: 'border-tertiary',
-      bg: 'bg-tertiary-faint',
+      bg: 'bg-tertiary',
       hover: 'hover:shadow-tertiary',
     },
   };

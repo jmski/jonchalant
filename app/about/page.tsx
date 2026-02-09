@@ -109,7 +109,7 @@ export default function About() {
         {/* EXPERTISE SECTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-neon text-xs">→ SPECIALIZATIONS</span>
+            <span className="retro-label text-tertiary text-xs">→ SPECIALIZATIONS</span>
             <Heading level={2} className="mt-4">What I Do</Heading>
           </div>
 
@@ -175,12 +175,12 @@ export default function About() {
         {/* HOBBIES SECTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-neon text-xs">→ OUTSIDE THE STUDIO</span>
+            <span className="retro-label text-tertiary text-xs">→ OUTSIDE THE STUDIO</span>
             <Heading level={2} className="mt-4">Also Known For</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="border-bold border-neon bg-neon-faint p-8">
+            <div className="border-bold border-secondary bg-secondary-faint p-8">
               <div className="text-5xl mb-4">🤖</div>
               <Heading level={3} className="mb-4">Gunpla Building</Heading>
               <p className="text-secondary text-sm leading-relaxed">

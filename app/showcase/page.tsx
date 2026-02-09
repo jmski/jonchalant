@@ -153,14 +153,14 @@ export default async function Showcase() {
 
           {/* LEFT - BOLD TEXT */}
           <div className="relative z-10 space-y-8">
-            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-neon bg-neon-faint">
-              <span className="w-2 h-2 bg-neon animate-pulse rounded-full" />
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-neon">🎨 COLLECTION</span>
+            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-tertiary bg-tertiary">
+              <span className="w-2 h-2 bg-tertiary animate-pulse rounded-full" />
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-tertiary">🎨 COLLECTION</span>
             </div>
 
             <div>
               <Heading level={1} className="mb-4">PASSION<br />
-                <span className="text-neon">PROJECTS</span>
+                <span className="text-tertiary">PROJECTS</span>
               </Heading>
               <div className="h-1 w-40 bg-neon" />
             </div>

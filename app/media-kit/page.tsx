@@ -54,9 +54,9 @@ const MEDIA_KIT_DATA = {
 
 const getColorVars = (color: string) => {
   const colors: Record<string, { bg: string; border: string; text: string }> = {
-    vibrant: { bg: 'var(--bg-vibrant-faint)', border: 'var(--accent-vibrant)', text: 'var(--accent-vibrant)' },
-    secondary: { bg: 'var(--bg-secondary-faint)', border: 'var(--accent-secondary)', text: 'var(--accent-secondary)' },
-    tertiary: { bg: 'var(--bg-tertiary-faint)', border: 'var(--accent-tertiary)', text: 'var(--accent-tertiary)' }
+    vibrant: { bg: 'var(--bg-tertiary)', border: 'var(--accent-vibrant)', text: 'var(--accent-vibrant)' },
+    secondary: { bg: 'var(--bg-tertiary)', border: 'var(--accent-secondary)', text: 'var(--accent-secondary)' },
+    tertiary: { bg: 'var(--bg-tertiary)', border: 'var(--accent-tertiary)', text: 'var(--accent-tertiary)' }
   };
   return colors[color] || colors.vibrant;
 };
@@ -76,7 +76,7 @@ export default function MediaKit() {
 
           {/* Left: Title */}
           <div className="relative z-10">
-            <div className="retro-label text-neon uppercase text-xs tracking-widest mb-4">→ METRICS & INSIGHTS</div>
+            <div className="retro-label text-tertiary uppercase text-xs tracking-widest mb-4">→ METRICS & INSIGHTS</div>
             <Heading level={1} className="mb-6">MEDIA<br />KIT</Heading>
             <p className="text-lg text-secondary max-w-lg mb-8">
               Comprehensive audience data, platform breakdown, and collaboration potential metrics
@@ -315,7 +315,7 @@ export default function MediaKit() {
         {/* COLLABORATION PACKAGES */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-neon text-xs">→ OPPORTUNITIES</span>
+            <span className="retro-label text-tertiary text-xs">→ OPPORTUNITIES</span>
             <Heading level={2} className="mt-4">Collaborate</Heading>
           </div>
 
