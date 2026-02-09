@@ -18,7 +18,7 @@ import { DESIGN_TOKENS } from '@/lib/design-tokens';
  * Adds minimalist border treatment to containers
  */
 interface CornerBracketsProps {
-  color?: 'vibrant' | 'neon' | 'magenta' | 'inherit';
+  color?: 'vibrant' | 'secondary' | 'tertiary' | 'inherit';
   size?: 'sm' | 'md' | 'lg';
   position?: 'all' | 'top' | 'bottom' | 'top-left' | 'top-right';
   thickness?: number;
@@ -37,8 +37,8 @@ export function CornerBrackets({
   const sizeMap = { sm: 30, md: 50, lg: 80 };
   const colorMap = {
     vibrant: 'var(--accent-vibrant)',
-    neon: 'var(--accent-neon)',
-    magenta: 'var(--accent-magenta)',
+    secondary: 'var(--accent-secondary)',
+    tertiary: 'var(--accent-tertiary)',
     inherit: 'currentColor',
   };
 
@@ -56,6 +56,8 @@ export function CornerBrackets({
         viewBox={`0 0 100% 100%`}
         preserveAspectRatio="none"
         style={{ stroke: strokeColor, strokeWidth: thickness, fill: 'none' }}
+        aria-hidden="true"
+        role="presentation"
       >
         {/* Top-left bracket */}
         {corners && showTop && showLeft && (
@@ -98,7 +100,7 @@ export function CornerBrackets({
  * Separates content sections with visual flair
  */
 interface DecorativeDividerProps {
-  color?: 'vibrant' | 'neon' | 'magenta';
+  color?: 'vibrant' | 'secondary' | 'tertiary';
   size?: 'sm' | 'md' | 'lg';
   dotCount?: number;
   variant?: 'dots' | 'line-dots' | 'gradient';
@@ -106,7 +108,7 @@ interface DecorativeDividerProps {
 }
 
 export function DecorativeDivider({
-  color = 'neon',
+  color = 'secondary',
   size = 'md',
   dotCount = 5,
   variant = 'line-dots',
@@ -114,8 +116,8 @@ export function DecorativeDivider({
 }: DecorativeDividerProps) {
   const colorMap = {
     vibrant: 'var(--accent-vibrant)',
-    neon: 'var(--accent-neon)',
-    magenta: 'var(--accent-magenta)',
+    secondary: 'var(--accent-secondary)',
+    tertiary: 'var(--accent-tertiary)',
   };
   const sizeMap = { sm: 4, md: 6, lg: 8 };
   const dotRadius = sizeMap[size];
@@ -157,7 +159,7 @@ export function DecorativeDivider({
  */
 interface PatternBackgroundProps {
   pattern: 'grid' | 'diagonal' | 'dots' | 'checkerboard' | 'waves' | 'none';
-  color?: 'vibrant' | 'neon' | 'magenta' | 'muted';
+  color?: 'vibrant' | 'secondary' | 'tertiary' | 'muted';
   opacity?: number;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -172,8 +174,8 @@ export function PatternBackground({
 }: PatternBackgroundProps) {
   const colorMap = {
     vibrant: 'var(--accent-vibrant)',
-    neon: 'var(--accent-neon)',
-    magenta: 'var(--accent-magenta)',
+    secondary: 'var(--accent-secondary)',
+    tertiary: 'var(--accent-tertiary)',
     muted: 'var(--text-primary)',
   };
 
@@ -259,7 +261,7 @@ export function PatternBackground({
  */
 interface GlowingCTAProps {
   children: React.ReactNode;
-  color?: 'vibrant' | 'neon' | 'magenta';
+  color?: 'vibrant' | 'secondary' | 'tertiary';
   size?: 'sm' | 'md' | 'lg';
   onClick?: () => void;
   className?: string;
@@ -268,7 +270,7 @@ interface GlowingCTAProps {
 
 export function GlowingCTA({
   children,
-  color = 'neon',
+  color = 'secondary',
   size = 'md',
   onClick,
   className = '',
@@ -276,8 +278,8 @@ export function GlowingCTA({
 }: GlowingCTAProps) {
   const colorMap = {
     vibrant: 'var(--accent-vibrant)',
-    neon: 'var(--accent-neon)',
-    magenta: 'var(--accent-magenta)',
+    secondary: 'var(--accent-secondary)',
+    tertiary: 'var(--accent-tertiary)',
   };
 
   const sizeMap = {
@@ -329,8 +331,8 @@ export function GlowingCTA({
 interface LayeredPatternOverlayProps {
   pattern1?: 'grid' | 'diagonal' | 'dots' | 'checkerboard' | 'waves';
   pattern2?: 'grid' | 'diagonal' | 'dots' | 'checkerboard' | 'waves';
-  color1?: 'vibrant' | 'neon' | 'magenta';
-  color2?: 'vibrant' | 'neon' | 'magenta';
+  color1?: 'vibrant' | 'secondary' | 'tertiary';
+  color2?: 'vibrant' | 'secondary' | 'tertiary';
   opacity1?: number;
   opacity2?: number;
   rotation?: number;
@@ -340,8 +342,8 @@ interface LayeredPatternOverlayProps {
 export function LayeredPatternOverlay({
   pattern1 = 'grid',
   pattern2 = 'diagonal',
-  color1 = 'neon',
-  color2 = 'magenta',
+  color1 = 'secondary',
+  color2 = 'tertiary',
   opacity1 = 0.03,
   opacity2 = 0.02,
   rotation = 45,
@@ -372,7 +374,7 @@ export function LayeredPatternOverlay({
  * AccentLine - Minimalist decorative line (left/top border)
  */
 interface AccentLineProps {
-  color?: 'vibrant' | 'neon' | 'magenta';
+  color?: 'vibrant' | 'secondary' | 'tertiary';
   position?: 'left' | 'top' | 'right' | 'bottom';
   thickness?: number;
   length?: string | number; // allows "100%" or px values
@@ -380,7 +382,7 @@ interface AccentLineProps {
 }
 
 export function AccentLine({
-  color = 'neon',
+  color = 'secondary',
   position = 'left',
   thickness = 3,
   length = '100%',
@@ -388,8 +390,8 @@ export function AccentLine({
 }: AccentLineProps) {
   const colorMap = {
     vibrant: 'var(--accent-vibrant)',
-    neon: 'var(--accent-neon)',
-    magenta: 'var(--accent-magenta)',
+    secondary: 'var(--accent-secondary)',
+    tertiary: 'var(--accent-tertiary)',
   };
 
   const isVertical = position === 'left' || position === 'right';

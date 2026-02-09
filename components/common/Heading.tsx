@@ -10,7 +10,7 @@ import { DESIGN_TOKENS } from '@/lib/design-tokens';
 
 type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 type HeadingVariant = 'display' | 'section' | 'subsection' | 'label';
-type TextColor = 'primary' | 'secondary' | 'vibrant' | 'neon' | 'magenta' | 'inherit';
+type TextColor = 'primary' | 'secondary' | 'vibrant' | 'tertiary' | 'inherit';
 type TextAlign = 'left' | 'center' | 'right';
 
 interface HeadingProps {
@@ -98,13 +98,12 @@ function getTextColor(color: TextColor): string {
   if (color === 'inherit') return 'inherit';
   
   const colorMap = {
-    primary: 'text-primary dark:text-white',
-    secondary: 'text-secondary dark:text-gray-300',
+    primary: 'text-primary',
+    secondary: 'text-secondary',
     vibrant: 'text-accent-vibrant',
-    neon: 'text-neon',
-    magenta: 'text-magenta',
+    tertiary: 'text-tertiary',
   };
-  return colorMap[color] || 'text-primary dark:text-white';
+  return colorMap[color] || 'text-primary';
 }
 
 /**

@@ -18,7 +18,7 @@ interface EnhancedGalleryProps {
   images: GalleryItem[];
   categories?: string[];
   columns?: 1 | 2 | 3 | 4;
-  accentColor?: 'vibrant' | 'neon' | 'magenta';
+  accentColor?: 'vibrant' | 'secondary' | 'tertiary';
   enableFiltering?: boolean;
   enableLightbox?: boolean;
   enableLazyLoad?: boolean;
@@ -78,20 +78,20 @@ export default function EnhancedGallery({
     vibrant: {
       text: 'text-vibrant',
       border: 'border-vibrant',
-      bg: 'bg-vibrant-faint',
+      bg: 'bg-tertiary',
       hover: 'hover:shadow-vibrant',
     },
-    neon: {
-      text: 'text-neon',
-      border: 'border-neon',
-      bg: 'bg-neon-faint',
-      hover: 'hover:shadow-neon',
+    secondary: {
+      text: 'text-secondary',
+      border: 'border-secondary',
+      bg: 'bg-tertiary',
+      hover: 'hover:shadow-secondary',
     },
-    magenta: {
-      text: 'text-magenta',
-      border: 'border-magenta',
-      bg: 'bg-magenta-faint',
-      hover: 'hover:shadow-magenta',
+    tertiary: {
+      text: 'text-tertiary',
+      border: 'border-tertiary',
+      bg: 'bg-tertiary',
+      hover: 'hover:shadow-tertiary',
     },
   };
 
@@ -157,17 +157,26 @@ export default function EnhancedGallery({
               return (
                 <div
                   key={`${image.src}-${idx}`}
-                  className="group relative overflow-hidden rounded-lg cursor-pointer"
+                  className="group relative overflow-hidden rounded-lg cursor-pointer focus-within:ring-2 focus-within:ring-vibrant"
                   onClick={() => handleImageClick(idx)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleImageClick(idx);
+                    }
+                  }}
+                  aria-label={`${image.alt}${image.caption ? ': ' + image.caption : ''}`}
                 >
                   {/* Image Container */}
-                  <div className="relative aspect-square bg-tertiary overflow-hidden">
+                  <div className="relative aspect-square bg-tertiary overflow-hidden rounded-lg">
                     {/* Lazy load skeleton */}
                     {enableLazyLoad && !isLoaded && (
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
                     )}
 
-                    {/* Image */}
+                    {/* Image with smooth fade-in */}
                     <OptimizedImage
                       src={image.thumbnail || image.src}
                       alt={image.alt}
@@ -176,17 +185,21 @@ export default function EnhancedGallery({
                       quality={80}
                       objectFit="cover"
                       onLoadingComplete={() => handleImageLoad(image.src)}
-                      className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110`}
+                      className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-focus-within:scale-110 ${
+                        isLoaded ? 'animate-fadeIn' : ''
+                      }`}
                     />
 
-                    {/* Overlay on Hover */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                      <div className={`p-3 rounded-full border-2 ${colors.border} text-white`}>
+                    {/* Overlay on Hover - Enhanced */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 group-focus-within:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
+                      <div className={`p-3 rounded-full border-2 ${colors.border} text-white transform transition-transform duration-300 group-hover:scale-110 group-focus-within:scale-110`}>
                         <svg
                           className="w-6 h-6"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          role="presentation"
                         >
                           <path
                             strokeLinecap="round"
@@ -198,10 +211,10 @@ export default function EnhancedGallery({
                       </div>
                     </div>
 
-                    {/* Category Badge */}
+                    {/* Category Badge - Enhanced */}
                     {image.category && (
                       <div
-                        className={`absolute top-3 right-3 text-xs font-black uppercase px-3 py-1 rounded ${colors.bg} ${colors.text}`}
+                        className={`absolute top-3 right-3 text-xs font-black uppercase px-3 py-1 rounded ${colors.bg} ${colors.text} transition-all duration-300 group-hover:scale-110 group-focus-within:scale-110`}
                       >
                         {image.category}
                       </div>
@@ -210,8 +223,8 @@ export default function EnhancedGallery({
 
                   {/* Caption */}
                   {image.caption && (
-                    <div className="p-3 bg-primary border-t border-primary">
-                      <p className="text-sm text-secondary line-clamp-2">
+                    <div className="p-3 bg-primary border-t border-primary transition-colors duration-300 group-hover:bg-secondary group-focus-within:bg-secondary">
+                      <p className="text-sm text-secondary line-clamp-2 group-hover:text-primary group-focus-within:text-primary">
                         {image.caption}
                       </p>
                     </div>

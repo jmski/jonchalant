@@ -29,6 +29,17 @@
 .border-primary {
   border-color: var(--border-color);
 }
+
+/* OVERLAY UTILITIES - For modal/lightbox components */
+.text-overlay {
+  color: #ffffff;
+}
+.bg-overlay-light {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.bg-overlay-lighter {
+  background-color: rgba(255, 255, 255, 0.05);
+}
 .border-accent {
   border-color: var(--border-accent);
 }
@@ -38,48 +49,76 @@
 .bg-accent {
   background-color: var(--accent-vibrant);
 }
+.bg-vibrant {
+  background-color: var(--accent-vibrant);
+}
 
 /* ACCENT COLOR UTILITIES */
-.text-neon {
-  color: var(--accent-neon);
+.text-secondary {
+  color: var(--accent-secondary);
 }
-.text-magenta {
-  color: var(--accent-magenta);
+.text-tertiary {
+  color: var(--accent-tertiary);
 }
 .text-vibrant {
   color: var(--accent-vibrant);
 }
-.bg-neon-faint {
-  background-color: rgba(0, 255, 255, 0.05);
+.bg-secondary {
+  background-color: var(--accent-secondary);
 }
-.bg-magenta-faint {
-  background-color: rgba(255, 0, 255, 0.05);
+.bg-tertiary {
+  background-color: var(--accent-tertiary);
 }
-.bg-vibrant-faint {
-  background-color: rgba(255, 95, 31, 0.08);
-}
-.border-neon {
-  border-color: var(--accent-neon);
+.border-secondary {
+  border-color: var(--accent-secondary);
 }
 .border-vibrant {
   border-color: var(--accent-vibrant);
 }
-.border-magenta {
-  border-color: var(--accent-magenta);
+.border-tertiary {
+  border-color: var(--accent-tertiary);
 }
 
 /* SPACING UTILITIES */
 .section-spacing {
-  padding: 4rem 0;
+  padding: 2rem 0;
+}
+@media (min-width: 640px) {
+  .section-spacing {
+    padding: 4rem 0;
+  }
+}
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding: 6rem 0;
+  }
 }
 .section-spacing-lg {
-  padding: 6rem 0;
+  padding: 3rem 0;
+}
+@media (min-width: 768px) {
+  .section-spacing-lg {
+    padding: 6rem 0;
+  }
+}
+@media (min-width: 1024px) {
+  .section-spacing-lg {
+    padding: 8rem 0;
+  }
 }
 .card-padding {
   padding: 1.5rem;
 }
 .card-padding-lg {
   padding: 2rem;
+}
+@media (min-width: 768px) {
+  .card-padding-lg {
+    padding: 2.5rem;
+  }
+}
+.card-padding-xl {
+  padding: 3rem;
 }
 
 /* TYPOGRAPHY UTILITIES */
@@ -145,6 +184,85 @@
 }
 .border-thick {
   border-width: 4px;
+}
+
+/* CARD UTILITIES - Enhanced with responsive styling */
+.card-base {
+  border: 2px solid var(--border-color);
+  padding: 1.5rem;
+  background-color: var(--bg-primary);
+  transition: all var(--transition-base);
+}
+.card-base:hover {
+  border-color: var(--accent-vibrant);
+  box-shadow: 0 4px 12px rgba(0, 82, 204, 0.1);
+}
+@media (min-width: 768px) {
+  .card-base {
+    padding: 2rem;
+  }
+}
+
+/* BUTTON UTILITIES - Consistent hover and active states */
+.btn-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+.btn-primary {
+  border-color: var(--accent-vibrant);
+  background-color: var(--accent-vibrant);
+  color: var(--bg-primary);
+}
+.btn-primary:hover {
+  background-color: var(--accent-vibrant-hover);
+  border-color: var(--accent-vibrant-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 82, 204, 0.2);
+}
+.btn-secondary {
+  border-color: var(--accent-secondary);
+  color: var(--accent-secondary);
+  background-color: transparent;
+}
+.btn-secondary:hover {
+  background-color: var(--accent-secondary);
+  color: var(--bg-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 188, 212, 0.2);
+}
+
+/* INTERACTIVE ELEMENTS - Smooth transitions */
+.interactive-element {
+  transition: all var(--transition-base);
+}
+.interactive-element:hover {
+  transform: translateY(-2px);
+}
+
+/* SECTION HEADER - Typography with accent */
+.section-header {
+  border-bottom: 3px solid var(--accent-vibrant);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* TEXT UTILITIES - Readability focused */
+.text-readable {
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+.text-readable-lg {
+  line-height: 1.9;
+  letter-spacing: 0.4px;
 }
 .border-double {
   border: 3px solid var(--border-color);
@@ -329,6 +447,224 @@
   font-size: 0.875rem;
 }
 
+/* ============================================================================
+   DESIGN ENHANCEMENTS - Large Typography, Marquee, Patterns
+   ============================================================================ */
+
+/* DISPLAY TYPOGRAPHY - Large Impact Headlines */
+.display-xl {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.display-lg {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.display-md {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Body text in pure black for maximum readability */
+.body-readable {
+  color: var(--text-primary);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+.body-readable-sm {
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Section labels with accent underline (not colored text) */
+.section-label {
+  font-family: var(--font-retro);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-primary);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid;
+  border-color: var(--accent-vibrant);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* MARQUEE - Animated scrolling text */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 2rem;
+  animation: marquee-left 20s linear infinite;
+  white-space: nowrap;
+  font-family: var(--font-retro);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-secondary);
+}
+
+.marquee-content span {
+  color: var(--accent-vibrant);
+  font-weight: 700;
+  margin: 0 0.5rem;
+}
+
+.marquee:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* ACCENT DIVIDER - Modern section separator */
+.divider-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  font-family: var(--font-retro);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+}
+
+.divider-arrow::before,
+.divider-arrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--text-secondary),
+    transparent
+  );
+}
+
+.divider-arrow span {
+  color: var(--accent-vibrant);
+  font-size: 1.25rem;
+}
+
+/* BACKGROUND SHAPES - Decorative elements */
+.shape-circle-xl {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.shape-circle-lg {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.shape-diagonal-stripe {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--accent-vibrant),
+    var(--accent-vibrant) 2px,
+    transparent 2px,
+    transparent 20px
+  );
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* GRADIENT BACKGROUNDS - Subtle depth */
+.gradient-bg-subtle {
+  background: radial-gradient(
+    circle at 30% 50%,
+    var(--accent-secondary),
+    transparent 70%
+  );
+  opacity: 0.02;
+}
+
+.gradient-bg-vibrant {
+  background: radial-gradient(
+    circle at 70% 30%,
+    var(--accent-vibrant),
+    transparent 60%
+  );
+  opacity: 0.02;
+}
+
+/* SECTION BACKGROUND - with accent bar */
+.section-accent-left {
+  border-left: 4px solid var(--accent-vibrant);
+  padding-left: 2rem;
+}
+
+.section-accent-top {
+  border-top: 3px solid var(--accent-vibrant);
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+/* STAT NUMBERS - Extra large and impactful */
+.stat-number {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent-vibrant);
+  font-family: var(--font-display);
+}
+
+.stat-label {
+  font-family: var(--font-retro);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--text-primary);
+  margin-top: 0.5rem;
+}
+
 /* GLITCH TEXT EFFECT */
 .glitch-text {
   position: relative;
@@ -336,4 +672,110 @@
 }
 .glitch-text:hover {
   animation: glitch-anim 0.3s ease-in-out;
+}
+/* ENHANCED ANIMATIONS & TRANSITIONS */
+/* Smooth hover lift for interactive elements */
+.hover-lift {
+  transition: all var(--transition-base);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth scale on hover */
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Color transition on hover */
+.hover-glow {
+  transition: all var(--transition-base);
+}
+.hover-glow:hover {
+  text-shadow: 0 0 8px currentColor;
+  transform: scale(1.01);
+}
+
+/* Underline animation on hover */
+.hover-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-vibrant);
+  transition: width var(--transition-base);
+}
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Smooth opacity transitions */
+.hover-opacity {
+  transition: opacity var(--transition-base);
+}
+.hover-opacity:hover {
+  opacity: 0.8;
+}
+
+/* Loading state animation */
+@keyframes pulse-opacity {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+.loading-pulse {
+  animation: pulse-opacity 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth slide in from left */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.slide-in-left {
+  animation: slide-in-left var(--transition-slow) ease-out;
+}
+
+/* Smooth slide in from right */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.slide-in-right {
+  animation: slide-in-right var(--transition-slow) ease-out;
+}
+
+/* Smooth fade in */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade-in var(--transition-base) ease-out;
 }

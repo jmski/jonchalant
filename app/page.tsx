@@ -8,6 +8,7 @@ import {
   LayeredPatternOverlay,
   DecorativeCornerBracket,
 } from '@/components/effects';
+import { Marquee } from '@/components/effects/Marquee';
 import { Heading } from '@/components/typography';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -65,6 +66,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* MARQUEE - Animated Keywords */}
+      <Marquee
+        items={['Choreography', 'Content Creation', 'Brand Partnerships', 'Live Performance', 'Creative Direction', 'Digital Media']}
+        speed={25}
+        pauseOnHover={true}
+      />
+
       {/* BOLD STATS & METRICS SECTION - MAXIMALIST */}
       <section 
         className="py-16 md:py-24 border-t border-b border-primary relative"
@@ -74,8 +82,8 @@ export default function Home() {
         }}
       >
         {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 border-3 border-neon opacity-5" />
-        <div className="absolute bottom-0 left-1/4 w-48 h-48 border-2 border-magenta opacity-3" style={{ borderStyle: 'dashed' }} />
+        <div className="absolute top-0 right-0 w-64 h-64 border-3 border-secondary opacity-5" />
+        <div className="absolute bottom-0 left-1/4 w-48 h-48 border-2 border-tertiary opacity-3" style={{ borderStyle: 'dashed' }} />
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollStagger variant="slideInUp" staggerDelay={100}>
@@ -112,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* Decorative Divider */}
-      <DecorativeDivider color="neon" variant="line-dots" dotCount={7} className="bg-primary" />
+      <DecorativeDivider color="secondary" variant="line-dots" dotCount={7} className="bg-primary" />
 
       {/* FEATURED AREAS - EDITORIAL ASYMMETRIC LAYOUT */}
       <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
@@ -120,24 +128,27 @@ export default function Home() {
         <LayeredPatternOverlay
           pattern1="grid"
           pattern2="diagonal"
-          color1="neon"
-          color2="magenta"
+          color1="secondary"
+          color2="tertiary"
           opacity1={0.04}
           opacity2={0.02}
           rotation={-15}
         />
 
-        {/* Maximalist background decoration */}
-        <div className="absolute inset-0 opacity-3 pointer-events-none">
-          <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-neon rounded-full" />
-          <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-magenta" style={{ borderStyle: 'dashed' }} />
+        {/* Decorative background circles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full opacity-3" style={{
+            background: 'radial-gradient(circle, var(--accent-secondary), transparent)',
+          }} />
+          <div className="absolute -bottom-32 left-1/4 w-80 h-80 rounded-full opacity-2" style={{
+            background: 'radial-gradient(circle, var(--accent-tertiary), transparent)',
+          }} />
         </div>
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-16 pr-0 md:pr-12">
-            <span className="retro-label text-neon text-xs">→ PRIMARY FOCUS AREAS</span>
+            <span className="section-label">→ Primary Focus Areas</span>
             <Heading level={2} className="mt-4 mb-6">What I<br />Specialize In</Heading>
-            <div className="w-32 h-3 bg-vibrant" />
           </div>
 
           {/* EDITORIAL ASYMMETRIC GRID */}
@@ -145,7 +156,7 @@ export default function Home() {
               {/* Dance Portfolio - BOLD */}
               <ScrollFade variant="slideInUp" delay={0}>
             <div 
-              className="border-bold border-vibrant bg-vibrant-faint group cursor-pointer transition-all duration-300 hover:shadow-vibrant"
+              className="border-bold border-vibrant bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-vibrant"
             >
               <div className="aspect-square bg-linear-to-br from-vibrant/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 {/* Diagonal lines pattern */}
@@ -161,7 +172,7 @@ export default function Home() {
               </div>
               <div className="p-6 border-t-3 border-vibrant">
                 <Heading level={3} className="mb-3">Dance Portfolio</Heading>
-                <p className="text-sm text-secondary font-body">
+                <p className="text-sm text-primary font-body">
                   Choreography, freestyle, performances & tutorials
                 </p>
               </div>
@@ -171,22 +182,22 @@ export default function Home() {
             {/* Showcase - NEON */}
             <ScrollFade variant="slideInUp" delay={80}>
             <div 
-              className="border-bold border-neon bg-neon-faint group cursor-pointer transition-all duration-300 hover:shadow-neon"
+              className="border-bold border-secondary bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
-              <div className="aspect-square bg-linear-to-br from-neon/20 to-transparent flex items-center justify-center relative overflow-hidden">
+              <div className="aspect-square bg-linear-to-br from-secondary/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20" style={{
-                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--accent-neon) 10px, var(--accent-neon) 11px)'
+                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--accent-secondary) 10px, var(--accent-secondary) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-6xl mb-3 text-neon font-black">✦</div>
-                  <div className="text-xs font-black uppercase tracking-widest text-neon retro-label">
+                  <div className="text-6xl mb-3 text-secondary font-black">✦</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-secondary retro-label">
                     Gunpla & Pokémon
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t-3 border-neon">
+              <div className="p-6 border-t-3 border-secondary">
                 <Heading level={3} className="mb-3">Creative Showcase</Heading>
-                <p className="text-sm text-secondary font-body">
+                <p className="text-sm text-primary font-body">
                   Model builds, collections & digital media
                 </p>
               </div>
@@ -196,22 +207,22 @@ export default function Home() {
             {/* Collaborations - MAGENTA */}
             <ScrollFade variant="slideInUp" delay={160}>
             <div 
-              className="border-bold border-magenta bg-magenta-faint group cursor-pointer transition-all duration-300 hover:shadow-lg"
+              className="border-bold border-tertiary bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-lg"
             >
-              <div className="aspect-square bg-linear-to-br from-magenta/20 to-transparent flex items-center justify-center relative overflow-hidden">
+              <div className="aspect-square bg-linear-to-br from-tertiary/20 to-transparent flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20" style={{
-                  backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 10px, var(--accent-magenta) 10px, var(--accent-magenta) 11px)'
+                  backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 10px, var(--accent-tertiary) 10px, var(--accent-tertiary) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-6xl mb-3 text-magenta font-black">◆</div>
-                  <div className="text-xs font-black uppercase tracking-widest text-magenta retro-label">
+                  <div className="text-6xl mb-3 text-tertiary font-black">◆</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-tertiary retro-label">
                     Brand Ready
                   </div>
                 </div>
               </div>
-              <div className="p-6 border-t-3 border-magenta">
+              <div className="p-6 border-t-3 border-tertiary">
                 <Heading level={3} className="mb-3">Collaborations</Heading>
-                <p className="text-sm text-secondary font-body">
+                <p className="text-sm text-primary font-body">
                   Partnerships, campaigns & brand opportunities
                 </p>
               </div>
@@ -222,7 +233,7 @@ export default function Home() {
           {/* What's Possible - Services Grid */}
           <div className="border-t-4 border-primary pt-16">
             <div className="mb-12">
-              <h3 className="text-lg font-black uppercase tracking-widest text-tertiary retro-label mb-3">→ Services & Offerings</h3>
+              <h3 className="section-label">→ Services & Offerings</h3>
               <Heading level={3}>What We Can Create</Heading>
             </div>
             <ScrollStagger variant="scaleUp" staggerDelay={60}>
@@ -239,7 +250,7 @@ export default function Home() {
                 ].map((service, idx) => (
                 <div
                   key={idx}
-                  className="border-2 border-primary p-4 text-center hover:border-vibrant hover:bg-vibrant-faint transition-all duration-300 group"
+                  className="border-2 border-primary p-4 text-center hover:border-vibrant hover:bg-tertiary transition-all duration-300 group"
                 >
                   <div className="text-2xl mb-2 group-hover:scale-125 transition-transform">
                     {service.icon}
@@ -323,7 +334,7 @@ export default function Home() {
                       <h4 className="font-bold mb-1 text-primary">
                         {feature.title}
                       </h4>
-                      <p className="text-sm text-secondary">
+                      <p className="text-sm text-primary">
                         {feature.desc}
                       </p>
                     </div>
@@ -344,19 +355,19 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
             Let's Create Something Extraordinary
           </h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto text-secondary">
+          <p className="text-lg mb-8 max-w-2xl mx-auto text-primary">
             From concept to execution, I'm ready to bring your movement and creative vision to life.
           </p>
           <a 
             href="/collaborations"
             className="inline-block px-8 py-4 border-2 font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-lg border-accent text-accent"
           >
-            Start a Project →
+            Start a Project <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
       {/* Decorative Divider */}
-      <DecorativeDivider color="magenta" variant="line-dots" dotCount={5} className="bg-primary" />
+      <DecorativeDivider color="tertiary" variant="line-dots" dotCount={5} className="bg-primary" />
       {/* CTA Section */}
       <CTASection 
         title="Ready to Collaborate?"

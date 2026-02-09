@@ -80,10 +80,6 @@
   .flex-column {
     flex-direction: column;
   }
-  .theme-square {
-    width: 20px;
-    height: 20px;
-  }
 }
 
 /* ========== MOBILE OVERRIDES (≤767px) ========== */
@@ -151,13 +147,6 @@
   }
   .sidebar-toggle {
     display: block;
-  }
-  .theme-selector {
-    gap: 0.375rem;
-  }
-  .theme-square {
-    width: 20px;
-    height: 20px;
   }
   .main-content {
     padding: 3rem 1.5rem;

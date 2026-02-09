@@ -41,7 +41,7 @@ export default function HomeHero() {
 
       {/* Accent lines - editorial style */}
       <div className="absolute top-1/4 left-0 w-96 h-1 bg-vibrant opacity-20" />
-      <div className="absolute bottom-1/3 right-0 w-64 h-1 bg-neon opacity-15" />
+      <div className="absolute bottom-1/3 right-0 w-64 h-1 bg-secondary opacity-15" />
 
       {/* Main content - ASYMMETRIC LAYOUT */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -49,12 +49,12 @@ export default function HomeHero() {
         <div className="space-y-8">
           {/* Status badge - interactive */}
           <div 
-            className="inline-flex items-center gap-3 px-5 py-3 border-2 border-vibrant bg-vibrant-faint group hover:border-neon hover:bg-neon-faint transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-3 px-5 py-3 border-2 border-vibrant bg-tertiary group hover:border-secondary hover:bg-tertiary transition-all duration-300 cursor-pointer"
             onMouseEnter={() => setGlitchActive(true)}
             onMouseLeave={() => setGlitchActive(false)}
           >
-            <span className="w-2 h-2 bg-vibrant group-hover:bg-neon animate-pulse rounded-full" />
-            <span className="text-xs font-black uppercase tracking-[0.15em] text-vibrant group-hover:text-neon transition-colors">
+            <span className="w-2 h-2 bg-vibrant group-hover:bg-secondary animate-pulse rounded-full" />
+            <span className="text-xs font-black uppercase tracking-[0.15em] text-vibrant group-hover:text-secondary transition-colors">
               🎬 NOW ACCEPTING
             </span>
           </div>
@@ -112,7 +112,7 @@ export default function HomeHero() {
             </Link>
             <Link
               href="/dance"
-              className="px-8 py-4 font-black uppercase tracking-[0.1em] text-sm border-3 border-primary text-primary hover:border-neon hover:text-neon transition-all duration-300 relative group"
+              className="px-8 py-4 font-black uppercase tracking-[0.1em] text-sm border-3 border-primary text-primary hover:border-secondary hover:text-secondary transition-all duration-300 relative group"
             >
               ⬇ PORTFOLIO
             </Link>
@@ -123,7 +123,7 @@ export default function HomeHero() {
         <div className="relative hidden lg:flex items-center justify-center">
           <div className="relative w-full max-w-lg aspect-square">
             {/* Outer technical frame */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
               {/* Outer border */}
               <rect x="20" y="20" width="360" height="360" fill="none" stroke="var(--border-color)" strokeWidth="2" />
               
@@ -143,7 +143,7 @@ export default function HomeHero() {
               </g>
 
               {/* Center circle with movement lines */}
-              <circle cx="200" cy="200" r="60" fill="none" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" strokeDasharray="8,4" />
+              <circle cx="200" cy="200" r="60" fill="none" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.6" strokeDasharray="8,4" />
               
               {/* Radiating movement lines */}
               {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
@@ -157,7 +157,7 @@ export default function HomeHero() {
                     y1="200"
                     x2={x2}
                     y2={y2}
-                    stroke={i % 2 === 0 ? 'var(--accent-vibrant)' : 'var(--accent-neon)'}
+                    stroke={i % 2 === 0 ? 'var(--accent-vibrant)' : 'var(--accent-secondary)'}
                     strokeWidth="1"
                     opacity="0.4"
                   />
@@ -166,8 +166,8 @@ export default function HomeHero() {
               
               {/* Measurement markers */}
               <circle cx="120" cy="120" r="3" fill="var(--accent-vibrant)" opacity="0.7" />
-              <circle cx="280" cy="120" r="3" fill="var(--accent-neon)" opacity="0.7" />
-              <circle cx="120" cy="280" r="3" fill="var(--accent-neon)" opacity="0.7" />
+              <circle cx="280" cy="120" r="3" fill="var(--accent-secondary)" opacity="0.7" />
+              <circle cx="120" cy="280" r="3" fill="var(--accent-secondary)" opacity="0.7" />
               <circle cx="280" cy="280" r="3" fill="var(--accent-vibrant)" opacity="0.7" />
               
               {/* Center indicator */}

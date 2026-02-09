@@ -25,11 +25,11 @@ const getCategoryColor = (category: string): string => {
       return 'vibrant';
     case 'Freestyle':
     case 'Freestyle Video':
-      return 'neon';
+      return 'secondary';
     case 'Performance':
     case 'Performances':
     case 'Performance Video':
-      return 'magenta';
+      return 'tertiary';
     case 'All':
       return 'primary';
     default:
@@ -48,8 +48,8 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
   const getColorVar = (color: string) => {
     const colorMap: Record<string, string> = {
       vibrant: 'var(--accent-vibrant)',
-      neon: 'var(--accent-neon)',
-      magenta: 'var(--accent-magenta)',
+      secondary: 'var(--accent-secondary)',
+      tertiary: 'var(--accent-tertiary)',
       primary: 'var(--text-primary)'
     };
     return colorMap[color] || 'var(--text-primary)';

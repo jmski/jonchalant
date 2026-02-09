@@ -10,3 +10,6 @@ export { usePointerPosition } from './usePointerPosition';
 export { useScrollTrigger } from './useScrollTrigger';
 export { useScrollAnimation, getAnimationClass } from './useScrollAnimation';
 export type { AnimationVariant } from './useScrollAnimation';
+
+export { useFocusTrap } from './useFocusTrap';
+export { useSwipeGesture } from './useSwipeGesture';

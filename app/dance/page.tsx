@@ -177,9 +177,9 @@ export default async function Dance() {
   return (
     <div className="min-h-screen page-wrapper bg-primary">
       <PageTransition animation="slide-left">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-24" id="main-content">
         {/* TECHNICAL HERO SECTION */}
-        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative py-12 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Technical background grid */}
           <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
             backgroundImage: `
@@ -230,18 +230,18 @@ export default async function Dance() {
               </g>
 
               {/* Center movement indicator */}
-              <circle cx="200" cy="200" r="50" fill="none" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.7" strokeDasharray="5,3" />
+              <circle cx="200" cy="200" r="50" fill="none" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.7" strokeDasharray="5,3" />
               
               {/* Movement vectors */}
               <line x1="200" y1="120" x2="200" y2="60" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6" />
               <line x1="200" y1="280" x2="200" y2="340" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6" />
-              <line x1="120" y1="200" x2="60" y2="200" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" />
-              <line x1="280" y1="200" x2="340" y2="200" stroke="var(--accent-neon)" strokeWidth="2" opacity="0.6" />
+              <line x1="120" y1="200" x2="60" y2="200" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.6" />
+              <line x1="280" y1="200" x2="340" y2="200" stroke="var(--accent-secondary)" strokeWidth="2" opacity="0.6" />
               
               {/* Category indicators */}
               <circle cx="140" cy="140" r="8" fill="var(--accent-vibrant)" opacity="0.8" />
-              <circle cx="260" cy="140" r="8" fill="var(--accent-neon)" opacity="0.8" />
-              <circle cx="200" cy="260" r="8" fill="var(--accent-magenta)" opacity="0.8" />
+              <circle cx="260" cy="140" r="8" fill="var(--accent-secondary)" opacity="0.8" />
+              <circle cx="200" cy="260" r="8" fill="var(--accent-tertiary)" opacity="0.8" />
               
               {/* Labels */}
               <text x="140" y="120" fontSize="9" fill="var(--text-tertiary)" fontFamily="monospace" textAnchor="middle">CHORE</text>
@@ -252,13 +252,13 @@ export default async function Dance() {
         </div>
 
         {/* Dynamic Filter and Portfolio */}
-        <section className="py-12 relative mb-12">
+        <section className="py-12 sm:py-16 lg:py-20 relative mb-12">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="diagonal"
             pattern2="dots"
             color1="vibrant"
-            color2="neon"
+            color2="secondary"
             opacity1={0.035}
             opacity2={0.025}
             rotation={-30}
@@ -270,7 +270,7 @@ export default async function Dance() {
         </section>
 
         {/* Decorative Divider */}
-        <DecorativeDivider color="magenta" variant="line-dots" dotCount={5} className="bg-primary" />
+        <DecorativeDivider color="tertiary" variant="line-dots" dotCount={5} className="bg-primary" />
 
         {/* CTA Section */}
         <CTASection

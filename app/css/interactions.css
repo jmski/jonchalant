@@ -1,0 +1,253 @@
+/* ============================================================================
+   ENHANCED INTERACTIONS & HOVER STATES
+   
+   Modern, polished interactive elements with:
+   - Enhanced hover effects (scale, shadow, glow)
+   - Smooth transitions
+   - Focus states for accessibility
+   - Improved touch targets
+   
+   ============================================================================ */
+
+/* Card Hover Effects */
+.card {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card.hoverable:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(var(--accent-vibrant-rgb, 37, 99, 235), 0.15);
+}
+
+/* Button Hover Effects */
+button:not(:disabled):not(.theme-toggle),
+.btn-primary {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+button:hover:not(:disabled):not(.theme-toggle),
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+button:active:not(:disabled):not(.theme-toggle),
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus States (Accessibility) */
+button:focus-visible:not(.theme-toggle),
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  ring: 2px solid var(--accent-vibrant);
+  ring-offset: 2px;
+}
+
+/* Enhanced Link Hover */
+a:not(.no-underline) {
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+a:hover:not(.no-underline) {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-vibrant);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* Input Field Focus */
+input:focus,
+textarea:focus,
+select:focus {
+  transition: all 0.2s ease;
+}
+
+input:focus:not(.no-ring),
+textarea:focus:not(.no-ring),
+select:focus:not(.no-ring) {
+  ring: 2px solid var(--accent-vibrant);
+  ring-offset: 2px;
+}
+
+/* Gallery Item Hover */
+.gallery-item {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.gallery-item:hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+.gallery-item:focus-visible {
+  outline: 2px solid var(--accent-vibrant);
+  outline-offset: 2px;
+}
+
+/* Badge Hover */
+.badge {
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Button with Glow Effect */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.btn-glow:hover::before {
+  opacity: 1;
+}
+
+/* Loading State */
+.loading,
+[data-loading="true"] {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Smooth Color Transitions */
+.transition-colors {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Enhanced Touch Targets (Minimum 48px) */
+button,
+a[role="button"],
+input[type="checkbox"],
+input[type="radio"],
+select {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 1rem;
+}
+
+@media (hover: hover) {
+  /* Only apply hover effects on devices that support hover */
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  button:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* Keyboard Navigation Indicator */
+:focus-visible {
+  outline-offset: 2px;
+  outline-width: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: more) {
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible {
+    outline-width: 3px;
+    outline-offset: 3px;
+  }
+}
+
+/* Screen Reader Only (sr-only) - WCAG 2.1 Bypass Blocks */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

@@ -39,7 +39,8 @@ const MOCK_GUNPLA = [
     description: 'Detailed Real Grade build with custom weathering and LED lighting. Professional display photography.',
     image: '/images/showcase/gunpla/rg-evangelion-unit-01.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'RG Evangelion Unit-01 Gundam model with custom weathering and LED lighting'
   },
   {
     _id: 'gunpla-2',
@@ -48,7 +49,8 @@ const MOCK_GUNPLA = [
     description: 'Master Grade with full transformation mechanics. Handpainted details and metallic accents.',
     image: '/images/showcase/gunpla/mg-unicorn-gundam.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Master Grade Unicorn Gundam with transformation mechanics and hand-painted metallic details'
   },
   {
     _id: 'gunpla-3',
@@ -57,7 +59,8 @@ const MOCK_GUNPLA = [
     description: 'High Grade with custom painting and weathering effects. Action pose showcase.',
     image: '/images/showcase/gunpla/hg-barbatos-lupus-rex.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'High Grade Barbatos Lupus Rex in dynamic action pose with custom painting and weathering'
   },
   {
     _id: 'gunpla-4',
@@ -66,7 +69,8 @@ const MOCK_GUNPLA = [
     description: 'Perfect Grade with advanced LED system and mechanical detail customization.',
     image: '/images/showcase/gunpla/pg-strike-freedom.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Perfect Grade Strike Freedom Gundam with advanced LED system and detailed mechanical components'
   }
 ];
 
@@ -78,7 +82,8 @@ const MOCK_POKEMON = [
     description: 'PSA 8 graded. Vivid Voltage era premium collection piece.',
     image: '/images/showcase/pokemon/charizard-vmax-gold.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Charizard VMAX Gold Secret rare Pokémon trading card, PSA 8 graded'
   },
   {
     _id: 'poke-2',
@@ -87,7 +92,8 @@ const MOCK_POKEMON = [
     description: 'Japanese promotional holographic. Vintage 1997 original.',
     image: '/images/showcase/pokemon/pikachu-illustrator.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Pikachu Illustrator promotional holographic Pokémon card from 1997, vintage original'
   },
   {
     _id: 'poke-3',
@@ -96,7 +102,8 @@ const MOCK_POKEMON = [
     description: 'Crystal Type holographic. Neo Genesis era rare collectible.',
     image: '/images/showcase/pokemon/mewtwo-ex-crystal.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Mewtwo EX Crystal holographic Pokémon card from Neo Genesis set'
   },
   {
     _id: 'poke-4',
@@ -105,7 +112,8 @@ const MOCK_POKEMON = [
     description: 'First Edition holographic. Shadowless condition. Mint center.',
     image: '/images/showcase/pokemon/blastoise-base-set.jpg',
     width: 680,
-    height: 680
+    height: 680,
+    altText: 'Blastoise Base Set First Edition holographic Pokémon card in mint shadowless condition'
   }
 ];
 
@@ -131,9 +139,9 @@ export default async function Showcase() {
   return (
     <div className="min-h-screen page-wrapper bg-primary">
       <PageTransition animation="slide-right">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-24" id="main-content">
         {/* TECHNICAL HERO SECTION */}
-        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative py-12 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Technical background grid */}
           <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
             backgroundImage: `
@@ -145,14 +153,14 @@ export default async function Showcase() {
 
           {/* LEFT - BOLD TEXT */}
           <div className="relative z-10 space-y-8">
-            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-neon bg-neon-faint">
-              <span className="w-2 h-2 bg-neon animate-pulse rounded-full" />
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-neon">🎨 COLLECTION</span>
+            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-tertiary bg-tertiary">
+              <span className="w-2 h-2 bg-tertiary animate-pulse rounded-full" />
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-tertiary">🎨 COLLECTION</span>
             </div>
 
             <div>
               <Heading level={1} className="mb-4">PASSION<br />
-                <span className="text-neon">PROJECTS</span>
+                <span className="text-tertiary">PROJECTS</span>
               </Heading>
               <div className="h-1 w-40 bg-neon" />
             </div>
@@ -169,10 +177,10 @@ export default async function Showcase() {
           <div className="relative hidden lg:flex items-center justify-center">
             <svg className="w-full max-w-sm" viewBox={`0 0 ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION} ${DESIGN_TOKENS.SIZES.SVG.VISUALIZATION}`} xmlns="http://www.w3.org/2000/svg">
               {/* Outer frame */}
-              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
+              <rect x="30" y="30" width="340" height="340" fill="none" stroke="var(--accent-secondary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} />
               
               {/* Corner marks */}
-              <g stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
+              <g stroke="var(--accent-secondary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.MD} fill="none">
                 <line x1="30" y1="30" x2="70" y2="30" />
                 <line x1="30" y1="30" x2="30" y2="70" />
                 <line x1="370" y1="30" x2="330" y2="30" />
@@ -184,12 +192,12 @@ export default async function Showcase() {
               </g>
 
               {/* Diagonal divisions */}
-              <line x1="30" y1="30" x2="370" y2="370" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
-              <line x1="370" y1="30" x2="30" y2="370" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
+              <line x1="30" y1="30" x2="370" y2="370" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
+              <line x1="370" y1="30" x2="30" y2="370" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.THIN} opacity="0.4" />
               
               {/* Category zones */}
-              <circle cx="120" cy="120" r="50" fill="none" stroke="var(--accent-neon)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
-              <circle cx="280" cy="280" r="50" fill="none" stroke="var(--accent-magenta)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
+              <circle cx="120" cy="120" r="50" fill="none" stroke="var(--accent-secondary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
+              <circle cx="280" cy="280" r="50" fill="none" stroke="var(--accent-tertiary)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.6" />
               <circle cx="200" cy="200" r="40" fill="none" stroke="var(--accent-vibrant)" strokeWidth={DESIGN_TOKENS.BORDERS.WIDTH.SM} opacity="0.5" strokeDasharray="5,3" />
               
               {/* Labels */}
@@ -200,13 +208,13 @@ export default async function Showcase() {
         </div>
 
         {/* GUNPLA SECTION - NEON CYAN */}
-        <section className="mb-24 relative">
+        <section className="mb-24 py-12 sm:py-16 lg:py-20 relative">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="grid"
             pattern2="diagonal"
-            color1="neon"
-            color2="magenta"
+            color1="secondary"
+            color2="tertiary"
             opacity1={0.035}
             opacity2={0.025}
             rotation={-20}
@@ -214,8 +222,8 @@ export default async function Showcase() {
           />
           <div className="relative z-10">
           <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-neon)' }}>
-              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-neon)' }}>▶ GUNPLA BUILD GALLERY</Heading>
+            <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-secondary)' }}>
+              <Heading level={2} className="mb-4 uppercase text-readable" style={{ color: 'var(--accent-secondary)' }}>▶ GUNPLA BUILD GALLERY</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Custom Gundam model engineering featuring Real Grade, Master Grade, and Perfect Grade builds with professional photography, LED customization, and hand-painted details.
               </p>
@@ -224,14 +232,14 @@ export default async function Showcase() {
           <EnhancedGallery
             images={gunplaShowcase.map((item: any) => ({
               src: item.image,
-              alt: item.title,
+              alt: item.altText || item.title,
               caption: item.description,
               category: item.category,
               thumbnail: item.image,
             }))}
             categories={['Gunpla']}
             columns={3}
-            accentColor="neon"
+            accentColor="secondary"
             enableFiltering={false}
             enableLightbox={true}
             enableLazyLoad={true}
@@ -243,13 +251,13 @@ export default async function Showcase() {
         <DecorativeDivider color="vibrant" variant="line-dots" dotCount={7} className="bg-primary" />
 
         {/* POKÉMON SECTION - MAGENTA */}
-        <section className="mb-20 relative">
+        <section className="mb-20 py-12 sm:py-16 lg:py-20 relative">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="dots"
             pattern2="checkerboard"
-            color1="magenta"
-            color2="neon"
+            color1="tertiary"
+            color2="secondary"
             opacity1={0.03}
             opacity2={0.02}
             rotation={45}
@@ -257,8 +265,8 @@ export default async function Showcase() {
           />
           <div className="relative z-10">
           <ScrollFade>
-            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-magenta)' }}>
-              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-magenta)' }}>▶ POKÉMON CARD COLLECTION</Heading>
+            <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-tertiary)' }}>
+              <Heading level={2} className="mb-4 uppercase text-readable" style={{ color: 'var(--accent-tertiary)' }}>▶ POKÉMON CARD COLLECTION</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Premium trading card collection spanning vintage base sets, holographic rares, and modern chase cards. Japanese imports, graded specimens, and official promotional releases.
               </p>
@@ -267,14 +275,14 @@ export default async function Showcase() {
           <EnhancedGallery
             images={pokemonShowcase.map((item: any) => ({
               src: item.image,
-              alt: item.title,
+              alt: item.altText || item.title,
               caption: item.description,
               category: item.category,
               thumbnail: item.image,
             }))}
             categories={['Pokémon']}
             columns={3}
-            accentColor="magenta"
+            accentColor="tertiary"
             enableFiltering={false}
             enableLightbox={true}
             enableLazyLoad={true}
@@ -283,7 +291,7 @@ export default async function Showcase() {
         </section>
 
         {/* Decorative Divider */}
-        <DecorativeDivider color="neon" variant="line-dots" dotCount={5} className="bg-primary" />
+        <DecorativeDivider color="secondary" variant="line-dots" dotCount={5} className="bg-primary" />
 
         {/* CTA Section */}
         <CTASection

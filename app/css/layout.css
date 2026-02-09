@@ -83,14 +83,9 @@
 
 .sidebar-theme-selector {
   margin-bottom: 1rem;
-}
-
-.theme-buttons {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.5rem;
-  width: auto;
 }
 
 .sidebar-sections {
@@ -137,12 +132,14 @@
 .sidebar-links a:hover {
   color: var(--accent-vibrant);
   border-left-color: var(--accent-vibrant);
+  text-decoration: none;
 }
 
 .sidebar-links a.active {
   color: var(--accent-vibrant);
   border-left-color: var(--accent-vibrant);
   background-color: var(--bg-tertiary);
+  text-decoration: none;
 }
 
 .sidebar-footer {
