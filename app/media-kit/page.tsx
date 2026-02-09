@@ -76,9 +76,9 @@ export default function MediaKit() {
 
           {/* Left: Title */}
           <div className="relative z-10">
-            <div className="retro-label text-tertiary uppercase text-xs tracking-widest mb-4">→ METRICS & INSIGHTS</div>
+            <div className="section-label">→ Metrics & Insights</div>
             <Heading level={1} className="mb-6">MEDIA<br />KIT</Heading>
-            <p className="text-lg text-secondary max-w-lg mb-8">
+            <p className="text-lg text-primary max-w-lg mb-8">
               Comprehensive audience data, platform breakdown, and collaboration potential metrics
             </p>
             <div className="flex gap-4">
@@ -156,7 +156,7 @@ export default function MediaKit() {
         {/* PLATFORM BREAKDOWN */}
         <section className="py-20 border-t border-primary">
           <div className="mb-16">
-            <span className="retro-label text-secondary text-xs">→ PLATFORM PRESENCE</span>
+            <span className="section-label">→ Platform Presence</span>
             <Heading level={2} className="mt-4">Social Reach</Heading>
           </div>
 
@@ -212,7 +212,7 @@ export default function MediaKit() {
         {/* CONTENT DISTRIBUTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-vibrant text-xs">→ CONTENT MIX</span>
+            <span className="section-label">→ Content Mix</span>
             <Heading level={2} className="mt-4">Distribution</Heading>
           </div>
 
@@ -239,7 +239,7 @@ export default function MediaKit() {
                   />
                 </div>
                 
-                <p className="text-secondary text-sm">
+                <p className="text-primary text-sm">
                   {category.description}
                 </p>
               </div>
@@ -250,19 +250,19 @@ export default function MediaKit() {
         {/* AUDIENCE DEMOGRAPHICS */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-tertiary text-xs">→ AUDIENCE INSIGHTS</span>
+            <span className="section-label">→ Audience Insights</span>
             <Heading level={2} className="mt-4">Demographics</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Age Distribution */}
-            <div className="border-bold border-vibrant bg-vibrant-faint p-8">
+            <div className="border-l-4 border-vibrant bg-primary p-8">
               <Heading level={3} className="mb-8">Age Distribution</Heading>
               <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.age.map((age, idx) => (
                   <div key={idx} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-bold text-secondary">{age.range}</span>
+                      <span className="text-sm font-bold text-primary">{age.range}</span>
                       <span className="text-vibrant font-black text-lg">{age.percentage}%</span>
                     </div>
                     <div className="h-3 border border-vibrant bg-primary relative overflow-hidden">
@@ -277,13 +277,13 @@ export default function MediaKit() {
             </div>
 
             {/* Gender Distribution */}
-            <div className="border-bold border-secondary bg-secondary-faint p-8">
+            <div className="border-l-4 border-secondary bg-primary p-8">
               <Heading level={3} className="mb-8">Gender</Heading>
               <div className="space-y-6">
                 {MEDIA_KIT_DATA.audience.gender.map((gender, idx) => (
                   <div key={idx} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-bold text-secondary">{gender.label}</span>
+                      <span className="text-sm font-bold text-primary">{gender.label}</span>
                       <span className="text-secondary font-black text-lg">{gender.percentage}%</span>
                     </div>
                     <div className="h-3 border border-secondary bg-primary relative overflow-hidden">
@@ -298,12 +298,12 @@ export default function MediaKit() {
             </div>
 
             {/* Top Locations */}
-            <div className="border-bold border-tertiary bg-tertiary-faint p-8">
+            <div className="border-l-4 border-tertiary bg-primary p-8">
               <Heading level={3} className="mb-8">Top Locations</Heading>
               <div className="space-y-4">
                 {MEDIA_KIT_DATA.audience.locations.map((location, idx) => (
                   <div key={idx} className="flex justify-between items-center pb-3 border-b border-tertiary">
-                    <span className="text-sm font-bold text-secondary">{location.country}</span>
+                    <span className="text-sm font-bold text-primary">{location.country}</span>
                     <span className="text-tertiary font-black">{location.percentage}%</span>
                   </div>
                 ))}
@@ -315,7 +315,7 @@ export default function MediaKit() {
         {/* COLLABORATION PACKAGES */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-tertiary text-xs">→ OPPORTUNITIES</span>
+            <span className="section-label">→ Opportunities</span>
             <Heading level={2} className="mt-4">Collaborate</Heading>
           </div>
 
@@ -342,7 +342,7 @@ export default function MediaKit() {
                     {pkg.features.map((feature, fidx) => (
                       <li key={fidx} className="flex items-center gap-3">
                         <span style={{ color: colors.text }} className="text-lg font-black">▶</span>
-                        <span className="text-secondary text-sm">{feature}</span>
+                        <span className="text-primary text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>

@@ -8,6 +8,7 @@ import {
   LayeredPatternOverlay,
   DecorativeCornerBracket,
 } from '@/components/effects';
+import { Marquee } from '@/components/effects/Marquee';
 import { Heading } from '@/components/typography';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -64,6 +65,13 @@ export default function Home() {
           <HomeHero />
         </div>
       </section>
+
+      {/* MARQUEE - Animated Keywords */}
+      <Marquee
+        items={['Choreography', 'Content Creation', 'Brand Partnerships', 'Live Performance', 'Creative Direction', 'Digital Media']}
+        speed={25}
+        pauseOnHover={true}
+      />
 
       {/* BOLD STATS & METRICS SECTION - MAXIMALIST */}
       <section 
@@ -127,17 +135,20 @@ export default function Home() {
           rotation={-15}
         />
 
-        {/* Maximalist background decoration */}
-        <div className="absolute inset-0 opacity-3 pointer-events-none">
-          <div className="absolute top-1/4 right-0 w-96 h-96 border-4 border-secondary rounded-full" />
-          <div className="absolute -bottom-20 left-1/3 w-80 h-80 border-3 border-tertiary" style={{ borderStyle: 'dashed' }} />
+        {/* Decorative background circles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full opacity-3" style={{
+            background: 'radial-gradient(circle, var(--accent-secondary), transparent)',
+          }} />
+          <div className="absolute -bottom-32 left-1/4 w-80 h-80 rounded-full opacity-2" style={{
+            background: 'radial-gradient(circle, var(--accent-tertiary), transparent)',
+          }} />
         </div>
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-16 pr-0 md:pr-12">
-            <span className="retro-label text-tertiary text-xs">→ PRIMARY FOCUS AREAS</span>
+            <span className="section-label">→ Primary Focus Areas</span>
             <Heading level={2} className="mt-4 mb-6">What I<br />Specialize In</Heading>
-            <div className="w-32 h-3 bg-vibrant" />
           </div>
 
           {/* EDITORIAL ASYMMETRIC GRID */}
@@ -161,7 +172,7 @@ export default function Home() {
               </div>
               <div className="p-6 border-t-3 border-vibrant">
                 <Heading level={3} className="mb-3">Dance Portfolio</Heading>
-                <p className="text-sm text-secondary font-body">
+                <p className="text-sm text-primary font-body">
                   Choreography, freestyle, performances & tutorials
                 </p>
               </div>
@@ -186,7 +197,7 @@ export default function Home() {
               </div>
               <div className="p-6 border-t-3 border-secondary">
                 <Heading level={3} className="mb-3">Creative Showcase</Heading>
-                <p className="text-sm text-secondary font-body">
+                <p className="text-sm text-primary font-body">
                   Model builds, collections & digital media
                 </p>
               </div>
@@ -211,7 +222,7 @@ export default function Home() {
               </div>
               <div className="p-6 border-t-3 border-tertiary">
                 <Heading level={3} className="mb-3">Collaborations</Heading>
-                <p className="text-sm text-secondary font-body">
+                <p className="text-sm text-primary font-body">
                   Partnerships, campaigns & brand opportunities
                 </p>
               </div>
@@ -222,7 +233,7 @@ export default function Home() {
           {/* What's Possible - Services Grid */}
           <div className="border-t-4 border-primary pt-16">
             <div className="mb-12">
-              <h3 className="text-lg font-black uppercase tracking-widest text-tertiary retro-label mb-3">→ Services & Offerings</h3>
+              <h3 className="section-label">→ Services & Offerings</h3>
               <Heading level={3}>What We Can Create</Heading>
             </div>
             <ScrollStagger variant="scaleUp" staggerDelay={60}>
@@ -323,7 +334,7 @@ export default function Home() {
                       <h4 className="font-bold mb-1 text-primary">
                         {feature.title}
                       </h4>
-                      <p className="text-sm text-secondary">
+                      <p className="text-sm text-primary">
                         {feature.desc}
                       </p>
                     </div>
@@ -344,7 +355,7 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
             Let's Create Something Extraordinary
           </h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto text-secondary">
+          <p className="text-lg mb-8 max-w-2xl mx-auto text-primary">
             From concept to execution, I'm ready to bring your movement and creative vision to life.
           </p>
           <a 

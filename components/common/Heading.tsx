@@ -98,12 +98,12 @@ function getTextColor(color: TextColor): string {
   if (color === 'inherit') return 'inherit';
   
   const colorMap = {
-    primary: 'text-primary dark:text-white',
-    secondary: 'text-secondary dark:text-gray-300',
+    primary: 'text-primary',
+    secondary: 'text-secondary',
     vibrant: 'text-accent-vibrant',
     tertiary: 'text-tertiary',
   };
-  return colorMap[color] || 'text-primary dark:text-white';
+  return colorMap[color] || 'text-primary';
 }
 
 /**

@@ -88,8 +88,8 @@ export default function Card({
   
   // Variant-specific classes
   const variantClasses = {
-    default: `border-${DESIGN_TOKENS.BORDERS.WIDTH.SM} bg-white dark:bg-slate-900`,
-    enhanced: `border-${DESIGN_TOKENS.BORDERS.WIDTH.SM} bg-white dark:bg-slate-900 shadow-${DESIGN_TOKENS.SHADOW.SM}`,
+    default: `border-${DESIGN_TOKENS.BORDERS.WIDTH.SM} bg-primary`,
+    enhanced: `border-${DESIGN_TOKENS.BORDERS.WIDTH.SM} bg-primary shadow-${DESIGN_TOKENS.SHADOW.SM}`,
     cta: `border-none shadow-${DESIGN_TOKENS.SHADOW.LG}`,
     content: `border-${DESIGN_TOKENS.BORDERS.WIDTH.SM} bg-transparent`,
     accent: `border-${DESIGN_TOKENS.BORDERS.WIDTH.MD} bg-transparent`,

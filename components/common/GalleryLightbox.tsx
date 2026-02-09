@@ -128,7 +128,11 @@ export default function GalleryLightbox({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 text-white hover:bg-white/20 transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+          className="absolute top-4 right-4 z-10 p-2 text-overlay hover:bg-overlay-light transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2"
+          style={{
+            '--tw-ring-color': '#ffffff',
+            '--tw-ring-offset-color': 'rgba(0, 0, 0, 0.5)',
+          } as React.CSSProperties}
           aria-label="Close gallery"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +175,7 @@ export default function GalleryLightbox({
 
         {/* Caption */}
         {currentImage.caption && (
-          <p className="text-center text-white text-sm mb-4 max-w-2xl" id="gallery-title">
+          <p className="text-center text-overlay text-sm mb-4 max-w-2xl" id="gallery-title">
             {currentImage.caption}
           </p>
         )}
@@ -181,7 +185,11 @@ export default function GalleryLightbox({
           {/* Previous Button */}
           <button
             onClick={goToPrevious}
-            className="p-2 text-white hover:bg-white/20 active:bg-white/30 transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/50 hover:scale-110"
+            className="p-2 text-overlay hover:bg-overlay-light active:bg-overlay-lighter transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 hover:scale-110"
+            style={{
+              '--tw-ring-color': '#ffffff',
+              '--tw-ring-offset-color': 'rgba(0, 0, 0, 0.5)',
+            } as React.CSSProperties}
             disabled={totalImages <= 1}
             aria-label="Previous image"
             title="Previous (←)"
@@ -194,7 +202,7 @@ export default function GalleryLightbox({
           {/* Counter & Thumbnails */}
           <div className="flex flex-col items-center gap-4 flex-1 mx-4">
             <div className="relative h-6 flex items-center justify-center">
-              <p className="text-white text-sm font-medium transition-all duration-300" aria-live="polite" aria-atomic="true">
+              <p className="text-overlay text-sm font-medium transition-all duration-300" aria-live="polite" aria-atomic="true">
                 <span className={`inline-block transition-all duration-300 ${isLoading ? 'opacity-50 scale-95' : 'opacity-100 scale-100'}`} id="current-image">{currentIndex + 1}</span> / <span id="total-images">{totalImages}</span>
               </p>
             </div>
@@ -210,11 +218,14 @@ export default function GalleryLightbox({
                     setIsLoading(true);
                     setShowHelpHint(false);
                   }}
-                  className={`flex-shrink-0 w-12 h-12 rounded transition-all focus:outline-none focus:ring-2 focus:ring-white hover:scale-110 ${
+                  className={`shrink-0 w-12 h-12 rounded transition-all focus:outline-none focus:ring-2 hover:scale-110 ${
                     idx === currentIndex
-                      ? 'ring-2 ring-white scale-110 shadow-lg'
+                      ? 'ring-2 scale-110 shadow-lg'
                       : 'opacity-60 hover:opacity-100'
                   }`}
+                  style={{
+                    '--tw-ring-color': idx === currentIndex ? '#ffffff' : 'transparent',
+                  } as React.CSSProperties}
                   aria-label={`View image ${idx + 1}: ${img.alt}`}
                   aria-current={idx === currentIndex ? 'true' : 'false'}
                 >
@@ -235,7 +246,11 @@ export default function GalleryLightbox({
           {/* Next Button */}
           <button
             onClick={goToNext}
-            className="p-2 text-white hover:bg-white/20 active:bg-white/30 transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/50 hover:scale-110"
+            className="p-2 text-overlay hover:bg-overlay-light active:bg-overlay-lighter transition-all rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 hover:scale-110"
+            style={{
+              '--tw-ring-color': '#ffffff',
+              '--tw-ring-offset-color': 'rgba(0, 0, 0, 0.5)',
+            } as React.CSSProperties}
             disabled={totalImages <= 1}
             aria-label="Next image"
             title="Next (→)"
@@ -250,20 +265,20 @@ export default function GalleryLightbox({
         {(allowKeyboardNav || allowTouchGestures) && (
           <div className="mt-6 text-center space-y-3">
             {showHelpHint && (
-              <div className="px-4 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 animate-fadeIn">
-                <div className="space-y-2 text-sm">
-                  {allowKeyboardNav && (
-                    <div className="flex justify-center gap-6 text-white/90 flex-wrap">
-                      <span className="flex items-center gap-2">
-                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs font-bold">←</kbd>
-                        <span>Previous</span>
-                      </span>
-                      <span className="flex items-center gap-2">
-                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs font-bold">→</kbd>
-                        <span>Next</span>
-                      </span>
-                      <span className="flex items-center gap-2">
-                        <kbd className="px-2 py-1 bg-white/20 rounded text-xs font-bold">ESC</kbd>
+            <div className="px-4 py-3 bg-overlay-lighter backdrop-blur-sm rounded-lg border border-overlay-light animate-fadeIn">
+              <div className="space-y-2 text-sm">
+                {allowKeyboardNav && (
+                  <div className="flex justify-center gap-6 text-overlay flex-wrap">
+                    <span className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-overlay-light rounded text-xs font-bold">←</kbd>
+                      <span>Previous</span>
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-overlay-light rounded text-xs font-bold">→</kbd>
+                      <span>Next</span>
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-overlay-light rounded text-xs font-bold">ESC</kbd>
                         <span>Close</span>
                       </span>
                     </div>

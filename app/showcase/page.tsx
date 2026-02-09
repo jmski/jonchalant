@@ -139,9 +139,9 @@ export default async function Showcase() {
   return (
     <div className="min-h-screen page-wrapper bg-primary">
       <PageTransition animation="slide-right">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="main-content">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-24" id="main-content">
         {/* TECHNICAL HERO SECTION */}
-        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative py-12 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Technical background grid */}
           <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
             backgroundImage: `
@@ -208,7 +208,7 @@ export default async function Showcase() {
         </div>
 
         {/* GUNPLA SECTION - NEON CYAN */}
-        <section className="mb-24 relative">
+        <section className="mb-24 py-12 sm:py-16 lg:py-20 relative">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="grid"
@@ -223,7 +223,7 @@ export default async function Showcase() {
           <div className="relative z-10">
           <ScrollFade>
             <div className="mb-12 pb-6 border-b-3 relative" style={{ borderColor: 'var(--accent-secondary)' }}>
-              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-secondary)' }}>▶ GUNPLA BUILD GALLERY</Heading>
+              <Heading level={2} className="mb-4 uppercase text-readable" style={{ color: 'var(--accent-secondary)' }}>▶ GUNPLA BUILD GALLERY</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Custom Gundam model engineering featuring Real Grade, Master Grade, and Perfect Grade builds with professional photography, LED customization, and hand-painted details.
               </p>
@@ -251,7 +251,7 @@ export default async function Showcase() {
         <DecorativeDivider color="vibrant" variant="line-dots" dotCount={7} className="bg-primary" />
 
         {/* POKÉMON SECTION - MAGENTA */}
-        <section className="mb-20 relative">
+        <section className="mb-20 py-12 sm:py-16 lg:py-20 relative">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="dots"
@@ -266,7 +266,7 @@ export default async function Showcase() {
           <div className="relative z-10">
           <ScrollFade>
             <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-tertiary)' }}>
-              <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-tertiary)' }}>▶ POKÉMON CARD COLLECTION</Heading>
+              <Heading level={2} className="mb-4 uppercase text-readable" style={{ color: 'var(--accent-tertiary)' }}>▶ POKÉMON CARD COLLECTION</Heading>
               <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                 Premium trading card collection spanning vintage base sets, holographic rares, and modern chase cards. Japanese imports, graded specimens, and official promotional releases.
               </p>

@@ -1,0 +1,46 @@
+VISUAL POLISH AUDIT - Dance, Showcase, Collaborations Pages
+============================================================
+
+Areas to Review:
+
+1. SPACING & ALIGNMENT
+   - Consistent padding in sections (should use Tailwind py-16 sm:py-24 lg:py-32)
+   - Gap between grid items
+   - Horizontal padding consistency
+   - Vertical rhythm between sections
+
+2. TYPOGRAPHY HIERARCHY
+   - Section titles sizing
+   - Subtitle sizing  
+   - Body text readability
+   - Label styling consistency
+
+3. COMPONENT STYLING
+   - Card padding and borders
+   - Button hover states
+   - Icon styling
+   - Border styling consistency
+
+4. RESPONSIVE DESIGN
+   - Mobile layout (flex-col)
+   - Tablet layout (2-column grids)
+   - Desktop layout (3-column grids)
+   - Text scaling appropriateness
+
+5. ANIMATIONS & INTERACTIONS
+   - Hover states on cards and buttons
+   - Smooth transitions (use var(--transition-base))
+   - Scroll animations
+   - Loading states
+
+6. COLOR & CONTRAST
+   - Sufficient contrast for accessibility
+   - Proper use of accent colors
+   - Background/text pairing
+
+7. CONSISTENCY ACROSS PAGES
+   - All three pages follow same structure
+   - Hero sections are consistent
+   - CTA buttons match
+   - Dividers match
+

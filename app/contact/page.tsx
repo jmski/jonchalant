@@ -66,9 +66,9 @@ export default function Contact() {
 
           {/* Left: Title */}
           <div className="relative z-10">
-            <div className="retro-label text-tertiary uppercase text-xs tracking-widest mb-4">→ LET'S TALK</div>
+            <div className="section-label">→ Let's Talk</div>
             <Heading level={1} className="mb-6">GET IN<br />TOUCH</Heading>
-            <p className="text-lg text-secondary max-w-lg mb-8">
+            <p className="text-lg text-primary max-w-lg mb-8">
               Have a collaboration idea? Let's discuss how we can work together on your next project.
             </p>
             <div className="flex gap-4">
@@ -121,8 +121,8 @@ export default function Contact() {
             return (
               <div
                 key={idx}
-                className="border-bold group cursor-pointer transition-all duration-300 hover:shadow-bold p-8 text-center"
-                style={{ borderColor: colorMap[contact.color], backgroundColor: `var(--bg-${contact.color}-faint)` }}
+                className="border-l-4 bg-primary group cursor-pointer transition-all duration-300 hover:shadow-bold p-8 text-center"
+                style={{ borderColor: colorMap[contact.color] }}
               >
                 <div style={{ color: colorMap[contact.color] }} className="text-5xl mb-4">
                   {contact.icon}
@@ -130,7 +130,7 @@ export default function Contact() {
                 <h3 style={{ color: colorMap[contact.color] }} className="text-lg font-black uppercase retro-label mb-2">
                   {contact.method}
                 </h3>
-                <p className="text-secondary font-bold mono-text">
+                <p className="text-primary font-bold mono-text">
                   {contact.value}
                 </p>
               </div>
@@ -142,7 +142,7 @@ export default function Contact() {
         {/* FORM SECTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-tertiary text-xs">→ DIRECT MESSAGE</span>
+            <span className="section-label">→ Direct Message</span>
             <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
               Send a Message
             </h2>
@@ -150,12 +150,12 @@ export default function Contact() {
 
           <div className="max-w-2xl">
             {submitted ? (
-              <div className="border-bold border-neon bg-neon-faint p-16 text-center">
+              <div className="border-l-4 border-vibrant bg-primary p-16 text-center">
                 <div className="text-6xl mb-6">✨</div>
                 <h3 className="text-4xl font-black text-primary mb-3 heading-display">
                   Message Sent!
                 </h3>
-                <p className="text-secondary text-lg">
+                <p className="text-primary text-lg">
                   Thanks for reaching out. I'll get back to you within 24 hours.
                 </p>
               </div>
@@ -187,7 +187,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 border-2 border-neon bg-primary text-primary focus:outline-none focus:shadow-bold transition-all"
+                    className="w-full px-6 py-4 border-2 bg-primary text-primary focus:outline-none focus:shadow-bold transition-all"
                     placeholder="you@example.com"
                     style={{ borderColor: 'var(--accent-secondary)' }}
                   />
@@ -222,16 +222,16 @@ export default function Contact() {
 
         {/* INFO SECTION */}
         <section className="py-20 border-t border-primary grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="border-bold border-vibrant bg-vibrant-faint p-8">
+          <div className="border-l-4 border-vibrant bg-primary p-8">
             <h3 className="text-2xl font-black text-primary heading-display mb-4">Response Time</h3>
-            <p className="text-secondary text-sm leading-relaxed">
+            <p className="text-primary text-sm leading-relaxed">
               I typically respond to all inquiries within 24 hours. For urgent matters, reach out on Instagram @jonchalon.
             </p>
           </div>
 
-          <div className="border-bold border-neon bg-neon-faint p-8">
+          <div className="border-l-4 border-secondary bg-primary p-8">
             <h3 className="text-2xl font-black text-primary heading-display mb-4">Collaboration Types</h3>
-            <p className="text-secondary text-sm leading-relaxed">
+            <p className="text-primary text-sm leading-relaxed">
               Open to choreography, content direction, brand partnerships, educational workshops, and creative consulting projects.
             </p>
           </div>

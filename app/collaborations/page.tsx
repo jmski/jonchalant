@@ -167,9 +167,9 @@ export default async function Collaborations() {
   return (
     <div className="min-h-screen page-wrapper bg-primary">
       <PageTransition animation="scale">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="main-content">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-24" id="main-content">
         {/* TECHNICAL HERO SECTION */}
-        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative py-12 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Technical background grid */}
           <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
             backgroundImage: `
@@ -193,10 +193,10 @@ export default async function Collaborations() {
               <div className="h-1 w-40 bg-tertiary" />
             </div>
 
-            <p className="text-lg font-black text-secondary leading-tight">
+            <p className="text-lg font-black text-primary leading-tight">
               Music Videos | Brands | Events | Content
             </p>
-            <p className="text-base leading-relaxed text-tertiary font-body max-w-lg">
+            <p className="text-base leading-relaxed text-primary font-body max-w-lg">
               Strategic collaborations that blend movement, creativity, and storytelling. From TikTok trends to major brand campaigns, let's create something unforgettable together.
             </p>
 
@@ -249,7 +249,7 @@ export default async function Collaborations() {
         </div>
 
         {/* SERVICE CATEGORIES - COLOR CODED */}
-        <section className="mb-24 relative">
+        <section className="mb-24 py-12 sm:py-16 lg:py-20 relative">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="checkerboard"
@@ -263,8 +263,8 @@ export default async function Collaborations() {
           />
           <div className="relative z-10">
             <ScrollFade>
-              <div className="mb-12">
-                <Heading level={2} className="mb-4 uppercase">Services & Collaboration Types</Heading>
+              <div className="mb-12 pb-6 border-b-3 border-accent" style={{ borderColor: 'var(--accent-vibrant)' }}>
+                <Heading level={2} className="mb-4 uppercase text-readable" style={{ color: 'var(--text-primary)' }}>Services & Collaboration Types</Heading>
                 <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                   Flexible pricing and customizable packages based on your project scope and requirements.
                 </p>
@@ -272,17 +272,17 @@ export default async function Collaborations() {
             </ScrollFade>
 
             <ScrollStagger variant="slideInUp" staggerDelay={100}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
               {SERVICE_CATEGORIES.map((category, idx) => {
                 const colorVar = getColorVar(category.color);
                 return (
                   <div key={idx} className="relative group">
                       <div 
-                        className="border-t-4 pt-6 pb-8 px-8 transition-all duration-300 hover:shadow-lg"
+                        className="border-t-4 pt-6 pb-8 px-8 interactive-element transition-all duration-300 hover:shadow-lg"
                         style={{ borderColor: colorVar, backgroundColor: 'rgba(255,255,255, 0.01)' }}
                       >
                         <h3 
-                          className="text-3xl font-black uppercase heading-display tracking-widest mb-6"
+                          className="text-2xl sm:text-3xl font-black uppercase heading-display tracking-widest mb-6"
                           style={{ color: colorVar }}
                         >
                           {category.name}
@@ -290,8 +290,8 @@ export default async function Collaborations() {
                         <ul className="space-y-3">
                           {category.items.map((item, i) => (
                             <li key={i} className="flex items-start gap-3">
-                              <span className="text-lg font-black mt-1" style={{ color: colorVar }}>✓</span>
-                              <span className="text-sm leading-relaxed text-tertiary font-body">{item}</span>
+                              <span className="text-lg font-black mt-1 flex-shrink-0" style={{ color: colorVar }}>✓</span>
+                              <span className="text-sm leading-relaxed text-tertiary font-body text-readable">{item}</span>
                             </li>
                           ))}
                         </ul>
@@ -314,7 +314,7 @@ export default async function Collaborations() {
         <DecorativeDivider color="secondary" variant="line-dots" dotCount={7} className="bg-primary mb-24" />
 
         {/* PAST COLLABORATIONS */}
-        <section className="mb-24 relative">
+        <section className="mb-24 py-12 sm:py-16 lg:py-20 relative">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="grid"
@@ -329,25 +329,25 @@ export default async function Collaborations() {
           <div className="relative z-10">
             <ScrollFade>
               <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-tertiary)' }}>
-                <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-tertiary)' }}>▶ Recent Projects</Heading>
+                <Heading level={2} className="mb-4 uppercase text-readable" style={{ color: 'var(--accent-tertiary)' }}>▶ Recent Projects</Heading>
                 <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                   A selection of successful brand partnerships and creative collaborations.
                 </p>
               </div>
             </ScrollFade>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {services.slice(0, 6).map((collab: any, idx: number) => (
                 <ScrollFade key={collab._id} delay={idx * 100}>
-                  <div className="group relative border-2 border-tertiary p-6 hover:border-tertiary transition-all duration-300">
+                  <div className="group relative border-2 border-tertiary card-padding interactive-element hover:border-accent-vibrant transition-all duration-300 hover:shadow-lg">
                     <CornerBrackets position="all" size="md" color="tertiary" /> 
-                    <h3 className="text-xl font-black uppercase tracking-widest text-primary mb-2">
+                    <h3 className="text-lg sm:text-xl font-black uppercase tracking-widest text-primary mb-2">
                       {collab.title}
                     </h3>
                     <p className="text-xs font-black uppercase tracking-widest text-tertiary mb-4">
                       {collab.category}
                     </p>
-                    <p className="text-sm leading-relaxed text-tertiary font-body mb-4">
+                    <p className="text-sm leading-relaxed text-tertiary font-body text-readable mb-4">
                       {collab.description}
                     </p>
                     {collab.price && (
@@ -371,7 +371,7 @@ export default async function Collaborations() {
         <DecorativeDivider color="vibrant" variant="line-dots" dotCount={5} className="bg-primary mb-24" />
 
         {/* COLLABORATION FORM */}
-        <section id="collaboration-form" className="mb-20 py-12 relative">
+        <section id="collaboration-form" className="mb-20 py-12 sm:py-16 lg:py-20 relative">
           {/* Pattern background */}
           <LayeredPatternOverlay
             pattern1="dots"
@@ -386,7 +386,7 @@ export default async function Collaborations() {
           <div className="relative z-10">
             <ScrollFade>
               <div className="mb-12 pb-6 border-b-3" style={{ borderColor: 'var(--accent-vibrant)' }}>
-                <Heading level={2} className="mb-4 uppercase" style={{ color: 'var(--accent-vibrant)' }}>▶ Let's Connect</Heading>
+                <Heading level={2} className="mb-4 uppercase text-readable" style={{ color: 'var(--accent-vibrant)' }}>▶ Let's Connect</Heading>
                 <p className="text-base leading-relaxed text-tertiary font-body max-w-2xl">
                   Have a project in mind? Send your collaboration inquiry below. I respond to all inquiries within 48 hours.
                 </p>

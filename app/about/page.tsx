@@ -23,9 +23,9 @@ export default function About() {
 
           {/* Left: Title */}
           <div className="relative z-10">
-            <div className="retro-label text-vibrant uppercase text-xs tracking-widest mb-4">→ ORIGIN STORY</div>
+            <div className="section-label">→ Origin Story</div>
             <Heading level={1} className="mb-6">JON<br />CHALON</Heading>
-            <p className="text-lg text-secondary max-w-lg">
+            <p className="text-lg text-primary max-w-lg">
               Professional choreographer. Creator. Collaborator. Blending movement, technology, and otaku culture.
             </p>
           </div>
@@ -63,13 +63,13 @@ export default function About() {
         {/* BIO SECTION */}
         <section className="py-20 border-t border-primary grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
-            <p className="text-lg text-secondary leading-relaxed">
+            <p className="text-lg text-primary leading-relaxed">
               I'm a professional choreographer and digital creator with 8+ years of experience delivering high-impact movement content for brands, creators, and live productions. My work combines technical choreographic precision with creative innovation.
             </p>
-            <p className="text-lg text-secondary leading-relaxed">
+            <p className="text-lg text-primary leading-relaxed">
               From TikTok viral choreography to music video direction, brand collaborations to educational workshops—I bring both artistic vision and strategic thinking to every project. I specialize in bridging the gap between artistic movement and commercial success.
             </p>
-            <p className="text-lg text-secondary leading-relaxed">
+            <p className="text-lg text-primary leading-relaxed">
               Beyond choreography, I'm deeply invested in animation (Gunpla), Pokémon culture, and the intersection of internet aesthetics with professional content creation. These intersecting worlds inform my creative approach and help me connect with diverse audiences.
             </p>
           </div>
@@ -109,7 +109,7 @@ export default function About() {
         {/* EXPERTISE SECTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-tertiary text-xs">→ SPECIALIZATIONS</span>
+            <span className="section-label">→ Specializations</span>
             <Heading level={2} className="mt-4">What I Do</Heading>
           </div>
 
@@ -127,13 +127,13 @@ export default function About() {
               return (
                 <div
                   key={idx}
-                  className="border-bold group cursor-pointer transition-all duration-300 hover:shadow-bold p-8"
-                  style={{ borderColor: colorMap[service.color], backgroundColor: `var(--bg-${service.color}-faint)` }}
+                  className="border-l-4 bg-primary group cursor-pointer transition-all duration-300 hover:shadow-bold p-8"
+                  style={{ borderColor: colorMap[service.color] }}
                 >
-                  <div style={{ color: colorMap[service.color] }} className="retro-label text-xs uppercase mb-3">
+                  <h3 className="text-primary font-bold text-lg mb-3 uppercase tracking-wide">
                     {service.title}
-                  </div>
-                  <p className="text-secondary text-sm leading-relaxed">
+                  </h3>
+                  <p className="text-primary text-sm leading-relaxed">
                     {service.desc}
                   </p>
                 </div>
@@ -146,7 +146,7 @@ export default function About() {
         {/* PHILOSOPHY SECTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-tertiary text-xs">→ APPROACH</span>
+            <span className="section-label">→ Approach</span>
             <Heading level={2} className="mt-4 mb-12">Philosophy</Heading>
           </div>
 
@@ -162,7 +162,7 @@ export default function About() {
                 <h3 className="heading-display text-2xl font-black text-primary mb-4">
                   {philosophy.title}
                 </h3>
-                <p className="text-secondary text-sm leading-relaxed">
+                <p className="text-primary text-sm leading-relaxed">
                   {philosophy.desc}
                 </p>
                 
@@ -175,23 +175,23 @@ export default function About() {
         {/* HOBBIES SECTION */}
         <section className="py-20 border-t border-primary">
           <div className="mb-12">
-            <span className="retro-label text-tertiary text-xs">→ OUTSIDE THE STUDIO</span>
+            <span className="section-label">→ Outside the Studio</span>
             <Heading level={2} className="mt-4">Also Known For</Heading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="border-bold border-secondary bg-secondary-faint p-8">
+            <div className="border-l-4 border-secondary bg-primary p-8">
               <div className="text-5xl mb-4">🤖</div>
               <Heading level={3} className="mb-4">Gunpla Building</Heading>
-              <p className="text-secondary text-sm leading-relaxed">
+              <p className="text-primary text-sm leading-relaxed">
                 Scale modeling enthusiast. I approach Gunpla with the same precision and attention to detail as choreography. The intricate assembly process mirrors creative composition—each piece has its role in the larger vision.
               </p>
             </div>
 
-            <div className="border-bold border-tertiary bg-tertiary-faint p-8">
+            <div className="border-l-4 border-tertiary bg-primary p-8">
               <div className="text-5xl mb-4">🎴</div>
               <Heading level={3} className="mb-4">Pokémon Collecting</Heading>
-              <p className="text-secondary text-sm leading-relaxed">
+              <p className="text-primary text-sm leading-relaxed">
                 Active collector and enthusiast. The Pokémon universe connects with my audience and influences my creative aesthetic. Nostalgia, design, and community matter. It's not just a hobby—it's cultural commentary.
               </p>
             </div>
