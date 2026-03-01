@@ -82,7 +82,7 @@ export default function Contact() {
                 <a
                   key={idx}
                   href={method.href}
-                  className="border border-slate-200 border-b-2 p-8 rounded hover:shadow-md transition-shadow duration-300 text-center group"
+                  className="border p-8 rounded hover:shadow-md transition-shadow duration-300 text-center no-underline hover:no-underline"
                 >
                   <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-3">
                     {method.label}
@@ -129,7 +129,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all"
+                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all"
                       placeholder="Your full name"
                     />
                   </div>
@@ -144,7 +144,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all"
+                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -159,14 +159,14 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all resize-none"
+                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all resize-none"
                       placeholder="Tell me about your project or inquiry..."
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded transition-colors duration-200"
+                    className="btn btn-primary w-full"
                   >
                     Send Message
                   </button>
