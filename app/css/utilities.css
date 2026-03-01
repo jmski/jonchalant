@@ -79,6 +79,36 @@
   border-color: var(--accent-tertiary);
 }
 
+/* GROUP HOVER VARIANTS */
+.group:hover .group-hover\:text-vibrant {
+  color: var(--accent-vibrant);
+}
+.group:hover .group-hover\:text-secondary {
+  color: var(--accent-secondary);
+}
+.group:hover .group-hover\:text-tertiary {
+  color: var(--accent-tertiary);
+}
+.group:hover .group-hover\:border-vibrant {
+  border-color: var(--accent-vibrant);
+}
+.group:hover .group-hover\:border-secondary {
+  border-color: var(--accent-secondary);
+}
+
+/* TEXT DECORATION UTILITIES */
+.no-underline {
+  text-decoration: none !important;
+}
+
+.no-underline:hover {
+  text-decoration: none !important;
+}
+
+.no-underline:focus {
+  text-decoration: none !important;
+}
+
 /* SPACING UTILITIES */
 .section-spacing {
   padding: 2rem 0;

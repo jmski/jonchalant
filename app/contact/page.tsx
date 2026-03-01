@@ -42,85 +42,112 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white">
       <PageTransition animation="fade">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           {/* HERO SECTION */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-block">
-                <span className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">Direct Inquiry</span>
+                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Direct Inquiry</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
                 Get in Touch
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-lg sm:text-xl text-slate-700 leading-relaxed">
                 Have a collaboration idea or question? I'd love to hear from you. Drop me a message and I'll get back to you within 24 hours.
               </p>
 
-              <p className="text-base text-slate-600 dark:text-slate-400">
+              <p className="text-base text-slate-600">
                 Choose your preferred way to connect below.
               </p>
             </div>
 
             {/* Right column visual placeholder */}
-            <div className="bg-slate-100 dark:bg-slate-800 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-slate-500 dark:text-slate-400">Contact Methods</p>
+            <div className="bg-slate-100 rounded-lg h-96 flex items-center justify-center">
+              <p className="text-slate-500">Contact Methods</p>
             </div>
           </section>
 
           {/* QUICK CONTACT OPTIONS */}
-          <section className="mb-24 border-t border-slate-200 dark:border-slate-700 pt-16">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8">
-              Quick Links
-            </h2>
+          <section className="mb-24 border-t border-slate-200 pt-16">
+            <div className="mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+                Quick Links
+              </h2>
+              <p className="text-base text-slate-700">
+                Connect with me directly through your preferred channel.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 auto-rows-fr">
               {contactMethods.map((method, idx) => (
                 <a
                   key={idx}
                   href={method.href}
-                  className="border border-slate-200 dark:border-slate-700 p-8 rounded hover:shadow-md transition-shadow duration-300 text-center group"
+                  className="card group block border-2 border-slate-200 hover:border-accent transition-all duration-300 no-underline overflow-visible h-full"
                 >
-                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-3">
-                    {method.label}
-                  </p>
-                  <p className="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                    {method.value}
-                  </p>
+                  <div className="flex flex-col h-full">
+                    {/* Icon/Label section */}
+                    <div className="mb-4 pb-4 border-b border-slate-200">
+                      <p className="text-xs uppercase tracking-widest font-black text-accent mb-2">
+                        {method.label}
+                      </p>
+                      <div className="h-2 w-8 bg-accent rounded-full" />
+                    </div>
+                    
+                    {/* Content section */}
+                    <div className="flex-1">
+                      <p className="text-lg font-black text-slate-900 leading-tight mb-3 group-hover:text-accent transition-colors">
+                        {method.value}
+                      </p>
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {method.label === 'Email' && 'Send me a detailed message about your project or inquiry.'}
+                        {method.label === 'Instagram' && 'Follow for dance content, behind-the-scenes, and announcements.'}
+                        {method.label === 'TikTok' && 'Short-form dance videos, challenges, and creative experiments.'}
+                      </p>
+                    </div>
+                    
+                    {/* CTA indicator */}
+                    <div className="mt-6 pt-4 border-t border-slate-200 text-right">
+                      <span className="text-xs font-bold uppercase tracking-widest text-accent group-hover:translate-x-1 transition-transform inline-block">
+                        Connect →
+                      </span>
+                    </div>
+                  </div>
                 </a>
               ))}
             </div>
           </section>
 
           {/* CONTACT FORM SECTION */}
-          <section className="mb-24 py-16 border-t border-slate-200 dark:border-slate-700">
+          <section className="mb-24 py-16 border-t border-slate-200">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 Send a Message
               </h2>
-              <p className="text-lg text-slate-700 dark:text-slate-300">
+              <p className="text-lg text-slate-700">
                 Tell me about your project, collaboration idea, or any questions you have.
               </p>
             </div>
 
             <div className="max-w-2xl">
               {submitted ? (
-                <div className="border border-slate-200 dark:border-slate-700 p-12 text-center bg-slate-50 dark:bg-slate-800 rounded">
+                <div className="border border-slate-200 p-12 text-center bg-slate-50 rounded">
                   <div className="text-5xl mb-4">✓</div>
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
                     Message Sent!
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-slate-700">
                     Thanks for reaching out. I'll respond within 24 hours.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-slate-900 dark:text-white mb-3">
+                    <label className="block text-sm font-medium text-slate-900 mb-3">
                       Name
                     </label>
                     <input
@@ -129,13 +156,13 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 dark:focus:ring-offset-slate-900 transition-all"
+                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all"
                       placeholder="Your full name"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-900 dark:text-white mb-3">
+                    <label className="block text-sm font-medium text-slate-900 mb-3">
                       Email
                     </label>
                     <input
@@ -144,13 +171,13 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 dark:focus:ring-offset-slate-900 transition-all"
+                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all"
                       placeholder="your@email.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-900 dark:text-white mb-3">
+                    <label className="block text-sm font-medium text-slate-900 mb-3">
                       Message
                     </label>
                     <textarea
@@ -159,14 +186,14 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 dark:focus:ring-offset-slate-900 transition-all resize-none"
+                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all resize-none"
                       placeholder="Tell me about your project or inquiry..."
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded transition-colors duration-200"
+                    className="btn btn-primary w-full"
                   >
                     Send Message
                   </button>
@@ -176,17 +203,17 @@ export default function Contact() {
           </section>
 
           {/* INFO BOXES */}
-          <section className="mb-24 grid grid-cols-1 md:grid-cols-2 gap-8 py-16 border-t border-slate-200 dark:border-slate-700">
-            <div className="border border-slate-200 dark:border-slate-700 p-8 rounded">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">Response Time</h3>
-              <p className="text-slate-700 dark:text-slate-300">
+          <section className="mb-24 grid grid-cols-1 md:grid-cols-2 gap-8 py-16 border-t border-slate-200">
+            <div className="border border-slate-200 p-8 rounded">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Response Time</h3>
+              <p className="text-slate-700">
                 I respond to all messages within 24 hours. For time-sensitive inquiries, reach out directly via email or Instagram.
               </p>
             </div>
 
-            <div className="border border-slate-200 dark:border-slate-700 p-8 rounded">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">What to Include</h3>
-              <p className="text-slate-700 dark:text-slate-300">
+            <div className="border border-slate-200 p-8 rounded">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">What to Include</h3>
+              <p className="text-slate-700">
                 Project details, timeline, budget if applicable, and any specific goals or questions. The more context, the better I can help.
               </p>
             </div>

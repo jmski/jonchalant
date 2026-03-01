@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { EnsoCircle } from '@/components/decorative';
 
 export default function HomeHero() {
   return (
@@ -14,11 +15,11 @@ export default function HomeHero() {
       />
 
       {/* Main content: Editorial 60/40 split */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 sm:py-32 lg:py-40">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-12 lg:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT: Content (60%) */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-4">
             {/* Status indicator - Minimal badge */}
             <div className="inline-flex items-center">
               <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
@@ -27,9 +28,21 @@ export default function HomeHero() {
             </div>
 
             {/* Headline - Cormorant Garamond, generous letter-spacing */}
-            <div className="space-y-2">
+            <div className="space-y-1 relative">
+              {/* Subtle Enso circle behind headline (Ikigai/Wellness pillar) */}
+              <EnsoCircle
+                size={280}
+                opacity={0.06}
+                strokeWidth={1.5}
+                style={{
+                  top: '-40px',
+                  left: '-60px',
+                  color: 'var(--accent-primary)',
+                }}
+              />
+              
               <h1 
-                className="font-headline font-normal leading-tight"
+                className="font-headline font-normal leading-tight relative z-10"
                 style={{
                   fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
                   letterSpacing: '0.03em',
@@ -83,7 +96,7 @@ export default function HomeHero() {
             </p>
 
             {/* CTA Buttons - Sleek, minimal */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link
                 href="/programs"
                 className="px-8 py-4 font-body font-semibold uppercase text-sm tracking-wider transition-all duration-300"

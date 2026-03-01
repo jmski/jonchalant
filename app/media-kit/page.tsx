@@ -48,34 +48,34 @@ const MEDIA_KIT_DATA = {
 
 export default function MediaKit() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white">
       <PageTransition animation="scale">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           {/* HERO SECTION */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-block">
-                <span className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">Press & Collaboration</span>
+                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Press & Collaboration</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
                 Media Kit
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-lg sm:text-xl text-slate-700 leading-relaxed">
                 Comprehensive audience data, platform metrics, and collaboration opportunities. Download and review partnership potential.
               </p>
             </div>
 
             {/* Right column visual placeholder */}
-            <div className="bg-slate-100 dark:bg-slate-800 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-slate-500 dark:text-slate-400">Media Kit Overview</p>
+            <div className="bg-slate-100 rounded-lg h-96 flex items-center justify-center">
+              <p className="text-slate-500">Media Kit Overview</p>
             </div>
           </section>
 
           {/* KEY METRICS CARDS */}
           <section className="mb-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">
               Key Metrics
             </h2>
 
@@ -83,15 +83,15 @@ export default function MediaKit() {
               {MEDIA_KIT_DATA.keyMetrics.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200 dark:border-slate-700 p-8 rounded hover:shadow-md transition-shadow duration-300"
+                  className="border border-slate-200 p-8 rounded hover:shadow-md transition-shadow duration-300"
                 >
-                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-4">
+                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-4">
                     {stat.label}
                   </p>
-                  <p className="text-4xl font-bold text-slate-900 dark:text-white mb-3">
+                  <p className="text-4xl font-bold text-slate-900 mb-3">
                     {stat.value}
                   </p>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-sm text-slate-600">
                     {stat.change}
                   </p>
                 </div>
@@ -100,8 +100,8 @@ export default function MediaKit() {
           </section>
 
           {/* PLATFORM BREAKDOWN */}
-          <section className="mb-24 border-t border-slate-200 dark:border-slate-700 pt-16">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8">
+          <section className="mb-24 border-t border-slate-200 pt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">
               Platform Breakdown
             </h2>
 
@@ -109,34 +109,34 @@ export default function MediaKit() {
               {MEDIA_KIT_DATA.platforms.map((platform, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200 dark:border-slate-700 p-8 rounded"
+                  className="border border-slate-200 p-8 rounded"
                 >
-                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-2">
+                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-2">
                     {platform.name}
                   </p>
-                  <p className="text-lg font-semibold text-slate-900 dark:text-white mb-6">
+                  <p className="text-lg font-semibold text-slate-900 mb-6">
                     {platform.handle}
                   </p>
 
-                  <div className="space-y-4 border-t border-slate-200 dark:border-slate-700 pt-6">
+                  <div className="space-y-4 border-t border-slate-200 pt-6">
                     <div>
-                      <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-2">
+                      <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-2">
                         Followers
                       </p>
-                      <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                      <p className="text-2xl font-bold text-slate-900">
                         {platform.followers}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-2">
+                      <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-2">
                         Avg Monthly Views
                       </p>
-                      <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                      <p className="text-2xl font-bold text-slate-900">
                         {platform.avgViews}
                       </p>
                     </div>
-                    <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
-                      <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <div className="pt-4 border-t border-slate-200">
+                      <p className="text-sm font-medium text-slate-700">
                         {platform.category}
                       </p>
                     </div>
@@ -147,8 +147,8 @@ export default function MediaKit() {
           </section>
 
           {/* CONTENT DISTRIBUTION */}
-          <section className="mb-24 border-t border-slate-200 dark:border-slate-700 pt-16">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8">
+          <section className="mb-24 border-t border-slate-200 pt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">
               Content Mix
             </h2>
 
@@ -156,23 +156,23 @@ export default function MediaKit() {
               {MEDIA_KIT_DATA.contentCategories.map((category, idx) => (
                 <div key={idx} className="space-y-3">
                   <div className="flex justify-between items-baseline">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    <h3 className="text-lg font-semibold text-slate-900">
                       {category.name}
                     </h3>
-                    <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                    <span className="text-2xl font-bold text-accent">
                       {category.percentage}%
                     </span>
                   </div>
 
                   {/* Progress bar */}
-                  <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                  <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-purple-600 dark:bg-purple-500 transition-all duration-700"
+                      className="h-full bg-accent transition-all duration-700"
                       style={{ width: `${category.percentage}%` }}
                     />
                   </div>
 
-                  <p className="text-sm text-slate-700 dark:text-slate-400">
+                  <p className="text-sm text-slate-700">
                     {category.description}
                   </p>
                 </div>
@@ -181,29 +181,29 @@ export default function MediaKit() {
           </section>
 
           {/* AUDIENCE DEMOGRAPHICS */}
-          <section className="mb-24 border-t border-slate-200 dark:border-slate-700 pt-16">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8">
+          <section className="mb-24 border-t border-slate-200 pt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">
               Audience Demographics
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Age Distribution */}
-              <div className="border border-slate-200 dark:border-slate-700 p-8 rounded">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">Age Range</h3>
+              <div className="border border-slate-200 p-8 rounded">
+                <h3 className="text-lg font-bold text-slate-900 mb-6">Age Range</h3>
                 <div className="space-y-5">
                   {MEDIA_KIT_DATA.audience.age.map((age, idx) => (
                     <div key={idx} className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                        <span className="text-sm font-medium text-slate-700">
                           {age.range}
                         </span>
-                        <span className="text-sm font-bold text-purple-600 dark:text-purple-400">
+                        <span className="text-sm font-bold text-accent">
                           {age.percentage}%
                         </span>
                       </div>
-                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-purple-600 dark:bg-purple-500 transition-all duration-700"
+                          className="h-full bg-accent transition-all duration-700"
                           style={{ width: `${age.percentage}%` }}
                         />
                       </div>
@@ -213,22 +213,22 @@ export default function MediaKit() {
               </div>
 
               {/* Gender Distribution */}
-              <div className="border border-slate-200 dark:border-slate-700 p-8 rounded">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">Gender</h3>
+              <div className="border border-slate-200 p-8 rounded">
+                <h3 className="text-lg font-bold text-slate-900 mb-6">Gender</h3>
                 <div className="space-y-5">
                   {MEDIA_KIT_DATA.audience.gender.map((gender, idx) => (
                     <div key={idx} className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                        <span className="text-sm font-medium text-slate-700">
                           {gender.label}
                         </span>
-                        <span className="text-sm font-bold text-purple-600 dark:text-purple-400">
+                        <span className="text-sm font-bold text-accent">
                           {gender.percentage}%
                         </span>
                       </div>
-                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-purple-600 dark:bg-purple-500 transition-all duration-700"
+                          className="h-full bg-accent transition-all duration-700"
                           style={{ width: `${gender.percentage}%` }}
                         />
                       </div>
@@ -238,22 +238,22 @@ export default function MediaKit() {
               </div>
 
               {/* Top Locations */}
-              <div className="border border-slate-200 dark:border-slate-700 p-8 rounded">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">Top Locations</h3>
+              <div className="border border-slate-200 p-8 rounded">
+                <h3 className="text-lg font-bold text-slate-900 mb-6">Top Locations</h3>
                 <div className="space-y-5">
                   {MEDIA_KIT_DATA.audience.locations.map((location, idx) => (
                     <div key={idx} className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                        <span className="text-sm font-medium text-slate-700">
                           {location.country}
                         </span>
-                        <span className="text-sm font-bold text-purple-600 dark:text-purple-400">
+                        <span className="text-sm font-bold text-accent">
                           {location.percentage}%
                         </span>
                       </div>
-                      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-purple-600 dark:bg-purple-500 transition-all duration-700"
+                          className="h-full bg-accent transition-all duration-700"
                           style={{ width: `${location.percentage}%` }}
                         />
                       </div>
@@ -265,8 +265,8 @@ export default function MediaKit() {
           </section>
 
           {/* COLLABORATION PACKAGES */}
-          <section className="mb-24 border-t border-slate-200 dark:border-slate-700 pt-16">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8">
+          <section className="mb-24 border-t border-slate-200 pt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">
               Collaboration Packages
             </h2>
 
@@ -278,23 +278,23 @@ export default function MediaKit() {
               ].map((pkg, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200 dark:border-slate-700 p-8 rounded hover:shadow-md transition-shadow duration-300"
+                  className="border border-slate-200 p-8 rounded hover:shadow-md transition-shadow duration-300"
                 >
-                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-3">
+                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-3">
                     {pkg.title}
                   </p>
-                  <p className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
+                  <p className="text-3xl font-bold text-slate-900 mb-6">
                     {pkg.price}
                   </p>
                   <ul className="space-y-3 mb-8">
                     {pkg.features.map((feature, fidx) => (
                       <li key={fidx} className="flex items-center gap-3">
-                        <span className="text-purple-600 dark:text-purple-400 font-semibold">✓</span>
-                        <span className="text-sm text-slate-700 dark:text-slate-300">{feature}</span>
+                        <span className="text-accent font-semibold">✓</span>
+                        <span className="text-sm text-slate-700">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-semibold py-3 px-4 rounded hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                  <button className="w-full border border-slate-200 text-slate-900 font-semibold py-3 px-4 rounded hover:bg-slate-50 transition-colors">
                     Get Started
                   </button>
                 </div>

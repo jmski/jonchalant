@@ -1,5 +1,6 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import { BlueprintGrid } from "@/components/decorative";
 import dynamic from 'next/dynamic';
 import ProgramCardsSection from '@/components/sections/ProgramCardsSection';
 
@@ -21,7 +22,6 @@ const PROGRAMS = [
     category: 'Premium 1-on-1 Coaching',
     description: 'Intensive 12-week personal transformation. Weekly sessions, customized movement modules, social scripting frameworks, and ongoing support. For introverts seeking leadership promotions or major career transitions.',
     investment: 'Custom Quote',
-    color: 'slate',
     features: [
       '12 weekly 1-on-1 sessions',
       'Personalized movement coaching',
@@ -37,7 +37,6 @@ const PROGRAMS = [
     category: 'Group Training (6 weeks)',
     description: 'Learn the three pillars in a cohort-based format. Meet other ambitious introverts, practice live, receive feedback. For those seeking guided learning with peer support.',
     investment: '$1,500',
-    color: 'blue',
     features: [
       '6 weekly 2-hour group sessions',
       'Physical Grounding module',
@@ -53,7 +52,6 @@ const PROGRAMS = [
     category: 'Self-Paced Digital Course',
     description: 'Video modules, worksheets, and frameworks you can learn at your own pace. Foundation-level introduction to Physical Grounding and Social Scripting.',
     investment: '$297',
-    color: 'indigo',
     features: [
       '8 HD video modules',
       'Downloadable worksheets',
@@ -69,7 +67,6 @@ const PROGRAMS = [
     category: 'High-Stakes Preparation',
     description: 'Specialized coaching for critical moments. Job interviews, investor pitches, presentations. 1-on-1 training with live practice and video feedback.',
     investment: '$500-$1,000',
-    color: 'purple',
     features: [
       '3-5 intensive sessions',
       'Mock interview/pitch practice',
@@ -85,7 +82,6 @@ const PROGRAMS = [
     category: 'Organization Custom',
     description: 'For leadership teams wanting to build more confident, inclusive organizations. Multi-session workshops designed for your specific context and team size.',
     investment: 'Custom Quote',
-    color: 'teal',
     features: [
       'Customized to your needs',
       'Multi-session format available',
@@ -101,7 +97,6 @@ const PROGRAMS = [
     category: 'First Step (Complimentary)',
     description: 'Not sure where to start? Let\'s assess your current baseline. In this 30-minute call, I\'ll identify your strengths, barriers, and the right program for your goals.',
     investment: 'Free',
-    color: 'cyan',
     features: [
       '30-minute discovery call',
       'Personal baseline assessment',
@@ -133,34 +128,50 @@ const PROGRAM_FOCUS = [
 
 export default function Programs() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white">
       <PageTransition animation="scale">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           {/* HERO SECTION - 60/40 LAYOUT */}
-          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative">
+            {/* Blueprint grid decorative element - represents kaizen/structure */}
+            <BlueprintGrid
+              size={450}
+              spacing={35}
+              opacity={0.03}
+              variant="dots"
+              style={{
+                position: 'absolute',
+                bottom: '-150px',
+                right: '-100px',
+                color: 'var(--accent-primary)',
+                zIndex: 0,
+                pointerEvents: 'none',
+              }}
+            />
+            
+            <div className="lg:col-span-7 space-y-6 relative z-10">
               <div className="inline-block">
-                <span className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">Personalized Coaching</span>
+                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Personalized Coaching</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
                 Find Your Path to Quiet Command
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-lg sm:text-xl text-slate-700 leading-relaxed">
                 From self-paced courses to premium 1-on-1 coaching, choose the program that matches your goals and learning style. Each path builds your professional presence through the same proven methodology.
               </p>
 
               <div className="pt-4">
-                <a href="#inquiry-form" className="inline-block px-8 py-4 font-semibold uppercase tracking-widest text-sm border border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 transition-colors duration-300">
+                <a href="#inquiry-form" className="inline-block px-8 py-4 font-semibold uppercase tracking-widest text-sm border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-colors duration-300">
                   Compare Programs
                 </a>
               </div>
             </div>
 
             {/* Right column visual placeholder */}
-            <div className="lg:col-span-5 bg-slate-100 dark:bg-slate-800 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-slate-500 dark:text-slate-400">Program Comparison Guide</p>
+            <div className="lg:col-span-5 bg-slate-100 rounded-lg h-96 flex items-center justify-center">
+              <p className="text-slate-500">Program Comparison Guide</p>
             </div>
           </section>
 
@@ -172,22 +183,22 @@ export default function Programs() {
           {/* THREE PILLARS */}
           <section className="mb-24">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 The Three Pillars
               </h2>
-              <p className="text-lg text-slate-700 dark:text-slate-300">
+              <p className="text-lg text-slate-700">
                 Every program is built on these foundational principles.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {PROGRAM_FOCUS.map((pillar, idx) => (
-                <div key={idx} className="border border-slate-200 dark:border-slate-700 p-8">
+                <div key={idx} className="border border-slate-200 p-8">
                   <div className="text-4xl mb-4">{pillar.icon}</div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">
                     {pillar.title}
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-400 leading-relaxed">
+                  <p className="text-slate-700 leading-relaxed">
                     {pillar.description}
                   </p>
                 </div>
@@ -196,12 +207,12 @@ export default function Programs() {
           </section>
 
           {/* INQUIRY FORM */}
-          <section id="inquiry-form" className="mb-24 py-16 border-t border-slate-200 dark:border-slate-700">
+          <section id="inquiry-form" className="mb-24 py-16 border-t border-slate-200">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 Let's Find Your Program
               </h2>
-              <p className="text-lg text-slate-700 dark:text-slate-300 max-w-2xl">
+              <p className="text-lg text-slate-700 max-w-2xl">
                 Tell me about your goals and timeline. I'll respond within 48 hours with a program recommendation and next steps.
               </p>
             </div>

@@ -123,7 +123,7 @@ export const DESIGN_TOKENS = {
 
   /* ========== COLORS - Theme Variables ========== */
   COLORS: {
-    /* Light theme (default) */
+    /* Light theme only - pure light mode */
     LIGHT: {
       PRIMARY_BG: '#fcfcfa',
       SECONDARY_BG: '#ffffff',
@@ -133,18 +133,6 @@ export const DESIGN_TOKENS = {
       TERTIARY_TEXT: '#666666',
       BORDER: '#e5e5e5',
       BORDER_ACCENT: '#d0d0d0',
-    },
-
-    /* Dark theme */
-    DARK: {
-      PRIMARY_BG: '#0a0a0a',
-      SECONDARY_BG: '#1a1a1a',
-      TERTIARY_BG: '#2a2a2a',
-      PRIMARY_TEXT: '#f2f2f2',
-      SECONDARY_TEXT: '#d0d0d0',
-      TERTIARY_TEXT: '#999999',
-      BORDER: '#333333',
-      BORDER_ACCENT: '#444444',
     },
 
     /* Accent colors (consistent across themes) */

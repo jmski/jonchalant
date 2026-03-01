@@ -50,14 +50,12 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', margin: 0, padding: 0 }} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4"
-          style={{ 
-            backgroundColor: 'var(--accent-vibrant)',
-            color: 'white',
+          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 bg-accent text-white"
+          style={{
             fontWeight: 'bold'
           }}
         >
