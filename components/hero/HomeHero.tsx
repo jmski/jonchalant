@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { EnsoCircle } from '@/components/decorative';
 
 export default function HomeHero() {
   return (
@@ -27,9 +28,21 @@ export default function HomeHero() {
             </div>
 
             {/* Headline - Cormorant Garamond, generous letter-spacing */}
-            <div className="space-y-2">
+            <div className="space-y-2 relative">
+              {/* Subtle Enso circle behind headline (Ikigai/Wellness pillar) */}
+              <EnsoCircle
+                size={280}
+                opacity={0.06}
+                strokeWidth={1.5}
+                style={{
+                  top: '-40px',
+                  left: '-60px',
+                  color: 'var(--accent-primary)',
+                }}
+              />
+              
               <h1 
-                className="font-headline font-normal leading-tight"
+                className="font-headline font-normal leading-tight relative z-10"
                 style={{
                   fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
                   letterSpacing: '0.03em',

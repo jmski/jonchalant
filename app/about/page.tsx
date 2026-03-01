@@ -1,5 +1,6 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import { EnsoCircle } from "@/components/decorative";
 
 export const metadata = {
   title: "About | The Kinetic Leader",
@@ -22,8 +23,22 @@ export default function About() {
           </section>
 
           {/* ORIGIN STORY - 60/40 LAYOUT */}
-          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative">
+            {/* Subtle Enso circle decorative element - represents Ikigai/Purpose */}
+            <EnsoCircle
+              size={300}
+              opacity={0.05}
+              strokeWidth={1}
+              style={{
+                position: 'absolute',
+                top: '40px',
+                right: '-80px',
+                color: 'var(--accent-primary)',
+                zIndex: 0,
+              }}
+            />
+            
+            <div className="lg:col-span-7 space-y-6 relative z-10">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
                 Everything changed when I stopped thinking and started moving.
               </h2>

@@ -1,5 +1,6 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import { BlueprintGrid } from "@/components/decorative";
 import dynamic from 'next/dynamic';
 import ProgramCardsSection from '@/components/sections/ProgramCardsSection';
 
@@ -137,8 +138,23 @@ export default function Programs() {
       <PageTransition animation="scale">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           {/* HERO SECTION - 60/40 LAYOUT */}
-          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative">
+            {/* Blueprint grid decorative element - represents kaizen/structure */}
+            <BlueprintGrid
+              size={450}
+              spacing={35}
+              opacity={0.015}
+              variant="dots"
+              style={{
+                position: 'absolute',
+                bottom: '-100px',
+                right: '-80px',
+                color: 'var(--text-primary)',
+                zIndex: 0,
+              }}
+            />
+            
+            <div className="lg:col-span-7 space-y-6 relative z-10">
               <div className="inline-block">
                 <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Personalized Coaching</span>
               </div>

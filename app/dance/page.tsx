@@ -1,5 +1,6 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import { FluidShape } from "@/components/decorative";
 import dynamic from 'next/dynamic';
 
 // Below-fold dynamic import
@@ -64,8 +65,22 @@ export default async function Dance() {
       <PageTransition animation="slide-left">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           {/* HERO SECTION - 60/40 Editorial Layout */}
-          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative">
+            {/* Subtle fluid shape decorative element - represents dance/movement energy */}
+            <FluidShape
+              size={320}
+              opacity={0.03}
+              variant="blob"
+              style={{
+                position: 'absolute',
+                top: '60px',
+                left: '-100px',
+                color: 'var(--color-muted-moss)',
+                zIndex: 0,
+              }}
+            />
+            
+            <div className="lg:col-span-7 space-y-6 relative z-10">
               <div className="inline-block">
                 <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Choreography • Freestyle • Performance</span>
               </div>
