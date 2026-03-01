@@ -2,9 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useState, useEffect } from 'react';
-
-type Theme = 'default' | 'dark';
+import { useState, useEffect } from 'react';
 
 const SITE_SECTIONS = [
   {
@@ -36,49 +34,12 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
-function ThemeToggle({
-  isLight,
-  onChange,
-}: {
-  isLight: boolean;
-  onChange: (isLight: boolean) => void;
-}) {
-  return (
-    <button
-      onClick={() => onChange(!isLight)}
-      className="theme-toggle"
-      aria-label={`Switch to ${isLight ? 'dark' : 'light'} theme`}
-      role="switch"
-      aria-checked={isLight}
-    >
-      {/* Toggle switch track and knob */}
-      <span className="toggle-track" />
-      <span className="toggle-knob" />
-      {/* Light and dark icons */}
-      <span className="toggle-icon toggle-icon-light">☀️</span>
-      <span className="toggle-icon toggle-icon-dark">🌙</span>
-    </button>
-  );
-}
-
 export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
-  const [theme, setTheme] = useState<Theme>('default');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem('jonchalon-theme') as Theme | null;
-    const initialTheme = stored || 'default';
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
     setMounted(true);
-  }, []);
-
-  const changeTheme = useCallback((isLight: boolean) => {
-    const newTheme: Theme = isLight ? 'default' : 'dark';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('jonchalon-theme', newTheme);
   }, []);
 
   const handleLinkClick = () => {
@@ -91,13 +52,6 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     <aside className={`sidebar ${isOpen ? 'mobile-open' : ''}`}>
       {/* Sidebar Header */}
       <div className="sidebar-header">
-        {/* Theme Selector */}
-        <div className="sidebar-theme-selector">
-          <ThemeToggle
-            isLight={theme === 'default'}
-            onChange={changeTheme}
-          />
-        </div>
         <h1>JONCHALON</h1>
       </div>
 

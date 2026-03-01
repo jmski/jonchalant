@@ -5,6 +5,9 @@
    - Ikigai: Purpose-driven design
    - Kaizen: Continuous refinement
    - Ma: The space between (negative space as primary design element)
+   
+   ADAPTIVE THEMING: Automatically follows system preference (prefers-color-scheme).
+   No manual toggle required—seamless transitions based on OS/device settings.
    ============================================================================ */
 
 /* ========== TYPOGRAPHY SYSTEM ========== */
@@ -35,8 +38,11 @@
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ========== MODERN ZEN COLOR PALETTE ========== */
+/* ========== LIGHT MODE - "THE MORNING DOJO" ========== */
+/* Default light mode for prefers-color-scheme: light and no preference */
 :root {
+  color-scheme: light;
+
   /* Primary Palette - Ink & Bone */
   --color-ink-black: #0f0e0c; /* Deep authority, trust, grounded */
   --color-ink-dark: #1a1915; /* Slightly lighter ink */
@@ -56,15 +62,15 @@
   --color-error: #8a4a4a; /* Muted burgundy error */
   --color-info: #5a7a9a; /* Soft indigo info */
 
-  /* Derived Base Colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #faf9f6;
-  --bg-tertiary: #e8e3d8;
-  --text-primary: #0f0e0c;
-  --text-secondary: #3a3a3a;
-  --text-tertiary: #8a8a8a;
-  --border-color: #d9d5cc;
-  --border-subtle: #ede9e3;
+  /* Light Mode Base Colors - Warm Paper Aesthetic */
+  --bg-primary: #f5f5f0; /* Warm paper/bone background */
+  --bg-secondary: #faf9f6; /* Slightly warmer secondary */
+  --bg-tertiary: #e8e3d8; /* Warm sand for accents */
+  --text-primary: #1a1a1a; /* Deep ink text */
+  --text-secondary: #3a3a3a; /* Secondary ink */
+  --text-tertiary: #8a8a8a; /* Muted text */
+  --border-color: #d9d5cc; /* Subtle warm borders */
+  --border-subtle: #ede9e3; /* Very subtle borders */
 
   /* Accent & Interactive */
   --accent-primary: #4a3a5c; /* Burnt Indigo - primary interactions */
@@ -78,19 +84,65 @@
   --glow-moss: 0 0 16px rgba(107, 142, 99, 0.1);
 }
 
-/* ========== DARK THEME - Refined for Japanese Aesthetics ========== */
+/* ========== DARK MODE - "THE MIDNIGHT STUDIO" ========== */
+/* Activate when system prefers dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* Dark Mode Base Colors - Deep Midnight Aesthetic */
+    --bg-primary: #0d0d0d; /* Deep midnight indigo/charcoal */
+    --bg-secondary: #1a1815; /* Slightly lighter for depth */
+    --bg-tertiary: #26211a; /* Tertiary for subtle elevation */
+    --text-primary: #e0e0d6; /* Soft bone text on dark */
+    --text-secondary: #d9d5cc; /* Secondary soft text */
+    --text-tertiary: #8a8a8a; /* Tertiary subtle text */
+    --border-color: #3a3530; /* Dark borders with warmth */
+    --border-subtle: #2a2520; /* Subtle dark borders */
+
+    /* Accent & Interactive - Lightened for visibility */
+    --accent-primary: #d4c5d9; /* Light indigo in dark mode - maintains vibrancy */
+    --accent-secondary: #a8c4a0; /* Light moss in dark mode - natural, visible */
+    --accent-hover: #c9bae0; /* Lighter indigo for hover */
+
+    /* Utilities - Adjusted for dark background */
+    --overlay-dark: rgba(15, 14, 12, 0.3);
+    --overlay-light: rgba(210, 205, 195, 0.15);
+    --glow-subtle: 0 0 20px rgba(212, 197, 217, 0.2);
+    --glow-moss: 0 0 16px rgba(168, 196, 160, 0.15);
+  }
+}
+
+/* ========== TYPOGRAPHY ADJUSTMENTS FOR DARK MODE ========== */
+/* Slightly reduce font-weight in dark mode for optical balance */
+@media (prefers-color-scheme: dark) {
+  body {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600; /* Reduced from 700 for dark mode */
+  }
+}
+
+/* ========== LEGACY SUPPORT: data-theme attribute (for backwards compatibility) ========== */
+/* If old code still uses data-theme, fallback to dark mode styles */
 html[data-theme="dark"] {
-  --bg-primary: #0f0e0c;
+  color-scheme: dark;
+
+  --bg-primary: #0d0d0d;
   --bg-secondary: #1a1815;
   --bg-tertiary: #26211a;
-  --text-primary: #f5f3f0;
+  --text-primary: #e0e0d6;
   --text-secondary: #d9d5cc;
   --text-tertiary: #8a8a8a;
   --border-color: #3a3530;
   --border-subtle: #2a2520;
 
-  --accent-primary: #d4c5d9; /* Light indigo in dark mode */
-  --accent-secondary: #a8c4a0; /* Light moss in dark mode */
+  --accent-primary: #d4c5d9;
+  --accent-secondary: #a8c4a0;
   --accent-hover: #c9bae0;
 
   --glow-subtle: 0 0 20px rgba(212, 197, 217, 0.2);

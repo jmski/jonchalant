@@ -45,13 +45,6 @@
   font-weight: 700;
 }
 
-.sidebar-theme-selector {
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 .sidebar-sections {
   flex: 1;
   display: flex;
