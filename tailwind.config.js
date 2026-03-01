@@ -5,7 +5,6 @@ export default {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'media', // Respect system preference via prefers-color-scheme
   theme: {
     extend: {
       colors: {

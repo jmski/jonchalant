@@ -33,7 +33,7 @@ export function SkeletonLoader({
   variant = 'image',
   count = 1,
 }: SkeletonLoaderProps) {
-  const baseClasses = 'bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 animate-pulse';
+  const baseClasses = 'bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse';
 
   const variantClasses: Record<string, string> = {
     image: 'rounded-lg',

@@ -60,32 +60,32 @@ export default async function Dance() {
   let dancePortfolio: any[] = MOCK_DANCEDATA;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white">
       <PageTransition animation="slide-left">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           {/* HERO SECTION - 60/40 Editorial Layout */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-block">
-                <span className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">Choreography • Freestyle • Performance</span>
+                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Choreography • Freestyle • Performance</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
                 Movement<br />Portfolio
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">
+              <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl">
                 A collection of my best dance work across multiple platforms, styles, and collaborations. Each piece represents precision, creativity, and technical excellence in movement.
               </p>
 
-              <p className="text-base text-slate-600 dark:text-slate-400">
+              <p className="text-base text-slate-600">
                 Explore choreography, freestyle improvisation, and live performances that showcase the kinetic principles I teach.
               </p>
             </div>
 
             {/* Right column visual placeholder */}
-            <div className="lg:col-span-5 bg-slate-100 dark:bg-slate-800 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-slate-500 dark:text-slate-400">Featured Performance Placeholder</p>
+            <div className="lg:col-span-5 bg-slate-100 rounded-lg h-96 flex items-center justify-center">
+              <p className="text-slate-500">Featured Performance Placeholder</p>
             </div>
           </section>
 
@@ -110,11 +110,11 @@ export default async function Dance() {
                 desc: 'Staged performances at festivals, theaters, fashion shows, and international venues.',
               },
             ].map((cat, idx) => (
-              <div key={idx} className="border border-slate-200 dark:border-slate-700 p-8">
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">
+              <div key={idx} className="border border-slate-200 p-8">
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">
                   {cat.title}
                 </h3>
-                <p className="text-slate-700 dark:text-slate-400 leading-relaxed">
+                <p className="text-slate-700 leading-relaxed">
                   {cat.desc}
                 </p>
               </div>

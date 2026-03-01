@@ -486,36 +486,3 @@ tbody tr:hover {
     font-size: 16px; /* Prevent zoom on mobile */
   }
 }
-
-/* ========== DARK MODE ========== */
-@media (prefers-color-scheme: dark) {
-  .card {
-    background-color: var(--bg-secondary);
-    border-color: var(--border-color);
-  }
-
-  .card:hover {
-    background-color: var(--bg-tertiary);
-  }
-
-  input,
-  textarea,
-  select {
-    background-color: var(--bg-secondary);
-  }
-
-  input:focus,
-  textarea:focus,
-  select:focus {
-    background-color: var(--bg-primary);
-  }
-
-  code {
-    background-color: var(--bg-secondary);
-    color: var(--accent-primary);
-  }
-
-  pre {
-    background-color: var(--bg-secondary);
-  }
-}

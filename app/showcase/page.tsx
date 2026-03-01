@@ -172,21 +172,21 @@ export default async function Showcase() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lessons.filter((l: any) => l.category === 'Beginner').map((lesson: any) => (
-              <div key={lesson._id} className="group card border-2 border-slate-200 dark:border-slate-700 hover:border-vibrant transition-all duration-300 overflow-hidden flex flex-col">
-                <div className="h-32 bg-linear-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center text-4xl relative overflow-hidden">
+              <div key={lesson._id} className="group card border-2 border-slate-200 hover:border-vibrant transition-all duration-300 overflow-hidden flex flex-col">
+                <div className="h-32 bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center text-4xl relative overflow-hidden">
                   <span className="group-hover:scale-125 transition-transform duration-300">{lesson.icon}</span>
                 </div>
                 <div className="flex-1 p-6 flex flex-col">
                   <span className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--accent-vibrant)' }}>
                     {lesson.pillar}
                   </span>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-vibrant transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-vibrant transition-colors">
                     {lesson.title}
                   </h3>
                   <p className="text-sm text-tertiary leading-relaxed flex-1">
                     {lesson.description}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                  <div className="mt-4 pt-4 border-t border-slate-200 flex justify-between items-center">
                     <span className="text-xs text-tertiary">{lesson.duration}</span>
                     <a href="#" className="text-xs font-bold uppercase text-vibrant hover:gap-2 hover:translate-x-1 transition-all inline-flex items-center gap-1">Read →</a>
                   </div>
@@ -213,21 +213,21 @@ export default async function Showcase() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lessons.filter((l: any) => l.category === 'Intermediate').map((lesson: any) => (
-              <div key={lesson._id} className="group card border-2 border-slate-200 dark:border-slate-700 hover:border-secondary transition-all duration-300 overflow-hidden flex flex-col">
-                <div className="h-32 bg-linear-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center text-4xl relative overflow-hidden">
+              <div key={lesson._id} className="group card border-2 border-slate-200 hover:border-secondary transition-all duration-300 overflow-hidden flex flex-col">
+                <div className="h-32 bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center text-4xl relative overflow-hidden">
                   <span className="group-hover:scale-125 transition-transform duration-300">{lesson.icon}</span>
                 </div>
                 <div className="flex-1 p-6 flex flex-col">
                   <span className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--accent-secondary)' }}>
                     {lesson.pillar}
                   </span>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-secondary transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-secondary transition-colors">
                     {lesson.title}
                   </h3>
                   <p className="text-sm text-tertiary leading-relaxed flex-1">
                     {lesson.description}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                  <div className="mt-4 pt-4 border-t border-slate-200 flex justify-between items-center">
                     <span className="text-xs text-tertiary">{lesson.duration}</span>
                     <a href="#" className="text-xs font-bold uppercase text-secondary hover:gap-2 hover:translate-x-1 transition-all inline-flex items-center gap-1">Read →</a>
                   </div>
@@ -254,21 +254,21 @@ export default async function Showcase() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lessons.filter((l: any) => l.category === 'Advanced').map((lesson: any) => (
-              <div key={lesson._id} className="group card border-2 border-slate-200 dark:border-slate-700 hover:border-tertiary transition-all duration-300 overflow-hidden flex flex-col">
-                <div className="h-32 bg-linear-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center text-4xl relative overflow-hidden">
+              <div key={lesson._id} className="group card border-2 border-slate-200 hover:border-tertiary transition-all duration-300 overflow-hidden flex flex-col">
+                <div className="h-32 bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center text-4xl relative overflow-hidden">
                   <span className="group-hover:scale-125 transition-transform duration-300">{lesson.icon}</span>
                 </div>
                 <div className="flex-1 p-6 flex flex-col">
                   <span className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--accent-tertiary)' }}>
                     {lesson.pillar}
                   </span>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-tertiary transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-tertiary transition-colors">
                     {lesson.title}
                   </h3>
                   <p className="text-sm text-tertiary leading-relaxed flex-1">
                     {lesson.description}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                  <div className="mt-4 pt-4 border-t border-slate-200 flex justify-between items-center">
                     <span className="text-xs text-tertiary">{lesson.duration}</span>
                     <a href="#" className="text-xs font-bold uppercase text-tertiary hover:gap-2 hover:translate-x-1 transition-all inline-flex items-center gap-1">Read →</a>
                   </div>

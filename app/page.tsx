@@ -9,13 +9,13 @@ const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ 
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white">
       <PageTransition animation="fade">
         {/* HERO SECTION */}
         <HomeHero />
 
         {/* KEY STATS SECTION */}
-        <section className="bg-slate-50 dark:bg-slate-800 py-16 sm:py-24">
+        <section className="bg-slate-50 py-16 sm:py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {[
@@ -24,10 +24,10 @@ export default function Home() {
                 { label: 'Years in Creative Direction', value: '8+' },
               ].map((stat, idx) => (
                 <div key={idx} className="space-y-3 text-center md:text-left">
-                  <div className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white">
+                  <div className="text-4xl sm:text-5xl font-bold text-slate-900">
                     {stat.value}
                   </div>
-                  <div className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">
+                  <div className="text-sm uppercase tracking-widest font-medium text-slate-600">
                     {stat.label}
                   </div>
                 </div>
@@ -40,7 +40,7 @@ export default function Home() {
         <section className="py-16 sm:py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
                 Where I Create Impact
               </h2>
             </div>
@@ -48,11 +48,11 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Main featured area */}
               <div className="lg:col-span-2 space-y-6">
-                <div className="aspect-video rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" />
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                <div className="aspect-video rounded-lg bg-slate-100 border border-slate-200" />
+                <h3 className="text-2xl font-bold text-slate-900">
                   Dance & Movement Direction
                 </h3>
-                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                <p className="text-lg text-slate-700 leading-relaxed">
                   Choreography, performance, and creative direction for brands and artists. I blend precision with expression—creating movement that communicates and inspires.
                 </p>
               </div>
@@ -60,19 +60,19 @@ export default function Home() {
               {/* Sidebar features */}
               <div className="space-y-8">
                 <div className="space-y-3">
-                  <h4 className="text-lg font-bold text-slate-900 dark:text-white">
+                  <h4 className="text-lg font-bold text-slate-900">
                     Leadership Coaching
                   </h4>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     Transform your presence and command rooms with quiet authority.
                   </p>
                 </div>
-                <div className="h-px bg-slate-200 dark:bg-slate-700" />
+                <div className="h-px bg-slate-200" />
                 <div className="space-y-3">
-                  <h4 className="text-lg font-bold text-slate-900 dark:text-white">
+                  <h4 className="text-lg font-bold text-slate-900">
                     Brand Partnerships
                   </h4>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     Collaborate on campaigns that move audiences.
                   </p>
                 </div>
@@ -82,10 +82,10 @@ export default function Home() {
         </section>
 
         {/* SERVICES OVERVIEW */}
-        <section className="bg-slate-50 dark:bg-slate-800 py-16 sm:py-24">
+        <section className="bg-slate-50 py-16 sm:py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
                 Services & Offerings
               </h2>
             </div>
@@ -107,12 +107,12 @@ export default function Home() {
               ].map((service, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200 dark:border-slate-700 p-8 rounded-lg hover:shadow-md transition-shadow duration-300"
+                  className="border border-slate-200 p-8 rounded-lg hover:shadow-md transition-shadow duration-300"
                 >
-                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
+                  <h4 className="text-lg font-bold text-slate-900 mb-3">
                     {service.title}
                   </h4>
-                  <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-700 text-sm leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -125,10 +125,10 @@ export default function Home() {
         <section className="py-16 sm:py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 Explore My Work
               </h2>
-              <p className="text-lg text-slate-700 dark:text-slate-300">
+              <p className="text-lg text-slate-700">
                 From dance portfolio to leadership coaching, discover what I offer.
               </p>
             </div>
@@ -157,20 +157,20 @@ export default function Home() {
                 <a
                   key={idx}
                   href={item.href}
-                  className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300 group"
+                  className="border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300 group"
                 >
-                  <div className="aspect-square bg-slate-100 dark:bg-slate-800 flex items-center justify-center relative">
+                  <div className="aspect-square bg-slate-100 flex items-center justify-center relative">
                     <div className="text-center">
-                      <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-2">
+                      <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-2">
                         {item.count}
                       </p>
                     </div>
                   </div>
-                  <div className="p-6 border-t border-slate-200 dark:border-slate-700">
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                  <div className="p-6 border-t border-slate-200">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-slate-700 dark:text-slate-400">
+                    <p className="text-sm text-slate-700">
                       {item.description}
                     </p>
                   </div>
@@ -181,11 +181,11 @@ export default function Home() {
         </section>
 
         {/* WHY WORK TOGETHER */}
-        <section className="bg-slate-50 dark:bg-slate-800 py-16 sm:py-24">
+        <section className="bg-slate-50 py-16 sm:py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8">
+                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">
                   Why Work Together
                 </h2>
                 <div className="space-y-6">
@@ -196,14 +196,14 @@ export default function Home() {
                     { title: 'Fast Turnaround', desc: 'Efficient workflows without compromising on quality' },
                   ].map((feature, idx) => (
                     <div key={idx} className="flex gap-4">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 dark:bg-purple-500 shrink-0 text-white font-bold text-sm">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 shrink-0 text-white font-bold text-sm">
                         {idx + 1}
                       </div>
                       <div>
-                        <h4 className="font-bold text-slate-900 dark:text-white mb-1">
+                        <h4 className="font-bold text-slate-900 mb-1">
                           {feature.title}
                         </h4>
-                        <p className="text-sm text-slate-700 dark:text-slate-300">
+                        <p className="text-sm text-slate-700">
                           {feature.desc}
                         </p>
                       </div>
@@ -212,8 +212,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-slate-900 rounded-lg h-96 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
-                <p className="text-slate-500 dark:text-slate-400">Visual Showcase</p>
+              <div className="bg-white rounded-lg h-96 border border-slate-200 flex items-center justify-center">
+                <p className="text-slate-500">Visual Showcase</p>
               </div>
             </div>
           </div>

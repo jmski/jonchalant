@@ -8,15 +8,15 @@ export const metadata = {
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+    <div className="min-h-screen bg-white text-slate-900">
       <PageTransition animation="blur">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24" id="main-content">
           {/* HERO SECTION */}
           <section className="mb-24">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
               From the Back of the Room to the Front of the Floor
             </h1>
-            <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 max-w-2xl leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-700 max-w-2xl leading-relaxed">
               For most of my life, I believed that leadership was a loud man's game. As a natural introvert, I was the one who overthought every email, stayed quiet in meetings, and felt like my social battery was perpetually at 5%.
             </p>
           </section>
@@ -24,34 +24,34 @@ export default function About() {
           {/* ORIGIN STORY - 60/40 LAYOUT */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
                 Everything changed when I stopped thinking and started moving.
               </h2>
               
-              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-lg text-slate-700 leading-relaxed">
                 I discovered that the same coordination, posture, and presence required on the dance floor were the exact 'mechanics' missing from my professional life. Dance taught me how to inhabit my body and take up space without saying a word.
               </p>
 
-              <div className="pt-6 border-t border-slate-200 dark:border-slate-700">
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">
+              <div className="pt-6 border-t border-slate-200">
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">
                   The Three Phases
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Dance & Discipline</h4>
-                    <p className="text-slate-700 dark:text-slate-400">
+                    <h4 className="font-semibold text-slate-900 mb-2">Dance & Discipline</h4>
+                    <p className="text-slate-700">
                       I discovered movement as a language for expression that bypassed all my introverted self-doubt. My body could say things my words couldn't.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Sales & Service</h4>
-                    <p className="text-slate-700 dark:text-slate-400">
+                    <h4 className="font-semibold text-slate-900 mb-2">Sales & Service</h4>
+                    <p className="text-slate-700">
                       I took that physical grounding into the high-pressure world of the fitness industry and realized that introverts don't need to change their personalities—they just need a better script and a stronger physical foundation.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white mb-2">The Mission</h4>
-                    <p className="text-slate-700 dark:text-slate-400">
+                    <h4 className="font-semibold text-slate-900 mb-2">The Mission</h4>
+                    <p className="text-slate-700">
                       Today, I've mastered the skills to lead despite my introversion. I created The Kinetic Leader to help other quiet experts use movement and social mechanics to command the room—all while protecting their energy.
                     </p>
                   </div>
@@ -60,8 +60,8 @@ export default function About() {
             </div>
 
             {/* Right column placeholder */}
-            <div className="lg:col-span-5 bg-slate-100 dark:bg-slate-800 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-slate-500 dark:text-slate-400">Editorial Image Placeholder</p>
+            <div className="lg:col-span-5 bg-slate-100 rounded-lg h-96 flex items-center justify-center">
+              <p className="text-slate-500">Editorial Image Placeholder</p>
             </div>
           </section>
 
@@ -75,26 +75,26 @@ export default function About() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="border-l border-slate-200 dark:border-slate-700 pl-6 py-4"
+                className="border-l border-slate-200 pl-6 py-4"
               >
-                <div className="text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 font-medium mb-2">
+                <div className="text-sm uppercase tracking-widest text-slate-600 font-medium mb-2">
                   {stat.label}
                 </div>
-                <div className="text-3xl font-bold text-slate-900 dark:text-white">
+                <div className="text-3xl font-bold text-slate-900">
                   {stat.value}
                 </div>
               </div>
             ))}
           </section>
-          <p className="text-xs text-slate-600 dark:text-slate-400 italic mb-24">*Of those who complete programs</p>
+          <p className="text-xs text-slate-600 italic mb-24">*Of those who complete programs</p>
 
           {/* WHAT I TEACH */}
           <section className="mb-24">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 What I Coach
               </h2>
-              <p className="text-lg text-slate-700 dark:text-slate-300">
+              <p className="text-lg text-slate-700">
                 Three core pillars that transform how you show up professionally.
               </p>
             </div>
@@ -128,12 +128,12 @@ export default function About() {
               ].map((service, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200 dark:border-slate-700 p-6 hover:shadow-md transition-shadow duration-300"
+                  className="border border-slate-200 p-6 hover:shadow-md transition-shadow duration-300"
                 >
-                  <h3 className="font-semibold text-slate-900 dark:text-white mb-3 text-lg">
+                  <h3 className="font-semibold text-slate-900 mb-3 text-lg">
                     {service.title}
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-400 leading-relaxed">
+                  <p className="text-slate-700 leading-relaxed">
                     {service.desc}
                   </p>
                 </div>
@@ -144,10 +144,10 @@ export default function About() {
           {/* MY PHILOSOPHY */}
           <section className="mb-24">
             <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 How I Work
               </h2>
-              <p className="text-lg text-slate-700 dark:text-slate-300">
+              <p className="text-lg text-slate-700">
                 Three principles guide everything I do.
               </p>
             </div>
@@ -169,12 +169,12 @@ export default function About() {
               ].map((philosophy, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200 dark:border-slate-700 p-8 hover:shadow-md transition-shadow duration-300"
+                  className="border border-slate-200 p-8 hover:shadow-md transition-shadow duration-300"
                 >
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">
                     {philosophy.title}
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-400 leading-relaxed">
+                  <p className="text-slate-700 leading-relaxed">
                     {philosophy.desc}
                   </p>
                 </div>
@@ -185,15 +185,15 @@ export default function About() {
           {/* INTROVERT ADVANTAGE */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
                 Why Your Introversion Is Your Superpower
               </h2>
 
-              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-lg text-slate-700 leading-relaxed">
                 You listen more than you speak. You think before you act. You draw energy from depth, not breadth. These aren't weaknesses—they're advantages waiting to be weaponized.
               </p>
 
-              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-lg text-slate-700 leading-relaxed">
                 The world needs more leaders who think before they act, who listen deeply, and who lead from authenticity. That's you.
               </p>
             </div>
@@ -209,9 +209,9 @@ export default function About() {
               ].map((trait, idx) => (
                 <div
                   key={idx}
-                  className="border border-slate-200 dark:border-slate-700 p-4 text-center hover:shadow-md transition-shadow duration-300"
+                  className="border border-slate-200 p-4 text-center hover:shadow-md transition-shadow duration-300"
                 >
-                  <p className="text-sm font-medium text-slate-900 dark:text-white">{trait}</p>
+                  <p className="text-sm font-medium text-slate-900">{trait}</p>
                 </div>
               ))}
             </div>
