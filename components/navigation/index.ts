@@ -1,1 +1,1 @@
-export { default as BreadcrumbNav } from './BreadcrumbNav';
+// Navigation components barrel export

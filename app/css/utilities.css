@@ -96,6 +96,19 @@
   border-color: var(--accent-secondary);
 }
 
+/* TEXT DECORATION UTILITIES */
+.no-underline {
+  text-decoration: none !important;
+}
+
+.no-underline:hover {
+  text-decoration: none !important;
+}
+
+.no-underline:focus {
+  text-decoration: none !important;
+}
+
 /* SPACING UTILITIES */
 .section-spacing {
   padding: 2rem 0;

@@ -110,6 +110,8 @@ button:disabled:hover {
   border-radius: 0px;
   padding: 2rem;
   transition: all var(--transition-base);
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 .card:hover {

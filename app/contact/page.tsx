@@ -73,23 +73,50 @@ export default function Contact() {
 
           {/* QUICK CONTACT OPTIONS */}
           <section className="mb-24 border-t border-slate-200 pt-16">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8">
-              Quick Links
-            </h2>
+            <div className="mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+                Quick Links
+              </h2>
+              <p className="text-base text-slate-700">
+                Connect with me directly through your preferred channel.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 auto-rows-fr">
               {contactMethods.map((method, idx) => (
                 <a
                   key={idx}
                   href={method.href}
-                  className="border p-8 rounded hover:shadow-md transition-shadow duration-300 text-center no-underline hover:no-underline"
+                  className="card group block border-2 border-slate-200 hover:border-accent transition-all duration-300 no-underline overflow-visible h-full"
                 >
-                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-3">
-                    {method.label}
-                  </p>
-                  <p className="text-lg font-semibold text-slate-900 transition-colors">
-                    {method.value}
-                  </p>
+                  <div className="flex flex-col h-full">
+                    {/* Icon/Label section */}
+                    <div className="mb-4 pb-4 border-b border-slate-200">
+                      <p className="text-xs uppercase tracking-widest font-black text-accent mb-2">
+                        {method.label}
+                      </p>
+                      <div className="h-2 w-8 bg-accent rounded-full" />
+                    </div>
+                    
+                    {/* Content section */}
+                    <div className="flex-1">
+                      <p className="text-lg font-black text-slate-900 leading-tight mb-3 group-hover:text-accent transition-colors">
+                        {method.value}
+                      </p>
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {method.label === 'Email' && 'Send me a detailed message about your project or inquiry.'}
+                        {method.label === 'Instagram' && 'Follow for dance content, behind-the-scenes, and announcements.'}
+                        {method.label === 'TikTok' && 'Short-form dance videos, challenges, and creative experiments.'}
+                      </p>
+                    </div>
+                    
+                    {/* CTA indicator */}
+                    <div className="mt-6 pt-4 border-t border-slate-200 text-right">
+                      <span className="text-xs font-bold uppercase tracking-widest text-accent group-hover:translate-x-1 transition-transform inline-block">
+                        Connect →
+                      </span>
+                    </div>
+                  </div>
                 </a>
               ))}
             </div>
