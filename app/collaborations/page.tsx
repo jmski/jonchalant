@@ -92,7 +92,7 @@ export default function Collaborations() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
-      <PageTransition animation="slide-up">
+      <PageTransition animation="fade">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           {/* HERO SECTION */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -140,7 +140,7 @@ export default function Collaborations() {
                   <ul className="space-y-3">
                     {category.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <span className="text-slate-900 dark:text-white font-semibold mt-1 flex-shrink-0">✓</span>
+                        <span className="text-slate-900 dark:text-white font-semibold mt-1 shrink-0">✓</span>
                         <span className="text-slate-700 dark:text-slate-400">{item}</span>
                       </li>
                     ))}

@@ -146,7 +146,7 @@ export default function GalleryLightbox({
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center z-20">
               {/* Blur-up placeholder background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-br from-white/10 to-white/5 backdrop-blur-md pointer-events-none" />
               <div className="text-center relative z-10">
                 <SkeletonLoader variant="image" width="100%" height="100%" />
                 <p className="text-white text-sm mt-4 opacity-70 animate-pulse">Loading image...</p>

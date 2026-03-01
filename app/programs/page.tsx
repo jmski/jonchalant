@@ -21,6 +21,7 @@ const PROGRAMS = [
     category: 'Premium 1-on-1 Coaching',
     description: 'Intensive 12-week personal transformation. Weekly sessions, customized movement modules, social scripting frameworks, and ongoing support. For introverts seeking leadership promotions or major career transitions.',
     investment: 'Custom Quote',
+    color: 'slate',
     features: [
       '12 weekly 1-on-1 sessions',
       'Personalized movement coaching',
@@ -36,6 +37,7 @@ const PROGRAMS = [
     category: 'Group Training (6 weeks)',
     description: 'Learn the three pillars in a cohort-based format. Meet other ambitious introverts, practice live, receive feedback. For those seeking guided learning with peer support.',
     investment: '$1,500',
+    color: 'blue',
     features: [
       '6 weekly 2-hour group sessions',
       'Physical Grounding module',
@@ -51,6 +53,7 @@ const PROGRAMS = [
     category: 'Self-Paced Digital Course',
     description: 'Video modules, worksheets, and frameworks you can learn at your own pace. Foundation-level introduction to Physical Grounding and Social Scripting.',
     investment: '$297',
+    color: 'indigo',
     features: [
       '8 HD video modules',
       'Downloadable worksheets',
@@ -66,6 +69,7 @@ const PROGRAMS = [
     category: 'High-Stakes Preparation',
     description: 'Specialized coaching for critical moments. Job interviews, investor pitches, presentations. 1-on-1 training with live practice and video feedback.',
     investment: '$500-$1,000',
+    color: 'purple',
     features: [
       '3-5 intensive sessions',
       'Mock interview/pitch practice',
@@ -81,6 +85,7 @@ const PROGRAMS = [
     category: 'Organization Custom',
     description: 'For leadership teams wanting to build more confident, inclusive organizations. Multi-session workshops designed for your specific context and team size.',
     investment: 'Custom Quote',
+    color: 'teal',
     features: [
       'Customized to your needs',
       'Multi-session format available',
@@ -96,6 +101,7 @@ const PROGRAMS = [
     category: 'First Step (Complimentary)',
     description: 'Not sure where to start? Let\'s assess your current baseline. In this 30-minute call, I\'ll identify your strengths, barriers, and the right program for your goals.',
     investment: 'Free',
+    color: 'cyan',
     features: [
       '30-minute discovery call',
       'Personal baseline assessment',

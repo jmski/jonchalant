@@ -60,7 +60,7 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
                       </h3>
 
                       {/* Description */}
-                      <p className="text-sm leading-relaxed text-primary mb-6 flex-grow">
+                      <p className="text-sm leading-relaxed text-primary mb-6 grow">
                         {program.description}
                       </p>
 
@@ -68,7 +68,7 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
                       <div className="space-y-2 mb-6">
                         {program.features.slice(0, 3).map((feature, i) => (
                           <div key={i} className="flex gap-2 items-start text-xs">
-                            <span className="font-black flex-shrink-0" style={{ color: colorVar }}>✓</span>
+                            <span className="font-black shrink-0" style={{ color: colorVar }}>✓</span>
                             <span className="text-primary">{feature}</span>
                           </div>
                         ))}

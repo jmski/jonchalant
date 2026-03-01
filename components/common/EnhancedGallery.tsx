@@ -173,7 +173,7 @@ export default function EnhancedGallery({
                   <div className="relative aspect-square bg-tertiary overflow-hidden rounded-lg">
                     {/* Lazy load skeleton */}
                     {enableLazyLoad && !isLoaded && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                      <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
                     )}
 
                     {/* Image with smooth fade-in */}

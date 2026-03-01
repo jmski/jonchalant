@@ -129,7 +129,7 @@ export default function HomeHero() {
           </div>
 
           {/* RIGHT: Visual (40%) - Space for future image or graphic */}
-          <div className="lg:col-span-5 hidden lg:flex items-center justify-center min-h-[500px]">
+          <div className="lg:col-span-5 hidden lg:flex items-center justify-center min-h-96">
             {/* Placeholder for future visual element */}
             <div 
               className="w-full h-full rounded-sm flex items-center justify-center"
@@ -147,7 +147,7 @@ export default function HomeHero() {
       </div>
 
       {/* Scroll indicator - Subtle */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 hidden sm:flex">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center gap-3">
         <p className="text-xs font-body uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
           Scroll
         </p>
@@ -156,9 +156,6 @@ export default function HomeHero() {
           style={{ backgroundColor: 'var(--accent-primary)' }}
         />
       </div>
-    </section>
-  );
-}
     </section>
   );
 }
