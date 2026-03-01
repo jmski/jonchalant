@@ -63,7 +63,7 @@ export default async function Dance() {
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="slide-left">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           {/* HERO SECTION - 60/40 Editorial Layout */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative">
             {/* Subtle fluid shape decorative element - represents dance/movement energy */}

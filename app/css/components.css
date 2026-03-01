@@ -11,8 +11,8 @@ button {
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
-  padding: 1rem 2rem;
-  border: none;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid var(--accent-primary);
   border-radius: 0px;
   background-color: var(--accent-primary);
   color: white;
@@ -23,13 +23,15 @@ button {
   white-space: nowrap;
   text-align: center;
   outline: none;
+  box-shadow: none; /* Zen Sleek: No shadows */
 }
 
 .btn:hover,
 button:hover {
   background-color: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--glow-subtle);
+  border-color: var(--accent-hover);
+  transform: translateY(-1px); /* Minimal motion */
+  box-shadow: none;
 }
 
 .btn:active,
@@ -42,13 +44,14 @@ button:active {
 .btn-primary {
   background-color: var(--accent-primary);
   color: white;
-  border: none;
+  border: 1px solid var(--accent-primary);
   outline: none;
 }
 
 .btn-primary:hover {
   background-color: var(--accent-hover);
-  border: none;
+  border-color: var(--accent-hover);
+  box-shadow: none;
 }
 
 .btn-secondary {
@@ -56,35 +59,40 @@ button:active {
   color: var(--accent-primary);
   border: 1px solid var(--border-color);
   border-width: 1px;
+  outline: none;
 }
 
 .btn-secondary:hover {
   background-color: transparent;
   color: var(--accent-primary);
   border: 1px solid var(--accent-primary);
+  box-shadow: none;
 }
 
 .btn-tertiary {
   background-color: transparent;
   color: var(--accent-primary);
   border: none;
-  border-bottom: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  padding-bottom: calc(0.875rem - 1px); /* Adjust for border */
+  outline: none;
 }
 
 .btn-tertiary:hover {
   background-color: transparent;
-  border-bottom: 1px solid var(--accent-primary);
+  border-bottom: 2px solid var(--accent-primary);
   color: var(--accent-primary);
+  box-shadow: none;
 }
 
 /* Button Sizes */
 .btn-sm {
-  padding: 0.75rem 1.5rem;
+  padding: 0.625rem 1rem;
   font-size: 0.875rem;
 }
 
 .btn-lg {
-  padding: 1.25rem 2.5rem;
+  padding: 1rem 2rem;
   font-size: 1.125rem;
 }
 
@@ -100,29 +108,37 @@ button:disabled {
 button:disabled:hover {
   transform: none;
   box-shadow: none;
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
 }
 
 /* ========== CARDS ========== */
 .card {
   position: relative;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: 0px;
-  padding: 2rem;
+  padding: 1.5rem;
   transition: all var(--transition-base);
   overflow: visible;
   box-sizing: border-box;
+  box-shadow: none; /* Zen Sleek: No shadow */
 }
 
 .card:hover {
   border-color: var(--accent-primary);
   background-color: var(--bg-secondary);
-  box-shadow: var(--glow-subtle);
+  box-shadow: 0 2px 8px rgba(107, 142, 99, 0.06); /* Subtle 2px blur only on hover */
 }
 
 .card-outlined {
   border: 1px solid var(--accent-primary);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
+  box-shadow: none;
+}
+
+.card-outlined:hover {
+  box-shadow: 0 2px 8px rgba(107, 142, 99, 0.08);
 }
 
 .card-title {
@@ -131,6 +147,8 @@ button:disabled:hover {
   font-weight: 700;
   margin: 0 0 1rem 0;
   color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-primary); /* Accent underline */
+  padding-bottom: 0.75rem;
 }
 
 .card-description {

@@ -11,7 +11,7 @@ export default function About() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <PageTransition animation="blur">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24" id="main-content">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" id="main-content">
           {/* HERO SECTION */}
           <section className="mb-24">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">

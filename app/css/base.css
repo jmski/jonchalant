@@ -21,15 +21,19 @@ html {
     color var(--transition-base),
     border-color var(--transition-base),
     background-image var(--transition-base);
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-size: 16px;
   line-height: 1.7;
   letter-spacing: 0.3px;
-  position: relative;
+  overflow-x: hidden; /* Ensure no horizontal overflow on mobile */
+  max-width: 100%;
 }
 
 /* Subtle scanline effect overlay */

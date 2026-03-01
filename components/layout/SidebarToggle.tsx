@@ -15,7 +15,7 @@ export default function SidebarToggle({ onClick }: SidebarToggleProps) {
       onClick={onClick}
       aria-label="Toggle navigation menu"
     >
-      ☰ Index
+      ☰ MENU
     </button>
   );
 }

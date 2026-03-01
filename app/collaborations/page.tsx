@@ -93,7 +93,7 @@ export default function Collaborations() {
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="fade">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           {/* HERO SECTION */}
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">

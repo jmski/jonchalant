@@ -7,6 +7,11 @@ const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ 
   ssr: true
 });
 
+const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
+  loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
+  ssr: true
+});
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
@@ -15,7 +20,7 @@ export default function Home() {
         <HomeHero />
 
         {/* KEY STATS SECTION */}
-        <section className="bg-slate-50 py-16 sm:py-24">
+        <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {[
@@ -37,7 +42,7 @@ export default function Home() {
         </section>
 
         {/* FEATURED AREAS SECTION */}
-        <section className="py-16 sm:py-24">
+        <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
@@ -82,7 +87,7 @@ export default function Home() {
         </section>
 
         {/* SERVICES OVERVIEW */}
-        <section className="bg-slate-50 py-16 sm:py-24">
+        <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
@@ -164,7 +169,7 @@ export default function Home() {
         </section>
 
         {/* FEATURED AREAS - PORTFOLIO CARDS */}
-        <section className="py-16 sm:py-24">
+        <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
@@ -285,7 +290,7 @@ export default function Home() {
         </section>
 
         {/* WHY WORK TOGETHER */}
-        <section className="bg-slate-50 py-16 sm:py-24">
+        <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -323,8 +328,58 @@ export default function Home() {
           </div>
         </section>
 
+        {/* INQUIRY FORM SECTION */}
+        <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
+          {/* Subtle background decoration */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -mr-48 -mt-48"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl -ml-48 -mb-48"></div>
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Section Header */}
+            <div className="text-center mb-16 sm:mb-20 lg:mb-24">
+              <span 
+                className="inline-block text-xs uppercase tracking-widest font-bold px-3 py-1.5 rounded mb-4"
+                style={{
+                  backgroundColor: 'var(--accent-primary)',
+                  color: 'white',
+                  letterSpacing: '0.15em'
+                }}
+              >
+                Let's Work Together
+              </span>
+              <h2 
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Start Your Journey
+              </h2>
+              <p 
+                className="text-lg sm:text-xl max-w-2xl mx-auto"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                Whether you're interested in coaching or collaboration, let's explore how we can work together. Fill out the form below and I'll respond within 24 hours.
+              </p>
+            </div>
+
+            {/* Form Container - Full Width */}
+            <div className="w-full">
+              <div 
+                className="rounded-lg p-8 sm:p-12 lg:p-16 border border-slate-200 shadow-lg"
+                style={{
+                  backgroundColor: 'var(--bg-primary)',
+                  borderColor: 'var(--border-color)'
+                }}
+              >
+                <CollaborationForm />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FINAL CTA */}
-        <section className="py-16 sm:py-24">
+        <section className="py-12 sm:py-16">
           <CTASection 
             title="Ready to Collaborate?"
             description="Let's explore how we can work together to bring your vision to life."
