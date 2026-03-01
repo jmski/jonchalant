@@ -1,47 +1,11 @@
 /* ============================================================================
-   LAYOUT.CSS - Layout Systems and Structural Components
+   LAYOUT.CSS - Clean Layout Systems
    
-   Grid layouts, container systems, sidebar, article grids, and page structures.
+   Simple, professional grid layouts with clear information architecture.
+   Removed sidebar complexity - using simple containers and grids only.
    ============================================================================ */
 
-/* ========== LAYOUT SYSTEMS ========== */
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-.article-grid {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-.article-main {
-  grid-column: 1;
-  min-width: 0;
-}
-
-.article-aside {
-  grid-column: 2;
-  padding: 1.5rem;
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  height: fit-content;
-  position: sticky;
-  top: 2rem;
-}
-
-.multi-column {
-  column-count: 2;
-  column-gap: var(--column-gap);
-  column-rule: 1px solid var(--border-color);
-}
-
-/* ========== SIDEBAR LAYOUT ========== */
+/* ========== LAYOUT WITH SIDEBAR ========== */
 .layout-with-sidebar {
   display: grid;
   grid-template-columns: 1fr 250px;
@@ -199,4 +163,166 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 30;
+}
+
+/* ========== CONTAINER ========== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.container-sm {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ========== SINGLE COLUMN LAYOUT ========== */
+.single-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ========== TWO COLUMN LAYOUT (OFFSET) ========== */
+/* Main content on left, narrower sidebar-like content on right */
+.two-column-offset {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--column-gap);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.two-column-offset__main {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.two-column-offset__side {
+  grid-column: 2;
+  height: fit-content;
+  position: sticky;
+  top: var(--gutter);
+}
+
+/* ========== BALANCED TWO COLUMN LAYOUT ========== */
+/* Equal width columns for symmetric content */
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--column-gap);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ========== THREE COLUMN GRID ========== */
+/* For program cards, lesson cards, featured sections */
+.three-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--column-gap);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.three-column__item {
+  min-width: 0;
+}
+
+/* ========== RESPONSIVE GRIDS ========== */
+/* Auto-adjusting grid - prefer 2-3 columns, fallback to 1 */
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--column-gap);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ========== MULTI-COLUMN TEXT (for long-form content) ========== */
+.multi-column {
+  column-count: 2;
+  column-gap: var(--column-gap);
+  column-rule: 1px solid var(--color-slate);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ========== FLEXBOX LAYOUTS ========== */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========== FLEXBOX LAYOUTS ========== */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--element-gap);
+}
+
+/* ========== MOBILE RESPONSIVE BREAKPOINTS ========== */
+/* Tablet: 768px and up */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .two-column-offset {
+    grid-template-columns: 1fr;
+    gap: var(--element-gap);
+  }
+
+  .two-column-offset__side {
+    position: static;
+    top: auto;
+  }
+
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .three-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .multi-column {
+    column-count: 1;
+  }
+}
+
+/* Mobile: 640px and down */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .container-sm {
+    padding: 0 1rem;
+  }
+
+  .three-column {
+    grid-template-columns: 1fr;
+  }
+
+  .auto-grid {
+    grid-template-columns: 1fr;
+  }
 }

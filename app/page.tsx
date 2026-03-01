@@ -1,19 +1,7 @@
 import { HomeHero } from '@/components/hero';
-import { PageTransition } from '@/components/layout';
-import { ScrollFade, ScrollStagger } from '@/components/animations';
-import {
-  CornerBrackets,
-  DecorativeDivider,
-  PatternBackground,
-  LayeredPatternOverlay,
-  DecorativeCornerBracket,
-} from '@/components/effects';
-import { Marquee } from '@/components/effects/Marquee';
-import { Heading } from '@/components/typography';
+import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
 
-// Below-fold dynamic imports
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
@@ -21,148 +9,224 @@ const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ 
 
 export default function Home() {
   return (
-    <div className="bg-primary text-primary">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       <PageTransition animation="fade">
-      {/* MAXIMALIST HERO SECTION */}
-      <section 
-        className="relative overflow-hidden pt-0 pb-16 md:pb-32"
-        style={{ 
-          backgroundColor: 'var(--bg-primary)',
-          backgroundImage: `
-            linear-gradient(0deg, transparent 24%, rgba(255, 95, 31, 0.05) 25%, rgba(255, 95, 31, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 95, 31, 0.05) 75%, rgba(255, 95, 31, 0.05) 76%, transparent 77%, transparent),
-            linear-gradient(90deg, transparent 24%, rgba(255, 95, 31, 0.05) 25%, rgba(255, 95, 31, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 95, 31, 0.05) 75%, rgba(255, 95, 31, 0.05) 76%, transparent 77%, transparent)
-          `,
-          backgroundSize: '50px 50px',
-        }}
-      >
-        {/* Floating SVG Elements - Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Large circle */}
-          <svg className="absolute top-10 left-5 opacity-10 md:opacity-20 animate-pulse" width="200" height="200" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="90" fill="none" stroke="var(--accent-vibrant)" strokeWidth="2" />
-          </svg>
+        {/* HERO SECTION */}
+        <HomeHero />
 
-          {/* Floating squares */}
-          <svg className="absolute top-32 right-10 opacity-15 md:opacity-25" width="150" height="150" viewBox="0 0 150 150" style={{ animation: 'float 6s ease-in-out infinite' }}>
-            <rect x="10" y="10" width="130" height="130" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1.5" />
-            <rect x="30" y="30" width="90" height="90" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.6" />
-          </svg>
-
-          {/* Grid overlay */}
-          <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: 'linear-gradient(0deg, transparent 24%, var(--border-color) 25%, var(--border-color) 26%, transparent 27%, transparent 74%, var(--border-color) 75%, var(--border-color) 76%, transparent 77%, transparent)',
-            backgroundSize: '60px 60px'
-          }} />
-
-          {/* Accent dots */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-accent-vibrant rounded-full opacity-30" />
-          <div className="absolute top-2/3 right-1/3 w-1.5 h-1.5 bg-accent-vibrant rounded-full opacity-40" />
-          <div className="absolute bottom-1/4 right-1/4 w-2.5 h-2.5 bg-accent-vibrant rounded-full opacity-25" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <HomeHero />
-        </div>
-      </section>
-
-      {/* MARQUEE - Animated Keywords */}
-      <Marquee
-        items={['Choreography', 'Content Creation', 'Brand Partnerships', 'Live Performance', 'Creative Direction', 'Digital Media']}
-        speed={25}
-        pauseOnHover={true}
-      />
-
-      {/* BOLD STATS & METRICS SECTION - MAXIMALIST */}
-      <section 
-        className="py-16 md:py-24 border-t border-b border-primary relative"
-        style={{
-          backgroundColor: 'var(--bg-secondary)',
-          backgroundImage: 'linear-gradient(135deg, rgba(0, 255, 255, 0.02) 0%, rgba(255, 0, 255, 0.02) 100%)'
-        }}
-      >
-        {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 border-3 border-secondary opacity-5" />
-        <div className="absolute bottom-0 left-1/4 w-48 h-48 border-2 border-tertiary opacity-3" style={{ borderStyle: 'dashed' }} />
-        
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <ScrollStagger variant="slideInUp" staggerDelay={100}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              {/* Stats Cards - BOLD NEW STYLE */}
+        {/* KEY STATS SECTION */}
+        <section className="bg-slate-50 dark:bg-slate-800 py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {[
-                { label: 'CHOREOGRAPHY PIECES', value: '50+', icon: '▶' },
-                { label: 'BRAND COLLABORATIONS', value: '30+', icon: '◆' },
-                { label: 'YEARS EXPERIENCE', value: '8+', icon: '●' },
+                { label: 'Coaching Clients Transformed', value: '100+' },
+                { label: 'Brand Collaborations', value: '30+' },
+                { label: 'Years in Creative Direction', value: '8+' },
               ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="relative group border-bold border-primary bg-primary transition-all duration-300 hover:shadow-bold card-padding-lg overflow-hidden"
-              >
-                {/* Corner brackets */}
-                <CornerBrackets color="vibrant" size="sm" position="all" thickness={2} opacity={0.7} />
-                
-                <div className="relative z-10 space-y-4">
-                  <div className="text-5xl md:text-6xl font-black mb-2 heading-display text-vibrant">
+                <div key={idx} className="space-y-3 text-center md:text-left">
+                  <div className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white">
                     {stat.value}
                   </div>
-                  <div className="text-xs uppercase tracking-[0.2em] text-tertiary retro-label">
+                  <div className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">
                     {stat.label}
                   </div>
-                  <div className="text-4xl opacity-30 select-none text-vibrant">
-                    {stat.icon}
-                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FEATURED AREAS SECTION */}
+        <section className="py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+                Where I Create Impact
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+              {/* Main featured area */}
+              <div className="lg:col-span-2 space-y-6">
+                <div className="aspect-video rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" />
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  Dance & Movement Direction
+                </h3>
+                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Choreography, performance, and creative direction for brands and artists. I blend precision with expression—creating movement that communicates and inspires.
+                </p>
+              </div>
+
+              {/* Sidebar features */}
+              <div className="space-y-8">
+                <div className="space-y-3">
+                  <h4 className="text-lg font-bold text-slate-900 dark:text-white">
+                    Leadership Coaching
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    Transform your presence and command rooms with quiet authority.
+                  </p>
+                </div>
+                <div className="h-px bg-slate-200 dark:bg-slate-700" />
+                <div className="space-y-3">
+                  <h4 className="text-lg font-bold text-slate-900 dark:text-white">
+                    Brand Partnerships
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    Collaborate on campaigns that move audiences.
+                  </p>
                 </div>
               </div>
-            ))}
             </div>
-          </ScrollStagger>
-        </div>
-      </section>
-
-      {/* Decorative Divider */}
-      <DecorativeDivider color="secondary" variant="line-dots" dotCount={7} className="bg-primary" />
-
-      {/* FEATURED AREAS - EDITORIAL ASYMMETRIC LAYOUT */}
-      <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
-        {/* Layered pattern background */}
-        <LayeredPatternOverlay
-          pattern1="grid"
-          pattern2="diagonal"
-          color1="secondary"
-          color2="tertiary"
-          opacity1={0.04}
-          opacity2={0.02}
-          rotation={-15}
-        />
-
-        {/* Decorative background circles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full opacity-3" style={{
-            background: 'radial-gradient(circle, var(--accent-secondary), transparent)',
-          }} />
-          <div className="absolute -bottom-32 left-1/4 w-80 h-80 rounded-full opacity-2" style={{
-            background: 'radial-gradient(circle, var(--accent-tertiary), transparent)',
-          }} />
-        </div>
-        
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="mb-16 pr-0 md:pr-12">
-            <span className="section-label">→ Primary Focus Areas</span>
-            <Heading level={2} className="mt-4 mb-6">What I<br />Specialize In</Heading>
           </div>
+        </section>
 
-          {/* EDITORIAL ASYMMETRIC GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              {/* Dance Portfolio - BOLD */}
-              <ScrollFade variant="slideInUp" delay={0}>
-            <div 
-              className="border-bold border-vibrant bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-vibrant"
-            >
-              <div className="aspect-square bg-linear-to-br from-vibrant/20 to-transparent flex items-center justify-center relative overflow-hidden">
-                {/* Diagonal lines pattern */}
-                <div className="absolute inset-0 opacity-20" style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, var(--accent-vibrant) 10px, var(--accent-vibrant) 11px)'
-                }} />
+        {/* SERVICES OVERVIEW */}
+        <section className="bg-slate-50 dark:bg-slate-800 py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+                Services & Offerings
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: 'Leadership Programs',
+                  description: '1-on-1 coaching, group workshops, and digital courses for building Quiet Command.'
+                },
+                {
+                  title: 'Movement Coaching',
+                  description: 'Physical grounding techniques and body-aware presence training.'
+                },
+                {
+                  title: 'Brand Collaboration',
+                  description: 'Choreography, content creation, and creative direction for campaigns.'
+                },
+              ].map((service, idx) => (
+                <div
+                  key={idx}
+                  className="border border-slate-200 dark:border-slate-700 p-8 rounded-lg hover:shadow-md transition-shadow duration-300"
+                >
+                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
+                    {service.title}
+                  </h4>
+                  <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FEATURED AREAS - PORTFOLIO CARDS */}
+        <section className="py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                Explore My Work
+              </h2>
+              <p className="text-lg text-slate-700 dark:text-slate-300">
+                From dance portfolio to leadership coaching, discover what I offer.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: 'Dance Portfolio',
+                  description: 'Choreography, freestyle, performances & tutorials',
+                  href: '/dance',
+                  count: '30+ Videos'
+                },
+                {
+                  title: 'Social Skill Lessons',
+                  description: 'Beginner to advanced frameworks for Quiet Command',
+                  href: '/lessons',
+                  count: 'Master Classes'
+                },
+                {
+                  title: 'Collaborations',
+                  description: 'Partnerships, campaigns & brand opportunities',
+                  href: '/collaborations',
+                  count: 'Brand Ready'
+                },
+              ].map((item, idx) => (
+                <a
+                  key={idx}
+                  href={item.href}
+                  className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300 group"
+                >
+                  <div className="aspect-square bg-slate-100 dark:bg-slate-800 flex items-center justify-center relative">
+                    <div className="text-center">
+                      <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-2">
+                        {item.count}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="p-6 border-t border-slate-200 dark:border-slate-700">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-400">
+                      {item.description}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* WHY WORK TOGETHER */}
+        <section className="bg-slate-50 dark:bg-slate-800 py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8">
+                  Why Work Together
+                </h2>
+                <div className="space-y-6">
+                  {[
+                    { title: 'Technical Excellence', desc: 'Precision choreography with professional production quality' },
+                    { title: 'Creative Partnership', desc: 'Collaborative approach from concept to final execution' },
+                    { title: 'Strategic Thinking', desc: 'Brand alignment and audience engagement optimization' },
+                    { title: 'Fast Turnaround', desc: 'Efficient workflows without compromising on quality' },
+                  ].map((feature, idx) => (
+                    <div key={idx} className="flex gap-4">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 dark:bg-purple-500 flex-shrink-0 text-white font-bold text-sm">
+                        {idx + 1}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 dark:text-white mb-1">
+                          {feature.title}
+                        </h4>
+                        <p className="text-sm text-slate-700 dark:text-slate-300">
+                          {feature.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-slate-900 rounded-lg h-96 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+                <p className="text-slate-500 dark:text-slate-400">Visual Showcase</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FINAL CTA */}
+        <section className="py-16 sm:py-24">
+          <CTASection />
+        </section>
+      </PageTransition>
+    </div>
+  );
+}
                 <div className="relative z-10 text-center">
                   <div className="text-6xl mb-3 text-vibrant font-black">▶</div>
                   <div className="text-xs font-black uppercase tracking-widest text-vibrant retro-label">
@@ -179,7 +243,7 @@ export default function Home() {
             </div>
             </ScrollFade>
 
-            {/* Showcase - NEON */}
+            {/* Lessons - NEON */}
             <ScrollFade variant="slideInUp" delay={80}>
             <div 
               className="border-bold border-secondary bg-tertiary group cursor-pointer transition-all duration-300 hover:shadow-lg"
@@ -189,16 +253,16 @@ export default function Home() {
                   backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, var(--accent-secondary) 10px, var(--accent-secondary) 11px)'
                 }} />
                 <div className="relative z-10 text-center">
-                  <div className="text-6xl mb-3 text-secondary font-black">✦</div>
+                  <div className="text-6xl mb-3 text-secondary font-black">📚</div>
                   <div className="text-xs font-black uppercase tracking-widest text-secondary retro-label">
-                    Gunpla & Pokémon
+                    Master Classes
                   </div>
                 </div>
               </div>
               <div className="p-6 border-t-3 border-secondary">
-                <Heading level={3} className="mb-3">Creative Showcase</Heading>
+                <Heading level={3} className="mb-3">Social Skill Lessons</Heading>
                 <p className="text-sm text-primary font-body">
-                  Model builds, collections & digital media
+                  Beginner to advanced frameworks for Quiet Command
                 </p>
               </div>
             </div>

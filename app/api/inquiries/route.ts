@@ -1,4 +1,3 @@
-import { sanityClient } from '@/lib/sanityClient';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -24,26 +23,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create document in Sanity
-    const doc = await sanityClient.create({
-      _type: 'inquiry',
-      name,
-      email,
-      company: company || null,
-      collaborationType,
-      message,
-      submittedAt: new Date().toISOString(),
-      status: 'New',
-    });
-
-    // Send confirmation email (optional - requires email service)
-    // For now, we'll just store it in Sanity
+    // For now, just return success response
+    // In the future, you can integrate with email service or database
+    console.log('Inquiry received:', { name, email, company, collaborationType, message });
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Inquiry submitted successfully',
-        docId: doc._id,
+        message: 'Inquiry submitted successfully. We will review and get back to you soon.',
       },
       { status: 201 }
     );

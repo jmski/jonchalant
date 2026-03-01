@@ -90,7 +90,6 @@ export const IMAGE_CONFIG = {
   REMOTE_PATTERNS: {
     UNSPLASH: 'https://images.unsplash.com',
     PICSUM: 'https://picsum.photos',
-    SANITY: 'https://cdn.sanity.io',
   },
 
   /**

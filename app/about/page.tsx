@@ -1,213 +1,232 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
-import { ScrollFade, ScrollStagger } from "@/components/animations";
-import { Heading } from "@/components/typography";
 
 export const metadata = {
-  title: "About | Jon Chalon",
-  description: "Professional dancer and creator. Choreography, digital media, and strategic collaborations."
+  title: "About | The Kinetic Leader",
+  description: "Jon Chalon teaches introverts how to gain Quiet Command through body-led leadership, social mechanics, and introvert mastery."
 };
 
 export default function About() {
   return (
-    <div className="bg-primary text-primary">
+    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
       <PageTransition animation="blur">
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20" id="main-content">
-        {/* TECHNICAL HERO SECTION */}
-        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Technical background grid */}
-          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
-            backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(255, 95, 31, 0.1) 25%, rgba(255, 95, 31, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 95, 31, 0.1) 75%, rgba(255, 95, 31, 0.1) 76%, transparent 77%, transparent)',
-            backgroundSize: '50px 50px'
-          }} />
-
-          {/* Left: Title */}
-          <div className="relative z-10">
-            <div className="section-label">→ Origin Story</div>
-            <Heading level={1} className="mb-6">JON<br />CHALON</Heading>
-            <p className="text-lg text-primary max-w-lg">
-              Professional choreographer. Creator. Collaborator. Blending movement, technology, and otaku culture.
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24" id="main-content">
+          {/* HERO SECTION */}
+          <section className="mb-24">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6">
+              From the Back of the Room to the Front of the Floor
+            </h1>
+            <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 max-w-2xl leading-relaxed">
+              For most of my life, I believed that leadership was a loud man's game. As a natural introvert, I was the one who overthought every email, stayed quiet in meetings, and felt like my social battery was perpetually at 5%.
             </p>
-          </div>
+          </section>
 
-          {/* Right: Technical SVG Schematic */}
-          <div className="relative z-10 flex justify-end">
-            <svg width="300" height="300" viewBox="0 0 300 300" className="opacity-80">
-              {/* Outer Pentagon-like shape */}
-              <circle cx="150" cy="150" r="140" fill="none" stroke="var(--accent-vibrant)" strokeWidth="2" opacity="0.6"/>
-              <circle cx="150" cy="150" r="100" fill="none" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.3"/>
+          {/* ORIGIN STORY - 60/40 LAYOUT */}
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+                Everything changed when I stopped thinking and started moving.
+              </h2>
               
-              {/* Inner elements */}
-              <circle cx="150" cy="150" r="60" fill="none" stroke="var(--accent-vibrant)" strokeWidth="2"/>
-              <circle cx="150" cy="150" r="4" fill="var(--accent-vibrant)"/>
-              
-              {/* Radiating lines */}
-              <line x1="150" y1="90" x2="150" y2="40" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
-              <line x1="210" y1="150" x2="260" y2="150" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
-              <line x1="150" y1="210" x2="150" y2="260" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
-              <line x1="90" y1="150" x2="40" y2="150" stroke="var(--accent-vibrant)" strokeWidth="1.5" opacity="0.6"/>
-              
-              {/* Diagonal lines */}
-              <line x1="105" y1="105" x2="75" y2="75" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.4"/>
-              <line x1="195" y1="105" x2="225" y2="75" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.4"/>
-              <line x1="195" y1="195" x2="225" y2="225" stroke="var(--accent-tertiary)" strokeWidth="1" opacity="0.4"/>
-              <line x1="105" y1="195" x2="75" y2="225" stroke="var(--accent-tertiary)" strokeWidth="1" opacity="0.4"/>
-              
-              {/* Center nodes */}
-              <circle cx="120" cy="180" r="7" fill="none" stroke="var(--accent-secondary)" strokeWidth="1.5" opacity="0.7"/>
-              <circle cx="180" cy="120" r="7" fill="none" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.7"/>
-            </svg>
-          </div>
-        </div>
+              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                I discovered that the same coordination, posture, and presence required on the dance floor were the exact 'mechanics' missing from my professional life. Dance taught me how to inhabit my body and take up space without saying a word.
+              </p>
 
-        {/* BIO SECTION */}
-        <section className="py-20 border-t border-primary grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-6">
-            <p className="text-lg text-primary leading-relaxed">
-              I'm a professional choreographer and digital creator with 8+ years of experience delivering high-impact movement content for brands, creators, and live productions. My work combines technical choreographic precision with creative innovation.
-            </p>
-            <p className="text-lg text-primary leading-relaxed">
-              From TikTok viral choreography to music video direction, brand collaborations to educational workshops—I bring both artistic vision and strategic thinking to every project. I specialize in bridging the gap between artistic movement and commercial success.
-            </p>
-            <p className="text-lg text-primary leading-relaxed">
-              Beyond choreography, I'm deeply invested in animation (Gunpla), Pokémon culture, and the intersection of internet aesthetics with professional content creation. These intersecting worlds inform my creative approach and help me connect with diverse audiences.
-            </p>
-          </div>
+              <div className="pt-6 border-t border-slate-200 dark:border-slate-700">
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">
+                  The Three Phases
+                </h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Dance & Discipline</h4>
+                    <p className="text-slate-700 dark:text-slate-400">
+                      I discovered movement as a language for expression that bypassed all my introverted self-doubt. My body could say things my words couldn't.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Sales & Service</h4>
+                    <p className="text-slate-700 dark:text-slate-400">
+                      I took that physical grounding into the high-pressure world of the fitness industry and realized that introverts don't need to change their personalities—they just need a better script and a stronger physical foundation.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white mb-2">The Mission</h4>
+                    <p className="text-slate-700 dark:text-slate-400">
+                      Today, I've mastered the skills to lead despite my introversion. I created The Kinetic Leader to help other quiet experts use movement and social mechanics to command the room—all while protecting their energy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          {/* Quick Stats Grid */}
-          <ScrollStagger variant="slideInUp" staggerDelay={100}>
-            <div className="space-y-4">
+            {/* Right column placeholder */}
+            <div className="lg:col-span-5 bg-slate-100 dark:bg-slate-800 rounded-lg h-96 flex items-center justify-center">
+              <p className="text-slate-500 dark:text-slate-400">Editorial Image Placeholder</p>
+            </div>
+          </section>
+
+          {/* KEY STATS */}
+          <section className="mb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { label: 'Experience', value: '8+ Years', icon: '▶' },
-              { label: 'Projects', value: '50+', icon: '◆' },
-              { label: 'Followers', value: '150K+', icon: '●' },
-              { label: 'Global Reach', value: 'Yes', icon: '✦' },
+              { label: 'Years Experience', value: '8+' },
+              { label: 'Clients Coached', value: '50+' },
+              { label: 'Transformations', value: '100%*' },
+              { label: 'Introvert-Led', value: '✓' },
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="border-bold border-vibrant bg-vibrant-faint group p-6"
+                className="border-l border-slate-200 dark:border-slate-700 pl-6 py-4"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="retro-label text-vibrant text-xs uppercase mb-2">
-                      {stat.label}
-                    </div>
-                    <div className="text-3xl font-black text-vibrant">
-                      {stat.value}
-                    </div>
-                  </div>
-                  <div className="text-4xl opacity-30">
-                    {stat.icon}
-                  </div>
+                <div className="text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 font-medium mb-2">
+                  {stat.label}
+                </div>
+                <div className="text-3xl font-bold text-slate-900 dark:text-white">
+                  {stat.value}
                 </div>
               </div>
             ))}
+          </section>
+          <p className="text-xs text-slate-600 dark:text-slate-400 italic mb-24">*Of those who complete programs</p>
+
+          {/* WHAT I TEACH */}
+          <section className="mb-24">
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                What I Coach
+              </h2>
+              <p className="text-lg text-slate-700 dark:text-slate-300">
+                Three core pillars that transform how you show up professionally.
+              </p>
             </div>
-          </ScrollStagger>
-        </section>
 
-        {/* EXPERTISE SECTION */}
-        <section className="py-20 border-t border-primary">
-          <div className="mb-12">
-            <span className="section-label">→ Specializations</span>
-            <Heading level={2} className="mt-4">What I Do</Heading>
-          </div>
-
-          <ScrollStagger variant="slideInUp" staggerDelay={90}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: 'Choreography', desc: 'Custom movement design for music videos, commercials, performances, and digital content', color: 'vibrant' },
-              { title: 'Brand Partnerships', desc: 'Strategic collaborations with authentic movement-based content and product integration', color: 'secondary' },
-              { title: 'Content Direction', desc: 'Creative vision for dance content across TikTok, Instagram, YouTube, and emerging platforms', color: 'tertiary' },
-              { title: 'Movement Consulting', desc: 'Art direction and technical movement expertise for film, TV, theater, and installations', color: 'vibrant' },
-              { title: 'Workshops & Teaching', desc: 'Choreography workshops, intensives, technique classes, and creative coaching for creators', color: 'secondary' },
-              { title: 'Creative Collaboration', desc: 'Cross-disciplinary projects blending dance with music, visual art, and multimedia', color: 'tertiary' },
-            ].map((service, idx) => {
-              const colorMap: Record<string, string> = { vibrant: 'var(--accent-vibrant)', secondary: 'var(--accent-secondary)', tertiary: 'var(--accent-tertiary)' };
-              return (
+              {[
+                {
+                  title: 'Physical Grounding',
+                  desc: 'How your body language shapes perception. Posture, movement, spatial awareness—the foundation of presence.'
+                },
+                {
+                  title: 'Social Scripting',
+                  desc: 'The hidden rules of professional interactions. Conversation frameworks, networking mechanics, relationship building.'
+                },
+                {
+                  title: 'Energy Mastery',
+                  desc: 'Your introvert energy is finite and powerful. Learn to activate it strategically while avoiding burnout.'
+                },
+                {
+                  title: 'Executive Presence',
+                  desc: 'For professionals seeking leadership roles. Combining all three pillars into a commanding, authentic presence.'
+                },
+                {
+                  title: 'Interview & Pitch Coaching',
+                  desc: 'High-stakes moments where your body and delivery matter most. Master them without losing authenticity.'
+                },
+                {
+                  title: 'Team & Group Programs',
+                  desc: 'For organizations building more confident, inclusive teams. Leadership development through the Kinetic lens.'
+                },
+              ].map((service, idx) => (
                 <div
                   key={idx}
-                  className="border-l-4 bg-primary group cursor-pointer transition-all duration-300 hover:shadow-bold p-8"
-                  style={{ borderColor: colorMap[service.color] }}
+                  className="border border-slate-200 dark:border-slate-700 p-6 hover:shadow-md transition-shadow duration-300"
                 >
-                  <h3 className="text-primary font-bold text-lg mb-3 uppercase tracking-wide">
+                  <h3 className="font-semibold text-slate-900 dark:text-white mb-3 text-lg">
                     {service.title}
                   </h3>
-                  <p className="text-primary text-sm leading-relaxed">
+                  <p className="text-slate-700 dark:text-slate-400 leading-relaxed">
                     {service.desc}
                   </p>
                 </div>
-              );
-            })}
+              ))}
             </div>
-          </ScrollStagger>
-        </section>
+          </section>
 
-        {/* PHILOSOPHY SECTION */}
-        <section className="py-20 border-t border-primary">
-          <div className="mb-12">
-            <span className="section-label">→ Approach</span>
-            <Heading level={2} className="mt-4 mb-12">Philosophy</Heading>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: 'Technical Excellence', desc: 'Precision choreography meets production quality. Every movement matters.' },
-              { title: 'Authentic Storytelling', desc: 'Movement is narrative. I prioritize genuine creative expression over trends.' },
-              { title: 'Strategic Growth', desc: 'All creative work serves measurable impact. Metrics and artistry aren\'t mutually exclusive.' },
-            ].map((philosophy, idx) => (
-              <div key={idx} className="border-bold border-primary p-8 relative">
-                <div className="absolute -top-3 -left-3 w-6 h-6 border-2 border-primary" />
-                
-                <h3 className="heading-display text-2xl font-black text-primary mb-4">
-                  {philosophy.title}
-                </h3>
-                <p className="text-primary text-sm leading-relaxed">
-                  {philosophy.desc}
-                </p>
-                
-                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-2 border-primary" />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* HOBBIES SECTION */}
-        <section className="py-20 border-t border-primary">
-          <div className="mb-12">
-            <span className="section-label">→ Outside the Studio</span>
-            <Heading level={2} className="mt-4">Also Known For</Heading>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="border-l-4 border-secondary bg-primary p-8">
-              <div className="text-5xl mb-4">🤖</div>
-              <Heading level={3} className="mb-4">Gunpla Building</Heading>
-              <p className="text-primary text-sm leading-relaxed">
-                Scale modeling enthusiast. I approach Gunpla with the same precision and attention to detail as choreography. The intricate assembly process mirrors creative composition—each piece has its role in the larger vision.
+          {/* MY PHILOSOPHY */}
+          <section className="mb-24">
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                How I Work
+              </h2>
+              <p className="text-lg text-slate-700 dark:text-slate-300">
+                Three principles guide everything I do.
               </p>
             </div>
 
-            <div className="border-l-4 border-tertiary bg-primary p-8">
-              <div className="text-5xl mb-4">🎴</div>
-              <Heading level={3} className="mb-4">Pokémon Collecting</Heading>
-              <p className="text-primary text-sm leading-relaxed">
-                Active collector and enthusiast. The Pokémon universe connects with my audience and influences my creative aesthetic. Nostalgia, design, and community matter. It's not just a hobby—it's cultural commentary.
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: 'No Performance Required',
+                  desc: 'You don\'t need to become someone else. I help you become fully, confidently yourself—and let that presence speak.'
+                },
+                {
+                  title: 'Science + Intuition',
+                  desc: 'Body language psychology meets personal intuition. We use both data and soul to build your authentic command.'
+                },
+                {
+                  title: 'Sustainable Leadership',
+                  desc: 'Your energy is precious. I teach you how to lead from strength, not from depletion or performance anxiety.'
+                },
+              ].map((philosophy, idx) => (
+                <div
+                  key={idx}
+                  className="border border-slate-200 dark:border-slate-700 p-8 hover:shadow-md transition-shadow duration-300"
+                >
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+                    {philosophy.title}
+                  </h3>
+                  <p className="text-slate-700 dark:text-slate-400 leading-relaxed">
+                    {philosophy.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* INTROVERT ADVANTAGE */}
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+                Why Your Introversion Is Your Superpower
+              </h2>
+
+              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                You listen more than you speak. You think before you act. You draw energy from depth, not breadth. These aren't weaknesses—they're advantages waiting to be weaponized.
+              </p>
+
+              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                The world needs more leaders who think before they act, who listen deeply, and who lead from authenticity. That's you.
               </p>
             </div>
-          </div>
-        </section>
 
-        {/* CTA */}
-        <section className="py-20 border-t border-primary">
-          <CTASection
-            title="Let's Work Together"
-            description="Whether you're looking for choreography, content direction, or creative partnership—I'm ready to bring your vision to life."
-            buttonText="START A CONVERSATION"
-            buttonLink="/contact"
-          />
-        </section>
-      </main>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                'Deep Listeners',
+                'Thoughtful Decision Makers',
+                'One-on-One Masters',
+                'Authentic Leaders',
+                'Written Communicators',
+                'Resilient Problem Solvers',
+              ].map((trait, idx) => (
+                <div
+                  key={idx}
+                  className="border border-slate-200 dark:border-slate-700 p-4 text-center hover:shadow-md transition-shadow duration-300"
+                >
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">{trait}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* CTA */}
+          <section className="py-16">
+            <CTASection
+              title="Ready to Discover Your Quiet Command?"
+              description="This is more than coaching. It's a transformation that starts with understanding where you are now. Let's talk about your Presence Audit."
+              buttonText="BOOK YOUR AUDIT"
+              buttonLink="/programs"
+            />
+          </section>
+        </main>
       </PageTransition>
     </div>
   );

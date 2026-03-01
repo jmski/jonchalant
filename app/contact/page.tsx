@@ -2,29 +2,12 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { PageTransition } from "@/components/layout";
-import { Heading } from "@/components/typography";
 
-// Below-fold dynamic import
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
-
-const contactData = {
-  headline: 'Get in Touch',
-  subheadline: 'Have a collaboration idea or just want to chat? I\'d love to hear from you.',
-  formTitle: 'Send me a Message',
-  contactOptions: [
-    { icon: '✉️', title: 'Email', value: 'contact@jonchalon.com' },
-    { icon: '📱', title: 'Instagram', value: '@jonchalon' },
-    { icon: '🎬', title: 'TikTok', value: '@jonchalon' }
-  ],
-  directEmailText: 'Or email me directly at',
-  directEmail: 'contact@jonchalon.com'
-};
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -52,201 +35,173 @@ export default function Contact() {
     }, 3000);
   };
 
+  const contactMethods = [
+    { label: 'Email', value: 'contact@jonchalon.com', href: 'mailto:contact@jonchalon.com' },
+    { label: 'Instagram', value: '@jonchalon', href: 'https://instagram.com/jonchalon' },
+    { label: 'TikTok', value: '@jonchalon', href: 'https://tiktok.com/@jonchalon' }
+  ];
+
   return (
-    <div className="min-h-screen page-wrapper bg-primary">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       <PageTransition animation="fade">
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="main-content">
-        {/* TECHNICAL HERO SECTION */}
-        <div className="relative py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Technical background grid */}
-          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
-            backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(255, 0, 255, 0.1) 25%, rgba(255, 0, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.1) 75%, rgba(255, 0, 255, 0.1) 76%, transparent 77%, transparent)',
-            backgroundSize: '50px 50px'
-          }} />
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          {/* HERO SECTION */}
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="inline-block">
+                <span className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">Direct Inquiry</span>
+              </div>
 
-          {/* Left: Title */}
-          <div className="relative z-10">
-            <div className="section-label">→ Let's Talk</div>
-            <Heading level={1} className="mb-6">GET IN<br />TOUCH</Heading>
-            <p className="text-lg text-primary max-w-lg mb-8">
-              Have a collaboration idea? Let's discuss how we can work together on your next project.
-            </p>
-            <div className="flex gap-4">
-              <div className="w-24 h-1 bg-tertiary" />
-              <div className="w-16 h-1 bg-secondary" />
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
+                Get in Touch
+              </h1>
+
+              <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+                Have a collaboration idea or question? I'd love to hear from you. Drop me a message and I'll get back to you within 24 hours.
+              </p>
+
+              <p className="text-base text-slate-600 dark:text-slate-400">
+                Choose your preferred way to connect below.
+              </p>
             </div>
-          </div>
 
-          {/* Right: Technical SVG Schematic */}
-          <div className="relative z-10 flex justify-end">
-            <svg width="300" height="300" viewBox="0 0 300 300" className="opacity-80">
-              {/* Outer hexagon */}
-              <circle cx="150" cy="150" r="140" fill="none" stroke="var(--accent-tertiary)" strokeWidth="2" opacity="0.6"/>
-              
-              {/* Inner rings */}
-              <circle cx="150" cy="150" r="100" fill="none" stroke="var(--accent-tertiary)" strokeWidth="1" opacity="0.3"/>
-              <circle cx="150" cy="150" r="70" fill="none" stroke="var(--accent-tertiary)" strokeWidth="2"/>
-              <circle cx="150" cy="150" r="4" fill="var(--accent-tertiary)"/>
-              
-              {/* Connection points */}
-              <circle cx="150" cy="80" r="8" fill="none" stroke="var(--accent-tertiary)" strokeWidth="2" opacity="0.8"/>
-              <circle cx="220" cy="150" r="8" fill="none" stroke="var(--accent-tertiary)" strokeWidth="2" opacity="0.8"/>
-              <circle cx="150" cy="220" r="8" fill="none" stroke="var(--accent-tertiary)" strokeWidth="2" opacity="0.8"/>
-              <circle cx="80" cy="150" r="8" fill="none" stroke="var(--accent-tertiary)" strokeWidth="2" opacity="0.8"/>
-              
-              {/* Connection lines */}
-              <line x1="150" y1="150" x2="150" y2="80" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.5" strokeDasharray="5,5"/>
-              <line x1="150" y1="150" x2="220" y2="150" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.5" strokeDasharray="5,5"/>
-              <line x1="150" y1="150" x2="150" y2="220" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.5" strokeDasharray="5,5"/>
-              <line x1="150" y1="150" x2="80" y2="150" stroke="var(--accent-tertiary)" strokeWidth="1.5" opacity="0.5" strokeDasharray="5,5"/>
-              
-              {/* Accent diagonal lines */}
-              <line x1="105" y1="105" x2="75" y2="75" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.4"/>
-              <line x1="195" y1="105" x2="225" y2="75" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.4"/>
-              <line x1="195" y1="195" x2="225" y2="225" stroke="var(--accent-secondary)" strokeWidth="1" opacity="0.4"/>
-              <line x1="105" y1="195" x2="75" y2="225" stroke="var(--accent-vibrant)" strokeWidth="1" opacity="0.4"/>
-            </svg>
-          </div>
-        </div>
-
-        {/* CONTACT OPTIONS */}
-        <ScrollStagger variant="slideInUp" staggerDelay={100}>
-          <section className="py-20 border-t border-primary grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { method: 'Email', value: 'contact@jonchalon.com', icon: '✉', color: 'vibrant' },
-            { method: 'Instagram', value: '@jonchalon', icon: '📸', color: 'secondary' },
-            { method: 'TikTok', value: '@jonchalon', icon: '▶', color: 'tertiary' },
-          ].map((contact, idx) => {
-            const colorMap: Record<string, string> = { vibrant: 'var(--accent-vibrant)', secondary: 'var(--accent-secondary)', tertiary: 'var(--accent-tertiary)' };
-            return (
-              <div
-                key={idx}
-                className="border-l-4 bg-primary group cursor-pointer transition-all duration-300 hover:shadow-bold p-8 text-center"
-                style={{ borderColor: colorMap[contact.color] }}
-              >
-                <div style={{ color: colorMap[contact.color] }} className="text-5xl mb-4">
-                  {contact.icon}
-                </div>
-                <h3 style={{ color: colorMap[contact.color] }} className="text-lg font-black uppercase retro-label mb-2">
-                  {contact.method}
-                </h3>
-                <p className="text-primary font-bold mono-text">
-                  {contact.value}
-                </p>
-              </div>
-            );
-          })}
+            {/* Right column visual placeholder */}
+            <div className="bg-slate-100 dark:bg-slate-800 rounded-lg h-96 flex items-center justify-center">
+              <p className="text-slate-500 dark:text-slate-400">Contact Methods</p>
+            </div>
           </section>
-        </ScrollStagger>
 
-        {/* FORM SECTION */}
-        <section className="py-20 border-t border-primary">
-          <div className="mb-12">
-            <span className="section-label">→ Direct Message</span>
-            <h2 className="heading-display text-6xl sm:text-7xl font-black text-primary mt-4 leading-none">
-              Send a Message
+          {/* QUICK CONTACT OPTIONS */}
+          <section className="mb-24 border-t border-slate-200 dark:border-slate-700 pt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8">
+              Quick Links
             </h2>
-          </div>
 
-          <div className="max-w-2xl">
-            {submitted ? (
-              <div className="border-l-4 border-vibrant bg-primary p-16 text-center">
-                <div className="text-6xl mb-6">✨</div>
-                <h3 className="text-4xl font-black text-primary mb-3 heading-display">
-                  Message Sent!
-                </h3>
-                <p className="text-primary text-lg">
-                  Thanks for reaching out. I'll get back to you within 24 hours.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div>
-                  <label className="block text-sm uppercase tracking-widest retro-label text-vibrant mb-4 font-black">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-6 py-4 border-2 border-vibrant bg-primary text-primary focus:outline-none focus:shadow-bold transition-all"
-                    placeholder="Full Name"
-                    style={{ borderColor: 'var(--accent-vibrant)' }}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm uppercase tracking-widest retro-label text-tertiary mb-4 font-black">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-6 py-4 border-2 bg-primary text-primary focus:outline-none focus:shadow-bold transition-all"
-                    placeholder="you@example.com"
-                    style={{ borderColor: 'var(--accent-secondary)' }}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm uppercase tracking-widest retro-label text-tertiary mb-4 font-black">
-                    Project Details
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={8}
-                    className="w-full px-6 py-4 border-2 border-tertiary bg-primary text-primary focus:outline-none focus:shadow-bold transition-all resize-none"
-                    placeholder="Tell me about your project idea..."
-                    style={{ borderColor: 'var(--accent-tertiary)' }}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full border-bold border-vibrant bg-vibrant text-primary font-black text-lg uppercase py-4 px-8 transition-all duration-300 hover:shadow-bold"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {contactMethods.map((method, idx) => (
+                <a
+                  key={idx}
+                  href={method.href}
+                  className="border border-slate-200 dark:border-slate-700 p-8 rounded hover:shadow-md transition-shadow duration-300 text-center group"
                 >
-                  Send Message
-                </button>
-              </form>
-            )}
-          </div>
-        </section>
+                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-3">
+                    {method.label}
+                  </p>
+                  <p className="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    {method.value}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </section>
 
-        {/* INFO SECTION */}
-        <section className="py-20 border-t border-primary grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="border-l-4 border-vibrant bg-primary p-8">
-            <h3 className="text-2xl font-black text-primary heading-display mb-4">Response Time</h3>
-            <p className="text-primary text-sm leading-relaxed">
-              I typically respond to all inquiries within 24 hours. For urgent matters, reach out on Instagram @jonchalon.
-            </p>
-          </div>
+          {/* CONTACT FORM SECTION */}
+          <section className="mb-24 py-16 border-t border-slate-200 dark:border-slate-700">
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                Send a Message
+              </h2>
+              <p className="text-lg text-slate-700 dark:text-slate-300">
+                Tell me about your project, collaboration idea, or any questions you have.
+              </p>
+            </div>
 
-          <div className="border-l-4 border-secondary bg-primary p-8">
-            <h3 className="text-2xl font-black text-primary heading-display mb-4">Collaboration Types</h3>
-            <p className="text-primary text-sm leading-relaxed">
-              Open to choreography, content direction, brand partnerships, educational workshops, and creative consulting projects.
-            </p>
-          </div>
-        </section>
+            <div className="max-w-2xl">
+              {submitted ? (
+                <div className="border border-slate-200 dark:border-slate-700 p-12 text-center bg-slate-50 dark:bg-slate-800 rounded">
+                  <div className="text-5xl mb-4">✓</div>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+                    Message Sent!
+                  </h3>
+                  <p className="text-slate-700 dark:text-slate-300">
+                    Thanks for reaching out. I'll respond within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-900 dark:text-white mb-3">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 dark:focus:ring-offset-slate-900 transition-all"
+                      placeholder="Your full name"
+                    />
+                  </div>
 
-        {/* CTA */}
-        <section className="py-20 border-t border-primary">
-          <CTASection
-            title="Let's Create Together"
-            description="Whether it's a quick discussion or a full project proposal, I'm excited to hear your ideas."
-            buttonText="RETURN TO HOME"
-            buttonLink="/"
-          />
-        </section>
-      </main>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-900 dark:text-white mb-3">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 dark:focus:ring-offset-slate-900 transition-all"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-900 dark:text-white mb-3">
+                      Message
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={6}
+                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 dark:focus:ring-offset-slate-900 transition-all resize-none"
+                      placeholder="Tell me about your project or inquiry..."
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded transition-colors duration-200"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              )}
+            </div>
+          </section>
+
+          {/* INFO BOXES */}
+          <section className="mb-24 grid grid-cols-1 md:grid-cols-2 gap-8 py-16 border-t border-slate-200 dark:border-slate-700">
+            <div className="border border-slate-200 dark:border-slate-700 p-8 rounded">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">Response Time</h3>
+              <p className="text-slate-700 dark:text-slate-300">
+                I respond to all messages within 24 hours. For time-sensitive inquiries, reach out directly via email or Instagram.
+              </p>
+            </div>
+
+            <div className="border border-slate-200 dark:border-slate-700 p-8 rounded">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">What to Include</h3>
+              <p className="text-slate-700 dark:text-slate-300">
+                Project details, timeline, budget if applicable, and any specific goals or questions. The more context, the better I can help.
+              </p>
+            </div>
+          </section>
+
+          {/* CTA */}
+          <section>
+            <CTASection
+              title="Ready to Connect?"
+              description="Submit the form above or reach out directly via email or social media."
+              buttonText="Scroll Up to Form"
+              buttonLink="#"
+            />
+          </section>
+        </main>
       </PageTransition>
     </div>
   );

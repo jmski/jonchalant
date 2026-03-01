@@ -19,13 +19,13 @@ const SITE_SECTIONS = [
     title: 'Portfolio',
     links: [
       { label: 'Dance', href: '/dance' },
-      { label: 'Showcase', href: '/showcase' },
     ],
   },
   {
-    title: 'Professional',
+    title: 'Coaching',
     links: [
-      { label: 'Collaborations', href: '/collaborations' },
+      { label: 'Programs', href: '/programs' },
+      { label: 'Lessons', href: '/lessons' },
       { label: 'Media Kit', href: '/media-kit' },
     ],
   },

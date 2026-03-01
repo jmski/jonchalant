@@ -5,7 +5,7 @@
 
 export const BREADCRUMB_MAP: Record<string, string> = {
   '/dance': 'Dance Portfolio',
-  '/showcase': 'Showcase',
+  '/lessons': 'Lessons',
   '/collaborations': 'Collaborations',
   '/media-kit': 'Media Kit',
   '/about': 'About',

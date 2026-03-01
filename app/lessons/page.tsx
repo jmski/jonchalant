@@ -1,0 +1,197 @@
+import { CTASection } from "@/components/sections";
+import { PageTransition } from "@/components/layout";
+import dynamic from 'next/dynamic';
+
+export const metadata = {
+  title: "Lessons | The Kinetic Leader",
+  description: "Social skill lessons, communication frameworks, and presence master classes for introverts"
+};
+
+// Fallback mock data for lessons
+const MOCK_LESSONS = [
+  {
+    _id: 'lesson-1',
+    title: 'Eye Contact Without Intensity',
+    category: 'Beginner',
+    pillar: 'Physical Grounding',
+    description: 'Master the 70/30 rule: Hold eye contact for 70% of conversation, look away 30%. Maintain presence without intimidation.',
+    duration: '8 min read',
+    icon: '👁️'
+  },
+  {
+    _id: 'lesson-2',
+    title: 'The Power Pause',
+    category: 'Beginner',
+    pillar: 'Physical Grounding',
+    description: 'Learn to command space through deliberate silence. Strategic pauses amplify presence and authority without words.',
+    duration: '6 min read',
+    icon: '⏸️'
+  },
+  {
+    _id: 'lesson-3',
+    title: 'Active Listening Scripts',
+    category: 'Beginner',
+    pillar: 'Social Scripting',
+    description: 'Templated responses that make people feel heard. "So what you\'re saying is..." frameworks to deepen connection.',
+    duration: '10 min read',
+    icon: '👂'
+  },
+  {
+    _id: 'lesson-4',
+    title: 'The Confident Introduction',
+    category: 'Beginner',
+    pillar: 'Social Scripting',
+    description: 'A 30-second introduction framework that positions your value without overselling. Perfect for networking and first meetings.',
+    duration: '7 min read',
+    icon: '🤝'
+  },
+  {
+    _id: 'lesson-5',
+    title: 'Body Language Mapping',
+    category: 'Intermediate',
+    pillar: 'Physical Grounding',
+    description: 'Decode what your body is communicating. Posture, hand placement, and stance adjustments that signal confidence.',
+    duration: '12 min read',
+    icon: '💪'
+  },
+  {
+    _id: 'lesson-6',
+    title: 'Managing Social Fatigue',
+    category: 'Intermediate',
+    pillar: 'Energy Mastery',
+    description: 'Strategic activation and recovery protocols. How to maintain presence through long events without burnout.',
+    duration: '11 min read',
+    icon: '🔋'
+  },
+  {
+    _id: 'lesson-7',
+    title: 'Navigating Difficult Conversations',
+    category: 'Intermediate',
+    pillar: 'Social Scripting',
+    description: 'Framework for disagreeing, setting boundaries, and handling conflict with composure and clarity.',
+    duration: '13 min read',
+    icon: '💬'
+  },
+  {
+    _id: 'lesson-8',
+    title: 'Advanced Presence in High-Stakes Meetings',
+    category: 'Advanced',
+    pillar: 'Physical Grounding',
+    description: 'Command rooms without dominating. How to influence decisions and shape perception at executive levels.',
+    duration: '14 min read',
+    icon: '🎯'
+  },
+  {
+    _id: 'lesson-9',
+    title: 'Building Your Presence Multiplier',
+    category: 'Advanced',
+    pillar: 'Energy Mastery',
+    description: 'Scale your influence through systems. Delegate, empower, and amplify your leadership beyond your presence.',
+    duration: '15 min read',
+    icon: '📈'
+  }
+];
+
+export default function Lessons() {
+  const lessons = MOCK_LESSONS;
+
+  const LessonCategory = ({ level, pillarColor, lessons }: { level: string; pillarColor: string; lessons: any[] }) => (
+    <section className="mb-24">
+      <div className="mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+          {level === 'Beginner' && 'Beginner Fundamentals'}
+          {level === 'Intermediate' && 'Intermediate Mastery'}
+          {level === 'Advanced' && 'Advanced Amplification'}
+        </h2>
+        <p className="text-lg text-slate-700 dark:text-slate-300 max-w-2xl">
+          {level === 'Beginner' && 'Start here. Master the foundational skills of physical presence and social mechanics. Build the confidence that comes from knowing what to do and say.'}
+          {level === 'Intermediate' && 'Build on fundamentals. Advanced applications of the three pillars. Learn to manage energy, navigate complexity, and influence outcomes in professional settings.'}
+          {level === 'Advanced' && 'Command your field. Executive presence, system building, and scaling your influence. From personal mastery to organizational impact.'}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {lessons.map((lesson) => (
+          <div
+            key={lesson._id}
+            className="border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col"
+          >
+            <div className="h-32 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-4xl">
+              {lesson.icon}
+            </div>
+            <div className="flex-1 p-8 flex flex-col">
+              <span className="text-xs uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400 mb-3">
+                {lesson.pillar}
+              </span>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                {lesson.title}
+              </h3>
+              <p className="text-slate-700 dark:text-slate-400 leading-relaxed flex-1 mb-4">
+                {lesson.description}
+              </p>
+              <div className="flex justify-between items-center pt-4 border-t border-slate-200 dark:border-slate-700">
+                <span className="text-xs text-slate-600 dark:text-slate-400">{lesson.duration}</span>
+                <a href="#" className="text-sm font-medium text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-slate-300">
+                  Read →
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-slate-900">
+      <PageTransition animation="slide-right">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          {/* HERO */}
+          <section className="mb-24">
+            <div className="inline-block mb-6">
+              <span className="text-sm uppercase tracking-widest font-medium text-slate-600 dark:text-slate-400">Structured Learning</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6">
+              Social Skill Lessons
+            </h1>
+            <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">
+              Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
+            </p>
+            <p className="text-base text-slate-600 dark:text-slate-400 mt-4">
+              Organized by skill level: Beginner → Intermediate → Advanced
+            </p>
+          </section>
+
+          {/* LESSON CATEGORIES */}
+          <LessonCategory 
+            level="Beginner" 
+            pillarColor="text-slate-900"
+            lessons={lessons.filter((l) => l.category === 'Beginner')} 
+          />
+          
+          <LessonCategory 
+            level="Intermediate" 
+            pillarColor="text-slate-900"
+            lessons={lessons.filter((l) => l.category === 'Intermediate')} 
+          />
+          
+          <LessonCategory 
+            level="Advanced" 
+            pillarColor="text-slate-900"
+            lessons={lessons.filter((l) => l.category === 'Advanced')} 
+          />
+
+          {/* CTA */}
+          <section className="py-16">
+            <CTASection
+              title="Ready to Master Quiet Command?"
+              description="Choose a coaching program that matches your skill level, or start with a free Presence Audit to assess your baseline."
+              buttonText="Book Your Audit"
+              buttonLink="/programs"
+            />
+          </section>
+        </main>
+      </PageTransition>
+    </div>
+  );
+}

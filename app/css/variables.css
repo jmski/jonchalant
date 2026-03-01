@@ -1,96 +1,98 @@
 /* ============================================================================
-   VARIABLES.CSS - CSS Custom Properties & Theme Definitions
+   VARIABLES.CSS - THE KINETIC LEADER DESIGN SYSTEM
    
-   Centralized color, typography, spacing, and timing variables for all themes.
+   Modern Zen Color Palette inspired by Japanese Aesthetics:
+   - Ikigai: Purpose-driven design
+   - Kaizen: Continuous refinement
+   - Ma: The space between (negative space as primary design element)
    ============================================================================ */
 
-/* SHARED VARIABLES - Available across all themes */
+/* ========== TYPOGRAPHY SYSTEM ========== */
 :root {
-  --font-serif: "Georgia", "Garamond", serif;
-  --font-mono: "Departure Mono", "Courier New", monospace;
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "IBM Plex Sans", sans-serif;
-  --font-tech: "JetBrains Mono", monospace;
-  --font-retro: "VT323", monospace;
+  /* Premium Editorial Typography */
+  --font-headline: "Cormorant Garamond", "Georgia", serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Monaco", "Courier New", monospace;
 
-  /* Spacing & Layout */
-  --column-gap: 2rem;
-  --gutter: 1.5rem;
+  /* Spacing System - Generous breathing room (Ma principle) */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 3.5rem;
+  --spacing-2xl: 5rem;
+  --spacing-3xl: 8rem;
 
-  /* Transitions & Timing */
-  --transition-fast: 150ms ease-in-out;
-  --transition-base: 250ms ease-in-out;
-  --transition-slow: 400ms ease-in-out;
+  /* Section padding - Vertical Rhythm */
+  --section-padding-mobile: 6rem 1.5rem; /* 96px top/bottom */
+  --section-padding-tablet: 8rem 2.5rem; /* 128px top/bottom */
+  --section-padding-desktop: 10rem 3rem; /* 160px top/bottom */
+
+  /* Transitions - Kaizen pacing (smooth, deliberate) */
+  --transition-subtle: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ========== LIGHT THEME (EDITORIAL / CLEAN PROFESSIONAL) ========== */
+/* ========== MODERN ZEN COLOR PALETTE ========== */
 :root {
-  /* Base Colors */
+  /* Primary Palette - Ink & Bone */
+  --color-ink-black: #0f0e0c; /* Deep authority, trust, grounded */
+  --color-ink-dark: #1a1915; /* Slightly lighter ink */
+  --color-bone-cream: #faf9f6; /* Warm, breathing, minimal */
+  --color-sand: #e8e3d8; /* Warm tertiary bg */
+  --color-ash: #8a8a8a; /* Subtle secondary text */
+
+  /* Kinetic Accents - Sophistication & Growth */
+  --color-burnt-indigo: #4a3a5c; /* Contemplative, deep, kinetic */
+  --color-indigo-light: #6b5a7a; /* Hover state, lighter variant */
+  --color-muted-moss: #6b8e63; /* Natural, growth, secondary accent */
+  --color-moss-light: #8aa87a; /* Softened moss for hover */
+
+  /* Status Colors (refined) */
+  --color-success: #4a7a5c; /* Moss-inspired success */
+  --color-warning: #b89a5f; /* Warm amber warning */
+  --color-error: #8a4a4a; /* Muted burgundy error */
+  --color-info: #5a7a9a; /* Soft indigo info */
+
+  /* Derived Base Colors */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8f8f8;
-  --bg-tertiary: #f0f0f0;
-  --text-primary: #000000;
-  --text-secondary: #222222;
-  --text-tertiary: #555555;
-  --border-color: #e0e0e0;
-  --border-accent: #d0d0d0;
+  --bg-secondary: #faf9f6;
+  --bg-tertiary: #e8e3d8;
+  --text-primary: #0f0e0c;
+  --text-secondary: #3a3a3a;
+  --text-tertiary: #8a8a8a;
+  --border-color: #d9d5cc;
+  --border-subtle: #ede9e3;
 
-  /* Accent Colors - Maximalist: Blue + Cyan + Magenta */
-  --accent-vibrant: #0052cc;
-  --accent-vibrant-hover: #003fa3;
-  --accent-secondary: #00bcd4;
-  --accent-secondary-light: #00dde9;
-  --accent-tertiary: #d946ef;
-
-  /* Status Colors */
-  --color-success: #16a34a;
-  --color-success-light: #dcfce7;
-  --color-success-dark: #15803d;
-  --color-error: #dc2626;
-  --color-error-light: #fee2e2;
-  --color-error-dark: #991b1b;
+  /* Accent & Interactive */
+  --accent-primary: #4a3a5c; /* Burnt Indigo - primary interactions */
+  --accent-secondary: #6b8e63; /* Muted Moss - secondary actions */
+  --accent-hover: #6b5a7a; /* Indigo light - hover state */
 
   /* Utilities */
-  --reg-mark: #cccccc;
-  --overlay-dark: rgba(0, 0, 0, 0.4);
-  --overlay-dark-medium: rgba(0, 0, 0, 0.3);
-  --overlay-light: rgba(255, 95, 31, 0.1);
-  --text-muted: #999999;
-
-  /* Derived Variables */
-  --text-heading: var(--text-primary);
-  --text-body: var(--text-secondary);
-  --bg-muted: var(--bg-tertiary);
-  --form-input-bg: var(--bg-secondary);
-  --form-input-border: var(--border-color);
-  --btn-primary-text: var(--bg-primary);
+  --overlay-dark: rgba(15, 14, 12, 0.1);
+  --overlay-light: rgba(210, 205, 195, 0.08);
+  --glow-subtle: 0 0 20px rgba(74, 58, 92, 0.12);
+  --glow-moss: 0 0 16px rgba(107, 142, 99, 0.1);
 }
 
-/* ========== DARK THEME ========== */
+/* ========== DARK THEME - Refined for Japanese Aesthetics ========== */
 html[data-theme="dark"] {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #151515;
-  --bg-tertiary: #222222;
-  --text-primary: #f2f2f2;
-  --text-secondary: #e0e0e0;
-  --text-tertiary: #a0a0a0;
-  --border-color: #222222;
-  --border-accent: #333333;
-  /* Accent Colors - Maximalist: Orange + Purple + Lime */
-  --accent-vibrant: #ff6b35;
-  --accent-vibrant-hover: #ff8a5a;
-  --accent-secondary: #a855f7;
-  --accent-secondary-light: #c084fc;
-  --accent-tertiary: #76ff03;
-  --reg-mark: #444444;
-  --color-success: #22c55e;
-  --color-success-light: #f0fdf4;
-  --color-success-dark: #16a34a;
-  --color-error: #ef4444;
-  --color-error-light: #fef2f2;
-  --color-error-dark: #dc2626;
-  --overlay-dark: rgba(0, 0, 0, 0.6);
-  --overlay-dark-medium: rgba(0, 0, 0, 0.5);
-  --text-muted: #666666;
-  color-scheme: dark;
+  --bg-primary: #0f0e0c;
+  --bg-secondary: #1a1815;
+  --bg-tertiary: #26211a;
+  --text-primary: #f5f3f0;
+  --text-secondary: #d9d5cc;
+  --text-tertiary: #8a8a8a;
+  --border-color: #3a3530;
+  --border-subtle: #2a2520;
+
+  --accent-primary: #d4c5d9; /* Light indigo in dark mode */
+  --accent-secondary: #a8c4a0; /* Light moss in dark mode */
+  --accent-hover: #c9bae0;
+
+  --glow-subtle: 0 0 20px rgba(212, 197, 217, 0.2);
+  --glow-moss: 0 0 16px rgba(168, 196, 160, 0.15);
 }
