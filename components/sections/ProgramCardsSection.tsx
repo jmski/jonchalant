@@ -41,12 +41,12 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
         </ScrollFade>
 
         <ScrollStagger variant="slideInUp" staggerDelay={100}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr">
             {programs.map((program, idx) => {
               const colorVar = getColorVar(program.color);
               return (
                 <ScrollFade key={program._id} delay={idx * 100}>
-                  <div className="group relative border-2" style={{ borderColor: colorVar }}>
+                  <div className="group relative border-2 min-h-full" style={{ borderColor: colorVar }}>
                     {/* Card content */}
                     <div className="p-8 h-full flex flex-col">
                       {/* Category badge */}
@@ -88,22 +88,7 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
                       {/* CTA Button */}
                       <a
                         href={program._id === 'program-6' ? '#audit-cta' : '#inquiry-form'}
-                        className="w-full py-3 font-black uppercase tracking-widest text-sm border-2 transition-all duration-300"
-                        style={{
-                          borderColor: colorVar,
-                          color: colorVar,
-                          backgroundColor: 'transparent'
-                        }}
-                        onMouseEnter={(e) => {
-                          const el = e.currentTarget as HTMLElement;
-                          el.style.backgroundColor = colorVar;
-                          el.style.color = 'var(--bg-primary)';
-                        }}
-                        onMouseLeave={(e) => {
-                          const el = e.currentTarget as HTMLElement;
-                          el.style.backgroundColor = 'transparent';
-                          el.style.color = colorVar;
-                        }}
+                        className="mt-auto w-full py-3 px-6 bg-accent-vibrant text-white font-black uppercase tracking-widest text-sm hover:shadow-lg hover:scale-105 transition-all duration-300"
                       >
                         Learn More
                       </a>

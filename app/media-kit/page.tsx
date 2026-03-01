@@ -159,7 +159,7 @@ export default function MediaKit() {
                     <h3 className="text-lg font-semibold text-slate-900">
                       {category.name}
                     </h3>
-                    <span className="text-2xl font-bold text-purple-600">
+                    <span className="text-2xl font-bold text-accent-primary">
                       {category.percentage}%
                     </span>
                   </div>
@@ -167,7 +167,7 @@ export default function MediaKit() {
                   {/* Progress bar */}
                   <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-purple-600 transition-all duration-700"
+                      className="h-full bg-accent-primary transition-all duration-700"
                       style={{ width: `${category.percentage}%` }}
                     />
                   </div>
@@ -197,13 +197,13 @@ export default function MediaKit() {
                         <span className="text-sm font-medium text-slate-700">
                           {age.range}
                         </span>
-                        <span className="text-sm font-bold text-purple-600">
+                        <span className="text-sm font-bold text-accent-primary">
                           {age.percentage}%
                         </span>
                       </div>
                       <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-purple-600 transition-all duration-700"
+                          className="h-full bg-accent-primary transition-all duration-700"
                           style={{ width: `${age.percentage}%` }}
                         />
                       </div>
@@ -222,13 +222,13 @@ export default function MediaKit() {
                         <span className="text-sm font-medium text-slate-700">
                           {gender.label}
                         </span>
-                        <span className="text-sm font-bold text-purple-600">
+                        <span className="text-sm font-bold text-accent-primary">
                           {gender.percentage}%
                         </span>
                       </div>
                       <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-purple-600 transition-all duration-700"
+                          className="h-full bg-accent-primary transition-all duration-700"
                           style={{ width: `${gender.percentage}%` }}
                         />
                       </div>
@@ -247,13 +247,13 @@ export default function MediaKit() {
                         <span className="text-sm font-medium text-slate-700">
                           {location.country}
                         </span>
-                        <span className="text-sm font-bold text-purple-600">
+                        <span className="text-sm font-bold text-accent-primary">
                           {location.percentage}%
                         </span>
                       </div>
                       <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-purple-600 transition-all duration-700"
+                          className="h-full bg-accent-primary transition-all duration-700"
                           style={{ width: `${location.percentage}%` }}
                         />
                       </div>
@@ -289,7 +289,7 @@ export default function MediaKit() {
                   <ul className="space-y-3 mb-8">
                     {pkg.features.map((feature, fidx) => (
                       <li key={fidx} className="flex items-center gap-3">
-                        <span className="text-purple-600 font-semibold">✓</span>
+                        <span className="text-accent-primary font-semibold">✓</span>
                         <span className="text-sm text-slate-700">{feature}</span>
                       </li>
                     ))}

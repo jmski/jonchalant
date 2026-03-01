@@ -82,12 +82,12 @@ export default function Contact() {
                 <a
                   key={idx}
                   href={method.href}
-                  className="border border-slate-200 p-8 rounded hover:shadow-md transition-shadow duration-300 text-center group"
+                  className="border border-slate-200 border-b-2 p-8 rounded hover:shadow-md transition-shadow duration-300 text-center group"
                 >
                   <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-3">
                     {method.label}
                   </p>
-                  <p className="text-lg font-semibold text-slate-900 group-hover:text-purple-600 transition-colors">
+                  <p className="text-lg font-semibold text-slate-900 transition-colors">
                     {method.value}
                   </p>
                 </a>

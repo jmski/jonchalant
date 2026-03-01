@@ -6,51 +6,52 @@ Quick reference for developing **The Kinetic Leader** portfolio.
 
 ## ��� Start Here
 
-| Document | Purpose |
-|----------|---------|
-| **[PROJECT_STATUS.md](PROJECT_STATUS.md)** | Current project status and what's been completed |
-| **[ADAPTIVE_THEME_IMPLEMENTATION.md](ADAPTIVE_THEME_IMPLEMENTATION.md)** | How the light/dark adaptive theme system works |
+| Document                                                                 | Purpose                                          |
+| ------------------------------------------------------------------------ | ------------------------------------------------ |
+| **[PROJECT_STATUS.md](PROJECT_STATUS.md)**                               | Current project status and what's been completed |
+| **[ADAPTIVE_THEME_IMPLEMENTATION.md](ADAPTIVE_THEME_IMPLEMENTATION.md)** | How the light/dark adaptive theme system works   |
 
 ---
 
 ## ��� Design & Brand
 
-| Guide | Purpose |
-|-------|---------|
-| **[KINETIC_LEADER_BRAND_VOICE.md](KINETIC_LEADER_BRAND_VOICE.md)** | Brand guidelines, tone, and messaging for The Kinetic Leader |
-| **[DESIGN_TOKENS_GUIDE.md](DESIGN_TOKENS_GUIDE.md)** | Design system: colors, spacing, typography, and styling constants |
+| Guide                                                              | Purpose                                                           |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| **[KINETIC_LEADER_BRAND_VOICE.md](KINETIC_LEADER_BRAND_VOICE.md)** | Brand guidelines, tone, and messaging for The Kinetic Leader      |
+| **[DESIGN_TOKENS_GUIDE.md](DESIGN_TOKENS_GUIDE.md)**               | Design system: colors, spacing, typography, and styling constants |
 
 ---
 
 ## ���️ Development Guides
 
-| Guide | Purpose |
-|-------|---------|
-| **[REUSABLE_COMPONENTS_GUIDE.md](REUSABLE_COMPONENTS_GUIDE.md)** | Pre-built component patterns, best practices, and examples |
-| **[PATTERN_LIBRARY_IMPLEMENTATION.md](PATTERN_LIBRARY_IMPLEMENTATION.md)** | Component patterns ready to use in development |
-| **[PERFORMANCE_BASELINE.md](PERFORMANCE_BASELINE.md)** | Performance metrics and optimization targets |
+| Guide                                                                      | Purpose                                                    |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **[REUSABLE_COMPONENTS_GUIDE.md](REUSABLE_COMPONENTS_GUIDE.md)**           | Pre-built component patterns, best practices, and examples |
+| **[PATTERN_LIBRARY_IMPLEMENTATION.md](PATTERN_LIBRARY_IMPLEMENTATION.md)** | Component patterns ready to use in development             |
+| **[PERFORMANCE_BASELINE.md](PERFORMANCE_BASELINE.md)**                     | Performance metrics and optimization targets               |
 
 ---
 
 ## ��� Media & Images
 
-| Guide | Purpose |
-|-------|---------|
+| Guide                                                          | Purpose                                                    |
+| -------------------------------------------------------------- | ---------------------------------------------------------- |
 | **[IMAGE_OPTIMIZATION_GUIDE.md](IMAGE_OPTIMIZATION_GUIDE.md)** | Image sizing, formats, responsive images, and optimization |
-| **[IMAGE_TESTING_GUIDE.md](IMAGE_TESTING_GUIDE.md)** | Testing image loading, performance, and visual quality |
+| **[IMAGE_TESTING_GUIDE.md](IMAGE_TESTING_GUIDE.md)**           | Testing image loading, performance, and visual quality     |
 
 ---
-
 
 ## ��� Key Project Files
 
 ### Configuration
+
 - `next.config.ts` - Next.js configuration
 - `tsconfig.json` - TypeScript setup
 - `tailwind.config.js` - Tailwind CSS with `darkMode: 'media'`
 - `eslint.config.mjs` - ESLint rules
 
 ### Styles (`app/css/`)
+
 - `variables.css` - CSS custom properties and adaptive theme
 - `animations.css` - Animation keyframes
 - `base.css` - Base element styles
@@ -62,6 +63,7 @@ Quick reference for developing **The Kinetic Leader** portfolio.
 - `responsive.css` - Media queries and breakpoints
 
 ### Components
+
 - `components/hero/` - Hero sections
 - `components/forms/` - Form components
 - `components/sections/` - Content sections
@@ -71,6 +73,7 @@ Quick reference for developing **The Kinetic Leader** portfolio.
 - `components/typography/` - Text and heading components
 
 ### Pages (App Router)
+
 - `app/page.tsx` - Home
 - `app/about/page.tsx` - About
 - `app/dance/page.tsx` - Dance portfolio
@@ -81,6 +84,7 @@ Quick reference for developing **The Kinetic Leader** portfolio.
 - `app/contact/page.tsx` - Contact form
 
 ### Utilities
+
 - `lib/design-tokens.ts` - Design system constants
 - `lib/pageContent.ts` - Page content definitions
 - `public/` - Static assets

@@ -21,7 +21,7 @@ export function BlueprintGrid({
   size = 400,
   dotSize = 1.5,
   spacing = 20,
-  opacity = 0.02,
+  opacity = 0.08,
   variant = 'dots',
   className = "",
   style = {},

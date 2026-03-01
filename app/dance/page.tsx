@@ -69,13 +69,13 @@ export default async function Dance() {
             {/* Subtle fluid shape decorative element - represents dance/movement energy */}
             <FluidShape
               size={320}
-              opacity={0.03}
+              opacity={0.08}
               variant="blob"
               style={{
                 position: 'absolute',
                 top: '60px',
                 left: '-100px',
-                color: 'var(--color-muted-moss)',
+                color: 'var(--accent-primary)',
                 zIndex: 0,
               }}
             />

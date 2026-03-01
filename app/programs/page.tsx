@@ -143,14 +143,15 @@ export default function Programs() {
             <BlueprintGrid
               size={450}
               spacing={35}
-              opacity={0.015}
+              opacity={0.03}
               variant="dots"
               style={{
                 position: 'absolute',
-                bottom: '-100px',
-                right: '-80px',
-                color: 'var(--text-primary)',
+                bottom: '-150px',
+                right: '-100px',
+                color: 'var(--accent-primary)',
                 zIndex: 0,
+                pointerEvents: 'none',
               }}
             />
             

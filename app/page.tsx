@@ -157,7 +157,7 @@ export default function Home() {
                 <a
                   key={idx}
                   href={item.href}
-                  className="border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300 group"
+                  className="border border-slate-200 border-b-2 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300 group"
                 >
                   <div className="aspect-square bg-slate-100 flex items-center justify-center relative">
                     <div className="text-center">
@@ -196,7 +196,7 @@ export default function Home() {
                     { title: 'Fast Turnaround', desc: 'Efficient workflows without compromising on quality' },
                   ].map((feature, idx) => (
                     <div key={idx} className="flex gap-4">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 shrink-0 text-white font-bold text-sm">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent-primary shrink-0 text-white font-bold text-sm">
                         {idx + 1}
                       </div>
                       <div>

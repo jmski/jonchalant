@@ -1,4 +1,5 @@
 # 🎨 Adaptive Theme System - Implementation Guide
+
 ## "The Kinetic Leader" - Seamless Light/Dark Mode
 
 ---
@@ -12,6 +13,7 @@ Your portfolio now uses a **seamless, adaptive theme system** that automatically
 ## 🎯 WHAT WAS CHANGED
 
 ### 1. **Removed Manual Theme Switcher**
+
 - ❌ Deleted `ThemeToggle` component from `components/layout/Sidebar.tsx`
 - ❌ Removed all theme state management (localStorage, useState)
 - ❌ Deleted `.theme-toggle` CSS styles from `app/css/interactions.css`
@@ -23,6 +25,7 @@ Your portfolio now uses a **seamless, adaptive theme system** that automatically
 ---
 
 ### 2. **Created Tailwind CSS Configuration**
+
 **New file:** `tailwind.config.js`
 
 ```javascript
@@ -41,29 +44,39 @@ This tells Tailwind to honor the system's `prefers-color-scheme` media query pre
 ---
 
 ### 3. **Updated CSS Variables for Adaptive Colors**
+
 **File:** `app/css/variables.css`
 
 #### Light Mode (`prefers-color-scheme: light`) - "The Morning Dojo"
+
 - **Background:** `#f5f5f0` (Warm bone/paper)
 - **Text:** `#1a1a1a` (Deep ink)
 - **Accents:** Burnt Indigo (#4a3a5c) + Muted Moss (#6b8e63)
 
 #### Dark Mode (`prefers-color-scheme: dark`) - "The Midnight Studio"
+
 - **Background:** `#0d0d0d` (Deep midnight indigo/charcoal)
 - **Text:** `#e0e0d6` (Soft bone)
 - **Accents:** Light Indigo (#d4c5d9) + Light Moss (#a8c4a0)
 
 #### Backwards Compatibility
+
 - Kept `html[data-theme="dark"]` fallback for any legacy code
 
 ---
 
 ### 4. **Typography Adjustments for Dark Mode**
+
 Dark mode text appears optically bolder, so we slightly reduced font-weight:
 
 ```css
 @media (prefers-color-scheme: dark) {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 600; /* Reduced from 700 */
   }
 }
@@ -78,9 +91,12 @@ Dark mode text appears optically bolder, so we slightly reduced font-weight:
    - Browser respects `prefers-color-scheme: light|dark`
 
 2. **CSS Media Query Activation:**
+
    ```css
    @media (prefers-color-scheme: dark) {
-     :root { /* dark mode variables */ }
+     :root {
+       /* dark mode variables */
+     }
    }
    ```
 
@@ -99,11 +115,13 @@ Dark mode text appears optically bolder, so we slightly reduced font-weight:
 ## ✨ WCAG COMPLIANCE & CONTRAST
 
 ### Light Mode Contrast Ratios
+
 - Burnt Indigo (#4a3a5c) on Bone (#f5f5f0): **10.2:1** ✅ AAA
 - Muted Moss (#6b8e63) on Bone (#f5f5f0): **6.8:1** ✅ AA
 - Text (#1a1a1a) on Bone (#f5f5f0): **20:1** ✅ AAA Perfect
 
 ### Dark Mode Contrast Ratios
+
 - Light Indigo (#d4c5d9) on Midnight (#0d0d0d): **8.5:1** ✅ AAA
 - Light Moss (#a8c4a0) on Midnight (#0d0d0d): **6.2:1** ✅ AA
 - Soft Bone Text (#e0e0d6) on Midnight (#0d0d0d): **11.8:1** ✅ AAA
@@ -114,26 +132,28 @@ All colors maintain **professional sleekness** with strong contrast.
 
 ## 🔧 TECHNICAL FILES MODIFIED
 
-| File | Change |
-|------|--------|
-| `tailwind.config.js` | **NEW** - Configured `darkMode: 'media'` |
-| `app/css/variables.css` | Updated to use `@media (prefers-color-scheme)` |
-| `components/layout/Sidebar.tsx` | Removed ThemeToggle component + state |
-| `app/css/interactions.css` | Removed all `.theme-toggle` styles |
-| `app/css/layout.css` | Removed `.sidebar-theme-selector` styles |
-| `postcss.config.mjs` | *(unchanged)* - Already configured |
+| File                            | Change                                         |
+| ------------------------------- | ---------------------------------------------- |
+| `tailwind.config.js`            | **NEW** - Configured `darkMode: 'media'`       |
+| `app/css/variables.css`         | Updated to use `@media (prefers-color-scheme)` |
+| `components/layout/Sidebar.tsx` | Removed ThemeToggle component + state          |
+| `app/css/interactions.css`      | Removed all `.theme-toggle` styles             |
+| `app/css/layout.css`            | Removed `.sidebar-theme-selector` styles       |
+| `postcss.config.mjs`            | _(unchanged)_ - Already configured             |
 
 ---
 
 ## 💡 USER EXPERIENCE
 
 ### For End Users
+
 ✅ **Light Mode Default:** On systems with "Light" preference or no preference  
 ✅ **Dark Mode on Demand:** Automatically when system "Dark" mode is enabled  
 ✅ **No Config Needed:** Works out of the box on all modern browsers/OS  
 ✅ **Accessibility First:** Respects `prefers-reduced-motion` too (bonus)
 
 ### Browser/OS Support
+
 - ✅ macOS system preferences
 - ✅ Windows 11+ Settings → Colors
 - ✅ iOS Light/Dark Switch
@@ -146,6 +166,7 @@ All colors maintain **professional sleekness** with strong contrast.
 ## 🎨 COLOR SYSTEM REFERENCE
 
 ### CSS Variables Available (Both Modes)
+
 ```css
 /* Always available, change by mode */
 --bg-primary           /* Main background */
@@ -162,6 +183,7 @@ All colors maintain **professional sleekness** with strong contrast.
 ```
 
 ### Static Colors (Unchanged)
+
 ```css
 --color-ink-black      /* #0f0e0c - Dark ink */
 --color-bone-cream     /* #faf9f6 - Warm bone */
@@ -176,23 +198,26 @@ All colors maintain **professional sleekness** with strong contrast.
 ## 🧪 TESTING THE ADAPTIVE THEME
 
 ### macOS
+
 1. System Preferences → General
 2. Appearance: "Light" or "Dark"
 3. Refresh browser → Should update instantly
 
 ### Windows 11
+
 1. Settings → Personalization → Colors
 2. Choose "Light" or "Dark"
 3. Refresh browser → Updates automatically
 
 ### Test in Browser DevTools
+
 ```javascript
 // Check if dark mode is active
-window.matchMedia('(prefers-color-scheme: dark)').matches // true/false
+window.matchMedia("(prefers-color-scheme: dark)").matches; // true/false
 
 // Listen for changes
-window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
-  console.log('Dark mode:', e.matches);
+window.matchMedia("(prefers-color-scheme: dark)").addListener((e) => {
+  console.log("Dark mode:", e.matches);
 });
 ```
 
@@ -201,6 +226,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
 ## 🔌 NO JAVASCRIPT REQUIRED
 
 Unlike toggles that require JS:
+
 - ✅ Pure CSS media query approach
 - ✅ Works even with JavaScript disabled
 - ✅ Faster initial load (no state hydration)
@@ -227,6 +253,7 @@ Unlike toggles that require JS:
 ## 📝 NOTES FOR FUTURE MAINTENANCE
 
 ### If You Need to Change Colors
+
 Edit variables in `app/css/variables.css`:
 
 ```css
@@ -246,13 +273,14 @@ Edit variables in `app/css/variables.css`:
 ```
 
 ### If You Want to Add User Override (Optional)
+
 You could add a manual toggle in the future:
 
 ```tsx
 // In a component
-document.documentElement.style.colorScheme = 'dark'; // Force dark
-document.documentElement.style.colorScheme = 'light'; // Force light
-document.documentElement.style.colorScheme = ''; // Auto (default)
+document.documentElement.style.colorScheme = "dark"; // Force dark
+document.documentElement.style.colorScheme = "light"; // Force light
+document.documentElement.style.colorScheme = ""; // Auto (default)
 ```
 
 But **this is optional** - the current setup is superior for accessibility.
@@ -263,7 +291,7 @@ But **this is optional** - the current setup is superior for accessibility.
 
 This implementation represents the **high-end, professional design philosophy** of "The Kinetic Leader":
 
-- **No friction:** Users don't *think* about themes; it adapts automatically
+- **No friction:** Users don't _think_ about themes; it adapts automatically
 - **Respects accessibility:** Honors system preferences for vision/fatigue management
 - **Editorial aesthetic:** Both modes maintain the Modern Zen design language
 - **Seamless visual hierarchy:** Colors maintain contrast & professionalism in both modes
@@ -274,6 +302,7 @@ This implementation represents the **high-end, professional design philosophy** 
 ## ✅ DEPLOYMENT READY
 
 Your portfolio is now:
+
 - ✅ **Theme complete** - Adaptive light/dark automatic
 - ✅ **Accessible** - WCAG AAA compliant colors
 - ✅ **Production-ready** - Builds successfully, no console errors
@@ -284,5 +313,5 @@ Your portfolio is now:
 
 ---
 
-*Last Updated: February 28, 2026*  
-*System: Adaptive CSS Media Query (`prefers-color-scheme`)*
+_Last Updated: February 28, 2026_  
+_System: Adaptive CSS Media Query (`prefers-color-scheme`)_

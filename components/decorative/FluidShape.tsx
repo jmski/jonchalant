@@ -17,7 +17,7 @@ interface FluidShapeProps {
 
 export function FluidShape({
   size = 300,
-  opacity = 0.04,
+  opacity = 0.10,
   variant = 'blob',
   className = "",
   style = {},

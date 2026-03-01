@@ -17,7 +17,7 @@ interface EnsoCircleProps {
 
 export function EnsoCircle({
   size = 400,
-  opacity = 0.05,
+  opacity = 0.12,
   strokeWidth = 2,
   className = "",
   style = {},

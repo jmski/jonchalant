@@ -40,6 +40,7 @@
   /* Transitions - Kaizen pacing */
   --transition-subtle: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Line Heights - Editorial */
@@ -58,17 +59,17 @@
   --text-primary: #1a1a1a; /* Sumie ink - deep, commanding */
   --text-secondary: #3d3d3d; /* Secondary ink */
   --text-tertiary: #7a7a7a; /* Muted ink */
-  
+
   /* Borders - Hairline aesthetic */
   --border-color: #d4cfc7; /* Subtle, warm */
   --border-subtle: #e8e3db; /* Very faint */
-  
+
   /* Kinetic Accents */
   --color-burnt-indigo: #4a3a5c; /* Deep, contemplative */
   --color-burnt-indigo-light: #6b5a7a; /* Hover variant */
   --color-muted-moss: #6b8e63; /* Natural, growth */
   --color-moss-light: #8aa87a; /* Softened variant */
-  
+
   /* Status Colors */
   --color-success: #5a8a6a; /* Moss-inspired */
   --color-warning: #b89a5f; /* Warm amber */
@@ -76,19 +77,32 @@
   --color-info: #6a8aaa; /* Soft indigo */
 
   /* Accent & Interactive */
-  --accent-primary: #4a3a5c; /* Burnt Indigo */
-  --accent-secondary: #6b8e63; /* Muted Moss */
-  --accent-hover: #6b5a7a; /* Indigo light */
+  --accent-primary: #6b8e63; /* Muted Moss - PRIMARY GREEN */
+  --accent-secondary: #5a8a6a; /* Moss Success variant */
+  --accent-tertiary: #6a8aaa; /* Soft indigo - distinct category color */
+  --accent-hover: #8aa87a; /* Moss light - hover state */
+  --accent-vibrant: #6b8e63; /* Alias for primary accent (backward compatibility) */
+  --accent-vibrant-hover: #8aa87a; /* Alias for hover (backward compatibility) */
+  --btn-primary-text: #ffffff; /* Button text color */
 
   /* Overlay & Effects */
   --overlay-dark: rgba(26, 26, 26, 0.08);
-  --overlay-light: rgba(74, 58, 92, 0.05);
-  --glow-subtle: 0 0 20px rgba(74, 58, 92, 0.08);
-  --glow-moss: 0 0 16px rgba(107, 142, 99, 0.06);
+  --overlay-light: rgba(107, 142, 99, 0.05);
+  --glow-subtle: 0 0 20px rgba(107, 142, 99, 0.1);
+  --glow-moss: 0 0 16px rgba(107, 142, 99, 0.08);
 
   /* Decorative Elements */
-  --decor-enso: rgba(74, 58, 92, 0.03); /* Faint Enso circle */
-  --decor-fluid: rgba(107, 142, 99, 0.03); /* Faint fluid shapes */
-  --decor-grid: rgba(26, 26, 26, 0.02); /* Blueprint grid */
+  --decor-enso: rgba(107, 142, 99, 0.08); /* Enso circle - increased opacity */
+  --decor-fluid: rgba(
+    107,
+    142,
+    99,
+    0.06
+  ); /* Fluid shapes - increased opacity */
+  --decor-grid: rgba(
+    107,
+    142,
+    99,
+    0.03
+  ); /* Blueprint grid - increased opacity */
 }
-
