@@ -17,8 +17,9 @@ export default defineType({
       title: 'Contact Methods',
       type: 'array',
       of: [
-        defineField({
+        {
           type: 'object',
+          name: 'contactMethod',
           fields: [
             defineField({
               name: 'label',
@@ -59,7 +60,7 @@ export default defineType({
               initialValue: 0,
             }),
           ]
-        })
+        }
       ],
       validation: (Rule) => Rule.min(1),
     }),

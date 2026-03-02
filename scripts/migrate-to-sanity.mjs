@@ -407,41 +407,49 @@ const PAGE_METADATA = [
     headline: "Dance Portfolio",
     subheadline: "Choreography, freestyle performances, and artistic movement.",
     ctaTitle: "Let's Create Together",
-    ctaDescription: "Ready to collaborate on a dance project? Reach out with your vision.",
+    ctaDescription:
+      "Ready to collaborate on a dance project? Reach out with your vision.",
     ctaButtonText: "Start a Project",
   },
   {
     _type: "pageMetadata",
     page: "lessons",
     headline: "Social Presence Mastery",
-    subheadline: "Transform your communication style and build genuine confidence in any environment.",
+    subheadline:
+      "Transform your communication style and build genuine confidence in any environment.",
     ctaTitle: "Start Learning Today",
-    ctaDescription: "Discover the frameworks that help introverts lead with authentic authority.",
+    ctaDescription:
+      "Discover the frameworks that help introverts lead with authentic authority.",
     ctaButtonText: "Explore Lessons",
   },
   {
     _type: "pageMetadata",
     page: "programs",
     headline: "Coaching Programs",
-    subheadline: "Choose your path to Quiet Command. From self-paced courses to premium 1-on-1 coaching.",
+    subheadline:
+      "Choose your path to Quiet Command. From self-paced courses to premium 1-on-1 coaching.",
     ctaTitle: "Ready to Transform?",
-    ctaDescription: "Start with a free Presence Audit to discover the perfect program for your goals.",
+    ctaDescription:
+      "Start with a free Presence Audit to discover the perfect program for your goals.",
     ctaButtonText: "Book Your Audit",
   },
   {
     _type: "pageMetadata",
     page: "collaborations",
     headline: "Let's Work Together",
-    subheadline: "Collaborate on projects that move audiences and build lasting partnerships.",
+    subheadline:
+      "Collaborate on projects that move audiences and build lasting partnerships.",
     ctaTitle: "Discuss Your Project",
-    ctaDescription: "Share your vision and let's explore how we can create something memorable.",
+    ctaDescription:
+      "Share your vision and let's explore how we can create something memorable.",
     ctaButtonText: "Start a Conversation",
   },
   {
     _type: "pageMetadata",
     page: "contact",
     headline: "Get in Touch",
-    subheadline: "Have questions about programs? Ready to book a Presence Audit? Reach out—I respond within 48 hours.",
+    subheadline:
+      "Have questions about programs? Ready to book a Presence Audit? Reach out—I respond within 48 hours.",
     ctaTitle: "Contact Methods",
     ctaDescription: "Choose your preferred way to connect.",
     ctaButtonText: "Send Message",
@@ -450,7 +458,8 @@ const PAGE_METADATA = [
     _type: "pageMetadata",
     page: "mediaKit",
     headline: "Media Kit",
-    subheadline: "Audience statistics, engagement metrics, and collaboration opportunities.",
+    subheadline:
+      "Audience statistics, engagement metrics, and collaboration opportunities.",
     ctaTitle: "Download Media Kit",
     ctaDescription: "Get comprehensive data for partnership discussions.",
     ctaButtonText: "Download PDF",
@@ -459,7 +468,8 @@ const PAGE_METADATA = [
     _type: "pageMetadata",
     page: "home",
     headline: "The Kinetic Leader",
-    subheadline: "Transform your presence and command rooms with quiet authority.",
+    subheadline:
+      "Transform your presence and command rooms with quiet authority.",
     ctaTitle: "Ready to Lead Differently?",
     ctaDescription: "Start your journey to authentic leadership today.",
     ctaButtonText: "Book Free Audit",
@@ -499,7 +509,8 @@ const ABOUT_PAGE = {
   heroHeadline: "From the Back of the Room to the Front of the Floor",
   heroDescription:
     "For most of my life, I believed that leadership was a loud man's game. As a natural introvert, I was the one who overthought every email, stayed quiet in meetings, and felt like my social battery was perpetually at 5%.",
-  originSectionHeadline: "Everything changed when I stopped thinking and started moving.",
+  originSectionHeadline:
+    "Everything changed when I stopped thinking and started moving.",
   originSectionDescription:
     "I discovered that the same coordination, posture, and presence required on the dance floor were the exact 'mechanics' missing from my professional life. Dance taught me how to inhabit my body and take up space without saying a word.",
   phases: [
@@ -543,7 +554,8 @@ const HOME_PAGE = {
   sidebarFeatures: [
     {
       title: "Leadership Coaching",
-      description: "Transform your presence and command rooms with quiet authority.",
+      description:
+        "Transform your presence and command rooms with quiet authority.",
     },
     {
       title: "Brand Partnerships",

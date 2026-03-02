@@ -17,8 +17,9 @@ export default defineType({
       title: 'Categories',
       type: 'array',
       of: [
-        defineField({
+        {
           type: 'object',
+          name: 'category',
           fields: [
             defineField({
               name: 'name',
@@ -33,7 +34,7 @@ export default defineType({
               initialValue: 0,
             }),
           ]
-        })
+        }
       ],
       validation: (Rule) => Rule.min(1),
     }),

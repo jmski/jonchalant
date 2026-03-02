@@ -39,8 +39,9 @@ export default defineType({
       title: 'Three Phases',
       type: 'array',
       of: [
-        defineField({
+        {
           type: 'object',
+          name: 'phase',
           fields: [
             defineField({
               name: 'title',
@@ -55,7 +56,7 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
           ]
-        })
+        }
       ],
       validation: (Rule) => Rule.length(3),
     }),
@@ -64,8 +65,9 @@ export default defineType({
       title: 'Key Stats',
       type: 'array',
       of: [
-        defineField({
+        {
           type: 'object',
+          name: 'stat',
           fields: [
             defineField({
               name: 'label',
@@ -80,7 +82,7 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
           ]
-        })
+        }
       ],
     }),
   ],

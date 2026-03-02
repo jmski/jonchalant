@@ -17,8 +17,9 @@ export default defineType({
       title: 'Key Statistics',
       type: 'array',
       of: [
-        defineField({
+        {
           type: 'object',
+          name: 'stat',
           fields: [
             defineField({
               name: 'label',
@@ -33,7 +34,7 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
           ]
-        })
+        }
       ],
     }),
     defineField({
@@ -56,8 +57,9 @@ export default defineType({
       title: 'Sidebar Features',
       type: 'array',
       of: [
-        defineField({
+        {
           type: 'object',
+          name: 'sidebarFeature',
           fields: [
             defineField({
               name: 'title',
@@ -72,7 +74,7 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
           ]
-        })
+        }
       ],
     }),
     defineField({
