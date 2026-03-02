@@ -1,6 +1,7 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
+import { getHomePageContent, getServices } from "@/lib/sanity";
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
@@ -12,7 +13,51 @@ const CollaborationForm = dynamic(() => import('@/components/forms').then(mod =>
   ssr: true
 });
 
-export default function Home() {
+// Fallback home content
+const MOCK_HOME_CONTENT = {
+  stats: [
+    { label: 'Coaching Clients Transformed', value: '100+' },
+    { label: 'Brand Collaborations', value: '30+' },
+    { label: 'Years in Creative Direction', value: '8+' },
+  ],
+  impactSectionHeadline: 'Where I Create Impact',
+  featuredMainTitle: 'Dance & Movement Direction',
+  featuredMainDescription: 'Choreography, performance, and creative direction for brands and artists. I blend precision with expression—creating movement that communicates and inspires.',
+  sidebarFeatures: [
+    {
+      title: 'Leadership Coaching',
+      description: 'Transform your presence and command rooms with quiet authority.'
+    },
+    {
+      title: 'Brand Partnerships',
+      description: 'Collaborate on campaigns that move audiences.'
+    }
+  ],
+  servicesHeadline: 'Services & Offerings',
+  servicesDescription: 'Comprehensive solutions tailored to help you move better, lead stronger, and collaborate smarter.'
+};
+
+export default async function Home() {
+  let homeContent = MOCK_HOME_CONTENT;
+  let services = [];
+
+  try {
+    const [sanityHome, sanityServices] = await Promise.all([
+      getHomePageContent(),
+      getServices()
+    ]);
+    
+    if (sanityHome) {
+      homeContent = sanityHome;
+    }
+    
+    if (sanityServices && sanityServices.length > 0) {
+      services = sanityServices;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch home content from Sanity, using fallback data:', error);
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="fade">
@@ -23,11 +68,7 @@ export default function Home() {
         <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {[
-                { label: 'Coaching Clients Transformed', value: '100+' },
-                { label: 'Brand Collaborations', value: '30+' },
-                { label: 'Years in Creative Direction', value: '8+' },
-              ].map((stat, idx) => (
+              {(homeContent?.stats || MOCK_HOME_CONTENT.stats).map((stat: any, idx: number) => (
                 <div key={idx} className="space-y-3 text-center md:text-left">
                   <div className="text-4xl sm:text-5xl font-bold text-slate-900">
                     {stat.value}
@@ -46,7 +87,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
-                Where I Create Impact
+                {homeContent?.impactSectionHeadline || MOCK_HOME_CONTENT.impactSectionHeadline}
               </h2>
             </div>
 
@@ -55,32 +96,30 @@ export default function Home() {
               <div className="lg:col-span-2 space-y-6">
                 <div className="aspect-video rounded-lg bg-slate-100 border border-slate-200" />
                 <h3 className="text-2xl font-bold text-slate-900">
-                  Dance & Movement Direction
+                  {homeContent?.featuredMainTitle || MOCK_HOME_CONTENT.featuredMainTitle}
                 </h3>
                 <p className="text-lg text-slate-700 leading-relaxed">
-                  Choreography, performance, and creative direction for brands and artists. I blend precision with expression—creating movement that communicates and inspires.
+                  {homeContent?.featuredMainDescription || MOCK_HOME_CONTENT.featuredMainDescription}
                 </p>
               </div>
 
               {/* Sidebar features */}
               <div className="space-y-8">
-                <div className="space-y-3">
-                  <h4 className="text-lg font-bold text-slate-900">
-                    Leadership Coaching
-                  </h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Transform your presence and command rooms with quiet authority.
-                  </p>
-                </div>
-                <div className="h-px bg-slate-200" />
-                <div className="space-y-3">
-                  <h4 className="text-lg font-bold text-slate-900">
-                    Brand Partnerships
-                  </h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Collaborate on campaigns that move audiences.
-                  </p>
-                </div>
+                {(homeContent?.sidebarFeatures || MOCK_HOME_CONTENT.sidebarFeatures).map((feature: any, idx: number) => (
+                  <div key={idx}>
+                    <div className="space-y-3">
+                      <h4 className="text-lg font-bold text-slate-900">
+                        {feature.title}
+                      </h4>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                    {idx < (homeContent?.sidebarFeatures || MOCK_HOME_CONTENT.sidebarFeatures).length - 1 && (
+                      <div className="h-px bg-slate-200 mt-8" />
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -91,64 +130,44 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                Services & Offerings
+                {homeContent?.servicesHeadline || MOCK_HOME_CONTENT.servicesHeadline}
               </h2>
               <p className="text-lg text-slate-700 max-w-2xl">
-                Comprehensive solutions tailored to help you move better, lead stronger, and collaborate smarter.
+                {homeContent?.servicesDescription || MOCK_HOME_CONTENT.servicesDescription}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-fr">
-              {[
-                {
-                  title: 'Leadership Programs',
-                  description: 'Transform your presence and command authority with grace',
-                  icon: '🎯',
-                  features: ['1-on-1 Coaching', 'Group Workshops', 'Digital Courses'],
-                  color: 'accent'
-                },
-                {
-                  title: 'Movement Coaching',
-                  description: 'Unlock physical grounding and body-aware presence',
-                  icon: '💃',
-                  features: ['Presence Training', 'Body Mechanics', 'Energy Control'],
-                  color: 'accent'
-                },
-                {
-                  title: 'Brand Collaboration',
-                  description: 'Create compelling visual narratives for your campaigns',
-                  icon: '✨',
-                  features: ['Choreography', 'Content Creation', 'Creative Direction'],
-                  color: 'accent'
-                },
-              ].map((service, idx) => (
-                <div
-                  key={idx}
-                  className="group border border-slate-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full overflow-hidden"
-                >
-                  {/* Icon header */}
-                  <div className="bg-gradient-to-r from-slate-50 to-slate-100 px-6 pt-8 pb-6 border-b border-slate-200 group-hover:from-slate-100 group-hover:to-slate-100 transition-colors">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors">
-                      {service.title}
-                    </h3>
-                  </div>
+              {services && services.length > 0 ? (
+                services.map((service: any) => (
+                  <div
+                    key={service._id}
+                    className="group border border-slate-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full overflow-hidden"
+                  >
+                    {/* Icon header */}
+                    <div className="bg-gradient-to-r from-slate-50 to-slate-100 px-6 pt-8 pb-6 border-b border-slate-200 group-hover:from-slate-100 group-hover:to-slate-100 transition-colors">
+                      <div className="text-4xl mb-4">{service.icon || '🎯'}</div>
+                      <h3 className="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors">
+                        {service.title}
+                      </h3>
+                    </div>
 
-                  {/* Content section */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    {/* Description */}
-                    <p className="text-slate-700 text-sm leading-relaxed mb-6">
-                      {service.description}
-                    </p>
+                    {/* Content section */}
+                    <div className="p-6 flex-1 flex flex-col">
+                      {/* Description */}
+                      <p className="text-slate-700 text-sm leading-relaxed mb-6">
+                        {service.description}
+                      </p>
 
-                    {/* Features list */}
-                    <div className="mb-6 space-y-3 flex-1">
-                      {service.features.map((feature, fidx) => (
-                        <div key={fidx} className="flex items-start gap-3">
-                          <span className="text-accent font-bold mt-0.5">+</span>
-                          <span className="text-sm text-slate-600">{feature}</span>
-                        </div>
-                      ))}
+                      {/* Features list */}
+                      <div className="mb-6 space-y-3 flex-1">
+                        {service.features && service.features.map((feature: string, fidx: number) => (
+                          <div key={fidx} className="flex items-start gap-3">
+                            <span className="text-accent font-bold mt-0.5">+</span>
+                            <span className="text-sm text-slate-600">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     {/* CTA */}
@@ -162,8 +181,12 @@ export default function Home() {
                       </button>
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="col-span-full py-8 text-center text-slate-600">
+                  Loading services...
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>

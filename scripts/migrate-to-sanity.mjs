@@ -249,6 +249,324 @@ const TESTIMONIALS_DATA = [
   },
 ];
 
+const LESSONS_DATA = [
+  {
+    _type: "lesson",
+    title: "Eye Contact Without Intensity",
+    slug: { current: "eye-contact-without-intensity" },
+    category: "Beginner",
+    pillar: "Physical Grounding",
+    description:
+      "Master the 70/30 rule: Hold eye contact for 70% of conversation, look away 30%. Maintain presence without intimidation.",
+    duration: "8 min read",
+    icon: "👁️",
+    order: 1,
+  },
+  {
+    _type: "lesson",
+    title: "The Power Pause",
+    slug: { current: "the-power-pause" },
+    category: "Beginner",
+    pillar: "Physical Grounding",
+    description:
+      "Learn to command space through deliberate silence. Strategic pauses amplify presence and authority without words.",
+    duration: "6 min read",
+    icon: "⏸️",
+    order: 2,
+  },
+  {
+    _type: "lesson",
+    title: "Active Listening Scripts",
+    slug: { current: "active-listening-scripts" },
+    category: "Beginner",
+    pillar: "Social Scripting",
+    description:
+      'Templated responses that make people feel heard. "So what you\'re saying is..." frameworks to deepen connection.',
+    duration: "10 min read",
+    icon: "👂",
+    order: 3,
+  },
+  {
+    _type: "lesson",
+    title: "The Confident Introduction",
+    slug: { current: "the-confident-introduction" },
+    category: "Beginner",
+    pillar: "Social Scripting",
+    description:
+      "A 30-second introduction framework that positions your value without overselling. Perfect for networking and first meetings.",
+    duration: "7 min read",
+    icon: "🤝",
+    order: 4,
+  },
+  {
+    _type: "lesson",
+    title: "Body Language Mapping",
+    slug: { current: "body-language-mapping" },
+    category: "Intermediate",
+    pillar: "Physical Grounding",
+    description:
+      "Decode what your body is communicating. Posture, hand placement, and stance adjustments that signal confidence.",
+    duration: "12 min read",
+    icon: "💪",
+    order: 5,
+  },
+  {
+    _type: "lesson",
+    title: "Managing Social Fatigue",
+    slug: { current: "managing-social-fatigue" },
+    category: "Intermediate",
+    pillar: "Energy Mastery",
+    description:
+      "Strategic activation and recovery protocols. How to maintain presence through long events without burnout.",
+    duration: "11 min read",
+    icon: "🔋",
+    order: 6,
+  },
+];
+
+const PROGRAMS_DATA = [
+  {
+    _type: "program",
+    title: "The 90-Day Presence Pivot",
+    slug: { current: "90-day-presence-pivot" },
+    category: "Premium 1-on-1 Coaching",
+    description:
+      "Intensive 12-week personal transformation. Weekly sessions, customized movement modules, social scripting frameworks, and ongoing support. For introverts seeking leadership promotions or major career transitions.",
+    investment: "Custom Quote",
+    features: [
+      "12 weekly 1-on-1 sessions",
+      "Personalized movement coaching",
+      "Social mechanics framework",
+      "Energy management strategy",
+      "Pre-interview/presentation coaching",
+      "Lifetime community access",
+    ],
+    order: 1,
+  },
+  {
+    _type: "program",
+    title: "Social Choreography Workshop",
+    slug: { current: "social-choreography-workshop" },
+    category: "Group Training (6 weeks)",
+    description:
+      "Learn the three pillars in a cohort-based format. Meet other ambitious introverts, practice live, receive feedback. For those seeking guided learning with peer support.",
+    investment: "$1,500",
+    features: [
+      "6 weekly 2-hour group sessions",
+      "Physical Grounding module",
+      "Social Scripting workshop",
+      "Energy Mastery deep dive",
+      "Group practice & feedback",
+      "Private community",
+    ],
+    order: 2,
+  },
+  {
+    _type: "program",
+    title: "The Quiet Command Essentials",
+    slug: { current: "quiet-command-essentials" },
+    category: "Self-Paced Digital Course",
+    description:
+      "Video modules, worksheets, and frameworks you can learn at your own pace. Foundation-level introduction to Physical Grounding and Social Scripting.",
+    investment: "$297",
+    features: [
+      "8 HD video modules",
+      "Downloadable worksheets",
+      "Social framework templates",
+      "Body language checklists",
+      "Quick-reference guides",
+      "Email support included",
+    ],
+    order: 3,
+  },
+  {
+    _type: "program",
+    title: "Interview & Pitch Coaching",
+    slug: { current: "interview-pitch-coaching" },
+    category: "High-Stakes Preparation",
+    description:
+      "Specialized coaching for critical moments. Job interviews, investor pitches, presentations. 1-on-1 training with live practice and video feedback.",
+    investment: "$500-$1,000",
+    features: [
+      "3-5 intensive sessions",
+      "Mock interview/pitch practice",
+      "Video feedback & analysis",
+      "Body language optimization",
+      "Q&A strategy development",
+      "Anxiety management techniques",
+    ],
+    order: 4,
+  },
+];
+
+// Page Metadata
+const PAGE_METADATA = [
+  {
+    _type: "pageMetadata",
+    page: "dance",
+    headline: "Dance Portfolio",
+    subheadline: "Choreography, freestyle performances, and artistic movement.",
+    ctaTitle: "Let's Create Together",
+    ctaDescription: "Ready to collaborate on a dance project? Reach out with your vision.",
+    ctaButtonText: "Start a Project",
+  },
+  {
+    _type: "pageMetadata",
+    page: "lessons",
+    headline: "Social Presence Mastery",
+    subheadline: "Transform your communication style and build genuine confidence in any environment.",
+    ctaTitle: "Start Learning Today",
+    ctaDescription: "Discover the frameworks that help introverts lead with authentic authority.",
+    ctaButtonText: "Explore Lessons",
+  },
+  {
+    _type: "pageMetadata",
+    page: "programs",
+    headline: "Coaching Programs",
+    subheadline: "Choose your path to Quiet Command. From self-paced courses to premium 1-on-1 coaching.",
+    ctaTitle: "Ready to Transform?",
+    ctaDescription: "Start with a free Presence Audit to discover the perfect program for your goals.",
+    ctaButtonText: "Book Your Audit",
+  },
+  {
+    _type: "pageMetadata",
+    page: "collaborations",
+    headline: "Let's Work Together",
+    subheadline: "Collaborate on projects that move audiences and build lasting partnerships.",
+    ctaTitle: "Discuss Your Project",
+    ctaDescription: "Share your vision and let's explore how we can create something memorable.",
+    ctaButtonText: "Start a Conversation",
+  },
+  {
+    _type: "pageMetadata",
+    page: "contact",
+    headline: "Get in Touch",
+    subheadline: "Have questions about programs? Ready to book a Presence Audit? Reach out—I respond within 48 hours.",
+    ctaTitle: "Contact Methods",
+    ctaDescription: "Choose your preferred way to connect.",
+    ctaButtonText: "Send Message",
+  },
+  {
+    _type: "pageMetadata",
+    page: "mediaKit",
+    headline: "Media Kit",
+    subheadline: "Audience statistics, engagement metrics, and collaboration opportunities.",
+    ctaTitle: "Download Media Kit",
+    ctaDescription: "Get comprehensive data for partnership discussions.",
+    ctaButtonText: "Download PDF",
+  },
+  {
+    _type: "pageMetadata",
+    page: "home",
+    headline: "The Kinetic Leader",
+    subheadline: "Transform your presence and command rooms with quiet authority.",
+    ctaTitle: "Ready to Lead Differently?",
+    ctaDescription: "Start your journey to authentic leadership today.",
+    ctaButtonText: "Book Free Audit",
+  },
+];
+
+// Contact Information
+const CONTACT_INFO = {
+  _type: "contactInfo",
+  title: "Contact Information",
+  contactMethods: [
+    {
+      label: "Email",
+      value: "jon@jonchalon.com",
+      href: "mailto:jon@jonchalon.com",
+      order: 0,
+    },
+    {
+      label: "Instagram",
+      value: "@jonchalon",
+      href: "https://instagram.com/jonchalon",
+      order: 1,
+    },
+    {
+      label: "TikTok",
+      value: "@jonchalon",
+      href: "https://tiktok.com/@jonchalon",
+      order: 2,
+    },
+  ],
+};
+
+// About Page Content
+const ABOUT_PAGE = {
+  _type: "aboutPage",
+  title: "About",
+  heroHeadline: "From the Back of the Room to the Front of the Floor",
+  heroDescription:
+    "For most of my life, I believed that leadership was a loud man's game. As a natural introvert, I was the one who overthought every email, stayed quiet in meetings, and felt like my social battery was perpetually at 5%.",
+  originSectionHeadline: "Everything changed when I stopped thinking and started moving.",
+  originSectionDescription:
+    "I discovered that the same coordination, posture, and presence required on the dance floor were the exact 'mechanics' missing from my professional life. Dance taught me how to inhabit my body and take up space without saying a word.",
+  phases: [
+    {
+      title: "Dance & Discipline",
+      description:
+        "I discovered movement as a language for expression that bypassed all my introverted self-doubt. My body could say things my words couldn't.",
+    },
+    {
+      title: "Sales & Service",
+      description:
+        "I took that physical grounding into the high-pressure world of the fitness industry and realized that introverts don't need to change their personalities—they just need a better script and a stronger physical foundation.",
+    },
+    {
+      title: "The Mission",
+      description:
+        "Today, I've mastered the skills to lead despite my introversion. I created The Kinetic Leader to help other quiet experts use movement and social mechanics to command the room—all while protecting their energy.",
+    },
+  ],
+  stats: [
+    { label: "Years Experience", value: "8+" },
+    { label: "Clients Coached", value: "50+" },
+    { label: "Transformations", value: "100%*" },
+    { label: "Introvert-Led", value: "✓" },
+  ],
+};
+
+// Home Page Content
+const HOME_PAGE = {
+  _type: "homePageContent",
+  title: "Home Page",
+  stats: [
+    { label: "Coaching Clients Transformed", value: "100+" },
+    { label: "Brand Collaborations", value: "30+" },
+    { label: "Years in Creative Direction", value: "8+" },
+  ],
+  impactSectionHeadline: "Where I Create Impact",
+  featuredMainTitle: "Dance & Movement Direction",
+  featuredMainDescription:
+    "Choreography, performance, and creative direction for brands and artists. I blend precision with expression—creating movement that communicates and inspires.",
+  sidebarFeatures: [
+    {
+      title: "Leadership Coaching",
+      description: "Transform your presence and command rooms with quiet authority.",
+    },
+    {
+      title: "Brand Partnerships",
+      description: "Collaborate on campaigns that move audiences.",
+    },
+  ],
+  servicesHeadline: "Services & Offerings",
+  servicesDescription:
+    "Comprehensive solutions tailored to help you move better, lead stronger, and collaborate smarter.",
+};
+
+// Dance Category Filter
+const DANCE_CATEGORIES = {
+  _type: "danceCategoryFilter",
+  title: "Dance Categories",
+  categories: [
+    { name: "All", order: 0 },
+    { name: "Choreography", order: 1 },
+    { name: "Freestyle", order: 2 },
+    { name: "Performance", order: 3 },
+  ],
+};
+
 async function migrateData() {
   console.log("🚀 Starting migration to Sanity...\n");
 
@@ -285,6 +603,47 @@ async function migrateData() {
       await client.create(testimonial);
       console.log(`  ✓ Created testimonial from: ${testimonial.clientName}`);
     }
+
+    // Migrate lessons
+    console.log("\n📚 Migrating lessons...");
+    for (const lesson of LESSONS_DATA) {
+      await client.create(lesson);
+      console.log(`  ✓ Created: ${lesson.title}`);
+    }
+
+    // Migrate programs
+    console.log("\n🎓 Migrating programs...");
+    for (const program of PROGRAMS_DATA) {
+      await client.create(program);
+      console.log(`  ✓ Created: ${program.title}`);
+    }
+
+    // Migrate page metadata
+    console.log("\n📄 Migrating page metadata...");
+    for (const page of PAGE_METADATA) {
+      await client.create(page);
+      console.log(`  ✓ Created metadata for: ${page.page}`);
+    }
+
+    // Migrate contact information
+    console.log("\n📧 Migrating contact information...");
+    await client.create(CONTACT_INFO);
+    console.log(`  ✓ Created: Contact Information`);
+
+    // Migrate about page content
+    console.log("\n👤 Migrating about page content...");
+    await client.create(ABOUT_PAGE);
+    console.log(`  ✓ Created: About Page Content`);
+
+    // Migrate home page content
+    console.log("\n🏠 Migrating home page content...");
+    await client.create(HOME_PAGE);
+    console.log(`  ✓ Created: Home Page Content`);
+
+    // Migrate dance categories
+    console.log("\n💃 Migrating dance categories...");
+    await client.create(DANCE_CATEGORIES);
+    console.log(`  ✓ Created: Dance Category Filter`);
 
     console.log("\n✅ Migration complete! All data synced to Sanity.\n");
     console.log("📝 Next steps:");

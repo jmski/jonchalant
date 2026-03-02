@@ -1,6 +1,7 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
+import { getCollaborations, getPageMetadata } from "@/lib/sanity";
 
 const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
@@ -12,7 +13,7 @@ export const metadata = {
   description: "Brand partnerships, teaching collaborations, and professional opportunities"
 };
 
-// Mock collaboration examples
+// Mock collaboration examples (fallback only)
 const MOCK_COLLABORATIONS = [
   {
     _id: 'collab-1',
@@ -43,6 +44,12 @@ const MOCK_COLLABORATIONS = [
     price: 'Negotiable'
   }
 ];
+
+// Mock page metadata (fallback only)
+const MOCK_PAGE_METADATA = {
+  headline: 'Let\'s Work Together',
+  subheadline: 'I\'m open to collaborations that align with The Kinetic Leader mission: helping introverts discover their quiet command, build authentic presence, and lead with confidence.'
+};
 
 const SERVICE_CATEGORIES = [
   {
@@ -87,8 +94,28 @@ const SERVICE_CATEGORIES = [
   }
 ];
 
-export default function Collaborations() {
-  const services = MOCK_COLLABORATIONS;
+export default async function Collaborations() {
+  let collaborations = MOCK_COLLABORATIONS;
+  let pageMetadata = MOCK_PAGE_METADATA;
+
+  try {
+    const [sanityCollaborations, sanityMetadata] = await Promise.all([
+      getCollaborations(),
+      getPageMetadata('collaborations')
+    ]);
+    
+    if (sanityCollaborations && sanityCollaborations.length > 0) {
+      collaborations = sanityCollaborations;
+    }
+    
+    if (sanityMetadata) {
+      pageMetadata = sanityMetadata;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch collaborations from Sanity, using fallback data:', error);
+  }
+
+  const services = collaborations;
 
   return (
     <div className="min-h-screen bg-white">
@@ -102,11 +129,11 @@ export default function Collaborations() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
-                Let's Work Together
+                {pageMetadata?.headline || 'Let\'s Work Together'}
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed">
-                I'm open to collaborations that align with The Kinetic Leader mission: helping introverts discover their quiet command, build authentic presence, and lead with confidence.
+                {pageMetadata?.subheadline || 'I\'m open to collaborations that align with The Kinetic Leader mission.'}
               </p>
 
               <p className="text-base text-slate-600">

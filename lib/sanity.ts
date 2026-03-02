@@ -249,3 +249,184 @@ export async function getCaseStudy(slug: string) {
   }`
   return await client.fetch(query)
 }
+
+// ============================================================================
+// LESSONS
+// ============================================================================
+
+export async function getLessons() {
+  const query = `*[_type == "lesson"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    category,
+    pillar,
+    description,
+    duration,
+    image,
+    icon,
+    order
+  }`
+  return await client.fetch(query)
+}
+
+export async function getLessonsByCategory(category: string) {
+  const query = `*[_type == "lesson" && category == "${category}"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    category,
+    pillar,
+    description,
+    duration,
+    image,
+    icon,
+    order
+  }`
+  return await client.fetch(query)
+}
+
+export async function getLessonsByPillar(pillar: string) {
+  const query = `*[_type == "lesson" && pillar == "${pillar}"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    category,
+    pillar,
+    description,
+    duration,
+    image,
+    icon,
+    order
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// PROGRAMS
+// ============================================================================
+
+export async function getPrograms() {
+  const query = `*[_type == "program"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    investment,
+    features,
+    image,
+    order
+  }`
+  return await client.fetch(query)
+}
+
+export async function getProgramBySlug(slug: string) {
+  const query = `*[_type == "program" && slug.current == "${slug}"][0] {
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    investment,
+    features,
+    image,
+    order
+  }`
+  return await client.fetch(query)
+}
+
+export async function getProgramsByCategory(category: string) {
+  const query = `*[_type == "program" && category == "${category}"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    investment,
+    features,
+    image,
+    order
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// PAGE METADATA (Headlines, CTAs, Descriptions)
+// ============================================================================
+
+export async function getPageMetadata(page: string) {
+  const query = `*[_type == "pageMetadata" && page == "${page}"][0] {
+    page,
+    headline,
+    subheadline,
+    ctaTitle,
+    ctaDescription,
+    ctaButtonText
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// CONTACT INFORMATION
+// ============================================================================
+
+export async function getContactInfo() {
+  const query = `*[_type == "contactInfo"][0] {
+    title,
+    contactMethods | order(order asc) {
+      label,
+      value,
+      href,
+      order
+    }
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// ABOUT PAGE CONTENT
+// ============================================================================
+
+export async function getAboutPageContent() {
+  const query = `*[_type == "aboutPage" && title == "About"][0] {
+    heroHeadline,
+    heroDescription,
+    originSectionHeadline,
+    originSectionDescription,
+    phases,
+    stats
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// HOME PAGE CONTENT
+// ============================================================================
+
+export async function getHomePageContent() {
+  const query = `*[_type == "homePageContent" && title == "Home Page"][0] {
+    stats,
+    impactSectionHeadline,
+    featuredMainTitle,
+    featuredMainDescription,
+    sidebarFeatures,
+    servicesHeadline,
+    servicesDescription
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// DANCE CATEGORY FILTER
+// ============================================================================
+
+export async function getDanceCategoryFilter() {
+  const query = `*[_type == "danceCategoryFilter" && title == "Dance Categories"][0] {
+    categories | order(order asc) {
+      name,
+      order
+    }
+  }`
+  return await client.fetch(query)
+}

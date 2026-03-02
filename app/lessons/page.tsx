@@ -1,6 +1,7 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
+import { getLessons } from "@/lib/sanity";
 
 export const metadata = {
   title: "Lessons | The Kinetic Leader",
@@ -92,8 +93,18 @@ const MOCK_LESSONS = [
   }
 ];
 
-export default function Lessons() {
-  const lessons = MOCK_LESSONS;
+export default async function Lessons() {
+  let lessons = MOCK_LESSONS;
+
+  try {
+    const sanityLessons = await getLessons();
+    if (sanityLessons && sanityLessons.length > 0) {
+      lessons = sanityLessons;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch lessons from Sanity, using fallback data:', error);
+    // Falls back to MOCK_LESSONS if Sanity fails
+  }
 
   const LessonCategory = ({ level, pillarColor, lessons }: { level: string; pillarColor: string; lessons: any[] }) => (
     <section className="mb-24">

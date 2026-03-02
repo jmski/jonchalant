@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic';
 import { PageTransition } from "@/components/layout";
+import { getMediaKitData, getPageMetadata } from "@/lib/sanity";
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
-const MEDIA_KIT_DATA = {
+// Fallback data
+const MOCK_MEDIA_KIT_DATA = {
   keyMetrics: [
     { label: 'Total Followers', value: '150K+', change: '+15% YoY' },
     { label: 'Avg Monthly Views', value: '2.5M', change: '+22% YoY' },
@@ -46,7 +48,39 @@ const MEDIA_KIT_DATA = {
   }
 };
 
-export default function MediaKit() {
+const MOCK_PAGE_METADATA = {
+  headline: 'Media Kit',
+  subheadline: 'Comprehensive audience data, platform metrics, and collaboration opportunities.'
+};
+
+// Collaboration packages (keeping hardcoded as these are service-specific)
+const COLLABORATION_PACKAGES = [
+  { title: 'Content Integration', price: 'Custom', features: ['Brand integration', 'Custom content', 'Performance report'] },
+  { title: 'Campaign Package', price: 'Premium', features: ['Multi-platform', 'Creative direction', 'Analytics'] },
+  { title: 'Exclusive Partnership', price: 'Enterprise', features: ['Long-term strategy', 'Dedicated support', 'Custom metrics'] }
+];
+
+export default async function MediaKit() {
+  let mediaKitData = MOCK_MEDIA_KIT_DATA;
+  let pageMetadata = MOCK_PAGE_METADATA;
+
+  try {
+    const [sanityMediaKit, sanityMetadata] = await Promise.all([
+      getMediaKitData(),
+      getPageMetadata('mediaKit')
+    ]);
+    
+    if (sanityMediaKit) {
+      mediaKitData = sanityMediaKit;
+    }
+    
+    if (sanityMetadata) {
+      pageMetadata = sanityMetadata;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch media kit from Sanity, using fallback data:', error);
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="scale">
@@ -59,11 +93,11 @@ export default function MediaKit() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
-                Media Kit
+                {pageMetadata?.headline || 'Media Kit'}
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed">
-                Comprehensive audience data, platform metrics, and collaboration opportunities. Download and review partnership potential.
+                {pageMetadata?.subheadline || 'Comprehensive audience data, platform metrics, and collaboration opportunities.'}
               </p>
             </div>
 
@@ -80,7 +114,7 @@ export default function MediaKit() {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {MEDIA_KIT_DATA.keyMetrics.map((stat, idx) => (
+              {mediaKitData?.keyMetrics?.map((stat: any, idx: number) => (
                 <div
                   key={idx}
                   className="border border-slate-200 p-8 rounded hover:shadow-md transition-shadow duration-300"
@@ -106,7 +140,7 @@ export default function MediaKit() {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {MEDIA_KIT_DATA.platforms.map((platform, idx) => (
+              {mediaKitData?.platforms?.map((platform: any, idx: number) => (
                 <div
                   key={idx}
                   className="border border-slate-200 p-8 rounded"
@@ -153,7 +187,7 @@ export default function MediaKit() {
             </h2>
 
             <div className="space-y-8">
-              {MEDIA_KIT_DATA.contentCategories.map((category, idx) => (
+              {mediaKitData?.contentCategories?.map((category: any, idx: number) => (
                 <div key={idx} className="space-y-3">
                   <div className="flex justify-between items-baseline">
                     <h3 className="text-lg font-semibold text-slate-900">
@@ -191,7 +225,7 @@ export default function MediaKit() {
               <div className="border border-slate-200 p-8 rounded">
                 <h3 className="text-lg font-bold text-slate-900 mb-6">Age Range</h3>
                 <div className="space-y-5">
-                  {MEDIA_KIT_DATA.audience.age.map((age, idx) => (
+                  {mediaKitData?.audience?.age?.map((age: any, idx: number) => (
                     <div key={idx} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium text-slate-700">
@@ -216,7 +250,7 @@ export default function MediaKit() {
               <div className="border border-slate-200 p-8 rounded">
                 <h3 className="text-lg font-bold text-slate-900 mb-6">Gender</h3>
                 <div className="space-y-5">
-                  {MEDIA_KIT_DATA.audience.gender.map((gender, idx) => (
+                  {mediaKitData?.audience?.gender?.map((gender: any, idx: number) => (
                     <div key={idx} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium text-slate-700">
@@ -241,7 +275,7 @@ export default function MediaKit() {
               <div className="border border-slate-200 p-8 rounded">
                 <h3 className="text-lg font-bold text-slate-900 mb-6">Top Locations</h3>
                 <div className="space-y-5">
-                  {MEDIA_KIT_DATA.audience.locations.map((location, idx) => (
+                  {mediaKitData?.audience?.locations?.map((location: any, idx: number) => (
                     <div key={idx} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium text-slate-700">

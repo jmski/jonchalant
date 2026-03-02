@@ -4,6 +4,13 @@ import collaboration from './collaboration'
 import mediaKitData from './mediaKitData'
 import testimonial from './testimonial'
 import caseStudy from './caseStudy'
+import lesson from './lesson'
+import program from './program'
+import pageMetadata from './pageMetadata'
+import contactInfo from './contactInfo'
+import aboutPage from './aboutPage'
+import homePageContent from './homePageContent'
+import danceCategoryFilter from './danceCategoryFilter'
 
 export const schemaTypes = [
   portfolio,
@@ -12,4 +19,11 @@ export const schemaTypes = [
   mediaKitData,
   testimonial,
   caseStudy,
+  lesson,
+  program,
+  pageMetadata,
+  contactInfo,
+  aboutPage,
+  homePageContent,
+  danceCategoryFilter,
 ]

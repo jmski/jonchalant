@@ -1,21 +1,64 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { PageTransition } from "@/components/layout";
+import { getContactInfo, getPageMetadata } from "@/lib/sanity";
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
+// Mock contact methods (fallback only)
+const MOCK_CONTACT_METHODS = [
+  { label: 'Email', value: 'contact@jonchalon.com', href: 'mailto:contact@jonchalon.com' },
+  { label: 'Instagram', value: '@jonchalon', href: 'https://instagram.com/jonchalon' },
+  { label: 'TikTok', value: '@jonchalon', href: 'https://tiktok.com/@jonchalon' }
+];
+
+// Mock page metadata (fallback only)
+const MOCK_PAGE_METADATA = {
+  headline: 'Get in Touch',
+  subheadline: 'Have a collaboration idea or question? I\'d love to hear from you.'
+};
+
 export default function Contact() {
+  const [contactMethods, setContactMethods] = useState(MOCK_CONTACT_METHODS);
+  const [pageMetadata, setPageMetadata] = useState(MOCK_PAGE_METADATA);
+  const [isLoading, setIsLoading] = useState(true);
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [contactInfo, metadata] = await Promise.all([
+          getContactInfo(),
+          getPageMetadata('contact')
+        ]);
+        
+        if (contactInfo?.contactMethods) {
+          setContactMethods(contactInfo.contactMethods);
+        }
+        
+        if (metadata) {
+          setPageMetadata(metadata);
+        }
+      } catch (error) {
+        console.warn('Failed to fetch contact info from Sanity, using fallback data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -35,11 +78,14 @@ export default function Contact() {
     }, 3000);
   };
 
-  const contactMethods = [
-    { label: 'Email', value: 'contact@jonchalon.com', href: 'mailto:contact@jonchalon.com' },
-    { label: 'Instagram', value: '@jonchalon', href: 'https://instagram.com/jonchalon' },
-    { label: 'TikTok', value: '@jonchalon', href: 'https://tiktok.com/@jonchalon' }
-  ];
+  const getMethodDescription = (label: string) => {
+    const descriptions: Record<string, string> = {
+      'Email': 'Send me a detailed message about your project or inquiry.',
+      'Instagram': 'Follow for dance content, behind-the-scenes, and announcements.',
+      'TikTok': 'Short-form dance videos, challenges, and creative experiments.',
+    };
+    return descriptions[label] || '';
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -53,11 +99,11 @@ export default function Contact() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
-                Get in Touch
+                {pageMetadata?.headline || 'Get in Touch'}
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed">
-                Have a collaboration idea or question? I'd love to hear from you. Drop me a message and I'll get back to you within 24 hours.
+                {pageMetadata?.subheadline || 'Have a collaboration idea or question? I\'d love to hear from you.'}
               </p>
 
               <p className="text-base text-slate-600">
@@ -82,44 +128,46 @@ export default function Contact() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 auto-rows-fr">
-              {contactMethods.map((method, idx) => (
-                <a
-                  key={idx}
-                  href={method.href}
-                  className="card group block border-2 border-slate-200 hover:border-accent transition-all duration-300 no-underline overflow-visible h-full"
-                >
-                  <div className="flex flex-col h-full">
-                    {/* Icon/Label section */}
-                    <div className="mb-4 pb-4 border-b border-slate-200">
-                      <p className="text-xs uppercase tracking-widest font-black text-accent mb-2">
-                        {method.label}
-                      </p>
-                      <div className="h-2 w-8 bg-accent rounded-full" />
+            {isLoading ? (
+              <div className="text-center py-8 text-slate-600">Loading contact methods...</div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 auto-rows-fr">
+                {contactMethods.map((method, idx) => (
+                  <a
+                    key={idx}
+                    href={method.href}
+                    className="card group block border-2 border-slate-200 hover:border-accent transition-all duration-300 no-underline overflow-visible h-full"
+                  >
+                    <div className="flex flex-col h-full">
+                      {/* Icon/Label section */}
+                      <div className="mb-4 pb-4 border-b border-slate-200">
+                        <p className="text-xs uppercase tracking-widest font-black text-accent mb-2">
+                          {method.label}
+                        </p>
+                        <div className="h-2 w-8 bg-accent rounded-full" />
+                      </div>
+                      
+                      {/* Content section */}
+                      <div className="flex-1">
+                        <p className="text-lg font-black text-slate-900 leading-tight mb-3 group-hover:text-accent transition-colors">
+                          {method.value}
+                        </p>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          {getMethodDescription(method.label)}
+                        </p>
+                      </div>
+                      
+                      {/* CTA indicator */}
+                      <div className="mt-6 pt-4 border-t border-slate-200 text-right">
+                        <span className="text-xs font-bold uppercase tracking-widest text-accent group-hover:translate-x-1 transition-transform inline-block">
+                          Connect →
+                        </span>
+                      </div>
                     </div>
-                    
-                    {/* Content section */}
-                    <div className="flex-1">
-                      <p className="text-lg font-black text-slate-900 leading-tight mb-3 group-hover:text-accent transition-colors">
-                        {method.value}
-                      </p>
-                      <p className="text-sm text-slate-600 leading-relaxed">
-                        {method.label === 'Email' && 'Send me a detailed message about your project or inquiry.'}
-                        {method.label === 'Instagram' && 'Follow for dance content, behind-the-scenes, and announcements.'}
-                        {method.label === 'TikTok' && 'Short-form dance videos, challenges, and creative experiments.'}
-                      </p>
-                    </div>
-                    
-                    {/* CTA indicator */}
-                    <div className="mt-6 pt-4 border-t border-slate-200 text-right">
-                      <span className="text-xs font-bold uppercase tracking-widest text-accent group-hover:translate-x-1 transition-transform inline-block">
-                        Connect →
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
+                  </a>
+                ))}
+              </div>
+            )}
           </section>
 
           {/* CONTACT FORM SECTION */}

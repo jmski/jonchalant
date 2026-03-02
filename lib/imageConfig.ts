@@ -20,7 +20,6 @@ export const IMAGE_CONFIG = {
     PORTFOLIO_CARD: { width: 500, height: 400 },
     GALLERY_THUMB: { width: 300, height: 300 },
     GALLERY_FULL: { width: 1200, height: 900 },
-    SHOWCASE_ITEM: { width: 600, height: 500 },
     BANNER: { width: 1920, height: 600 },
     // Also expose design token placeholders
     SQUARE: DESIGN_TOKENS.SIZES.IMAGE.PLACEHOLDER_SQUARE,

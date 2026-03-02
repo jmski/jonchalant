@@ -3,6 +3,7 @@ import { PageTransition } from "@/components/layout";
 import { BlueprintGrid } from "@/components/decorative";
 import dynamic from 'next/dynamic';
 import ProgramCardsSection from '@/components/sections/ProgramCardsSection';
+import { getPrograms } from "@/lib/sanity";
 
 const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
@@ -126,7 +127,19 @@ const PROGRAM_FOCUS = [
   }
 ];
 
-export default function Programs() {
+export default async function Programs() {
+  let programCards = PROGRAMS;
+
+  try {
+    const sanityPrograms = await getPrograms();
+    if (sanityPrograms && sanityPrograms.length > 0) {
+      programCards = sanityPrograms;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch programs from Sanity, using fallback data:', error);
+    // Falls back to PROGRAMS if Sanity fails
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="scale">
@@ -316,7 +329,7 @@ export default function Programs() {
 
           {/* PROGRAM CARDS */}
           <section id="programs-section" className="mb-24">
-            <ProgramCardsSection programs={PROGRAMS} />
+            <ProgramCardsSection programs={programCards} />
           </section>
 
           {/* INQUIRY FORM */}
