@@ -2,6 +2,7 @@ import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { FluidShape } from "@/components/decorative";
 import dynamic from 'next/dynamic';
+import { getPortfolioItems } from "@/lib/sanity";
 
 // Below-fold dynamic import
 const DanceFilter = dynamic(() => import('@/components/content').then(mod => ({ default: mod.DanceFilter })), {
@@ -26,7 +27,7 @@ const MOCK_DANCEDATA = [
   {
     _id: 'chore-1',
     title: 'Ninjago Choreography | Urban Style',
-    category: 'Choreography',
+    category: 'choreography',
     description: 'Original choreography to Japanese hip-hop. Featured on TikTok (2.4M views). High-energy urban style with precision footwork.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     thumbnail: '/images/dance/choreography/ninjago-urban-style.jpg',
@@ -34,7 +35,7 @@ const MOCK_DANCEDATA = [
   {
     _id: 'chore-2',
     title: 'Midnight Dreams | Contemporary Fusion',
-    category: 'Choreography',
+    category: 'choreography',
     description: 'Contemporary-hip hop fusion for music video. Ethereal slow sections transitioning to explosive moments. Directed & choreographed.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     thumbnail: '/images/dance/choreography/midnight-dreams-fusion.jpg',
@@ -42,7 +43,7 @@ const MOCK_DANCEDATA = [
   {
     _id: 'free-1',
     title: 'Cypher Session | Battle Flow',
-    category: 'Freestyle',
+    category: 'freestyle',
     description: 'High-energy freestyle battle cypher. Improvisation to live beatboxing. Runner-up at NYC Freestyle Championship 2024.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     thumbnail: '/images/dance/freestyle/cypher-session-battle.jpg',
@@ -50,7 +51,7 @@ const MOCK_DANCEDATA = [
   {
     _id: 'perf-1',
     title: 'Seoul Performance | International Stage',
-    category: 'Performance',
+    category: 'performance',
     description: 'Live performance at Seoul Dance Festival (August 2024). 8-minute showcase performance. 5000+ live audience.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     thumbnail: '/images/dance/performances/seoul-festival-stage.jpg',
@@ -59,6 +60,17 @@ const MOCK_DANCEDATA = [
 
 export default async function Dance() {
   let dancePortfolio: any[] = MOCK_DANCEDATA;
+
+  try {
+    // Try to fetch from Sanity CMS
+    const sanityData = await getPortfolioItems();
+    if (sanityData && sanityData.length > 0) {
+      dancePortfolio = sanityData;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch portfolio from Sanity, using fallback data:', error);
+    // Falls back to MOCK_DANCEDATA if Sanity fails
+  }
 
   return (
     <div className="min-h-screen bg-white">
