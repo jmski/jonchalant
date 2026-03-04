@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
   title: "Media Kit | Jonchalant",
   description: "Audience insights, platform metrics, and collaboration opportunities. Connect with Jon on TikTok, Instagram, and YouTube."
 };
 
-const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });

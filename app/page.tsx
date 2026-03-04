@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Leadership coaching for introverts. Build executive presence and quiet command through dance-based movement coaching. Transform your confidence in 8-12 weeks.",
 };
 
-const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
