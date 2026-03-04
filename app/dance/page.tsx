@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
+import '@/app/css/dance.css';
 
 export const metadata: Metadata = {
   title: "Dance Choreography Portfolio | Hip-Hop & Contemporary | Jonchalant",
@@ -74,55 +75,69 @@ export default async function Dance() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="dance-main">
       <PageTransition animation="slide-left">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-          {/* HERO SECTION */}
-          {featuredItem && (
-            <FeaturedVideoHero
-              title={featuredItem.title}
-              category={featuredItem.category}
-              description={featuredItem.description}
-              videoUrl={featuredItem.videoUrl}
-              duration={featuredItem.duration}
-              publishedAt={featuredItem.publishedAt}
-            />
-          )}
+        {/* HERO SECTION */}
+        <div className="dance-section-wrapper dance-section-hero">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            {featuredItem && (
+              <FeaturedVideoHero
+                title={featuredItem.title}
+                category={featuredItem.category}
+                description={featuredItem.description}
+                videoUrl={featuredItem.videoUrl}
+                duration={featuredItem.duration}
+                publishedAt={featuredItem.publishedAt}
+              />
+            )}
+          </main>
+        </div>
 
-          {/* PORTFOLIO FILTER */}
-          <section className="mb-24">
-            <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
-          </section>
+        {/* PORTFOLIO FILTER */}
+        <div className="dance-section-wrapper dance-section-portfolio">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section>
+              <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
+            </section>
+          </main>
+        </div>
 
-          {/* APPROACH LINK */}
-          <section className="mb-24 p-8 bg-slate-50 rounded-lg border border-slate-200">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Why Movement Matters for Leadership</h2>
-            <p className="text-slate-700 mb-4">
-              Every piece in this portfolio demonstrates principles that directly transfer to executive presence. Your body communicates before your words do.
-            </p>
-            <p className="text-sm text-slate-600">
-              Learn more about how choreography principles translate to professional leadership in the{' '}
-              <Link href="/lessons" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
-                leadership lessons
-              </Link>
-              {' '}or{' '}
-              <Link href="/about" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
-                about my approach
-              </Link>
-              .
-            </p>
-          </section>
+        {/* APPROACH LINK */}
+        <div className="dance-section-wrapper dance-section-approach">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="p-8 bg-slate-50 rounded-lg border border-slate-200">
+              <h2 className="text-2xl font-bold text-slate-900 mb-4">Why Movement Matters for Leadership</h2>
+              <p className="text-slate-700 mb-4">
+                Every piece in this portfolio demonstrates principles that directly transfer to executive presence. Your body communicates before your words do.
+              </p>
+              <p className="text-sm text-slate-600">
+                Learn more about how choreography principles translate to professional leadership in the{' '}
+                <Link href="/lessons" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                  leadership lessons
+                </Link>
+                {' '}or{' '}
+                <Link href="/about" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                  about my approach
+                </Link>
+                .
+              </p>
+            </section>
+          </main>
+        </div>
 
-          {/* CTA */}
-          <section className="py-16">
-            <CTASection
-              title="Ready to Integrate Movement into Your Leadership?"
-              description="See how dance principles translate directly into professional presence, confidence, and command. Let's explore what's possible."
-              buttonText="EXPLORE COACHING"
-              buttonLink="/contact"
-            />
-          </section>
-        </main>
+        {/* CTA */}
+        <div className="dance-section-wrapper dance-section-cta">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section>
+              <CTASection
+                title="Ready to Integrate Movement into Your Leadership?"
+                description="See how dance principles translate directly into professional presence, confidence, and command. Let's explore what's possible."
+                buttonText="EXPLORE COACHING"
+                buttonLink="/contact"
+              />
+            </section>
+          </main>
+        </div>
       </PageTransition>
     </div>
   );

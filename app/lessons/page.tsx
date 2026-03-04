@@ -3,6 +3,7 @@ import { PageTransition } from "@/components/layout";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { getLessons } from "@/lib/sanity";
+import '@/app/css/lessons.css';
 
 import type { Metadata } from 'next';
 
@@ -95,65 +96,89 @@ export default async function Lessons() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="lessons-main">
       <PageTransition animation="slide-right">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          {/* HERO */}
-          <section className="mb-24">
-            <div className="inline-block mb-6">
-              <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Structured Learning</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              Master Quiet Command: Leadership Lessons
-            </h1>
-            <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl">
-              Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
-            </p>
-            <p className="text-base text-slate-600 mt-4">
-              Organized by skill level: Beginner → Intermediate → Advanced
-            </p>
-          </section>
+        {/* HERO */}
+        <div className="lessons-section-wrapper lessons-section-hero">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section>
+              <div className="inline-block mb-6">
+                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Structured Learning</span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+                Master Quiet Command: Leadership Lessons
+              </h1>
+              <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl">
+                Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
+              </p>
+              <p className="text-base text-slate-600 mt-4">
+                Organized by skill level: Beginner → Intermediate → Advanced
+              </p>
+            </section>
+          </main>
+        </div>
 
-          {/* CONCEPT-TO-MOVEMENT LINK */}
-          <section className="mb-24 p-8 bg-slate-50 rounded-lg border border-slate-200">
-            <p className="text-slate-700">
-              See these principles in motion: Watch how body awareness creates executive presence in my{' '}
-              <Link href="/dance" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
-                choreography portfolio
-              </Link>
-              .
-            </p>
-          </section>
+        {/* CONCEPT-TO-MOVEMENT LINK */}
+        <div className="lessons-section-wrapper lessons-section-supplemental">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="p-8 bg-slate-50 rounded-lg border border-slate-200">
+              <p className="text-slate-700">
+                See these principles in motion: Watch how body awareness creates executive presence in my{' '}
+                <Link href="/dance" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                  choreography portfolio
+                </Link>
+                .
+              </p>
+            </section>
+          </main>
+        </div>
 
-          {/* LESSON CATEGORIES */}
-          <LessonCategory 
-            level="Beginner" 
-            pillarColor="text-slate-900"
-            lessons={lessons.filter((l) => l.category === 'Beginner')} 
-          />
-          
-          <LessonCategory 
-            level="Intermediate" 
-            pillarColor="text-slate-900"
-            lessons={lessons.filter((l) => l.category === 'Intermediate')} 
-          />
-          
-          <LessonCategory 
-            level="Advanced" 
-            pillarColor="text-slate-900"
-            lessons={lessons.filter((l) => l.category === 'Advanced')} 
-          />
-
-          {/* CTA */}
-          <section className="py-16">
-            <CTASection
-              title="Learn Better with Coaching"
-              description="These lessons teach the frameworks. But transformation happens through application. Get personalized guidance, real-time feedback, and accountability through a coaching program."
-              buttonText="Find Your Program"
-              buttonLink="/programs"
+        {/* BEGINNER LESSONS */}
+        <div className="lessons-section-wrapper lessons-section-beginner">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <LessonCategory 
+              level="Beginner" 
+              pillarColor="text-slate-900"
+              lessons={lessons.filter((l) => l.category === 'Beginner')} 
             />
-          </section>
-        </main>
+          </main>
+        </div>
+        
+        {/* INTERMEDIATE LESSONS */}
+        <div className="lessons-section-wrapper lessons-section-intermediate">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <LessonCategory 
+              level="Intermediate" 
+              pillarColor="text-slate-900"
+              lessons={lessons.filter((l) => l.category === 'Intermediate')} 
+            />
+          </main>
+        </div>
+        
+        {/* ADVANCED LESSONS */}
+        <div className="lessons-section-wrapper lessons-section-advanced">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <LessonCategory 
+              level="Advanced" 
+              pillarColor="text-slate-900"
+              lessons={lessons.filter((l) => l.category === 'Advanced')} 
+            />
+          </main>
+        </div>
+
+        {/* CTA */}
+        <div className="lessons-section-wrapper lessons-section-cta">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section>
+              <CTASection
+                title="Learn Better with Coaching"
+                description="These lessons teach the frameworks. But transformation happens through application. Get personalized guidance, real-time feedback, and accountability through a coaching program."
+                buttonText="Find Your Program"
+                buttonLink="/programs"
+              />
+            </section>
+          </main>
+        </div>
       </PageTransition>
     </div>
   );

@@ -59,21 +59,23 @@ export default async function BlogPage() {
   return (
     <main className="blog-page-main">
       {/* Header */}
-      <div className="blog-page-header">
+      <div className="blog-section-wrapper blog-section-header">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Heading level={1} className="blog-page-title">
-            Leadership Blog
-          </Heading>
-          <p className="blog-page-subtitle">
-            Articles on executive presence, quiet command, confidence coaching, and leadership for introverts.
-          </p>
+          <div className="blog-page-header">
+            <Heading level={1} className="blog-page-title">
+              Leadership Blog
+            </Heading>
+            <p className="blog-page-subtitle">
+              Articles on executive presence, quiet command, confidence coaching, and leadership for introverts.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Featured Posts */}
       {featuredPosts.length > 0 && (
-        <section className="blog-featured-section">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="blog-section-wrapper blog-section-featured">
+          <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="blog-featured-title">Featured</h2>
             <div className="blog-featured-grid">
               {featuredPosts.map((post) => (
@@ -106,13 +108,13 @@ export default async function BlogPage() {
                 </article>
               ))}
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       )}
 
       {/* All Posts */}
-      <section className="blog-all-section">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="blog-section-wrapper blog-section-all">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="blog-all-title">All Articles</h2>
           
           {posts.length === 0 ? (
@@ -152,16 +154,20 @@ export default async function BlogPage() {
               ))}
             </div>
           )}
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* CTA Section */}
-      <CTASection
-        title="Ready to Build Your Executive Presence?"
-        description="Get personalized guidance from an expert coach. Start with a free 30-minute presence audit."
-        buttonText="Schedule Your Free Audit"
-        buttonLink="/contact"
-      />
+      <div className="blog-section-wrapper blog-section-cta">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CTASection
+            title="Ready to Build Your Executive Presence?"
+            description="Get personalized guidance from an expert coach. Start with a free 30-minute presence audit."
+            buttonText="Schedule Your Free Audit"
+            buttonLink="/contact"
+          />
+        </section>
+      </div>
     </main>
   );
 }
