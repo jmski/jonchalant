@@ -505,13 +505,3 @@
 .about-cta-section {
   padding: 4rem 0;
 }
-
-/* Enso Circle Decorative */
-.about-enso-circle {
-  position: absolute;
-  top: 40px;
-  right: -80px;
-  z-index: 0;
-  opacity: 0.05;
-  color: var(--accent-primary);
-}

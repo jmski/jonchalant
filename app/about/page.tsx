@@ -1,6 +1,5 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
-import { EnsoCircle } from "@/components/decorative";
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
@@ -89,14 +88,6 @@ export default async function About() {
 
           {/* ORIGIN STORY - 60/40 LAYOUT */}
           <section className="about-origin-section">
-            {/* Subtle Enso circle decorative element - represents Ikigai/Purpose */}
-            <EnsoCircle
-              size={300}
-              opacity={0.05}
-              strokeWidth={1}
-              className="about-enso-circle"
-            />
-            
             <div className="about-origin-content">
               {aboutContent?.originSectionHeadline ? (
                 <>
