@@ -263,7 +263,7 @@ export default async function Programs() {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-8 text-slate-600">
+                  <div className="text-center py-8" style={{ color: 'var(--text-tertiary)' }}>
                     Loading program focus areas...
                   </div>
                 )}
@@ -276,33 +276,33 @@ export default async function Programs() {
               style={{ backgroundColor: 'var(--border-color)' }}
             />
           </section>
-        </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* PROGRAM CARDS */}
-        <div className="programs-section-wrapper programs-section-cards">
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             <section id="programs-section">
               {programCards.length > 0 ? (
                 <ProgramCardsSection programs={programCards} />
               ) : (
-                <div className="py-12 text-center text-slate-600">
+                <div className="py-12 text-center" style={{ color: 'var(--text-tertiary)' }}>
                   <p>Loading coaching programs...</p>
                 </div>
               )}
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* SUPPLEMENTAL LEARNING CTA */}
-        <div className="programs-section-wrapper programs-section-supplemental">
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <section>
               <div className="text-center space-y-4">
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                <h3 className="text-2xl sm:text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
                   Learn at Your Own Pace
                 </h3>
-                <p className="text-lg text-slate-700 max-w-2xl mx-auto">
+                <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
                   Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
                 </p>
                 <TextLink 
@@ -313,12 +313,12 @@ export default async function Programs() {
                 </TextLink>
               </div>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* CTA */}
-        <div className="programs-section-wrapper programs-section-cta">
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
             <section>
               <CTASection
                 title="Ready to Build Real Executive Presence?"
@@ -327,8 +327,8 @@ export default async function Programs() {
                 buttonLink="/contact"
               />
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
       </PageTransition>
     </div>
   );

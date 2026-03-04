@@ -3,48 +3,6 @@
    Uses CSS Variables from variables.css
    ============================================================================ */
 
-/* Section Wrappers - Full-width backgrounds with alternating colors */
-.programs-section-wrapper {
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding: 4rem 2rem;
-}
-
-@media (min-width: 640px) {
-  .programs-section-wrapper {
-    width: calc(100% + 6rem);
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding: 6rem 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .programs-section-wrapper {
-    width: calc(100% + 8rem);
-    margin-left: -4rem;
-    margin-right: -4rem;
-    padding: 6rem 4rem;
-  }
-}
-
-.programs-section-hero {
-  background-color: var(--bg-primary);
-}
-
-.programs-section-cards {
-  background-color: var(--bg-secondary);
-}
-
-.programs-section-supplemental {
-  background-color: var(--bg-primary);
-}
-
-.programs-section-cta {
-  background-color: var(--bg-tertiary);
-}
-
 /* Button Styling - Used for primary action links */
 .programs-cta-button {
   display: inline-block;
