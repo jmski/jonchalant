@@ -2,6 +2,7 @@ import { type SchemaTypeDefinition } from 'sanity'
 
 // Import all schema types from the schemas directory
 import aboutPage from '../schemas/aboutPage'
+import blogPost from '../schemas/blogPost'
 import caseStudy from '../schemas/caseStudy'
 import collaboration from '../schemas/collaboration'
 import collaborationPackage from '../schemas/collaborationPackage'
@@ -22,6 +23,7 @@ import testimonial from '../schemas/testimonial'
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
   aboutPage,
+  blogPost,
   caseStudy,
   collaboration,
   collaborationPackage,

@@ -69,6 +69,24 @@ async function getRelatedPosts(pillar: string, currentSlug: string): Promise<Blo
   }
 }
 
+export async function generateStaticParams() {
+  const query = `*[_type == "blogPost"] {
+    slug
+  }`;
+
+  try {
+    const posts = await client.fetch(query);
+    return posts.map((post: any) => ({
+      slug: post.slug.current,
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
+}
+
+export const revalidate = 3600; // Revalidate every hour
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getBlogPost(params.slug);
 
