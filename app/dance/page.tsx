@@ -3,11 +3,35 @@ import { PageTransition } from "@/components/layout";
 import { FluidShape } from "@/components/decorative";
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Dance Choreography Portfolio | Jonchalant",
-  description: "Professional choreography portfolio featuring 30+ hip-hop, contemporary, and freestyle videos. Discover original choreography and performance work by Jon.",
+  title: "Dance Choreography Portfolio | Hip-Hop & Contemporary | Jonchalant",
+  description: "Explore professional choreography portfolio with 30+ original hip-hop and contemporary videos. Premium choreography for brands, events, and performers.",
+  keywords: "dance choreography, hip-hop choreography, contemporary dance, freestyle dance, professional choreographer, dance videos, movement coaching",
+  openGraph: {
+    title: "Dance Choreography Portfolio | Jonchalant",
+    description: "Professional choreography work: hip-hop, contemporary, freestyle, and original pieces.",
+    type: "website",
+    url: "https://jonchalant.com/dance",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-dance-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Dance Choreography Portfolio",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dance Choreography Portfolio | Jonchalant",
+    description: "Professional choreography: hip-hop, contemporary, freestyle, and original pieces.",
+    images: ["https://jonchalant.com/social/og-dance-1200x630.png"],
+    creator: "@jonchalant",
+  },
 };
 
 // Below-fold dynamic import
@@ -68,6 +92,25 @@ export default async function Dance() {
           {/* PORTFOLIO FILTER */}
           <section className="mb-24">
             <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
+          </section>
+
+          {/* APPROACH LINK */}
+          <section className="mb-24 p-8 bg-slate-50 rounded-lg border border-slate-200">
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">Why Movement Matters for Leadership</h2>
+            <p className="text-slate-700 mb-4">
+              Every piece in this portfolio demonstrates principles that directly transfer to executive presence. Your body communicates before your words do.
+            </p>
+            <p className="text-sm text-slate-600">
+              Learn more about how choreography principles translate to professional leadership in the{' '}
+              <Link href="/lessons" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                leadership lessons
+              </Link>
+              {' '}or{' '}
+              <Link href="/about" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                about my approach
+              </Link>
+              .
+            </p>
           </section>
 
           {/* CTA */}

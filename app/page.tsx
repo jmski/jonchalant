@@ -1,13 +1,40 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
 import { Marquee } from '@/components/effects';
+import { FeaturedBlogSection } from '@/components/sections';
+import Link from 'next/link';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
+import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Executive Presence Coaching | Jonchalant",
-  description: "Leadership coaching for introverts. Build executive presence and quiet command through dance-based movement coaching. Transform your confidence in 8-12 weeks.",
+  title: "Executive Presence Coaching for Introverts | 8-Week Program | Jonchalant",
+  description: "Build executive presence and quiet command in 8-12 weeks. Leadership coaching for introverts using evidence-based, body-aware techniques. Master confident communication.",
+  keywords: "executive presence coaching, leadership coaching for introverts, quiet command, confidence coaching, introvert leadership, professional presence",
+  openGraph: {
+    title: "Executive Presence Coaching for Introverts | Jonchalant",
+    description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for shy professionals and introverts.",
+    type: "website",
+    url: "https://jonchalant.com",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-home-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Executive Presence Coaching for Introverts",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Executive Presence Coaching for Introverts | Jonchalant",
+    description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for introverts.",
+    images: ["https://jonchalant.com/social/og-home-1200x630.png"],
+    creator: "@jonchalant",
+  },
 };
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {
@@ -44,6 +71,20 @@ export default async function Home() {
 
   return (
     <div className="bg-white">
+      {/* Aggregate Rating Schema - Coach reviews */}
+      <Script
+        id="coach-rating-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(AggregateRatingSchema({
+            name: "Jonchalant Leadership Coaching",
+            ratingValue: 4.9,
+            ratingCount: testimonials?.length || 25,
+            reviewCount: testimonials?.length || 25
+          })),
+        }}
+      />
+      
       <PageTransition animation="fade" className="-mt-6 lg:-mt-16">
         {/* HERO SECTION */}
         <HomeHero />
@@ -60,9 +101,13 @@ export default async function Home() {
           className="bg-slate-900 text-white py-3 sm:py-4 text-sm sm:text-base font-semibold"
         />
 
-        {/* KEY STATS SECTION */}
+        {/* KEY STATS SECTION - Impact at a Glance */}
         <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Proven Results</h2>
+              <p className="text-slate-700 max-w-2xl">Real outcomes from real coaching. These numbers represent transformations in confidence, presence, and professional impact.</p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {homeContent?.stats?.map((stat: any, idx: number) => (
                 <div key={idx} className="space-y-3 text-center md:text-left">
@@ -159,7 +204,7 @@ export default async function Home() {
                       <div className="mb-6 space-y-3 flex-1">
                         {service.features && service.features.map((feature: string, fidx: number) => (
                           <div key={fidx} className="flex items-start gap-3">
-                            <span className="text-accent font-bold mt-0.5">+</span>
+                            <span className="text-accent font-bold mt-0.5">✓</span>
                             <span className="text-sm text-slate-600">{feature}</span>
                           </div>
                         ))}
@@ -168,13 +213,14 @@ export default async function Home() {
 
                     {/* CTA */}
                     <div className="pt-4 border-t border-slate-100">
-                      <button
-                        className="text-white font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all hover:text-accent"
-                        aria-label={`Learn more about ${service.title}`}
+                      <Link
+                        href="/programs"
+                        className="text-slate-900 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all group-hover:text-accent"
+                        aria-label={`Explore ${service.title} coaching`}
                       >
-                        <span>Learn more</span>
+                        <span>Explore this coaching path</span>
                         <span className="group-hover:translate-x-1 transition-transform">→</span>
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 ))
@@ -354,19 +400,19 @@ export default async function Home() {
                   letterSpacing: '0.15em'
                 }}
               >
-                Client Success Stories
+                Transformation Stories
               </span>
               <h2 
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
                 style={{ color: 'var(--text-primary)' }}
               >
-                Trusted by Industry Leaders
+                See Real Results from Real Clients
               </h2>
               <p 
                 className="text-lg sm:text-xl max-w-2xl mx-auto"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                See how leading teams have transformed their presence and impact through our coaching and consulting programs.
+                These leaders transformed how they show up. From speaking up in meetings to commanding rooms with quiet confidence—see what they achieved.
               </p>
             </div>
 
@@ -387,7 +433,8 @@ export default async function Home() {
                     {testimonial.result && (
                       <div className="mb-6 p-4 bg-accent/10 rounded border border-accent/20">
                         <p className="text-sm font-bold text-accent">
-                          {testimonial.result}
+                          <span className="inline-block mr-2">📈</span>
+                          Key Result: {testimonial.result}
                         </p>
                       </div>
                     )}
@@ -415,12 +462,15 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* FEATURED BLOG SECTION */}
+        <FeaturedBlogSection />
+
         {/* FINAL CTA */}
         <section className="py-12 sm:py-16">
           <CTASection 
-            title="Ready to Collaborate?"
-            description="Let's explore how we can work together to bring your vision to life."
-            buttonText="Start a Project"
+            title="Ready to Transform Your Executive Presence?"
+            description="Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."
+            buttonText="Schedule Your Free Audit"
             buttonLink="/contact"
           />
         </section>

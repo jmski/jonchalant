@@ -1,8 +1,11 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { BlueprintGrid } from "@/components/decorative";
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
+import { CourseSchema } from "@/lib/schema";
 
 const ProgramCardsSection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.ProgramCardsSection })), {
   loading: () => <div className="py-16 md:py-24">Loading programs...</div>,
@@ -12,8 +15,31 @@ const ProgramCardsSection = dynamic(() => import('@/components/sections').then(m
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Leadership Coaching Programs | Jonchalant",
-  description: "8-12 week executive presence and quiet command coaching for introverts. Build confidence, professional presence, and body-aware leadership."
+  title: "Leadership Coaching Programs | Quiet Command & Executive Presence | Jonchalant",
+  description: "8-12 week programs for building executive presence and quiet command. Body-aware coaching for introverts to develop confidence and professional presence.",
+  keywords: "leadership coaching programs, executive presence training, quiet command coaching, introvert leadership program, professional presence coaching, body-aware leadership",
+  openGraph: {
+    title: "Leadership Coaching Programs | Jonchalant",
+    description: "Transform your professional presence with 8-12 week coaching programs for introverts.",
+    type: "website",
+    url: "https://jonchalant.com/programs",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-programs-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Leadership Coaching Programs",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Leadership Coaching Programs | Jonchalant",
+    description: "Transform your professional presence with 8-12 week coaching programs.",
+    images: ["https://jonchalant.com/social/og-programs-1200x630.png"],
+    creator: "@jonchalant",
+  },
 };
 
 
@@ -42,6 +68,33 @@ export default async function Programs() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Course Schema - Featured programs */}
+      <Script
+        id="8week-course-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(CourseSchema({
+            name: "8-Week Executive Presence & Quiet Command Program",
+            description: "Transform your professional presence in 8 weeks through body-aware leadership coaching designed for introverts and shy professionals.",
+            price: "1,997",
+            duration: "P8W",
+            level: "Intermediate"
+          })),
+        }}
+      />
+      <Script
+        id="group-workshop-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(CourseSchema({
+            name: "Group Workshop: Building Quiet Command",
+            description: "Interactive group workshop on developing executive presence and professional confidence for introvert leaders.",
+            duration: "P1D",
+            level: "Beginner"
+          })),
+        }}
+      />
+      
       <PageTransition animation="scale">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* HERO SECTION - Enhanced Visual Design */}
@@ -80,28 +133,16 @@ export default async function Programs() {
                 </div>
 
                 {/* Main Headline */}
-                <div className="space-y-4">
-                  <h1 
-                    className="font-headline font-bold leading-tight"
-                    style={{
-                      fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-                      color: 'var(--text-primary)',
-                      letterSpacing: '-0.01em'
-                    }}
-                  >
-                    Your Path to
-                  </h1>
-                  <h2 
-                    className="font-headline font-bold leading-tight"
-                    style={{
-                      fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-                      color: 'var(--accent-primary)',
-                      letterSpacing: '-0.01em'
-                    }}
-                  >
-                    Quiet Command
-                  </h2>
-                </div>
+                <h1 
+                  className="font-headline font-bold leading-tight space-y-0"
+                  style={{
+                    fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                    letterSpacing: '-0.01em'
+                  }}
+                >
+                  <div style={{ color: 'var(--text-primary)' }}>Transform Your</div>
+                  <div style={{ color: 'var(--accent-primary)' }}>Executive Presence</div>
+                </h1>
 
                 {/* Accent underline */}
                 <div 
@@ -117,7 +158,7 @@ export default async function Programs() {
                     maxWidth: '32rem'
                   }}
                 >
-                  Choose your learning path. Each program builds professional presence through the same proven methodology.
+                  Building quiet command isn't complicated. It's methodical. Pick your format and commit to the process.
                 </p>
 
                 {/* Description */}
@@ -202,12 +243,12 @@ export default async function Programs() {
                           {pillar.icon}
                         </div>
                         <div className="flex-1 space-y-2">
-                          <h3 
+                          <h2 
                             className="font-headline font-bold text-lg"
                             style={{ color: 'var(--text-primary)' }}
                           >
                             {pillar.title}
-                          </h3>
+                          </h2>
                           <p 
                             className="text-sm leading-relaxed"
                             style={{ color: 'var(--text-tertiary)' }}
@@ -244,12 +285,30 @@ export default async function Programs() {
             )}
           </section>
 
+          {/* SUPPLEMENTAL LEARNING CTA */}
+          <section className="py-16 bg-slate-50 px-4 sm:px-6 lg:px-8 rounded-lg mb-24">
+            <div className="text-center space-y-4">
+              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                Learn at Your Own Pace
+              </h3>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto">
+                Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
+              </p>
+              <Link 
+                href="/lessons" 
+                className="inline-block mt-4 px-6 py-3 bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"
+              >
+                Explore Leadership Lessons →
+              </Link>
+            </div>
+          </section>
+
           {/* CTA */}
           <section className="py-16">
             <CTASection
-              title="Still Unsure Which Program Is Right for You?"
-              description="Start with a free 30-minute Presence Audit. I'll assess your baseline, identify your biggest opportunities, and recommend the perfect program for your goals."
-              buttonText="SCHEDULE YOUR AUDIT"
+              title="Ready to Build Real Executive Presence?"
+              description="Don't guess which program is right. Schedule a free 30-minute Presence Audit where we'll assess where you are now, identify your biggest opportunities, and create a custom roadmap to get you there."
+              buttonText="Book Your Free Audit"
               buttonLink="/contact"
             />
           </section>

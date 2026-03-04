@@ -34,25 +34,18 @@ export default function HomeHero() {
                 style={{
                   fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
                   letterSpacing: '0.03em',
-                  color: 'var(--text-primary)',
                   lineHeight: '1.15'
                 }}
               >
-                Body-Led
-                <br />
-                Leadership
+                <div style={{ color: 'var(--text-primary)' }}>
+                  Body-Led
+                  <br />
+                  Leadership
+                </div>
+                <div style={{ color: 'var(--accent-primary)', marginTop: '0.25em' }}>
+                  for Introverts
+                </div>
               </h1>
-              <h2 
-                className="font-headline font-normal"
-                style={{
-                  fontSize: 'clamp(2rem, 7vw, 3.5rem)',
-                  letterSpacing: '0.03em',
-                  color: 'var(--accent-primary)',
-                  lineHeight: '1.15'
-                }}
-              >
-                for Introverts
-              </h2>
             </div>
 
             {/* Thin accent line (Ma principle) */}

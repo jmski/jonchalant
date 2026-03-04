@@ -2,20 +2,24 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
+import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Jonchalant | Leadership Coaching & Dance Choreography",
-  description: "Body-led leadership coaching for introverts. Build executive presence, quiet command, and professional confidence through movement-based coaching and choreography.",
+  title: "Leadership Coaching for Introverts | Executive Presence & Quiet Command | Jonchalant",
+  description: "Build executive presence and quiet command through body-aware leadership coaching. Transform your confidence with dance-based techniques designed for introverts and shy professionals.",
+  keywords: "leadership coaching for introverts, executive presence coaching, quiet command, confidence coaching, introvert leadership development, body-aware leadership, movement coaching",
   openGraph: {
-    title: "Jonchalant | Leadership Coaching & Choreography",
-    description: "Transform your presence and confidence through body-aware leadership coaching.",
+    title: "Leadership Coaching for Introverts | Executive Presence | Jonchalant",
+    description: "Build executive presence and quiet command through body-aware coaching. Originally trained in dance, Jon helps introverts develop professional confidence.",
     url: "https://jonchalant.com",
     type: "website",
+    siteName: "Jonchalant",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jonchalant | Leadership Coaching",
-    description: "Body-led leadership for introverts",
+    title: "Leadership Coaching for Introverts | Jonchalant",
+    description: "Build executive presence, quiet command, and professional confidence",
+    creator: "@jonchalant",
   },
 };
 
@@ -39,6 +43,30 @@ export default function RootLayout({
             `,
           }}
         />
+        
+        {/* JSON-LD Structured Data */}
+        <Script
+          id="person-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(PersonSchema()),
+          }}
+        />
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(OrganizationSchema()),
+          }}
+        />
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(LocalBusinessSchema()),
+          }}
+        />
+        
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>

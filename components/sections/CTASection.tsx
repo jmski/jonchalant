@@ -15,31 +15,18 @@ export default function CTASection({
   buttonLink = "#"
 }: CTASectionProps) {
   return (
-    <div className="py-16 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+    <div className="cta-section">
       <ScrollFade>
-        <div className="p-12 text-center border" style={{ background: 'linear-gradient(135deg, var(--bg-tertiary), var(--bg-muted))', borderColor: 'var(--border-accent)', borderRadius: '0px' }}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-display" style={{ color: 'var(--accent-vibrant)' }}>
+        <div className="cta-section-content">
+          <h2 className="text-3xl sm:text-4xl font-bold cta-section-title">
             {title}
           </h2>
-          <div className="mb-8 max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-body)' }}>
+          <div className="cta-section-description text-lg leading-relaxed">
             {description}
           </div>
           <a
             href={buttonLink}
-            className="inline-block px-8 py-3 font-bold"
-            style={{
-              display: 'inline-block',
-              padding: '12px 32px',
-              borderRadius: '0px',
-              backgroundColor: 'var(--accent-vibrant)',
-              color: 'var(--btn-primary-text)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.875rem',
-              fontWeight: '600',
-              letterSpacing: '0.5px',
-              textTransform: 'uppercase',
-              textDecoration: 'none'
-            }}
+            className="cta-section-button"
           >
             {buttonText}
           </a>

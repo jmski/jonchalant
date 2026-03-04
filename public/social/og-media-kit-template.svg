@@ -1,0 +1,36 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#ffffff"/>
+  
+  <!-- Accent bar left -->
+  <rect width="8" height="630" fill="#2563eb"/>
+  
+  <!-- Brand name -->
+  <text x="50" y="80" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#0f172a">
+    Jonchalant
+  </text>
+  
+  <!-- Main headline -->
+  <text x="50" y="200" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#0f172a" width="800">
+    Media Kit
+  </text>
+  <text x="50" y="270" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#2563eb">
+    Collaboration Opportunities
+  </text>
+  
+  <!-- Divider -->
+  <line x1="50" y1="310" x2="950" y2="310" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Achievement metric -->
+  <text x="50" y="360" font-family="Arial, sans-serif" font-size="18" fill="#64748b">
+    Multi-Platform Reach: TikTok • Instagram • YouTube
+  </text>
+  
+  <!-- Bottom CTA -->
+  <text x="50" y="580" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2563eb">
+    Download Media Kit
+  </text>
+  
+  <!-- Decorative element -->
+  <circle cx="1050" cy="150" r="80" fill="#f97316" opacity="0.1"/>
+</svg>
