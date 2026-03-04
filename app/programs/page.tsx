@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import ProgramCardsSection from '@/components/sections/ProgramCardsSection';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
 
-const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
+const CollaborationForm = dynamic(() => import('@/components/forms/CollaborationForm'), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
   ssr: true
 });

@@ -3,12 +3,12 @@ import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { getHomePageContent, getServices } from "@/lib/sanity";
 
-const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+const CTASection = dynamic(() => import('@/components/sections/CTASection'), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
-const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
+const CollaborationForm = dynamic(() => import('@/components/forms/CollaborationForm'), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
   ssr: true
 });
