@@ -168,16 +168,31 @@ export async function getMediaKitData() {
   const query = `*[_type == "mediaKitData"][0] {
     _id,
     title,
-    totalFollowers,
-    followerChange,
-    avgMonthlyViews,
-    viewsChange,
-    engagementRate,
-    engagementChange,
-    activeSubscribers,
-    subscriberChange,
-    platforms,
-    contentCategories
+    keyMetrics | order(order asc) {
+      label,
+      value,
+      change,
+      order
+    },
+    platforms | order(order asc) {
+      name,
+      handle,
+      followers,
+      avgViews,
+      category,
+      order
+    },
+    contentCategories | order(order asc) {
+      name,
+      percentage,
+      description,
+      order
+    },
+    audience {
+      age,
+      gender,
+      locations
+    }
   }`
   return await client.fetch(query)
 }
@@ -408,7 +423,9 @@ export async function getAboutPageContent() {
     originSectionHeadline,
     originSectionDescription,
     phases,
-    stats
+    stats,
+    philosophies,
+    introvertTraits
   }`
   return await client.fetch(query)
 }
@@ -438,6 +455,37 @@ export async function getDanceCategoryFilter() {
   const query = `*[_type == "danceCategoryFilter" && title == "Dance Categories"][0] {
     categories | order(order asc) {
       name,
+      order
+    }
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// SERVICE CATEGORIES
+// ============================================================================
+
+export async function getServiceCategories() {
+  const query = `*[_type == "serviceCategory" && title == "Service Categories"][0] {
+    categories | order(order asc) {
+      name,
+      items,
+      order
+    }
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// COLLABORATION PACKAGES
+// ============================================================================
+
+export async function getCollaborationPackages() {
+  const query = `*[_type == "collaborationPackage" && title == "Collaboration Packages"][0] {
+    packages | order(order asc) {
+      name,
+      price,
+      features,
       order
     }
   }`

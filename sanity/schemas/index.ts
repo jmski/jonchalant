@@ -13,6 +13,8 @@ import homePageContent from './homePageContent'
 import danceCategoryFilter from './danceCategoryFilter'
 import programFocus from './programFocus'
 import programsPageContent from './programsPageContent'
+import serviceCategory from './serviceCategory'
+import collaborationPackage from './collaborationPackage'
 
 export const schemaTypes = [
   portfolio,
@@ -30,4 +32,6 @@ export const schemaTypes = [
   danceCategoryFilter,
   programFocus,
   programsPageContent,
+  serviceCategory,
+  collaborationPackage,
 ]

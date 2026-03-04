@@ -85,6 +85,43 @@ export default defineType({
         }
       ],
     }),
+    defineField({
+      name: 'philosophies',
+      title: 'My Philosophy (How I Work)',
+      description: 'Three core principles guiding the coaching approach',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'philosophy',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Philosophy Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'description',
+              title: 'Philosophy Description',
+              type: 'text',
+              validation: (Rule) => Rule.required(),
+            }),
+          ]
+        }
+      ],
+    }),
+    defineField({
+      name: 'introvertTraits',
+      title: 'Introvert Traits / Superpowers',
+      description: 'List of trait names representing introvert strengths',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+        }
+      ],
+    }),
   ],
   preview: {
     select: {

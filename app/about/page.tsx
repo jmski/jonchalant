@@ -27,34 +27,11 @@ const MOCK_ABOUT_CONTENT = {
   ]
 };
 
-// Philosophy items (kept as these are consistent brand voice)
-const PHILOSOPHIES = [
-  {
-    title: 'No Performance Required',
-    desc: 'You don\'t need to become someone else. I help you become fully, confidently yourself—and let that presence speak.'
-  },
-  {
-    title: 'Science + Intuition',
-    desc: 'Body language psychology meets personal intuition. We use both data and soul to build your authentic command.'
-  },
-  {
-    title: 'Sustainable Leadership',
-    desc: 'Your energy is precious. I teach you how to lead from strength, not from depletion or performance anxiety.'
-  },
-];
-
-const INTROVERT_TRAITS = [
-  'Deep Listeners',
-  'Thoughtful Decision Makers',
-  'One-on-One Masters',
-  'Authentic Leaders',
-  'Written Communicators',
-  'Resilient Problem Solvers',
-];
-
 export default async function About() {
   let aboutContent = MOCK_ABOUT_CONTENT;
   let services = [];
+  let philosophies = [];
+  let introvertTraits = [];
 
   try {
     const [sanityAbout, sanityServices] = await Promise.all([
@@ -64,6 +41,12 @@ export default async function About() {
     
     if (sanityAbout) {
       aboutContent = sanityAbout;
+      if (sanityAbout.philosophies) {
+        philosophies = sanityAbout.philosophies;
+      }
+      if (sanityAbout.introvertTraits) {
+        introvertTraits = sanityAbout.introvertTraits;
+      }
     }
     
     if (sanityServices && sanityServices.length > 0) {
@@ -199,19 +182,25 @@ export default async function About() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {PHILOSOPHIES.map((philosophy, idx) => (
-                <div
-                  key={idx}
-                  className="border border-slate-200 p-8 hover:shadow-md transition-shadow duration-300"
-                >
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">
-                    {philosophy.title}
-                  </h3>
-                  <p className="text-slate-700 leading-relaxed">
-                    {philosophy.desc}
-                  </p>
+              {philosophies.length > 0 ? (
+                philosophies.map((philosophy, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-slate-200 p-8 hover:shadow-md transition-shadow duration-300"
+                  >
+                    <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                      {philosophy.title}
+                    </h3>
+                    <p className="text-slate-700 leading-relaxed">
+                      {philosophy.description}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center py-8 text-slate-600">
+                  Loading philosophy content...
                 </div>
-              ))}
+              )}
             </div>
           </section>
 
@@ -232,14 +221,20 @@ export default async function About() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {INTROVERT_TRAITS.map((trait, idx) => (
-                <div
-                  key={idx}
-                  className="border border-slate-200 p-4 text-center hover:shadow-md transition-shadow duration-300"
-                >
-                  <p className="text-sm font-medium text-slate-900">{trait}</p>
+              {introvertTraits.length > 0 ? (
+                introvertTraits.map((trait, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-slate-200 p-4 text-center hover:shadow-md transition-shadow duration-300"
+                  >
+                    <p className="text-sm font-medium text-slate-900">{trait}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-2 text-center py-8 text-slate-600">
+                  Loading introvert traits...
                 </div>
-              ))}
+              )}
             </div>
           </section>
 

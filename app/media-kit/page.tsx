@@ -1,73 +1,27 @@
 import dynamic from 'next/dynamic';
 import { PageTransition } from "@/components/layout";
-import { getMediaKitData, getPageMetadata } from "@/lib/sanity";
+import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
-// Fallback data
-const MOCK_MEDIA_KIT_DATA = {
-  keyMetrics: [
-    { label: 'Total Followers', value: '150K+', change: '+15% YoY' },
-    { label: 'Avg Monthly Views', value: '2.5M', change: '+22% YoY' },
-    { label: 'Engagement Rate', value: '4.8%', change: '+0.5% YoY' },
-    { label: 'Active Subscribers', value: '85K', change: '+18% YoY' }
-  ],
-  platforms: [
-    { name: 'TikTok', handle: '@jonhandle', followers: '120K', avgViews: '2.1M', category: 'Dance Content' },
-    { name: 'Instagram', handle: '@jonhandle', followers: '45K', avgViews: '8K', category: 'Photography & Reels' },
-    { name: 'YouTube', handle: '@jonhandle', followers: '32K', avgViews: '125K', category: 'Long-form & Tutorials' }
-  ],
-  contentCategories: [
-    { name: 'Dance Choreography', percentage: 45, description: 'Original choreography and dance covers' },
-    { name: 'Tutorials', percentage: 25, description: 'Dance tutorials and how-to content' },
-    { name: 'Lifestyle', percentage: 20, description: 'Behind-the-scenes and daily life' },
-    { name: 'Collaborations', percentage: 10, description: 'Collaborations with other creators' }
-  ],
-  audience: {
-    age: [
-      { range: '13-17', percentage: 15 },
-      { range: '18-24', percentage: 45 },
-      { range: '25-34', percentage: 25 },
-      { range: '35+', percentage: 15 }
-    ],
-    gender: [
-      { label: 'Female', percentage: 68 },
-      { label: 'Male', percentage: 28 },
-      { label: 'Other', percentage: 4 }
-    ],
-    locations: [
-      { country: 'United States', percentage: 42 },
-      { country: 'Canada', percentage: 12 },
-      { country: 'United Kingdom', percentage: 10 },
-      { country: 'Australia', percentage: 8 },
-      { country: 'Other', percentage: 28 }
-    ]
-  }
-};
-
 const MOCK_PAGE_METADATA = {
   headline: 'Media Kit',
   subheadline: 'Comprehensive audience data, platform metrics, and collaboration opportunities.'
 };
 
-// Collaboration packages (keeping hardcoded as these are service-specific)
-const COLLABORATION_PACKAGES = [
-  { title: 'Content Integration', price: 'Custom', features: ['Brand integration', 'Custom content', 'Performance report'] },
-  { title: 'Campaign Package', price: 'Premium', features: ['Multi-platform', 'Creative direction', 'Analytics'] },
-  { title: 'Exclusive Partnership', price: 'Enterprise', features: ['Long-term strategy', 'Dedicated support', 'Custom metrics'] }
-];
-
 export default async function MediaKit() {
-  let mediaKitData = MOCK_MEDIA_KIT_DATA;
+  let mediaKitData = {};
   let pageMetadata = MOCK_PAGE_METADATA;
+  let collaborationPackages = [];
 
   try {
-    const [sanityMediaKit, sanityMetadata] = await Promise.all([
+    const [sanityMediaKit, sanityMetadata, packages] = await Promise.all([
       getMediaKitData(),
-      getPageMetadata('mediaKit')
+      getPageMetadata('mediaKit'),
+      getCollaborationPackages()
     ]);
     
     if (sanityMediaKit) {
@@ -76,6 +30,10 @@ export default async function MediaKit() {
     
     if (sanityMetadata) {
       pageMetadata = sanityMetadata;
+    }
+    
+    if (packages?.packages && packages.packages.length > 0) {
+      collaborationPackages = packages.packages;
     }
   } catch (error) {
     console.warn('Failed to fetch media kit from Sanity, using fallback data:', error);
@@ -305,34 +263,36 @@ export default async function MediaKit() {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { title: 'Content Integration', price: 'Custom', features: ['Brand integration', 'Custom content', 'Performance report'] },
-                { title: 'Campaign Package', price: 'Premium', features: ['Multi-platform', 'Creative direction', 'Analytics'] },
-                { title: 'Exclusive Partnership', price: 'Enterprise', features: ['Long-term strategy', 'Dedicated support', 'Custom metrics'] }
-              ].map((pkg, idx) => (
-                <div
-                  key={idx}
-                  className="border border-slate-200 p-8 rounded hover:shadow-md transition-shadow duration-300"
-                >
-                  <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-3">
-                    {pkg.title}
-                  </p>
-                  <p className="text-3xl font-bold text-slate-900 mb-6">
-                    {pkg.price}
-                  </p>
-                  <ul className="space-y-3 mb-8">
-                    {pkg.features.map((feature, fidx) => (
-                      <li key={fidx} className="flex items-center gap-3">
-                        <span className="text-accent font-semibold">✓</span>
-                        <span className="text-sm text-slate-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <button className="w-full border border-slate-200 text-slate-900 font-semibold py-3 px-4 rounded hover:bg-slate-50 transition-colors">
-                    Get Started
-                  </button>
+              {collaborationPackages.length > 0 ? (
+                collaborationPackages.map((pkg, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-slate-200 p-8 rounded hover:shadow-md transition-shadow duration-300"
+                  >
+                    <p className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-3">
+                      {pkg.name}
+                    </p>
+                    <p className="text-3xl font-bold text-slate-900 mb-6">
+                      {pkg.price}
+                    </p>
+                    <ul className="space-y-3 mb-8">
+                      {pkg.features.map((feature, fidx) => (
+                        <li key={fidx} className="flex items-center gap-3">
+                          <span className="text-accent font-semibold">✓</span>
+                          <span className="text-sm text-slate-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className="w-full border border-slate-200 text-slate-900 font-semibold py-3 px-4 rounded hover:bg-slate-50 transition-colors">
+                      Get Started
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center py-8 text-slate-600">
+                  Loading collaboration packages...
                 </div>
-              ))}
+              )}
             </div>
           </section>
 

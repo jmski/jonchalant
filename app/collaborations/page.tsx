@@ -1,7 +1,7 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
-import { getCollaborations, getPageMetadata } from "@/lib/sanity";
+import { getCollaborations, getPageMetadata, getServiceCategories } from "@/lib/sanity";
 
 const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
@@ -51,57 +51,16 @@ const MOCK_PAGE_METADATA = {
   subheadline: 'I\'m open to collaborations that align with The Kinetic Leader mission: helping introverts discover their quiet command, build authentic presence, and lead with confidence.'
 };
 
-const SERVICE_CATEGORIES = [
-  {
-    name: 'Leadership Coaching',
-    items: [
-      'Executive presence development',
-      'Team coaching programs',
-      'Organizational culture shifts',
-      'Customized to your needs',
-      'Measured outcomes & ROI'
-    ]
-  },
-  {
-    name: 'Speaking & Teaching',
-    items: [
-      'Keynote presentations',
-      'Workshop facilitation',
-      'Corporate training programs',
-      'University guest lectures',
-      'Conference presentations'
-    ]
-  },
-  {
-    name: 'Content & Media',
-    items: [
-      'Podcast guest appearances',
-      'Interview features',
-      'Article/blog contributions',
-      'Video content collaboration',
-      'Educational course content'
-    ]
-  },
-  {
-    name: 'Custom Partnerships',
-    items: [
-      'Brand collaborations',
-      'Course development',
-      'Product partnerships',
-      'Affiliate opportunities',
-      'Strategic alliances'
-    ]
-  }
-];
-
 export default async function Collaborations() {
   let collaborations = MOCK_COLLABORATIONS;
   let pageMetadata = MOCK_PAGE_METADATA;
+  let serviceCategories = [];
 
   try {
-    const [sanityCollaborations, sanityMetadata] = await Promise.all([
+    const [sanityCollaborations, sanityMetadata, categories] = await Promise.all([
       getCollaborations(),
-      getPageMetadata('collaborations')
+      getPageMetadata('collaborations'),
+      getServiceCategories()
     ]);
     
     if (sanityCollaborations && sanityCollaborations.length > 0) {
@@ -110,6 +69,10 @@ export default async function Collaborations() {
     
     if (sanityMetadata) {
       pageMetadata = sanityMetadata;
+    }
+    
+    if (categories?.categories && categories.categories.length > 0) {
+      serviceCategories = categories.categories;
     }
   } catch (error) {
     console.warn('Failed to fetch collaborations from Sanity, using fallback data:', error);
@@ -159,21 +122,27 @@ export default async function Collaborations() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {SERVICE_CATEGORIES.map((category, idx) => (
-                <div key={idx} className="border-t-2 border-slate-200 pt-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-6">
-                    {category.name}
-                  </h3>
-                  <ul className="space-y-3">
-                    {category.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <span className="text-slate-900 font-semibold mt-1 shrink-0">✓</span>
-                        <span className="text-slate-700">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+              {serviceCategories.length > 0 ? (
+                serviceCategories.map((category, idx) => (
+                  <div key={idx} className="border-t-2 border-slate-200 pt-8">
+                    <h3 className="text-xl font-semibold text-slate-900 mb-6">
+                      {category.name}
+                    </h3>
+                    <ul className="space-y-3">
+                      {category.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="text-slate-900 font-semibold mt-1 shrink-0">✓</span>
+                          <span className="text-slate-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-2 text-center py-8 text-slate-600">
+                  Loading service categories...
                 </div>
-              ))}
+              )}
             </div>
           </section>
 

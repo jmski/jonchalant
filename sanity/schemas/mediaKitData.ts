@@ -1,94 +1,218 @@
-export default {
+import { defineType, defineField } from 'sanity';
+
+export default defineType({
   name: 'mediaKitData',
   title: 'Media Kit Data',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-      initialValue: 'Media Kit Statistics',
+      initialValue: 'Media Kit',
       readOnly: true,
-    },
-    {
-      name: 'totalFollowers',
-      title: 'Total Followers',
-      type: 'string',
-      description: 'e.g., "150K+"',
-    },
-    {
-      name: 'followerChange',
-      title: 'Follower Change YoY',
-      type: 'string',
-      description: 'e.g., "+15% YoY"',
-    },
-    {
-      name: 'avgMonthlyViews',
-      title: 'Avg Monthly Views',
-      type: 'string',
-      description: 'e.g., "2.5M"',
-    },
-    {
-      name: 'viewsChange',
-      title: 'Views Change YoY',
-      type: 'string',
-      description: 'e.g., "+22% YoY"',
-    },
-    {
-      name: 'engagementRate',
-      title: 'Engagement Rate %',
-      type: 'string',
-      description: 'e.g., "4.8%"',
-    },
-    {
-      name: 'engagementChange',
-      title: 'Engagement Change',
-      type: 'string',
-      description: 'e.g., "+0.5% YoY"',
-    },
-    {
-      name: 'activeSubscribers',
-      title: 'Active Subscribers',
-      type: 'string',
-      description: 'e.g., "85K"',
-    },
-    {
-      name: 'subscriberChange',
-      title: 'Subscriber Change',
-      type: 'string',
-      description: 'e.g., "+18% YoY"',
-    },
-    {
+    }),
+    defineField({
+      name: 'keyMetrics',
+      title: 'Key Metrics',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'metric',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Metric Label',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'value',
+              title: 'Metric Value',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'change',
+              title: 'Year-over-Year Change',
+              type: 'string',
+              description: 'e.g., "+15% YoY"',
+            }),
+            defineField({
+              name: 'order',
+              title: 'Display Order',
+              type: 'number',
+            }),
+          ]
+        }
+      ],
+    }),
+    defineField({
       name: 'platforms',
       title: 'Platform Breakdown',
       type: 'array',
       of: [
         {
           type: 'object',
+          name: 'platform',
           fields: [
-            { name: 'name', type: 'string', title: 'Platform Name' },
-            { name: 'handle', type: 'string', title: 'Handle' },
-            { name: 'followers', type: 'string', title: 'Followers' },
-            { name: 'avgViews', type: 'string', title: 'Avg Views per Post' },
-            { name: 'category', type: 'string', title: 'Content Category' },
+            defineField({
+              name: 'name',
+              title: 'Platform Name',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'handle',
+              title: 'Handle',
+              type: 'string',
+            }),
+            defineField({
+              name: 'followers',
+              title: 'Followers',
+              type: 'string',
+            }),
+            defineField({
+              name: 'avgViews',
+              title: 'Avg Views per Post',
+              type: 'string',
+            }),
+            defineField({
+              name: 'category',
+              title: 'Content Category',
+              type: 'string',
+            }),
+            defineField({
+              name: 'order',
+              title: 'Display Order',
+              type: 'number',
+            }),
           ],
         },
       ],
-    },
-    {
+    }),
+    defineField({
       name: 'contentCategories',
       title: 'Content Category Breakdown',
       type: 'array',
       of: [
         {
           type: 'object',
+          name: 'contentCategory',
           fields: [
-            { name: 'name', type: 'string', title: 'Category Name' },
-            { name: 'percentage', type: 'number', title: 'Percentage' },
-            { name: 'description', type: 'string', title: 'Description' },
+            defineField({
+              name: 'name',
+              title: 'Category Name',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'percentage',
+              title: 'Percentage',
+              type: 'number',
+              validation: (Rule) => Rule.required().min(0).max(100),
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'string',
+            }),
+            defineField({
+              name: 'order',
+              title: 'Display Order',
+              type: 'number',
+            }),
           ],
         },
       ],
-    },
+    }),
+    defineField({
+      name: 'audience',
+      title: 'Audience Demographics',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'age',
+          title: 'Age Distribution',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              name: 'ageGroup',
+              fields: [
+                defineField({
+                  name: 'range',
+                  title: 'Age Range',
+                  type: 'string',
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'percentage',
+                  title: 'Percentage',
+                  type: 'number',
+                  validation: (Rule) => Rule.required().min(0).max(100),
+                }),
+              ]
+            }
+          ],
+        }),
+        defineField({
+          name: 'gender',
+          title: 'Gender Distribution',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              name: 'genderGroup',
+              fields: [
+                defineField({
+                  name: 'label',
+                  title: 'Gender Label',
+                  type: 'string',
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'percentage',
+                  title: 'Percentage',
+                  type: 'number',
+                  validation: (Rule) => Rule.required().min(0).max(100),
+                }),
+              ]
+            }
+          ],
+        }),
+        defineField({
+          name: 'locations',
+          title: 'Geographic Distribution',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              name: 'location',
+              fields: [
+                defineField({
+                  name: 'country',
+                  title: 'Country',
+                  type: 'string',
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'percentage',
+                  title: 'Percentage',
+                  type: 'number',
+                  validation: (Rule) => Rule.required().min(0).max(100),
+                }),
+              ]
+            }
+          ],
+        }),
+      ],
+    }),
   ],
-}
+  preview: {
+    select: {
+      title: 'title',
+    }
+  }
+});
