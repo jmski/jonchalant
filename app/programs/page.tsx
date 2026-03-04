@@ -2,7 +2,9 @@ import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { BlueprintGrid } from "@/components/decorative";
 import dynamic from 'next/dynamic';
+import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
+import { CourseSchema } from "@/lib/schema";
 
 const ProgramCardsSection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.ProgramCardsSection })), {
   loading: () => <div className="py-16 md:py-24">Loading programs...</div>,
@@ -12,8 +14,14 @@ const ProgramCardsSection = dynamic(() => import('@/components/sections').then(m
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Leadership Coaching Programs | Jonchalant",
-  description: "8-12 week executive presence and quiet command coaching for introverts. Build confidence, professional presence, and body-aware leadership."
+  title: "Leadership Coaching Programs | Quiet Command & Executive Presence | Jonchalant",
+  description: "8-12 week programs for building executive presence and quiet command. Body-aware coaching for introverts to develop confidence and professional presence.",
+  keywords: "leadership coaching programs, executive presence training, quiet command coaching, introvert leadership program, professional presence coaching, body-aware leadership",
+  openGraph: {
+    title: "Leadership Coaching Programs | Jonchalant",
+    description: "Transform your professional presence with 8-12 week coaching programs for introverts.",
+    type: "website"
+  }
 };
 
 
@@ -42,6 +50,33 @@ export default async function Programs() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Course Schema - Featured programs */}
+      <Script
+        id="8week-course-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(CourseSchema({
+            name: "8-Week Executive Presence & Quiet Command Program",
+            description: "Transform your professional presence in 8 weeks through body-aware leadership coaching designed for introverts and shy professionals.",
+            price: "1,997",
+            duration: "P8W",
+            level: "Intermediate"
+          })),
+        }}
+      />
+      <Script
+        id="group-workshop-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(CourseSchema({
+            name: "Group Workshop: Building Quiet Command",
+            description: "Interactive group workshop on developing executive presence and professional confidence for introvert leaders.",
+            duration: "P1D",
+            level: "Beginner"
+          })),
+        }}
+      />
+      
       <PageTransition animation="scale">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* HERO SECTION - Enhanced Visual Design */}
@@ -80,28 +115,16 @@ export default async function Programs() {
                 </div>
 
                 {/* Main Headline */}
-                <div className="space-y-4">
-                  <h1 
-                    className="font-headline font-bold leading-tight"
-                    style={{
-                      fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-                      color: 'var(--text-primary)',
-                      letterSpacing: '-0.01em'
-                    }}
-                  >
-                    Your Path to
-                  </h1>
-                  <h2 
-                    className="font-headline font-bold leading-tight"
-                    style={{
-                      fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-                      color: 'var(--accent-primary)',
-                      letterSpacing: '-0.01em'
-                    }}
-                  >
-                    Quiet Command
-                  </h2>
-                </div>
+                <h1 
+                  className="font-headline font-bold leading-tight space-y-0"
+                  style={{
+                    fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                    letterSpacing: '-0.01em'
+                  }}
+                >
+                  <div style={{ color: 'var(--text-primary)' }}>Your Path to</div>
+                  <div style={{ color: 'var(--accent-primary)' }}>Quiet Command</div>
+                </h1>
 
                 {/* Accent underline */}
                 <div 
@@ -202,12 +225,12 @@ export default async function Programs() {
                           {pillar.icon}
                         </div>
                         <div className="flex-1 space-y-2">
-                          <h3 
+                          <h2 
                             className="font-headline font-bold text-lg"
                             style={{ color: 'var(--text-primary)' }}
                           >
                             {pillar.title}
-                          </h3>
+                          </h2>
                           <p 
                             className="text-sm leading-relaxed"
                             style={{ color: 'var(--text-tertiary)' }}

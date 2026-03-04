@@ -86,7 +86,7 @@ export default async function Lessons() {
               <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Structured Learning</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              Social Skill Lessons
+              Master Quiet Command: Leadership Lessons
             </h1>
             <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl">
               Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
