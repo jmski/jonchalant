@@ -199,7 +199,7 @@ Comprehensive step-by-step guide:
 ## Project Structure Updates
 
 ```
-jonchalon/
+jonchalant/
 ├── app/
 │   ├── api/
 │   │   └── inquiries/
@@ -291,7 +291,7 @@ SUPABASE_SERVICE_KEY=eyJ...
 RESEND_API_KEY=re_...
 
 # Contact notification recipient
-NEXT_PUBLIC_CONTACT_EMAIL=jon@jonchalon.com
+NEXT_PUBLIC_CONTACT_EMAIL=jon@jonchalant.com
 ```
 
 ### 3. Create Supabase Database Table

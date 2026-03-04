@@ -1,15 +1,17 @@
-export default {
+import { defineType, defineField } from 'sanity'
+
+export default defineType({
   name: 'collaboration',
   title: 'Collaboration / Service Offering',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Collaboration Title',
       type: 'string',
       validation: (Rule: any) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -17,8 +19,8 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -31,34 +33,34 @@ export default {
           { title: 'Custom Partnerships', value: 'custom' },
         ],
       },
-    },
-    {
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
-    },
-    {
+    }),
+    defineField({
       name: 'price',
       title: 'Price / Pricing Model',
       type: 'string',
       description: 'e.g., "Custom Quote", "$2,000-$5,000 per session"',
-    },
-    {
+    }),
+    defineField({
       name: 'deliverables',
       title: 'Deliverables',
       type: 'array',
       of: [{ type: 'string' }],
-    },
-    {
+    }),
+    defineField({
       name: 'timelineWeeks',
       title: 'Typical Timeline (weeks)',
       type: 'number',
-    },
-    {
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-    },
+    }),
   ],
   preview: {
     select: {
@@ -72,4 +74,4 @@ export default {
       }
     },
   },
-}
+})

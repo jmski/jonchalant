@@ -483,20 +483,20 @@ const CONTACT_INFO = {
   contactMethods: [
     {
       label: "Email",
-      value: "jon@jonchalon.com",
-      href: "mailto:jon@jonchalon.com",
+      value: "jon@jonchalant.com",
+      href: "mailto:jon@jonchalant.com",
       order: 0,
     },
     {
       label: "Instagram",
-      value: "@jonchalon",
-      href: "https://instagram.com/jonchalon",
+      value: "@jonchalant",
+      href: "https://instagram.com/jonchalant",
       order: 1,
     },
     {
       label: "TikTok",
-      value: "@jonchalon",
-      href: "https://tiktok.com/@jonchalon",
+      value: "@jonchalant",
+      href: "https://tiktok.com/@jonchalant"
       order: 2,
     },
   ],

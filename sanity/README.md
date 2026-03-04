@@ -8,7 +8,7 @@ This Sanity Studio integration allows Jon to manage all portfolio, services, col
 
 1. Visit https://sanity.io and sign up (or use existing Google account)
 2. Create a new project:
-   - **Project Name**: jonchalon
+   - **Project Name**: jonchalant
    - **Dataset Name**: production
    - **Plan**: Free tier works fine initially
 3. Note your **Project ID** from the project settings

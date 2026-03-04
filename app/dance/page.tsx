@@ -1,8 +1,14 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { FluidShape } from "@/components/decorative";
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
+
+export const metadata: Metadata = {
+  title: "Dance Choreography Portfolio | Jonchalant",
+  description: "Professional choreography portfolio featuring 30+ hip-hop, contemporary, and freestyle videos. Discover original choreography and performance work by Jon.",
+};
 
 // Below-fold dynamic import
 const DanceFilter = dynamic(() => import('@/components/content').then(mod => ({ default: mod.DanceFilter })), {
@@ -21,11 +27,6 @@ const FeaturedVideoHero = dynamic(() => import('@/components/sections').then(mod
 });
 
 import { DANCE_FILTER_CATEGORIES } from "@/lib/pageContent";
-
-export const metadata = {
-  title: "Dance Portfolio | The Kinetic Leader",
-  description: "Dance choreography, freestyle performances, and movement artistry"
-};
 
 export default async function Dance() {
   let dancePortfolio: any[] = [];

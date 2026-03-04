@@ -1,10 +1,16 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
 import { Marquee } from '@/components/effects';
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
 
-const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+export const metadata: Metadata = {
+  title: "Executive Presence Coaching | Jonchalant",
+  description: "Leadership coaching for introverts. Build executive presence and quiet command through dance-based movement coaching. Transform your confidence in 8-12 weeks.",
+};
+
+const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
@@ -37,8 +43,11 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <PageTransition animation="fade">
+    <div className="bg-white">
+      <PageTransition animation="fade" className="-mt-6 lg:-mt-16">
+        {/* HERO SECTION */}
+        <HomeHero />
+
         {/* MARQUEE BANNER */}
         <Marquee
           items={[
@@ -50,9 +59,6 @@ export default async function Home() {
           speed={30}
           className="bg-slate-900 text-white py-3 sm:py-4 text-sm sm:text-base font-semibold"
         />
-
-        {/* HERO SECTION */}
-        <HomeHero />
 
         {/* KEY STATS SECTION */}
         <section className="bg-slate-50 py-12 sm:py-16">

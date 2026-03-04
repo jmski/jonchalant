@@ -147,7 +147,7 @@ export default function Contact() {
                         Response Time
                       </h3>
                       <p className="text-slate-700 leading-relaxed">
-                        I respond to all inquiries within 48 hours. For time-sensitive matters, reach out directly via <a href="mailto:contact@jonchalon.com" className="font-semibold text-accent hover:underline">email</a> or <a href="https://instagram.com/jonchalon" className="font-semibold text-accent hover:underline">Instagram DM</a>.
+                        I respond to all inquiries within 48 hours. For time-sensitive matters, reach out directly via <a href="mailto:contact@jonchalant.com" className="font-semibold text-accent hover:underline">email</a> or <a href="https://instagram.com/sojonchalant" className="font-semibold text-accent">Instagram DM</a>.
                       </p>
                     </div>
                   </div>

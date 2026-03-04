@@ -157,7 +157,7 @@ Run with: `npm run migrate:data`
 ## Project Structure
 
 ```
-jonchalon/
+jonchalant/
 ├── sanity/                          # Sanity CMS folder
 │   ├── schemas/                     # Content type definitions
 │   │   ├── portfolio.ts

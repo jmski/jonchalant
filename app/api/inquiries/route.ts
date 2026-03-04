@@ -112,13 +112,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Define contact email address
-    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "jon@jonchalon.com";
+    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@jonchalant.com";
 
     // --- Send confirmation email to visitor ---
     if (resend) {
       try {
         await resend.emails.send({
-          from: "The Kinetic Leader <no-reply@jonchalon.dev>",
+          from: "Jonchalant <no-reply@jonchalant.com>",
           to: email,
           subject: `We Received Your ${inquiry_type.charAt(0).toUpperCase() + inquiry_type.slice(1)} Inquiry`,
           html: `
@@ -131,10 +131,10 @@ export async function POST(request: NextRequest) {
                 <p style="margin: 8px 0;"><strong>Received:</strong> ${new Date().toLocaleDateString()}</p>
               </div>
               
-              <p>In the meantime, feel free to explore more about my services at <a href="https://jonchalon.com" style="color: #2563eb;">jonchalon.com</a></p>
+              <p>In the meantime, feel free to explore more about my services at <a href="https://jonchalant.com" style="color: #2563eb;">jonchalant.com</a></p>
               
               <p style="margin-top: 30px;">Looking forward to connecting!</p>
-              <p>— <strong>Jon Chalon</strong><br>The Kinetic Leader</p>
+              <p>— <strong>Jonchalant</strong><br>The Kinetic Leader</p>
               
               <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
               <p style="font-size: 12px; color: #6b7280;">
@@ -189,7 +189,7 @@ export async function POST(request: NextRequest) {
         `;
 
         await resend.emails.send({
-          from: "The Kinetic Leader <no-reply@jonchalon.dev>",
+          from: "Jonchalant <no-reply@jonchalant.com>",
           to: contactEmail,
           subject: `[New] ${inquiryTypeLabel}`,
           html: `

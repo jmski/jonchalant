@@ -3,9 +3,11 @@ import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { getLessons } from "@/lib/sanity";
 
-export const metadata = {
-  title: "Lessons | The Kinetic Leader",
-  description: "Social skill lessons, communication frameworks, and presence master classes for introverts"
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Leadership Lessons & Coaching | Jonchalant",
+  description: "Master quiet command, executive presence, and body-aware leadership through evidence-based lessons and communication frameworks for introverts."
 };
 
 export default async function Lessons() {

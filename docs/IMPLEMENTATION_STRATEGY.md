@@ -1,4 +1,4 @@
-# Implementation Strategy: jonchalon Website Optimization
+# Implementation Strategy: jonchalant Website Optimization
 
 ## Phase-by-Phase Execution Plan
 
@@ -92,7 +92,7 @@ npm install -g @sanity/cli
 sanity init
 
 # Follow prompts:
-# - Project name: "jonchalon"
+# - Project name: "jonchalant"
 # - Dataset: "production"
 # - Default config: Yes
 # - Template: "Clean"
@@ -604,14 +604,14 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to visitor
     await resend.emails.send({
-      from: "noreply@jonchalon.com",
+      from: "noreply@jonchalant.com",
       to: email,
       subject: "We received your inquiry - The Kinetic Leader",
       html: `
         <h2>Hi ${name},</h2>
         <p>Thanks for reaching out! I've received your message and will get back to you within 24 hours.</p>
         <p><strong>Inquiry Type</strong>: ${inquiry_type}</p>
-        <p>In the meantime, you can explore more about my services at <a href="https://jonchalon.com">jonchalon.com</a></p>
+        <p>In the meantime, you can explore more about my services at <a href="https://jonchalant.com">jonchalant.com</a></p>
         <p>Looking forward to connecting!</p>
         <p>— Jon</p>
       `,
@@ -619,8 +619,8 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to Jon
     await resend.emails.send({
-      from: "noreply@jonchalon.com",
-      to: "jon@jonchalon.com",
+      from: "noreply@jonchalant.com",
+      to: "jon@jonchalant.com",
       subject: `New Inquiry: ${inquiry_type.charAt(0).toUpperCase() + inquiry_type.slice(1)}`,
       html: `
         <h3>New Inquiry Received</h3>
@@ -1048,7 +1048,7 @@ Optimize page metadata, fix heading hierarchy, improve keyword positioning, and 
 ## Tertiary Keywords (Branded/Content)
 
 - The Kinetic Leader
-- Jon Chalon
+- Jonchalant
 - Dance choreography
 - Movement coaching
 
@@ -1068,7 +1068,7 @@ Optimize page metadata, fix heading hierarchy, improve keyword positioning, and 
 
 ```typescript
 export const metadata: Metadata = {
-  title: "The Kinetic Leader | Leadership Coaching for Introverts | Jon Chalon",
+  title: "The Kinetic Leader | Leadership Coaching for Introverts | Jonchalant",
   description:
     "Build executive presence and quiet command. Dance-based leadership coaching for introverts. Transform your confidence without changing who you are.",
   keywords: [
@@ -1096,7 +1096,7 @@ export const metadata: Metadata = {
 ```typescript
 export const metadata: Metadata = {
   title:
-    "Dance Choreography Portfolio | Hip-Hop, Contemporary & Freestyle | Jon Chalon",
+    "Dance Choreography Portfolio | Hip-Hop, Contemporary & Freestyle | Jonchalant",
   description:
     "Professional choreography portfolio: 30+ videos including original choreography, freestyle performances, and contemporary pieces. Watch dance videos and book collaborations.",
 };
@@ -1172,12 +1172,12 @@ export function getPersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Jon Chalon",
-    url: "https://jonchalon.com",
+    name: "Jonchalant",
+    url: "https://jonchalant.com",
     sameAs: [
-      "https://instagram.com/jonchalon",
-      "https://tiktok.com/@jonchalon",
-      "https://youtube.com/@jonchalon",
+      "https://instagram.com/jonchalant",
+      "https://tiktok.com/@jonchalant",
+      "https://youtube.com/@jonchalant",
     ],
     jobTitle: "Leadership Coach & Choreographer",
     knowsAbout: [
@@ -1195,13 +1195,13 @@ export function getLocalBusinessSchema() {
     "@type": "LocalBusiness",
     name: "The Kinetic Leader",
     description: "Leadership coaching for introverts",
-    url: "https://jonchalon.com",
+    url: "https://jonchalant.com",
     areaServed: ["US", "NYC", "Remote"],
     telephone: "+1-XXX-XXX-XXXX",
-    email: "contact@jonchalon.com",
+    email: "contact@jonchalant.com",
     sameAs: [
-      "https://instagram.com/jonchalon",
-      "https://tiktok.com/@jonchalon",
+      "https://instagram.com/jonchalant",
+      "https://tiktok.com/@jonchalant",
     ],
   };
 }
@@ -1322,11 +1322,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Kinetic Leader | Leadership Coaching",
     description: "Build executive presence and quiet command.",
-    url: "https://jonchalon.com",
+    url: "https://jonchalant.com",
     siteName: "The Kinetic Leader",
     images: [
       {
-        url: "https://jonchalon.com/og-image.jpg",
+        url: "https://jonchalant.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "The Kinetic Leader - Leadership Coaching",
@@ -1338,8 +1338,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Kinetic Leader",
     description: "Executive presence coaching for introverts",
-    images: ["https://jonchalon.com/twitter-image.jpg"],
-    creator: "@jonchalon",
+    images: ["https://jonchalant.com/twitter-image.jpg"],
+    creator: "@jonchalant",
   },
 };
 ```

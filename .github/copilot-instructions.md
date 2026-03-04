@@ -310,4 +310,4 @@ For professional contexts, light mode may be preferred (easier to read portfolio
 - **Responsive testing**: Mobile-first; test `sm:`, `md:`, `lg:` breakpoints for all gallery/video sections
 - **Professional checks**: Verify no decorative fonts, minimal animations, clean whitespace, consistent brand colors
 - **Debugging**: Layout issues → inspect grid/gaps; type errors → `npm run lint`; video not loading → check embed URL</content>
-  <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalon/.github/copilot-instructions.md
+  <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md

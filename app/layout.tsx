@@ -4,8 +4,19 @@ import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
 
 export const metadata: Metadata = {
-  title: "Jon | Choreographer & Content Creator",
-  description: "Professional brand hub showcasing dance portfolio, hobby content, and collaboration opportunities",
+  title: "Jonchalant | Leadership Coaching & Dance Choreography",
+  description: "Body-led leadership coaching for introverts. Build executive presence, quiet command, and professional confidence through movement-based coaching and choreography.",
+  openGraph: {
+    title: "Jonchalant | Leadership Coaching & Choreography",
+    description: "Transform your presence and confidence through body-aware leadership coaching.",
+    url: "https://jonchalant.com",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jonchalant | Leadership Coaching",
+    description: "Body-led leadership for introverts",
+  },
 };
 
 export default function RootLayout({
