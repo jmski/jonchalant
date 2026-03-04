@@ -98,8 +98,8 @@ export default async function Programs() {
       
       <PageTransition animation="scale">
         {/* HERO SECTION */}
-        <div className="programs-section-wrapper programs-section-hero">
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
           {/* HERO SECTION - Enhanced Visual Design */}
           <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
             {/* Background decorative elements */}
@@ -305,12 +305,12 @@ export default async function Programs() {
                 <p className="text-lg text-slate-700 max-w-2xl mx-auto">
                   Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
                 </p>
-                <Link 
+                <TextLink 
                   href="/lessons" 
-                  className="inline-block mt-4 px-6 py-3 bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"
+                  className="programs-cta-button"
                 >
                   Explore Leadership Lessons →
-                </Link>
+                </TextLink>
               </div>
             </section>
           </main>

@@ -44,3 +44,22 @@
 .programs-section-cta {
   background-color: var(--bg-tertiary);
 }
+
+/* Button Styling - Used for primary action links */
+.programs-cta-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+}
+
+.programs-cta-button:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-primary);
+}

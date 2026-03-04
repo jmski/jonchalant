@@ -9,7 +9,9 @@
   color: var(--accent-primary);
   text-decoration: none;
   font-weight: 500;
-  transition: color var(--transition-fast), text-decoration var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    text-decoration var(--transition-fast);
   cursor: pointer;
 }
 

@@ -13,15 +13,11 @@ export default function MyPage() {
     <div className="my-page-main">
       <PageTransition animation="blur">
         <SectionWrapper variant="primary">
-          <SectionContent>
-            {/* Section 1 content */}
-          </SectionContent>
+          <SectionContent>{/* Section 1 content */}</SectionContent>
         </SectionWrapper>
 
         <SectionWrapper variant="secondary">
-          <SectionContent>
-            {/* Section 2 content */}
-          </SectionContent>
+          <SectionContent>{/* Section 2 content */}</SectionContent>
         </SectionWrapper>
 
         <SectionWrapper variant="tertiary">
@@ -150,6 +146,7 @@ var(--leading-editorial) /* 1.9 */
 ## Common Patterns
 
 ### Full-Width Section with Alternating Background
+
 ```tsx
 <SectionWrapper variant="primary">
   <SectionContent>
@@ -160,12 +157,13 @@ var(--leading-editorial) /* 1.9 */
 ```
 
 ### Grid of Cards
+
 ```tsx
 <SectionWrapper variant="secondary">
   <SectionContent>
     <h2>Cards Section</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {items.map(item => (
+      {items.map((item) => (
         <Card key={item.id} hoverable={true}>
           <h3>{item.title}</h3>
           <p>{item.description}</p>
@@ -177,6 +175,7 @@ var(--leading-editorial) /* 1.9 */
 ```
 
 ### Hero Section
+
 ```tsx
 <SectionWrapper variant="primary">
   <SectionContent>
@@ -192,6 +191,7 @@ var(--leading-editorial) /* 1.9 */
 ```
 
 ### CTA Section (Bottom of Page)
+
 ```tsx
 <SectionWrapper variant="tertiary">
   <SectionContent>
@@ -209,9 +209,9 @@ var(--leading-editorial) /* 1.9 */
 
 - [ ] Update imports (remove Link, add SectionWrapper, SectionContent, TextLink)
 - [ ] Replace all `<Link>` with `<TextLink>`
-- [ ] Remove all manual `max-w-6xl mx-auto px-4...` divs  
+- [ ] Remove all manual `max-w-6xl mx-auto px-4...` divs
 - [ ] Replace with `<SectionWrapper>` + `<SectionContent>`
-- [ ] Remove all Tailwind color classes (text-slate-*, bg-slate-*, etc.)
+- [ ] Remove all Tailwind color classes (text-slate-_, bg-slate-_, etc.)
 - [ ] Replace with CSS variables (var(--text-primary), etc.)
 - [ ] Simplify page CSS file (remove section-wrapper duplicates)
 - [ ] Add page-specific CSS classes only
@@ -240,6 +240,7 @@ Each page has one CSS file at `/app/css/[page].css`:
 ```
 
 Don't include:
+
 - ❌ `max-width` settings (handled by SectionContent)
 - ❌ `margin: 0 auto` centering (handled by SectionContent)
 - ❌ Full-width background tricks (handled by SectionWrapper)
@@ -249,10 +250,14 @@ Don't include:
 
 ```tsx
 // For all refactored pages, copy these imports:
-import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import {
+  PageTransition,
+  SectionWrapper,
+  SectionContent,
+} from "@/components/layout";
 import { TextLink } from "@/components/typography";
 import { CTASection } from "@/components/sections";
-import '@/app/css/your-page.css';
+import "@/app/css/your-page.css";
 
 // Remove these:
 // import Link from 'next/link';
@@ -261,19 +266,20 @@ import '@/app/css/your-page.css';
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Section background not full-width | Make sure using `<SectionWrapper>`, not a div |
-| Colors wrong | Check you're using `var(--color-name)`, not Tailwind |
-| Text chopped off on mobile | Check SectionContent responsive padding at breakpoints |
-| Links don't look right | Switch to `<TextLink>` component |
-| Excessive padding on desktop | That's intentional - ma (space) principle |
-| Sidebar covering content | Check SectionWrapper width calculation includes sidebar |
-| Hard to maintain styles | Move Tailwind utilities to semantic CSS classes |
+| Issue                             | Solution                                                |
+| --------------------------------- | ------------------------------------------------------- |
+| Section background not full-width | Make sure using `<SectionWrapper>`, not a div           |
+| Colors wrong                      | Check you're using `var(--color-name)`, not Tailwind    |
+| Text chopped off on mobile        | Check SectionContent responsive padding at breakpoints  |
+| Links don't look right            | Switch to `<TextLink>` component                        |
+| Excessive padding on desktop      | That's intentional - ma (space) principle               |
+| Sidebar covering content          | Check SectionWrapper width calculation includes sidebar |
+| Hard to maintain styles           | Move Tailwind utilities to semantic CSS classes         |
 
 ## Examples of Completed Pages
 
 Refer to these for reference implementations:
+
 - ✅ `/app/about/page.tsx` - Multiple section types
 - ✅ `/app/blog/page.tsx` - Featured + List sections
 - ✅ `/app/dance/page.tsx` - Portfolio + Approach sections

@@ -3,6 +3,7 @@
 ## Overview
 
 All pages and components have been refactored to:
+
 1. **Use reusable React components** instead of manual div structures
 2. **Eliminate Tailwind color utilities** in favor of CSS variables
 3. **Follow a consistent pattern** for section layouts and styling
@@ -10,6 +11,7 @@ All pages and components have been refactored to:
 ## Key Components
 
 ### SectionWrapper
+
 Provides full-width background sections with proper responsive padding that accounts for the 250px fixed sidebar.
 
 ```tsx
@@ -21,38 +23,41 @@ import { SectionWrapper } from "@/components/layout";
 ```
 
 **Variants:**
+
 - `primary` - Uses `--bg-primary` (rice paper color)
 - `secondary` - Uses `--bg-secondary` (slightly warmer)
 - `tertiary` - Uses `--bg-tertiary` (warm sand accent)
 
 **Features:**
+
 - Automatic responsive padding (4rem → 6rem → 6rem)
 - Full-width background that extends beyond content
 - Proper sidebar-aware width calculations
 
 ### SectionContent
+
 Inner content container that constrains width and provides responsive padding.
 
 ```tsx
 import { SectionContent } from "@/components/layout";
 
 <SectionWrapper variant="primary">
-  <SectionContent>
-    {/* Your content here */}
-  </SectionContent>
-</SectionWrapper>
+  <SectionContent>{/* Your content here */}</SectionContent>
+</SectionWrapper>;
 ```
 
 ### TextLink
+
 Replaces `<Link>` from Next.js, using CSS variables for colors instead of Tailwind utilities.
 
 ```tsx
 import { TextLink } from "@/components/typography";
 
-<TextLink href="/path">Link text</TextLink>
+<TextLink href="/path">Link text</TextLink>;
 ```
 
 ### HeroSection
+
 Provides consistent hero heading styling.
 
 ```tsx
@@ -64,21 +69,21 @@ import { HeroSection } from "@/components/sections";
   description="Optional description"
 >
   {/* Optional children */}
-</HeroSection>
+</HeroSection>;
 ```
 
 ### Card
+
 Reusable card component with optional hover effects.
 
 ```tsx
 import { Card } from "@/components/layout";
 
-<Card hoverable={true}>
-  {/* Card content */}
-</Card>
+<Card hoverable={true}>{/* Card content */}</Card>;
 ```
 
 ### Grid
+
 Responsive grid layout component.
 
 ```tsx
@@ -86,7 +91,7 @@ import { Grid } from "@/components/layout";
 
 <Grid columns={3} gap="md">
   {/* Grid items */}
-</Grid>
+</Grid>;
 ```
 
 ## CSS Variables System
@@ -94,6 +99,7 @@ import { Grid } from "@/components/layout";
 All styling uses CSS custom properties defined in `/app/css/variables.css`:
 
 ### Colors
+
 - `--bg-primary` - Main background (rice paper)
 - `--bg-secondary` - Secondary backgrounds
 - `--bg-tertiary` - Tertiary/accent backgrounds
@@ -106,10 +112,12 @@ All styling uses CSS custom properties defined in `/app/css/variables.css`:
 - `--accent-hover` - Hover state for accents
 
 ### Spacing
+
 - `--spacing-xs` through `--spacing-3xl` - Consistent spacing scale
 - `--section-padding-*` - Pre-configured section padding
 
 ### Typography
+
 - `--font-headline` - Serif font for headings (Cormorant Garamond)
 - `--font-body` - Sans-serif for body (Inter)
 - `--leading-*` - Line height presets
@@ -117,6 +125,7 @@ All styling uses CSS custom properties defined in `/app/css/variables.css`:
 ## Replacing Tailwind Color Classes
 
 ### Before (Old Pattern)
+
 ```tsx
 <p className="text-slate-700 mb-4">Description</p>
 <Link href="/path" className="font-semibold text-slate-900 hover:text-accent">
@@ -125,6 +134,7 @@ All styling uses CSS custom properties defined in `/app/css/variables.css`:
 ```
 
 ### After (New Pattern)
+
 ```tsx
 <p style={{color: 'var(--text-secondary)', marginBottom: '1rem'}}>
   Description
@@ -140,6 +150,7 @@ All styling uses CSS custom properties defined in `/app/css/variables.css`:
 For each page, follow this pattern:
 
 1. **Update Imports**
+
    ```tsx
    import { SectionWrapper, SectionContent } from "@/components/layout";
    import { TextLink } from "@/components/typography";
@@ -148,6 +159,7 @@ For each page, follow this pattern:
    ```
 
 2. **Replace Manual Section Wrappers**
+
    ```tsx
    // Before
    <div className="page-section-wrapper page-section-header">
@@ -165,6 +177,7 @@ For each page, follow this pattern:
    ```
 
 3. **Replace Link Components**
+
    ```tsx
    // Before
    <Link href="/path" className="text-slate-900">Link</Link>
@@ -181,6 +194,7 @@ For each page, follow this pattern:
 
 5. **Simplify CSS Files**
    Remove duplicate section wrapper styles now handled by SectionWrapper component:
+
    ```css
    /* Remove these - now in section-wrapper.css */
    .page-section-wrapper {
@@ -188,7 +202,7 @@ For each page, follow this pattern:
      margin-left: -2rem;
      /* ... etc */
    }
-   
+
    /* Keep only page-specific styles */
    .page-specific-element {
      /* your custom styles */
@@ -198,16 +212,19 @@ For each page, follow this pattern:
 ## Completed Refactors
 
 ✅ **About Page** (`/app/about/page.tsx`)
+
 - Uses SectionWrapper for all sections
 - Replaced Link with TextLink
 - Simplified /app/css/about.css
 
 ✅ **Blog Page** (`/app/blog/page.tsx`)
+
 - Uses SectionWrapper for header, featured, all, cta sections
 - Replaced Link with TextLink
 - Simplified /app/css/blog.css
 
 ✅ **Dance Page** (`/app/dance/page.tsx`)
+
 - Uses SectionWrapper for all sections
 - Replaced Link with TextLink
 - Updated /app/css/dance.css with approach section styles
@@ -215,25 +232,30 @@ For each page, follow this pattern:
 ## Pages Needing Refactoring
 
 ⚠️ **Programs Page** (`/app/programs/page.tsx`)
+
 - Large complex layout with inline styles
 - Multiple decorative elements
 - Strategy: Break into smaller sections, use SectionWrapper
 
 ⚠️ **Lessons Page** (`/app/lessons/page.tsx`)
+
 - Multiple lesson categories
 - Strategy: Use SectionWrapper with nested Grid components
 
 ⚠️ **Media Kit Page** (`/app/media-kit/page.tsx`)
+
 - Complex layout with multiple data sections
 - Strategy: Use SectionWrapper for each section
 
 ⚠️ **Contact Page** (`/app/contact/page.tsx`)
+
 - Form-heavy layout
 - Suggestion: Create reusable FormSection component
 
 ## Best Practices
 
 ### Color Usage
+
 ```tsx
 // ✅ Good - Uses CSS variables
 <div style={{color: 'var(--text-primary)'}}>Text</div>
@@ -247,6 +269,7 @@ For each page, follow this pattern:
 ```
 
 ### Spacing
+
 ```tsx
 // ✅ Good - Uses CSS values
 <div style={{padding: '1rem', marginBottom: '1.5rem'}}>
@@ -258,6 +281,7 @@ For each page, follow this pattern:
 ```
 
 ### Links
+
 ```tsx
 // ✅ Good
 <TextLink href="/path">Link text</TextLink>
@@ -277,6 +301,7 @@ All components are exported from their respective index files:
 - `/components/sections/index.ts` - HeroSection, CTASection, etc.
 
 This allows clean imports:
+
 ```tsx
 import { SectionWrapper, SectionContent } from "@/components/layout";
 import { TextLink, Heading } from "@/components/typography";
@@ -288,15 +313,19 @@ import { HeroSection, CTASection } from "@/components/sections";
 For new pages, follow this template:
 
 ```tsx
-import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import {
+  PageTransition,
+  SectionWrapper,
+  SectionContent,
+} from "@/components/layout";
 import { HeroSection, CTASection } from "@/components/sections";
 import { TextLink } from "@/components/typography";
-import type { Metadata } from 'next';
-import '@/app/css/your-page.css';
+import type { Metadata } from "next";
+import "@/app/css/your-page.css";
 
 export const metadata: Metadata = {
-  title: 'Page Title',
-  description: 'Page description',
+  title: "Page Title",
+  description: "Page description",
 };
 
 export default function YourPage() {
@@ -315,9 +344,7 @@ export default function YourPage() {
 
         {/* Content Sections */}
         <SectionWrapper variant="secondary">
-          <SectionContent>
-            {/* Your content */}
-          </SectionContent>
+          <SectionContent>{/* Your content */}</SectionContent>
         </SectionWrapper>
 
         {/* CTA Section */}
@@ -338,6 +365,7 @@ export default function YourPage() {
 ```
 
 And in your page-specific CSS file:
+
 ```css
 /* /app/css/your-page.css */
 
@@ -356,16 +384,19 @@ And in your page-specific CSS file:
 ## Troubleshooting
 
 ### Colors not applying
+
 - Check that CSS variables are defined in `/app/css/variables.css`
 - Verify you're using `var(--variable-name)` syntax
 - Don't use Tailwind color classes
 
 ### Section backgrounds not full-width
+
 - Make sure you're using `<SectionWrapper>` component
 - Check that `<SectionContent>` is inside `<SectionWrapper>`
 - Don't use `max-w-6xl mx-auto` directly
 
 ### Links not styled correctly
+
 - Use `<TextLink>` instead of `<Link>`
 - TextLink automatically uses CSS variables for colors
 - Add custom className only if needed for specific styling
@@ -373,6 +404,7 @@ And in your page-specific CSS file:
 ## Testing Responsive Design
 
 Test all refactored pages at:
+
 - Mobile: 320px, 375px, 412px
 - Tablet: 640px, 768px
 - Desktop: 1024px, 1280px, 1536px
