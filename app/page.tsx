@@ -13,32 +13,8 @@ const CollaborationForm = dynamic(() => import('@/components/forms').then(mod =>
   ssr: true
 });
 
-// Fallback home content
-const MOCK_HOME_CONTENT = {
-  stats: [
-    { label: 'Coaching Clients Transformed', value: '100+' },
-    { label: 'Brand Collaborations', value: '30+' },
-    { label: 'Years in Creative Direction', value: '8+' },
-  ],
-  impactSectionHeadline: 'Where I Create Impact',
-  featuredMainTitle: 'Dance & Movement Direction',
-  featuredMainDescription: 'Choreography, performance, and creative direction for brands and artists. I blend precision with expression—creating movement that communicates and inspires.',
-  sidebarFeatures: [
-    {
-      title: 'Leadership Coaching',
-      description: 'Transform your presence and command rooms with quiet authority.'
-    },
-    {
-      title: 'Brand Partnerships',
-      description: 'Collaborate on campaigns that move audiences.'
-    }
-  ],
-  servicesHeadline: 'Services & Offerings',
-  servicesDescription: 'Comprehensive solutions tailored to help you move better, lead stronger, and collaborate smarter.'
-};
-
 export default async function Home() {
-  let homeContent = MOCK_HOME_CONTENT;
+  let homeContent = null;
   let services = [];
 
   try {
@@ -68,7 +44,7 @@ export default async function Home() {
         <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {(homeContent?.stats || MOCK_HOME_CONTENT.stats).map((stat: any, idx: number) => (
+              {homeContent?.stats?.map((stat: any, idx: number) => (
                 <div key={idx} className="space-y-3 text-center md:text-left">
                   <div className="text-4xl sm:text-5xl font-bold text-slate-900">
                     {stat.value}
@@ -87,7 +63,7 @@ export default async function Home() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
-                {homeContent?.impactSectionHeadline || MOCK_HOME_CONTENT.impactSectionHeadline}
+                {homeContent?.impactSectionHeadline}
               </h2>
             </div>
 
@@ -96,16 +72,16 @@ export default async function Home() {
               <div className="lg:col-span-2 space-y-6">
                 <div className="aspect-video rounded-lg bg-slate-100 border border-slate-200" />
                 <h3 className="text-2xl font-bold text-slate-900">
-                  {homeContent?.featuredMainTitle || MOCK_HOME_CONTENT.featuredMainTitle}
+                  {homeContent?.featuredMainTitle}
                 </h3>
                 <p className="text-lg text-slate-700 leading-relaxed">
-                  {homeContent?.featuredMainDescription || MOCK_HOME_CONTENT.featuredMainDescription}
+                  {homeContent?.featuredMainDescription}
                 </p>
               </div>
 
               {/* Sidebar features */}
               <div className="space-y-8">
-                {(homeContent?.sidebarFeatures || MOCK_HOME_CONTENT.sidebarFeatures).map((feature: any, idx: number) => (
+                {homeContent?.sidebarFeatures?.map((feature: any, idx: number) => (
                   <div key={idx}>
                     <div className="space-y-3">
                       <h4 className="text-lg font-bold text-slate-900">
@@ -115,7 +91,7 @@ export default async function Home() {
                         {feature.description}
                       </p>
                     </div>
-                    {idx < (homeContent?.sidebarFeatures || MOCK_HOME_CONTENT.sidebarFeatures).length - 1 && (
+                    {idx < (homeContent?.sidebarFeatures?.length || 0) - 1 && (
                       <div className="h-px bg-slate-200 mt-8" />
                     )}
                   </div>
@@ -130,10 +106,10 @@ export default async function Home() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                {homeContent?.servicesHeadline || MOCK_HOME_CONTENT.servicesHeadline}
+                {homeContent?.servicesHeadline}
               </h2>
               <p className="text-lg text-slate-700 max-w-2xl">
-                {homeContent?.servicesDescription || MOCK_HOME_CONTENT.servicesDescription}
+                {homeContent?.servicesDescription}
               </p>
             </div>
 

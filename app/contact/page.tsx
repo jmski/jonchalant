@@ -78,14 +78,6 @@ export default function Contact() {
     }, 3000);
   };
 
-  const getMethodDescription = (label: string) => {
-    const descriptions: Record<string, string> = {
-      'Email': 'Send me a detailed message about your project or inquiry.',
-      'Instagram': 'Follow for dance content, behind-the-scenes, and announcements.',
-      'TikTok': 'Short-form dance videos, challenges, and creative experiments.',
-    };
-    return descriptions[label] || '';
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -153,7 +145,7 @@ export default function Contact() {
                           {method.value}
                         </p>
                         <p className="text-sm text-slate-600 leading-relaxed">
-                          {getMethodDescription(method.label)}
+                          {method.description || 'Connect with me on this platform.'}
                         </p>
                       </div>
                       

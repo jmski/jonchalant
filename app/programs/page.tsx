@@ -3,7 +3,7 @@ import { PageTransition } from "@/components/layout";
 import { BlueprintGrid } from "@/components/decorative";
 import dynamic from 'next/dynamic';
 import ProgramCardsSection from '@/components/sections/ProgramCardsSection';
-import { getPrograms } from "@/lib/sanity";
+import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
 
 const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
@@ -109,26 +109,9 @@ const PROGRAMS = [
   }
 ];
 
-const PROGRAM_FOCUS = [
-  {
-    title: 'Physical Grounding',
-    description: 'Master posture, positioning, and body language. Learn how your physical presence shapes perception and authority.',
-    icon: '🧭'
-  },
-  {
-    title: 'Social Scripting',
-    description: 'Professional communication frameworks, conversation mechanics, and relationship-building strategies tailored for introverts.',
-    icon: '🔗'
-  },
-  {
-    title: 'Energy Mastery',
-    description: 'Strategic activation and recovery. Lead from strength without burnout. Manage your energy like a professional athlete.',
-    icon: '⚡'
-  }
-];
-
 export default async function Programs() {
   let programCards = PROGRAMS;
+  let focusItems: { title: string; description: string; icon: string }[] = [];
 
   try {
     const sanityPrograms = await getPrograms();
@@ -138,6 +121,16 @@ export default async function Programs() {
   } catch (error) {
     console.warn('Failed to fetch programs from Sanity, using fallback data:', error);
     // Falls back to PROGRAMS if Sanity fails
+  }
+
+  try {
+    const programsPageContent = await getProgramsFocusItems();
+    if (programsPageContent?.programFocusItems && programsPageContent.programFocusItems.length > 0) {
+      focusItems = programsPageContent.programFocusItems;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch program focus items from Sanity, using fallback:', error);
+    // Will render empty if Sanity fails
   }
 
   return (
@@ -283,40 +276,46 @@ export default async function Programs() {
                     transform: translateY(-4px);
                   }
                 `}</style>
-                {PROGRAM_FOCUS.map((pillar, idx) => (
-                  <div
-                    key={idx}
-                    className="pillar-card p-6 sm:p-8 rounded-sm border-l-4"
-                    style={{
-                      backgroundColor: 'var(--bg-secondary)',
-                      borderLeftColor: 'var(--accent-primary)',
-                      borderLeftWidth: '4px'
-                    }}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div 
-                        className="text-4xl flex-shrink-0"
-                        style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                      >
-                        {pillar.icon}
-                      </div>
-                      <div className="flex-1 space-y-2">
-                        <h3 
-                          className="font-headline font-bold text-lg"
-                          style={{ color: 'var(--text-primary)' }}
+                {focusItems.length > 0 ? (
+                  focusItems.map((pillar, idx) => (
+                    <div
+                      key={idx}
+                      className="pillar-card p-6 sm:p-8 rounded-sm border-l-4"
+                      style={{
+                        backgroundColor: 'var(--bg-secondary)',
+                        borderLeftColor: 'var(--accent-primary)',
+                        borderLeftWidth: '4px'
+                      }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div 
+                          className="text-4xl flex-shrink-0"
+                          style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
-                          {pillar.title}
-                        </h3>
-                        <p 
-                          className="text-sm leading-relaxed"
-                          style={{ color: 'var(--text-tertiary)' }}
-                        >
-                          {pillar.description}
-                        </p>
+                          {pillar.icon}
+                        </div>
+                        <div className="flex-1 space-y-2">
+                          <h3 
+                            className="font-headline font-bold text-lg"
+                            style={{ color: 'var(--text-primary)' }}
+                          >
+                            {pillar.title}
+                          </h3>
+                          <p 
+                            className="text-sm leading-relaxed"
+                            style={{ color: 'var(--text-tertiary)' }}
+                          >
+                            {pillar.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="text-center py-8 text-slate-600">
+                    Loading program focus areas...
                   </div>
-                ))}
+                )}
               </div>
             </div>
 

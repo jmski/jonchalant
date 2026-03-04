@@ -11,6 +11,8 @@ import contactInfo from './contactInfo'
 import aboutPage from './aboutPage'
 import homePageContent from './homePageContent'
 import danceCategoryFilter from './danceCategoryFilter'
+import programFocus from './programFocus'
+import programsPageContent from './programsPageContent'
 
 export const schemaTypes = [
   portfolio,
@@ -26,4 +28,6 @@ export const schemaTypes = [
   aboutPage,
   homePageContent,
   danceCategoryFilter,
+  programFocus,
+  programsPageContent,
 ]

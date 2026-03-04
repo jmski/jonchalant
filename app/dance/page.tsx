@@ -22,44 +22,8 @@ export const metadata = {
   description: "Dance choreography, freestyle performances, and movement artistry"
 };
 
-// Fallback mock data if Sanity fails
-const MOCK_DANCEDATA = [
-  {
-    _id: 'chore-1',
-    title: 'Ninjago Choreography | Urban Style',
-    category: 'choreography',
-    description: 'Original choreography to Japanese hip-hop. Featured on TikTok (2.4M views). High-energy urban style with precision footwork.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/images/dance/choreography/ninjago-urban-style.jpg',
-  },
-  {
-    _id: 'chore-2',
-    title: 'Midnight Dreams | Contemporary Fusion',
-    category: 'choreography',
-    description: 'Contemporary-hip hop fusion for music video. Ethereal slow sections transitioning to explosive moments. Directed & choreographed.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/images/dance/choreography/midnight-dreams-fusion.jpg',
-  },
-  {
-    _id: 'free-1',
-    title: 'Cypher Session | Battle Flow',
-    category: 'freestyle',
-    description: 'High-energy freestyle battle cypher. Improvisation to live beatboxing. Runner-up at NYC Freestyle Championship 2024.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/images/dance/freestyle/cypher-session-battle.jpg',
-  },
-  {
-    _id: 'perf-1',
-    title: 'Seoul Performance | International Stage',
-    category: 'performance',
-    description: 'Live performance at Seoul Dance Festival (August 2024). 8-minute showcase performance. 5000+ live audience.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    thumbnail: '/images/dance/performances/seoul-festival-stage.jpg',
-  },
-];
-
 export default async function Dance() {
-  let dancePortfolio: any[] = MOCK_DANCEDATA;
+  let dancePortfolio: any[] = [];
 
   try {
     // Try to fetch from Sanity CMS

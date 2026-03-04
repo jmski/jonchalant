@@ -351,6 +351,18 @@ export async function getProgramsByCategory(category: string) {
   return await client.fetch(query)
 }
 
+export async function getProgramsFocusItems() {
+  const query = `*[_type == "programsPageContent" && title == "Programs"][0] {
+    programFocusItems | order(order asc) {
+      title,
+      description,
+      icon,
+      order
+    }
+  }`
+  return await client.fetch(query)
+}
+
 // ============================================================================
 // PAGE METADATA (Headlines, CTAs, Descriptions)
 // ============================================================================
@@ -378,6 +390,7 @@ export async function getContactInfo() {
       label,
       value,
       href,
+      description,
       order
     }
   }`

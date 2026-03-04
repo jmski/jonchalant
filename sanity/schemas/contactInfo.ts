@@ -54,6 +54,13 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'string',
+              description: 'Brief description of what this contact method is for',
+              example: 'Send me a detailed message about your project or inquiry.',
+            }),
+            defineField({
               name: 'order',
               title: 'Display Order',
               type: 'number',
