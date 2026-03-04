@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { client } from '@/lib/sanity';
 import { PortableText } from '@portabletext/react';
+import '@/app/css/blog.css';
 
 interface BlogPostDocument {
   _id: string;
@@ -117,21 +118,21 @@ const portableTextComponents = {
       const style = value._type === 'block' ? value.style : 'normal';
 
       if (style === 'h2') {
-        return <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">{value.children.map((child: any) => child.text).join('')}</h2>;
+        return <h2 className="blog-content h2">{value.children.map((child: any) => child.text).join('')}</h2>;
       }
       if (style === 'h3') {
-        return <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">{value.children.map((child: any) => child.text).join('')}</h3>;
+        return <h3 className="blog-content h3">{value.children.map((child: any) => child.text).join('')}</h3>;
       }
       if (style === 'blockquote') {
         return (
-          <blockquote className="pl-4 py-2 border-l-4 border-blue-600 italic text-slate-700 my-6">
+          <blockquote className="blog-content blockquote">
             {value.children.map((child: any) => child.text).join('')}
           </blockquote>
         );
       }
 
       return (
-        <p className="text-slate-700 leading-relaxed mb-4">
+        <p className="blog-content p">
           {value.children?.map((child: any) => (
             <span key={child._key || Math.random()}>
               {child.text}
@@ -143,12 +144,12 @@ const portableTextComponents = {
   },
   list: {
     bullet: ({ children }: any) => (
-      <ul className="list-disc pl-6 mb-4 space-y-2 text-slate-700">
+      <ul className="blog-content ul">
         {children}
       </ul>
     ),
     number: ({ children }: any) => (
-      <ol className="list-decimal pl-6 mb-4 space-y-2 text-slate-700">
+      <ol className="blog-content ol">
         {children}
       </ol>
     ),
@@ -161,12 +162,12 @@ const portableTextComponents = {
     strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
     em: ({ children }: any) => <em className="italic">{children}</em>,
     code: ({ children }: any) => (
-      <code className="bg-slate-100 px-2 py-1 rounded text-sm font-mono">
+      <code className="blog-content code">
         {children}
       </code>
     ),
     link: ({ value, children }: any) => (
-      <a href={value?.href} className="text-blue-600 hover:underline">
+      <a href={value?.href} className="blog-content a">
         {children}
       </a>
     ),
@@ -189,48 +190,48 @@ export default async function BlogPostPage({ params }: Props) {
   }) : null;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="blog-main">
       {/* Breadcrumb */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center gap-2 text-sm text-slate-600">
-          <Link href="/blog" className="hover:text-slate-900">Blog</Link>
+        <div className="blog-breadcrumb">
+          <Link href="/blog" className="blog-breadcrumb-link">Blog</Link>
           <span>/</span>
-          <span className="text-slate-900 font-medium">{post.title}</span>
+          <span className="blog-breadcrumb-current">{post.title}</span>
         </div>
       </div>
 
       {/* Article Header */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
-        <div className="mb-8">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className="text-sm font-medium text-slate-500 uppercase tracking-wide bg-slate-100 px-3 py-1 rounded">
+        <div className="blog-article-header">
+          <div className="blog-meta">
+            <span className="blog-pillar-badge">
               {post.pillar}
             </span>
             {post.readingTime && (
-              <span className="text-sm text-slate-600">
+              <span className="blog-meta-text">
                 {post.readingTime} min read
               </span>
             )}
             {publishDate && (
-              <span className="text-sm text-slate-600">
+              <span className="blog-meta-text">
                 {publishDate}
               </span>
             )}
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+          <h1 className="blog-title">
             {post.title}
           </h1>
 
           {post.excerpt && (
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <p className="blog-excerpt">
               {post.excerpt}
             </p>
           )}
         </div>
 
         {/* Content */}
-        <div className="prose prose-lg max-w-none mb-16 text-slate-700">
+        <div className="blog-content">
           {post.content && post.content.length > 0 ? (
             <PortableText value={post.content} components={portableTextComponents} />
           ) : (
@@ -240,12 +241,9 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* CTA */}
         {post.cta && post.cta.url && (
-          <div className="my-12 p-8 bg-slate-50 rounded-lg border border-slate-200">
-            <p className="text-slate-700 mb-4">{post.cta.text || 'Ready to work with me?'}</p>
-            <Link
-              href={post.cta.url}
-              className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition-colors"
-            >
+          <div className="blog-cta">
+            <p className="blog-cta-text">{post.cta.text || 'Ready to work with me?'}</p>
+            <Link href={post.cta.url} className="blog-cta-button">
               Get Started
             </Link>
           </div>
@@ -253,34 +251,32 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
-          <section className="mt-16 pt-16 border-t border-slate-200">
-            <h2 className="text-2xl font-bold text-slate-900 mb-8">Related Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <section className="blog-related">
+            <h2 className="blog-related-title">Related Articles</h2>
+            <div className="blog-related-grid">
               {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost._id} href={`/blog/${relatedPost.slug.current}`}>
-                  <article className="group p-6 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-50 transition-colors h-full">
-                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">
-                      {relatedPost.pillar}
-                    </span>
-                    <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-blue-600 transition-colors">
-                      {relatedPost.title}
-                    </h3>
-                    {relatedPost.excerpt && (
-                      <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-                        {relatedPost.excerpt}
-                      </p>
-                    )}
-                    <div className="flex items-center justify-between">
-                      {relatedPost.readingTime && (
-                        <span className="text-xs text-slate-500">
-                          {relatedPost.readingTime} min read
-                        </span>
-                      )}
-                      <span className="text-blue-600 font-medium text-sm group-hover:translate-x-1 transition-transform">
-                        Read →
+                <Link key={relatedPost._id} href={`/blog/${relatedPost.slug.current}`} className="blog-related-card">
+                  <span className="blog-related-card-pillar">
+                    {relatedPost.pillar}
+                  </span>
+                  <h3 className="blog-related-card-title">
+                    {relatedPost.title}
+                  </h3>
+                  {relatedPost.excerpt && (
+                    <p className="blog-related-card-excerpt">
+                      {relatedPost.excerpt}
+                    </p>
+                  )}
+                  <div className="blog-related-card-footer">
+                    {relatedPost.readingTime && (
+                      <span className="blog-related-card-readtime">
+                        {relatedPost.readingTime} min read
                       </span>
-                    </div>
-                  </article>
+                    )}
+                    <span className="blog-related-card-link">
+                      Read →
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -289,8 +285,8 @@ export default async function BlogPostPage({ params }: Props) {
       </article>
 
       {/* Back to Blog */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-200">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
+      <div className="blog-back-section max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Link href="/blog" className="blog-back-link">
           ← Back to Blog
         </Link>
       </div>
