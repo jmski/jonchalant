@@ -1,0 +1,203 @@
+/* ============================================================================
+   THREE PILLARS SECTION - Kinetic Method Display
+   
+   Handles color variants and card styling for the three pillars of coaching
+   ============================================================================ */
+
+.three-pillars {
+  padding: var(--spacing-xl) var(--spacing-sm);
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .three-pillars {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .three-pillars {
+    padding: var(--spacing-3xl) var(--spacing-lg);
+  }
+}
+
+/* Subtle background pattern */
+.three-pillars::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: radial-gradient(circle at 1px 1px, var(--border-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Container */
+.three-pillars-content {
+  max-width: 72rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Header Section */
+.three-pillars-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 1024px) {
+  .three-pillars-header {
+    margin-bottom: var(--spacing-2xl);
+  }
+}
+
+.three-pillars-tag {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-burnt-indigo);
+  margin-bottom: var(--spacing-sm);
+}
+
+.three-pillars-title {
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.three-pillars-description {
+  font-size: 1.125rem;
+  line-height: var(--leading-relaxed);
+  color: var(--color-muted-moss);
+  max-width: 40rem;
+}
+
+/* Card Grid */
+.three-pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .three-pillars-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Pillar Card */
+.pillar-card {
+  position: relative;
+  padding: 2rem;
+  border: 3px solid;
+  background-color: var(--bg-primary);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .pillar-card {
+    padding: 2rem;
+  }
+}
+
+.pillar-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Pillar Card - Color Variants */
+.pillar-card-burnt-indigo {
+  border-color: var(--color-burnt-indigo);
+}
+
+.pillar-card-burnt-indigo:hover {
+  border-color: var(--color-burnt-indigo-light);
+}
+
+.pillar-card-moss {
+  border-color: var(--color-muted-moss);
+}
+
+.pillar-card-moss:hover {
+  border-color: var(--color-moss-light);
+}
+
+.pillar-card-accent {
+  border-color: var(--accent-primary);
+}
+
+.pillar-card-accent:hover {
+  border-color: var(--color-burnt-indigo-light);
+}
+
+/* Icon */
+.pillar-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  transition: transform var(--transition-base);
+}
+
+.pillar-card:hover .pillar-icon {
+  transform: scale(1.1);
+}
+
+/* Card Title */
+.pillar-title {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 900;
+  line-height: var(--leading-tight);
+  margin-bottom: var(--spacing-md);
+}
+
+.pillar-card-burnt-indigo .pillar-title {
+  color: var(--color-burnt-indigo);
+}
+
+.pillar-card-moss .pillar-title {
+  color: var(--color-muted-moss);
+}
+
+.pillar-card-accent .pillar-title {
+  color: var(--accent-primary);
+}
+
+/* Card Description */
+.pillar-description {
+  font-size: 0.95rem;
+  line-height: var(--leading-relaxed);
+  color: var(--color-muted-moss);
+}
+
+/* Accent Bar */
+.pillar-accent-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 0;
+  transition: width var(--transition-base);
+}
+
+.pillar-card-burnt-indigo .pillar-accent-bar {
+  background-color: var(--color-burnt-indigo);
+}
+
+.pillar-card-moss .pillar-accent-bar {
+  background-color: var(--color-muted-moss);
+}
+
+.pillar-card-accent .pillar-accent-bar {
+  background-color: var(--accent-primary);
+}
+
+.pillar-card:hover .pillar-accent-bar {
+  width: 3rem;
+}

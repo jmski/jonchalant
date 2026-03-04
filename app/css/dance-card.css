@@ -1,0 +1,172 @@
+/* ============================================================================
+   DANCE CARD - Portfolio Card Component Styling
+   
+   Interactive card component for dance portfolio items with hover effects,
+   shine animations, and theme-aware color coding
+   ============================================================================ */
+
+.card-enhanced {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  transition: all var(--transition-base);
+}
+
+.card-enhanced:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Shine effect overlay */
+.card-enhanced-shine {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+  z-index: 20;
+}
+
+.card-enhanced:hover .card-enhanced-shine {
+  opacity: 0.4;
+}
+
+/* Image container */
+.card-enhanced-image {
+  position: relative;
+  width: 100%;
+  height: 12rem;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  transition: colors var(--transition-base);
+}
+
+.card-enhanced-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.card-enhanced:hover .card-enhanced-image img {
+  transform: scale(1.1);
+}
+
+/* Image overlay gradient on hover */
+.card-enhanced-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary));
+  transition: opacity 500ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.card-enhanced:hover .card-enhanced-overlay {
+  opacity: 0.15;
+}
+
+/* Category badge */
+.card-badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  transition: all var(--transition-base);
+  z-index: 10;
+}
+
+.card-enhanced:hover .card-badge {
+  top: var(--spacing-xs);
+  left: var(--spacing-xs);
+  transform: scale(1.1);
+}
+
+/* Arrow icon reveal */
+.card-arrow-icon {
+  position: absolute;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 900;
+  border: 1px solid var(--accent-primary);
+  background-color: var(--accent-primary);
+  color: white;
+  opacity: 0;
+  transform: translateX(0.5rem);
+  transition: all var(--transition-base);
+  z-index: 15;
+}
+
+.card-enhanced:hover .card-arrow-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Content area */
+.card-content {
+  padding: var(--spacing-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+  transition: all var(--transition-base);
+}
+
+.card-content h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  transition: colors var(--transition-base);
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  transition: colors var(--transition-base);
+  margin-bottom: auto;
+}
+
+/* Learn more link reveal */
+.card-learn-more {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: var(--spacing-md);
+  opacity: 0;
+  transform: translateY(0.25rem);
+  transition: all var(--transition-base);
+}
+
+.card-enhanced:hover .card-learn-more {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-learn-more-arrow {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.card-enhanced:hover .card-learn-more-arrow {
+  transform: translateX(0.25rem);
+}
+
+/* Link wrapper */
+.card-link {
+  display: block;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}

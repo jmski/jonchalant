@@ -41,45 +41,45 @@ export async function FeaturedBlogSection() {
   }
 
   return (
-    <section className="bg-linear-to-b from-slate-50 to-white py-16 sm:py-24">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section style={{ background: 'var(--bg-primary)', paddingTop: 'var(--spacing-2xl)', paddingBottom: 'var(--spacing-3xl)' }}>
+      <div style={{ maxWidth: '72rem', margin: '0 auto', paddingLeft: 'var(--spacing-md)', paddingRight: 'var(--spacing-md)' }}>
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <span className="inline-block text-xs uppercase tracking-widest font-bold px-3 py-1.5 rounded mb-4 bg-blue-100 text-blue-700">
+        <div style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
+          <span className="text-badge" style={{ display: 'inline-block', color: 'var(--accent-primary)', marginBottom: 'var(--spacing-md)' }}>
             Insights & Resources
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-display-lg" style={{ color: 'var(--text-primary)', marginBottom: 'var(--spacing-md)' }}>
             Read Latest Articles
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', color: 'var(--text-secondary)', maxWidth: '40rem', margin: '0 auto', lineHeight: 'var(--leading-relaxed)' }}>
             Practical insights on executive presence, quiet command, and leadership coaching for introverts.
           </p>
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        <div className="grid-responsive-3" style={{ marginBottom: 'var(--spacing-2xl)' }}>
           {posts.map((post) => (
             <Link key={post._id} href={`/blog/${post.slug.current}`}>
-              <article className="group h-full flex flex-col p-6 border border-slate-200 rounded-lg hover:border-slate-300 hover:shadow-lg bg-white hover:bg-slate-50 transition-all duration-300">
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <span className="text-xs font-medium text-slate-500 uppercase tracking-wide bg-slate-100 px-2.5 py-1 rounded whitespace-nowrap">
+              <article className="card flex flex-col min-h-full group" style={{ cursor: 'pointer', transition: 'all var(--transition-base)' }}>
+                <div className="flex items-start justify-between gap-3" style={{ marginBottom: 'var(--spacing-sm)' }}>
+                  <span className="text-label" style={{ color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
                     {post.pillar}
                   </span>
                   {post.readingTime && (
-                    <span className="text-xs text-slate-500 whitespace-nowrap">
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
                       {post.readingTime} min
                     </span>
                   )}
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                <h3 className="font-black" style={{ fontSize: 'clamp(1.125rem, 3vw, 1.5rem)', color: 'var(--text-primary)', marginBottom: 'var(--spacing-md)', lineHeight: 'var(--leading-tight)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-sm text-slate-600 mb-4 grow line-clamp-2">
+                  <p className="text-body grow" style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-md)', fontSize: '0.95rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {post.excerpt}
                   </p>
                 )}
-                <div className="flex items-center text-blue-600 font-medium text-sm group-hover:translate-x-1 transition-transform">
+                <div style={{ display: 'flex', alignItems: 'center', color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.95rem', transition: 'transform var(--transition-base)' }}>
                   Read Article →
                 </div>
               </article>
@@ -88,13 +88,13 @@ export async function FeaturedBlogSection() {
         </div>
 
         {/* CTA to Blog */}
-        <div className="text-center">
+        <div style={{ textAlign: 'center' }}>
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-slate-300 rounded-lg text-slate-900 font-medium hover:bg-slate-50 hover:border-slate-400 transition-colors"
+            className="cta-link"
           >
             View All Articles
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
+            <span className="cta-link-arrow">→</span>
           </Link>
         </div>
       </div>

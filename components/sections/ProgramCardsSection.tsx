@@ -16,24 +16,41 @@ interface ProgramCardsSectionProps {
   programs: Program[];
 }
 
+/**
+ * ProgramCardsSection Component
+ * ─────────────────────────────────────────────
+ * Displays programs in a responsive grid of cards with features and pricing.
+ * 
+ * CSS Classes Used:
+ * - .grid, .grid-responsive-3: Grid layout (1 → 3 columns)
+ * - .flex, .flex-col, .items-start: Card layout
+ * - .min-h-full, .grow, .mt-auto: Flexible content sizing
+ * - .gap-6, .space-y-2: Spacing utilities
+ * - .line-clamp-2: Text truncation
+ * - .font-black, .uppercase, .tracking-widest: Text styling
+ * - .text-badge, .text-label: Typography combinations
+ * 
+ * Props:
+ *   programs: Array of program objects with title, category, description, etc.
+ */
 export default function ProgramCardsSection({ programs }: ProgramCardsSectionProps) {
   return (
-    <section className="mb-24 py-12 sm:py-16 lg:py-20">
+    <section style={{ marginBottom: 'var(--spacing-3xl)', paddingTop: 'var(--spacing-2xl)', paddingBottom: 'var(--spacing-3xl)' }}>
       <ScrollFade>
-        <div className="mb-12 pb-6 border-b-2" style={{ borderColor: 'var(--border-color)' }}>
-          <Heading level={2} className="mb-4">All Programs</Heading>
-          <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+        <div style={{ marginBottom: 'var(--spacing-2xl)', paddingBottom: 'var(--spacing-md)', borderBottom: '2px solid var(--border-color)' }}>
+          <Heading level={2} style={{ marginBottom: 'var(--spacing-md)' }}>All Programs</Heading>
+          <p className="text-body" style={{ color: 'var(--text-secondary)' }}>
             A program for every stage of your journey. From free assessment to intensive 1-on-1 coaching.
           </p>
         </div>
       </ScrollFade>
 
       <ScrollStagger variant="slideInUp" staggerDelay={100}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid-responsive-3">
           {programs.map((program, idx) => (
             <ScrollFade key={program._id} delay={idx * 100}>
               <div 
-                className="card group flex flex-col min-h-full"
+                className="card flex flex-col min-h-full"
                 style={{ 
                   borderColor: 'var(--border-color)',
                   backgroundColor: 'var(--bg-secondary)'
@@ -41,7 +58,7 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
               >
                 {/* Category badge */}
                 <p 
-                  className="text-xs font-black uppercase tracking-widest mb-4"
+                  className="text-badge"
                   style={{ color: 'var(--accent-primary)' }}
                 >
                   {program.category}
@@ -49,22 +66,22 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
                 
                 {/* Title */}
                 <h3 
-                  className="text-lg sm:text-xl font-black uppercase tracking-widest mb-4 leading-tight"
-                  style={{ color: 'var(--text-primary)' }}
+                  className="font-black uppercase tracking-widest"
+                  style={{ color: 'var(--text-primary)', marginBottom: 'var(--spacing-md)', fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)', lineHeight: 'var(--leading-tight)' }}
                 >
                   {program.title}
                 </h3>
 
                 {/* Description */}
                 <p 
-                  className="text-sm leading-relaxed mb-6 grow"
-                  style={{ color: 'var(--text-secondary)' }}
+                  className="text-sm grow"
+                  style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-lg)', lineHeight: 'var(--leading-relaxed)' }}
                 >
                   {program.description}
                 </p>
 
                 {/* Features */}
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2" style={{ marginBottom: 'var(--spacing-lg)' }}>
                   {program.features.slice(0, 3).map((feature, i) => (
                     <div key={i} className="flex gap-2 items-start text-xs">
                       <span 
@@ -80,8 +97,8 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
                   ))}
                   {program.features.length > 3 && (
                     <p 
-                      className="text-xs italic pt-2"
-                      style={{ color: 'var(--text-tertiary)' }}
+                      className="text-xs italic"
+                      style={{ color: 'var(--text-tertiary)', paddingTop: 'var(--spacing-sm)' }}
                     >
                       + {program.features.length - 3} more
                     </p>
@@ -90,18 +107,18 @@ export default function ProgramCardsSection({ programs }: ProgramCardsSectionPro
 
                 {/* Investment */}
                 <div 
-                  className="border-t pt-4 mb-6"
-                  style={{ borderColor: 'var(--border-color)' }}
+                  className="border-t"
+                  style={{ borderColor: 'var(--border-color)', paddingTop: 'var(--spacing-md)', marginBottom: 'var(--spacing-lg)' }}
                 >
                   <p 
-                    className="text-xs uppercase tracking-widest font-black mb-1"
-                    style={{ color: 'var(--text-secondary)' }}
+                    className="text-badge"
+                    style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-sm)' }}
                   >
                     Investment
                   </p>
                   <p 
-                    className="text-2xl font-black"
-                    style={{ color: 'var(--accent-primary)' }}
+                    className="font-black"
+                    style={{ color: 'var(--accent-primary)', fontSize: 'clamp(1.5rem, 4vw, 2rem)' }}
                   >
                     {program.investment}
                   </p>
