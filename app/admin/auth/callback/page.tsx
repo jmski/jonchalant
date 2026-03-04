@@ -27,19 +27,36 @@ export default function AuthCallback() {
 
         // Handle recovery/password reset flow
         if (tokenHash && type === 'recovery') {
+          console.log('Processing recovery token...');
+          
           const { data, error } = await supabase.auth.verifyOtp({
             token_hash: tokenHash,
             type: 'recovery',
           });
 
-          console.log('Verify recovery OTP:', { success: !!data.user, error: error?.message });
+          console.log('Verify recovery OTP result:', { 
+            hasUser: !!data?.user, 
+            hasSession: !!data?.session,
+            error: error?.message 
+          });
 
           if (data?.user && data?.session) {
-            // Store session and redirect to password reset
+            // Explicitly set the session to ensure it persists
+            const { error: setError } = await supabase.auth.setSession(data.session);
+            
+            if (setError) {
+              console.error('Error setting session:', setError);
+              router.push('/admin/login?error=session_failed');
+              return;
+            }
+            
+            console.log('Session set, redirecting to reset password...');
+            // Wait a moment for session to persist
+            await new Promise(resolve => setTimeout(resolve, 500));
             router.push('/admin/reset-password');
             return;
           } else if (error) {
-            console.error('Recovery error:', error);
+            console.error('Recovery verification error:', error);
             router.push('/admin/login?error=invalid_token');
             return;
           }
