@@ -9,9 +9,11 @@ const ProgramCardsSection = dynamic(() => import('@/components/sections').then(m
   ssr: true
 });
 
-export const metadata = {
-  title: "Programs | The Kinetic Leader",
-  description: "Coaching programs for introverts seeking quiet command and professional leadership."
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Leadership Coaching Programs | Jonchalant",
+  description: "8-12 week executive presence and quiet command coaching for introverts. Build confidence, professional presence, and body-aware leadership."
 };
 
 

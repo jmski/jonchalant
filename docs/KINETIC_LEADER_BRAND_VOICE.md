@@ -272,7 +272,7 @@ But **prefer descriptive names over colors** in copy. The colors are for visual 
 
 ### For Email Signature
 
-> Jon Chalon  
+> **Jonchalant**  
 > The Kinetic Leader  
 > Coaching Introverts to Quiet Command  
 > [Phone] | [Email] | [Website]

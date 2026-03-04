@@ -89,7 +89,7 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
       {/* Sidebar Header */}
       <div className="sidebar-header">
         <div className="sidebar-header-content">
-          <h6>JONCHALON</h6>
+          <h6>JONCHALANT</h6>
           <button
             className="sidebar-close-btn"
             onClick={handleClose}

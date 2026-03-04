@@ -17,7 +17,7 @@ import testimonial from './schemas/testimonial'
 
 export default defineConfig({
   name: 'default',
-  title: 'jonchalon',
+  title: 'jonchalant',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || process.env.SANITY_STUDIO_PROJECT_ID || 'f0611nfi',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || process.env.SANITY_STUDIO_DATASET || 'production',
   plugins: [

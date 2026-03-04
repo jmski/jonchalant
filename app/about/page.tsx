@@ -1,11 +1,12 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { EnsoCircle } from "@/components/decorative";
+import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
 
-export const metadata = {
-  title: "About | The Kinetic Leader",
-  description: "Jon Chalon teaches introverts how to gain Quiet Command through body-led leadership, social mechanics, and introvert mastery."
+export const metadata: Metadata = {
+  title: "About Me | Jonchalant",
+  description: "Discover how Jon combines dance choreography expertise with leadership coaching to teach introverts quiet command, executive presence, and body-aware confidence."
 };
 
 export default async function About() {

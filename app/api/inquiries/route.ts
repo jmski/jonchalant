@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Define contact email address
-    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "jon@jonchalon.com";
+    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@jonchalant.com";
 
     // --- Send confirmation email to visitor ---
     if (resend) {

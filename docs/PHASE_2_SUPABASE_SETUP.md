@@ -7,7 +7,7 @@
 1. Go to https://supabase.com
 2. Sign up (use Google, GitHub, or email)
 3. Create a new project:
-   - **Name**: jonchalon
+   - **Name**: jonchalant
    - **Database Password**: Create a strong password (save it!)
    - **Region**: Choose closest to your location
    - **Pricing Plan**: Free tier (perfect for Phase 2)
@@ -85,7 +85,7 @@ If you want Jon to view inquiries via Supabase dashboard:
 
 1. Go to **Authentication** → **Users**
 2. Click **Invite a user**
-3. Enter your email (or jon@jonchalon.com)
+3. Enter your email (or jon@jonchalant.com)
 4. Complete signup link sent to email
 
 ---
