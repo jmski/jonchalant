@@ -15,10 +15,12 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 ## 🔍 Page-by-Page Audit
 
 ### ✅ **HOME (`app/page.tsx`)** - Status: PARTIAL
+
 **Currently Fetching from Sanity**: ✅ homePageContent, services  
 **Hardcoded Data Found**: 1 MOCK_HOME_CONTENT object (14 fields)
 
 **Hardcoded Fields**:
+
 - `stats` [3 items]
 - `impactSectionHeadline`
 - `featuredMainTitle`
@@ -33,10 +35,12 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 ---
 
 ### ✅ **DANCE (`app/dance/page.tsx`)** - Status: PARTIAL
+
 **Currently Fetching from Sanity**: ✅ getPortfolioItems()  
 **Hardcoded Data Found**: 1 MOCK_DANCEDATA array (4 items)
 
 **Hardcoded Items**:
+
 - `chore-1`: Ninjago Choreography
 - `chore-2`: Midnight Dreams
 - `free-1`: Cypher Session
@@ -49,10 +53,12 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 ---
 
 ### ✅ **ABOUT (`app/about/page.tsx`)** - Status: NEEDS WORK
+
 **Currently Fetching from Sanity**: ✅ aboutPageContent, services  
 **Hardcoded Data Found**: 3 objects (23 fields)
 
 **Hardcoded Objects**:
+
 1. **MOCK_ABOUT_CONTENT** (8 fields)
    - `heroHeadline`
    - `heroDescription`
@@ -75,17 +81,20 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
    - Resilient Problem Solvers
 
 **Issues**:
+
 - PHILOSOPHIES should be content in Sanity
 - INTROVERT_TRAITS should be dynamic from Sanity
 - About page needs additional Sanity schema fields for `phases` and `stats`
 
-**Recommendation**: 
-1. Expand `aboutPage` schema to include `phases` array and `stats` array  
+**Recommendation**:
+
+1. Expand `aboutPage` schema to include `phases` array and `stats` array
 2. Create new schema for `philosophy` type
 3. Add `introvertTraits` field to aboutPage
 4. Remove hardcoded objects
 
-**Refactoring Needed**: 
+**Refactoring Needed**:
+
 - [ ] Expand aboutPageContent schema
 - [ ] Create philosophy schema type
 - [ ] Update page fetch logic
@@ -94,13 +103,14 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 ---
 
 ### ✅ **CONTACT (`app/contact/page.tsx`)** - Status: PARTIAL
+
 **Currently Fetching from Sanity**: ✅ getContactInfo(), getPageMetadata()  
 **Hardcoded Data Found**: 2 objects (9 fields)
 
 **Hardcoded Objects**:
+
 1. **MOCK_CONTACT_METHODS** [3 items]
    - Email, Instagram, TikTok
-   
 2. **MOCK_PAGE_METADATA** (2 fields)
    - `headline`
    - `subheadline`
@@ -110,21 +120,25 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 **Issue**: Contact methods descriptions are hardcoded in a function. Should be in Sanity.
 
 **Recommendation**:
+
 1. Add `description` field to contactInfo schema for each method
 2. Remove getMethodDescription() function
 3. Remove MOCK data once CMS is verified
 
-**Refactoring Needed**: 
+**Refactoring Needed**:
+
 - [ ] Add description to contactInfo schema
 - [ ] Remove getMethodDescription() function
 
 ---
 
 ### ✅ **COLLABORATIONS (`app/collaborations/page.tsx`)** - Status: NEEDS WORK
+
 **Currently Fetching from Sanity**: ✅ getCollaborations(), getPageMetadata()  
 **Hardcoded Data Found**: 4 objects (23 fields)
 
 **Hardcoded Objects**:
+
 1. **MOCK_COLLABORATIONS** [4 items]
    - Leadership Coaching for Teams
    - Corporate Workshops
@@ -144,24 +158,28 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 **Critical Issue**: SERVICE_CATEGORIES are hardcoded and displayed in a loop. This is a full section that should be in Sanity.
 
 **Recommendation**:
+
 1. Create `serviceCategory` schema with array of items
 2. Add `serviceCategories` field to collaborationsPageContent in Sanity
 3. Update page to loop through Sanity data
 4. Remove MOCK data
 
 **Refactoring Needed**: ⚠️ SIGNIFICANT
-- [ ] Create serviceCategory schema type  
+
+- [ ] Create serviceCategory schema type
 - [ ] Extend collaborationsPageContent schema
 - [ ] Refactor page's SERVICE_CATEGORIES loop to use Sanity
 - [ ] Remove all hardcoding
 
 ---
 
-### ✅ **PROGRAMS (`app/programs/page.tsx`)** - Status: PARTIAL  
+### ✅ **PROGRAMS (`app/programs/page.tsx`)** - Status: PARTIAL
+
 **Currently Fetching from Sanity**: ✅ getPrograms()  
 **Hardcoded Data Found**: 2 objects (30 fields)
 
 **Hardcoded Objects**:
+
 1. **PROGRAMS** [6 items]
    - The 90-Day Presence Pivot
    - Social Choreography Workshop
@@ -178,12 +196,14 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 **Issue**: PROGRAM_FOCUS (3 pillars) are hardcoded. These are core to the brand and should be managed in Sanity.
 
 **Recommendation**:
+
 1. Create `programFocus` or `pillar` schema type
 2. Add `programFocusItems` field to programsPageContent
 3. Remove hardcoded PROGRAM_FOCUS array
 4. Keep PROGRAMS in Sanity (already being fetched)
 
-**Refactoring Needed**: 
+**Refactoring Needed**:
+
 - [ ] Create schema for program focus/pillars
 - [ ] Add to programs page content
 - [ ] Refactor PROGRAM_FOCUS display loop
@@ -191,10 +211,12 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 ---
 
 ### ✅ **MEDIA KIT (`app/media-kit/page.tsx`)** - Status: NEEDS WORK
+
 **Currently Fetching from Sanity**: ✅ getMediaKitData(), getPageMetadata()  
 **Hardcoded Data Found**: 4 objects (47 fields)
 
 **Hardcoded Objects**:
+
 1. **MOCK_MEDIA_KIT_DATA** (nested structure)
    - `keyMetrics` [4 items]
    - `platforms` [3 items]
@@ -213,12 +235,14 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 **Issue**: Media kit structure is partially in Sanity (mediaKitData exists). COLLABORATION_PACKAGES should be separate or extended.
 
 **Recommendation**:
+
 1. Verify mediaKitData schema in Sanity has all fields from MOCK_MEDIA_KIT_DATA
 2. Create `mediaPackage` schema for collaboration packages
 3. Add `packages` field to mediaKitData OR create dedicated mediaKitPackages document
 4. Remove all hardcoded data once verified
 
 **Refactoring Needed**: ⚠️ MODERATE
+
 - [ ] Verify mediaKitData completeness in Sanity
 - [ ] Create mediaPackage schema
 - [ ] Update page to fetch packages
@@ -227,6 +251,7 @@ Most pages are **properly architected** to fetch from Sanity with fallback mock 
 ---
 
 ### ✅ **LESSONS (`app/lessons/page.tsx`)** - Status: PARTIAL
+
 **Currently Fetching from Sanity**: ✅ getLessons()  
 **Hardcoded Data Found**: 1 MOCK_LESSONS array (9 items)
 
@@ -239,38 +264,42 @@ All 9 lessons with icons, categories, descriptions, etc.
 ---
 
 ### ✅ **STUDIO** (`app/studio/[[...tool]]/page.tsx`)
+
 **Status**: Embedded Sanity Studio, no content concerns.
 
 ---
 
 ## 📊 Summary Table
 
-| Page | Sanity Fetch Active | Hardcoded Data | Refactoring Needed | Priority |
-|------|:--:|:--:|:--:|:--:|
-| Home | ✅ | Low (1 object) | None | Low |
-| Dance | ✅ | Low (1 array) | None | Low |
-| About | ✅ | HIGH (3 objects) | Yes - expand schema | HIGH |
-| Contact | ✅ | Low (2 objects) | Minimal | Medium |
-| Collaborations | ✅ | HIGH (4 objects) | Yes - big refactor | HIGH |
-| Programs | ✅ | Medium (2 objects) | Minor | Medium |
-| Media Kit | ✅ | HIGH (4 objects) | Yes - verify + extend | HIGH |
-| Lessons | ✅ | Low (1 array) | None | Low |
+| Page           | Sanity Fetch Active |   Hardcoded Data   |  Refactoring Needed   | Priority |
+| -------------- | :-----------------: | :----------------: | :-------------------: | :------: |
+| Home           |         ✅          |   Low (1 object)   |         None          |   Low    |
+| Dance          |         ✅          |   Low (1 array)    |         None          |   Low    |
+| About          |         ✅          |  HIGH (3 objects)  |  Yes - expand schema  |   HIGH   |
+| Contact        |         ✅          |  Low (2 objects)   |        Minimal        |  Medium  |
+| Collaborations |         ✅          |  HIGH (4 objects)  |  Yes - big refactor   |   HIGH   |
+| Programs       |         ✅          | Medium (2 objects) |         Minor         |  Medium  |
+| Media Kit      |         ✅          |  HIGH (4 objects)  | Yes - verify + extend |   HIGH   |
+| Lessons        |         ✅          |   Low (1 array)    |         None          |   Low    |
 
 ---
 
 ## 🎯 Cleanup Strategy
 
 ### Phase 1: IMMEDIATE (Remove No-Cost Hardcoded Data)
+
 - [ ] Dance: Remove MOCK_DANCEDATA (Portfolio fetch is working)
 - [ ] Lessons: Remove MOCK_LESSONS (Fetch is working)
 - [ ] Home: Remove MOCK_HOME_CONTENT (Fetch is working)
 - [ ] Verify each page works without mock data
 
 ### Phase 2: EASY WINS (Minimal Schema Changes)
+
 - [ ] Contact: Add `description` field to contactInfo, remove function
 - [ ] Programs: Create pillar schema, remove hardcoded PROGRAM_FOCUS
 
 ### Phase 3: MAJOR REFACTORS (Schema Extensions)
+
 - [ ] About: Extend aboutPage schema for `phases`, `stats`, add philosophy type
 - [ ] Collaborations: Create SERVICE_CATEGORIES schema, refactor loop
 - [ ] Media Kit: Verify mediaKitData completeness, create mediaPackage schema
@@ -290,7 +319,7 @@ All 9 lessons with icons, categories, descriptions, etc.
 1. **Code Quality**: Pages are WELL-ARCHITECTED with proper fallbacks. Good job!
 2. **Content**: 36 instances need migration, but most are low-risk
 3. **Priority**: Focus on HIGH priority items (About, Collaborations, Media Kit)
-4. **Process**: 
+4. **Process**:
    - Update Sanity schema first
    - Populate CMS with content
    - Update fetch queries if needed
@@ -301,4 +330,3 @@ All 9 lessons with icons, categories, descriptions, etc.
 
 **Owner**: Development Team  
 **Next Step**: Prioritize Phase 1 cleanup and begin schema extensions
-

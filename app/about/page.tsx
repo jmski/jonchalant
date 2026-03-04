@@ -8,27 +8,8 @@ export const metadata = {
   description: "Jon Chalon teaches introverts how to gain Quiet Command through body-led leadership, social mechanics, and introvert mastery."
 };
 
-// Mock about page content (fallback only)
-const MOCK_ABOUT_CONTENT = {
-  heroHeadline: "From the Back of the Room to the Front of the Floor",
-  heroDescription: "For most of my life, I believed that leadership was a loud man's game. As a natural introvert, I was the one who overthought every email, stayed quiet in meetings, and felt like my social battery was perpetually at 5%.",
-  originSectionHeadline: "Everything changed when I stopped thinking and started moving.",
-  originSectionDescription: "I discovered that the same coordination, posture, and presence required on the dance floor were the exact 'mechanics' missing from my professional life. Dance taught me how to inhabit my body and take up space without saying a word.",
-  phases: [
-    { title: "Dance & Discipline", description: "I discovered movement as a language for expression that bypassed all my introverted self-doubt. My body could say things my words couldn't." },
-    { title: "Sales & Service", description: "I took that physical grounding into the high-pressure world of the fitness industry and realized that introverts don't need to change their personalities—they just need a better script and a stronger physical foundation." },
-    { title: "The Mission", description: "Today, I've mastered the skills to lead despite my introversion. I created The Kinetic Leader to help other quiet experts use movement and social mechanics to command the room—all while protecting their energy." },
-  ],
-  stats: [
-    { label: "Years Experience", value: "8+" },
-    { label: "Clients Coached", value: "50+" },
-    { label: "Transformations", value: "100%*" },
-    { label: "Introvert-Led", value: "✓" },
-  ]
-};
-
 export default async function About() {
-  let aboutContent = MOCK_ABOUT_CONTENT;
+  let aboutContent = null;
   let services = [];
   let philosophies = [];
   let introvertTraits = [];
@@ -62,12 +43,18 @@ export default async function About() {
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" id="main-content">
           {/* HERO SECTION */}
           <section className="mb-24">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              {aboutContent?.heroHeadline || MOCK_ABOUT_CONTENT.heroHeadline}
-            </h1>
-            <p className="text-lg sm:text-xl text-slate-700 max-w-2xl leading-relaxed">
-              {aboutContent?.heroDescription || MOCK_ABOUT_CONTENT.heroDescription}
-            </p>
+            {aboutContent?.heroHeadline ? (
+              <>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+                  {aboutContent.heroHeadline}
+                </h1>
+                <p className="text-lg sm:text-xl text-slate-700 max-w-2xl leading-relaxed">
+                  {aboutContent.heroDescription}
+                </p>
+              </>
+            ) : (
+              <div className="py-16 text-center text-slate-600">Loading hero content...</div>
+            )}
           </section>
 
           {/* ORIGIN STORY - 60/40 LAYOUT */}
@@ -87,29 +74,35 @@ export default async function About() {
             />
             
             <div className="lg:col-span-7 space-y-6 relative z-10">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
-                {aboutContent?.originSectionHeadline || MOCK_ABOUT_CONTENT.originSectionHeadline}
-              </h2>
-              
-              <p className="text-lg text-slate-700 leading-relaxed">
-                {aboutContent?.originSectionDescription || MOCK_ABOUT_CONTENT.originSectionDescription}
-              </p>
+              {aboutContent?.originSectionHeadline ? (
+                <>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
+                    {aboutContent.originSectionHeadline}
+                  </h2>
+                  
+                  <p className="text-lg text-slate-700 leading-relaxed">
+                    {aboutContent.originSectionDescription}
+                  </p>
 
-              <div className="pt-6 border-t border-slate-200">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                  The Three Phases
-                </h3>
-                <div className="space-y-4">
-                  {(aboutContent?.phases || MOCK_ABOUT_CONTENT.phases).map((phase: any, idx: number) => (
-                    <div key={idx}>
-                      <h4 className="font-semibold text-slate-900 mb-2">{phase.title}</h4>
-                      <p className="text-slate-700">
-                        {phase.description}
-                      </p>
+                  <div className="pt-6 border-t border-slate-200">
+                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                      The Three Phases
+                    </h3>
+                    <div className="space-y-4">
+                      {aboutContent.phases?.map((phase: any, idx: number) => (
+                        <div key={idx}>
+                          <h4 className="font-semibold text-slate-900 mb-2">{phase.title}</h4>
+                          <p className="text-slate-700">
+                            {phase.description}
+                          </p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                </>
+              ) : (
+                <div className="py-8 text-center text-slate-600">Loading origin story...</div>
+              )}
             </div>
 
             {/* Right column placeholder */}
@@ -119,22 +112,30 @@ export default async function About() {
           </section>
 
           {/* KEY STATS */}
-          <section className="mb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {(aboutContent?.stats || MOCK_ABOUT_CONTENT.stats).map((stat: any, idx: number) => (
-              <div
-                key={idx}
-                className="border-l border-slate-200 pl-6 py-4"
-              >
-                <div className="text-sm uppercase tracking-widest text-slate-600 font-medium mb-2">
-                  {stat.label}
+          <section className="mb-24">
+            {aboutContent?.stats && aboutContent.stats.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {aboutContent.stats.map((stat: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className="border-l border-slate-200 pl-6 py-4"
+                    >
+                      <div className="text-sm uppercase tracking-widest text-slate-600 font-medium mb-2">
+                        {stat.label}
+                      </div>
+                      <div className="text-3xl font-bold text-slate-900">
+                        {stat.value}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="text-3xl font-bold text-slate-900">
-                  {stat.value}
-                </div>
-              </div>
-            ))}
+                <p className="text-xs text-slate-600 italic mt-4">*Of those who complete programs</p>
+              </>
+            ) : (
+              <div className="py-8 text-center text-slate-600">Loading stats...</div>
+            )}
           </section>
-          <p className="text-xs text-slate-600 italic mb-24">*Of those who complete programs</p>
 
           {/* WHAT I COACH - Now fetching from Sanity services */}
           <section className="mb-24">
