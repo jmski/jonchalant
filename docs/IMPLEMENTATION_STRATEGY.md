@@ -1472,7 +1472,7 @@ export function Icon({ name, className }: { name: IconName; className?: string }
     key={idx}
     className={`group border rounded-lg transition-all duration-300 ${
       service.isPrimary
-        ? 'border-accent bg-gradient-to-b from-accent from-5% to-white shadow-lg scale-100 md:scale-105' // Larger, prominent
+        ? 'border-accent bg-linear-to-b from-accent from-5% to-white shadow-lg scale-100 md:scale-105' // Larger, prominent
         : 'border-slate-200 hover:shadow-lg hover:scale-100' // Standard, subtle
     }`}
   >
@@ -1481,7 +1481,7 @@ export function Icon({ name, className }: { name: IconName; className?: string }
       className={`px-6 pt-8 pb-6 border-b ${
         service.isPrimary
           ? 'bg-accent text-white'
-          : 'bg-gradient-to-r from-slate-50 to-slate-100'
+          : 'bg-linear-to-r from-slate-50 to-slate-100'
       }`}
     >
       <Icon

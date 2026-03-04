@@ -33,5 +33,5 @@ export const types = [
 ] as const
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types,
+  types: types as unknown as SchemaTypeDefinition[],
 }

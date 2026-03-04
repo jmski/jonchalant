@@ -17,7 +17,6 @@ export default defineType({
       title: 'Main Headline',
       type: 'string',
       description: 'Large headline for the page',
-      example: 'Choose Your Path to Quiet Command',
     }),
     defineField({
       name: 'pageSubtitle',
@@ -50,7 +49,7 @@ export default defineType({
               name: 'icon',
               title: 'Icon / Emoji',
               type: 'string',
-              example: '🧭',
+              initialValue: '🧭',
             }),
             defineField({
               name: 'order',

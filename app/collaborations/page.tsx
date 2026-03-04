@@ -3,7 +3,7 @@ import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { getCollaborations, getPageMetadata, getServiceCategories } from "@/lib/sanity";
 
-const CollaborationForm = dynamic(() => import('@/components/forms/CollaborationForm'), {
+const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
   ssr: true
 });

@@ -144,9 +144,11 @@ export default function Contact() {
                         <p className="text-lg font-black text-slate-900 leading-tight mb-3 group-hover:text-accent transition-colors">
                           {method.value}
                         </p>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          {method.description || 'Connect with me on this platform.'}
-                        </p>
+                        {method.description && (
+                          <p className="text-sm text-slate-600 leading-relaxed">
+                            {method.description}
+                          </p>
+                        )}
                       </div>
                       
                       {/* CTA indicator */}

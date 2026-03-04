@@ -12,8 +12,19 @@ const MOCK_PAGE_METADATA = {
   subheadline: 'Comprehensive audience data, platform metrics, and collaboration opportunities.'
 };
 
+interface MediaKitData {
+  keyMetrics?: Array<{ label: string; value: string; change: string }>;
+  platforms?: Array<{ name: string; handle: string; followers: string; avgViews: string; category: string }>;
+  contentCategories?: Array<{ name: string; percentage: number; description: string }>;
+  audience?: {
+    age?: Array<{ range: string; percentage: number }>;
+    gender?: Array<{ label: string; percentage: number }>;
+    locations?: Array<{ country: string; percentage: number }>;
+  };
+}
+
 export default async function MediaKit() {
-  let mediaKitData = {};
+  let mediaKitData: MediaKitData = {};
   let pageMetadata = MOCK_PAGE_METADATA;
   let collaborationPackages = [];
 

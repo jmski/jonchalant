@@ -3,12 +3,12 @@ import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
 import { getHomePageContent, getServices } from "@/lib/sanity";
 
-const CTASection = dynamic(() => import('@/components/sections/CTASection'), {
+const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
-const CollaborationForm = dynamic(() => import('@/components/forms/CollaborationForm'), {
+const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
   ssr: true
 });
@@ -121,7 +121,7 @@ export default async function Home() {
                     className="group border border-slate-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full overflow-hidden"
                   >
                     {/* Icon header */}
-                    <div className="bg-gradient-to-r from-slate-50 to-slate-100 px-6 pt-8 pb-6 border-b border-slate-200 group-hover:from-slate-100 group-hover:to-slate-100 transition-colors">
+                    <div className="bg-linear-to-r from-slate-50 to-slate-100 px-6 pt-8 pb-6 border-b border-slate-200 group-hover:from-slate-100 group-hover:to-slate-100 transition-colors">
                       <div className="text-4xl mb-4">{service.icon || '🎯'}</div>
                       <h3 className="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors">
                         {service.title}
@@ -224,7 +224,7 @@ export default async function Home() {
                   className="group relative border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full no-underline"
                 >
                   {/* Visual header with gradient */}
-                  <div className={`bg-gradient-to-br ${item.bgColor} h-40 flex flex-col items-center justify-center relative overflow-hidden`}>
+                  <div className={`bg-linear-to-br ${item.bgColor} h-40 flex flex-col items-center justify-center relative overflow-hidden`}>
                     <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity" 
                       style={{
                         backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)'
@@ -328,7 +328,7 @@ export default async function Home() {
         </section>
 
         {/* INQUIRY FORM SECTION */}
-        <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
+        <section className="py-16 sm:py-24 lg:py-32 bg-linear-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
           {/* Subtle background decoration */}
           <div className="absolute inset-0 opacity-5 pointer-events-none">
             <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -mr-48 -mt-48"></div>

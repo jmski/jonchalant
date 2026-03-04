@@ -2,8 +2,12 @@ import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { BlueprintGrid } from "@/components/decorative";
 import dynamic from 'next/dynamic';
-import ProgramCardsSection from '@/components/sections/ProgramCardsSection';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
+
+const ProgramCardsSection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.ProgramCardsSection })), {
+  loading: () => <div className="py-16 md:py-24">Loading programs...</div>,
+  ssr: true
+});
 
 const CollaborationForm = dynamic(() => import('@/components/forms/CollaborationForm'), {
   loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
@@ -15,102 +19,10 @@ export const metadata = {
   description: "Coaching programs for introverts seeking quiet command and professional leadership."
 };
 
-// Kinetic Leader Programs
-const PROGRAMS = [
-  {
-    _id: 'program-1',
-    title: 'The 90-Day Presence Pivot',
-    category: 'Premium 1-on-1 Coaching',
-    description: 'Intensive 12-week personal transformation. Weekly sessions, customized movement modules, social scripting frameworks, and ongoing support. For introverts seeking leadership promotions or major career transitions.',
-    investment: 'Custom Quote',
-    features: [
-      '12 weekly 1-on-1 sessions',
-      'Personalized movement coaching',
-      'Social mechanics framework',
-      'Energy management strategy',
-      'Pre-interview/presentation coaching',
-      'Lifetime community access'
-    ],
-  },
-  {
-    _id: 'program-2',
-    title: 'Social Choreography Workshop',
-    category: 'Group Training (6 weeks)',
-    description: 'Learn the three pillars in a cohort-based format. Meet other ambitious introverts, practice live, receive feedback. For those seeking guided learning with peer support.',
-    investment: '$1,500',
-    features: [
-      '6 weekly 2-hour group sessions',
-      'Physical Grounding module',
-      'Social Scripting workshop',
-      'Energy Mastery deep dive',
-      'Group practice & feedback',
-      'Private community'
-    ],
-  },
-  {
-    _id: 'program-3',
-    title: 'The Quiet Command Essentials',
-    category: 'Self-Paced Digital Course',
-    description: 'Video modules, worksheets, and frameworks you can learn at your own pace. Foundation-level introduction to Physical Grounding and Social Scripting.',
-    investment: '$297',
-    features: [
-      '8 HD video modules',
-      'Downloadable worksheets',
-      'Social framework templates',
-      'Body language checklists',
-      'Quick-reference guides',
-      'Email support included'
-    ],
-  },
-  {
-    _id: 'program-4',
-    title: 'Interview & Pitch Coaching',
-    category: 'High-Stakes Preparation',
-    description: 'Specialized coaching for critical moments. Job interviews, investor pitches, presentations. 1-on-1 training with live practice and video feedback.',
-    investment: '$500-$1,000',
-    features: [
-      '3-5 intensive sessions',
-      'Mock interview/pitch practice',
-      'Video feedback & analysis',
-      'Body language optimization',
-      'Q&A strategy development',
-      'Anxiety management techniques'
-    ],
-  },
-  {
-    _id: 'program-5',
-    title: 'Team Leadership Program',
-    category: 'Organization Custom',
-    description: 'For leadership teams wanting to build more confident, inclusive organizations. Multi-session workshops designed for your specific context and team size.',
-    investment: 'Custom Quote',
-    features: [
-      'Customized to your needs',
-      'Multi-session format available',
-      'Whole-team participation',
-      'Leadership development focus',
-      'Measured outcomes & metrics',
-      'Ongoing support options'
-    ],
-  },
-  {
-    _id: 'program-6',
-    title: 'Book Your Presence Audit',
-    category: 'First Step (Complimentary)',
-    description: 'Not sure where to start? Let\'s assess your current baseline. In this 30-minute call, I\'ll identify your strengths, barriers, and the right program for your goals.',
-    investment: 'Free',
-    features: [
-      '30-minute discovery call',
-      'Personal baseline assessment',
-      'Customized program recommendation',
-      'No obligation to proceed',
-      'Confidential & judgment-free',
-      'Available within 5 business days'
-    ],
-  }
-];
+
 
 export default async function Programs() {
-  let programCards = PROGRAMS;
+  let programCards = [];
   let focusItems: { title: string; description: string; icon: string }[] = [];
 
   try {
@@ -119,8 +31,7 @@ export default async function Programs() {
       programCards = sanityPrograms;
     }
   } catch (error) {
-    console.warn('Failed to fetch programs from Sanity, using fallback data:', error);
-    // Falls back to PROGRAMS if Sanity fails
+    console.warn('Failed to fetch programs from Sanity:', error);
   }
 
   try {
@@ -129,8 +40,7 @@ export default async function Programs() {
       focusItems = programsPageContent.programFocusItems;
     }
   } catch (error) {
-    console.warn('Failed to fetch program focus items from Sanity, using fallback:', error);
-    // Will render empty if Sanity fails
+    console.warn('Failed to fetch program focus items from Sanity:', error);
   }
 
   return (
@@ -289,7 +199,7 @@ export default async function Programs() {
                     >
                       <div className="flex items-start gap-4">
                         <div 
-                          className="text-4xl flex-shrink-0"
+                          className="text-4xl shrink-0"
                           style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
                           {pillar.icon}
@@ -328,7 +238,13 @@ export default async function Programs() {
 
           {/* PROGRAM CARDS */}
           <section id="programs-section" className="mb-24">
-            <ProgramCardsSection programs={programCards} />
+            {programCards.length > 0 ? (
+              <ProgramCardsSection programs={programCards} />
+            ) : (
+              <div className="py-12 text-center text-slate-600">
+                <p>Loading coaching programs...</p>
+              </div>
+            )}
           </section>
 
           {/* INQUIRY FORM */}
