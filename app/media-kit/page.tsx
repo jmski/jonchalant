@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "Media Kit | Jonchalant",
