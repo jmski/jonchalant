@@ -7,17 +7,11 @@ import { getContactInfo } from '@/lib/sanity';
 
 const SITE_SECTIONS = [
   {
-    title: 'Primary',
+    title: 'Essentials',
     links: [
       { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
-    ],
-  },
-  {
-    title: 'Portfolio',
-    links: [
-      { label: 'Dance', href: '/dance' },
     ],
   },
   {
@@ -26,6 +20,12 @@ const SITE_SECTIONS = [
       { label: 'Programs', href: '/programs' },
       { label: 'Lessons', href: '/lessons' },
       { label: 'Blog', href: '/blog' },
+    ],
+  },
+  {
+    title: 'Media',
+    links: [
+      { label: 'Dance', href: '/dance' },
       { label: 'Media Kit', href: '/media-kit' },
     ],
   },
