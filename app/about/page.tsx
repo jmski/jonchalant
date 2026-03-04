@@ -69,18 +69,22 @@ export default async function About() {
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" id="main-content">
           {/* HERO SECTION */}
           <section className="about-hero-section">
-            {aboutContent?.heroHeadline ? (
-              <>
-                <h1 className="about-hero-title">
-                  {aboutContent.heroHeadline}
-                </h1>
-                <p className="about-hero-subtitle">
-                  {aboutContent.heroDescription}
-                </p>
-              </>
-            ) : (
-              <div className="py-16 text-center text-slate-600">Loading hero content...</div>
-            )}
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 about-hero-container">
+              {aboutContent?.heroHeadline ? (
+                <>
+                  <span className="about-hero-intro">Who I Am</span>
+                  <h1 className="about-hero-title">
+                    {aboutContent.heroHeadline}
+                  </h1>
+                  <p className="about-hero-subtitle">
+                    {aboutContent.heroDescription}
+                  </p>
+                </>
+              ) : (
+                <div className="py-16 text-center text-slate-600">Loading hero content...</div>
+              )}
+            </div>
+            <div className="about-hero-divider"></div>
           </section>
 
           {/* ORIGIN STORY - 60/40 LAYOUT */}
