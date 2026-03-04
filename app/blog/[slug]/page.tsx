@@ -21,9 +21,9 @@ interface BlogPostDocument {
 }
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function getBlogPost(slug: string): Promise<BlogPostDocument | null> {
@@ -88,7 +88,8 @@ export async function generateStaticParams() {
 export const revalidate = 3600; // Revalidate every hour
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
 
   if (!post) {
     return {
@@ -173,13 +174,14 @@ const portableTextComponents = {
 };
 
 export default async function BlogPostPage({ params }: Props) {
-  const post = await getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = await getRelatedPosts(post.pillar, params.slug);
+  const relatedPosts = await getRelatedPosts(post.pillar, slug);
   const publishDate = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
