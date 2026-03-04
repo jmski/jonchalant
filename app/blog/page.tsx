@@ -57,7 +57,7 @@ export default async function BlogPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-b from-slate-50 to-white py-12 md:py-20">
+      <div className="bg-linear-to-b from-slate-50 to-white py-12 md:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Heading level={1} className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Leadership Blog
@@ -95,7 +95,7 @@ export default async function BlogPage() {
                         {post.title}
                       </h3>
                       {post.excerpt && (
-                        <p className="text-slate-600 mb-4 flex-grow line-clamp-2">
+                        <p className="text-slate-600 mb-4 grow line-clamp-2">
                           {post.excerpt}
                         </p>
                       )}
@@ -149,7 +149,7 @@ export default async function BlogPage() {
                           </p>
                         )}
                       </div>
-                      <div className="flex-shrink-0 text-blue-600 font-medium text-sm group-hover:translate-x-1 transition-transform whitespace-nowrap">
+                      <div className="shrink-0 text-blue-600 font-medium text-sm group-hover:translate-x-1 transition-transform whitespace-nowrap">
                         Read →
                       </div>
                     </div>

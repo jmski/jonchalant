@@ -41,7 +41,7 @@ export async function FeaturedBlogSection() {
   }
 
   return (
-    <section className="bg-gradient-to-b from-slate-50 to-white py-16 sm:py-24">
+    <section className="bg-linear-to-b from-slate-50 to-white py-16 sm:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
@@ -75,7 +75,7 @@ export async function FeaturedBlogSection() {
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-sm text-slate-600 mb-4 flex-grow line-clamp-2">
+                  <p className="text-sm text-slate-600 mb-4 grow line-clamp-2">
                     {post.excerpt}
                   </p>
                 )}
