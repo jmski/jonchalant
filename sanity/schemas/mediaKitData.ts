@@ -22,11 +22,6 @@ export default defineType({
           name: 'metric',
           fields: [
             defineField({
-              name: '_key',
-              type: 'string',
-              hidden: true,
-            }),
-            defineField({
               name: 'label',
               title: 'Metric Label',
               type: 'string',
@@ -62,11 +57,6 @@ export default defineType({
           type: 'object',
           name: 'platform',
           fields: [
-            defineField({
-              name: '_key',
-              type: 'string',
-              hidden: true,
-            }),
             defineField({
               name: 'name',
               title: 'Platform Name',
@@ -112,11 +102,6 @@ export default defineType({
           name: 'contentCategory',
           fields: [
             defineField({
-              name: '_key',
-              type: 'string',
-              hidden: true,
-            }),
-            defineField({
               name: 'name',
               title: 'Category Name',
               type: 'string',
@@ -157,11 +142,6 @@ export default defineType({
               name: 'ageGroup',
               fields: [
                 defineField({
-                  name: '_key',
-                  type: 'string',
-                  hidden: true,
-                }),
-                defineField({
                   name: 'range',
                   title: 'Age Range',
                   type: 'string',
@@ -187,11 +167,6 @@ export default defineType({
               name: 'genderGroup',
               fields: [
                 defineField({
-                  name: '_key',
-                  type: 'string',
-                  hidden: true,
-                }),
-                defineField({
                   name: 'label',
                   title: 'Gender Label',
                   type: 'string',
@@ -216,11 +191,6 @@ export default defineType({
               type: 'object',
               name: 'location',
               fields: [
-                defineField({
-                  name: '_key',
-                  type: 'string',
-                  hidden: true,
-                }),
                 defineField({
                   name: 'country',
                   title: 'Country',

@@ -22,11 +22,6 @@ export default defineType({
           name: 'stat',
           fields: [
             defineField({
-              name: '_key',
-              type: 'string',
-              hidden: true,
-            }),
-            defineField({
               name: 'label',
               title: 'Label',
               type: 'string',
@@ -66,11 +61,6 @@ export default defineType({
           type: 'object',
           name: 'sidebarFeature',
           fields: [
-            defineField({
-              name: '_key',
-              type: 'string',
-              hidden: true,
-            }),
             defineField({
               name: 'title',
               title: 'Feature Title',

@@ -24,11 +24,6 @@ export default defineType({
           name: 'category',
           fields: [
             defineField({
-              name: '_key',
-              type: 'string',
-              hidden: true,
-            }),
-            defineField({
               name: 'name',
               title: 'Category Name',
               type: 'string',

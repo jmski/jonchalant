@@ -1,0 +1,17 @@
+npm warn Unknown global config "msvs_version". This will stop working in the next major version of npm.
+- Checking project info
+✓ Checking project info
+- Clean output folder
+✓ Clean output folder (11ms)
+- Build Sanity Studio
+✓ Build Sanity Studio (36344ms)
+- Extracting manifest
+✗ SchemaError
+↳ Failed to extract manifest:
+  SchemaError
+- Verifying local content
+✓ Verifying local content
+- Deploying to sanity.studio
+✓ Deploying to sanity.studio
+
+Success! Studio deployed to https://jonchalant.sanity.studio/
