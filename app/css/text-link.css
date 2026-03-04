@@ -1,0 +1,31 @@
+/* ============================================================================
+   TEXT LINK - Link Component CSS
+   
+   Provides consistent link styling using CSS variables instead of Tailwind
+   color utilities. Includes hover and focus states.
+   ============================================================================ */
+
+.text-link {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition:
+    color var(--transition-fast),
+    text-decoration var(--transition-fast);
+  cursor: pointer;
+}
+
+.text-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.text-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.text-link:active {
+  opacity: 0.8;
+}

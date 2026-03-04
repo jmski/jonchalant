@@ -26,6 +26,12 @@
   @import "./css/components.css";
   @import "./css/typography.css";
   @import "./css/layout.css";
+  @import "./css/section-wrapper.css";
+  @import "./css/section-content.css";
+  @import "./css/hero-section.css";
+  @import "./css/card.css";
+  @import "./css/grid.css";
+  @import "./css/text-link.css";
 }
 
 /* Utility Classes & Patterns */

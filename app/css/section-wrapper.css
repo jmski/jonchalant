@@ -1,0 +1,75 @@
+/* ============================================================================
+   SECTION WRAPPER - Reusable Full-Width Section Component CSS
+   
+   Provides consistent full-width background sections with responsive padding
+   that properly accounts for the 250px fixed sidebar layout.
+   ============================================================================ */
+
+.section-wrapper {
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding: 4rem 2rem;
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-base);
+}
+
+/* Responsive padding scaling */
+@media (min-width: 640px) {
+  .section-wrapper {
+    width: calc(100% + 6rem);
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding: 6rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-wrapper {
+    width: calc(100% + 8rem);
+    margin-left: -4rem;
+    margin-right: -4rem;
+    padding: 6rem 4rem;
+  }
+}
+
+/* Color variants */
+.section-wrapper-primary {
+  background-color: var(--bg-primary);
+}
+
+.section-wrapper-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.section-wrapper-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+/* Typography defaults - no Tailwind color utilities */
+.section-wrapper {
+  color: var(--text-primary);
+}
+
+.section-wrapper h1,
+.section-wrapper h2,
+.section-wrapper h3,
+.section-wrapper h4,
+.section-wrapper h5,
+.section-wrapper h6 {
+  color: var(--text-primary);
+}
+
+.section-wrapper p {
+  color: var(--text-secondary);
+}
+
+.section-wrapper a {
+  color: var(--accent-primary);
+  transition: color var(--transition-fast);
+}
+
+.section-wrapper a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}

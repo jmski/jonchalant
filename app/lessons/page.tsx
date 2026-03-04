@@ -1,8 +1,9 @@
 import { CTASection } from "@/components/sections";
-import { PageTransition } from "@/components/layout";
-import Link from 'next/link';
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
 import { getLessons } from "@/lib/sanity";
+import '@/app/css/lessons.css';
 
 import type { Metadata } from 'next';
 
@@ -95,65 +96,89 @@ export default async function Lessons() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
-      <PageTransition animation="slide-right">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          {/* HERO */}
-          <section className="mb-24">
-            <div className="inline-block mb-6">
-              <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Structured Learning</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              Master Quiet Command: Leadership Lessons
-            </h1>
-            <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl">
-              Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
-            </p>
-            <p className="text-base text-slate-600 mt-4">
-              Organized by skill level: Beginner → Intermediate → Advanced
-            </p>
-          </section>
+    <div className="lessons-main">
+      <PageTransition animation="fade">
+        {/* HERO */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <section>
+              <div className="lessons-hero-intro">
+                <span>Structured Learning</span>
+              </div>
+              <h1 className="lessons-hero-title">
+                Master Quiet Command: Leadership Lessons
+              </h1>
+              <p className="lessons-hero-description">
+                Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
+              </p>
+              <p className="lessons-hero-meta">
+                Organized by skill level: Beginner → Intermediate → Advanced
+              </p>
+            </section>
+          </SectionContent>
+        </SectionWrapper>
 
-          {/* CONCEPT-TO-MOVEMENT LINK */}
-          <section className="mb-24 p-8 bg-slate-50 rounded-lg border border-slate-200">
-            <p className="text-slate-700">
-              See these principles in motion: Watch how body awareness creates executive presence in my{' '}
-              <Link href="/dance" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
-                choreography portfolio
-              </Link>
-              .
-            </p>
-          </section>
+        {/* CONCEPT-TO-MOVEMENT LINK */}
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <section className="lessons-supplemental-section">
+              <p className="lessons-supplemental-text">
+                See these principles in motion: Watch how body awareness creates executive presence in my{' '}
+                <TextLink href="/dance">
+                  choreography portfolio
+                </TextLink>
+                .
+              </p>
+            </section>
+          </SectionContent>
+        </SectionWrapper>
 
-          {/* LESSON CATEGORIES */}
-          <LessonCategory 
-            level="Beginner" 
-            pillarColor="text-slate-900"
-            lessons={lessons.filter((l) => l.category === 'Beginner')} 
-          />
-          
-          <LessonCategory 
-            level="Intermediate" 
-            pillarColor="text-slate-900"
-            lessons={lessons.filter((l) => l.category === 'Intermediate')} 
-          />
-          
-          <LessonCategory 
-            level="Advanced" 
-            pillarColor="text-slate-900"
-            lessons={lessons.filter((l) => l.category === 'Advanced')} 
-          />
-
-          {/* CTA */}
-          <section className="py-16">
-            <CTASection
-              title="Learn Better with Coaching"
-              description="These lessons teach the frameworks. But transformation happens through application. Get personalized guidance, real-time feedback, and accountability through a coaching program."
-              buttonText="Find Your Program"
-              buttonLink="/programs"
+        {/* BEGINNER LESSONS */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <LessonCategory 
+              level="Beginner" 
+              pillarColor="text-primary"
+              lessons={lessons.filter((l) => l.category === 'Beginner')} 
             />
-          </section>
-        </main>
+          </SectionContent>
+        </SectionWrapper>
+        
+        {/* INTERMEDIATE LESSONS */}
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <LessonCategory 
+              level="Intermediate" 
+              pillarColor="text-primary"
+              lessons={lessons.filter((l) => l.category === 'Intermediate')} 
+            />
+          </SectionContent>
+        </SectionWrapper>
+        
+        {/* ADVANCED LESSONS */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <LessonCategory 
+              level="Advanced" 
+              pillarColor="text-primary"
+              lessons={lessons.filter((l) => l.category === 'Advanced')} 
+            />
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* CTA */}
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
+            <section>
+              <CTASection
+                title="Learn Better with Coaching"
+                description="These lessons teach the frameworks. But transformation happens through application. Get personalized guidance, real-time feedback, and accountability through a coaching program."
+                buttonText="Find Your Program"
+                buttonLink="/programs"
+              />
+            </section>
+          </SectionContent>
+        </SectionWrapper>
       </PageTransition>
     </div>
   );

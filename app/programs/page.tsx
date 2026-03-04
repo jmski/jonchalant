@@ -1,11 +1,12 @@
 import { CTASection } from "@/components/sections";
-import { PageTransition } from "@/components/layout";
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { TextLink } from "@/components/typography";
 import { BlueprintGrid } from "@/components/decorative";
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
 import { CourseSchema } from "@/lib/schema";
+import '@/app/css/programs.css';
 
 const ProgramCardsSection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.ProgramCardsSection })), {
   loading: () => <div className="py-16 md:py-24">Loading programs...</div>,
@@ -95,8 +96,10 @@ export default async function Programs() {
         }}
       />
       
-      <PageTransition animation="scale">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <PageTransition animation="fade">
+        {/* HERO SECTION */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
           {/* HERO SECTION - Enhanced Visual Design */}
           <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
             {/* Background decorative elements */}
@@ -260,7 +263,7 @@ export default async function Programs() {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-8 text-slate-600">
+                  <div className="text-center py-8" style={{ color: 'var(--text-tertiary)' }}>
                     Loading program focus areas...
                   </div>
                 )}
@@ -273,46 +276,59 @@ export default async function Programs() {
               style={{ backgroundColor: 'var(--border-color)' }}
             />
           </section>
+          </SectionContent>
+        </SectionWrapper>
 
-          {/* PROGRAM CARDS */}
-          <section id="programs-section" className="mb-24">
-            {programCards.length > 0 ? (
-              <ProgramCardsSection programs={programCards} />
-            ) : (
-              <div className="py-12 text-center text-slate-600">
-                <p>Loading coaching programs...</p>
+        {/* PROGRAM CARDS */}
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <section id="programs-section">
+              {programCards.length > 0 ? (
+                <ProgramCardsSection programs={programCards} />
+              ) : (
+                <div className="py-12 text-center" style={{ color: 'var(--text-tertiary)' }}>
+                  <p>Loading coaching programs...</p>
+                </div>
+              )}
+            </section>
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* SUPPLEMENTAL LEARNING CTA */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <section>
+              <div className="text-center space-y-4">
+                <h3 className="text-2xl sm:text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                  Learn at Your Own Pace
+                </h3>
+                <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+                  Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
+                </p>
+                <TextLink 
+                  href="/lessons" 
+                  className="programs-cta-button"
+                >
+                  Explore Leadership Lessons →
+                </TextLink>
               </div>
-            )}
-          </section>
+            </section>
+          </SectionContent>
+        </SectionWrapper>
 
-          {/* SUPPLEMENTAL LEARNING CTA */}
-          <section className="py-16 bg-slate-50 px-4 sm:px-6 lg:px-8 rounded-lg mb-24">
-            <div className="text-center space-y-4">
-              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                Learn at Your Own Pace
-              </h3>
-              <p className="text-lg text-slate-700 max-w-2xl mx-auto">
-                Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
-              </p>
-              <Link 
-                href="/lessons" 
-                className="inline-block mt-4 px-6 py-3 bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"
-              >
-                Explore Leadership Lessons →
-              </Link>
-            </div>
-          </section>
-
-          {/* CTA */}
-          <section className="py-16">
-            <CTASection
-              title="Ready to Build Real Executive Presence?"
-              description="Don't guess which program is right. Schedule a free 30-minute Presence Audit where we'll assess where you are now, identify your biggest opportunities, and create a custom roadmap to get you there."
-              buttonText="Book Your Free Audit"
-              buttonLink="/contact"
-            />
-          </section>
-        </main>
+        {/* CTA */}
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
+            <section>
+              <CTASection
+                title="Ready to Build Real Executive Presence?"
+                description="Don't guess which program is right. Schedule a free 30-minute Presence Audit where we'll assess where you are now, identify your biggest opportunities, and create a custom roadmap to get you there."
+                buttonText="Book Your Free Audit"
+                buttonLink="/contact"
+              />
+            </section>
+          </SectionContent>
+        </SectionWrapper>
       </PageTransition>
     </div>
   );

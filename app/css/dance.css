@@ -1,0 +1,38 @@
+/* ============================================================================
+   DANCE.CSS - Dance Portfolio Page Styling
+   Uses CSS Variables from variables.css and SectionWrapper component
+   ============================================================================ */
+
+.dance-main {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.dance-approach-section {
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background-color: var(--bg-secondary);
+}
+
+.dance-approach-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.dance-approach-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: var(--leading-relaxed);
+}
+
+.dance-approach-links {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.dance-approach-links .text-link {
+  font-weight: 600;
+}
