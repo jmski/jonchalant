@@ -1,26 +1,23 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
-import { getHomePageContent, getServices } from "@/lib/sanity";
+import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
-const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
-  loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
-  ssr: true
-});
-
 export default async function Home() {
   let homeContent = null;
   let services = [];
+  let testimonials = [];
 
   try {
-    const [sanityHome, sanityServices] = await Promise.all([
+    const [sanityHome, sanityServices, sanityTestimonials] = await Promise.all([
       getHomePageContent(),
-      getServices()
+      getServices(),
+      getTestimonials(true) // Fetch featured testimonials only
     ]);
     
     if (sanityHome) {
@@ -29,6 +26,10 @@ export default async function Home() {
     
     if (sanityServices && sanityServices.length > 0) {
       services = sanityServices;
+    }
+    
+    if (sanityTestimonials && sanityTestimonials.length > 0) {
+      testimonials = sanityTestimonials;
     }
   } catch (error) {
     console.warn('Failed to fetch home content from Sanity, using fallback data:', error);
@@ -327,7 +328,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* INQUIRY FORM SECTION */}
+        {/* CLIENT TESTIMONIALS SECTION */}
         <section className="py-16 sm:py-24 lg:py-32 bg-linear-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
           {/* Subtle background decoration */}
           <div className="absolute inset-0 opacity-5 pointer-events-none">
@@ -346,34 +347,64 @@ export default async function Home() {
                   letterSpacing: '0.15em'
                 }}
               >
-                Let's Work Together
+                Client Success Stories
               </span>
               <h2 
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
                 style={{ color: 'var(--text-primary)' }}
               >
-                Start Your Journey
+                Trusted by Industry Leaders
               </h2>
               <p 
                 className="text-lg sm:text-xl max-w-2xl mx-auto"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                Whether you're interested in coaching or collaboration, let's explore how we can work together. Fill out the form below and I'll respond within 24 hours.
+                See how leading teams have transformed their presence and impact through our coaching and consulting programs.
               </p>
             </div>
 
-            {/* Form Container - Full Width */}
-            <div className="w-full">
-              <div 
-                className="rounded-lg p-8 sm:p-12 lg:p-16 border border-slate-200 shadow-lg"
-                style={{
-                  backgroundColor: 'var(--bg-primary)',
-                  borderColor: 'var(--border-color)'
-                }}
-              >
-                <CollaborationForm />
+            {/* Testimonials Grid */}
+            {testimonials && testimonials.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {testimonials.map((testimonial: any, idx: number) => (
+                  <div
+                    key={testimonial._id || idx}
+                    className="group rounded-lg p-8 sm:p-10 border border-slate-200 bg-white hover:shadow-lg hover:border-accent transition-all duration-300 flex flex-col h-full"
+                  >
+                    {/* Quote */}
+                    <p className="text-slate-700 leading-relaxed mb-6 flex-1 italic">
+                      &quot;{testimonial.quote}&quot;
+                    </p>
+
+                    {/* Result highlight */}
+                    {testimonial.result && (
+                      <div className="mb-6 p-4 bg-accent/10 rounded border border-accent/20">
+                        <p className="text-sm font-bold text-accent">
+                          {testimonial.result}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Client info */}
+                    <div className="border-t border-slate-200 pt-6">
+                      <p className="font-bold text-slate-900 text-lg">
+                        {testimonial.clientName}
+                      </p>
+                      <p className="text-sm text-slate-600">
+                        {testimonial.role}
+                      </p>
+                      <p className="text-sm font-medium text-accent mt-1">
+                        {testimonial.company}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
+            ) : (
+              <div className="text-center py-12 text-slate-600">
+                <p>Loading testimonials...</p>
+              </div>
+            )}
           </div>
         </section>
 

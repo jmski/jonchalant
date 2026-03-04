@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { PageTransition } from "@/components/layout";
-import { getContactInfo, getPageMetadata } from "@/lib/sanity";
+import { getContactInfo, getPageMetadata, type ContactMethod } from "@/lib/sanity";
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
@@ -12,9 +12,9 @@ const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ 
 
 // Mock contact methods (fallback only)
 const MOCK_CONTACT_METHODS = [
-  { label: 'Email', value: 'contact@jonchalon.com', href: 'mailto:contact@jonchalon.com' },
-  { label: 'Instagram', value: '@jonchalon', href: 'https://instagram.com/jonchalon' },
-  { label: 'TikTok', value: '@jonchalon', href: 'https://tiktok.com/@jonchalon' }
+  { label: 'Email', value: 'contact@jonchalon.com', href: 'mailto:contact@jonchalon.com', description: 'Send me a detailed message' },
+  { label: 'Instagram', value: '@jonchalon', href: 'https://instagram.com/jonchalon', description: 'Follow for daily updates' },
+  { label: 'TikTok', value: '@jonchalon', href: 'https://tiktok.com/@jonchalon', description: 'Check out my latest videos' }
 ];
 
 // Mock page metadata (fallback only)
@@ -24,7 +24,7 @@ const MOCK_PAGE_METADATA = {
 };
 
 export default function Contact() {
-  const [contactMethods, setContactMethods] = useState(MOCK_CONTACT_METHODS);
+  const [contactMethods, setContactMethods] = useState<ContactMethod[]>(MOCK_CONTACT_METHODS);
   const [pageMetadata, setPageMetadata] = useState(MOCK_PAGE_METADATA);
   const [isLoading, setIsLoading] = useState(true);
   

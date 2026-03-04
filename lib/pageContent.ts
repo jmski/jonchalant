@@ -48,5 +48,5 @@ export const PAGE_CONTENT = {
   }
 };
 
-export const DANCE_FILTER_CATEGORIES = ["All", "Choreography", "Freestyle", "Performance"];
+export const DANCE_FILTER_CATEGORIES = ["All", "choreography", "freestyle", "performance"];
 
