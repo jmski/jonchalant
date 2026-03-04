@@ -196,6 +196,9 @@
     visibility: visible !important;
     opacity: 1 !important;
   }
+  .sidebar-close-btn {
+    display: flex;
+  }
   .main-content {
     padding: 3rem 1.5rem;
     padding-top: 2.5rem; /* Top padding to account for fixed button */

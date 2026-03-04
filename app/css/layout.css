@@ -43,6 +43,12 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+.sidebar-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .sidebar-header h6 {
   font-size: 0.75rem;
   line-height: 1.4;
@@ -53,6 +59,30 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-primary);
+}
+
+.sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.sidebar-close-btn:hover {
+  color: var(--accent-primary);
+}
+
+.sidebar-close-btn:focus-visible {
+  outline: 2px solid var(--accent-vibrant);
+  outline-offset: 2px;
 }
 
 .sidebar-sections {

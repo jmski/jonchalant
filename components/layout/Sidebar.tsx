@@ -42,6 +42,9 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
+  const handleClose = () => {
+    if (onClose) onClose();
+  };
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
@@ -85,7 +88,16 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     <aside className={`sidebar ${isOpen ? 'mobile-open' : ''}`}>
       {/* Sidebar Header */}
       <div className="sidebar-header">
-        <h6>JONCHALON</h6>
+        <div className="sidebar-header-content">
+          <h6>JONCHALON</h6>
+          <button
+            className="sidebar-close-btn"
+            onClick={handleClose}
+            aria-label="Close navigation menu"
+          >
+            ✕
+          </button>
+        </div>
       </div>
 
       {/* Sidebar Sections */}
