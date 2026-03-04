@@ -1,15 +1,17 @@
-export default {
+import { defineType, defineField } from 'sanity'
+
+export default defineType({
   name: 'caseStudy',
   title: 'Case Study',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Case Study Title',
       type: 'string',
       validation: (Rule: any) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -17,58 +19,58 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'clientName',
       title: 'Client Name',
       type: 'string',
       validation: (Rule: any) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: 'industry',
       title: 'Industry',
       type: 'string',
-    },
-    {
+    }),
+    defineField({
       name: 'challenge',
       title: 'Challenge',
       type: 'text',
-    },
-    {
+    }),
+    defineField({
       name: 'solution',
       title: 'Our Solution',
       type: 'text',
-    },
-    {
+    }),
+    defineField({
       name: 'results',
       title: 'Results Achieved',
       type: 'array',
       of: [{ type: 'string' }],
-    },
-    {
+    }),
+    defineField({
       name: 'testimonial',
       title: 'Client Quote',
       type: 'text',
-    },
-    {
+    }),
+    defineField({
       name: 'image',
       title: 'Featured Image',
       type: 'image',
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'featured',
       title: 'Featured on Home Page?',
       type: 'boolean',
-      default: false,
-    },
-    {
+      initialValue: false,
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-    },
+    }),
   ],
   preview: {
     select: {
@@ -84,4 +86,4 @@ export default {
       }
     },
   },
-}
+})
