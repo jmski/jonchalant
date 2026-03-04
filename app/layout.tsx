@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
+import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Leadership Coaching for Introverts | Executive Presence & Quiet Command | Jonchalant",
@@ -42,6 +43,30 @@ export default function RootLayout({
             `,
           }}
         />
+        
+        {/* JSON-LD Structured Data */}
+        <Script
+          id="person-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(PersonSchema()),
+          }}
+        />
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(OrganizationSchema()),
+          }}
+        />
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(LocalBusinessSchema()),
+          }}
+        />
+        
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>

@@ -1,6 +1,7 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { BlueprintGrid } from "@/components/decorative";
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
@@ -265,6 +266,24 @@ export default async function Programs() {
                 <p>Loading coaching programs...</p>
               </div>
             )}
+          </section>
+
+          {/* SUPPLEMENTAL LEARNING CTA */}
+          <section className="py-16 bg-slate-50 px-4 sm:px-6 lg:px-8 rounded-lg mb-24">
+            <div className="text-center space-y-4">
+              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                Learn at Your Own Pace
+              </h3>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto">
+                Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
+              </p>
+              <Link 
+                href="/lessons" 
+                className="inline-block mt-4 px-6 py-3 bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"
+              >
+                Explore Leadership Lessons →
+              </Link>
+            </div>
           </section>
 
           {/* CTA */}

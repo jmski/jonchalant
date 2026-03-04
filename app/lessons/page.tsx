@@ -1,5 +1,6 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { getLessons } from "@/lib/sanity";
 
@@ -93,6 +94,17 @@ export default async function Lessons() {
             </p>
             <p className="text-base text-slate-600 mt-4">
               Organized by skill level: Beginner → Intermediate → Advanced
+            </p>
+          </section>
+
+          {/* CONCEPT-TO-MOVEMENT LINK */}
+          <section className="mb-24 p-8 bg-slate-50 rounded-lg border border-slate-200">
+            <p className="text-slate-700">
+              See these principles in motion: Watch how body awareness creates executive presence in my{' '}
+              <Link href="/dance" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                choreography portfolio
+              </Link>
+              .
             </p>
           </section>
 

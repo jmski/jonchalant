@@ -1,6 +1,7 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { EnsoCircle } from "@/components/decorative";
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
 
@@ -225,6 +226,14 @@ export default async function About() {
 
               <p className="text-lg text-slate-700 leading-relaxed">
                 The world needs more leaders who think before they act, who listen deeply, and who lead from authenticity. That's you.
+              </p>
+
+              <p className="text-sm text-slate-600 pt-4">
+                See how these principles translate to movement and presence in my{' '}
+                <Link href="/dance" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                  choreography portfolio
+                </Link>
+                .
               </p>
             </div>
 

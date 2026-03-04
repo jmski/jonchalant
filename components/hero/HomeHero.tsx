@@ -46,6 +46,7 @@ export default function HomeHero() {
                   for Introverts
                 </div>
               </h1>
+            </div>
 
             {/* Thin accent line (Ma principle) */}
             <div className="h-px w-16" style={{ backgroundColor: 'var(--accent-primary)' }} />
