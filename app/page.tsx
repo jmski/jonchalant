@@ -1,6 +1,7 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
 import { Marquee } from '@/components/effects';
+import { FeaturedBlogSection } from '@/components/sections';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -460,6 +461,9 @@ export default async function Home() {
             )}
           </div>
         </section>
+
+        {/* FEATURED BLOG SECTION */}
+        <FeaturedBlogSection />
 
         {/* FINAL CTA */}
         <section className="py-12 sm:py-16">
