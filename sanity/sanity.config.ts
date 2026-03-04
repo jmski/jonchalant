@@ -2,6 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import aboutPage from './schemas/aboutPage'
+import blogPost from './schemas/blogPost'
 import caseStudy from './schemas/caseStudy'
 import collaboration from './schemas/collaboration'
 import collaborationPackage from './schemas/collaborationPackage'
@@ -31,6 +32,7 @@ export default defineConfig({
   schema: {
     types: [
       aboutPage,
+      blogPost,
       caseStudy,
       collaboration,
       collaborationPackage,
