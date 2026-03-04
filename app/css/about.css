@@ -10,6 +10,44 @@
   min-height: 100vh;
 }
 
+/* Section Wrappers - Full-width backgrounds */
+.about-section-wrapper {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.about-section-hero {
+  background-color: var(--bg-primary);
+}
+
+.about-section-origin {
+  background-color: var(--bg-secondary);
+}
+
+.about-section-stats {
+  background-color: var(--bg-tertiary);
+}
+
+.about-section-services {
+  background-color: var(--bg-primary);
+}
+
+.about-section-philosophy {
+  background-color: var(--bg-secondary);
+}
+
+.about-section-introvert {
+  background-color: var(--bg-primary);
+}
+
+.about-section-cta {
+  background-color: var(--bg-tertiary);
+}
+
 /* Hero Section */
 .about-hero-section {
   margin-bottom: 2rem;
@@ -113,7 +151,6 @@
 
 /* Origin Story Section */
 .about-origin-section {
-  margin-bottom: 6rem;
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem;
@@ -208,16 +245,7 @@
 
 /* Stats Section */
 .about-stats-section {
-  background-color: var(--bg-secondary);
-  padding: 3rem 2rem;
-  border-radius: 0.5rem;
-  margin-bottom: 6rem;
-}
-
-@media (min-width: 640px) {
-  .about-stats-section {
-    padding: 4rem 2rem;
-  }
+  padding: 0;
 }
 
 .about-stats-header {
@@ -287,7 +315,7 @@
 
 /* What I Coach Section */
 .about-services-section {
-  margin-bottom: 6rem;
+  padding: 0;
 }
 
 .about-services-header {
@@ -355,7 +383,7 @@
 
 /* Philosophy Section */
 .about-philosophy-section {
-  margin-bottom: 6rem;
+  padding: 0;
 }
 
 .about-philosophy-header {
@@ -424,7 +452,6 @@
 
 /* Introvert Advantage Section */
 .about-introvert-section {
-  margin-bottom: 6rem;
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem;
@@ -503,5 +530,5 @@
 
 /* CTA Section */
 .about-cta-section {
-  padding: 4rem 0;
+  padding: 0;
 }
