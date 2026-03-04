@@ -12,12 +12,28 @@
 
 /* Section Wrappers - Full-width backgrounds */
 .about-section-wrapper {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding: 4rem 2rem;
+}
+
+@media (min-width: 640px) {
+  .about-section-wrapper {
+    width: calc(100% + 6rem);
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding: 6rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-section-wrapper {
+    width: calc(100% + 8rem);
+    margin-left: -4rem;
+    margin-right: -4rem;
+    padding: 6rem 4rem;
+  }
 }
 
 .about-section-hero {
@@ -50,22 +66,10 @@
 
 /* Hero Section */
 .about-hero-section {
-  margin-bottom: 2rem;
-  padding: 3rem 0;
+  margin-bottom: 0;
+  padding: 0;
   position: relative;
   overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .about-hero-section {
-    padding: 4rem 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .about-hero-section {
-    padding: 5rem 0;
-  }
 }
 
 /* Hero Background Gradient */

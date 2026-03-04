@@ -67,7 +67,7 @@ export default async function About() {
       <PageTransition animation="blur">
         {/* HERO SECTION */}
         <div className="about-section-wrapper about-section-hero">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" id="main-content">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="main-content">
             <section className="about-hero-section">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 about-hero-container">
                 {aboutContent?.heroHeadline ? (
@@ -91,7 +91,7 @@ export default async function About() {
 
         {/* ORIGIN STORY - 60/40 LAYOUT */}
         <div className="about-section-wrapper about-section-origin">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <section className="about-origin-section">
               <div className="about-origin-content">
                 {aboutContent?.originSectionHeadline ? (
@@ -135,7 +135,7 @@ export default async function About() {
 
         {/* KEY STATS */}
         <div className="about-section-wrapper about-section-stats">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <section className="about-stats-section">
               <div className="about-stats-header">
                 <h2 className="about-stats-title">Proven Results From Real Leaders</h2>
@@ -166,7 +166,7 @@ export default async function About() {
 
         {/* WHAT I COACH - Now fetching from Sanity services */}
         <div className="about-section-wrapper about-section-services">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <section className="about-services-section">
               <div className="about-services-header">
                 <h2 className="about-services-title">
@@ -201,7 +201,7 @@ export default async function About() {
 
         {/* MY PHILOSOPHY */}
         <div className="about-section-wrapper about-section-philosophy">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <section className="about-philosophy-section">
               <div className="about-philosophy-header">
                 <h2 className="about-philosophy-title">
@@ -241,7 +241,7 @@ export default async function About() {
 
         {/* INTROVERT ADVANTAGE */}
         <div className="about-section-wrapper about-section-introvert">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <section className="about-introvert-section">
               <div className="about-introvert-content">
                 <h2 className="about-introvert-title">
@@ -284,7 +284,7 @@ export default async function About() {
 
         {/* CTA */}
         <div className="about-section-wrapper about-section-cta">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <section className="about-cta-section">
               <CTASection
                 title="Your Presence Matters. Let's Amplify It."
