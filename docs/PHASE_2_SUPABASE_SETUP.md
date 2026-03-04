@@ -67,6 +67,7 @@ CREATE INDEX idx_inquiries_email ON public.inquiries(email);
 ```
 
 Click **Run** button to execute. You should see:
+
 - ✅ Table `public.inquiries` created
 - ✅ RLS enabled
 - ✅ Policies created
@@ -98,6 +99,7 @@ Once Supabase is set up:
 3. Contact form component will submit to this API
 
 Test with:
+
 ```bash
 npm run dev
 # Visit http://localhost:3000/contact
@@ -110,16 +112,19 @@ npm run dev
 ## Troubleshooting
 
 **Table doesn't appear?**
+
 - Check SQL Editor output for errors
 - Try running SQL again (should be idempotent)
 - Clear browser cache and refresh
 
 **Submissions not appearing?**
+
 - Check `.env.local` has correct `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - Check browser console for fetch errors
 - Check server logs: `npm run dev` terminal output
 
 **"403 Forbidden" error?**
+
 - RLS policy might be too restrictive
 - Ensure INSERT policy allows anonymous: `WITH CHECK (true)`
 
@@ -127,11 +132,11 @@ npm run dev
 
 ## What Each Policy Does
 
-| Policy                    | Allows                          | Used By           |
-| ------------------------- | ------------------------------- | ----------------- |
-| `Allow anonymous inserts` | Anyone can submit forms         | Form submissions  |
-| `Authenticated select`     | Jon can view all inquiries      | Dashboard (future)|
-| `Authenticated update`     | Jon can update inquiry status   | Dashboard (future)|
+| Policy                    | Allows                        | Used By            |
+| ------------------------- | ----------------------------- | ------------------ |
+| `Allow anonymous inserts` | Anyone can submit forms       | Form submissions   |
+| `Authenticated select`    | Jon can view all inquiries    | Dashboard (future) |
+| `Authenticated update`    | Jon can update inquiry status | Dashboard (future) |
 
 ---
 
