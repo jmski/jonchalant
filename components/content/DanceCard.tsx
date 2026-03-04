@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { getOptimizedImageProps } from '@/lib/imageConfig';
 
-interface PortfolioCardProps {
+interface DanceCardProps {
   title: string;
   description: string;
   image?: string;
@@ -11,13 +11,13 @@ interface PortfolioCardProps {
   link?: string;
 }
 
-export default function PortfolioCard({
+export default function DanceCard({
   title,
   description,
   image,
   category,
   link,
-}: PortfolioCardProps) {
+}: DanceCardProps) {
   const [shinePosition, setShinePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -102,7 +102,7 @@ export default function PortfolioCard({
 
   if (link) {
     return (
-      <a href={link} className="no-underline block transition-all duration-300">
+      <a href={link} className="block transition-all duration-300">
         {content}
       </a>
     );

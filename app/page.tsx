@@ -223,7 +223,7 @@ export default async function Home() {
                 <a
                   key={idx}
                   href={item.href}
-                  className="group relative border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full no-underline"
+                  className="group relative border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full"
                 >
                   {/* Visual header with gradient */}
                   <div className={`bg-linear-to-br ${item.bgColor} h-40 flex flex-col items-center justify-center relative overflow-hidden`}>

@@ -85,7 +85,7 @@ export default function Contact() {
                           href={method.href}
                           target={method.href.startsWith('http') ? '_blank' : undefined}
                           rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="border-l-4 pl-8 no-underline group block transition-all duration-300"
+                          className="border-l-4 pl-8 group block transition-all duration-300"
                           style={{ borderColor: 'var(--accent-primary)' }}
                         >
                           <div className="flex items-start gap-4">

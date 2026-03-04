@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { PortfolioCard } from './index';
+import { DanceCard } from './index';
 import { ScrollFade, ScrollStagger } from '@/components/animations';
 
 interface DanceItem {
@@ -72,7 +72,7 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className="relative group px-6 py-3 font-black uppercase tracking-[0.1em] text-sm transition-all duration-300 overflow-hidden"
+                  className="relative group px-6 py-3 font-black uppercase tracking-widest text-sm transition-all duration-300 overflow-hidden"
                   style={{
                     borderWidth: isActive ? '3px' : '2px',
                     borderStyle: 'solid',
@@ -120,7 +120,7 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
             <div key={displayCategory}>
               <div className="mb-8 pb-4 border-b-3" style={{ borderColor: colorVar }}>
                 <h3 
-                  className="text-3xl font-black uppercase heading-display tracking-[0.1em]"
+                  className="text-3xl font-black uppercase heading-display tracking-widest"
                   style={{ color: colorVar }}
                 >
                   ▶ {displayName}
@@ -131,7 +131,7 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {itemsToDisplay.map((item, idx) => (
                     <div key={item._id} className="group relative">
-                      <PortfolioCard
+                      <DanceCard
                         title={item.title}
                         category={item.category}
                         description={item.description}

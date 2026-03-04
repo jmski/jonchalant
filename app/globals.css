@@ -5,147 +5,36 @@
    GLOBAL CSS - THE KINETIC LEADER DESIGN SYSTEM
    
    Modern Zen aesthetic: Editorial typography, generous spacing, minimal decoration.
-   All CSS organized by functionality for maintainability.
+   CSS organized by cascade layers for maintainability and predictability.
    ============================================================================ */
 
-@import "./css/variables.css";
-@import "./css/animations.css";
-@import "./css/base.css";
-@import "./css/typography.css";
-@import "./css/editorial.css";
-@import "./css/utilities.css";
-@import "./css/components.css";
-@import "./css/interactions.css";
-@import "./css/layout.css";
-@import "./css/responsive.css";
+/* CSS Layers define cascade priority (earlier = lower priority) */
+@layer reset, variables, base, components, utilities, interactive;
 
-/* ============================================================================
-   CSS MODULE OVERVIEW
-   
-   variables.css (134 lines)
-   ├─ CSS custom properties (fonts, colors, spacing, timing)
-   ├─ Light theme definitions
-   ├─ Dark theme definitions
-   └─ Earthy theme definitions
-   
-   animations.css (395 lines)
-   ├─ @keyframes for all animation effects
-   ├─ Page transitions (fade, slide, scale)
-   ├─ Scroll-triggered animations
-   └─ Tailwind animation utilities
-   
-   base.css (167 lines)
-   ├─ Global HTML/body styles
-   ├─ Typography base styles
-   ├─ Form resets and defaults
-   └─ Foundational page structure
-   
-   typography.css (~150 lines)
-   ├─ Font family definitions
-   ├─ Heading styles (h1-h6)
-   ├─ Text sizing and line-height utilities
-   └─ Text selection and styling
-   
-   utilities.css (340 lines)
-   ├─ Color utilities (.bg-*, .text-*, .border-*)
-   ├─ Spacing and layout utilities
-   ├─ Pattern and glow effects
-   └─ Flexible, reusable CSS classes
-   
-   components.css (~600 lines)
-   ├─ Card styles (.card, .card-outlined, .card-schematic)
-   ├─ Button styles (.btn, .btn-primary, .btn-outline)
-   ├─ Form elements (input, textarea, select, label)
-   ├─ Badges, links, navigation
-   ├─ Table of contents (TOC)
-   ├─ Breadcrumb navigation
-   └─ Theme controls
-   
-   layout.css (~200 lines)
-   ├─ Container and grid systems
-   ├─ Article grid layout
-   ├─ Sidebar layout system
-   ├─ Multi-column layouts
-   └─ Mobile navigation toggles
-   
-   responsive.css (~300 lines)
-   ├─ Media queries for all breakpoints
-   ├─ Mobile-first responsive overrides
-   │  ├─ ≤480px (extra small phones)
-   │  ├─ ≤767px (mobile devices)  
-   │  ├─ 768-1023px (tablets)
-   │  └─ ≥1024px (desktop)
-   └─ Print styles for paper/PDF output
-   
-   ============================================================================
-   
-   DESIGN PRINCIPLES:
-   
-   ✅ MOBILE-FIRST
-      Define base styles for mobile, override for larger screens
-   
-   ✅ SEMANTIC
-      Use meaningful class names (.card, .btn-primary, .sidebar)
-   
-   ✅ REUSABLE
-      Build with utility-first approach (spacing, colors, patterns)
-   
-   ✅ MAINTAINABLE
-      Organize CSS by function, not by page
-   
-   ✅ PERFORMANT
-      Use CSS variables for theme switching (no layout reflow)
-   
-   ✅ ACCESSIBLE
-      Minimum 48px touch targets, proper contrast, focus states
-   
-   ============================================================================
-   
-   USAGE QUICK REFERENCE:
-   
-   Color Classes:
-     .bg-primary, .bg-secondary, .bg-tertiary
-     .text-primary, .text-secondary, .text-tertiary
-     .border-primary, .border-accent
-   
-   Spacing Classes:
-     .card-padding, .card-padding-lg
-     .section-spacing, .section-spacing-lg
-   
-   Component Examples:
-     <div class="card"> ... </div>
-     <button class="btn btn-primary"> Click Me </button>
-     <input class="form-input" />
-     <span class="badge badge-accent"> Label </span>
-   
-   Theme Switching:
-     <html data-theme="default"> (light mode)
-     <html data-theme="dark">    (dark mode)
-     <html data-theme="earthy">  (earthy mode)
-   
-   Responsive Classes:
-     .hidden-mobile  (hidden on ≤767px)
-     .hidden-desktop (shown only on ≤767px)
-   
-   ============================================================================
-   
-   REFACTORING IMPACT:
-   
-   Before Refactoring:
-   • Single 2,649-line globals.css file
-   • Difficult to locate specific styles
-   • Hard to maintain across changes
-   • High cognitive load when editing
-   
-   After Refactoring:
-   • 8 focused CSS modules (total ~2,400 lines)
-   • Easy to navigate and understand
-   • Clear responsibility for each file
-   • Faster development and debugging
-   • Better team collaboration
-   
-   Time to Find & Change a Style:
-   Before: ~30 minutes (searching 2,600+ lines)
-   After:  ~5 minutes (focused module, 300-600 lines)
-   
-   ============================================================================ */
+/* Design System Foundation */
+@layer variables {
+  @import "./css/variables.css";
+}
+
+/* Global Reset & HTML/Body Styles */
+@layer base {
+  @import "./css/base.css";
+}
+
+/* Reusable Components (buttons, cards, forms, etc.) */
+@layer components {
+  @import "./css/components.css";
+  @import "./css/typography.css";
+  @import "./css/layout.css";
+}
+
+/* Utility Classes & Patterns */
+@layer utilities {
+  @import "./css/utilities.css";
+  @import "./css/responsive.css";
+}
+
+/* Interactive Effects (hover, focus, animations) */
+@layer interactive {
+  @import "./css/interactions.css";
+}

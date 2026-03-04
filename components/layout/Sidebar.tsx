@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { getContactInfo } from '@/lib/sanity';
 
 const SITE_SECTIONS = [
   {
@@ -29,6 +30,12 @@ const SITE_SECTIONS = [
   },
 ];
 
+interface SocialLink {
+  label: string;
+  href: string;
+  icon: string;
+}
+
 interface SidebarProps {
   isOpen?: boolean;
   onClose?: () => void;
@@ -37,10 +44,36 @@ interface SidebarProps {
 export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    const fetchSocialLinks = async () => {
+      try {
+        const contactInfo = await getContactInfo();
+        if (contactInfo?.contactMethods) {
+          // Filter only social media links and map to SocialLink
+          const socials = contactInfo.contactMethods
+            .filter((method) => ['Instagram', 'TikTok', 'YouTube'].includes(method.label))
+            .map((method) => ({
+              label: method.label,
+              href: method.href,
+              icon: method.label.toLowerCase().includes('instagram') ? 'ig' : method.label.toLowerCase().includes('youtube') ? 'yt' : 'tk',
+            }));
+          setSocialLinks(socials);
+        }
+      } catch (error) {
+        console.error('Error fetching social links:', error);
+      }
+    };
+
+    if (mounted) {
+      fetchSocialLinks();
+    }
+  }, [mounted]);
 
   const handleLinkClick = () => {
     if (onClose) onClose();
@@ -52,7 +85,7 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     <aside className={`sidebar ${isOpen ? 'mobile-open' : ''}`}>
       {/* Sidebar Header */}
       <div className="sidebar-header">
-        <h1>JONCHALON</h1>
+        <h6>JONCHALON</h6>
       </div>
 
       {/* Sidebar Sections */}
@@ -86,7 +119,23 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
       </nav>
 
       {/* Sidebar Footer */}
-      <div className="sidebar-footer"></div>
+      <div className="sidebar-footer">
+        <div className="social-links">
+          {socialLinks.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              title={social.label}
+              aria-label={social.label}
+            >
+              <span className="social-icon">{social.icon}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </aside>
   );
 }
