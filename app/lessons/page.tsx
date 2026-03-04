@@ -97,7 +97,7 @@ export default async function Lessons() {
 
   return (
     <div className="lessons-main">
-      <PageTransition animation="slide-right">
+      <PageTransition animation="fade">
         {/* HERO */}
         <SectionWrapper variant="primary">
           <SectionContent>

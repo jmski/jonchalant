@@ -64,7 +64,7 @@ export default async function About() {
 
   return (
     <div className="about-main">
-      <PageTransition animation="blur">
+      <PageTransition animation="fade">
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>

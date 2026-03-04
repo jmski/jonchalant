@@ -76,7 +76,7 @@ export default async function Dance() {
 
   return (
     <div className="dance-main">
-      <PageTransition animation="slide-left">
+      <PageTransition animation="fade">
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>

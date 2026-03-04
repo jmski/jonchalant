@@ -83,7 +83,7 @@ export default async function MediaKit() {
 
   return (
     <div className="media-kit-main">
-      <PageTransition animation="scale">
+      <PageTransition animation="fade">
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>

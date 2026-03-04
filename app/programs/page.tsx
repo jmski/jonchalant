@@ -96,7 +96,7 @@ export default async function Programs() {
         }}
       />
       
-      <PageTransition animation="scale">
+      <PageTransition animation="fade">
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>

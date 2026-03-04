@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { client } from '@/lib/sanity';
 import { Heading, TextLink } from '@/components/typography';
 import { CTASection } from '@/components/sections';
-import { SectionWrapper, SectionContent } from '@/components/layout';
+import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout';
 import { ScrollStagger, ScrollStaggerItem } from '@/components/animations';
 import '@/app/css/blog.css';
 
@@ -59,6 +59,7 @@ export default async function BlogPage() {
 
   return (
     <main className="blog-page-main">
+      <PageTransition animation="fade">
       {/* Header */}
       <SectionWrapper variant="primary">
         <SectionContent>
@@ -183,6 +184,7 @@ export default async function BlogPage() {
           </section>
         </SectionContent>
       </SectionWrapper>
+      </PageTransition>
     </main>
   );
 }
