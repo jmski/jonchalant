@@ -9,8 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "sanity:dev": "cd sanity && npm run dev",
-    "sanity:deploy": "cd sanity && npm run deploy",
-    "migrate:data": "node scripts/migrate-to-sanity.mjs"
+    "sanity:deploy": "cd sanity && npm run deploy"
   },
   "dependencies": {
     "@sanity/client": "^6.29.1",

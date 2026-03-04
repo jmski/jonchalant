@@ -3,6 +3,7 @@ import { client } from '@/lib/sanity';
 import { Heading, TextLink } from '@/components/typography';
 import { CTASection } from '@/components/sections';
 import { SectionWrapper, SectionContent } from '@/components/layout';
+import { ScrollStagger, ScrollStaggerItem } from '@/components/animations';
 import '@/app/css/blog.css';
 
 export const metadata: Metadata = {
@@ -78,37 +79,41 @@ export default async function BlogPage() {
           <SectionContent>
             <section>
               <h2 className="blog-featured-title">Featured</h2>
-              <div className="blog-featured-grid">
-                {featuredPosts.map((post) => (
-                  <article key={post._id} className="blog-featured-card">
-                    <TextLink href={`/blog/${post.slug.current}`}>
-                      <div className="blog-featured-card-inner">
-                        <div className="blog-featured-card-header">
-                          <span className="blog-featured-card-pillar">
-                            {post.pillar}
-                          </span>
-                          {post.readingTime && (
-                            <span className="blog-featured-card-readtime">
-                              {post.readingTime} min read
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="blog-featured-card-title">
-                          {post.title}
-                        </h3>
-                        {post.excerpt && (
-                          <p className="blog-featured-card-excerpt">
-                            {post.excerpt}
-                          </p>
-                        )}
-                        <div className="blog-featured-card-cta">
-                          Read Article →
-                        </div>
-                      </div>
-                    </TextLink>
-                  </article>
-                ))}
-              </div>
+              <ScrollStagger>
+                <div className="blog-featured-grid">
+                  {featuredPosts.map((post) => (
+                    <ScrollStaggerItem key={post._id}>
+                      <article className="blog-featured-card">
+                        <TextLink href={`/blog/${post.slug.current}`}>
+                          <div className="blog-featured-card-inner">
+                            <div className="blog-featured-card-header">
+                              <span className="blog-featured-card-pillar">
+                                {post.pillar}
+                              </span>
+                              {post.readingTime && (
+                                <span className="blog-featured-card-readtime">
+                                  {post.readingTime} min read
+                                </span>
+                              )}
+                            </div>
+                            <h3 className="blog-featured-card-title">
+                              {post.title}
+                            </h3>
+                            {post.excerpt && (
+                              <p className="blog-featured-card-excerpt">
+                                {post.excerpt}
+                              </p>
+                            )}
+                            <div className="blog-featured-card-cta">
+                              Read Article →
+                            </div>
+                          </div>
+                        </TextLink>
+                      </article>
+                    </ScrollStaggerItem>
+                  ))}
+                </div>
+              </ScrollStagger>
             </section>
           </SectionContent>
         </SectionWrapper>
@@ -125,37 +130,41 @@ export default async function BlogPage() {
                 <p className="blog-empty-message">No blog posts yet. Check back soon!</p>
               </div>
             ) : (
-              <div className="blog-posts-list">
-                {regularPosts.map((post) => (
-                  <article key={post._id} className="blog-list-card">
-                    <TextLink href={`/blog/${post.slug.current}`} className="blog-list-card-content">
-                      <div className="blog-list-card-body">
-                        <div className="blog-list-card-meta">
-                          <span className="blog-list-card-pillar">
-                            {post.pillar}
-                          </span>
-                          {post.readingTime && (
-                            <span className="blog-list-card-readtime">
-                              {post.readingTime} min read
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="blog-list-card-title">
-                          {post.title}
-                        </h3>
-                        {post.excerpt && (
-                          <p className="blog-list-card-excerpt">
-                            {post.excerpt}
-                          </p>
-                        )}
-                      </div>
-                      <div className="blog-list-card-action">
-                        Read →
-                      </div>
-                    </TextLink>
-                  </article>
-                ))}
-              </div>
+              <ScrollStagger>
+                <div className="blog-posts-list">
+                  {regularPosts.map((post) => (
+                    <ScrollStaggerItem key={post._id}>
+                      <article className="blog-list-card">
+                        <TextLink href={`/blog/${post.slug.current}`} className="blog-list-card-content">
+                          <div className="blog-list-card-body">
+                            <div className="blog-list-card-meta">
+                              <span className="blog-list-card-pillar">
+                                {post.pillar}
+                              </span>
+                              {post.readingTime && (
+                                <span className="blog-list-card-readtime">
+                                  {post.readingTime} min read
+                                </span>
+                              )}
+                            </div>
+                            <h3 className="blog-list-card-title">
+                              {post.title}
+                            </h3>
+                            {post.excerpt && (
+                              <p className="blog-list-card-excerpt">
+                                {post.excerpt}
+                              </p>
+                            )}
+                          </div>
+                          <div className="blog-list-card-action">
+                            Read →
+                          </div>
+                        </TextLink>
+                      </article>
+                    </ScrollStaggerItem>
+                  ))}
+                </div>
+              </ScrollStagger>
             )}
           </section>
         </SectionContent>
