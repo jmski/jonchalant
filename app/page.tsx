@@ -37,8 +37,8 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <PageTransition animation="fade">
+    <div className="bg-white">
+      <PageTransition animation="fade" className="-mt-6 lg:-mt-16">
         {/* HERO SECTION */}
         <HomeHero />
 
