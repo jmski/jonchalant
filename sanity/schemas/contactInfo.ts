@@ -22,6 +22,11 @@ export default defineType({
           name: 'contactMethod',
           fields: [
             defineField({
+              name: '_key',
+              type: 'string',
+              hidden: true,
+            }),
+            defineField({
               name: 'label',
               title: 'Label',
               type: 'string',

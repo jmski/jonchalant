@@ -34,6 +34,11 @@ export default defineType({
           name: 'focusItem',
           fields: [
             defineField({
+              name: '_key',
+              type: 'string',
+              hidden: true,
+            }),
+            defineField({
               name: 'title',
               title: 'Title',
               type: 'string',

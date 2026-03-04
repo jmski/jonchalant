@@ -23,6 +23,23 @@ export function urlFor(source: any) {
 }
 
 // ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+export interface ContactMethod {
+  label: string
+  value: string
+  href: string
+  description?: string
+  order?: number
+}
+
+export interface ContactInfo {
+  title?: string
+  contactMethods: ContactMethod[]
+}
+
+// ============================================================================
 // PORTFOLIO (Dance Videos)
 // ============================================================================
 
@@ -398,7 +415,7 @@ export async function getPageMetadata(page: string) {
 // CONTACT INFORMATION
 // ============================================================================
 
-export async function getContactInfo() {
+export async function getContactInfo(): Promise<ContactInfo | null> {
   const query = `*[_type == "contactInfo"][0] {
     title,
     contactMethods | order(order asc) {

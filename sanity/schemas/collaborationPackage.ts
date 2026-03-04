@@ -24,6 +24,11 @@ export default defineType({
           name: 'package',
           fields: [
             defineField({
+              name: '_key',
+              type: 'string',
+              hidden: true,
+            }),
+            defineField({
               name: 'name',
               title: 'Package Name',
               type: 'string',

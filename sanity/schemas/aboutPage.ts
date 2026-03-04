@@ -44,6 +44,11 @@ export default defineType({
           name: 'phase',
           fields: [
             defineField({
+              name: '_key',
+              type: 'string',
+              hidden: true,
+            }),
+            defineField({
               name: 'title',
               title: 'Phase Title',
               type: 'string',
@@ -70,6 +75,11 @@ export default defineType({
           name: 'stat',
           fields: [
             defineField({
+              name: '_key',
+              type: 'string',
+              hidden: true,
+            }),
+            defineField({
               name: 'label',
               title: 'Label',
               type: 'string',
@@ -95,6 +105,11 @@ export default defineType({
           type: 'object',
           name: 'philosophy',
           fields: [
+            defineField({
+              name: '_key',
+              type: 'string',
+              hidden: true,
+            }),
             defineField({
               name: 'title',
               title: 'Philosophy Title',
