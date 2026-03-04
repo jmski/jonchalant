@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
@@ -10,55 +10,81 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function AuthCallback() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const handleAuthCallback = async () => {
-      // Get the hash from the URL
-      const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      const token = hashParams.get('access_token');
-      const type = hashParams.get('type');
+      try {
+        // Supabase sends tokens in URL hash
+        const hashParams = new URLSearchParams(
+          typeof window !== 'undefined' ? window.location.hash.substring(1) : ''
+        );
+        const token = hashParams.get('access_token');
+        const tokenHash = hashParams.get('token_hash');
+        const type = hashParams.get('type');
 
-      console.log('Auth callback - token:', !!token, 'type:', type);
+        console.log('Auth callback params:', { token: !!token, tokenHash: !!tokenHash, type });
 
-      if (token && type === 'recovery') {
-        // Verify the token and establish session
-        const { data, error } = await supabase.auth.verifyOtp({
-          token_hash: token,
-          type: 'recovery',
-        });
+        // Handle recovery/password reset flow
+        if (tokenHash && type === 'recovery') {
+          const { data, error } = await supabase.auth.verifyOtp({
+            token_hash: tokenHash,
+            type: 'recovery',
+          });
 
-        console.log('Verify OTP result:', { user: data?.user?.email, error });
+          console.log('Verify recovery OTP:', { success: !!data.user, error: error?.message });
 
-        if (data.session) {
-          // Session verified, redirect to password reset page
-          router.push('/admin/reset-password');
-        } else if (error) {
-          console.error('Auth error:', error);
-          router.push('/admin/login?error=invalid_token');
+          if (data?.user && data?.session) {
+            // Store session and redirect to password reset
+            router.push('/admin/reset-password');
+            return;
+          } else if (error) {
+            console.error('Recovery error:', error);
+            router.push('/admin/login?error=invalid_token');
+            return;
+          }
         }
-      } else if (token && type === 'signup') {
-        // Email verification
-        const { data, error } = await supabase.auth.verifyOtp({
-          token_hash: token,
-          type: 'email',
-        });
 
-        if (data.session) {
-          router.push('/admin');
-        } else if (error) {
-          router.push('/admin/login?error=invalid_token');
+        // Handle email verification flow
+        if (tokenHash && type === 'email') {
+          const { data, error } = await supabase.auth.verifyOtp({
+            token_hash: tokenHash,
+            type: 'email',
+          });
+
+          if (data?.session) {
+            router.push('/admin');
+            return;
+          } else if (error) {
+            router.push('/admin/login?error=invalid_email_verification');
+            return;
+          }
         }
-      } else {
-        // No token, check if user is already logged in
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
 
+        // If we have an access token in URL, use it to establish session
+        if (token && hashParams.get('refresh_token')) {
+          const refreshToken = hashParams.get('refresh_token');
+          const { data, error } = await supabase.auth.setSession({
+            access_token: token,
+            refresh_token: refreshToken || '',
+          });
+
+          if (data?.session) {
+            router.push('/admin');
+            return;
+          }
+        }
+
+        // Fallback: check if user is already logged in
+        const { data: { session } } = await supabase.auth.getSession();
         if (session) {
           router.push('/admin');
         } else {
           router.push('/admin/login');
         }
+      } catch (error) {
+        console.error('Auth callback error:', error);
+        router.push('/admin/login?error=auth_failed');
       }
     };
 
@@ -66,10 +92,10 @@ export default function AuthCallback() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-        <p className="text-slate-600">Processing authentication...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+        <p className="text-slate-300">Verifying your credentials...</p>
       </div>
     </div>
   );
