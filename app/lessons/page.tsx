@@ -13,8 +13,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Leadership Lessons & Coaching | Jonchalant",
     description: "Master quiet command and executive presence through evidence-based lessons and body-aware techniques.",
-    type: "website"
-  }
+    type: "website",
+    url: "https://jonchalant.com/lessons",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-lessons-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Leadership Lessons & Coaching",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Leadership Lessons & Coaching | Jonchalant",
+    description: "Master quiet command and executive presence through evidence-based lessons.",
+    images: ["https://jonchalant.com/social/og-lessons-1200x630.png"],
+    creator: "@jonchalant",
+  },
 };
 
 export default async function Lessons() {
@@ -32,16 +49,16 @@ export default async function Lessons() {
 
   const LessonCategory = ({ level, pillarColor, lessons }: { level: string; pillarColor: string; lessons: any[] }) => (
     <section className="mb-24">
-      <div className="mb-12">
+      <div className="mb-12 pb-6 border-b border-slate-200">
         <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-          {level === 'Beginner' && 'Beginner Fundamentals'}
-          {level === 'Intermediate' && 'Intermediate Mastery'}
-          {level === 'Advanced' && 'Advanced Amplification'}
+          {level === 'Beginner' && '🎯 Beginner: Build Your Foundation'}
+          {level === 'Intermediate' && '🚀 Intermediate: Deepen Your Command'}
+          {level === 'Advanced' && '👑 Advanced: Master Your Impact'}
         </h2>
-        <p className="text-lg text-slate-700 max-w-2xl">
-          {level === 'Beginner' && 'Start here. Master the foundational skills of physical presence and social mechanics. Build the confidence that comes from knowing what to do and say.'}
-          {level === 'Intermediate' && 'Build on fundamentals. Advanced applications of the three pillars. Learn to manage energy, navigate complexity, and influence outcomes in professional settings.'}
-          {level === 'Advanced' && 'Command your field. Executive presence, system building, and scaling your influence. From personal mastery to organizational impact.'}
+        <p className="text-lg text-slate-700 max-w-3xl">
+          {level === 'Beginner' && 'Learn what presence actually is—and isn\'t. These fundamentals cover body awareness, vocal clarity, and the psychology of how people perceive authority. Master these first.'}
+          {level === 'Intermediate' && 'Apply the fundamentals in complex situations. Learn to read rooms, navigate power dynamics, manage your energy in high-stakes moments, and lead without being loud.'}
+          {level === 'Advanced' && 'Command rooms, shape culture, and amplify your influence across teams and organizations. Executive presence that scales and sustains.'}
         </p>
       </div>
 
@@ -130,9 +147,9 @@ export default async function Lessons() {
           {/* CTA */}
           <section className="py-16">
             <CTASection
-              title="Ready to Master Quiet Command?"
-              description="Choose a coaching program that matches your skill level, or start with a free Presence Audit to assess your baseline."
-              buttonText="Book Your Audit"
+              title="Learn Better with Coaching"
+              description="These lessons teach the frameworks. But transformation happens through application. Get personalized guidance, real-time feedback, and accountability through a coaching program."
+              buttonText="Find Your Program"
               buttonLink="/programs"
             />
           </section>

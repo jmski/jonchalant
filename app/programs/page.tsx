@@ -21,8 +21,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Leadership Coaching Programs | Jonchalant",
     description: "Transform your professional presence with 8-12 week coaching programs for introverts.",
-    type: "website"
-  }
+    type: "website",
+    url: "https://jonchalant.com/programs",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-programs-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Leadership Coaching Programs",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Leadership Coaching Programs | Jonchalant",
+    description: "Transform your professional presence with 8-12 week coaching programs.",
+    images: ["https://jonchalant.com/social/og-programs-1200x630.png"],
+    creator: "@jonchalant",
+  },
 };
 
 
@@ -123,8 +140,8 @@ export default async function Programs() {
                     letterSpacing: '-0.01em'
                   }}
                 >
-                  <div style={{ color: 'var(--text-primary)' }}>Your Path to</div>
-                  <div style={{ color: 'var(--accent-primary)' }}>Quiet Command</div>
+                  <div style={{ color: 'var(--text-primary)' }}>Transform Your</div>
+                  <div style={{ color: 'var(--accent-primary)' }}>Executive Presence</div>
                 </h1>
 
                 {/* Accent underline */}
@@ -141,7 +158,7 @@ export default async function Programs() {
                     maxWidth: '32rem'
                   }}
                 >
-                  Choose your learning path. Each program builds professional presence through the same proven methodology.
+                  Building quiet command isn't complicated. It's methodical. Pick your format and commit to the process.
                 </p>
 
                 {/* Description */}
@@ -289,9 +306,9 @@ export default async function Programs() {
           {/* CTA */}
           <section className="py-16">
             <CTASection
-              title="Still Unsure Which Program Is Right for You?"
-              description="Start with a free 30-minute Presence Audit. I'll assess your baseline, identify your biggest opportunities, and recommend the perfect program for your goals."
-              buttonText="SCHEDULE YOUR AUDIT"
+              title="Ready to Build Real Executive Presence?"
+              description="Don't guess which program is right. Schedule a free 30-minute Presence Audit where we'll assess where you are now, identify your biggest opportunities, and create a custom roadmap to get you there."
+              buttonText="Book Your Free Audit"
               buttonLink="/contact"
             />
           </section>

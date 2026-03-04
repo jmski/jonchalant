@@ -14,6 +14,23 @@ export const metadata: Metadata = {
     title: "Dance Choreography Portfolio | Jonchalant",
     description: "Professional choreography work: hip-hop, contemporary, freestyle, and original pieces.",
     type: "website",
+    url: "https://jonchalant.com/dance",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-dance-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Dance Choreography Portfolio",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dance Choreography Portfolio | Jonchalant",
+    description: "Professional choreography: hip-hop, contemporary, freestyle, and original pieces.",
+    images: ["https://jonchalant.com/social/og-dance-1200x630.png"],
+    creator: "@jonchalant",
   },
 };
 

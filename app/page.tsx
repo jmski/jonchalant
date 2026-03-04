@@ -16,6 +16,23 @@ export const metadata: Metadata = {
     title: "Executive Presence Coaching for Introverts | Jonchalant",
     description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for shy professionals and introverts.",
     type: "website",
+    url: "https://jonchalant.com",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-home-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Executive Presence Coaching for Introverts",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Executive Presence Coaching for Introverts | Jonchalant",
+    description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for introverts.",
+    images: ["https://jonchalant.com/social/og-home-1200x630.png"],
+    creator: "@jonchalant",
   },
 };
 

@@ -10,6 +10,23 @@ export const metadata: Metadata = {
     title: "Contact Jonchalant | Leadership & Choreography Services",
     description: "Reach out to discuss leadership coaching, choreography, or collaboration opportunities.",
     type: "website",
+    url: "https://jonchalant.com/contact",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-contact-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Contact Jonchalant",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Jonchalant",
+    description: "Get in touch for leadership coaching or collaboration inquiries.",
+    images: ["https://jonchalant.com/social/og-contact-1200x630.png"],
+    creator: "@jonchalant",
   },
 };
 

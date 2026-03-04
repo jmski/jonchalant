@@ -11,8 +11,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Media Kit & Collaboration | Jonchalant",
     description: "Explore audience insights, platform metrics, and partnership opportunities with Jonchalant.",
-    type: "website"
-  }
+    type: "website",
+    url: "https://jonchalant.com/media-kit",
+    siteName: "Jonchalant",
+    images: {
+      url: "https://jonchalant.com/social/og-media-kit-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Media Kit & Collaboration Opportunities",
+      type: "image/png",
+    },
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Media Kit & Collaboration | Jonchalant",
+    description: "Audience insights, platform metrics, and partnership opportunities.",
+    images: ["https://jonchalant.com/social/og-media-kit-1200x630.png"],
+    creator: "@jonchalant",
+  },
 };
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {

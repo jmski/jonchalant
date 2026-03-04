@@ -58,19 +58,19 @@ export default function ContactClient({
           <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-block">
-                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Direct Inquiry</span>
+                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Let's Talk</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900">
-                {pageMetadata?.headline || 'Get in Touch'}
+                {pageMetadata?.headline || 'Ready to Transform Your Presence?'}
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed">
-                {pageMetadata?.subheadline || 'Have a collaboration idea or question? I\'d love to hear from you.'}
+                {pageMetadata?.subheadline || 'Whether it\'s coaching, collaboration, or just questions—I\'m here to help. Let\'s discuss how we can build your executive presence together.'}
               </p>
 
               <p className="text-base text-slate-600">
-                Choose your preferred way to connect below.
+                The best way to start: Fill out the form below or reach out directly.
               </p>
             </div>
 
