@@ -1,49 +1,7 @@
 /* ============================================================================
    BLOG.CSS - Blog Post Page Styling
-   Uses CSS Variables from variables.css
+   Uses CSS Variables from variables.css and SectionWrapper component
    ============================================================================ */
-
-/* Section Wrappers - Full-width backgrounds with alternating colors */
-.blog-section-wrapper {
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding: 4rem 2rem;
-}
-
-@media (min-width: 640px) {
-  .blog-section-wrapper {
-    width: calc(100% + 6rem);
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding: 6rem 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .blog-section-wrapper {
-    width: calc(100% + 8rem);
-    margin-left: -4rem;
-    margin-right: -4rem;
-    padding: 6rem 4rem;
-  }
-}
-
-.blog-section-header {
-  background-color: var(--bg-primary);
-}
-
-.blog-section-featured {
-  background-color: var(--bg-secondary);
-}
-
-.blog-section-all {
-  background-color: var(--bg-primary);
-}
-
-.blog-section-cta {
-  background-color: var(--bg-tertiary);
-}
 
 /* Main Container */
 .blog-main {

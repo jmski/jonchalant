@@ -1,0 +1,59 @@
+/* ============================================================================
+   HERO SECTION - Reusable Hero Component CSS
+   
+   Provides consistent hero heading styling with proper typography hierarchy.
+   Uses CSS variables for colors and responsive sizing.
+   ============================================================================ */
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-subheading {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+  transition: color var(--transition-base);
+}
+
+.hero-heading {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: var(--leading-tight);
+  margin-bottom: 1.5rem;
+  transition: color var(--transition-base);
+}
+
+@media (min-width: 640px) {
+  .hero-heading {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-heading {
+    font-size: 3.75rem;
+  }
+}
+
+.hero-description {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 42rem;
+  margin-bottom: 2rem;
+  transition: color var(--transition-base);
+}
+
+@media (min-width: 640px) {
+  .hero-description {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+  }
+}

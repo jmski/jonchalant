@@ -1,46 +1,38 @@
 /* ============================================================================
    DANCE.CSS - Dance Portfolio Page Styling
-   Uses CSS Variables from variables.css
+   Uses CSS Variables from variables.css and SectionWrapper component
    ============================================================================ */
 
-/* Section Wrappers - Full-width backgrounds with alternating colors */
-.dance-section-wrapper {
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding: 4rem 2rem;
-}
-
-@media (min-width: 640px) {
-  .dance-section-wrapper {
-    width: calc(100% + 6rem);
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding: 6rem 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .dance-section-wrapper {
-    width: calc(100% + 8rem);
-    margin-left: -4rem;
-    margin-right: -4rem;
-    padding: 6rem 4rem;
-  }
-}
-
-.dance-section-hero {
+.dance-main {
+  min-height: 100vh;
   background-color: var(--bg-primary);
 }
 
-.dance-section-portfolio {
+.dance-approach-section {
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
   background-color: var(--bg-secondary);
 }
 
-.dance-section-approach {
-  background-color: var(--bg-primary);
+.dance-approach-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
 }
 
-.dance-section-cta {
-  background-color: var(--bg-tertiary);
+.dance-approach-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: var(--leading-relaxed);
+}
+
+.dance-approach-links {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.dance-approach-links .text-link {
+  font-weight: 600;
 }

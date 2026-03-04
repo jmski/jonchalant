@@ -1,0 +1,74 @@
+/* ============================================================================
+   GRID - Responsive Grid Layout Component CSS
+   
+   Provides responsive grid layout with configurable columns and gaps.
+   Uses mobile-first approach with responsive column adjustments.
+   ============================================================================ */
+
+.grid {
+  display: grid;
+}
+
+/* Column counts */
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Gap sizes */
+.gap-sm {
+  gap: 1rem;
+}
+
+.gap-md {
+  gap: 1.5rem;
+}
+
+.gap-lg {
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .gap-sm {
+    gap: 1.25rem;
+  }
+
+  .gap-md {
+    gap: 2rem;
+  }
+
+  .gap-lg {
+    gap: 2.5rem;
+  }
+}

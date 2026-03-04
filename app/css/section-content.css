@@ -1,0 +1,24 @@
+/* ============================================================================
+   SECTION CONTENT - Inner Content Container CSS
+   
+   Provides max-width constraint and responsive horizontal padding
+   for content inside SectionWrapper components.
+   ============================================================================ */
+
+.section-content {
+  max-width: 72rem; /* 1152px - 6xl Tailwind equivalent */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-content {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-content {
+    padding: 0 2rem;
+  }
+}

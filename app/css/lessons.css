@@ -1,50 +1,66 @@
 /* ============================================================================
    LESSONS.CSS - Lessons Page Styling
-   Uses CSS Variables from variables.css
+   Uses CSS Variables from variables.css and SectionWrapper component
    ============================================================================ */
 
-/* Section Wrappers - Full-width backgrounds with alternating colors */
-.lessons-section-wrapper {
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding: 4rem 2rem;
+.lessons-main {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.lessons-hero-intro {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.lessons-hero-title {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  line-height: var(--leading-tight);
 }
 
 @media (min-width: 640px) {
-  .lessons-section-wrapper {
-    width: calc(100% + 6rem);
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding: 6rem 3rem;
+  .lessons-hero-title {
+    font-size: 3rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .lessons-section-wrapper {
-    width: calc(100% + 8rem);
-    margin-left: -4rem;
-    margin-right: -4rem;
-    padding: 6rem 4rem;
+  .lessons-hero-title {
+    font-size: 3.75rem;
   }
 }
 
-.lessons-section-hero {
-  background-color: var(--bg-primary);
+.lessons-hero-description {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 42rem;
+  margin-bottom: 1rem;
 }
 
-.lessons-section-beginner {
+.lessons-hero-meta {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  margin-top: 1rem;
+}
+
+.lessons-supplemental-section {
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
   background-color: var(--bg-secondary);
 }
 
-.lessons-section-intermediate {
-  background-color: var(--bg-primary);
-}
-
-.lessons-section-advanced {
-  background-color: var(--bg-secondary);
-}
-
-.lessons-section-cta {
-  background-color: var(--bg-tertiary);
+.lessons-supplemental-text {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
 }

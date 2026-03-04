@@ -1,7 +1,7 @@
 import { CTASection } from "@/components/sections";
-import { PageTransition } from "@/components/layout";
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { TextLink } from "@/components/typography";
 import { BlueprintGrid } from "@/components/decorative";
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";

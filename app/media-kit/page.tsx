@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { PageTransition } from "@/components/layout";
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { TextLink } from "@/components/typography";
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
 import '@/app/css/media-kit.css';
 

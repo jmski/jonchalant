@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { client } from '@/lib/sanity';
-import { Heading } from '@/components/typography';
+import { Heading, TextLink } from '@/components/typography';
 import { CTASection } from '@/components/sections';
+import { SectionWrapper, SectionContent } from '@/components/layout';
 import '@/app/css/blog.css';
 
 export const metadata: Metadata = {
@@ -59,8 +59,8 @@ export default async function BlogPage() {
   return (
     <main className="blog-page-main">
       {/* Header */}
-      <div className="blog-section-wrapper blog-section-header">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionWrapper variant="primary">
+        <SectionContent>
           <div className="blog-page-header">
             <Heading level={1} className="blog-page-title">
               Leadership Blog
@@ -69,105 +69,111 @@ export default async function BlogPage() {
               Articles on executive presence, quiet command, confidence coaching, and leadership for introverts.
             </p>
           </div>
-        </div>
-      </div>
+        </SectionContent>
+      </SectionWrapper>
 
       {/* Featured Posts */}
       {featuredPosts.length > 0 && (
-        <div className="blog-section-wrapper blog-section-featured">
-          <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="blog-featured-title">Featured</h2>
-            <div className="blog-featured-grid">
-              {featuredPosts.map((post) => (
-                <article key={post._id} className="blog-featured-card">
-                  <Link href={`/blog/${post.slug.current}`}>
-                    <div className="blog-featured-card-inner">
-                      <div className="blog-featured-card-header">
-                        <span className="blog-featured-card-pillar">
-                          {post.pillar}
-                        </span>
-                        {post.readingTime && (
-                          <span className="blog-featured-card-readtime">
-                            {post.readingTime} min read
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <section>
+              <h2 className="blog-featured-title">Featured</h2>
+              <div className="blog-featured-grid">
+                {featuredPosts.map((post) => (
+                  <article key={post._id} className="blog-featured-card">
+                    <TextLink href={`/blog/${post.slug.current}`}>
+                      <div className="blog-featured-card-inner">
+                        <div className="blog-featured-card-header">
+                          <span className="blog-featured-card-pillar">
+                            {post.pillar}
                           </span>
+                          {post.readingTime && (
+                            <span className="blog-featured-card-readtime">
+                              {post.readingTime} min read
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="blog-featured-card-title">
+                          {post.title}
+                        </h3>
+                        {post.excerpt && (
+                          <p className="blog-featured-card-excerpt">
+                            {post.excerpt}
+                          </p>
                         )}
+                        <div className="blog-featured-card-cta">
+                          Read Article →
+                        </div>
                       </div>
-                      <h3 className="blog-featured-card-title">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="blog-featured-card-excerpt">
-                          {post.excerpt}
-                        </p>
-                      )}
-                      <div className="blog-featured-card-cta">
-                        Read Article →
-                      </div>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
+                    </TextLink>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </SectionContent>
+        </SectionWrapper>
       )}
 
       {/* All Posts */}
-      <div className="blog-section-wrapper blog-section-all">
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="blog-all-title">All Articles</h2>
-          
-          {posts.length === 0 ? (
-            <div className="blog-empty-state">
-              <p className="blog-empty-message">No blog posts yet. Check back soon!</p>
-            </div>
-          ) : (
-            <div className="blog-posts-list">
-              {regularPosts.map((post) => (
-                <article key={post._id} className="blog-list-card">
-                  <Link href={`/blog/${post.slug.current}`} className="blog-list-card-content">
-                    <div className="blog-list-card-body">
-                      <div className="blog-list-card-meta">
-                        <span className="blog-list-card-pillar">
-                          {post.pillar}
-                        </span>
-                        {post.readingTime && (
-                          <span className="blog-list-card-readtime">
-                            {post.readingTime} min read
+      <SectionWrapper variant="primary">
+        <SectionContent>
+          <section>
+            <h2 className="blog-all-title">All Articles</h2>
+            
+            {posts.length === 0 ? (
+              <div className="blog-empty-state">
+                <p className="blog-empty-message">No blog posts yet. Check back soon!</p>
+              </div>
+            ) : (
+              <div className="blog-posts-list">
+                {regularPosts.map((post) => (
+                  <article key={post._id} className="blog-list-card">
+                    <TextLink href={`/blog/${post.slug.current}`} className="blog-list-card-content">
+                      <div className="blog-list-card-body">
+                        <div className="blog-list-card-meta">
+                          <span className="blog-list-card-pillar">
+                            {post.pillar}
                           </span>
+                          {post.readingTime && (
+                            <span className="blog-list-card-readtime">
+                              {post.readingTime} min read
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="blog-list-card-title">
+                          {post.title}
+                        </h3>
+                        {post.excerpt && (
+                          <p className="blog-list-card-excerpt">
+                            {post.excerpt}
+                          </p>
                         )}
                       </div>
-                      <h3 className="blog-list-card-title">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="blog-list-card-excerpt">
-                          {post.excerpt}
-                        </p>
-                      )}
-                    </div>
-                    <div className="blog-list-card-action">
-                      Read →
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
-      </div>
+                      <div className="blog-list-card-action">
+                        Read →
+                      </div>
+                    </TextLink>
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
+        </SectionContent>
+      </SectionWrapper>
 
       {/* CTA Section */}
-      <div className="blog-section-wrapper blog-section-cta">
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <CTASection
-            title="Ready to Build Your Executive Presence?"
-            description="Get personalized guidance from an expert coach. Start with a free 30-minute presence audit."
-            buttonText="Schedule Your Free Audit"
-            buttonLink="/contact"
-          />
-        </section>
-      </div>
+      <SectionWrapper variant="tertiary">
+        <SectionContent>
+          <section>
+            <CTASection
+              title="Ready to Build Your Executive Presence?"
+              description="Get personalized guidance from an expert coach. Start with a free 30-minute presence audit."
+              buttonText="Schedule Your Free Audit"
+              buttonLink="/contact"
+            />
+          </section>
+        </SectionContent>
+      </SectionWrapper>
     </main>
   );
 }

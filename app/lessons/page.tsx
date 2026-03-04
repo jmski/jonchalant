@@ -1,6 +1,6 @@
 import { CTASection } from "@/components/sections";
-import { PageTransition } from "@/components/layout";
-import Link from 'next/link';
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
 import { getLessons } from "@/lib/sanity";
 import '@/app/css/lessons.css';
@@ -99,76 +99,76 @@ export default async function Lessons() {
     <div className="lessons-main">
       <PageTransition animation="slide-right">
         {/* HERO */}
-        <div className="lessons-section-wrapper lessons-section-hero">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <section>
-              <div className="inline-block mb-6">
-                <span className="text-sm uppercase tracking-widest font-medium text-slate-600">Structured Learning</span>
+              <div className="lessons-hero-intro">
+                <span>Structured Learning</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+              <h1 className="lessons-hero-title">
                 Master Quiet Command: Leadership Lessons
               </h1>
-              <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl">
+              <p className="lessons-hero-description">
                 Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
               </p>
-              <p className="text-base text-slate-600 mt-4">
+              <p className="lessons-hero-meta">
                 Organized by skill level: Beginner → Intermediate → Advanced
               </p>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* CONCEPT-TO-MOVEMENT LINK */}
-        <div className="lessons-section-wrapper lessons-section-supplemental">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <section className="p-8 bg-slate-50 rounded-lg border border-slate-200">
-              <p className="text-slate-700">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <section className="lessons-supplemental-section">
+              <p className="lessons-supplemental-text">
                 See these principles in motion: Watch how body awareness creates executive presence in my{' '}
-                <Link href="/dance" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                <TextLink href="/dance">
                   choreography portfolio
-                </Link>
+                </TextLink>
                 .
               </p>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* BEGINNER LESSONS */}
-        <div className="lessons-section-wrapper lessons-section-beginner">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <LessonCategory 
               level="Beginner" 
-              pillarColor="text-slate-900"
+              pillarColor="text-primary"
               lessons={lessons.filter((l) => l.category === 'Beginner')} 
             />
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
         
         {/* INTERMEDIATE LESSONS */}
-        <div className="lessons-section-wrapper lessons-section-intermediate">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             <LessonCategory 
               level="Intermediate" 
-              pillarColor="text-slate-900"
+              pillarColor="text-primary"
               lessons={lessons.filter((l) => l.category === 'Intermediate')} 
             />
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
         
         {/* ADVANCED LESSONS */}
-        <div className="lessons-section-wrapper lessons-section-advanced">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <LessonCategory 
               level="Advanced" 
-              pillarColor="text-slate-900"
+              pillarColor="text-primary"
               lessons={lessons.filter((l) => l.category === 'Advanced')} 
             />
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* CTA */}
-        <div className="lessons-section-wrapper lessons-section-cta">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
             <section>
               <CTASection
                 title="Learn Better with Coaching"
@@ -177,8 +177,8 @@ export default async function Lessons() {
                 buttonLink="/programs"
               />
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
       </PageTransition>
     </div>
   );

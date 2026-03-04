@@ -1,6 +1,6 @@
 /* ============================================================================
-   ABOUT.CSS - About Page Styling
-   Uses CSS Variables from variables.css
+   ABOUT.CSS - About Page Specific Styling
+   Uses CSS Variables from variables.css and SectionWrapper component
    ============================================================================ */
 
 /* Main Container */
@@ -10,42 +10,11 @@
   min-height: 100vh;
 }
 
-/* Section Wrappers - Full-width backgrounds */
-.about-section-wrapper {
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding: 4rem 2rem;
-}
-
-@media (min-width: 640px) {
-  .about-section-wrapper {
-    width: calc(100% + 6rem);
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding: 6rem 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .about-section-wrapper {
-    width: calc(100% + 8rem);
-    margin-left: -4rem;
-    margin-right: -4rem;
-    padding: 6rem 4rem;
-  }
-}
-
-.about-section-hero {
-  background-color: var(--bg-primary);
-}
-
-.about-section-origin {
-  background-color: var(--bg-secondary);
-}
-
-.about-section-stats {
-  background-color: var(--bg-tertiary);
+/* Loading States */
+.loading-state {
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-tertiary);
 }
 
 .about-section-services {

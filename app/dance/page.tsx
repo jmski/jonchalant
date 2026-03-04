@@ -1,9 +1,9 @@
 import { CTASection } from "@/components/sections";
-import { PageTransition } from "@/components/layout";
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { TextLink } from "@/components/typography";
 import { FluidShape } from "@/components/decorative";
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
 import '@/app/css/dance.css';
 
@@ -78,8 +78,8 @@ export default async function Dance() {
     <div className="dance-main">
       <PageTransition animation="slide-left">
         {/* HERO SECTION */}
-        <div className="dance-section-wrapper dance-section-hero">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             {featuredItem && (
               <FeaturedVideoHero
                 title={featuredItem.title}
@@ -90,44 +90,44 @@ export default async function Dance() {
                 publishedAt={featuredItem.publishedAt}
               />
             )}
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* PORTFOLIO FILTER */}
-        <div className="dance-section-wrapper dance-section-portfolio">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             <section>
               <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* APPROACH LINK */}
-        <div className="dance-section-wrapper dance-section-approach">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <section className="p-8 bg-slate-50 rounded-lg border border-slate-200">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4">Why Movement Matters for Leadership</h2>
-              <p className="text-slate-700 mb-4">
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <section className="dance-approach-section">
+              <h2 className="dance-approach-title">Why Movement Matters for Leadership</h2>
+              <p className="dance-approach-description">
                 Every piece in this portfolio demonstrates principles that directly transfer to executive presence. Your body communicates before your words do.
               </p>
-              <p className="text-sm text-slate-600">
+              <p className="dance-approach-links">
                 Learn more about how choreography principles translate to professional leadership in the{' '}
-                <Link href="/lessons" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                <TextLink href="/lessons">
                   leadership lessons
-                </Link>
+                </TextLink>
                 {' '}or{' '}
-                <Link href="/about" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                <TextLink href="/about">
                   about my approach
-                </Link>
+                </TextLink>
                 .
               </p>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* CTA */}
-        <div className="dance-section-wrapper dance-section-cta">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
             <section>
               <CTASection
                 title="Ready to Integrate Movement into Your Leadership?"
@@ -136,8 +136,8 @@ export default async function Dance() {
                 buttonLink="/contact"
               />
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
       </PageTransition>
     </div>
   );

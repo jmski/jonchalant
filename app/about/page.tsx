@@ -1,6 +1,6 @@
 import { CTASection } from "@/components/sections";
-import { PageTransition } from "@/components/layout";
-import Link from 'next/link';
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { TextLink } from "@/components/typography";
 import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
 import '@/app/css/about.css';
@@ -66,10 +66,10 @@ export default async function About() {
     <div className="about-main">
       <PageTransition animation="blur">
         {/* HERO SECTION */}
-        <div className="about-section-wrapper about-section-hero">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="main-content">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <section className="about-hero-section">
-              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 about-hero-container">
+              <div className="about-hero-container">
                 {aboutContent?.heroHeadline ? (
                   <>
                     <span className="about-hero-intro">Who I Am</span>
@@ -81,17 +81,17 @@ export default async function About() {
                     </p>
                   </>
                 ) : (
-                  <div className="py-16 text-center text-slate-600">Loading hero content...</div>
+                  <div className="loading-state">Loading hero content...</div>
                 )}
               </div>
               <div className="about-hero-divider"></div>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* ORIGIN STORY - 60/40 LAYOUT */}
-        <div className="about-section-wrapper about-section-origin">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             <section className="about-origin-section">
               <div className="about-origin-content">
                 {aboutContent?.originSectionHeadline ? (
@@ -121,7 +121,7 @@ export default async function About() {
                     </div>
                   </>
                 ) : (
-                  <div className="py-8 text-center text-slate-600">Loading origin story...</div>
+                  <div className="loading-state">Loading origin story...</div>
                 )}
               </div>
 
@@ -130,12 +130,12 @@ export default async function About() {
                 <p className="about-origin-image-text">Editorial Image Placeholder</p>
               </div>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* KEY STATS */}
-        <div className="about-section-wrapper about-section-stats">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
             <section className="about-stats-section">
               <div className="about-stats-header">
                 <h2 className="about-stats-title">Proven Results From Real Leaders</h2>
@@ -158,15 +158,15 @@ export default async function About() {
                   <p className="about-stats-footnote">*Of those who complete coaching programs</p>
                 </>
               ) : (
-                <div className="py-8 text-center text-slate-600">Loading stats...</div>
+                <div className="loading-state">Loading stats...</div>
               )}
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* WHAT I COACH - Now fetching from Sanity services */}
-        <div className="about-section-wrapper about-section-services">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <section className="about-services-section">
               <div className="about-services-header">
                 <h2 className="about-services-title">
@@ -190,18 +190,18 @@ export default async function About() {
                     </div>
                   ))
                 ) : (
-                  <div className="col-span-full py-8 text-center text-slate-600">
+                  <div className="loading-state">
                     Loading coaching services...
                   </div>
                 )}
               </div>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* MY PHILOSOPHY */}
-        <div className="about-section-wrapper about-section-philosophy">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             <section className="about-philosophy-section">
               <div className="about-philosophy-header">
                 <h2 className="about-philosophy-title">
@@ -230,18 +230,18 @@ export default async function About() {
                     </div>
                   ))
                 ) : (
-                  <div className="col-span-3 text-center py-8 text-slate-600">
+                  <div className="loading-state">
                     Loading philosophy content...
                   </div>
                 )}
               </div>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* INTROVERT ADVANTAGE */}
-        <div className="about-section-wrapper about-section-introvert">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <section className="about-introvert-section">
               <div className="about-introvert-content">
                 <h2 className="about-introvert-title">
@@ -258,9 +258,9 @@ export default async function About() {
 
                 <p className="about-introvert-cta-text">
                   See how these principles translate to movement and presence in my{' '}
-                  <Link href="/dance" className="about-introvert-link">
+                  <TextLink href="/dance">
                     choreography portfolio
-                  </Link>
+                  </TextLink>
                   .
                 </p>
               </div>
@@ -273,18 +273,18 @@ export default async function About() {
                     </div>
                   ))
                 ) : (
-                  <div className="col-span-2 text-center py-8 text-slate-600">
+                  <div className="loading-state">
                     Loading introvert traits...
                   </div>
                 )}
               </div>
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* CTA */}
-        <div className="about-section-wrapper about-section-cta">
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
             <section className="about-cta-section">
               <CTASection
                 title="Your Presence Matters. Let's Amplify It."
@@ -293,8 +293,8 @@ export default async function About() {
                 buttonLink="/contact"
               />
             </section>
-          </main>
-        </div>
+          </SectionContent>
+        </SectionWrapper>
       </PageTransition>
     </div>
   );
