@@ -4,18 +4,21 @@ import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
 
 export const metadata: Metadata = {
-  title: "Jonchalant | Leadership Coaching & Dance Choreography",
-  description: "Body-led leadership coaching for introverts. Build executive presence, quiet command, and professional confidence through movement-based coaching and choreography.",
+  title: "Leadership Coaching for Introverts | Executive Presence & Quiet Command | Jonchalant",
+  description: "Build executive presence and quiet command through body-aware leadership coaching. Transform your confidence with dance-based techniques designed for introverts and shy professionals.",
+  keywords: "leadership coaching for introverts, executive presence coaching, quiet command, confidence coaching, introvert leadership development, body-aware leadership, movement coaching",
   openGraph: {
-    title: "Jonchalant | Leadership Coaching & Choreography",
-    description: "Transform your presence and confidence through body-aware leadership coaching.",
+    title: "Leadership Coaching for Introverts | Executive Presence | Jonchalant",
+    description: "Build executive presence and quiet command through body-aware coaching. Originally trained in dance, Jon helps introverts develop professional confidence.",
     url: "https://jonchalant.com",
     type: "website",
+    siteName: "Jonchalant",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jonchalant | Leadership Coaching",
-    description: "Body-led leadership for introverts",
+    title: "Leadership Coaching for Introverts | Jonchalant",
+    description: "Build executive presence, quiet command, and professional confidence",
+    creator: "@jonchalant",
   },
 };
 

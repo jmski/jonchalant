@@ -1,9 +1,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import type { Metadata } from 'next';
 import { PageTransition } from "@/components/layout";
 import { getContactInfo, getPageMetadata, type ContactMethod } from "@/lib/sanity";
 import SegmentedInquiryForm from "@/components/forms/SegmentedInquiryForm";
+
+export const metadata: Metadata = {
+  title: "Contact & Inquiry | Leadership Coaching & Choreography Services | Jonchalant",
+  description: "Get in touch for leadership coaching, choreography services, or collaboration inquiries. Let's work together on your professional growth or creative project.",
+  keywords: "leadership coaching inquiry, choreography services, collaboration, contact coach, professional development, dance services",
+  openGraph: {
+    title: "Contact Jonchalant | Leadership & Choreography Services",
+    description: "Reach out to discuss leadership coaching, choreography, or collaboration opportunities.",
+    type: "website",
+  },
+};
 
 export default function Contact() {
   const [contactMethods, setContactMethods] = useState<ContactMethod[]>([]);

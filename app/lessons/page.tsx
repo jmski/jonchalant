@@ -6,8 +6,14 @@ import { getLessons } from "@/lib/sanity";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Leadership Lessons & Coaching | Jonchalant",
-  description: "Master quiet command, executive presence, and body-aware leadership through evidence-based lessons and communication frameworks for introverts."
+  title: "Leadership Lessons & Coaching | Evidence-Based Training | Jonchalant",
+  description: "Master quiet command, executive presence, and body-aware leadership through evidence-based lessons and communication frameworks for introverts.",
+  keywords: "leadership lessons, executive presence, quiet command, introvert leadership, body awareness, communication frameworks, executive coaching, subtle persuasion, nonverbal communication",
+  openGraph: {
+    title: "Leadership Lessons & Coaching | Jonchalant",
+    description: "Master quiet command and executive presence through evidence-based lessons and body-aware techniques.",
+    type: "website"
+  }
 };
 
 export default async function Lessons() {

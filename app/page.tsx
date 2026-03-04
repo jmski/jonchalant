@@ -6,8 +6,14 @@ import dynamic from 'next/dynamic';
 import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Executive Presence Coaching | Jonchalant",
-  description: "Leadership coaching for introverts. Build executive presence and quiet command through dance-based movement coaching. Transform your confidence in 8-12 weeks.",
+  title: "Executive Presence Coaching for Introverts | 8-Week Program | Jonchalant",
+  description: "Build executive presence and quiet command in 8-12 weeks. Leadership coaching for introverts using evidence-based, body-aware techniques. Master confident communication.",
+  keywords: "executive presence coaching, leadership coaching for introverts, quiet command, confidence coaching, introvert leadership, professional presence",
+  openGraph: {
+    title: "Executive Presence Coaching for Introverts | Jonchalant",
+    description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for shy professionals and introverts.",
+    type: "website",
+  },
 };
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {

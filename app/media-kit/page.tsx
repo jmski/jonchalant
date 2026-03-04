@@ -4,8 +4,14 @@ import { PageTransition } from "@/components/layout";
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Media Kit | Jonchalant",
-  description: "Audience insights, platform metrics, and collaboration opportunities. Connect with Jon on TikTok, Instagram, and YouTube."
+  title: "Media Kit & Collaboration Opportunities | TikTok, Instagram, YouTube | Jonchalant",
+  description: "Audience insights, platform metrics, and collaboration opportunities. Connect with Jon on TikTok, Instagram, and YouTube for brand partnerships.",
+  keywords: "media kit, creator collaboration, TikTok influencer, Instagram partnership, YouTube collaborations, brand creator, influencer marketing, social media metrics, content creator",
+  openGraph: {
+    title: "Media Kit & Collaboration | Jonchalant",
+    description: "Explore audience insights, platform metrics, and partnership opportunities with Jonchalant.",
+    type: "website"
+  }
 };
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {

@@ -6,8 +6,14 @@ import dynamic from 'next/dynamic';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Dance Choreography Portfolio | Jonchalant",
-  description: "Professional choreography portfolio featuring 30+ hip-hop, contemporary, and freestyle videos. Discover original choreography and performance work by Jon.",
+  title: "Dance Choreography Portfolio | Hip-Hop & Contemporary | Jonchalant",
+  description: "Explore professional choreography portfolio with 30+ original hip-hop and contemporary videos. Premium choreography for brands, events, and performers.",
+  keywords: "dance choreography, hip-hop choreography, contemporary dance, freestyle dance, professional choreographer, dance videos, movement coaching",
+  openGraph: {
+    title: "Dance Choreography Portfolio | Jonchalant",
+    description: "Professional choreography work: hip-hop, contemporary, freestyle, and original pieces.",
+    type: "website",
+  },
 };
 
 // Below-fold dynamic import

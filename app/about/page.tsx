@@ -5,8 +5,14 @@ import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "About Me | Jonchalant",
-  description: "Discover how Jon combines dance choreography expertise with leadership coaching to teach introverts quiet command, executive presence, and body-aware confidence."
+  title: "About Jon | Leadership Coach & Choreographer | Jonchalant",
+  description: "Learn how Jon combines professional dance choreography with leadership development to help introverts build executive presence, quiet command, and confident communication skills.",
+  keywords: "leadership coach introverts, choreographer, body-aware leadership, executive presence coach, introvert strengths, movement-based coaching",
+  openGraph: {
+    title: "About Jon | Leadership Coach & Choreographer | Jonchalant",
+    description: "Dance-trained leadership coach specializing in executive presence for introverts and shy professionals.",
+    type: "website",
+  },
 };
 
 export default async function About() {
