@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@supabase/supabase-js';
 
@@ -8,69 +8,75 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export default function AdminLogin() {
+export default function ResetPassword() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    // Check if user is already logged in
-    const checkAuth = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (session) {
-        router.push('/admin');
-      }
-    };
-
-    checkAuth();
-
-    // Check for error messages in URL
-    const params = new URLSearchParams(window.location.search);
-    const errorMsg = params.get('error');
-    if (errorMsg === 'invalid_token') {
-      setError('Reset link expired or invalid. Please request a new one.');
-    }
-  }, [router]);
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const { error: updateError } = await supabase.auth.updateUser({
+        password: newPassword,
       });
 
-      if (signInError) {
-        setError(signInError.message);
+      if (updateError) {
+        setError(updateError.message);
         setLoading(false);
         return;
       }
 
-      if (data.user) {
-        // Redirect to admin dashboard
+      setSuccess(true);
+      setTimeout(() => {
         router.push('/admin');
-      }
+      }, 2000);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
       setLoading(false);
     }
   };
 
+  if (success) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center px-4">
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-lg shadow-2xl p-8 text-center">
+            <div className="text-4xl mb-4">✓</div>
+            <h1 className="text-2xl font-bold text-slate-900 mb-2">Password Set!</h1>
+            <p className="text-slate-600 mb-4">
+              Your password has been set successfully. Redirecting to dashboard...
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-lg shadow-2xl p-8">
           <h1 className="text-3xl font-bold text-slate-900 mb-2 text-center">
-            Admin Dashboard
+            Set Your Password
           </h1>
-          <p className="text-slate-600 text-center mb-8">Sign in to manage inquiries</p>
+          <p className="text-slate-600 text-center mb-8">Create a password for your admin account</p>
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-6">
@@ -78,37 +84,39 @@ export default function AdminLogin() {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-6">
+          <form onSubmit={handleSetPassword} className="space-y-6">
             <div>
               <label
-                htmlFor="email"
+                htmlFor="newPassword"
                 className="block text-sm font-medium text-slate-900 mb-2"
               >
-                Email Address
+                New Password
               </label>
               <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="password"
+                id="newPassword"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 required
+                minLength={6}
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                placeholder="your@email.com"
+                placeholder="••••••••"
               />
+              <p className="text-xs text-slate-600 mt-1">At least 6 characters</p>
             </div>
 
             <div>
               <label
-                htmlFor="password"
+                htmlFor="confirmPassword"
                 className="block text-sm font-medium text-slate-900 mb-2"
               >
-                Password
+                Confirm Password
               </label>
               <input
                 type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 placeholder="••••••••"
@@ -120,13 +128,9 @@ export default function AdminLogin() {
               disabled={loading}
               className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Setting password...' : 'Set Password'}
             </button>
           </form>
-
-          <p className="text-center text-slate-600 text-sm mt-6">
-            Don't have an account? Contact support.
-          </p>
         </div>
       </div>
     </div>
