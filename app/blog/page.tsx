@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { client } from '@/lib/sanity';
 import { Heading } from '@/components/typography';
+import { CTASection } from '@/components/sections';
 
 export const metadata: Metadata = {
   title: 'Leadership Blog | Executive Presence & Quiet Command - Jonchalant',
@@ -91,7 +92,7 @@ export default async function BlogPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-accent transition-colors">
                         {post.title}
                       </h3>
                       {post.excerpt && (
@@ -99,7 +100,7 @@ export default async function BlogPage() {
                           {post.excerpt}
                         </p>
                       )}
-                      <div className="flex items-center text-blue-600 font-medium text-sm group-hover:translate-x-1 transition-transform">
+                      <div className="flex items-center text-accent font-medium text-sm group-hover:translate-x-1 transition-transform">
                         Read Article →
                       </div>
                     </div>
@@ -140,7 +141,7 @@ export default async function BlogPage() {
                             </span>
                           )}
                         </div>
-                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">
                           {post.title}
                         </h3>
                         {post.excerpt && (
@@ -149,7 +150,7 @@ export default async function BlogPage() {
                           </p>
                         )}
                       </div>
-                      <div className="shrink-0 text-blue-600 font-medium text-sm group-hover:translate-x-1 transition-transform whitespace-nowrap">
+                      <div className="shrink-0 text-accent font-medium text-sm group-hover:translate-x-1 transition-transform whitespace-nowrap">
                         Read →
                       </div>
                     </div>
@@ -162,20 +163,12 @@ export default async function BlogPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-slate-900 text-white">
-        <div className="max-w-2xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Build Your Executive Presence?</h2>
-          <p className="text-lg text-slate-300 mb-8">
-            Get personalized guidance from an expert coach. Start with a free 30-minute presence audit.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition-colors"
-          >
-            Schedule Your Free Audit
-          </Link>
-        </div>
-      </section>
+      <CTASection
+        title="Ready to Build Your Executive Presence?"
+        description="Get personalized guidance from an expert coach. Start with a free 30-minute presence audit."
+        buttonText="Schedule Your Free Audit"
+        buttonLink="/contact"
+      />
     </main>
   );
 }
