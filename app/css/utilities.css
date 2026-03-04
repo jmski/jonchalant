@@ -34,6 +34,12 @@
 .text-overlay {
   color: #ffffff;
 }
+
+/* Text White - Override element-level color rules */
+.text-white {
+  color: #ffffff !important;
+}
+
 .bg-overlay-light {
   background-color: rgba(255, 255, 255, 0.2);
 }
@@ -808,4 +814,41 @@
 }
 .fade-in {
   animation: fade-in var(--transition-base) ease-out;
+}
+/* ========== CONTAINER & OVERFLOW UTILITIES ========== */
+/* Prevent horizontal scrolling on mobile - Kaizen precision */
+.container,
+.max-w-container,
+.max-w-6xl {
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure all sections respect viewport bounds */
+section,
+article,
+main {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Mobile-safe padding utility */
+.responsive-px {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-px {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-px {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

@@ -7,14 +7,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sanity:dev": "cd sanity && npm run dev",
+    "sanity:deploy": "cd sanity && npm run deploy",
+    "migrate:data": "node scripts/migrate-to-sanity.mjs"
   },
   "dependencies": {
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^4.22.0",
     "dotenv": "^17.2.3",
     "next": "16.1.1",
+    "next-sanity": "^11.6.12",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "styled-components": "^6.3.8"
+    "sanity": "^4.22.0",
+    "styled-components": "^6.3.11"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

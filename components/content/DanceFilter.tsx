@@ -19,18 +19,19 @@ interface DanceFilterProps {
 }
 
 const getCategoryColor = (category: string): string => {
-  switch(category) {
-    case 'Choreography':
-    case 'Choreography Video':
+  const lowerCategory = category.toLowerCase();
+  switch(lowerCategory) {
+    case 'choreography':
+    case 'choreography video':
       return 'vibrant';
-    case 'Freestyle':
-    case 'Freestyle Video':
+    case 'freestyle':
+    case 'freestyle video':
       return 'secondary';
-    case 'Performance':
-    case 'Performances':
-    case 'Performance Video':
+    case 'performance':
+    case 'performances':
+    case 'performance video':
       return 'tertiary';
-    case 'All':
+    case 'all':
       return 'primary';
     default:
       return 'primary';
@@ -66,6 +67,7 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
               const color = getCategoryColor(cat);
               const colorVar = getColorVar(color);
               const isActive = cat === activeCategory;
+              const displayText = cat === 'All' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1);
 
               return (
                 <button
@@ -79,11 +81,11 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                     borderStyle: 'solid',
                     borderColor: colorVar,
                     backgroundColor: isActive ? colorVar : 'transparent',
-                    color: isActive ? 'var(--primary)' : colorVar,
+                    color: isActive ? 'white' : colorVar,
                   }}
                 >
                   <span className={glitchActive === cat && !isActive ? 'glitch-text' : ''}>
-                    {cat}
+                    {displayText}
                   </span>
                   {isActive && (
                     <div 
@@ -103,23 +105,19 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
 
       {/* Portfolio Grid - COLOR CODED BY CATEGORY */}
       <div className="space-y-16 pb-20">
-        {['Choreography', 'Freestyle', 'Performance', 'Other'].map((displayCategory) => {
-          const categoryItems = items.filter(item => {
-            if (displayCategory === 'Choreography') return item.category?.includes('Choreography');
-            if (displayCategory === 'Freestyle') return item.category?.includes('Freestyle');
-            if (displayCategory === 'Performance') return item.category?.includes('Performance');
-            return !item.category?.includes('Choreography') && !item.category?.includes('Freestyle') && !item.category?.includes('Performance');
-          });
+        {['choreography', 'freestyle', 'performance'].map((displayCategory) => {
+          const categoryItems = items.filter(item => item.category?.toLowerCase() === displayCategory);
 
-          if (activeCategory !== 'All' && !categoryItems.some(item => item.category === activeCategory)) {
-            return null;
-          }
+          // Skip this section if it's empty or if a specific category is selected and it's not this one
+          if (categoryItems.length === 0) return null;
+          if (activeCategory !== 'All' && activeCategory?.toLowerCase() !== displayCategory) return null;
 
-          const displayItems = activeCategory === 'All' ? categoryItems : filteredItems;
-          if (displayItems.length === 0 && activeCategory !== 'All') return null;
+          const itemsToDisplay = activeCategory === 'All' ? categoryItems : filteredItems;
+          if (itemsToDisplay.length === 0) return null;
 
           const color = getCategoryColor(displayCategory);
           const colorVar = getColorVar(color);
+          const displayName = displayCategory.charAt(0).toUpperCase() + displayCategory.slice(1);
 
           return (
             <div key={displayCategory}>
@@ -128,13 +126,13 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                   className="text-3xl font-black uppercase heading-display tracking-[0.1em]"
                   style={{ color: colorVar }}
                 >
-                  ▶ {displayCategory}
+                  ▶ {displayName}
                 </h3>
               </div>
               
               <ScrollStagger variant="slideInUp" staggerDelay={80}>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {(activeCategory === 'All' ? categoryItems : displayItems).map((item, idx) => (
+                  {itemsToDisplay.map((item, idx) => (
                     <div key={item._id} className="group relative">
                       <PortfolioCard
                         title={item.title}

@@ -33,6 +33,33 @@
   .section-spacing {
     padding: 6rem 0;
   }
+  /* Restore flexbox layout on tablet and up */
+  .layout-with-sidebar {
+    flex-direction: row-reverse;
+    height: 100vh;
+    overflow: hidden;
+  }
+  /* Reset sidebar to sticky on tablet and up */
+  .sidebar {
+    flex: 0 0 250px;
+    flex-shrink: 0;
+    position: sticky !important;
+    top: 0 !important;
+    height: 100% !important;
+    max-height: 100vh !important;
+    transform: translateX(0) !important;
+    width: auto !important;
+    right: auto !important;
+    left: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  /* Reset sidebar-toggle to sticky on tablet and up */
+  .sidebar-toggle {
+    display: none; /* Hide on tablet */
+    position: sticky;
+    top: 1.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -122,7 +149,10 @@
   }
 
   .layout-with-sidebar {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
   }
   .sidebar {
     position: fixed !important;
@@ -133,7 +163,7 @@
     height: 100vh;
     padding: 2rem;
     box-sizing: border-box;
-    z-index: 40;
+    z-index: 51 !important;
     background-color: var(--bg-secondary);
     border-left: 1px solid var(--border-color);
     transform: translateX(100%);
@@ -146,11 +176,29 @@
     transform: translateX(0) !important;
   }
   .sidebar-toggle {
-    display: block;
+    display: block !important;
+    position: fixed !important;
+    top: 1.5rem !important;
+    right: 1.5rem !important;
+    left: auto !important;
+    z-index: 50 !important;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-fast);
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   .main-content {
     padding: 3rem 1.5rem;
-    padding-top: 4rem;
+    padding-top: 2.5rem; /* Top padding to account for fixed button */
   }
 
   .breadcrumb-nav {

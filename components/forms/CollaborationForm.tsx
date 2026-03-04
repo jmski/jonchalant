@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent, useMemo } from 'react';
-import { useFormValidation, ValidationRules } from '@/lib/hooks/useFormValidation';
+import { useFormValidation, ValidationRules, type ValidationRule } from '@/lib/hooks/useFormValidation';
 import { FormLoadingState, FormSuccessState, FormErrorState, InputField, SelectField } from './FormFeedback';
 import FormProgress from './FormProgress';
 
@@ -16,12 +16,25 @@ interface FormData {
   company: string;
 }
 
+interface CollaborationFormProps {
+  formType?: 'collaboration' | 'program';
+}
+
 const COLLABORATION_TYPES = [
   { value: 'Music Video', label: '🎬 Music Video Direction' },
   { value: 'Social Content', label: '📱 TikTok/Reels Content' },
   { value: 'Brand Campaign', label: '🤝 Brand Campaign' },
   { value: 'Live Performance', label: '🎤 Live Performance' },
   { value: 'Other', label: '✨ Other' },
+];
+
+const PROGRAM_TYPES = [
+  { value: '90-Day Pivot', label: '🚀 The 90-Day Presence Pivot' },
+  { value: 'Social Choreography', label: '👥 Social Choreography Workshop' },
+  { value: 'Quiet Command Essentials', label: '📚 The Quiet Command Essentials' },
+  { value: 'Interview Coaching', label: '🎯 Interview & Pitch Coaching' },
+  { value: 'Team Leadership', label: '👔 Team Leadership Program' },
+  { value: 'Unsure', label: '❓ Not sure yet' },
 ];
 
 const TIMELINE_OPTIONS = [
@@ -39,12 +52,23 @@ const BUDGET_RANGE = [
   { value: 'TBD', label: 'Budget TBD' },
 ];
 
-const STEP_LABELS = ['Project Details', 'Budget & Timeline', 'Contact Info', 'Review'];
+const EXPERIENCE_LEVELS = [
+  { value: 'beginner', label: '🌱 Beginner (just starting leadership)' },
+  { value: 'intermediate', label: '🔄 Intermediate (some experience)' },
+  { value: 'advanced', label: '⭐ Advanced (experienced leader)' },
+  { value: 'unsure', label: '❓ Not sure where I am' },
+];
 
-export default function CollaborationForm() {
+const COLLABORATION_STEP_LABELS = ['Project Details', 'Budget & Timeline', 'Contact Info', 'Review'];
+const PROGRAM_STEP_LABELS = ['Program Interest', 'Background & Goals', 'Contact Info', 'Review'];
+
+export default function CollaborationForm({ formType = 'collaboration' }: CollaborationFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const isProgram = formType === 'program';
+  const STEP_LABELS = isProgram ? PROGRAM_STEP_LABELS : COLLABORATION_STEP_LABELS;
 
   // Helper function to get label for dropdown values
   const getLabelForValue = (value: string, options: Array<{ value: string; label: string }>) => {
@@ -52,16 +76,26 @@ export default function CollaborationForm() {
   };
 
   // Setup validation rules
-  const validationRules = useMemo(() => ({
-    projectName: [ValidationRules.required('Project name')],
-    collaborationType: [ValidationRules.required('Collaboration type')],
-    message: [ValidationRules.required('Message'), ValidationRules.minLength(20)],
-    budget: [ValidationRules.required('Budget range')],
-    timeline: [ValidationRules.required('Timeline')],
-    name: [ValidationRules.required('Your name')],
-    email: [ValidationRules.required('Email'), ValidationRules.email()],
-    company: [],
-  }), []);
+  const validationRules = useMemo(() => {
+    const rules: Partial<Record<keyof FormData, ValidationRule<string>[]>> = {
+      projectName: [isProgram ? ValidationRules.required('Your main goal') : ValidationRules.required('Project name')],
+      collaborationType: [isProgram ? ValidationRules.required('Program choice') : ValidationRules.required('Collaboration type')],
+      message: [ValidationRules.required(isProgram ? 'Your situation' : 'Message'), ValidationRules.minLength(20)],
+      timeline: [ValidationRules.required('Timeline')],
+      name: [ValidationRules.required('Your name')],
+      email: [ValidationRules.required('Email'), ValidationRules.email()],
+      company: [],
+    };
+    
+    // Conditionally add budget validation
+    if (!isProgram) {
+      rules.budget = [ValidationRules.required('Budget range')];
+    } else {
+      rules.budget = [];
+    }
+    
+    return rules;
+  }, [isProgram]);
 
   // Setup form validation hook
   const {
@@ -104,12 +138,19 @@ export default function CollaborationForm() {
           form.message.length >= 20
         );
       case 2:
-        return (
-          !getFieldError('budget') &&
-          !getFieldError('timeline') &&
-          !!form.budget &&
-          !!form.timeline
-        );
+        if (isProgram) {
+          return (
+            !getFieldError('timeline') &&
+            !!form.timeline
+          );
+        } else {
+          return (
+            !getFieldError('budget') &&
+            !getFieldError('timeline') &&
+            !!form.budget &&
+            !!form.timeline
+          );
+        }
       case 3:
         return (
           !getFieldError('name') &&
@@ -200,7 +241,7 @@ export default function CollaborationForm() {
       {/* Success State */}
       {status === 'success' && (
         <FormSuccessState 
-          message="Your inquiry has been submitted successfully! I'll review your collaboration request and get back to you within 24 hours."
+          message={isProgram ? "Your program inquiry has been submitted successfully! I'll review your information and get back to you within 24 hours to discuss the best program for your goals." : "Your inquiry has been submitted successfully! I'll review your collaboration request and get back to you within 24 hours."}
           onDismiss={handleSuccessDismiss}
           onReturnHome={handleReturnHome}
         />
@@ -209,47 +250,47 @@ export default function CollaborationForm() {
       {/* Error State */}
       {status === 'error' && <FormErrorState message={errorMessage} />}
 
-      {/* STEP 1: PROJECT DETAILS */}
+      {/* STEP 1: PROJECT DETAILS / PROGRAM INTEREST */}
       {currentStep === 1 && (
         <div className="space-y-6 animate-fadeIn">
           <div>
             <h3 className="text-2xl font-black uppercase heading-display mb-2 text-primary">
-              Let's talk about your project
+              {isProgram ? "Which program interests you?" : "Let's talk about your project"}
             </h3>
-            <p className="text-tertiary">Tell me about the collaboration you have in mind</p>
+            <p className="text-tertiary">{isProgram ? "Tell me about your coaching goals" : "Tell me about the collaboration you have in mind"}</p>
           </div>
 
           <SelectField
-            label="Collaboration Type"
+            label={isProgram ? "Program Interest" : "Collaboration Type"}
             name="collaborationType"
-            options={COLLABORATION_TYPES}
+            options={isProgram ? PROGRAM_TYPES : COLLABORATION_TYPES}
             value={form.collaborationType}
             onChange={handleChange}
             onBlur={handleBlur}
             error={getFieldError('collaborationType')}
             state={getFieldState('collaborationType')}
             required
-            hint="What kind of collaboration are you interested in?"
+            hint={isProgram ? "Which program fits your needs?" : "What kind of collaboration are you interested in?"}
           />
 
           <InputField
-            label="Project Name / Title"
+            label={isProgram ? "Your Main Goal" : "Project Name / Title"}
             name="projectName"
             type="text"
-            placeholder="e.g., 'Fashion Brand Campaign' or 'Music Video'"
+            placeholder={isProgram ? "e.g., 'Get promoted', 'Lead with confidence'" : "e.g., 'Fashion Brand Campaign' or 'Music Video'"}
             value={form.projectName}
             onChange={handleChange}
             onBlur={handleBlur}
             error={getFieldError('projectName')}
             state={getFieldState('projectName')}
             required
-            hint="Give your project a working title"
+            hint={isProgram ? "What do you want to achieve?" : "Give your project a working title"}
           />
 
           <InputField
-            label="Project Description"
+            label={isProgram ? "Tell me more about your situation" : "Project Description"}
             name="message"
-            placeholder="Describe your vision, goals, and any specific ideas you have..."
+            placeholder={isProgram ? "What's your current challenge? What does success look like?" : "Describe your vision, goals, and any specific ideas you have..."}
             value={form.message}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -263,28 +304,44 @@ export default function CollaborationForm() {
         </div>
       )}
 
-      {/* STEP 2: BUDGET & TIMELINE */}
+      {/* STEP 2: BUDGET & TIMELINE / TIMELINE & BACKGROUND */}
       {currentStep === 2 && (
         <div className="space-y-6 animate-fadeIn">
           <div>
             <h3 className="text-2xl font-black uppercase heading-display mb-2 text-primary">
-              Budget & Timeline
+              {isProgram ? "Background & Availability" : "Budget & Timeline"}
             </h3>
-            <p className="text-tertiary">Help me understand your project scope</p>
+            <p className="text-tertiary">{isProgram ? "Help me understand your experience level" : "Help me understand your project scope"}</p>
           </div>
 
-          <SelectField
-            label="Budget Range"
-            name="budget"
-            options={BUDGET_RANGE}
-            value={form.budget}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={getFieldError('budget')}
-            state={getFieldState('budget')}
-            required
-            hint="Select the range that fits your budget"
-          />
+          {!isProgram && (
+            <SelectField
+              label="Budget Range"
+              name="budget"
+              options={BUDGET_RANGE}
+              value={form.budget}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={getFieldError('budget')}
+              state={getFieldState('budget')}
+              required
+              hint="Select the range that fits your budget"
+            />
+          )}
+
+          {isProgram && (
+            <SelectField
+              label="Leadership Experience Level"
+              name="budget"
+              options={EXPERIENCE_LEVELS}
+              value={form.budget}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={getFieldError('budget')}
+              state={getFieldState('budget')}
+              hint="This helps me tailor the program to your level"
+            />
+          )}
 
           <SelectField
             label="Timeline"
@@ -296,7 +353,7 @@ export default function CollaborationForm() {
             error={getFieldError('timeline')}
             state={getFieldState('timeline')}
             required
-            hint="When do you need this completed?"
+            hint={isProgram ? "When do you want to start?" : "When do you need this completed?"}
           />
         </div>
       )}
@@ -365,28 +422,36 @@ export default function CollaborationForm() {
 
           {/* Review Card */}
           <div className="border-2 border-primary rounded p-6 space-y-6">
-            {/* Project Details Summary */}
+            {/* Project/Program Details Summary */}
             <div className="space-y-4">
               <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
-                <span className="text-tertiary mono-text">Collaboration Type</span>
-                <span className="font-bold text-primary group-hover:text-vibrant">{getLabelForValue(form.collaborationType, COLLABORATION_TYPES)}</span>
+                <span className="text-tertiary mono-text">{isProgram ? "Program Interest" : "Collaboration Type"}</span>
+                <span className="font-bold text-primary group-hover:text-vibrant">{getLabelForValue(form.collaborationType, isProgram ? PROGRAM_TYPES : COLLABORATION_TYPES)}</span>
               </div>
               <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
-                <span className="text-tertiary mono-text">Project Name</span>
+                <span className="text-tertiary mono-text">{isProgram ? "Your Goal" : "Project Name"}</span>
                 <span className="font-bold text-primary">{form.projectName}</span>
               </div>
               <div className="hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
-                <span className="text-tertiary mono-text block mb-2">Project Description</span>
+                <span className="text-tertiary mono-text block mb-2">{isProgram ? "Your Situation" : "Project Description"}</span>
                 <p className="text-primary whitespace-pre-wrap">{form.message}</p>
               </div>
             </div>
 
-            {/* Budget & Timeline Summary */}
+            {/* Budget & Timeline / Experience & Timeline Summary */}
             <div className="space-y-4 pt-4 border-t border-border-color">
-              <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
-                <span className="text-tertiary mono-text">Budget Range</span>
-                <span className="font-bold text-primary">{getLabelForValue(form.budget, BUDGET_RANGE)}</span>
-              </div>
+              {!isProgram && (
+                <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                  <span className="text-tertiary mono-text">Budget Range</span>
+                  <span className="font-bold text-primary">{getLabelForValue(form.budget, BUDGET_RANGE)}</span>
+                </div>
+              )}
+              {isProgram && form.budget && (
+                <div className="flex items-center justify-between pb-4 border-b border-border-color hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
+                  <span className="text-tertiary mono-text">Experience Level</span>
+                  <span className="font-bold text-primary">{getLabelForValue(form.budget, EXPERIENCE_LEVELS)}</span>
+                </div>
+              )}
               <div className="flex items-center justify-between hover:bg-vibrant hover:bg-opacity-5 px-3 py-2 -mx-3 rounded transition-colors duration-200">
                 <span className="text-tertiary mono-text">Timeline</span>
                 <span className="font-bold text-primary">{getLabelForValue(form.timeline, TIMELINE_OPTIONS)}</span>

@@ -1,13 +1,40 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
 import dynamic from 'next/dynamic';
+import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
 
 const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
-export default function Home() {
+export default async function Home() {
+  let homeContent = null;
+  let services = [];
+  let testimonials = [];
+
+  try {
+    const [sanityHome, sanityServices, sanityTestimonials] = await Promise.all([
+      getHomePageContent(),
+      getServices(),
+      getTestimonials(true) // Fetch featured testimonials only
+    ]);
+    
+    if (sanityHome) {
+      homeContent = sanityHome;
+    }
+    
+    if (sanityServices && sanityServices.length > 0) {
+      services = sanityServices;
+    }
+    
+    if (sanityTestimonials && sanityTestimonials.length > 0) {
+      testimonials = sanityTestimonials;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch home content from Sanity, using fallback data:', error);
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="fade">
@@ -15,14 +42,10 @@ export default function Home() {
         <HomeHero />
 
         {/* KEY STATS SECTION */}
-        <section className="bg-slate-50 py-16 sm:py-24">
+        <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {[
-                { label: 'Coaching Clients Transformed', value: '100+' },
-                { label: 'Brand Collaborations', value: '30+' },
-                { label: 'Years in Creative Direction', value: '8+' },
-              ].map((stat, idx) => (
+              {homeContent?.stats?.map((stat: any, idx: number) => (
                 <div key={idx} className="space-y-3 text-center md:text-left">
                   <div className="text-4xl sm:text-5xl font-bold text-slate-900">
                     {stat.value}
@@ -37,11 +60,11 @@ export default function Home() {
         </section>
 
         {/* FEATURED AREAS SECTION */}
-        <section className="py-16 sm:py-24">
+        <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
-                Where I Create Impact
+                {homeContent?.impactSectionHeadline}
               </h2>
             </div>
 
@@ -50,100 +73,78 @@ export default function Home() {
               <div className="lg:col-span-2 space-y-6">
                 <div className="aspect-video rounded-lg bg-slate-100 border border-slate-200" />
                 <h3 className="text-2xl font-bold text-slate-900">
-                  Dance & Movement Direction
+                  {homeContent?.featuredMainTitle}
                 </h3>
                 <p className="text-lg text-slate-700 leading-relaxed">
-                  Choreography, performance, and creative direction for brands and artists. I blend precision with expression—creating movement that communicates and inspires.
+                  {homeContent?.featuredMainDescription}
                 </p>
               </div>
 
               {/* Sidebar features */}
               <div className="space-y-8">
-                <div className="space-y-3">
-                  <h4 className="text-lg font-bold text-slate-900">
-                    Leadership Coaching
-                  </h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Transform your presence and command rooms with quiet authority.
-                  </p>
-                </div>
-                <div className="h-px bg-slate-200" />
-                <div className="space-y-3">
-                  <h4 className="text-lg font-bold text-slate-900">
-                    Brand Partnerships
-                  </h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Collaborate on campaigns that move audiences.
-                  </p>
-                </div>
+                {homeContent?.sidebarFeatures?.map((feature: any, idx: number) => (
+                  <div key={idx}>
+                    <div className="space-y-3">
+                      <h4 className="text-lg font-bold text-slate-900">
+                        {feature.title}
+                      </h4>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                    {idx < (homeContent?.sidebarFeatures?.length || 0) - 1 && (
+                      <div className="h-px bg-slate-200 mt-8" />
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* SERVICES OVERVIEW */}
-        <section className="bg-slate-50 py-16 sm:py-24">
+        <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                Services & Offerings
+                {homeContent?.servicesHeadline}
               </h2>
               <p className="text-lg text-slate-700 max-w-2xl">
-                Comprehensive solutions tailored to help you move better, lead stronger, and collaborate smarter.
+                {homeContent?.servicesDescription}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-fr">
-              {[
-                {
-                  title: 'Leadership Programs',
-                  description: 'Transform your presence and command authority with grace',
-                  icon: '🎯',
-                  features: ['1-on-1 Coaching', 'Group Workshops', 'Digital Courses'],
-                  color: 'accent'
-                },
-                {
-                  title: 'Movement Coaching',
-                  description: 'Unlock physical grounding and body-aware presence',
-                  icon: '💃',
-                  features: ['Presence Training', 'Body Mechanics', 'Energy Control'],
-                  color: 'accent'
-                },
-                {
-                  title: 'Brand Collaboration',
-                  description: 'Create compelling visual narratives for your campaigns',
-                  icon: '✨',
-                  features: ['Choreography', 'Content Creation', 'Creative Direction'],
-                  color: 'accent'
-                },
-              ].map((service, idx) => (
-                <div
-                  key={idx}
-                  className="group border border-slate-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full overflow-hidden"
-                >
-                  {/* Icon header */}
-                  <div className="bg-gradient-to-r from-slate-50 to-slate-100 px-6 pt-8 pb-6 border-b border-slate-200 group-hover:from-slate-100 group-hover:to-slate-100 transition-colors">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors">
-                      {service.title}
-                    </h3>
-                  </div>
+              {services && services.length > 0 ? (
+                services.map((service: any) => (
+                  <div
+                    key={service._id}
+                    className="group border border-slate-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full overflow-hidden"
+                  >
+                    {/* Icon header */}
+                    <div className="bg-linear-to-r from-slate-50 to-slate-100 px-6 pt-8 pb-6 border-b border-slate-200 group-hover:from-slate-100 group-hover:to-slate-100 transition-colors">
+                      <div className="text-4xl mb-4">{service.icon || '🎯'}</div>
+                      <h3 className="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors">
+                        {service.title}
+                      </h3>
+                    </div>
 
-                  {/* Content section */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    {/* Description */}
-                    <p className="text-slate-700 text-sm leading-relaxed mb-6">
-                      {service.description}
-                    </p>
+                    {/* Content section */}
+                    <div className="p-6 flex-1 flex flex-col">
+                      {/* Description */}
+                      <p className="text-slate-700 text-sm leading-relaxed mb-6">
+                        {service.description}
+                      </p>
 
-                    {/* Features list */}
-                    <div className="mb-6 space-y-3 flex-1">
-                      {service.features.map((feature, fidx) => (
-                        <div key={fidx} className="flex items-start gap-3">
-                          <span className="text-accent font-bold mt-0.5">+</span>
-                          <span className="text-sm text-slate-600">{feature}</span>
-                        </div>
-                      ))}
+                      {/* Features list */}
+                      <div className="mb-6 space-y-3 flex-1">
+                        {service.features && service.features.map((feature: string, fidx: number) => (
+                          <div key={fidx} className="flex items-start gap-3">
+                            <span className="text-accent font-bold mt-0.5">+</span>
+                            <span className="text-sm text-slate-600">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     {/* CTA */}
@@ -157,14 +158,18 @@ export default function Home() {
                       </button>
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="col-span-full py-8 text-center text-slate-600">
+                  Loading services...
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
 
         {/* FEATURED AREAS - PORTFOLIO CARDS */}
-        <section className="py-16 sm:py-24">
+        <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
@@ -220,7 +225,7 @@ export default function Home() {
                   className="group relative border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full no-underline"
                 >
                   {/* Visual header with gradient */}
-                  <div className={`bg-gradient-to-br ${item.bgColor} h-40 flex flex-col items-center justify-center relative overflow-hidden`}>
+                  <div className={`bg-linear-to-br ${item.bgColor} h-40 flex flex-col items-center justify-center relative overflow-hidden`}>
                     <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity" 
                       style={{
                         backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)'
@@ -285,7 +290,7 @@ export default function Home() {
         </section>
 
         {/* WHY WORK TOGETHER */}
-        <section className="bg-slate-50 py-16 sm:py-24">
+        <section className="bg-slate-50 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -323,8 +328,88 @@ export default function Home() {
           </div>
         </section>
 
+        {/* CLIENT TESTIMONIALS SECTION */}
+        <section className="py-16 sm:py-24 lg:py-32 bg-linear-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
+          {/* Subtle background decoration */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -mr-48 -mt-48"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl -ml-48 -mb-48"></div>
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Section Header */}
+            <div className="text-center mb-16 sm:mb-20 lg:mb-24">
+              <span 
+                className="inline-block text-xs uppercase tracking-widest font-bold px-3 py-1.5 rounded mb-4"
+                style={{
+                  backgroundColor: 'var(--accent-primary)',
+                  color: 'white',
+                  letterSpacing: '0.15em'
+                }}
+              >
+                Client Success Stories
+              </span>
+              <h2 
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Trusted by Industry Leaders
+              </h2>
+              <p 
+                className="text-lg sm:text-xl max-w-2xl mx-auto"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                See how leading teams have transformed their presence and impact through our coaching and consulting programs.
+              </p>
+            </div>
+
+            {/* Testimonials Grid */}
+            {testimonials && testimonials.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {testimonials.map((testimonial: any, idx: number) => (
+                  <div
+                    key={testimonial._id || idx}
+                    className="group rounded-lg p-8 sm:p-10 border border-slate-200 bg-white hover:shadow-lg hover:border-accent transition-all duration-300 flex flex-col h-full"
+                  >
+                    {/* Quote */}
+                    <p className="text-slate-700 leading-relaxed mb-6 flex-1 italic">
+                      &quot;{testimonial.quote}&quot;
+                    </p>
+
+                    {/* Result highlight */}
+                    {testimonial.result && (
+                      <div className="mb-6 p-4 bg-accent/10 rounded border border-accent/20">
+                        <p className="text-sm font-bold text-accent">
+                          {testimonial.result}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Client info */}
+                    <div className="border-t border-slate-200 pt-6">
+                      <p className="font-bold text-slate-900 text-lg">
+                        {testimonial.clientName}
+                      </p>
+                      <p className="text-sm text-slate-600">
+                        {testimonial.role}
+                      </p>
+                      <p className="text-sm font-medium text-accent mt-1">
+                        {testimonial.company}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 text-slate-600">
+                <p>Loading testimonials...</p>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* FINAL CTA */}
-        <section className="py-16 sm:py-24">
+        <section className="py-12 sm:py-16">
           <CTASection 
             title="Ready to Collaborate?"
             description="Let's explore how we can work together to bring your vision to life."

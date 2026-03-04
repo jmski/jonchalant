@@ -1,25 +1,60 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
 import { EnsoCircle } from "@/components/decorative";
+import { getAboutPageContent, getServices } from "@/lib/sanity";
 
 export const metadata = {
   title: "About | The Kinetic Leader",
   description: "Jon Chalon teaches introverts how to gain Quiet Command through body-led leadership, social mechanics, and introvert mastery."
 };
 
-export default function About() {
+export default async function About() {
+  let aboutContent = null;
+  let services = [];
+  let philosophies = [];
+  let introvertTraits = [];
+
+  try {
+    const [sanityAbout, sanityServices] = await Promise.all([
+      getAboutPageContent(),
+      getServices()
+    ]);
+    
+    if (sanityAbout) {
+      aboutContent = sanityAbout;
+      if (sanityAbout.philosophies) {
+        philosophies = sanityAbout.philosophies;
+      }
+      if (sanityAbout.introvertTraits) {
+        introvertTraits = sanityAbout.introvertTraits;
+      }
+    }
+    
+    if (sanityServices && sanityServices.length > 0) {
+      services = sanityServices;
+    }
+  } catch (error) {
+    console.warn('Failed to fetch about content from Sanity, using fallback data:', error);
+  }
+
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <PageTransition animation="blur">
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24" id="main-content">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" id="main-content">
           {/* HERO SECTION */}
           <section className="mb-24">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              From the Back of the Room to the Front of the Floor
-            </h1>
-            <p className="text-lg sm:text-xl text-slate-700 max-w-2xl leading-relaxed">
-              For most of my life, I believed that leadership was a loud man's game. As a natural introvert, I was the one who overthought every email, stayed quiet in meetings, and felt like my social battery was perpetually at 5%.
-            </p>
+            {aboutContent?.heroHeadline ? (
+              <>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+                  {aboutContent.heroHeadline}
+                </h1>
+                <p className="text-lg sm:text-xl text-slate-700 max-w-2xl leading-relaxed">
+                  {aboutContent.heroDescription}
+                </p>
+              </>
+            ) : (
+              <div className="py-16 text-center text-slate-600">Loading hero content...</div>
+            )}
           </section>
 
           {/* ORIGIN STORY - 60/40 LAYOUT */}
@@ -39,39 +74,35 @@ export default function About() {
             />
             
             <div className="lg:col-span-7 space-y-6 relative z-10">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
-                Everything changed when I stopped thinking and started moving.
-              </h2>
-              
-              <p className="text-lg text-slate-700 leading-relaxed">
-                I discovered that the same coordination, posture, and presence required on the dance floor were the exact 'mechanics' missing from my professional life. Dance taught me how to inhabit my body and take up space without saying a word.
-              </p>
+              {aboutContent?.originSectionHeadline ? (
+                <>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
+                    {aboutContent.originSectionHeadline}
+                  </h2>
+                  
+                  <p className="text-lg text-slate-700 leading-relaxed">
+                    {aboutContent.originSectionDescription}
+                  </p>
 
-              <div className="pt-6 border-t border-slate-200">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                  The Three Phases
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">Dance & Discipline</h4>
-                    <p className="text-slate-700">
-                      I discovered movement as a language for expression that bypassed all my introverted self-doubt. My body could say things my words couldn't.
-                    </p>
+                  <div className="pt-6 border-t border-slate-200">
+                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                      The Three Phases
+                    </h3>
+                    <div className="space-y-4">
+                      {aboutContent.phases?.map((phase: any, idx: number) => (
+                        <div key={idx}>
+                          <h4 className="font-semibold text-slate-900 mb-2">{phase.title}</h4>
+                          <p className="text-slate-700">
+                            {phase.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">Sales & Service</h4>
-                    <p className="text-slate-700">
-                      I took that physical grounding into the high-pressure world of the fitness industry and realized that introverts don't need to change their personalities—they just need a better script and a stronger physical foundation.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">The Mission</h4>
-                    <p className="text-slate-700">
-                      Today, I've mastered the skills to lead despite my introversion. I created The Kinetic Leader to help other quiet experts use movement and social mechanics to command the room—all while protecting their energy.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                </>
+              ) : (
+                <div className="py-8 text-center text-slate-600">Loading origin story...</div>
+              )}
             </div>
 
             {/* Right column placeholder */}
@@ -81,29 +112,32 @@ export default function About() {
           </section>
 
           {/* KEY STATS */}
-          <section className="mb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { label: 'Years Experience', value: '8+' },
-              { label: 'Clients Coached', value: '50+' },
-              { label: 'Transformations', value: '100%*' },
-              { label: 'Introvert-Led', value: '✓' },
-            ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="border-l border-slate-200 pl-6 py-4"
-              >
-                <div className="text-sm uppercase tracking-widest text-slate-600 font-medium mb-2">
-                  {stat.label}
+          <section className="mb-24">
+            {aboutContent?.stats && aboutContent.stats.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {aboutContent.stats.map((stat: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className="border-l border-slate-200 pl-6 py-4"
+                    >
+                      <div className="text-sm uppercase tracking-widest text-slate-600 font-medium mb-2">
+                        {stat.label}
+                      </div>
+                      <div className="text-3xl font-bold text-slate-900">
+                        {stat.value}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="text-3xl font-bold text-slate-900">
-                  {stat.value}
-                </div>
-              </div>
-            ))}
+                <p className="text-xs text-slate-600 italic mt-4">*Of those who complete programs</p>
+              </>
+            ) : (
+              <div className="py-8 text-center text-slate-600">Loading stats...</div>
+            )}
           </section>
-          <p className="text-xs text-slate-600 italic mb-24">*Of those who complete programs</p>
 
-          {/* WHAT I TEACH */}
+          {/* WHAT I COACH - Now fetching from Sanity services */}
           <section className="mb-24">
             <div className="mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
@@ -115,44 +149,25 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  title: 'Physical Grounding',
-                  desc: 'How your body language shapes perception. Posture, movement, spatial awareness—the foundation of presence.'
-                },
-                {
-                  title: 'Social Scripting',
-                  desc: 'The hidden rules of professional interactions. Conversation frameworks, networking mechanics, relationship building.'
-                },
-                {
-                  title: 'Energy Mastery',
-                  desc: 'Your introvert energy is finite and powerful. Learn to activate it strategically while avoiding burnout.'
-                },
-                {
-                  title: 'Executive Presence',
-                  desc: 'For professionals seeking leadership roles. Combining all three pillars into a commanding, authentic presence.'
-                },
-                {
-                  title: 'Interview & Pitch Coaching',
-                  desc: 'High-stakes moments where your body and delivery matter most. Master them without losing authenticity.'
-                },
-                {
-                  title: 'Team & Group Programs',
-                  desc: 'For organizations building more confident, inclusive teams. Leadership development through the Kinetic lens.'
-                },
-              ].map((service, idx) => (
-                <div
-                  key={idx}
-                  className="border border-slate-200 p-6 hover:shadow-md transition-shadow duration-300"
-                >
-                  <h3 className="font-semibold text-slate-900 mb-3 text-lg">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-700 leading-relaxed">
-                    {service.desc}
-                  </p>
+              {services && services.length > 0 ? (
+                services.map((service: any) => (
+                  <div
+                    key={service._id}
+                    className="border border-slate-200 p-6 hover:shadow-md transition-shadow duration-300"
+                  >
+                    <h3 className="font-semibold text-slate-900 mb-3 text-lg">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-700 leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-full py-8 text-center text-slate-600">
+                  Loading coaching services...
                 </div>
-              ))}
+              )}
             </div>
           </section>
 
@@ -168,32 +183,25 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: 'No Performance Required',
-                  desc: 'You don\'t need to become someone else. I help you become fully, confidently yourself—and let that presence speak.'
-                },
-                {
-                  title: 'Science + Intuition',
-                  desc: 'Body language psychology meets personal intuition. We use both data and soul to build your authentic command.'
-                },
-                {
-                  title: 'Sustainable Leadership',
-                  desc: 'Your energy is precious. I teach you how to lead from strength, not from depletion or performance anxiety.'
-                },
-              ].map((philosophy, idx) => (
-                <div
-                  key={idx}
-                  className="border border-slate-200 p-8 hover:shadow-md transition-shadow duration-300"
-                >
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">
-                    {philosophy.title}
-                  </h3>
-                  <p className="text-slate-700 leading-relaxed">
-                    {philosophy.desc}
-                  </p>
+              {philosophies.length > 0 ? (
+                philosophies.map((philosophy, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-slate-200 p-8 hover:shadow-md transition-shadow duration-300"
+                  >
+                    <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                      {philosophy.title}
+                    </h3>
+                    <p className="text-slate-700 leading-relaxed">
+                      {philosophy.description}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center py-8 text-slate-600">
+                  Loading philosophy content...
                 </div>
-              ))}
+              )}
             </div>
           </section>
 
@@ -214,21 +222,20 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {[
-                'Deep Listeners',
-                'Thoughtful Decision Makers',
-                'One-on-One Masters',
-                'Authentic Leaders',
-                'Written Communicators',
-                'Resilient Problem Solvers',
-              ].map((trait, idx) => (
-                <div
-                  key={idx}
-                  className="border border-slate-200 p-4 text-center hover:shadow-md transition-shadow duration-300"
-                >
-                  <p className="text-sm font-medium text-slate-900">{trait}</p>
+              {introvertTraits.length > 0 ? (
+                introvertTraits.map((trait, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-slate-200 p-4 text-center hover:shadow-md transition-shadow duration-300"
+                  >
+                    <p className="text-sm font-medium text-slate-900">{trait}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-2 text-center py-8 text-slate-600">
+                  Loading introvert traits...
                 </div>
-              ))}
+              )}
             </div>
           </section>
 

@@ -32,10 +32,10 @@
   --spacing-2xl: 6rem;
   --spacing-3xl: 9rem;
 
-  /* Section padding - Vertical Rhythm */
-  --section-padding-mobile: 8rem 2rem;
-  --section-padding-tablet: 10rem 3rem;
-  --section-padding-desktop: 12rem 4rem;
+  /* Section padding - Condensed & Editorial (Kaizen refinement) */
+  --section-padding-mobile: 4rem 1.5rem;
+  --section-padding-tablet: 5rem 2rem;
+  --section-padding-desktop: 6rem 3rem;
 
   /* Transitions - Kaizen pacing */
   --transition-subtle: 200ms cubic-bezier(0.4, 0, 0.2, 1);
