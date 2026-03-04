@@ -63,7 +63,6 @@ export default defineType({
               title: 'Description',
               type: 'string',
               description: 'Brief description of what this contact method is for',
-              example: 'Send me a detailed message about your project or inquiry.',
             }),
             defineField({
               name: 'order',

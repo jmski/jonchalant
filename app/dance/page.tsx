@@ -85,33 +85,6 @@ export default async function Dance() {
             <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
           </section>
 
-          {/* CATEGORIES INTRO */}
-          <section className="mb-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Choreography',
-                desc: 'Original choreography pieces created for performances, music videos, and collaborations.',
-              },
-              {
-                title: 'Freestyle',
-                desc: 'Improvised movement in response to music, beatboxing, and live creative partners.',
-              },
-              {
-                title: 'Performance',
-                desc: 'Staged performances at festivals, theaters, fashion shows, and international venues.',
-              },
-            ].map((cat, idx) => (
-              <div key={idx} className="border border-slate-200 p-8">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                  {cat.title}
-                </h3>
-                <p className="text-slate-700 leading-relaxed">
-                  {cat.desc}
-                </p>
-              </div>
-            ))}
-          </section>
-
           {/* CTA */}
           <section className="py-16">
             <CTASection
