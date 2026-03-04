@@ -1,31 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { PageTransition } from "@/components/layout";
 import { getContactInfo, getPageMetadata, type ContactMethod } from "@/lib/sanity";
 
-const CTASection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
-  loading: () => <div className="py-16 md:py-24">Loading...</div>,
-  ssr: true
-});
-
-// Mock contact methods (fallback only)
-const MOCK_CONTACT_METHODS = [
-  { label: 'Email', value: 'contact@jonchalon.com', href: 'mailto:contact@jonchalon.com', description: 'Send me a detailed message' },
-  { label: 'Instagram', value: '@jonchalon', href: 'https://instagram.com/jonchalon', description: 'Follow for daily updates' },
-  { label: 'TikTok', value: '@jonchalon', href: 'https://tiktok.com/@jonchalon', description: 'Check out my latest videos' }
-];
-
-// Mock page metadata (fallback only)
-const MOCK_PAGE_METADATA = {
-  headline: 'Get in Touch',
-  subheadline: 'Have a collaboration idea or question? I\'d love to hear from you.'
-};
-
 export default function Contact() {
-  const [contactMethods, setContactMethods] = useState<ContactMethod[]>(MOCK_CONTACT_METHODS);
-  const [pageMetadata, setPageMetadata] = useState(MOCK_PAGE_METADATA);
+  const [contactMethods, setContactMethods] = useState<ContactMethod[]>([]);
+  const [pageMetadata, setPageMetadata] = useState({
+    headline: 'Get in Touch',
+    subheadline: 'Have a collaboration idea or question? I\'d love to hear from you.'
+  });
   const [isLoading, setIsLoading] = useState(true);
   
   const [formData, setFormData] = useState({
@@ -103,70 +87,102 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* Right column visual placeholder */}
-            <div className="bg-slate-100 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-slate-500">Contact Methods</p>
+            {/* Right column - Quick contact methods from Sanity */}
+            <div className="space-y-8">
+              {isLoading ? (
+                <p className="text-slate-600">Loading contact options...</p>
+              ) : (
+                <>
+                  <div className="space-y-8">
+                    {contactMethods.map((method, idx) => {
+                      const emojiMap: { [key: string]: string } = {
+                        'Email': '✉️',
+                        'Instagram': '📸',
+                        'TikTok': '🎵',
+                        'Twitter': '𝕏',
+                      };
+                      const emoji = emojiMap[method.label] || '→';
+
+                      return (
+                        <a
+                          key={idx}
+                          href={method.href}
+                          target={method.href.startsWith('http') ? '_blank' : undefined}
+                          rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className="border-l-4 pl-8 no-underline group block transition-all duration-300"
+                          style={{ borderColor: 'var(--accent-primary)' }}
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className="text-3xl mt-1">{emoji}</div>
+                            <div className="flex-1">
+                              <h3 className="text-lg font-bold text-slate-900 group-hover:text-accent transition-colors">
+                                {method.label}
+                              </h3>
+                              <p className="text-slate-700 leading-relaxed">
+                                {method.value}
+                              </p>
+                              {method.description && (
+                                <p className="text-sm text-slate-600 mt-1">
+                                  {method.description}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
             </div>
           </section>
 
-          {/* QUICK CONTACT OPTIONS */}
-          <section className="mb-24 border-t border-slate-200 pt-16">
-            <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
-                Quick Links
-              </h2>
-              <p className="text-base text-slate-700">
-                Connect with me directly through your preferred channel.
-              </p>
-            </div>
 
-            {isLoading ? (
-              <div className="text-center py-8 text-slate-600">Loading contact methods...</div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 auto-rows-fr">
-                {contactMethods.map((method, idx) => (
-                  <a
-                    key={idx}
-                    href={method.href}
-                    className="card group block border-2 border-slate-200 hover:border-accent transition-all duration-300 no-underline overflow-visible h-full"
-                  >
-                    <div className="flex flex-col h-full">
-                      {/* Icon/Label section */}
-                      <div className="mb-4 pb-4 border-b border-slate-200">
-                        <p className="text-xs uppercase tracking-widest font-black text-accent mb-2">
-                          {method.label}
-                        </p>
-                        <div className="h-2 w-8 bg-accent rounded-full" />
-                      </div>
-                      
-                      {/* Content section */}
-                      <div className="flex-1">
-                        <p className="text-lg font-black text-slate-900 leading-tight mb-3 group-hover:text-accent transition-colors">
-                          {method.value}
-                        </p>
-                        {method.description && (
-                          <p className="text-sm text-slate-600 leading-relaxed">
-                            {method.description}
-                          </p>
-                        )}
-                      </div>
-                      
-                      {/* CTA indicator */}
-                      <div className="mt-6 pt-4 border-t border-slate-200 text-right">
-                        <span className="text-xs font-bold uppercase tracking-widest text-accent group-hover:translate-x-1 transition-transform inline-block">
-                          Connect →
-                        </span>
-                      </div>
+
+          {/* FORM GUIDANCE */}
+          <section className="mb-8 py-6 border-t border-slate-200">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6">
+                Before You Send
+              </h2>
+              
+              <div className="space-y-6 mb-8">
+                {/* What to Include */}
+                <div className="border-l-4 pl-8" style={{ borderColor: 'var(--accent-primary)' }}>
+                  <div className="flex items-start gap-4">
+                    <div className="text-2xl mt-1">📝</div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-slate-900 mb-2">
+                        What to Include
+                      </h3>
+                      <p className="text-slate-700 leading-relaxed">
+                        Project details, timeline, budget if applicable, and any specific goals or questions. The more context you provide, the better I can understand your vision and respond with tailored recommendations.
+                      </p>
                     </div>
-                  </a>
-                ))}
+                  </div>
+                </div>
+
+                {/* Response Time */}
+                <div className="border-l-4 pl-8" style={{ borderColor: 'var(--accent-primary)' }}>
+                  <div className="flex items-start gap-4">
+                    <div className="text-2xl mt-1">⏱️</div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-slate-900 mb-2">
+                        Response Time
+                      </h3>
+                      <p className="text-slate-700 leading-relaxed">
+                        I respond to all inquiries within 48 hours. For time-sensitive matters, reach out directly via <a href="mailto:contact@jonchalon.com" className="font-semibold text-accent hover:underline">email</a> or <a href="https://instagram.com/jonchalon" className="font-semibold text-accent hover:underline">Instagram DM</a>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            )}
+            </div>
           </section>
 
           {/* CONTACT FORM SECTION */}
-          <section className="mb-24 py-16 border-t border-slate-200">
-            <div className="mb-12">
+          <section className="mb-16 py-0">
+            <div className="max-w-2xl mx-auto mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 Send a Message
               </h2>
@@ -175,7 +191,7 @@ export default function Contact() {
               </p>
             </div>
 
-            <div className="max-w-2xl">
+            <div className="max-w-2xl mx-auto">
               {submitted ? (
                 <div className="border border-slate-200 p-12 text-center bg-slate-50 rounded">
                   <div className="text-5xl mb-4">✓</div>
@@ -183,7 +199,7 @@ export default function Contact() {
                     Message Sent!
                   </h3>
                   <p className="text-slate-700">
-                    Thanks for reaching out. I'll respond within 24 hours.
+                    Thanks for reaching out!
                   </p>
                 </div>
               ) : (
@@ -242,33 +258,6 @@ export default function Contact() {
                 </form>
               )}
             </div>
-          </section>
-
-          {/* INFO BOXES */}
-          <section className="mb-24 grid grid-cols-1 md:grid-cols-2 gap-8 py-16 border-t border-slate-200">
-            <div className="border border-slate-200 p-8 rounded">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Response Time</h3>
-              <p className="text-slate-700">
-                I respond to all messages within 24 hours. For time-sensitive inquiries, reach out directly via email or Instagram.
-              </p>
-            </div>
-
-            <div className="border border-slate-200 p-8 rounded">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">What to Include</h3>
-              <p className="text-slate-700">
-                Project details, timeline, budget if applicable, and any specific goals or questions. The more context, the better I can help.
-              </p>
-            </div>
-          </section>
-
-          {/* CTA */}
-          <section>
-            <CTASection
-              title="Ready to Connect?"
-              description="Submit the form above or reach out directly via email or social media."
-              buttonText="Scroll Up to Form"
-              buttonLink="#"
-            />
           </section>
         </main>
       </PageTransition>

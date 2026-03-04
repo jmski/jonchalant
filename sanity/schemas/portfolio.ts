@@ -65,6 +65,13 @@ export default {
       title: 'Display Order',
       type: 'number',
     },
+    {
+      name: 'featured',
+      title: 'Featured on Dance Page Hero',
+      type: 'boolean',
+      description: 'Mark as featured to showcase this piece in the dance page hero section',
+      initialValue: false,
+    },
   ],
   preview: {
     select: {

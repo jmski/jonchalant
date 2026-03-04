@@ -91,8 +91,25 @@ export async function getPortfolioItem(slug: string) {
   return await client.fetch(query)
 }
 
+export async function getFeaturedPortfolioItem() {
+  const query = `*[_type == "portfolioItem" && featured == true][0] {
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    videoUrl,
+    thumbnail,
+    duration,
+    publishedAt,
+    order
+  }`
+  return await client.fetch(query)
+}
+
 // ============================================================================
 // SERVICES
+
 // ============================================================================
 
 export async function getServices() {

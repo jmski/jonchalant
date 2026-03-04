@@ -81,7 +81,7 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                     borderStyle: 'solid',
                     borderColor: colorVar,
                     backgroundColor: isActive ? colorVar : 'transparent',
-                    color: isActive ? 'var(--primary)' : colorVar,
+                    color: isActive ? 'white' : colorVar,
                   }}
                 >
                   <span className={glitchActive === cat && !isActive ? 'glitch-text' : ''}>
