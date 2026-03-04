@@ -16,11 +16,13 @@
     "@sanity/client": "^6.29.1",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.22.0",
+    "@supabase/supabase-js": "^2.98.0",
     "dotenv": "^17.2.3",
     "next": "16.1.1",
     "next-sanity": "^11.6.12",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "resend": "^6.9.3",
     "sanity": "^4.22.0",
     "styled-components": "^6.3.11"
   },

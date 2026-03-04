@@ -1,12 +1,7 @@
 import { CTASection } from "@/components/sections";
 import { PageTransition } from "@/components/layout";
-import dynamic from 'next/dynamic';
+import SegmentedInquiryForm from "@/components/forms/SegmentedInquiryForm";
 import { getCollaborations, getPageMetadata, getServiceCategories } from "@/lib/sanity";
-
-const CollaborationForm = dynamic(() => import('@/components/forms').then(mod => ({ default: mod.CollaborationForm })), {
-  loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
-  ssr: true
-});
 
 export const metadata = {
   title: "Collaborations | The Kinetic Leader",
@@ -166,11 +161,11 @@ export default async function Collaborations() {
                 Send Your Inquiry
               </h2>
               <p className="text-lg text-slate-700 max-w-2xl">
-                Have a partnership idea? I respond to all inquiries within 48 hours. Let's explore what's possible together.
+                Have a partnership idea? I respond to all inquiries within 24 hours. Let's explore what's possible together.
               </p>
             </div>
             <div className="max-w-3xl">
-              <CollaborationForm />
+              <SegmentedInquiryForm />
             </div>
           </section>
 

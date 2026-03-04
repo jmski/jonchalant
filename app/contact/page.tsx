@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { PageTransition } from "@/components/layout";
 import { getContactInfo, getPageMetadata, type ContactMethod } from "@/lib/sanity";
+import SegmentedInquiryForm from "@/components/forms/SegmentedInquiryForm";
 
 export default function Contact() {
   const [contactMethods, setContactMethods] = useState<ContactMethod[]>([]);
@@ -11,13 +12,6 @@ export default function Contact() {
     subheadline: 'Have a collaboration idea or question? I\'d love to hear from you.'
   });
   const [isLoading, setIsLoading] = useState(true);
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,24 +37,6 @@ export default function Contact() {
 
     fetchData();
   }, []);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' });
-      setSubmitted(false);
-    }, 3000);
-  };
 
 
   return (
@@ -184,79 +160,15 @@ export default function Contact() {
           <section className="mb-16 py-0">
             <div className="max-w-2xl mx-auto mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                Send a Message
+                Send Your Inquiry
               </h2>
               <p className="text-lg text-slate-700">
-                Tell me about your project, collaboration idea, or any questions you have.
+                Tell me about your project, what you're interested in, or any questions you have.
               </p>
             </div>
 
             <div className="max-w-2xl mx-auto">
-              {submitted ? (
-                <div className="border border-slate-200 p-12 text-center bg-slate-50 rounded">
-                  <div className="text-5xl mb-4">✓</div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                    Message Sent!
-                  </h3>
-                  <p className="text-slate-700">
-                    Thanks for reaching out!
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-900 mb-3">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all"
-                      placeholder="Your full name"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-900 mb-3">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-900 mb-3">
-                      Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      className="w-full px-4 py-3 border border-slate-200 bg-white text-slate-900 rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 transition-all resize-none"
-                      placeholder="Tell me about your project or inquiry..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary w-full"
-                  >
-                    Send Message
-                  </button>
-                </form>
-              )}
+              <SegmentedInquiryForm />
             </div>
           </section>
         </main>
