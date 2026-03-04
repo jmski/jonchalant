@@ -12,21 +12,21 @@
 
 /* Hero Section */
 .about-hero-section {
-  margin-bottom: 0;
-  padding: 6rem 0;
+  margin-bottom: 2rem;
+  padding: 3rem 0;
   position: relative;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .about-hero-section {
-    padding: 8rem 0;
+    padding: 4rem 0;
   }
 }
 
 @media (min-width: 1024px) {
   .about-hero-section {
-    padding: 10rem 0;
+    padding: 5rem 0;
   }
 }
 
