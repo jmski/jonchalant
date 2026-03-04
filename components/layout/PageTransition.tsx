@@ -5,11 +5,13 @@ import { useEffect, useState } from 'react';
 interface PageTransitionProps {
   children: React.ReactNode;
   animation?: 'fade' | 'slide-left' | 'slide-right' | 'slide-bottom' | 'scale' | 'blur' | 'stagger';
+  className?: string;
 }
 
 export default function PageTransition({
   children,
-  animation = 'fade'
+  animation = 'fade',
+  className = ''
 }: PageTransitionProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -41,7 +43,7 @@ export default function PageTransition({
   };
 
   return (
-    <div className={getAnimationClass()}>
+    <div className={`${getAnimationClass()} ${className}`}>
       {children}
     </div>
   );
