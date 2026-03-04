@@ -39,6 +39,9 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="fade">
+        {/* HERO SECTION */}
+        <HomeHero />
+
         {/* MARQUEE BANNER */}
         <Marquee
           items={[
@@ -50,9 +53,6 @@ export default async function Home() {
           speed={30}
           className="bg-slate-900 text-white py-3 sm:py-4 text-sm sm:text-base font-semibold"
         />
-
-        {/* HERO SECTION */}
-        <HomeHero />
 
         {/* KEY STATS SECTION */}
         <section className="bg-slate-50 py-12 sm:py-16">
