@@ -29,7 +29,7 @@ export default function AdminDashboard() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
-  const [user, setUser] = useState<{ email: string } | null>(null);
+  const [user, setUser] = useState<{ email?: string } | null>(null);
   const [modalInquiry, setModalInquiry] = useState<ModalInquiry | null>(null);
 
   useEffect(() => {
