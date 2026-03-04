@@ -24,7 +24,6 @@ const SITE_SECTIONS = [
     links: [
       { label: 'Programs', href: '/programs' },
       { label: 'Lessons', href: '/lessons' },
-      { label: 'Collaborations', href: '/collaborations' },
       { label: 'Media Kit', href: '/media-kit' },
     ],
   },

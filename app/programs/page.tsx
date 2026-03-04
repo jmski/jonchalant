@@ -9,11 +9,6 @@ const ProgramCardsSection = dynamic(() => import('@/components/sections').then(m
   ssr: true
 });
 
-const CollaborationForm = dynamic(() => import('@/components/forms/CollaborationForm'), {
-  loading: () => <div className="py-12 px-8 text-center">Loading form...</div>,
-  ssr: true
-});
-
 export const metadata = {
   title: "Programs | The Kinetic Leader",
   description: "Coaching programs for introverts seeking quiet command and professional leadership."
@@ -245,21 +240,6 @@ export default async function Programs() {
                 <p>Loading coaching programs...</p>
               </div>
             )}
-          </section>
-
-          {/* INQUIRY FORM */}
-          <section id="inquiry-form" className="mb-24 py-16 border-t border-slate-200">
-            <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                Let's Find Your Program
-              </h2>
-              <p className="text-lg text-slate-700 max-w-2xl">
-                Tell me about your goals and timeline. I'll respond within 48 hours with a program recommendation and next steps.
-              </p>
-            </div>
-            <div className="max-w-3xl">
-              <CollaborationForm formType="program" />
-            </div>
           </section>
 
           {/* CTA */}

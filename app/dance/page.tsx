@@ -75,7 +75,7 @@ export default async function Dance() {
               title="Ready to Integrate Movement into Your Leadership?"
               description="See how dance principles translate directly into professional presence, confidence, and command. Let's explore what's possible."
               buttonText="EXPLORE COACHING"
-              buttonLink="/collaborations"
+              buttonLink="/contact"
             />
           </section>
         </main>

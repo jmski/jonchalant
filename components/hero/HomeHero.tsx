@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { EnsoCircle } from '@/components/decorative';
+import IkigaiSymbol from '@/components/decorative/IkigaiSymbol';
 
 export default function HomeHero() {
   return (
@@ -15,11 +15,11 @@ export default function HomeHero() {
       />
 
       {/* Main content: Editorial 60/40 split */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-4 sm:py-12 lg:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT: Content (60%) */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-7 space-y-3">
             {/* Status indicator - Minimal badge */}
             <div className="inline-flex items-center">
               <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
@@ -28,19 +28,7 @@ export default function HomeHero() {
             </div>
 
             {/* Headline - Cormorant Garamond, generous letter-spacing */}
-            <div className="space-y-1 relative">
-              {/* Subtle Enso circle behind headline (Ikigai/Wellness pillar) */}
-              <EnsoCircle
-                size={280}
-                opacity={0.06}
-                strokeWidth={1.5}
-                style={{
-                  top: '-40px',
-                  left: '-60px',
-                  color: 'var(--accent-primary)',
-                }}
-              />
-              
+            <div className="space-y-0 relative">
               <h1 
                 className="font-headline font-normal leading-tight relative z-10"
                 style={{
@@ -96,7 +84,7 @@ export default function HomeHero() {
             </p>
 
             {/* CTA Buttons - Sleek, minimal */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <Link
                 href="/programs"
                 className="px-8 py-4 font-body font-semibold uppercase text-sm tracking-wider transition-all duration-300"
@@ -141,33 +129,16 @@ export default function HomeHero() {
             </div>
           </div>
 
-          {/* RIGHT: Visual (40%) - Space for future image or graphic */}
-          <div className="lg:col-span-5 hidden lg:flex items-center justify-center min-h-96">
-            {/* Placeholder for future visual element */}
-            <div 
-              className="w-full h-full rounded-sm flex items-center justify-center"
-              style={{
-                backgroundColor: 'var(--bg-secondary)',
-                border: '1px solid var(--border-color)'
-              }}
-            >
-              <p style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem' }}>
-                Editorial Portrait / Graphics
-              </p>
-            </div>
+          {/* RIGHT: Visual (40%) - Ikigai Symbol - Desktop only */}
+          <div className="lg:col-span-5 hidden lg:flex items-center justify-center">
+            <IkigaiSymbol size={380} opacity={0.95} />
           </div>
         </div>
-      </div>
 
-      {/* Scroll indicator - Subtle */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:flex flex-col items-center gap-3">
-        <p className="text-xs font-body uppercase tracking-widest" style={{ color: 'var(--text-tertiary)' }}>
-          Scroll
-        </p>
-        <div 
-          className="w-px h-8"
-          style={{ backgroundColor: 'var(--accent-primary)' }}
-        />
+        {/* Mobile Ikigai Symbol - Visible on mobile/tablet only - Bottom of page */}
+        <div className="flex lg:hidden justify-center mt-16 sm:mt-20">
+          <IkigaiSymbol size={280} opacity={0.95} />
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
+import { Marquee } from '@/components/effects';
 import dynamic from 'next/dynamic';
 import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
 
@@ -38,6 +39,18 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-white">
       <PageTransition animation="fade">
+        {/* MARQUEE BANNER */}
+        <Marquee
+          items={[
+            'Movement-Based Leadership',
+            'Dance • Coaching • Professional Presence',
+            'From Stage to Boardroom',
+            'Quiet Command Through Motion'
+          ]}
+          speed={30}
+          className="bg-slate-900 text-white py-3 sm:py-4 text-sm sm:text-base font-semibold"
+        />
+
         {/* HERO SECTION */}
         <HomeHero />
 
@@ -205,18 +218,6 @@ export default async function Home() {
                   ],
                   tags: ['Coaching', 'Training', 'Leadership'],
                   bgColor: 'from-slate-800 to-slate-900'
-                },
-                {
-                  title: 'Collaborations',
-                  description: 'Brand partnerships, campaigns, and creative direction for forward-thinking organizations',
-                  href: '/collaborations',
-                  count: 'Brand Ready',
-                  metrics: [
-                    { label: 'Brand Partners', value: '20+' },
-                    { label: 'Campaign Projects', value: '15+' }
-                  ],
-                  tags: ['Branding', 'Content', 'Direction'],
-                  bgColor: 'from-slate-900 to-slate-950'
                 },
               ].map((item, idx) => (
                 <a
@@ -414,7 +415,7 @@ export default async function Home() {
             title="Ready to Collaborate?"
             description="Let's explore how we can work together to bring your vision to life."
             buttonText="Start a Project"
-            buttonLink="/collaborations"
+            buttonLink="/contact"
           />
         </section>
       </PageTransition>

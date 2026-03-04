@@ -40,7 +40,6 @@ const getCategoryColor = (category: string): string => {
 
 export default function DanceFilter({ items, categories }: DanceFilterProps) {
   const [activeCategory, setActiveCategory] = useState('All');
-  const [glitchActive, setGlitchActive] = useState<string | null>(null);
 
   const filteredItems = activeCategory === 'All' 
     ? items 
@@ -73,8 +72,6 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  onMouseEnter={() => setGlitchActive(cat)}
-                  onMouseLeave={() => setGlitchActive(null)}
                   className="relative group px-6 py-3 font-black uppercase tracking-[0.1em] text-sm transition-all duration-300 overflow-hidden"
                   style={{
                     borderWidth: isActive ? '3px' : '2px',
@@ -84,7 +81,7 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                     color: isActive ? 'white' : colorVar,
                   }}
                 >
-                  <span className={glitchActive === cat && !isActive ? 'glitch-text' : ''}>
+                  <span>
                     {displayText}
                   </span>
                   {isActive && (

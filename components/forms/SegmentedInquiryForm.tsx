@@ -125,24 +125,6 @@ export default function SegmentedInquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      {/* Success Message */}
-      {state.submitted && (
-        <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-          <p className="font-semibold">✓ Inquiry submitted successfully!</p>
-          <p className="text-sm mt-1">
-            You'll receive a confirmation email shortly. I'll get back to you within 24 hours.
-          </p>
-        </div>
-      )}
-
-      {/* Error Message */}
-      {state.error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-          <p className="font-semibold">✕ Oops, something went wrong</p>
-          <p className="text-sm mt-1">{state.error}</p>
-        </div>
-      )}
-
       {/* Inquiry Type Selection */}
       <div>
         <label className="block text-sm font-semibold text-slate-900 mb-4">
@@ -315,6 +297,24 @@ export default function SegmentedInquiryForm() {
           {state.isSubmitting ? "Submitting..." : "Send Inquiry"}
         </button>
       </div>
+
+      {/* Success Message */}
+      {state.submitted && (
+        <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+          <p className="font-semibold">✓ Inquiry submitted successfully!</p>
+          <p className="text-sm mt-1">
+            You'll receive a confirmation email shortly. I'll get back to you within 24 hours.
+          </p>
+        </div>
+      )}
+
+      {/* Error Message */}
+      {state.error && (
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+          <p className="font-semibold">✕ Oops, something went wrong</p>
+          <p className="text-sm mt-1">{state.error}</p>
+        </div>
+      )}
 
       {/* Helper text */}
       <p className="text-xs text-slate-600 text-center">
