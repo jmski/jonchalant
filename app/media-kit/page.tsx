@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import { PageTransition } from "@/components/layout";
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
 
 export const metadata: Metadata = {
