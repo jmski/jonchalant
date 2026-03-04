@@ -4,6 +4,7 @@ import { EnsoCircle } from "@/components/decorative";
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
+import '@/app/css/about.css';
 
 export const metadata: Metadata = {
   title: "About Jon | Leadership Coach & Choreographer | Jonchalant",
@@ -63,17 +64,17 @@ export default async function About() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="about-main">
       <PageTransition animation="blur">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" id="main-content">
           {/* HERO SECTION */}
-          <section className="mb-24">
+          <section className="about-hero-section">
             {aboutContent?.heroHeadline ? (
               <>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+                <h1 className="about-hero-title">
                   {aboutContent.heroHeadline}
                 </h1>
-                <p className="text-lg sm:text-xl text-slate-700 max-w-2xl leading-relaxed">
+                <p className="about-hero-subtitle">
                   {aboutContent.heroDescription}
                 </p>
               </>
@@ -83,41 +84,35 @@ export default async function About() {
           </section>
 
           {/* ORIGIN STORY - 60/40 LAYOUT */}
-          <section className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative">
+          <section className="about-origin-section">
             {/* Subtle Enso circle decorative element - represents Ikigai/Purpose */}
             <EnsoCircle
               size={300}
               opacity={0.05}
               strokeWidth={1}
-              style={{
-                position: 'absolute',
-                top: '40px',
-                right: '-80px',
-                color: 'var(--accent-primary)',
-                zIndex: 0,
-              }}
+              className="about-enso-circle"
             />
             
-            <div className="lg:col-span-7 space-y-6 relative z-10">
+            <div className="about-origin-content">
               {aboutContent?.originSectionHeadline ? (
                 <>
-                  <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
+                  <h2 className="about-origin-title">
                     {aboutContent.originSectionHeadline}
                   </h2>
                   
-                  <p className="text-lg text-slate-700 leading-relaxed">
+                  <p className="about-origin-description">
                     {aboutContent.originSectionDescription}
                   </p>
 
-                  <div className="pt-6 border-t border-slate-200">
-                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                  <div className="about-phases">
+                    <h3 className="about-phases-title">
                       The Three Phases
                     </h3>
-                    <div className="space-y-4">
+                    <div className="about-phases-list">
                       {aboutContent.phases?.map((phase: any, idx: number) => (
                         <div key={idx}>
-                          <h4 className="font-semibold text-slate-900 mb-2">{phase.title}</h4>
-                          <p className="text-slate-700">
+                          <h4 className="about-phase-item-title">{phase.title}</h4>
+                          <p className="about-phase-item-description">
                             {phase.description}
                           </p>
                         </div>
@@ -131,35 +126,32 @@ export default async function About() {
             </div>
 
             {/* Right column placeholder */}
-            <div className="lg:col-span-5 bg-slate-100 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-slate-500">Editorial Image Placeholder</p>
+            <div className="about-origin-image">
+              <p className="about-origin-image-text">Editorial Image Placeholder</p>
             </div>
           </section>
 
           {/* KEY STATS */}
-          <section className="bg-slate-50 py-12 sm:py-16 px-8 rounded-lg mb-24">
-            <div className="mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Proven Results From Real Leaders</h2>
-              <p className="text-slate-700">These outcomes matter because they represent how our clients show up differently—at work, with their teams, and in their own eyes.</p>
+          <section className="about-stats-section">
+            <div className="about-stats-header">
+              <h2 className="about-stats-title">Proven Results From Real Leaders</h2>
+              <p className="about-stats-description">These outcomes matter because they represent how our clients show up differently—at work, with their teams, and in their own eyes.</p>
             </div>
             {aboutContent?.stats && aboutContent.stats.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="about-stats-grid">
                   {aboutContent.stats.map((stat: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="bg-white border border-slate-200 p-6 rounded-lg"
-                    >
-                      <div className="text-3xl font-bold text-slate-900 mb-2">
+                    <div key={idx} className="about-stat-card">
+                      <div className="about-stat-value">
                         {stat.value}
                       </div>
-                      <div className="text-sm text-slate-600">
+                      <div className="about-stat-label">
                         {stat.label}
                       </div>
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-slate-600 italic mt-6">*Of those who complete coaching programs</p>
+                <p className="about-stats-footnote">*Of those who complete coaching programs</p>
               </>
             ) : (
               <div className="py-8 text-center text-slate-600">Loading stats...</div>
@@ -167,27 +159,24 @@ export default async function About() {
           </section>
 
           {/* WHAT I COACH - Now fetching from Sanity services */}
-          <section className="mb-24">
-            <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          <section className="about-services-section">
+            <div className="about-services-header">
+              <h2 className="about-services-title">
                 What I Coach
               </h2>
-              <p className="text-lg text-slate-700">
+              <p className="about-services-subtitle">
                 Three core pillars that transform how you show up professionally.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="about-services-grid">
               {services && services.length > 0 ? (
                 services.map((service: any) => (
-                  <div
-                    key={service._id}
-                    className="border border-slate-200 p-6 hover:shadow-md transition-shadow duration-300"
-                  >
-                    <h3 className="font-semibold text-slate-900 mb-3 text-lg">
+                  <div key={service._id} className="about-service-card">
+                    <h3 className="about-service-card-title">
                       {service.title}
                     </h3>
-                    <p className="text-slate-700 leading-relaxed">
+                    <p className="about-service-card-description">
                       {service.description}
                     </p>
                   </div>
@@ -201,32 +190,29 @@ export default async function About() {
           </section>
 
           {/* MY PHILOSOPHY */}
-          <section className="mb-24">
-            <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          <section className="about-philosophy-section">
+            <div className="about-philosophy-header">
+              <h2 className="about-philosophy-title">
                 How I Coach: Three Non-Negotiables
               </h2>
-              <p className="text-lg text-slate-700 max-w-2xl">
+              <p className="about-philosophy-subtitle">
                 This framework is the backbone of every coaching conversation. It's what makes the transformation real.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="about-philosophy-grid">
               {philosophies.length > 0 ? (
                 philosophies.map((philosophy, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-slate-200 p-8 bg-white hover:shadow-md transition-shadow duration-300"
-                  >
-                    <div className="text-4xl mb-4">
+                  <div key={idx} className="about-philosophy-card">
+                    <div className="about-philosophy-emoji">
                       {idx === 0 && '🧠'}
                       {idx === 1 && '💫'}
                       {idx === 2 && '🎯'}
                     </div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                    <h3 className="about-philosophy-card-title">
                       {philosophy.title}
                     </h3>
-                    <p className="text-slate-700 leading-relaxed">
+                    <p className="about-philosophy-card-description">
                       {philosophy.description}
                     </p>
                   </div>
@@ -240,37 +226,34 @@ export default async function About() {
           </section>
 
           {/* INTROVERT ADVANTAGE */}
-          <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
+          <section className="about-introvert-section">
+            <div className="about-introvert-content">
+              <h2 className="about-introvert-title">
                 Why Your Introversion Is Your Superpower
               </h2>
 
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="about-introvert-paragraph">
                 You listen more than you speak. You think before you act. You draw energy from depth, not breadth. These aren't weaknesses—they're advantages waiting to be weaponized.
               </p>
 
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="about-introvert-paragraph">
                 The world needs more leaders who think before they act, who listen deeply, and who lead from authenticity. That's you.
               </p>
 
-              <p className="text-sm text-slate-600 pt-4">
+              <p className="about-introvert-cta-text">
                 See how these principles translate to movement and presence in my{' '}
-                <Link href="/dance" className="font-semibold text-slate-900 hover:text-accent transition-colors underline">
+                <Link href="/dance" className="about-introvert-link">
                   choreography portfolio
                 </Link>
                 .
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="about-traits-grid">
               {introvertTraits.length > 0 ? (
                 introvertTraits.map((trait, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-slate-200 p-4 text-center hover:shadow-md transition-shadow duration-300"
-                  >
-                    <p className="text-sm font-medium text-slate-900">{trait}</p>
+                  <div key={idx} className="about-trait-card">
+                    <p className="about-trait-text">{trait}</p>
                   </div>
                 ))
               ) : (
@@ -282,7 +265,7 @@ export default async function About() {
           </section>
 
           {/* CTA */}
-          <section className="py-16">
+          <section className="about-cta-section">
             <CTASection
               title="Your Presence Matters. Let's Amplify It."
               description="Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today—and the fastest path to where you want to be."
