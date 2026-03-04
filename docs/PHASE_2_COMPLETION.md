@@ -199,7 +199,7 @@ Comprehensive step-by-step guide:
 ## Project Structure Updates
 
 ```
-jonchalon/
+jonchalant/
 ├── app/
 │   ├── api/
 │   │   └── inquiries/
