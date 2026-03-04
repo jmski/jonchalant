@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { client } from '@/lib/sanity';
 import { Heading } from '@/components/typography';
 import { CTASection } from '@/components/sections';
+import '@/app/css/blog.css';
 
 export const metadata: Metadata = {
   title: 'Leadership Blog | Executive Presence & Quiet Command - Jonchalant',
@@ -56,14 +57,14 @@ export default async function BlogPage() {
   const regularPosts = posts.filter((post) => !post.featured);
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="blog-page-main">
       {/* Header */}
-      <div className="bg-linear-to-b from-slate-50 to-white py-12 md:py-20">
+      <div className="blog-page-header">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Heading level={1} className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <Heading level={1} className="blog-page-title">
             Leadership Blog
           </Heading>
-          <p className="text-lg text-slate-600 max-w-2xl">
+          <p className="blog-page-subtitle">
             Articles on executive presence, quiet command, confidence coaching, and leadership for introverts.
           </p>
         </div>
@@ -71,36 +72,33 @@ export default async function BlogPage() {
 
       {/* Featured Posts */}
       {featuredPosts.length > 0 && (
-        <section className="py-12 md:py-16 border-b border-slate-200">
+        <section className="blog-featured-section">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Featured</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <h2 className="blog-featured-title">Featured</h2>
+            <div className="blog-featured-grid">
               {featuredPosts.map((post) => (
-                <article
-                  key={post._id}
-                  className="group overflow-hidden rounded-lg border border-slate-200 hover:border-slate-300 transition-colors"
-                >
+                <article key={post._id} className="blog-featured-card">
                   <Link href={`/blog/${post.slug.current}`}>
-                    <div className="p-6 hover:bg-slate-50 transition-colors h-full flex flex-col">
-                      <div className="flex items-start justify-between gap-4 mb-3">
-                        <span className="text-sm font-medium text-slate-500 uppercase tracking-wide">
+                    <div className="blog-featured-card-inner">
+                      <div className="blog-featured-card-header">
+                        <span className="blog-featured-card-pillar">
                           {post.pillar}
                         </span>
                         {post.readingTime && (
-                          <span className="text-sm text-slate-500 whitespace-nowrap">
+                          <span className="blog-featured-card-readtime">
                             {post.readingTime} min read
                           </span>
                         )}
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-accent transition-colors">
+                      <h3 className="blog-featured-card-title">
                         {post.title}
                       </h3>
                       {post.excerpt && (
-                        <p className="text-slate-600 mb-4 grow line-clamp-2">
+                        <p className="blog-featured-card-excerpt">
                           {post.excerpt}
                         </p>
                       )}
-                      <div className="flex items-center text-accent font-medium text-sm group-hover:translate-x-1 transition-transform">
+                      <div className="blog-featured-card-cta">
                         Read Article →
                       </div>
                     </div>
@@ -113,46 +111,41 @@ export default async function BlogPage() {
       )}
 
       {/* All Posts */}
-      <section className="py-12 md:py-16">
+      <section className="blog-all-section">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">All Articles</h2>
+          <h2 className="blog-all-title">All Articles</h2>
           
           {posts.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-slate-600 text-lg">No blog posts yet. Check back soon!</p>
+            <div className="blog-empty-state">
+              <p className="blog-empty-message">No blog posts yet. Check back soon!</p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="blog-posts-list">
               {regularPosts.map((post) => (
-                <article
-                  key={post._id}
-                  className="group p-6 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-50 transition-colors"
-                >
-                  <Link href={`/blog/${post.slug.current}`} className="block">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-3 mb-2">
-                          <span className="text-sm font-medium text-slate-500 uppercase tracking-wide">
-                            {post.pillar}
+                <article key={post._id} className="blog-list-card">
+                  <Link href={`/blog/${post.slug.current}`} className="blog-list-card-content">
+                    <div className="blog-list-card-body">
+                      <div className="blog-list-card-meta">
+                        <span className="blog-list-card-pillar">
+                          {post.pillar}
+                        </span>
+                        {post.readingTime && (
+                          <span className="blog-list-card-readtime">
+                            {post.readingTime} min read
                           </span>
-                          {post.readingTime && (
-                            <span className="text-sm text-slate-500">
-                              {post.readingTime} min read
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">
-                          {post.title}
-                        </h3>
-                        {post.excerpt && (
-                          <p className="text-slate-600 text-sm line-clamp-2">
-                            {post.excerpt}
-                          </p>
                         )}
                       </div>
-                      <div className="shrink-0 text-accent font-medium text-sm group-hover:translate-x-1 transition-transform whitespace-nowrap">
-                        Read →
-                      </div>
+                      <h3 className="blog-list-card-title">
+                        {post.title}
+                      </h3>
+                      {post.excerpt && (
+                        <p className="blog-list-card-excerpt">
+                          {post.excerpt}
+                        </p>
+                      )}
+                    </div>
+                    <div className="blog-list-card-action">
+                      Read →
                     </div>
                   </Link>
                 </article>
