@@ -59,9 +59,9 @@ export default async function Programs() {
   }
 
   try {
-    const programsPageContent = await getProgramsFocusItems();
-    if (programsPageContent?.programFocusItems && programsPageContent.programFocusItems.length > 0) {
-      focusItems = programsPageContent.programFocusItems;
+    const focusItemsData = await getProgramsFocusItems();
+    if (Array.isArray(focusItemsData) && focusItemsData.length > 0) {
+      focusItems = focusItemsData;
     }
   } catch (error) {
     console.warn('Failed to fetch program focus items from Sanity:', error);
