@@ -60,7 +60,11 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary));
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-primary)
+  );
   transition: opacity 500ms cubic-bezier(0.3, 0, 0.2, 1);
 }
 
@@ -115,7 +119,11 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(
+    to bottom,
+    var(--bg-secondary),
+    var(--bg-primary)
+  );
   transition: all var(--transition-base);
 }
 

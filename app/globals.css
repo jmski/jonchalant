@@ -41,6 +41,10 @@
   @import "./css/spacing.css";
   @import "./css/dance-card.css";
   @import "./css/dance-filter.css";
+  @import "./css/form-inquiry.css";
+  @import "./css/featured-video-hero.css";
+  @import "./css/featured-blog.css";
+  @import "./css/program-cards.css";
 }
 
 /* Utility Classes & Patterns */

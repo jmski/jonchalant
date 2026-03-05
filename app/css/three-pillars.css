@@ -27,11 +27,15 @@
 
 /* Subtle background pattern */
 .three-pillars::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   opacity: 0.03;
-  background-image: radial-gradient(circle at 1px 1px, var(--border-color) 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--border-color) 1px,
+    transparent 1px
+  );
   background-size: 40px 40px;
   pointer-events: none;
 }

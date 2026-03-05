@@ -1,0 +1,142 @@
+/* ═════════════════════════════════════════════════════════════════════════════
+   Program Cards Section Styles
+   ─────────────────────────────────────────────────────────────────────────────
+   Responsive grid of program cards with features, pricing, and CTAs.
+*/
+
+.program-cards-section {
+  margin-bottom: var(--spacing-3xl);
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-3xl);
+}
+
+/* ─── Section Header ─── */
+.program-cards-header {
+  margin-bottom: var(--spacing-2xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.program-cards-title {
+  margin-bottom: var(--spacing-md);
+}
+
+.program-cards-subtitle {
+  color: var(--text-secondary);
+}
+
+/* ─── Cards Grid ─── */
+.program-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: var(--spacing-2xl);
+}
+
+@media (min-width: 768px) {
+  .program-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .program-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ─── Card Wrapper ─── */
+.program-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border-color: var(--border-color);
+  background-color: var(--bg-secondary);
+}
+
+/* ─── Category Badge ─── */
+.program-card-category {
+  color: var(--accent-primary);
+}
+
+/* ─── Card Title ─── */
+.program-card-title {
+  font-weight: 900; /* font-black */
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* tracking-widest */
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  line-height: var(--leading-tight);
+}
+
+/* ─── Card Description ─── */
+.program-card-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+  flex-grow: 1;
+  line-height: var(--leading-relaxed);
+}
+
+/* ─── Features List ─── */
+.program-card-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* space-y-2 */
+  margin-bottom: var(--spacing-lg);
+}
+
+.program-card-feature {
+  display: flex;
+  gap: 0.5rem; /* gap-2 */
+  align-items: flex-start;
+  font-size: 0.75rem; /* text-xs */
+}
+
+.program-card-feature-check {
+  font-weight: 900; /* font-black */
+  flex-shrink: 0;
+  color: var(--accent-primary);
+}
+
+.program-card-feature-text {
+  color: var(--text-secondary);
+}
+
+/* ─── More Features Indicator ─── */
+.program-card-more-features {
+  font-size: 0.75rem; /* text-xs */
+  color: var(--text-tertiary);
+  padding-top: var(--spacing-sm);
+  font-style: italic;
+}
+
+/* ─── Investment Section ─── */
+.program-card-investment {
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.program-card-investment-label {
+  color: var(--text-secondary);
+}
+
+.program-card-investment-amount {
+  font-weight: 900; /* font-black */
+  color: var(--accent-primary);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+/* ─── CTA Button ─── */
+.program-card-cta {
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* ─── Section Footer ─── */
+.program-cards-footer {
+  text-align: center;
+}

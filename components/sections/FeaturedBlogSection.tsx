@@ -41,45 +41,45 @@ export async function FeaturedBlogSection() {
   }
 
   return (
-    <section style={{ background: 'var(--bg-primary)', paddingTop: 'var(--spacing-2xl)', paddingBottom: 'var(--spacing-3xl)' }}>
-      <div style={{ maxWidth: '72rem', margin: '0 auto', paddingLeft: 'var(--spacing-md)', paddingRight: 'var(--spacing-md)' }}>
+    <section className="featured-blog-section">
+      <div className="featured-blog-container">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
-          <span className="text-badge" style={{ display: 'inline-block', color: 'var(--accent-primary)', marginBottom: 'var(--spacing-md)' }}>
+        <div className="featured-blog-header">
+          <span className="featured-blog-badge text-badge">
             Insights & Resources
           </span>
-          <h2 className="text-display-lg" style={{ color: 'var(--text-primary)', marginBottom: 'var(--spacing-md)' }}>
+          <h2 className="featured-blog-title text-display-lg">
             Read Latest Articles
           </h2>
-          <p style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', color: 'var(--text-secondary)', maxWidth: '40rem', margin: '0 auto', lineHeight: 'var(--leading-relaxed)' }}>
+          <p className="featured-blog-subtitle">
             Practical insights on executive presence, quiet command, and leadership coaching for introverts.
           </p>
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid-responsive-3" style={{ marginBottom: 'var(--spacing-2xl)' }}>
+        <div className="featured-blog-grid">
           {posts.map((post) => (
             <Link key={post._id} href={`/blog/${post.slug.current}`}>
-              <article className="card flex flex-col min-h-full group" style={{ cursor: 'pointer', transition: 'all var(--transition-base)' }}>
-                <div className="flex items-start justify-between gap-3" style={{ marginBottom: 'var(--spacing-sm)' }}>
-                  <span className="text-label" style={{ color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
+              <article className="featured-blog-card card">
+                <div className="featured-blog-card-meta">
+                  <span className="featured-blog-card-pillar text-label">
                     {post.pillar}
                   </span>
                   {post.readingTime && (
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
+                    <span className="featured-blog-card-reading-time">
                       {post.readingTime} min
                     </span>
                   )}
                 </div>
-                <h3 className="font-black" style={{ fontSize: 'clamp(1.125rem, 3vw, 1.5rem)', color: 'var(--text-primary)', marginBottom: 'var(--spacing-md)', lineHeight: 'var(--leading-tight)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                <h3 className="featured-blog-card-title">
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="text-body grow" style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-md)', fontSize: '0.95rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  <p className="featured-blog-card-excerpt">
                     {post.excerpt}
                   </p>
                 )}
-                <div style={{ display: 'flex', alignItems: 'center', color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.95rem', transition: 'transform var(--transition-base)' }}>
+                <div className="featured-blog-card-cta">
                   Read Article →
                 </div>
               </article>
@@ -88,7 +88,7 @@ export async function FeaturedBlogSection() {
         </div>
 
         {/* CTA to Blog */}
-        <div style={{ textAlign: 'center' }}>
+        <div className="featured-blog-footer">
           <Link
             href="/blog"
             className="cta-link"
@@ -101,3 +101,4 @@ export async function FeaturedBlogSection() {
     </section>
   );
 }
+
