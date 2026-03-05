@@ -5,3 +5,4 @@ export { default as FeaturedVideoHero } from './FeaturedVideoHero';
 export { FeaturedBlogSection } from './FeaturedBlogSection';
 export { default as HeroSection } from './HeroSection';
 export { default as PageHeroSection } from './PageHeroSection';
+export { FAQSection } from './FAQSection';
