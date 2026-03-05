@@ -4,3 +4,4 @@ export { default as ThreePillars } from './ThreePillars';
 export { default as FeaturedVideoHero } from './FeaturedVideoHero';
 export { FeaturedBlogSection } from './FeaturedBlogSection';
 export { default as HeroSection } from './HeroSection';
+export { default as PageHeroSection } from './PageHeroSection';
