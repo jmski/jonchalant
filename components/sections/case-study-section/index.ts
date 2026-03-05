@@ -1,1 +1,0 @@
-export { CaseStudySection } from './CaseStudySection';

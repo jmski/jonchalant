@@ -118,6 +118,49 @@ export function SectionName({ data }) {
 - Data: `getCaseStudies(featured: true)` called in component
 - Styling: `case-study-section.css` + uses `CaseStudyCard`
 
+### FUTURE: Components/Sections Refactoring Plan
+
+**Current Structure Issue**: Component naming is redundant ("AboutServicesSection" in `/sections/` folder = saying "section" 3x). Sections scattered flat makes scaling difficult.
+
+**Proposed Structure** (to implement when time allows):
+
+```
+components/sections/
+├── shared/                     # Reusable across pages
+│   ├── stats/index.ts + Stats.tsx
+│   ├── cta/index.ts + CTA.tsx
+│   ├── faq/index.ts + FAQ.tsx
+│   ├── testimonials/index.ts + Testimonials.tsx
+│   ├── case-study/index.ts + CaseStudy.tsx
+│   ├── featured-blog/index.ts + FeaturedBlog.tsx
+│   └── services/index.ts + Services.tsx
+├── home/                       # Home page sections only
+│   ├── hero/index.ts + Hero.tsx
+│   ├── featured-areas/index.ts + FeaturedAreas.tsx
+│   └── blog-cards/index.ts + BlogCards.tsx
+└── about/                      # About page sections only
+    ├── hero/index.ts + Hero.tsx
+    ├── origin/index.ts + Origin.tsx
+    ├── services/index.ts + Services.tsx
+    ├── philosophy/index.ts + Philosophy.tsx
+    └── introvert/index.ts + Introvert.tsx
+```
+
+**Benefits**:
+- ✅ No naming redundancy (`about/hero/Hero.tsx` instead of `AboutHeroSection`)
+- ✅ Clear page association (all about sections grouped)
+- ✅ Easier imports: `import { Hero } from '@/sections/about/hero'`
+- ✅ Scalable (new pages easy to add)
+- ✅ Separates shared vs. page-specific
+
+**Refactoring Steps**:
+1. Create new folder structure (`shared/`, `home/`, `about/` subdirectories)
+2. Move component files to new locations, rename (drop `Section` suffix)
+3. Create `index.ts` in each folder with export
+4. Update main `sections/index.ts` to export from new locations
+5. Update all page imports (home, about, lessons, etc.)
+6. Build and verify no errors
+
 ## Styling System
 
 **CSS-First Architecture**: All component styling uses dedicated CSS files with BEM-inspired class names. No inline styles (except truly dynamic values). No Tailwind utility classes in component JSX.

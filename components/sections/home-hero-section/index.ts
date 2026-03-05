@@ -1,1 +1,0 @@
-export { HomeHeroSection } from './HomeHeroSection';
