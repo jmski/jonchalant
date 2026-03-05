@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { PageHeroSection } from "@/components/sections";
+import { PageHeroSection, CollaborationPackagesSection } from "@/components/sections";
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
-import CollaborationPackagesSection from "@/components/sections/CollaborationPackagesSection";
 import '@/app/css/media-kit.css';
 
 export const metadata: Metadata = {

@@ -1,4 +1,4 @@
-import { StatsGrid } from '@/components/shared/grids';
+import { StatsGrid } from '@/components/utilities/grids';
 
 interface Stat {
   label: string;

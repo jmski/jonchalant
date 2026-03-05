@@ -1,4 +1,4 @@
-import { LessonCard } from '@/components/shared/cards';
+import { LessonCard } from '@/components/utilities/cards';
 
 interface LessonCategorySectionProps {
   level: 'Beginner' | 'Intermediate' | 'Advanced';

@@ -37,26 +37,40 @@ npm run lint     # ESLint validation (Next.js + TypeScript strict rules)
 
 ```
 components/
-├── shared/                      # Reusable components across pages
-│   ├── badges/                 # Small UI components
-│   │   └── Badge.tsx
-│   ├── cards/                  # Card components (used in grids, carousels)
-│   │   ├── TestimonialCard.tsx
-│   │   ├── CaseStudyCard.tsx
-│   │   └── [other card types]
-│   └── index.ts
-├── sections/                    # Full-width section components
-│   ├── testimonial-section/     # Carousel section
-│   │   ├── TestimonialSection.tsx ('use client' - needs state)
-│   │   └── index.ts
-│   ├── case-study-section/      # Grid section
-│   │   ├── CaseStudySection.tsx (server - fetches from Sanity)
-│   │   └── index.ts
-│   ├── featured-blog-section/
-│   │   ├── FeaturedBlogSection.tsx
-│   │   └── index.ts
-│   └── [other sections]
-├── hero/                        # Hero components
+├── sections/                    # Page-specific sections
+│   ├── home/                    # Home page sections
+│   │   ├── hero/              # Hero.tsx
+│   │   ├── featured-areas/     # FeaturedAreas.tsx
+│   │   └── blog-cards/         # BlogCards.tsx
+│   ├── about/                   # About page sections
+│   │   ├── hero/              # Hero.tsx
+│   │   ├── origin/            # Origin.tsx
+│   │   ├── services/          # Services.tsx
+│   │   ├── philosophy/        # Philosophy.tsx
+│   │   └── introvert/         # Introvert.tsx
+│   ├── dance/                   # Dance page sections
+│   │   └── featured-video/    # FeaturedVideo.tsx
+│   ├── lesson-section/          # Lesson category section
+│   └── index.ts                 # Central export hub (aliases for backward compatibility)
+├── shared/                      # Reusable section components (used across pages)
+│   ├── cta/                    # CTA.tsx
+│   ├── faq/                    # FAQ.tsx
+│   ├── hero/                   # Hero.tsx (generic)
+│   ├── page-hero/              # PageHero.tsx
+│   ├── featured-blog/          # FeaturedBlog.tsx
+│   ├── carousel/               # Carousel.tsx
+│   ├── case-studies/           # CaseStudies.tsx
+│   ├── case-study/             # CaseStudy.tsx
+│   ├── collaboration/          # Collaboration.tsx
+│   ├── programs/               # Programs.tsx
+│   ├── services/               # Services.tsx
+│   ├── stats/                  # Stats.tsx
+│   ├── testimonials/           # Testimonials.tsx
+│   └── three-pillars/          # ThreePillars.tsx
+├── utilities/                   # Reusable utility components
+│   ├── badges/                 # Badge.tsx
+│   ├── cards/                  # TestimonialCard.tsx, CaseStudyCard.tsx, BlogCard.tsx, LessonCard.tsx, ServiceCard.tsx
+│   └── grids/                  # StatsGrid.tsx, CardGrid.tsx
 ├── layout/                      # Layout wrappers
 ├── navigation/                  # Navbar, navigation
 ├── typography/                  # Text/heading components
@@ -66,28 +80,36 @@ components/
 └── animations/                  # Reusable animation hooks
 ```
 
-### Shared Components Pattern
+### Utility Components Pattern
 
-**Badge** (`components/shared/badges/Badge.tsx`):
+**Badge** (`components/utilities/badges/Badge.tsx`):
 
 - Reusable badge/label component
 - Props: `size` (sm/md/lg), `variant` (accent/primary/secondary), `children`
 - Styling: `.badge` classes from `badge.css`
 - Usage: Tags, labels, section headers
 
-**Cards** (`components/shared/cards/`):
+**Cards** (`components/utilities/cards/`):
 
 - **TestimonialCard**: Displays quote, client name, role, company, optional result
 - **CaseStudyCard**: Displays case study with image, challenge, solution, results
-- Both are stateless, accept data as props
+- **BlogCard**: Blog post preview card
+- **LessonCard**: Lesson/dance category card
+- **ServiceCard**: Service/offering card
+- All are stateless, accept data as props
 - Styled via dedicated CSS files (no inline styles, no Tailwind classes)
 
-### Section Components Pattern
+**Grids** (`components/utilities/grids/`):
 
-All sections follow this pattern:
+- **StatsGrid**: Display statistics/metrics in a responsive grid
+- **CardGrid**: Generic grid layout for card components
+
+### Shared Section Components Pattern
+
+All shared sections follow this pattern:
 
 ```tsx
-// ✅ CORRECT: Dedicated CSS file, CSS class names only
+// ✅ CORRECT: Named export, dedicated CSS file, CSS class names only
 export function SectionName({ data }) {
   return (
     <section className="section-name">
@@ -104,62 +126,66 @@ export function SectionName({ data }) {
 }
 ```
 
-**Example: TestimonialSection** (`components/sections/testimonial-section/`):
+**Export convention**: Shared components use _named exports_. The `index.ts` file may re-export as default for convenience:
+
+```tsx
+// components/shared/carousel/index.ts
+export { Carousel } from "./Carousel"; // Named export
+
+// components/shared/cta/index.ts
+export { default as CTA } from "./CTA"; // Default export in component file
+```
+
+**Example: Carousel** (`components/shared/carousel/`):
 
 - Type: `'use client'` (manages carousel state)
 - Features: Auto-play (6s interval), dot indicators, keyboard navigation
 - Data: Passed as prop from parent (home page)
-- Styling: `testimonial-section.css` + uses `TestimonialCard`
+- Used by: `Testimonials` section
 
-**Example: CaseStudySection** (`components/sections/case-study-section/`):
+**Example: CaseStudies** (`components/shared/case-studies/`):
 
-- Type: Server component (async)
-- Features: Fetches from Sanity, responsive grid (1→2 cols)
-- Data: `getCaseStudies(featured: true)` called in component
-- Styling: `case-study-section.css` + uses `CaseStudyCard`
+- Type: Server component (can fetch from Sanity if needed)
+- Features: Responsive grid (1→2 cols), uses `CaseStudyCard`
+- Data: Passed as prop from parent
+- Styling: Dedicated CSS file
 
-### FUTURE: Components/Sections Refactoring Plan
+### Page-Specific Section Components
 
-**Current Structure Issue**: Component naming is redundant ("AboutServicesSection" in `/sections/` folder = saying "section" 3x). Sections scattered flat makes scaling difficult.
+**About page sections** (`components/sections/about/`):
 
-**Proposed Structure** (to implement when time allows):
+- No "Section" suffix (e.g., `Hero`, `Origin`, `Services`, `Philosophy`, `Introvert`)
+- Each in its own folder with `index.ts`
+- Re-exported from `sections/index.ts` with aliases for backward compatibility
 
-```
-components/sections/
-├── shared/                     # Reusable across pages
-│   ├── stats/index.ts + Stats.tsx
-│   ├── cta/index.ts + CTA.tsx
-│   ├── faq/index.ts + FAQ.tsx
-│   ├── testimonials/index.ts + Testimonials.tsx
-│   ├── case-study/index.ts + CaseStudy.tsx
-│   ├── featured-blog/index.ts + FeaturedBlog.tsx
-│   └── services/index.ts + Services.tsx
-├── home/                       # Home page sections only
-│   ├── hero/index.ts + Hero.tsx
-│   ├── featured-areas/index.ts + FeaturedAreas.tsx
-│   └── blog-cards/index.ts + BlogCards.tsx
-└── about/                      # About page sections only
-    ├── hero/index.ts + Hero.tsx
-    ├── origin/index.ts + Origin.tsx
-    ├── services/index.ts + Services.tsx
-    ├── philosophy/index.ts + Philosophy.tsx
-    └── introvert/index.ts + Introvert.tsx
-```
+**Home page sections** (`components/sections/home/`):
 
-**Benefits**:
-- ✅ No naming redundancy (`about/hero/Hero.tsx` instead of `AboutHeroSection`)
+- No "Section" suffix (e.g., `Hero`, `FeaturedAreas`, `BlogCards`)
+- Similar structure to about sections
+
+### Architecture Highlights
+
+**Separation of Concerns**:
+
+- ✅ Page-specific sections in `components/sections/{page}/`
+- ✅ Reusable sections in `components/shared/`
+- ✅ Utility components (cards, badges, grids) in `components/utilities/`
+- ✅ No naming redundancy (`Hero` instead of `HeroSection`)
+
+**Export Strategy**:
+
+- Page-specific sections like `About/Hero` exported from `sections/index.ts` with backward-compatible aliases
+  - `export { Hero as AboutHeroSection } from '@/components/sections/about/hero'`
+- This allows existing code using old names to continue working
+- New code should use the simpler names directly
+
+**Folder Organization Benefits**:
+
 - ✅ Clear page association (all about sections grouped)
-- ✅ Easier imports: `import { Hero } from '@/sections/about/hero'`
 - ✅ Scalable (new pages easy to add)
-- ✅ Separates shared vs. page-specific
-
-**Refactoring Steps**:
-1. Create new folder structure (`shared/`, `home/`, `about/` subdirectories)
-2. Move component files to new locations, rename (drop `Section` suffix)
-3. Create `index.ts` in each folder with export
-4. Update main `sections/index.ts` to export from new locations
-5. Update all page imports (home, about, lessons, etc.)
-6. Build and verify no errors
+- ✅ Easier imports: `import { Hero } from '@/components/sections/about/hero'`
+- ✅ Shared components aren't nested under page-specific content
+- ✅ Utilities are at top level for easy access
 
 ## Styling System
 
@@ -544,22 +570,27 @@ For page headers and standard text, use **minimal Tailwind utilities** (size/wei
 ## Development Tips
 
 - **New page**: Create `app/newpage/page.tsx`, import Navbar, follow page structure template
-- **New component (shared card)**:
-  1. Create `components/shared/cards/ComponentName.tsx` with props interface
+- **New utility component**:
+  1. Create `components/utilities/{category}/ComponentName.tsx` with props interface
   2. Create `app/css/component-name.css` with BEM naming
-  3. Export from `components/shared/cards/index.ts`
+  3. Export from `components/utilities/{category}/index.ts`
   4. Import CSS in `app/globals.css`
-- **New section**:
-  1. Create `components/sections/section-name/` directory
-  2. Create `SectionName.tsx` (server component, async data fetch if needed)
-  3. Create `index.ts` with export
-  4. Create `app/css/section-name.css`
-  5. Import CSS in `app/globals.css`
-  6. Update `components/sections/index.ts` to export new section
+- **New shared section** (reusable across pages):
+  1. Create `components/shared/section-name/SectionName.tsx`
+  2. Create `index.ts` with named export
+  3. Create `app/css/section-name.css`
+  4. Import CSS in `app/globals.css`
+  5. Re-export from `components/sections/index.ts`
+- **New page-specific section**:
+  1. Create `components/sections/{page}/section-name/SectionName.tsx`
+  2. Create `index.ts` with export (no "Section" suffix in component name)
+  3. Create `app/css/section-name.css`
+  4. Import CSS in `app/globals.css`
+  5. Import directly in page file
 - **Fetch from Sanity**: Use async server components with `getCaseStudies()`, `getTestimonials()`, etc. from `@/lib/sanity`
 - **Styling**: Create dedicated `.css` file for component, use CSS variable references, follow BEM naming
 - **Responsive design**: Build mobile-first with `@media (min-width: 640px)` for tablet/desktop adjustments
 - **Test build**: `npm run build` validates TypeScript and CSS compilation (required before committing)
 - **Debug CSS**: Inspect `.css` files in `app/css/` using browser DevTools
-- **Legacy components**: Check `components/sections/index.ts` for DEPRECATED notices before using old components</content>
+- **Imports**: Use `@/components/sections`, `@/components/shared`, `@/components/utilities` with consistent paths</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md

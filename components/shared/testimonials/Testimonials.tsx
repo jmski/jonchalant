@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { TestimonialCard } from '@/components/shared/cards'
+import { TestimonialCard } from '@/components/utilities/cards'
 
 interface Testimonial {
   _id?: string

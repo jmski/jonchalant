@@ -1,5 +1,5 @@
-import { ServiceCard } from '@/components/shared/cards';
-import { CardGrid } from '@/components/shared/grids';
+import { ServiceCard } from '@/components/utilities/cards';
+import { CardGrid } from '@/components/utilities/grids';
 
 interface Service {
   _id: string;

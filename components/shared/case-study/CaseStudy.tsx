@@ -1,5 +1,5 @@
 import { getCaseStudies } from '@/lib/sanity';
-import { CaseStudyCard } from '@/components/shared/cards';
+import { CaseStudyCard } from '@/components/utilities/cards';
 
 interface CaseStudy {
   _id: string;

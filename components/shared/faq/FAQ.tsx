@@ -31,7 +31,7 @@ const FAQ_ITEMS: FAQItem[] = [
   },
 ]
 
-export function FAQ() {
+export default function FAQ() {
   const [expanded, setExpanded] = useState<number | null>(null)
 
   return (

@@ -1,5 +1,5 @@
-import { BlogCard } from '@/components/shared/cards';
-import { CardGrid } from '@/components/shared/grids';
+import { BlogCard } from '@/components/utilities/cards';
+import { CardGrid } from '@/components/utilities/grids';
 
 interface BlogPost {
   _id: string;
