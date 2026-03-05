@@ -18,26 +18,55 @@ interface DanceFilterProps {
   categories: string[];
 }
 
+/**
+ * Color mapping for dance categories
+ * Maps category names to CSS variable references
+ */
 const getCategoryColor = (category: string): string => {
   const lowerCategory = category.toLowerCase();
   switch(lowerCategory) {
     case 'choreography':
     case 'choreography video':
-      return 'vibrant';
+      return 'var(--color-burnt-indigo)';
     case 'freestyle':
     case 'freestyle video':
-      return 'secondary';
+      return 'var(--color-muted-moss)';
     case 'performance':
     case 'performances':
     case 'performance video':
-      return 'tertiary';
+      return 'var(--accent-primary)';
     case 'all':
-      return 'primary';
+      return 'var(--text-primary)';
     default:
-      return 'primary';
+      return 'var(--text-primary)';
   }
 };
 
+/**
+ * DanceFilter Component
+ * ─────────────────────────────────────────────
+ * Portfolio filter with category buttons and responsive grid layout.
+ * All styling handled through CSS classes in dance-filter.css
+ * 
+ * CSS Classes Used:
+ * - .dance-filter-header: Header container
+ * - .dance-filter-title: "Filter by Style" heading
+ * - .dance-filter-buttons: Button container with flex layout
+ * - .filter-button: Individual button class (base)
+ * - .filter-button.active: Active button state styling
+ * - .filter-button-bar: Animated pulse bar for active button
+ * - .dance-portfolio-sections: Grid sections container
+ * - .dance-section-header: Section header with color-coded border
+ * - .dance-section-title: Section title text
+ * - .dance-grid: Responsive grid layout (1 → 2 → 3 columns)
+ * - .dance-grid-item: Individual grid item
+ * - .dance-grid-item-underline: Hover underline effect
+ * - .dance-empty-state: Empty state message
+ * 
+ * Props:
+ *   items: Array of dance portfolio items
+ *   categories: Array of category strings for filtering
+ */
 export default function DanceFilter({ items, categories }: DanceFilterProps) {
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -45,26 +74,15 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
     ? items 
     : items.filter(item => item.category === activeCategory);
 
-  const getColorVar = (color: string) => {
-    const colorMap: Record<string, string> = {
-      vibrant: 'var(--accent-vibrant)',
-      secondary: 'var(--accent-secondary)',
-      tertiary: 'var(--accent-tertiary)',
-      primary: 'var(--text-primary)'
-    };
-    return colorMap[color] || 'var(--text-primary)';
-  };
-
   return (
     <>
-      {/* CATEGORY FILTER - BOLD & COLOR-CODED */}
+      {/* CATEGORY FILTER */}
       <ScrollFade>
-        <div className="mb-16">
-          <h2 className="text-2xl font-black uppercase tracking-[0.15em] text-primary mb-6 heading-display">Filter by Style</h2>
-          <div className="flex flex-wrap gap-4">
+        <div className="dance-filter-header">
+          <h2 className="dance-filter-title">Filter by Style</h2>
+          <div className="dance-filter-buttons">
             {(['All', ...categories.filter(c => c !== 'All')] as string[]).map((cat) => {
-              const color = getCategoryColor(cat);
-              const colorVar = getColorVar(color);
+              const colorVar = getCategoryColor(cat);
               const isActive = cat === activeCategory;
               const displayText = cat === 'All' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1);
 
@@ -72,25 +90,18 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className="relative group px-6 py-3 font-black uppercase tracking-widest text-sm transition-all duration-300 overflow-hidden"
+                  className={`filter-button ${isActive ? 'active' : ''}`}
                   style={{
-                    borderWidth: isActive ? '3px' : '2px',
-                    borderStyle: 'solid',
                     borderColor: colorVar,
                     backgroundColor: isActive ? colorVar : 'transparent',
                     color: isActive ? 'white' : colorVar,
                   }}
                 >
-                  <span>
-                    {displayText}
-                  </span>
+                  <span>{displayText}</span>
                   {isActive && (
                     <div 
-                      className="absolute bottom-0 left-0 h-1 animate-pulse"
-                      style={{
-                        backgroundColor: colorVar,
-                        width: '100%'
-                      }}
+                      className="filter-button-bar"
+                      style={{ backgroundColor: colorVar }}
                     />
                   )}
                 </button>
@@ -100,27 +111,25 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
         </div>
       </ScrollFade>
 
-      {/* Portfolio Grid - COLOR CODED BY CATEGORY */}
-      <div className="space-y-16 pb-20">
+      {/* Portfolio Grid */}
+      <div className="dance-portfolio-sections">
         {['choreography', 'freestyle', 'performance'].map((displayCategory) => {
           const categoryItems = items.filter(item => item.category?.toLowerCase() === displayCategory);
 
-          // Skip this section if it's empty or if a specific category is selected and it's not this one
           if (categoryItems.length === 0) return null;
           if (activeCategory !== 'All' && activeCategory?.toLowerCase() !== displayCategory) return null;
 
           const itemsToDisplay = activeCategory === 'All' ? categoryItems : filteredItems;
           if (itemsToDisplay.length === 0) return null;
 
-          const color = getCategoryColor(displayCategory);
-          const colorVar = getColorVar(color);
+          const colorVar = getCategoryColor(displayCategory);
           const displayName = displayCategory.charAt(0).toUpperCase() + displayCategory.slice(1);
 
           return (
             <div key={displayCategory}>
-              <div className="mb-8 pb-4 border-b-3" style={{ borderColor: colorVar }}>
+              <div className="dance-section-header" style={{ borderColor: colorVar }}>
                 <h3 
-                  className="text-3xl font-black uppercase heading-display tracking-widest"
+                  className="dance-section-title"
                   style={{ color: colorVar }}
                 >
                   ▶ {displayName}
@@ -128,18 +137,17 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
               </div>
               
               <ScrollStagger variant="slideInUp" staggerDelay={80}>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {itemsToDisplay.map((item, idx) => (
-                    <div key={item._id} className="group relative">
+                <div className="dance-grid">
+                  {itemsToDisplay.map((item) => (
+                    <div key={item._id} className="dance-grid-item">
                       <DanceCard
                         title={item.title}
                         category={item.category}
                         description={item.description}
                         image={item.thumbnail}
                       />
-                      {/* Color underline on hover */}
                       <div 
-                        className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-300"
+                        className="dance-grid-item-underline"
                         style={{ backgroundColor: colorVar }}
                       />
                     </div>
@@ -151,8 +159,8 @@ export default function DanceFilter({ items, categories }: DanceFilterProps) {
         })}
         
         {filteredItems.length === 0 && (
-          <div className="col-span-full text-center py-12">
-            <p style={{ color: 'var(--text-secondary)' }}>
+          <div className="dance-empty-state">
+            <p>
               No videos in this category yet. Check back soon! 🎬
             </p>
           </div>

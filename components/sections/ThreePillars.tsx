@@ -7,7 +7,7 @@ interface Pillar {
   title: string;
   description: string;
   icon: string;
-  color: 'vibrant' | 'secondary' | 'tertiary';
+  colorClass: 'pillar-card-burnt-indigo' | 'pillar-card-moss' | 'pillar-card-accent';
 }
 
 const pillars: Pillar[] = [
@@ -15,90 +15,78 @@ const pillars: Pillar[] = [
     title: 'Physical Grounding',
     description: 'Your body speaks before your words do. I teach you how to use movement, posture, and spatial awareness to command presence naturally—without forcing it.',
     icon: '🧭',
-    color: 'vibrant'
+    colorClass: 'pillar-card-burnt-indigo'
   },
   {
     title: 'Social Scripting',
     description: 'Networking, conversations, and influence don\'t require you to be a natural extrovert. Learn the frameworks and mechanics I discovered in sales that make human connection predictable.',
     icon: '🔗',
-    color: 'secondary'
+    colorClass: 'pillar-card-moss'
   },
   {
     title: 'Energy Mastery',
     description: 'As an introvert, you have a limited but powerful energy reserve. I teach you how to activate it strategically, lead authentically, and avoid burnout.',
     icon: '⚡',
-    color: 'tertiary'
+    colorClass: 'pillar-card-accent'
   }
 ];
 
+/**
+ * ThreePillars Component
+ * ─────────────────────────────────────────────
+ * Displays three core pillars of the Kinetic Method.
+ * 
+ * CSS Classes Used:
+ * - .three-pillars: Main section wrapper
+ * - .three-pillars-content: Constrained width container
+ * - .three-pillars-header: Header section
+ * - .three-pillars-tag: Tag styling
+ * - .three-pillars-title: Main heading
+ * - .three-pillars-description: Header description
+ * - .three-pillars-grid: Card grid layout
+ * - .pillar-card: Individual card base
+ * - .pillar-card-{variant}: Color variants (burnt-indigo, moss, accent)
+ * - .pillar-icon: Icon styling
+ * - .pillar-title: Card title
+ * - .pillar-description: Card description
+ * - .pillar-accent-bar: Animated bottom bar
+ */
 export default function ThreePillars() {
-  const colorMap = {
-    vibrant: 'border-vibrant text-vibrant',
-    secondary: 'border-secondary text-secondary',
-    tertiary: 'border-tertiary text-tertiary'
-  };
-
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden bg-primary border-t border-b border-primary">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-3" style={{
-        backgroundImage: 'radial-gradient(circle at 1px 1px, var(--border-color) 1px, transparent 1px)',
-        backgroundSize: '40px 40px'
-      }} />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="three-pillars">
+      <div className="three-pillars-content">
         {/* Header */}
-        <div className="mb-16 md:mb-20">
-          <span className="text-vibrant text-xs uppercase tracking-widest font-black">→ THE KINETIC METHOD</span>
+        <div className="three-pillars-header">
+          <span className="three-pillars-tag">→ THE KINETIC METHOD</span>
           <Heading level={2} className="mt-4 mb-6">Three Pillars of Quiet Command</Heading>
-          <p className="text-lg text-secondary max-w-2xl leading-relaxed">
+          <p className="three-pillars-description">
             Every introvert has the capacity to lead. The question isn't whether you can—it's whether you know <em>how</em>. My methodology combines three proven drivers of professional presence.
           </p>
         </div>
 
         {/* Three Pillar Cards */}
         <ScrollStagger variant="slideInUp" staggerDelay={120}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="three-pillars-grid">
             {pillars.map((pillar, idx) => (
               <ScrollFade key={idx} variant="slideInUp" delay={idx * 150}>
-                <div
-                  className={`relative p-8 border-3 ${colorMap[pillar.color]} bg-primary hover:shadow-lg transition-all duration-300 group cursor-pointer`}
-                  style={{
-                    borderColor: pillar.color === 'vibrant' ? 'var(--accent-vibrant)' : 
-                                 pillar.color === 'secondary' ? 'var(--accent-secondary)' : 
-                                 'var(--accent-tertiary)'
-                  }}
-                >
+                <div className={`pillar-card ${pillar.colorClass}`}>
                   {/* Icon */}
-                  <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <div className="pillar-icon">
                     {pillar.icon}
                   </div>
 
                   {/* Title */}
-                  <h3 
-                    className="text-xl sm:text-2xl font-black mb-4 leading-tight"
-                    style={{
-                      color: pillar.color === 'vibrant' ? 'var(--accent-vibrant)' : 
-                             pillar.color === 'secondary' ? 'var(--accent-secondary)' : 
-                             'var(--accent-tertiary)'
-                    }}
-                  >
+                  <h3 className="pillar-title">
                     {pillar.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-secondary leading-relaxed text-sm sm:text-base">
+                  <p className="pillar-description">
                     {pillar.description}
                   </p>
 
                   {/* Accent decoration */}
-                  <div className="mt-6 h-1 w-0 group-hover:w-12 transition-all duration-300"
-                    style={{
-                      backgroundColor: pillar.color === 'vibrant' ? 'var(--accent-vibrant)' : 
-                                       pillar.color === 'secondary' ? 'var(--accent-secondary)' : 
-                                       'var(--accent-tertiary)'
-                    }}
-                  />
+                  <div className="pillar-accent-bar" />
                 </div>
               </ScrollFade>
             ))}
@@ -106,13 +94,13 @@ export default function ThreePillars() {
         </ScrollStagger>
 
         {/* Bottom CTA */}
-        <div className="mt-16 pt-12 border-t border-primary text-center">
-          <p className="text-secondary text-lg mb-6 max-w-2xl mx-auto">
+        <div style={{ marginTop: 'var(--spacing-2xl)', paddingTop: 'var(--spacing-3xl)', borderTop: '1px solid var(--border-color)', textAlign: 'center' }}>
+          <p style={{ color: 'var(--color-muted-moss)', fontSize: '1.125rem', marginBottom: 'var(--spacing-md)', maxWidth: '40rem', margin: '0 auto var(--spacing-md)' }}>
             These three drivers compound. Master them, and you become unstoppable—while staying true to who you are.
           </p>
           <a
             href="/programs"
-            className="inline-block px-8 py-4 font-black uppercase tracking-[0.1em] text-sm border-2 border-vibrant bg-vibrant text-primary hover:bg-primary hover:text-vibrant transition-all duration-300"
+            className="btn-primary-bold"
           >
             Explore Programs
           </a>

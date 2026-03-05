@@ -17,29 +17,30 @@ interface HeadingProps {
  * Semantic heading component with responsive sizing and accent colors.
  * Replaces repetitive heading style combinations throughout the codebase.
  *
- * Heading Levels & Sizes:
- *   - h1: 6xl (sm:7xl lg:8xl) - Page titles
- *   - h2: 5xl (sm:6xl lg:7xl) - Section titles
- *   - h3: 4xl (sm:5xl lg:6xl) - Subsection titles
- *   - h4: 3xl (sm:4xl lg:5xl) - Large text
- *   - h5: 2xl (sm:3xl lg:4xl) - Medium text
- *   - h6: xl (sm:2xl lg:3xl)  - Small text
+ * Heading Levels & CSS Classes:
+ *   - h1: text-display-1xl - Page titles
+ *   - h2: text-display-lg - Section titles
+ *   - h3: text-heading-1 - Subsection titles
+ *   - h4: text-heading-2 - Large text
+ *   - h5: text-heading-3 - Medium text
+ *   - h6: text-heading-4 - Small text
  *
  * Props:
  *   level: Heading level (h1-h6), defaults to h2
- *   accent: Apply accent color (vibrant) to heading
- *   className: Additional Tailwind classes
+ *   accent: Apply accent color (muted-moss) to heading
+ *   className: Additional CSS classes
  *   as: Override semantic element (h1-h6)
+ *   style: Inline styles (minimal usage)
  *
  * Features:
- *   - Mobile-first responsive sizing
- *   - Professional typography
+ *   - Mobile-first responsive sizing via CSS clamp()
+ *   - Professional typography via CSS variables
  *   - Optional accent color
  *   - Semantic HTML
  *
  * Usage:
  *   <Heading level={1}>Page Title</Heading>
- *   <Heading level={2} accent>Section</Heading>
+ *   <Heading level={2} accent>Section with Accent</Heading>
  */
 export default function Heading({
   level = 2,
@@ -49,30 +50,28 @@ export default function Heading({
   as,
   style,
 }: HeadingProps) {
+  // CSS class mapping for responsive sizing
   const sizeMap: Record<HeadingLevel, string> = {
-    1: 'text-6xl sm:text-7xl lg:text-8xl',
-    2: 'text-5xl sm:text-6xl lg:text-7xl',
-    3: 'text-4xl sm:text-5xl lg:text-6xl',
-    4: 'text-3xl sm:text-4xl lg:text-5xl',
-    5: 'text-2xl sm:text-3xl lg:text-4xl',
-    6: 'text-xl sm:text-2xl lg:text-3xl',
+    1: 'text-display-1xl',
+    2: 'text-display-lg',
+    3: 'text-heading-1',
+    4: 'text-heading-2',
+    5: 'text-heading-3',
+    6: 'text-heading-4',
   };
 
   const displayLevel = as || level;
-  
-  const baseClasses = `
-    font-bold heading-display tracking-wider
-    ${sizeMap[level]}
-    ${accent ? 'text-vibrant' : 'text-primary'}
-    ${className}
-  `.trim();
+  const accentStyle = accent ? { color: 'var(--color-muted-moss)' } : undefined;
 
   // Map heading level to HTML element
   const tagName = `h${displayLevel}` as const;
   const HeadingElement = tagName as any;
 
   return (
-    <HeadingElement className={baseClasses} style={style}>
+    <HeadingElement 
+      className={`${sizeMap[level]} ${className}`} 
+      style={{ ...accentStyle, ...style }}
+    >
       {children}
     </HeadingElement>
   );

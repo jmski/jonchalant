@@ -402,13 +402,13 @@ export async function getProgramsByCategory(category: string) {
 }
 
 export async function getProgramsFocusItems() {
-  const query = `*[_type == "programsPageContent" && title == "Programs"][0] {
-    programFocusItems | order(order asc) {
-      title,
-      description,
-      icon,
-      order
-    }
+  const query = `*[_type == "programFocus"] | order(order asc) {
+    _id,
+    title,
+    slug,
+    description,
+    icon,
+    order
   }`
   return await client.fetch(query)
 }

@@ -50,6 +50,23 @@ const INQUIRY_OPTIONS: InquiryOption[] = [
   },
 ];
 
+/**
+ * SegmentedInquiryForm Component
+ * ─────────────────────────────────────────────
+ * Multi-step inquiry form with conditional fields and status messages.
+ * All styling handled through CSS classes in form-inquiry.css
+ * 
+ * CSS Classes Used:
+ * - .inquiry-form: Main form wrapper with flex layout
+ * - .form-section: Individual form section
+ * - .form-label: Label styling
+ * - .form-input, .form-select, .form-textarea: Input field styling
+ * - .radio-group, .radio-option: Radio button group styling
+ * - .form-submit: Submit button styling
+ * - .form-message: Status message container
+ * - .form-message-success, .form-message-error: Message variants
+ * - .form-helper-text: Helper text styling
+ */
 export default function SegmentedInquiryForm() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -124,20 +141,16 @@ export default function SegmentedInquiryForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="inquiry-form">
       {/* Inquiry Type Selection */}
-      <div>
-        <label className="block text-sm font-semibold text-slate-900 mb-4">
-          What type of inquiry?
-        </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="form-section">
+        <label className="form-label">What type of inquiry?</label>
+        <div className="radio-group">
           {INQUIRY_OPTIONS.map((option) => (
             <label
               key={option.value}
-              className={`block p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                formData.inquiry_type === option.value
-                  ? "border-blue-500 bg-blue-50"
-                  : "border-slate-200 hover:border-slate-300 bg-white"
+              className={`radio-option ${
+                formData.inquiry_type === option.value ? "active" : ""
               }`}
             >
               <input
@@ -146,20 +159,17 @@ export default function SegmentedInquiryForm() {
                 value={option.value}
                 checked={formData.inquiry_type === option.value}
                 onChange={handleChange}
-                className="w-5 h-5 accent-blue-600"
               />
-              <span className="block ml-0 mt-2 font-medium text-slate-900">
-                {option.label}
-              </span>
-              <p className="text-xs text-slate-600 mt-1">{option.description}</p>
+              <span className="radio-label">{option.label}</span>
+              <p className="radio-description">{option.description}</p>
             </label>
           ))}
         </div>
       </div>
 
       {/* Name */}
-      <div>
-        <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-2">
+      <div className="form-section">
+        <label htmlFor="name" className="form-label">
           Full Name *
         </label>
         <input
@@ -169,14 +179,14 @@ export default function SegmentedInquiryForm() {
           value={formData.name}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+          className="form-input"
           placeholder="Your name"
         />
       </div>
 
       {/* Email */}
-      <div>
-        <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-2">
+      <div className="form-section">
+        <label htmlFor="email" className="form-label">
           Email Address *
         </label>
         <input
@@ -186,14 +196,14 @@ export default function SegmentedInquiryForm() {
           value={formData.email}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+          className="form-input"
           placeholder="your.email@example.com"
         />
       </div>
 
-      {/* Phone (Optional for all) */}
-      <div>
-        <label htmlFor="phone" className="block text-sm font-semibold text-slate-900 mb-2">
+      {/* Phone */}
+      <div className="form-section">
+        <label htmlFor="phone" className="form-label">
           Phone Number (Optional)
         </label>
         <input
@@ -202,17 +212,17 @@ export default function SegmentedInquiryForm() {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+          className="form-input"
           placeholder="+1 (555) 000-0000"
         />
       </div>
 
-      {/* Conditional fields for Collaboration & Media */}
+      {/* Conditional Fields */}
       {(formData.inquiry_type === "collaboration" ||
         formData.inquiry_type === "media") && (
-        <>
-          <div>
-            <label htmlFor="company" className="block text-sm font-semibold text-slate-900 mb-2">
+        <div className="form-conditional">
+          <div className="form-section">
+            <label htmlFor="company" className="form-label">
               Company/Organization
             </label>
             <input
@@ -221,15 +231,15 @@ export default function SegmentedInquiryForm() {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              className="form-input"
               placeholder="Your company name"
             />
           </div>
 
           {formData.inquiry_type === "collaboration" && (
             <>
-              <div>
-                <label htmlFor="budget" className="block text-sm font-semibold text-slate-900 mb-2">
+              <div className="form-section">
+                <label htmlFor="budget" className="form-label">
                   Budget Range (Approximate)
                 </label>
                 <select
@@ -237,7 +247,7 @@ export default function SegmentedInquiryForm() {
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="form-select"
                 >
                   <option value="">Select a range...</option>
                   <option value="under-5k">Under $5k</option>
@@ -248,8 +258,8 @@ export default function SegmentedInquiryForm() {
                 </select>
               </div>
 
-              <div>
-                <label htmlFor="timeline" className="block text-sm font-semibold text-slate-900 mb-2">
+              <div className="form-section">
+                <label htmlFor="timeline" className="form-label">
                   Desired Timeline
                 </label>
                 <select
@@ -257,7 +267,7 @@ export default function SegmentedInquiryForm() {
                   name="timeline"
                   value={formData.timeline}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="form-select"
                 >
                   <option value="">Select a timeline...</option>
                   <option value="asap">ASAP (within 2 weeks)</option>
@@ -267,12 +277,12 @@ export default function SegmentedInquiryForm() {
               </div>
             </>
           )}
-        </>
+        </div>
       )}
 
       {/* Message */}
-      <div>
-        <label htmlFor="message" className="block text-sm font-semibold text-slate-900 mb-2">
+      <div className="form-section">
+        <label htmlFor="message" className="form-label">
           Message *
         </label>
         <textarea
@@ -281,18 +291,17 @@ export default function SegmentedInquiryForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          rows={6}
-          className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+          className="form-textarea"
           placeholder="Tell me more about your inquiry, what you're looking for, and why you think we'd be a great fit..."
         />
       </div>
 
       {/* Submit Button */}
-      <div className="flex gap-4">
+      <div className="form-button-group">
         <button
           type="submit"
           disabled={state.isSubmitting}
-          className="flex-1 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors"
+          className="form-submit"
         >
           {state.isSubmitting ? "Submitting..." : "Send Inquiry"}
         </button>
@@ -300,9 +309,9 @@ export default function SegmentedInquiryForm() {
 
       {/* Success Message */}
       {state.submitted && (
-        <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-          <p className="font-semibold">✓ Inquiry submitted successfully!</p>
-          <p className="text-sm mt-1">
+        <div className="form-message form-message-success">
+          <p className="form-message-title">✓ Inquiry submitted successfully!</p>
+          <p className="form-message-text">
             You'll receive a confirmation email shortly. I'll get back to you within 24 hours.
           </p>
         </div>
@@ -310,14 +319,14 @@ export default function SegmentedInquiryForm() {
 
       {/* Error Message */}
       {state.error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-          <p className="font-semibold">✕ Oops, something went wrong</p>
-          <p className="text-sm mt-1">{state.error}</p>
+        <div className="form-message form-message-error">
+          <p className="form-message-title">✕ Oops, something went wrong</p>
+          <p className="form-message-text">{state.error}</p>
         </div>
       )}
 
       {/* Helper text */}
-      <p className="text-xs text-slate-600 text-center">
+      <p className="form-helper-text">
         * Required fields. I typically respond within 24 hours.
       </p>
     </form>

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { TextLink } from "@/components/typography";
+import { PageHeroSection } from "@/components/sections";
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
+import CollaborationPackagesSection from "@/components/sections/CollaborationPackagesSection";
 import '@/app/css/media-kit.css';
 
 export const metadata: Metadata = {
@@ -87,26 +88,74 @@ export default async function MediaKit() {
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <div className="inline-block">
-                  <span className="text-sm uppercase tracking-widest font-medium" style={{ color: 'var(--text-tertiary)' }}>Press & Collaboration</span>
+            <PageHeroSection
+              eyebrow="Press & Collaboration"
+              headline={['Audience Insights &', 'Collaboration Opportunities']}
+              subheading={pageMetadata?.subheadline || 'Comprehensive audience data, platform metrics, and partnership opportunities.'}
+              description="100,000+ engaged followers across TikTok, Instagram, and YouTube. Let's work together on something meaningful for your brand."
+              ctaButtons={[
+                { label: 'View Packages', href: '#collaboration-section', variant: 'primary' },
+                { label: 'Custom Inquiry', href: '/contact', variant: 'secondary' },
+              ]}
+              rightColumn={
+                <div className="space-y-6">
+                  <style>{`
+                    .stat-card {
+                      transition: all 300ms ease-in-out;
+                    }
+                    .stat-card:hover {
+                      box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.12);
+                      transform: translateY(-4px);
+                    }
+                  `}</style>
+                  
+                  <div
+                    className="stat-card p-6 sm:p-8 rounded-sm border-l-4"
+                    style={{
+                      backgroundColor: 'var(--bg-secondary)',
+                      borderLeftColor: 'var(--accent-primary)',
+                    }}
+                  >
+                    <p className="text-xs uppercase tracking-widest font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
+                      Total Followers
+                    </p>
+                    <p className="text-4xl sm:text-5xl font-bold" style={{ color: 'var(--accent-primary)' }}>
+                      100K+
+                    </p>
+                  </div>
+
+                  <div
+                    className="stat-card p-6 sm:p-8 rounded-sm border-l-4"
+                    style={{
+                      backgroundColor: 'var(--bg-secondary)',
+                      borderLeftColor: 'var(--accent-primary)',
+                    }}
+                  >
+                    <p className="text-xs uppercase tracking-widest font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
+                      Monthly Views
+                    </p>
+                    <p className="text-4xl sm:text-5xl font-bold" style={{ color: 'var(--accent-primary)' }}>
+                      2M+
+                    </p>
+                  </div>
+
+                  <div
+                    className="stat-card p-6 sm:p-8 rounded-sm border-l-4"
+                    style={{
+                      backgroundColor: 'var(--bg-secondary)',
+                      borderLeftColor: 'var(--accent-primary)',
+                    }}
+                  >
+                    <p className="text-xs uppercase tracking-widest font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
+                      Engagement Rate
+                    </p>
+                    <p className="text-4xl sm:text-5xl font-bold" style={{ color: 'var(--accent-primary)' }}>
+                      8-12%
+                    </p>
+                  </div>
                 </div>
-
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                  {pageMetadata?.headline || 'Media Kit'}
-                </h1>
-
-                <p className="text-lg sm:text-xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  {pageMetadata?.subheadline || 'Comprehensive audience data, platform metrics, and collaboration opportunities.'}
-                </p>
-              </div>
-
-              {/* Right column visual placeholder */}
-              <div className="rounded-lg h-96 flex items-center justify-center" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-                <p style={{ color: 'var(--text-tertiary)' }}>Media Kit Overview</p>
-              </div>
-            </section>
+              }
+            />
           </SectionContent>
         </SectionWrapper>
 
@@ -114,21 +163,36 @@ export default async function MediaKit() {
         <SectionWrapper variant="secondary">
           <SectionContent>
             <section>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-                Key Metrics
-              </h2>
+              <div className="space-y-3 mb-12">
+                <h2 
+                  className="text-3xl sm:text-4xl font-bold leading-tight"
+                  style={{ 
+                    fontSize: 'clamp(1.875rem, 5vw, 2.25rem)',
+                    color: 'var(--text-primary)' 
+                  }}
+                >
+                  Key Metrics
+                </h2>
+                <div 
+                  className="w-20 h-1"
+                  style={{ backgroundColor: 'var(--accent-primary)' }}
+                />
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {mediaKitData?.keyMetrics?.map((stat: any, idx: number) => (
                   <div
                     key={idx}
-                    className="p-8 rounded hover:shadow-md transition-shadow duration-300"
-                    style={{ border: '1px solid var(--border-color)' }}
+                    className="p-6 sm:p-8 rounded-sm border-b-2 transition-all duration-300 hover:shadow-md"
+                    style={{ 
+                      borderBottomColor: 'var(--accent-primary)',
+                      borderBottom: '2px solid var(--accent-primary)'
+                    }}
                   >
-                    <p className="text-xs uppercase tracking-widest font-medium mb-4" style={{ color: 'var(--text-tertiary)' }}>
+                    <p className="text-xs uppercase tracking-widest font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>
                       {stat.label}
                     </p>
-                    <p className="text-4xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                    <p className="text-3xl sm:text-4xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
                       {stat.value}
                     </p>
                     <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
@@ -145,30 +209,48 @@ export default async function MediaKit() {
         <SectionWrapper variant="primary">
           <SectionContent>
             <section>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-                Platform Breakdown
-              </h2>
+              <div className="space-y-3 mb-12">
+                <h2 
+                  className="text-3xl sm:text-4xl font-bold leading-tight"
+                  style={{ 
+                    fontSize: 'clamp(1.875rem, 5vw, 2.25rem)',
+                    color: 'var(--text-primary)' 
+                  }}
+                >
+                  Platform Breakdown
+                </h2>
+                <div 
+                  className="w-20 h-1"
+                  style={{ backgroundColor: 'var(--accent-primary)' }}
+                />
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {mediaKitData?.platforms?.map((platform: any, idx: number) => (
                   <div
                     key={idx}
-                    className="p-8 rounded"
-                    style={{ border: '1px solid var(--border-color)' }}
+                    className="p-8 rounded-sm border-l-4 transition-all duration-300 hover:shadow-md"
+                    style={{ 
+                      borderLeftColor: 'var(--accent-primary)',
+                      borderLeft: '4px solid var(--accent-primary)',
+                      backgroundColor: 'var(--bg-secondary)'
+                    }}
                   >
-                    <p className="text-xs uppercase tracking-widest font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
-                      {platform.name}
-                    </p>
-                    <p className="text-lg font-semibold mb-6" style={{ color: 'var(--text-primary)' }}>
-                      {platform.handle}
-                    </p>
+                    <div>
+                      <p className="text-xs uppercase tracking-widest font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
+                        {platform.name}
+                      </p>
+                      <p className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+                        {platform.handle}
+                      </p>
+                    </div>
 
-                    <div className="space-y-4 pt-6" style={{ borderTop: '1px solid var(--border-color)' }}>
+                    <div className="space-y-6 pt-6" style={{ borderTop: '1px solid var(--border-color)' }}>
                       <div>
                         <p className="text-xs uppercase tracking-widest font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
                           Followers
                         </p>
-                        <p className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                        <p className="text-3xl font-bold" style={{ color: 'var(--accent-primary)' }}>
                           {platform.followers}
                         </p>
                       </div>
@@ -176,12 +258,12 @@ export default async function MediaKit() {
                         <p className="text-xs uppercase tracking-widest font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
                           Avg Monthly Views
                         </p>
-                        <p className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                        <p className="text-3xl font-bold" style={{ color: 'var(--accent-primary)' }}>
                           {platform.avgViews}
                         </p>
                       </div>
                       <div className="pt-4" style={{ borderTop: '1px solid var(--border-color)' }}>
-                        <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+                        <p className="text-sm font-semibold" style={{ color: 'var(--text-secondary)' }}>
                           {platform.category}
                         </p>
                       </div>
@@ -197,18 +279,30 @@ export default async function MediaKit() {
         <SectionWrapper variant="secondary">
           <SectionContent>
             <section>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-                Content Mix
-              </h2>
+              <div className="space-y-3 mb-12">
+                <h2 
+                  className="text-3xl sm:text-4xl font-bold leading-tight"
+                  style={{ 
+                    fontSize: 'clamp(1.875rem, 5vw, 2.25rem)',
+                    color: 'var(--text-primary)' 
+                  }}
+                >
+                  Content Mix
+                </h2>
+                <div 
+                  className="w-20 h-1"
+                  style={{ backgroundColor: 'var(--accent-primary)' }}
+                />
+              </div>
 
-              <div className="space-y-8">
+              <div className="space-y-10">
                 {mediaKitData?.contentCategories?.map((category: any, idx: number) => (
                   <div key={idx} className="space-y-3">
                     <div className="flex justify-between items-baseline">
                       <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
                         {category.name}
                       </h3>
-                      <span className="text-2xl font-bold" style={{ color: 'var(--accent-primary)' }}>
+                      <span className="text-3xl font-bold" style={{ color: 'var(--accent-primary)' }}>
                         {category.percentage}%
                       </span>
                     </div>
@@ -216,7 +310,7 @@ export default async function MediaKit() {
                     {/* Progress bar */}
                     <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-muted)' }}>
                       <div
-                        className="h-full transition-all duration-700"
+                        className="h-full transition-all duration-1000"
                         style={{ width: `${category.percentage}%`, backgroundColor: 'var(--accent-primary)' }}
                       />
                     </div>
@@ -235,15 +329,27 @@ export default async function MediaKit() {
         <SectionWrapper variant="primary">
           <SectionContent>
             <section>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-                Audience Profile
-              </h2>
+              <div className="space-y-3 mb-12">
+                <h2 
+                  className="text-3xl sm:text-4xl font-bold leading-tight"
+                  style={{ 
+                    fontSize: 'clamp(1.875rem, 5vw, 2.25rem)',
+                    color: 'var(--text-primary)' 
+                  }}
+                >
+                  Audience Profile
+                </h2>
+                <div 
+                  className="w-20 h-1"
+                  style={{ backgroundColor: 'var(--accent-primary)' }}
+                />
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Age Distribution */}
-                <div className="p-8 rounded" style={{ border: '1px solid var(--border-color)' }}>
-                  <h3 className="text-lg font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Age</h3>
-                  <div className="space-y-5">
+                <div className="p-8 rounded-sm" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                  <h3 className="text-lg font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Age Distribution</h3>
+                  <div className="space-y-6">
                     {mediaKitData?.audience?.age?.map((age: any, idx: number) => (
                       <div key={idx} className="space-y-2">
                         <div className="flex justify-between items-center">
@@ -256,7 +362,7 @@ export default async function MediaKit() {
                         </div>
                         <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-muted)' }}>
                           <div
-                            className="h-full transition-all duration-700"
+                            className="h-full transition-all duration-1000"
                             style={{ width: `${age.percentage}%`, backgroundColor: 'var(--accent-primary)' }}
                           />
                         </div>
@@ -266,9 +372,9 @@ export default async function MediaKit() {
                 </div>
 
                 {/* Gender Distribution */}
-                <div className="p-8 rounded" style={{ border: '1px solid var(--border-color)' }}>
-                  <h3 className="text-lg font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Gender</h3>
-                  <div className="space-y-5">
+                <div className="p-8 rounded-sm" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                  <h3 className="text-lg font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Gender Distribution</h3>
+                  <div className="space-y-6">
                     {mediaKitData?.audience?.gender?.map((gender: any, idx: number) => (
                       <div key={idx} className="space-y-2">
                         <div className="flex justify-between items-center">
@@ -281,7 +387,7 @@ export default async function MediaKit() {
                         </div>
                         <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-muted)' }}>
                           <div
-                            className="h-full transition-all duration-700"
+                            className="h-full transition-all duration-1000"
                             style={{ width: `${gender.percentage}%`, backgroundColor: 'var(--accent-primary)' }}
                           />
                         </div>
@@ -291,9 +397,9 @@ export default async function MediaKit() {
                 </div>
 
                 {/* Top Locations */}
-                <div className="p-8 rounded" style={{ border: '1px solid var(--border-color)' }}>
-                  <h3 className="text-lg font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Top Locations</h3>
-                  <div className="space-y-5">
+                <div className="p-8 rounded-sm" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                  <h3 className="text-lg font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Top Locations</h3>
+                  <div className="space-y-6">
                     {mediaKitData?.audience?.locations?.map((location: any, idx: number) => (
                       <div key={idx} className="space-y-2">
                         <div className="flex justify-between items-center">
@@ -306,7 +412,7 @@ export default async function MediaKit() {
                         </div>
                         <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-muted)' }}>
                           <div
-                            className="h-full transition-all duration-700"
+                            className="h-full transition-all duration-1000"
                             style={{ width: `${location.percentage}%`, backgroundColor: 'var(--accent-primary)' }}
                           />
                         </div>
@@ -322,44 +428,24 @@ export default async function MediaKit() {
         {/* COLLABORATION PACKAGES */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <section>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-                Collaboration Packages
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {collaborationPackages.length > 0 ? (
-                  collaborationPackages.map((pkg, idx) => (
-                    <div
-                      key={idx}
-                      className="p-8 rounded hover:shadow-md transition-shadow duration-300"
-                      style={{ border: '1px solid var(--border-color)' }}
-                    >
-                      <p className="text-xs uppercase tracking-widest font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>
-                        {pkg.name}
-                      </p>
-                      <p className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-                        {pkg.price}
-                      </p>
-                      <ul className="space-y-3 mb-8">
-                        {pkg.features.map((feature, fidx) => (
-                          <li key={fidx} className="flex items-center gap-3">
-                            <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>✓</span>
-                            <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <button className="w-full font-semibold py-3 px-4 rounded transition-colors" style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)', backgroundColor: 'transparent' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-muted)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                        Get Started
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <div className="col-span-3 text-center py-8" style={{ color: 'var(--text-tertiary)' }}>
-                    Loading collaboration packages...
-                  </div>
-                )}
+            <section id="collaboration-section">
+              <div className="space-y-3 mb-12">
+                <h2 
+                  className="text-3xl sm:text-4xl font-bold leading-tight"
+                  style={{ 
+                    fontSize: 'clamp(1.875rem, 5vw, 2.25rem)',
+                    color: 'var(--text-primary)' 
+                  }}
+                >
+                  Collaboration Packages
+                </h2>
+                <div 
+                  className="w-20 h-1"
+                  style={{ backgroundColor: 'var(--accent-primary)' }}
+                />
               </div>
+
+              <CollaborationPackagesSection packages={collaborationPackages} />
             </section>
           </SectionContent>
         </SectionWrapper>
