@@ -26,6 +26,7 @@ Let's go.
 ### Page 1-2: Assessment Questions
 
 **Instructions**: For each question, rate yourself 1-5:
+
 - 1 = Never/Not at all
 - 2 = Rarely/Somewhat below average
 - 3 = Sometimes/Average
@@ -37,64 +38,74 @@ Let's go.
 #### SECTION 1: PHYSICAL GROUNDING (Questions 1-2)
 
 **Q1. When I'm in a meeting or presentation, I feel grounded in my body (not anxious or fidgety)**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 **Q2. I notice my posture throughout the day and can adjust it to feel more confident**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
 
-**Section 1 Score**: ___ / 10
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
+
+**Section 1 Score**: \_\_\_ / 10
 
 ---
 
 #### SECTION 2: VOCAL PRESENCE (Questions 3-4)
 
 **Q3. People tell me I speak clearly and with confidence (good pace, volume, no filler words)**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 **Q4. I can command attention in a room by the way I speak (not by being loud, but by being clear)**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
 
-**Section 2 Score**: ___ / 10
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
+
+**Section 2 Score**: \_\_\_ / 10
 
 ---
 
 #### SECTION 3: EXECUTIVE CONFIDENCE (Questions 5-6)
 
 **Q5. I feel genuine confidence in meetings with senior leaders (not faking it)**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 **Q6. I can stay calm and think clearly under pressure**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
 
-**Section 3 Score**: ___ / 10
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
+
+**Section 3 Score**: \_\_\_ / 10
 
 ---
 
 #### SECTION 4: STRATEGIC COMMUNICATION (Questions 7-8)
 
 **Q7. I know when to speak up in meetings and when to stay silent (strategic timing)**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 **Q8. People take my opinions seriously because I communicate with clarity and intent**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
 
-**Section 4 Score**: ___ / 10
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
+
+**Section 4 Score**: \_\_\_ / 10
 
 ---
 
 #### SECTION 5: AUTHENTIC PRESENCE (Questions 9-10)
 
 **Q9. I feel comfortable being myself at work (not trying to be someone I'm not)**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 **Q10. People describe me as approachable and genuine**
-- [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
 
-**Section 5 Score**: ___ / 10
+- [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
+
+**Section 5 Score**: \_\_\_ / 10
 
 ---
 
-**TOTAL SCORE**: ___ / 50
+**TOTAL SCORE**: \_\_\_ / 50
 
 ---
 
@@ -173,6 +184,7 @@ Let's go.
 **Based on your profile above, here's what to do next:**
 
 ### Immediate (This Week)
+
 1. **Read** the specific section recommendation for your profile
 2. **Identify** the 1-2 focus areas you want to develop
 3. **Decide** if you want to:
@@ -181,11 +193,13 @@ Let's go.
    - [ ] Join a group program (community + accountability)
 
 ### Next 30 Days
+
 - [ ] Start the foundational lessons in your focus area
 - [ ] Practice daily (micro-practices, 5-15 min)
 - [ ] Measure progress (re-take audit in 30 days)
 
 ### Beyond 30 Days
+
 - [ ] Deepen your practice
 - [ ] Get feedback from trusted colleagues
 - [ ] Plan your next level
@@ -197,9 +211,7 @@ Let's go.
 **Three ways to move forward:**
 
 1. **Free Lessons** → Join our email list to get exclusive leadership lessons delivered weekly + access to our resource library
-   
 2. **Coaching** → Schedule a free 30-minute Presence Audit call to create a custom strategy
-   
 3. **Group Programs** → Explore our 8-12 week group coaching programs (small cohorts, structured framework, community)
 
 ---

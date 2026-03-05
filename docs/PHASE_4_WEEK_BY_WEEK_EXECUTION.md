@@ -11,11 +11,13 @@
 **Timeline**: 8 weeks (February - March 2025)
 
 **Three concurrent tracks**:
+
 1. **Email Foundation** (Week 1-2): ConvertKit setup, lead magnet delivery, welcome sequence automation
 2. **Blog Content** (Week 2-7): 6 pillar blog posts, one per week, driving email signups and SEO traffic
 3. **YouTube Channel** (Starting Week 4): Channel branding, first 3 videos recorded, published alongside blog
 
 **Expected impact (30-60 days)**:
+
 - 100+ email subscribers
 - 6,000+ words of authority content
 - 3 YouTube videos establishing credibility
@@ -28,6 +30,7 @@
 ### Monday-Tuesday: ConvertKit Account & Lead Magnet Design
 
 **Tasks**:
+
 - [ ] Create ConvertKit account (use jchalant@gmail.com or business email)
 - [ ] Complete branded profile setup (photo, bio, brand colors)
 - [ ] Design audit PDF in Canva (use [LEAD_MAGNET_EXECUTIVE_PRESENCE_AUDIT.md](./LEAD_MAGNET_EXECUTIVE_PRESENCE_AUDIT.md) content)
@@ -44,6 +47,7 @@
 ### Wednesday: ConvertKit Setup & Automation
 
 **Tasks**:
+
 - [ ] Upload lead magnet PDF to ConvertKit
 - [ ] Create signup form (named "Free Executive Presence Audit")
 - [ ] Build 5-email welcome sequence (use copy from [EMAIL_WELCOME_SEQUENCE_5_EMAILS.md](./EMAIL_WELCOME_SEQUENCE_5_EMAILS.md))
@@ -62,6 +66,7 @@
 ### Thursday: Website Integration
 
 **Tasks**:
+
 - [ ] Create signup form embed code from ConvertKit
 - [ ] Add form to website footer (all pages)
 - [ ] Create dedicated landing page: "/join" or "/lessons" with CTA
@@ -78,6 +83,7 @@
 ### Friday: Testing & Launch
 
 **Tasks**:
+
 - [ ] Complete end-to-end test (sign up → get lead magnet → receive Welcome sequence)
 - [ ] Fix any issues (email delivery, PDF download, form submission)
 - [ ] Announce email signup on social media (LinkedIn, Instagram, TikTok)
@@ -98,6 +104,7 @@
 **Post**: "Why Executive Presence Starts with How You Move" (Physical Grounding)
 
 **Tasks**:
+
 - [ ] Write full blog post (~1,650 words)
 - [ ] Add internal links (to lead magnet, Email 4, next posts)
 - [ ] Format with H2/H3, bullet points, bold key phrases
@@ -110,6 +117,7 @@
 **Deliverable**: Draft blog post ready for recording
 
 **Writing approach**:
+
 - Use outline as skeleton
 - Write intro first (hook + why it matters)
 - Write each section with subsections
@@ -121,6 +129,7 @@
 ### Tuesday-Wednesday: Video Recording & Editing
 
 **Tasks**:
+
 - [ ] Record video: Jon demonstrating posture tips (~3-5 minutes)
 - [ ] Consider: Head-on, showing before/after posture, close-up
 - [ ] Edit video (add text overlays, captions, music)
@@ -132,6 +141,7 @@
 **Deliverable**: Embedded video on blog post
 
 **Video specs**:
+
 - 16:9 aspect ratio
 - Captions (auto-generated or manual)
 - Title card + end screen with CTA
@@ -142,6 +152,7 @@
 ### Thursday: Publishing & Promotion
 
 **Tasks**:
+
 - [ ] Publish blog post (set publish date to Monday of Week 2 for scheduled posting)
 - [ ] Create social media content (3-5 pieces):
   - LinkedIn post (500 words, teaser of blog)
@@ -160,6 +171,7 @@
 ### Friday: Email Marketing
 
 **Tasks**:
+
 - [ ] Write "Weekly Lesson #1" email (based on blog post, 200-300 words)
 - [ ] Provide one actionable tip (e.g., "Do this posture check right now")
 - [ ] Schedule for next Monday (Week 3 start)
@@ -176,6 +188,7 @@
 ### Monday: Publish + Promote Blog Post #1 Results
 
 **Tasks**:
+
 - [ ] Check analytics: Page views, scroll depth, time on page
 - [ ] Read comments + reply to all
 - [ ] Monitor which CTAs got clicks
@@ -192,6 +205,7 @@
 **Post**: "Your Voice Holds More Power Than You Think" (Vocal Presence)
 
 **Tasks** (same as Week 2):
+
 - [ ] Write blog post (~1,700 words)
 - [ ] Record videos (2 recommended):
   - Vocal exercise demo (~4 minutes)
@@ -209,6 +223,7 @@
 ### Friday: Publishing
 
 **Tasks**:
+
 - [ ] Publish blog post (scheduled for Monday, Week 3)
 - [ ] Schedule social media (Mon-Wed, Week 3)
 - [ ] Plan weekly lesson email
@@ -228,6 +243,7 @@
 ### Tuesday-Wednesday: YouTube Channel Setup
 
 **Tasks** (can parallel with blog writing):
+
 - [ ] Create YouTube channel (link to jonchalant.com)
 - [ ] Brand channel:
   - [ ] Create channel art (banner image, 2560x1440px)
@@ -249,6 +265,7 @@
 **Post**: "Quiet Doesn't Mean Shy" (Executive Confidence)
 
 **Tasks** (same as Week 2):
+
 - [ ] Write blog post (~2,000 words, longer + more strategic)
 - [ ] Record video: Personal story about discovering introvert strength (~5-6 minutes)
 - [ ] Create downloadable: "5 Mindset Shifts Workbook" (PDF, 10-15 pages)
@@ -264,6 +281,7 @@
 ### Friday: Publishing + Video Upload
 
 **Tasks**:
+
 - [ ] Publish blog post (scheduled for Monday, Week 4)
 - [ ] Upload video to YouTube (make public, add description with links)
 - [ ] Embed YouTube video in blog post (pulls official YouTube embed)
@@ -279,6 +297,7 @@
 ### Monday: Publish Blog Post #3 + YouTube Video
 
 **Impact check**:
+
 - [ ] Blog analytics (views, engagement)
 - [ ] YouTube views (first video going live)
 - [ ] Email analytics (open rate, clicks, replies)
@@ -294,6 +313,7 @@
 **Post**: "Say It Strategically" (Strategic Communication)
 
 **Tasks**:
+
 - [ ] Write blog post (~1,750 words)
 - [ ] Record video: Jon pitching same idea badly, then strategically (~4-5 minutes, split screen or side-by-side comparison)
 - [ ] Create downloadable: "DIN Framework Template" (PDF, 1-page worksheet)
@@ -307,6 +327,7 @@
 ### Friday: Publishing
 
 **Tasks**:
+
 - [ ] Publish blog post (scheduled for Monday, Week 5)
 - [ ] Upload video to YouTube + second video in playlist
 - [ ] Schedule social media
@@ -321,6 +342,7 @@
 ### Monday: Publish Blog Post #4
 
 **Campaign checkpoint** (30-day mark from Week 1 launch):
+
 - [ ] Email subscribers: 50+? 100+?
 - [ ] Email metrics: 40%+ open rate? 20%+ click rate?
 - [ ] Blog traffic: Which post is most popular?
@@ -339,6 +361,7 @@
 **Post**: "The Secret Quiet Leaders Don't Tell" (Authentic Presence)
 
 **Tasks**:
+
 - [ ] Write blog post (~1,700 words, more vulnerable + personal)
 - [ ] Record video: Jon sharing vulnerability about imposter syndrome (~5 minutes)
 - [ ] Create downloadable: "Authenticity Workbook" (PDF, 10 pages, reflection questions)
@@ -352,6 +375,7 @@
 ### Friday: Publishing
 
 **Tasks**:
+
 - [ ] Publish blog post (scheduled for Monday, Week 6)
 - [ ] Upload video to YouTube + playlist
 - [ ] Prepare for final blog post sprint (Week 7)
@@ -371,6 +395,7 @@
 ### Tuesday-Wednesday: Plan Case Study Content
 
 **Before writing, prepare**:
+
 - [ ] Identify a real client transformation (anonymize if needed)
 - [ ] Outline the story: Starting point → Framework → Results → Lessons
 - [ ] Plan video: Client interview (optional, if client willing) or Jon telling the story
@@ -386,6 +411,7 @@
 **Post**: "From Invisible to Inevitable" (Real transformation example)
 
 **Tasks**:
+
 - [ ] Write case study blog post (~1,500 words)
 - [ ] Record video: Case study story with client (or Jon telling story) (~4-5 minutes)
 - [ ] No downloadable (but link to previous workbooks)
@@ -399,6 +425,7 @@
 ### Publishing
 
 **Tasks**:
+
 - [ ] Publish blog post (scheduled for Monday, Week 7)
 - [ ] Upload video to YouTube
 - [ ] Schedule social media
@@ -412,6 +439,7 @@
 ### Focus: Consolidation + Optimization
 
 **Tasks**:
+
 - [ ] Review all 6 blog posts + analytics
 - [ ] Identify which topics resonated (e.g., Authentic Presence got 50% more views)
 - [ ] Plan YouTube content strategy:
@@ -424,6 +452,7 @@
   - [ ] Plan next email funnel (e.g., nurture sequence for people who didn't engage)
 
 **Ongoing activities (every week)**:
+
 - [ ] Respond to blog comments
 - [ ] Moderate YouTube comments + replies
 - [ ] Monitor email metrics
@@ -437,6 +466,7 @@
 ## Success Metrics (8-Week Target)
 
 ### Email Marketing
+
 - [ ] 100+ subscribers by end of Week 8
 - [ ] 40%+ open rate on welcome emails
 - [ ] 20%+ click rate on CTAs
@@ -444,6 +474,7 @@
 - [ ] 30+ lead magnet downloads
 
 ### Blog Content
+
 - [ ] 6 published posts (10,300 words total)
 - [ ] 2,000+ total page views (300-400 per post avg)
 - [ ] 5:00+ avg time on page (shows engagement)
@@ -451,6 +482,7 @@
 - [ ] 3+ backlinks (if you can get press mentions)
 
 ### YouTube Channel
+
 - [ ] 50+ subscribers
 - [ ] 3 videos published
 - [ ] 300+ total views
@@ -458,6 +490,7 @@
 - [ ] 10+ CTAs clicked (to coaching, email signup)
 
 ### Overall Lead Generation
+
 - [ ] 2-5 paid coaching client inquiries
 - [ ] 0-1 group program signup
 - [ ] Brand awareness increase (mentions on social)
@@ -504,6 +537,7 @@
 ## Resources & Reference Docs
 
 **Documents you already have**:
+
 1. [LEAD_MAGNET_EXECUTIVE_PRESENCE_AUDIT.md](./LEAD_MAGNET_EXECUTIVE_PRESENCE_AUDIT.md) — Lead magnet content
 2. [EMAIL_WELCOME_SEQUENCE_5_EMAILS.md](./EMAIL_WELCOME_SEQUENCE_5_EMAILS.md) — Email copy, ready to paste
 3. [EMAIL_PLATFORM_SETUP_CONVERTKIT.md](./EMAIL_PLATFORM_SETUP_CONVERTKIT.md) — Step-by-step setup guide
@@ -511,6 +545,7 @@
 5. [PHASE_4_EMAIL_FOUNDATION_COMPLETE.md](./PHASE_4_EMAIL_FOUNDATION_COMPLETE.md) — Recap of Week 1 work
 
 **Tools you'll need**:
+
 - ConvertKit (free + $29/month)
 - Canva (free + Pro $120/year)
 - YouTube (free)
@@ -531,4 +566,3 @@
 ---
 
 **You've got this. One blog post at a time, one email at a time. Let's build your audience.**
-

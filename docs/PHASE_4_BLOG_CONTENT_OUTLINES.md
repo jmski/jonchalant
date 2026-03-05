@@ -11,6 +11,7 @@
 **Publishing cadence**: 1 post per week (6 weeks = evergreen content foundation)
 
 **Content mix**:
+
 - 3 foundational posts (theory + why it matters)
 - 3 tactical/actionable posts (how-to + examples)
 - 1 bonus post (authority + case study)
@@ -64,6 +65,7 @@
 **Total word count**: ~1,650 words
 
 **Formatting**:
+
 - H2 for main sections
 - H3 for subsections
 - Bullet points for quick tips
@@ -129,6 +131,7 @@
 **Total word count**: ~1,700 words
 
 **Formatting**:
+
 - Embedded video: Jon doing vocal exercise
 - Audio sample: Before/after voice recording
 - Downloadable: "30-Day Vocal Presence Challenge" (PDF)
@@ -183,7 +186,7 @@
    - Better listeners → better managers
    - More thoughtful → fewer mistakes
    - More prepared → higher credibility
-   -  Authentic → trusted more
+   - Authentic → trusted more
    - Real example: Your quiet strength built your network despite introversion
 
 5. **Confidence-Building Actions (This Week)** (200 words)
@@ -202,6 +205,7 @@
 **Total word count**: ~2,000 words
 
 **Formatting**:
+
 - Embedded video: Jon's story about discovering his introvert strength
 - Downloadable: "5 Mindset Shifts Workbook" (PDF)
 - Internal link: Email 5 (CTA to coaching)
@@ -269,6 +273,7 @@
 **Total word count**: ~1,750 words
 
 **Formatting**:
+
 - Embedded video: Jon pitching the same idea badly, then strategically
 - Downloadable: "DIN Framework Template" (PDF)
 - Internal link: Email 4 (framework intro)
@@ -334,6 +339,7 @@
 **Total word count**: ~1,700 words
 
 **Formatting**:
+
 - Embedded video: Jon sharing vulnerable moment about imposter syndrome
 - Downloadable: "Authenticity Workbook" (PDF)
 - Internal link to all previous posts (framework recap)
@@ -347,6 +353,7 @@
 ### Post: "From Invisible to Inevitable: How [Client Name] Became the Person Everyone Listens to"
 
 **Structure**:
+
 - Client story (anonymized if needed)
 - Starting point (where they were)
 - The 3-month journey (framework applied)
@@ -357,6 +364,7 @@
 **Word count**: ~1,500 words
 
 **Story elements**:
+
 - Real example from your coaching
 - Specific metrics (e.g., "Promoted in 6 months," "Got the project lead role")
 - Vulnerability + transformation
@@ -366,21 +374,22 @@
 
 ## Content Creation Timeline
 
-| Week | Post | Keyword | Word Count | Format |
-|------|------|---------|-----------|--------|
-| 2 (W2) | Physical Grounding | executive presence body language | 1,650 | Blog + Video |
-| 3 (W3) | Vocal Presence | vocal presence, executive voice | 1,700 | Blog + Video + Audio |
-| 4 (W4) | Executive Confidence | introvert leadership, quiet confidence | 2,000 | Blog + Video |
-| 5 (W5) | Strategic Communication | executive communication | 1,750 | Blog + Video |
-| 6 (W6) | Authentic Presence | authentic leadership | 1,700 | Blog + Video |
-| 7 (W7) | Case Study | real transformation example | 1,500 | Blog |
-| **Total** | | | **10,300 words** | **6 posts + videos** |
+| Week      | Post                    | Keyword                                | Word Count       | Format               |
+| --------- | ----------------------- | -------------------------------------- | ---------------- | -------------------- |
+| 2 (W2)    | Physical Grounding      | executive presence body language       | 1,650            | Blog + Video         |
+| 3 (W3)    | Vocal Presence          | vocal presence, executive voice        | 1,700            | Blog + Video + Audio |
+| 4 (W4)    | Executive Confidence    | introvert leadership, quiet confidence | 2,000            | Blog + Video         |
+| 5 (W5)    | Strategic Communication | executive communication                | 1,750            | Blog + Video         |
+| 6 (W6)    | Authentic Presence      | authentic leadership                   | 1,700            | Blog + Video         |
+| 7 (W7)    | Case Study              | real transformation example            | 1,500            | Blog                 |
+| **Total** |                         |                                        | **10,300 words** | **6 posts + videos** |
 
 ---
 
 ## SEO & Internal Linking Strategy
 
 **Link pattern** (each post links to):
+
 1. Lead magnet assessment (2x per post)
 2. Email sequence (1x per post)
 3. Previous pillar posts (1x per post, after Week 3)
@@ -388,6 +397,7 @@
 5. Group program page
 
 **SEO checklist** (for each post):
+
 - [ ] Meta description (under 160 characters)
 - [ ] Target keyword in H2 (within first 300 words)
 - [ ] 3-5 internal links
@@ -400,6 +410,7 @@
 ## Content Repurposing Calendar
 
 Each blog post becomes:
+
 1. **LinkedIn post** (week of publication, 3-5 content pieces)
 2. **Email** to subscribers (2 weeks after publication)
 3. **Short-form video** (TikTok/Instagram Reels, 1-2 per post)
@@ -429,4 +440,3 @@ Each blog post becomes:
 ---
 
 **Ready to write the first post? Let me outline the first blog post in detail, step-by-step, for fastest writing.**
-
