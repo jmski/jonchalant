@@ -1,0 +1,1 @@
+export { FeaturedAreasSection } from './FeaturedAreasSection';

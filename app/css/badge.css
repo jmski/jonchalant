@@ -1,0 +1,68 @@
+/* ═════════════════════════════════════════════════════════════════════════════
+   Badge Component
+   ────────────────────────────────────────────────────────────────────────────
+   Small label/tag component with size and variant options.
+*/
+
+.badge {
+  display: inline-block;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* ─── Sizes ─── */
+.badge-sm {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-md {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-lg {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Variants ─── */
+
+/* Accent (Primary) */
+.badge-accent {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.badge-accent:hover {
+  opacity: 0.9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Primary */
+.badge-primary {
+  background-color: var(--text-primary, #0f172a);
+  color: white;
+}
+
+.badge-primary:hover {
+  opacity: 0.85;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Secondary */
+.badge-secondary {
+  background-color: var(--bg-muted, #f8fafc);
+  color: var(--text-primary, #0f172a);
+  border: 1px solid var(--border-color, #e2e8f0);
+}
+
+.badge-secondary:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}

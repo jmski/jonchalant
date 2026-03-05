@@ -2,179 +2,297 @@
 
 ## Architecture Overview
 
-**Tech Stack**: Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS v4
+**Tech Stack**: Next.js 16.1.1 (App Router) + React 19 + TypeScript + CSS-First Styling (Tailwind v4 for utilities only)
 
-This is a **Professional Brand Hub & Digital Media Kit** for Jon—a multi-niche content creator with dance as the primary professional skill. The site integrates dance portfolio, hobby showcases (Gunpla/Pokémon), collaboration opportunities, and media metrics. **Design philosophy**: Clean, modern, minimalist with professional typography and strategic accent colors to appeal to brands and collaborators.
+This is a **Professional Executive Presence Coaching Platform** for Jon—transforming confidence and leadership presence in busy professionals and introverts. The site features coaching programs, blog content, case studies, testimonials, and a comprehensive media kit. **Design philosophy**: Clean, modern, minimalist with professional typography and strategic accent colors that appeal to corporate clients and coaching prospects.
 
-**Key Architectural Decisions**:
+**Core Architecture**:
 
-- **App Router (not Pages Router)**: Simplifies file-based routing and enables server components by default
-- **React Compiler Enabled**: Automatic memoization without manual `useMemo`/`useCallback`
-- **Minimal Glassmorphism**: Shift from Pokemon playfulness to sleek, professional UI with clean lines and purposeful whitespace
-- **Video Integration**: Hero and portfolio sections embed videos (YouTube/Vimeo) with lazy-loading and responsive sizing
-- **Media Gallery**: High-quality image galleries for dance, Gunpla, Pokémon with professional mockups
-- **Minimal Client State**: Most components are server components; interactive elements (toggles, video players) use `'use client'` sparingly
+- **Next.js App Router**: Server components by default (smaller bundle, faster initial load)
+- **React 19 Compiler**: Automatic memoization without manual `useMemo`/`useCallback`
+- **CSS-First Styling**: Dedicated CSS files per component, CSS variables for theming, BEM naming convention
+- **Sanity CMS Integration**: Server components fetch content (case studies, testimonials, blog posts, services)
+- **Minimal Client State**: Interactive components (`'use client'`) only for carousel logic, forms, modals
+- **TypeScript Strict Mode**: Enforced at build time; failing types block production
 
-**New Page Structure** (`app/` directory):
+**Build System**:
 
-- `page.tsx` - **Home**: Hero section with dance video loop, headline, CTA to collaborations
-- `dance/page.tsx` - **Dance Portfolio**: Categorized videos (choreography, freestyle, performances), professional photography
-- `showcase/page.tsx` - **Hobby Showcase**: Sub-sections for Gunpla (builds, timelapse) and Pokémon (collection, unboxings)
-- `collaborations/page.tsx` - **Collaborations & Services**: "Let's Work Together" focus with past projects, collaboration types, inquiry form
-- `media-kit/page.tsx` - **Media Kit**: Audience demographics, reach, engagement metrics (boilerplate/placeholder)
-- `about/page.tsx` - **About**: Short punchy bio connecting dance background with otaku culture and content creation
-- `contact/page.tsx` - **Contact**: Direct inquiry form and email
-  npm run dev # Starts http://localhost:3000 with hot reload
-  npm run build # Production build (optimizes with React Compiler + Turbopack)
-  npm run start # Runs production build locally
-  npm run lint # Runs ESLint (warns on Next.js best practices + TypeScript errors)
+```bash
+npm run dev      # Starts http://localhost:3000 with hot reload
+npm run build    # Optimized production build (11-12 seconds with Turbopack)
+npm run start    # Runs production build locally
+npm run lint     # ESLint validation (Next.js + TypeScript strict rules)
+```
 
-````
+**Key Config**:
 
-**Build Process Details**:
-
-- **Turbopack** enabled in `next.config.ts` for faster builds
-- **React Compiler** (`babel-plugin-react-compiler`) automatically optimizes components
-- **Type checking**: TypeScript runs during build; failing types block production
-- **Linting**: ESLint enforces Next.js best practices and TypeScript strict mode
-- **Video Optimization**: Next.js Image component for thumbnails, external embeds (YouTube/Vimeo) for video content
-
-**Common Tasks**:
-
-- **Add a new page**: Create `app/newpage/page.tsx`, import Navbar, follow page structure template
-- **Embed video**: Use `<iframe>` for YouTube/Vimeo with lazy loading, or build custom `VideoEmbed.tsx` component
-- **Add images to gallery**: Place in `public/` folder, use `next/image` with responsive sizing
-- **Update media kit stats**: Edit boilerplate numbers in `media-kit/page.tsx` (placeholder data for now)
-- **Test responsive design**: Check `sm:`, `md:`, `lg:` breakpoints on mobile/tablet/desktop
-- **Dark mode**: Adjust for professional context (may be minimal dark mode or removed entirely)
+- **Turbopack** enabled for 2x faster builds
+- **React Compiler** automatically optimizes component rendering
+- **TypeScript** strict mode enforced
+- **ESLint** flat config extending Next.js best practices
 
 ## Component Architecture
 
-**Core Components** (`components/` directory):
+**Directory Structure** (`components/` folder):
 
-- **Navbar.tsx** - Clean navigation (Home, Dance, Showcase, Collaborations, Media Kit, About, Contact)
-- **Hero.tsx** - Homepage hero with background dance video loop, headline, CTA button
-- **VideoEmbed.tsx** (`'use client'`) - Lazy-loaded YouTube/Vimeo embeds with play button overlay, responsive aspect ratio
-- **Gallery.tsx** (`'use client'`) - Lightbox/modal image gallery for Gunpla builds, Pokémon collection, dance photography
-- **PortfolioCard.tsx** - Clean card component for portfolio items (image, title, description, category badge)
-- **StatsGrid.tsx** - Media kit metrics display (followers, engagement rate, avg views—boilerplate values)
-- **CollaborationForm.tsx** (`'use client'`) - Contact/inquiry form for collaboration requests
-
-**Key Component Patterns**:
-
-**VideoEmbed Example**:
-```tsx
-<VideoEmbed
-  src="https://www.youtube.com/embed/VIDEO_ID"
-  title="Dance Choreography: [Song Name]"
-  aspectRatio="16:9"
-/>
-````
-
-Handles responsive sizing, lazy loading, and accessibility.
-
-**Gallery Example**:
-
-```tsx
-<Gallery
-  images={[{src: '/dance/photo1.jpg', alt: 'Dance performance'}, ...]}
-  category="dance"
-/>
+```
+components/
+├── shared/                      # Reusable components across pages
+│   ├── badges/                 # Small UI components
+│   │   └── Badge.tsx
+│   ├── cards/                  # Card components (used in grids, carousels)
+│   │   ├── TestimonialCard.tsx
+│   │   ├── CaseStudyCard.tsx
+│   │   └── [other card types]
+│   └── index.ts
+├── sections/                    # Full-width section components
+│   ├── testimonial-section/     # Carousel section
+│   │   ├── TestimonialSection.tsx ('use client' - needs state)
+│   │   └── index.ts
+│   ├── case-study-section/      # Grid section
+│   │   ├── CaseStudySection.tsx (server - fetches from Sanity)
+│   │   └── index.ts
+│   ├── featured-blog-section/
+│   │   ├── FeaturedBlogSection.tsx
+│   │   └── index.ts
+│   └── [other sections]
+├── hero/                        # Hero components
+├── layout/                      # Layout wrappers
+├── navigation/                  # Navbar, navigation
+├── typography/                  # Text/heading components
+├── effects/                     # Animations, decorative effects
+├── forms/                       # Form components
+├── decorative/                  # SVG, decorative elements
+└── animations/                  # Reusable animation hooks
 ```
 
-Click-to-expand modal with navigation arrows, captions, category filtering.
+### Shared Components Pattern
+
+**Badge** (`components/shared/badges/Badge.tsx`):
+
+- Reusable badge/label component
+- Props: `size` (sm/md/lg), `variant` (accent/primary/secondary), `children`
+- Styling: `.badge` classes from `badge.css`
+- Usage: Tags, labels, section headers
+
+**Cards** (`components/shared/cards/`):
+
+- **TestimonialCard**: Displays quote, client name, role, company, optional result
+- **CaseStudyCard**: Displays case study with image, challenge, solution, results
+- Both are stateless, accept data as props
+- Styled via dedicated CSS files (no inline styles, no Tailwind classes)
+
+### Section Components Pattern
+
+All sections follow this pattern:
+
+```tsx
+// ✅ CORRECT: Dedicated CSS file, CSS class names only
+export function SectionName({ data }) {
+  return (
+    <section className="section-name">
+      <div className="section-name-header">
+        <h2 className="section-name-title">Title</h2>
+      </div>
+      <div className="section-name-content">
+        {data.map((item) => (
+          <ItemCard key={item.id} {...item} />
+        ))}
+      </div>
+    </section>
+  );
+}
+```
+
+**Example: TestimonialSection** (`components/sections/testimonial-section/`):
+
+- Type: `'use client'` (manages carousel state)
+- Features: Auto-play (6s interval), dot indicators, keyboard navigation
+- Data: Passed as prop from parent (home page)
+- Styling: `testimonial-section.css` + uses `TestimonialCard`
+
+**Example: CaseStudySection** (`components/sections/case-study-section/`):
+
+- Type: Server component (async)
+- Features: Fetches from Sanity, responsive grid (1→2 cols)
+- Data: `getCaseStudies(featured: true)` called in component
+- Styling: `case-study-section.css` + uses `CaseStudyCard`
 
 ## Styling System
 
-### Modern Minimalist Color Palette
+**CSS-First Architecture**: All component styling uses dedicated CSS files with BEM-inspired class names. No inline styles (except truly dynamic values). No Tailwind utility classes in component JSX.
 
-**Primary Colors**:
+### CSS File Organization
 
-- **`--slate-900: #0f172a`** - Deep charcoal for headings, main text (professional, clean)
-- **`--slate-700: #334155`** - Secondary text, borders (muted contrast)
-- **`--white: #ffffff`** - Clean backgrounds, cards
+Each component gets its own `.css` file in `app/css/`, imported on the global level:
 
-**Accent Colors** (choose one pair):
+```
+app/css/
+├── badge.css
+├── testimonial-card.css
+├── case-study-card.css
+├── testimonial-section.css
+├── case-study-section.css
+├── [other component CSS files]
+└── ~~card.css, btn-primary.css~~ [legacy - replaced by component CSS]
+```
 
-1. **Option A - Vibrant Professional**:
-   - `--accent-primary: #2563eb` (deep blue - trust, professionalism)
-   - `--accent-secondary: #f97316` (warm orange - energy, creativity)
-2. **Option B - Minimal Elegant**:
-   - `--accent-primary: #7c3aed` (deep purple - luxury, creativity)
-   - `--accent-secondary: #06b6d4` (cyan - modern, tech-forward)
-3. **Option C - Bold Modern**:
-   - `--accent-primary: #dc2626` (red - bold, confident)
-   - `--accent-secondary: #0891b2` (teal - cool, balance)
+Import in `app/globals.css`:
 
-**Backgrounds & Borders**:
+```css
+@import url("./css/badge.css");
+@import url("./css/testimonial-card.css");
+@import url("./css/case-study-card.css");
+@import url("./css/testimonial-section.css");
+@import url("./css/case-study-section.css");
+```
 
-- `--bg-light: #ffffff` - Cards, sections
-- `--bg-muted: #f8fafc` - Subtle backgrounds, hover states
-- `--border: #e2e8f0` - Clean lines, dividers
-- `--shadow-sm: 0 1px 2px rgba(0,0,0,0.05)` - Subtle elevation
+### CSS Naming Convention (BEM-Inspired)
 
-**Recommended**: Option A (Blue + Orange) for professional appeal with energy for collaborations.
+Use kebab-case class names matching component names:
 
-### Design Principles
+```css
+/* Component name: TestimonialCard */
+.testimonial-card {
+} /* Base element */
+.testimonial-card-quote {
+} /* Child element */
+.testimonial-card-footer {
+} /* Another child */
+.testimonial-card:hover .testimonial-card-cta {
+} /* Hover state */
 
-- **Clean Typography**: Sans-serif only (no decorative fonts), generous whitespace, clear hierarchy
-- **Professional Cards**: Simple borders, subtle shadows, no glassmorphism (too playful)
-- **Video Focus**: Dark overlays for video thumbnails, play buttons on hover
-- **Image Gallery**: Full-bleed images, minimal captions, category badges with accent color
-- **CTA Buttons**: Solid accent color with hover state (slight scale/shadow increase)
+/* Component name: Badge */
+.badge {
+} /* Base */
+.badge--sm {
+} /* Variant/modifier */
+.badge--accent {
+} /* Color variant */
 
-### CSS Custom Properties in `globals.css`
+/* Component name: TestimonialSection */
+.testimonial-section {
+} /* Base section */
+.testimonial-section-header {
+} /* Header area */
+.testimonial-carousel {
+} /* Carousel track */
+.testimonial-carousel-dot {
+} /* Indicator dots */
+.testimonial-carousel-dot.active {
+} /* Active state */
+```
+
+### Color System (CSS Variables)
+
+All colors defined in `:root` in `app/globals.css`:
 
 ```css
 :root {
-  /* Colors */
-  --slate-900: #0f172a;
-  --slate-700: #334155;
-  --slate-500: #64748b;
-  --white: #ffffff;
-  --accent-primary: #2563eb; /* Change based on chosen palette */
-  --accent-secondary: #f97316; /* Change based on chosen palette */
+  /* Primary Colors */
+  --text-primary: #0f172a; /* Headings, primary text */
+  --text-secondary: #334155; /* Secondary text, muted */
+  --text-tertiary: #64748b; /* Tertiary, very muted */
+  --accent-primary: #2563eb; /* Main accent color (blue) */
+  --accent-secondary: #f97316; /* Secondary accent (orange) */
 
   /* Backgrounds */
   --bg-light: #ffffff;
   --bg-muted: #f8fafc;
 
   /* Borders & Shadows */
-  --border: #e2e8f0;
+  --border-color: #e2e8f0;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-
-  /* Fonts */
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --slate-900: #ffffff;
-    --slate-700: #e2e8f0;
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
     --bg-light: #1e293b;
     --bg-muted: #0f172a;
-    --border: #334155;
+    --border-color: #334155;
   }
 }
 ```
 
-### Minimal Custom Classes
+### Example: CSS File Pattern
 
-| Class              | Purpose                                    | Usage                         |
-| ------------------ | ------------------------------------------ | ----------------------------- |
-| `.card`            | Clean card with subtle shadow and border   | Portfolio items, stats blocks |
-| `.btn-primary`     | Solid accent color button with hover scale | CTAs, form submit             |
-| `.badge`           | Small accent color label                   | Category tags, skill badges   |
-| `.video-container` | Responsive 16:9 video embed wrapper        | YouTube/Vimeo embeds          |
+**testimonial-card.css**:
 
-### Typography
+```css
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-light);
+  transition: all 0.3s ease;
+}
 
-- **Headings**: System sans-serif (Segoe UI, Roboto), bold weight, `--slate-900` color
-- **Body**: System sans-serif, regular weight, `--slate-700` color, 16px base size
-- **Accents**: Use accent color for important text, badges, links, CTAs
-- **No decorative fonts** - Keep professional for brand credibility
+.testimonial-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-card-quote {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  font-style: italic;
+}
+
+.testimonial-card-result {
+  background: var(--bg-muted);
+  padding: 1rem;
+  border-left: 3px solid var(--accent-primary);
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.testimonial-card-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.testimonial-card-client-name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+  .testimonial-card {
+    padding: 1.75rem;
+  }
+}
+```
+
+### Modern Minimalist Color Palette
+
+**Chosen Colors** (Option A - Vibrant Professional):
+
+- **`--accent-primary: #2563eb`** (deep blue - trust, professionalism)
+- **`--accent-secondary: #f97316`** (warm orange - energy, creativity)
+
+**Alternative Options** (if brand pivot):
+
+1. **Option B - Minimal Elegant**: Purple + Cyan
+2. **Option C - Bold Modern**: Red + Teal
+
+**Design Principles**:
+
+- Clean typography (system sans-serif only)
+- Professional cards with simple borders and subtle shadows
+- Minimal glass/transparency effects (reserved for dark mode)
+- Full-bleed images with subtle overlays
+- CTA buttons with accent colors, slight hover scale/shadow
 
 ## Page Structure & Responsive Design
 
@@ -248,49 +366,129 @@ export default function Gallery({ images, category }) {
 }
 ```
 
-### Typography & Styling
+### Styling Approach: CSS-First
 
-Use system sans-serif (auto-loaded via CSS), Tailwind color classes for consistency:
+**New Standard** (as of Phase 4): All component styling uses dedicated `.css` files with BEM-inspired naming. No inline styles (except dynamic values). No Tailwind utility classes in JSX for styled components.
 
-```tsx
-<h1 className="text-4xl font-bold text-slate-900 dark:text-white">Heading</h1>
-<p className="text-lg text-slate-700 dark:text-slate-300">Body text</p>
-<span className="px-3 py-1 bg-accent-primary text-white rounded text-sm font-medium badge">Tag</span>
-```
+**Pattern**:
 
-**Never use decorative fonts** - Keep professional appeal for collaborations.
-
-### Styling Preference Order
-
-1. **Tailwind utilities**: `text-slate-900`, `bg-white`, `p-6`, `rounded`, `border`
-2. **Custom CSS classes**: `.card`, `.btn-primary`, `.badge`, `.video-container`
-3. **Inline styles**: Only for truly dynamic values (rarely needed)
-
-### Animations & Transitions
-
-Minimal animations for professional feel—subtle hover effects and smooth transitions:
+Component JSX (`TestimonialCard.tsx`):
 
 ```tsx
-/* Smooth color/shadow transitions */
-<button className="transition-all duration-200 hover:shadow-md">CTA</button>
-
-/* Lazy load images with fade-in */
-<img className="opacity-0 animate-fadeIn" src="..." />
+export function TestimonialCard({ quote, clientName, role, company, result }) {
+  return (
+    <div className="testimonial-card">
+      <p className="testimonial-card-quote">{quote}</p>
+      {result && (
+        <div className="testimonial-card-result">
+          <p className="testimonial-card-result-text">Key Result: {result}</p>
+        </div>
+      )}
+      <div className="testimonial-card-footer">
+        <p className="testimonial-card-client-name">{clientName}</p>
+        <p className="testimonial-card-role">{role}</p>
+        <p className="testimonial-card-company">{company}</p>
+      </div>
+    </div>
+  );
+}
 ```
 
-Keep animations subtle and purposeful (no playful bounces).
+Dedicated CSS (`app/css/testimonial-card.css`):
 
-### Dark Mode (Optional)
+```css
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-light);
+}
 
-If dark mode is desired, use Tailwind's `dark:` classes with CSS variable overrides:
+.testimonial-card-quote {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+/* ... more styles ... */
+```
+
+**Advantages**:
+
+- Cleaner JSX (no className bloat)
+- Centralized styling (easier to maintain)
+- Consistent pattern across project
+- Easy to adjust responsive behavior
+- Better performance (smaller JS bundles)
+
+### Client vs Server Components
+
+Use `'use client'` **only** for interactive state management: carousels, form handling, modals, toggles. **Most components are server components** (fetching data, rendering static content).
+
+**Example Server Component** (CaseStudySection):
 
 ```tsx
-<div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-  Content adapts automatically
-</div>
+// No 'use client' - fetches from Sanity
+export async function CaseStudySection() {
+  const caseStudies = await getCaseStudies(true);
+
+  return (
+    <section className="case-study-section">
+      <div className="case-study-section-grid">
+        {caseStudies.map((study) => (
+          <CaseStudyCard key={study._id} {...study} />
+        ))}
+      </div>
+    </section>
+  );
+}
 ```
 
-For professional contexts, light mode may be preferred (easier to read portfolios/media kits).
+**Example Client Component** (TestimonialSection):
+
+```tsx
+"use client";
+import { useState, useEffect } from "react";
+
+export function TestimonialSection({ testimonials }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  return (
+    <section className="testimonial-section">
+      <div className="testimonial-carousel">
+        {testimonials.map((testimonial, idx) => (
+          <div key={idx} className={idx === currentIndex ? "active" : ""}>
+            <TestimonialCard {...testimonial} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+```
+
+### Typography & Text Classes
+
+For page headers and standard text, use **minimal Tailwind utilities** (size/weight/color). Then style via CSS classes:
+
+```tsx
+<h2 className="text-4xl sm:text-5xl font-bold mb-6">Title</h2>
+<p className="text-lg text-secondary mb-4">Description</p>
+<span className="badge badge--accent">Tag</span>
+```
+
+**Keep it simple**: Text utilities only, never `.p-6 .flex .gap-4` etc. Use a CSS class instead if you need complex styling.
 
 ## Configuration Files
 
@@ -303,11 +501,22 @@ For professional contexts, light mode may be preferred (easier to read portfolio
 ## Development Tips
 
 - **New page**: Create `app/newpage/page.tsx`, import Navbar, follow page structure template
-- **Video embeds**: Use `VideoEmbed.tsx` component for YouTube/Vimeo with lazy loading
-- **Image galleries**: Use `Gallery.tsx` (`'use client'`) for modal galleries with category filtering
-- **Update media kit**: Edit boilerplate stats in `media-kit/page.tsx` with real data when available
-- **Accent colors**: Choose one palette option (A, B, or C) and update CSS variables in `globals.css`
-- **Responsive testing**: Mobile-first; test `sm:`, `md:`, `lg:` breakpoints for all gallery/video sections
-- **Professional checks**: Verify no decorative fonts, minimal animations, clean whitespace, consistent brand colors
-- **Debugging**: Layout issues → inspect grid/gaps; type errors → `npm run lint`; video not loading → check embed URL</content>
+- **New component (shared card)**:
+  1. Create `components/shared/cards/ComponentName.tsx` with props interface
+  2. Create `app/css/component-name.css` with BEM naming
+  3. Export from `components/shared/cards/index.ts`
+  4. Import CSS in `app/globals.css`
+- **New section**:
+  1. Create `components/sections/section-name/` directory
+  2. Create `SectionName.tsx` (server component, async data fetch if needed)
+  3. Create `index.ts` with export
+  4. Create `app/css/section-name.css`
+  5. Import CSS in `app/globals.css`
+  6. Update `components/sections/index.ts` to export new section
+- **Fetch from Sanity**: Use async server components with `getCaseStudies()`, `getTestimonials()`, etc. from `@/lib/sanity`
+- **Styling**: Create dedicated `.css` file for component, use CSS variable references, follow BEM naming
+- **Responsive design**: Build mobile-first with `@media (min-width: 640px)` for tablet/desktop adjustments
+- **Test build**: `npm run build` validates TypeScript and CSS compilation (required before committing)
+- **Debug CSS**: Inspect `.css` files in `app/css/` using browser DevTools
+- **Legacy components**: Check `components/sections/index.ts` for DEPRECATED notices before using old components</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md

@@ -45,8 +45,23 @@
   @import "./css/featured-video-hero.css";
   @import "./css/featured-blog.css";
   @import "./css/program-cards.css";
+  @import "./css/badge.css";
+  @import "./css/testimonial-card.css";
+  @import "./css/case-study-card.css";
+  @import "./css/testimonial-section.css";
+  @import "./css/case-study-section.css";
+  @import "./css/lesson-card.css";
+  @import "./css/blog-card.css";
+  @import "./css/service-card.css";
+  @import "./css/stats-grid.css";
+  @import "./css/card-grid.css";
+  @import "./css/lesson-category-section.css";
+  @import "./css/blog-cards-section.css";
+  @import "./css/services-section.css";
+  @import "./css/featured-areas-section.css";
+  @import "./css/home-hero-section.css";
+  @import "./css/stats-section.css";
 }
-
 /* Utility Classes & Patterns */
 @layer utilities {
   @import "./css/utilities.css";

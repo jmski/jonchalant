@@ -1,8 +1,15 @@
-import { HomeHero } from '@/components/hero';
-import { PageTransition } from "@/components/layout";
+import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { Marquee } from '@/components/effects';
-import { FeaturedBlogSection, TestimonialCarousel, CaseStudiesSection } from '@/components/sections';
-import Link from 'next/link';
+import { 
+  HomeHeroSection,
+  StatsSection,
+  ServicesSection, 
+  FeaturedAreasSection,
+  FeaturedBlogSection, 
+  TestimonialSection, 
+  CaseStudySection,
+  CTASection 
+} from '@/components/sections';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
@@ -37,7 +44,7 @@ export const metadata: Metadata = {
   },
 };
 
-const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {
+const FinalCTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
@@ -87,45 +94,43 @@ export default async function Home() {
       
       <PageTransition animation="fade" className="-mt-6 lg:-mt-16">
         {/* HERO SECTION */}
-        <HomeHero />
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <HomeHeroSection />
+          </SectionContent>
+        </SectionWrapper>
 
         {/* MARQUEE BANNER */}
-        <Marquee
-          items={[
-            'Movement-Based Leadership',
-            'Dance • Coaching • Professional Presence',
-            'From Stage to Boardroom',
-            'Quiet Command Through Motion'
-          ]}
-          speed={30}
-          className="bg-slate-900 text-white py-3 sm:py-4 text-sm sm:text-base font-semibold"
-        />
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <Marquee
+              items={[
+                'Movement-Based Leadership',
+                'Dance • Coaching • Professional Presence',
+                'From Stage to Boardroom',
+                'Quiet Command Through Motion'
+              ]}
+              speed={30}
+              className="bg-slate-900 text-white py-3 sm:py-4 text-sm sm:text-base font-semibold"
+            />
+          </SectionContent>
+        </SectionWrapper>
 
         {/* KEY STATS SECTION - Impact at a Glance */}
-        <section className="bg-slate-50 py-12 sm:py-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Proven Results</h2>
-              <p className="text-slate-700 max-w-2xl">Real outcomes from real coaching. These numbers represent transformations in confidence, presence, and professional impact.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {homeContent?.stats?.map((stat: any, idx: number) => (
-                <div key={idx} className="space-y-3 text-center md:text-left">
-                  <div className="text-4xl sm:text-5xl font-bold text-slate-900">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm uppercase tracking-widest font-medium text-slate-600">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <StatsSection 
+              stats={homeContent?.stats || []} 
+              heading="Proven Results"
+              description="Real outcomes from real coaching. These numbers represent transformations in confidence, presence, and professional impact."
+              columns={3}
+            />
+          </SectionContent>
+        </SectionWrapper>
 
         {/* FEATURED AREAS SECTION */}
-        <section className="py-12 sm:py-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             <div className="mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
                 {homeContent?.impactSectionHeadline}
@@ -163,79 +168,23 @@ export default async function Home() {
                 ))}
               </div>
             </div>
-          </div>
-        </section>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* SERVICES OVERVIEW */}
-        <section className="bg-slate-50 py-12 sm:py-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                {homeContent?.servicesHeadline}
-              </h2>
-              <p className="text-lg text-slate-700 max-w-2xl">
-                {homeContent?.servicesDescription}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-fr">
-              {services && services.length > 0 ? (
-                services.map((service: any) => (
-                  <div
-                    key={service._id}
-                    className="group border border-slate-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white flex flex-col h-full overflow-hidden"
-                  >
-                    {/* Icon header */}
-                    <div className="bg-linear-to-r from-slate-50 to-slate-100 px-6 pt-8 pb-6 border-b border-slate-200 group-hover:from-slate-100 group-hover:to-slate-100 transition-colors">
-                      <div className="text-4xl mb-4">{service.icon || '🎯'}</div>
-                      <h3 className="text-xl font-bold text-slate-900 group-hover:text-accent transition-colors">
-                        {service.title}
-                      </h3>
-                    </div>
-
-                    {/* Content section */}
-                    <div className="p-6 flex-1 flex flex-col">
-                      {/* Description */}
-                      <p className="text-slate-700 text-sm leading-relaxed mb-6">
-                        {service.description}
-                      </p>
-
-                      {/* Features list */}
-                      <div className="mb-6 space-y-3 flex-1">
-                        {service.features && service.features.map((feature: string, fidx: number) => (
-                          <div key={fidx} className="flex items-start gap-3">
-                            <span className="text-accent font-bold mt-0.5">✓</span>
-                            <span className="text-sm text-slate-600">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA */}
-                    <div className="pt-4 border-t border-slate-100">
-                      <Link
-                        href="/programs"
-                        className="text-slate-900 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all group-hover:text-accent"
-                        aria-label={`Explore ${service.title} coaching`}
-                      >
-                        <span>Explore this coaching path</span>
-                        <span className="group-hover:translate-x-1 transition-transform">→</span>
-                      </Link>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col-span-full py-8 text-center text-slate-600">
-                  Loading services...
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <ServicesSection 
+              services={services || []} 
+              heading={homeContent?.servicesHeadline}
+              description={homeContent?.servicesDescription}
+            />
+          </SectionContent>
+        </SectionWrapper>
 
         {/* FEATURED AREAS - PORTFOLIO CARDS */}
-        <section className="py-12 sm:py-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             <div className="mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
                 Explore My Work
@@ -339,12 +288,10 @@ export default async function Home() {
                 </a>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* WHY WORK TOGETHER */}
-        <section className="bg-slate-50 py-12 sm:py-16">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          </SectionContent>
+        </SectionWrapper>
+        <SectionWrapper variant="primary">
+          <SectionContent>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">
@@ -378,18 +325,12 @@ export default async function Home() {
                 <p className="text-slate-500">Visual Showcase</p>
               </div>
             </div>
-          </div>
-        </section>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* CLIENT TESTIMONIALS SECTION */}
-        <section className="py-16 sm:py-24 lg:py-32 bg-linear-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
-          {/* Subtle background decoration */}
-          <div className="absolute inset-0 opacity-5 pointer-events-none">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -mr-48 -mt-48"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl -ml-48 -mb-48"></div>
-          </div>
-
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionWrapper variant="secondary">
+          <SectionContent>
             {/* Section Header */}
             <div className="text-center mb-16 sm:mb-20 lg:mb-24">
               <span 
@@ -418,30 +359,40 @@ export default async function Home() {
 
             {/* Testimonials Carousel */}
             {testimonials && testimonials.length > 0 ? (
-              <TestimonialCarousel testimonials={testimonials} />
+              <TestimonialSection testimonials={testimonials} />
             ) : (
               <div className="text-center py-12 text-slate-600">
                 <p>Loading testimonials...</p>
               </div>
             )}
-          </div>
-        </section>
+          </SectionContent>
+        </SectionWrapper>
 
         {/* CASE STUDIES SECTION */}
-        <CaseStudiesSection />
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <CaseStudySection />
+          </SectionContent>
+        </SectionWrapper>
 
         {/* FEATURED BLOG SECTION */}
-        <FeaturedBlogSection />
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <FeaturedBlogSection />
+          </SectionContent>
+        </SectionWrapper>
 
         {/* FINAL CTA */}
-        <section className="py-12 sm:py-16">
-          <CTASection 
-            title="Ready to Transform Your Executive Presence?"
-            description="Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."
-            buttonText="Schedule Your Free Audit"
-            buttonLink="/contact"
-          />
-        </section>
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
+            <CTASection 
+              title="Ready to Transform Your Executive Presence?"
+              description="Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."
+              buttonText="Schedule Your Free Audit"
+              buttonLink="/contact"
+            />
+          </SectionContent>
+        </SectionWrapper>
       </PageTransition>
     </div>
   );

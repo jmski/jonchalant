@@ -1,4 +1,4 @@
-import { CTASection } from "@/components/sections";
+import { CTASection, StatsSection, ServicesSection, FAQSection } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { TextLink } from "@/components/typography";
 import type { Metadata } from 'next';
@@ -136,31 +136,12 @@ export default async function About() {
         {/* KEY STATS */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
-            <section className="about-stats-section">
-              <div className="about-stats-header">
-                <h2 className="about-stats-title">Proven Results From Real Leaders</h2>
-                <p className="about-stats-description">These outcomes matter because they represent how our clients show up differently—at work, with their teams, and in their own eyes.</p>
-              </div>
-              {aboutContent?.stats && aboutContent.stats.length > 0 ? (
-                <>
-                  <div className="about-stats-grid">
-                    {aboutContent.stats.map((stat: any, idx: number) => (
-                      <div key={idx} className="about-stat-card">
-                        <div className="about-stat-value">
-                          {stat.value}
-                        </div>
-                        <div className="about-stat-label">
-                          {stat.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="about-stats-footnote">*Of those who complete coaching programs</p>
-                </>
-              ) : (
-                <div className="loading-state">Loading stats...</div>
-              )}
-            </section>
+            <StatsSection 
+              stats={aboutContent?.stats || []} 
+              heading="Proven Results From Real Leaders"
+              description="These outcomes matter because they represent how our clients show up differently—at work, with their teams, and in their own eyes."
+              columns={3}
+            />
           </SectionContent>
         </SectionWrapper>
 
@@ -285,29 +266,7 @@ export default async function About() {
         {/* FAQ SECTION */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <div className="py-16 md:py-24">
-              <h2 className="text-3xl font-bold text-slate-900 mb-8">
-                Frequently Asked Questions
-              </h2>
-              <div className="space-y-4 max-w-3xl">
-                <div className="border rounded-lg p-6" style={{ borderColor: 'var(--border-color)' }}>
-                  <h3 className="font-semibold text-slate-900 mb-3">How long does a typical coaching engagement last?</h3>
-                  <p className="text-slate-700">Most clients work with me for 8-12 weeks in intensive programs, though I also offer ongoing monthly coaching for sustained development. Some choose a single intensive session to start.</p>
-                </div>
-                <div className="border rounded-lg p-6" style={{ borderColor: 'var(--border-color)' }}>
-                  <h3 className="font-semibold text-slate-900 mb-3">What's included in a corporate leadership workshop?</h3>
-                  <p className="text-slate-700">Workshops include movement fundamentals, interactive presence exercises, group feedback, resource materials, and follow-up resources. Custom workshops can include pre/post assessments.</p>
-                </div>
-                <div className="border rounded-lg p-6" style={{ borderColor: 'var(--border-color)' }}>
-                  <h3 className="font-semibold text-slate-900 mb-3">How do I know if coaching is working?</h3>
-                  <p className="text-slate-700">Clients typically report increased confidence in meeting rooms (83%), better emotional regulation (76%), and improved influence perception (89%) within 8 weeks. We track specific metrics aligned to your goals.</p>
-                </div>
-                <div className="border rounded-lg p-6" style={{ borderColor: 'var(--border-color)' }}>
-                  <h3 className="font-semibold text-slate-900 mb-3">Can I do coaching remotely?</h3>
-                  <p className="text-slate-700">Yes, all coaching is available remotely via Zoom. Many clients prefer this for flexibility, though in-person options are available in NYC.</p>
-                </div>
-              </div>
-            </div>
+            <FAQSection />
           </SectionContent>
         </SectionWrapper>
 
