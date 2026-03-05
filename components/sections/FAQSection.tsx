@@ -39,17 +39,22 @@ export function FAQSection() {
       {FAQ_ITEMS.map((item, idx) => (
         <div
           key={idx}
-          className="border border-slate-200 rounded-lg hover:border-accent transition-colors"
+          className="border rounded-lg transition-colors"
+          style={{
+            borderColor: expanded === idx ? 'var(--accent-primary)' : '#d4cfc7',
+          }}
         >
           <button
             onClick={() => setExpanded(expanded === idx ? null : idx)}
             className="w-full p-6 text-left font-semibold text-slate-900 hover:bg-slate-50 flex items-center justify-between"
           >
             {item.question}
-            <span className="text-accent">{expanded === idx ? '−' : '+'}</span>
+            <span style={{ color: 'var(--accent-primary)' }}>
+              {expanded === idx ? '−' : '+'}
+            </span>
           </button>
           {expanded === idx && (
-            <div className="px-6 pb-6 text-slate-700 border-t border-slate-200">
+            <div className="px-6 pb-6 text-slate-700" style={{ borderTop: '1px solid #d4cfc7' }}>
               {item.answer}
             </div>
           )}
