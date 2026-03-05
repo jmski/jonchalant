@@ -1,12 +1,12 @@
 import { HomeHero } from '@/components/hero';
 import { PageTransition } from "@/components/layout";
 import { Marquee } from '@/components/effects';
-import { FeaturedBlogSection } from '@/components/sections';
+import { FeaturedBlogSection, TestimonialCarousel, CaseStudiesSection } from '@/components/sections';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
-import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
+import { getHomePageContent, getServices, getTestimonials, getCaseStudies } from "@/lib/sanity";
 import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -416,44 +416,9 @@ export default async function Home() {
               </p>
             </div>
 
-            {/* Testimonials Grid */}
+            {/* Testimonials Carousel */}
             {testimonials && testimonials.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {testimonials.map((testimonial: any, idx: number) => (
-                  <div
-                    key={testimonial._id || idx}
-                    className="group rounded-lg p-8 sm:p-10 border border-slate-200 bg-white hover:shadow-lg hover:border-accent transition-all duration-300 flex flex-col h-full"
-                  >
-                    {/* Quote */}
-                    <p className="text-slate-700 leading-relaxed mb-6 flex-1 italic">
-                      &quot;{testimonial.quote}&quot;
-                    </p>
-
-                    {/* Result highlight */}
-                    {testimonial.result && (
-                      <div className="mb-6 p-4 bg-accent/10 rounded border border-accent/20">
-                        <p className="text-sm font-bold text-accent">
-                          <span className="inline-block mr-2">📈</span>
-                          Key Result: {testimonial.result}
-                        </p>
-                      </div>
-                    )}
-
-                    {/* Client info */}
-                    <div className="border-t border-slate-200 pt-6">
-                      <p className="font-bold text-slate-900 text-lg">
-                        {testimonial.clientName}
-                      </p>
-                      <p className="text-sm text-slate-600">
-                        {testimonial.role}
-                      </p>
-                      <p className="text-sm font-medium text-accent mt-1">
-                        {testimonial.company}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <TestimonialCarousel testimonials={testimonials} />
             ) : (
               <div className="text-center py-12 text-slate-600">
                 <p>Loading testimonials...</p>
@@ -461,6 +426,9 @@ export default async function Home() {
             )}
           </div>
         </section>
+
+        {/* CASE STUDIES SECTION */}
+        <CaseStudiesSection />
 
         {/* FEATURED BLOG SECTION */}
         <FeaturedBlogSection />
