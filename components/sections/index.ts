@@ -44,7 +44,8 @@ export { FeaturedVideo } from './dance/featured-video';
 export { FeaturedVideo as FeaturedVideoHero }; // BACKWARD COMPATIBILITY
 
 // ─────────────── OTHER SECTIONS ────────────────
-export { LessonCategorySection } from './lesson-section';
+export { LessonCategory } from './lessons';
+export { LessonCategory as LessonCategorySection } from './lessons'; // BACKWARD COMPATIBILITY
 
 // ─────────────── SHARED UTILITY COMPONENTS ────────────────
 export { Badge } from '@/components/utilities/badges';
