@@ -1,9 +1,6 @@
-import { CTA, FeaturedVideo } from "@/components/sections";
+import { CTA, FeaturedVideo, DanceApproach, DancePortfolio } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { TextLink } from "@/components/typography";
-import { FluidShape } from "@/components/decorative";
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
 import '@/app/css/dance.css';
 
@@ -35,24 +32,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Below-fold dynamic import
-const DanceFilter = dynamic(() => import('@/components/content').then(mod => ({ default: mod.DanceFilter })), {
-  loading: () => <div className="py-16 md:py-24">Loading...</div>,
-  ssr: true
-});
-
-const CTASectionDynamic = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTA })), {
-  loading: () => <div className="py-16 md:py-24">Loading...</div>,
-  ssr: true
-});
-
-const FeaturedVideoHeroDynamic = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.FeaturedVideo })), {
-  loading: () => <div className="py-16 md:py-24">Loading...</div>,
-  ssr: true
-});
-
-import { DANCE_FILTER_CATEGORIES } from "@/lib/pageContent";
-
 export default async function Dance() {
   let dancePortfolio: any[] = [];
   let featuredItem: any = null;
@@ -81,7 +60,7 @@ export default async function Dance() {
         <SectionWrapper variant="primary">
           <SectionContent>
             {featuredItem && (
-              <FeaturedVideoHeroDynamic
+              <FeaturedVideo
                 title={featuredItem.title}
                 category={featuredItem.category}
                 description={featuredItem.description}
@@ -96,32 +75,14 @@ export default async function Dance() {
         {/* PORTFOLIO FILTER */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <section>
-              <DanceFilter items={dancePortfolio} categories={DANCE_FILTER_CATEGORIES} />
-            </section>
+            <DancePortfolio items={dancePortfolio} />
           </SectionContent>
         </SectionWrapper>
 
         {/* APPROACH LINK */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <section className="dance-approach-section">
-              <h2 className="dance-approach-title">Why Movement Matters for Leadership</h2>
-              <p className="dance-approach-description">
-                Every piece in this portfolio demonstrates principles that directly transfer to executive presence. Your body communicates before your words do.
-              </p>
-              <p className="dance-approach-links">
-                Learn more about how choreography principles translate to professional leadership in the{' '}
-                <TextLink href="/lessons">
-                  leadership lessons
-                </TextLink>
-                {' '}or{' '}
-                <TextLink href="/about">
-                  about my approach
-                </TextLink>
-                .
-              </p>
-            </section>
+            <DanceApproach />
           </SectionContent>
         </SectionWrapper>
 
@@ -129,7 +90,7 @@ export default async function Dance() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section>
-              <CTASectionDynamic
+              <CTA
                 title="Ready to Integrate Movement into Your Leadership?"
                 description="See how dance principles translate directly into professional presence, confidence, and command. Let's explore what's possible."
                 buttonText="EXPLORE COACHING"

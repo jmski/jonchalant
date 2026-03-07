@@ -1,4 +1,4 @@
-import { CTA, LessonCategory } from "@/components/sections";
+import { CTA, LessonCategory, GenericHero } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
@@ -54,20 +54,15 @@ export default async function Lessons() {
         {/* HERO */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <section>
-              <div className="lessons-hero-intro">
-                <span>Structured Learning</span>
-              </div>
-              <h1 className="lessons-hero-title">
-                Master Quiet Command: Leadership Lessons
-              </h1>
-              <p className="lessons-hero-description">
-                Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
-              </p>
+            <GenericHero
+              subheading="Structured Learning"
+              heading="Master Quiet Command: Leadership Lessons"
+              description="Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves."
+            >
               <p className="lessons-hero-meta">
                 Organized by skill level: Beginner → Intermediate → Advanced
               </p>
-            </section>
+            </GenericHero>
           </SectionContent>
         </SectionWrapper>
 

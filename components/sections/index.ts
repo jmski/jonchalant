@@ -35,10 +35,11 @@ export { Carousel } from '@/components/shared/carousel';
 export { CaseStudies } from '@/components/shared/case-studies';
 
 // ─────────────── DANCE SECTIONS ────────────────
-export { FeaturedVideo } from './dance/featured-video';
+export { FeaturedVideo, Approach as DanceApproach, Portfolio as DancePortfolio } from './dance';
 
 // ─────────────── OTHER SECTIONS ────────────────
 export { LessonCategory } from './lessons';
+export { KeyMetrics, PlatformBreakdown, ContentMix, AudienceProfile, HeroStats, CollaborationPackages } from './media-kit';
 
 // ─────────────── SHARED UTILITY COMPONENTS ────────────────
 export { Badge } from '@/components/utilities/badges';
