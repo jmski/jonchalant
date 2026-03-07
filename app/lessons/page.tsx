@@ -1,4 +1,4 @@
-import { CTASection, LessonCategorySection } from "@/components/sections";
+import { CTA, LessonCategory } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
@@ -89,7 +89,7 @@ export default async function Lessons() {
         {/* BEGINNER LESSONS */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <LessonCategorySection 
+            <LessonCategory 
               level="Beginner"
               lessons={lessons.filter((l) => l.category === 'Beginner')} 
             />
@@ -99,7 +99,7 @@ export default async function Lessons() {
         {/* INTERMEDIATE LESSONS */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <LessonCategorySection 
+            <LessonCategory 
               level="Intermediate"
               lessons={lessons.filter((l) => l.category === 'Intermediate')} 
             />
@@ -109,7 +109,7 @@ export default async function Lessons() {
         {/* ADVANCED LESSONS */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <LessonCategorySection 
+            <LessonCategory 
               level="Advanced"
               lessons={lessons.filter((l) => l.category === 'Advanced')} 
             />
@@ -120,7 +120,7 @@ export default async function Lessons() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section>
-              <CTASection
+              <CTA
                 title="Learn Better with Coaching"
                 description="These lessons teach the frameworks. But transformation happens through application. Get personalized guidance, real-time feedback, and accountability through a coaching program."
                 buttonText="Find Your Program"

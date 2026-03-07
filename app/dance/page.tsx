@@ -1,4 +1,4 @@
-import { CTASection } from "@/components/sections";
+import { CTA, FeaturedVideo } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { TextLink } from "@/components/typography";
 import { FluidShape } from "@/components/decorative";
@@ -41,12 +41,12 @@ const DanceFilter = dynamic(() => import('@/components/content').then(mod => ({ 
   ssr: true
 });
 
-const CTASectionDynamic = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTASection })), {
+const CTASectionDynamic = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTA })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
 
-const FeaturedVideoHero = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.FeaturedVideoHero })), {
+const FeaturedVideoHeroDynamic = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.FeaturedVideo })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
@@ -81,7 +81,7 @@ export default async function Dance() {
         <SectionWrapper variant="primary">
           <SectionContent>
             {featuredItem && (
-              <FeaturedVideoHero
+              <FeaturedVideoHeroDynamic
                 title={featuredItem.title}
                 category={featuredItem.category}
                 description={featuredItem.description}
@@ -129,7 +129,7 @@ export default async function Dance() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section>
-              <CTASection
+              <CTASectionDynamic
                 title="Ready to Integrate Movement into Your Leadership?"
                 description="See how dance principles translate directly into professional presence, confidence, and command. Let's explore what's possible."
                 buttonText="EXPLORE COACHING"

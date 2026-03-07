@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { client } from '@/lib/sanity';
 import { Heading, TextLink } from '@/components/typography';
-import { CTASection } from '@/components/sections';
+import { CTA } from '@/components/sections';
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout';
 import { ScrollStagger, ScrollStaggerItem } from '@/components/animations';
 import '@/app/css/blog.css';
@@ -175,7 +175,7 @@ export default async function BlogPage() {
       <SectionWrapper variant="tertiary">
         <SectionContent>
           <section>
-            <CTASection
+            <CTA
               title="Ready to Build Your Executive Presence?"
               description="Get personalized guidance from an expert coach. Start with a free 30-minute presence audit."
               buttonText="Schedule Your Free Audit"

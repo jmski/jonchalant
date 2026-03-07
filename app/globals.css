@@ -59,6 +59,9 @@
   @import "./css/blog-cards-section.css";
   @import "./css/services-section.css";
   @import "./css/featured-areas-section.css";
+  @import "./css/impact-section.css";
+  @import "./css/portfolio-preview.css";
+  @import "./css/why-work-together.css";
   @import "./css/home-hero-section.css";
   @import "./css/stats-section.css";
 }

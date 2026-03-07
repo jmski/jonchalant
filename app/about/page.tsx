@@ -1,4 +1,5 @@
-import { CTASection, StatsSection, AboutHeroSection, AboutOriginSection, AboutServicesSection, AboutPhilosophySection, AboutIntrovertSection, FAQSection } from "@/components/sections";
+import { CTA, Stats, FAQ } from "@/components/sections";
+import { Hero as AboutHero, Origin, Services as AboutServices, Philosophy, Introvert } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
@@ -67,7 +68,7 @@ export default async function About() {
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <AboutHeroSection
+            <AboutHero
               headline={aboutContent?.heroHeadline}
               description={aboutContent?.heroDescription}
             />
@@ -77,7 +78,7 @@ export default async function About() {
         {/* ORIGIN STORY - 60/40 LAYOUT */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <AboutOriginSection
+            <Origin
               headline={aboutContent?.originSectionHeadline}
               description={aboutContent?.originSectionDescription}
               phases={aboutContent?.phases}
@@ -88,7 +89,7 @@ export default async function About() {
         {/* KEY STATS */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
-            <StatsSection 
+            <Stats 
               stats={aboutContent?.stats || []} 
               heading="Proven Results From Real Leaders"
               description="These outcomes matter because they represent how our clients show up differently—at work, with their teams, and in their own eyes."
@@ -100,35 +101,35 @@ export default async function About() {
         {/* WHAT I COACH - Now fetching from Sanity services */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <AboutServicesSection services={services} />
+            <AboutServices services={services} />
           </SectionContent>
         </SectionWrapper>
 
         {/* MY PHILOSOPHY */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <AboutPhilosophySection philosophies={philosophies} />
+            <Philosophy philosophies={philosophies} />
           </SectionContent>
         </SectionWrapper>
 
         {/* INTROVERT ADVANTAGE */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <AboutIntrovertSection traits={introvertTraits} />
+            <Introvert traits={introvertTraits} />
           </SectionContent>
         </SectionWrapper>
 
         {/* FAQ SECTION */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <FAQSection />
+            <FAQ />
           </SectionContent>
         </SectionWrapper>
 
         {/* CTA */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
-            <CTASection
+            <CTA
               title="Your Presence Matters. Let's Amplify It."
               description="Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today—and the fastest path to where you want to be."
               buttonText="Get Your Free Audit Now"

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { PageHeroSection, CollaborationPackagesSection } from "@/components/sections";
+import { PageHero, Collaboration, CTA } from "@/components/sections";
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
 import '@/app/css/media-kit.css';
 
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-const CTASection = dynamic(() => import('@/components/sections').then(mod => mod.CTASection), {
+const CTASectionDynamic = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.CTA })), {
   loading: () => <div className="py-16 md:py-24">Loading...</div>,
   ssr: true
 });
@@ -87,7 +87,7 @@ export default async function MediaKit() {
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <PageHeroSection
+            <PageHero
               eyebrow="Press & Collaboration"
               headline={['Audience Insights &', 'Collaboration Opportunities']}
               subheading={pageMetadata?.subheadline || 'Comprehensive audience data, platform metrics, and partnership opportunities.'}
@@ -444,7 +444,7 @@ export default async function MediaKit() {
                 />
               </div>
 
-              <CollaborationPackagesSection packages={collaborationPackages} />
+              <Collaboration packages={collaborationPackages} />
             </section>
           </SectionContent>
         </SectionWrapper>
@@ -453,7 +453,7 @@ export default async function MediaKit() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section>
-              <CTASection
+              <CTA
                 title="Let's Collaborate"
                 description="Interested in a partnership? Download the full media kit or contact me directly to discuss a custom collaboration package."
                 buttonText="Start Conversation"

@@ -1,4 +1,4 @@
-import { CTASection, PageHeroSection } from "@/components/sections";
+import { CTA, PageHero, Programs as ProgramsSection } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
@@ -6,11 +6,6 @@ import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
 import { CourseSchema } from "@/lib/schema";
 import '@/app/css/programs.css';
-
-const ProgramCardsSection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.ProgramCardsSection })), {
-  loading: () => <div className="py-16 md:py-24">Loading programs...</div>,
-  ssr: true
-});
 
 import type { Metadata } from 'next';
 
@@ -99,7 +94,7 @@ export default async function Programs() {
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <PageHeroSection
+            <PageHero
               eyebrow="Coaching Programs"
               headline={['Transform Your', 'Executive Presence']}
               subheading="Building quiet command isn't complicated. It's methodical. Pick your format and commit to the process."
@@ -170,7 +165,7 @@ export default async function Programs() {
           <SectionContent>
             <section id="programs-section">
               {programCards.length > 0 ? (
-                <ProgramCardsSection programs={programCards} />
+                <ProgramsSection programs={programCards} />
               ) : (
                 <div className="py-12 text-center" style={{ color: 'var(--text-tertiary)' }}>
                   <p>Loading coaching programs...</p>
@@ -206,7 +201,7 @@ export default async function Programs() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section>
-              <CTASection
+              <CTA
                 title="Ready to Build Real Executive Presence?"
                 description="Don't guess which program is right. Schedule a free 30-minute Presence Audit where we'll assess where you are now, identify your biggest opportunities, and create a custom roadmap to get you there."
                 buttonText="Book Your Free Audit"
