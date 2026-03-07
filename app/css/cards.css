@@ -1,0 +1,902 @@
+/* ═════════════════════════════════════════════════════════════════════════════
+   CARDS - All Card Component Styles
+   
+   Consolidated card components: testimonial, case-study, lesson, blog, service,
+   dance/enhanced cards, generic card, and badge components
+   ════════════════════════════════════════════════════════════════════════════
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   GENERIC CARD - Reusable Card Component
+   
+   Provides consistent card styling with subtle borders and shadows.
+   Uses CSS variables for colors.
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+.card {
+  padding: 1.5rem;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  transition: all var(--transition-base);
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 2rem;
+  }
+}
+
+.card-hoverable {
+  cursor: pointer;
+}
+
+.card-hoverable:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(107, 142, 99, 0.1);
+  transform: translateY(-2px);
+}
+
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6 {
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.card p {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.card a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.card a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TESTIMONIAL CARD
+   ────────────────────────────────────────────────────────────────────────────
+   Individual testimonial card with quote, result highlight, and client info.
+*/
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 0.5rem;
+  background: var(--bg-light, #ffffff);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.testimonial-card-quote {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  font-style: italic;
+}
+
+.testimonial-card-result {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.375rem;
+  background-color: var(--overlay-light, rgba(107, 142, 99, 0.1));
+  border: 1px solid var(--accent-primary, #6b8e63);
+}
+
+.testimonial-card-result-text {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.testimonial-card-result-icon {
+  display: inline-block;
+}
+
+.testimonial-card-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+}
+
+.testimonial-card-client-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-card-role {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-card-company {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+@media (min-width: 640px) {
+  .testimonial-card {
+    padding: 1.75rem;
+  }
+
+  .testimonial-card-quote {
+    font-size: 1.0625rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .testimonial-card {
+    padding: 2rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CASE STUDY CARD
+   ────────────────────────────────────────────────────────────────────────────
+   Card displaying case study with image, challenge, solution, and results.
+*/
+
+.case-study-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: var(--bg-light, #ffffff);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.case-study-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.case-study-card-image {
+  position: relative;
+  height: 12rem;
+  overflow: hidden;
+  background-color: var(--bg-muted, #f8fafc);
+}
+
+.case-study-card-image-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.case-study-card:hover .case-study-card-image-element {
+  transform: scale(1.05);
+}
+
+.case-study-card-image-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+}
+
+.case-study-card:hover .case-study-card-image-overlay {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.case-study-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+@media (min-width: 640px) {
+  .case-study-card-content {
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .case-study-card-content {
+    padding: 2rem;
+  }
+}
+
+.case-study-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.case-study-card-industry {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.case-study-card-title {
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  font-weight: 900;
+  color: var(--text-primary, #0f172a);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.case-study-card:hover .case-study-card-title {
+  color: var(--accent-primary);
+}
+
+.case-study-card-client {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.case-study-card-client span {
+  font-weight: 600;
+}
+
+.case-study-card-details {
+  margin-bottom: 1.5rem;
+  space-y: 1rem;
+  flex-grow: 1;
+}
+
+.case-study-card-section {
+  margin-bottom: 1rem;
+}
+
+.case-study-card-section:last-child {
+  margin-bottom: 0;
+}
+
+.case-study-card-section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 0.5rem;
+}
+
+.case-study-card-section-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #64748b);
+}
+
+.case-study-card-results {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.375rem;
+  background-color: var(--overlay-light, rgba(107, 142, 99, 0.05));
+  border-left: 4px solid var(--accent-primary);
+}
+
+.case-study-card-results-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+}
+
+.case-study-card-results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.case-study-card-results-item {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #64748b);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.case-study-card-results-icon {
+  color: var(--accent-primary);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.case-study-card-cta {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+}
+
+.case-study-card-cta-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: gap 0.3s ease;
+}
+
+.case-study-card:hover .case-study-card-cta-text {
+  gap: 0.75rem;
+}
+
+.case-study-card-cta-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.case-study-card:hover .case-study-card-cta-arrow {
+  transform: translateX(0.25rem);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   LESSON CARD
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+.lesson-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-light);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.lesson-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.lesson-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  background: var(--bg-muted);
+  font-size: 2.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lesson-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.lesson-card-pillar {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 0.75rem;
+}
+
+.lesson-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.lesson-card-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.lesson-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+.lesson-card-duration {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.lesson-card-cta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.lesson-card-cta:hover {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+  .lesson-card-content {
+    padding: 2.25rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BLOG CARD
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-light);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.blog-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.blog-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-card-title {
+  color: var(--accent-primary);
+}
+
+.blog-card-date {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  display: block;
+}
+
+.blog-card-excerpt {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.blog-card-cta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.blog-card-cta:hover {
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .blog-card {
+    padding: 1.75rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SERVICE CARD
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-light);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.service-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-card-header {
+  background: linear-gradient(
+    to right,
+    var(--bg-muted),
+    color-mix(in srgb, var(--bg-muted) 90%, var(--text-primary))
+  );
+  padding: 2rem 1.5rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-card-header {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--bg-muted) 80%, var(--text-primary)),
+    color-mix(in srgb, var(--bg-muted) 70%, var(--text-primary))
+  );
+}
+
+.service-card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.service-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-card-title {
+  color: var(--accent-primary);
+}
+
+.service-card-body {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.service-card-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.service-card-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.service-card-feature-check {
+  color: var(--accent-primary);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.service-card-feature-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.service-card-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+.service-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.service-card-cta:hover {
+  color: var(--accent-primary);
+  gap: 0.5rem;
+}
+
+.service-card-cta-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.service-card-cta:hover .service-card-cta-arrow {
+  transform: translateX(0.25rem);
+}
+
+@media (min-width: 640px) {
+  .service-card-header {
+    padding: 2rem;
+  }
+
+  .service-card-body {
+    padding: 1.5rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   DANCE CARD / ENHANCED CARD
+   ────────────────────────────────────────────────────────────────────────────
+   Interactive card component for dance portfolio items with hover effects
+*/
+
+.card-enhanced {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  transition: all var(--transition-base);
+}
+
+.card-enhanced:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.card-enhanced-shine {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+  z-index: 20;
+}
+
+.card-enhanced:hover .card-enhanced-shine {
+  opacity: 0.4;
+}
+
+.card-enhanced-image {
+  position: relative;
+  width: 100%;
+  height: 12rem;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  transition: colors var(--transition-base);
+}
+
+.card-enhanced-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.card-enhanced:hover .card-enhanced-image img {
+  transform: scale(1.1);
+}
+
+.card-enhanced-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-primary)
+  );
+  transition: opacity 500ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.card-enhanced:hover .card-enhanced-overlay {
+  opacity: 0.15;
+}
+
+.card-badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  transition: all var(--transition-base);
+  z-index: 10;
+}
+
+.card-enhanced:hover .card-badge {
+  top: var(--spacing-xs);
+  left: var(--spacing-xs);
+  transform: scale(1.1);
+}
+
+.card-arrow-icon {
+  position: absolute;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 900;
+  border: 1px solid var(--accent-primary);
+  background-color: var(--accent-primary);
+  color: white;
+  opacity: 0;
+  transform: translateX(0.5rem);
+  transition: all var(--transition-base);
+  z-index: 15;
+}
+
+.card-enhanced:hover .card-arrow-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card-content {
+  padding: var(--spacing-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    to bottom,
+    var(--bg-secondary),
+    var(--bg-primary)
+  );
+  transition: all var(--transition-base);
+}
+
+.card-content h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  transition: colors var(--transition-base);
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  transition: colors var(--transition-base);
+  margin-bottom: auto;
+}
+
+.card-learn-more {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: var(--spacing-md);
+  opacity: 0;
+  transform: translateY(0.25rem);
+  transition: all var(--transition-base);
+}
+
+.card-enhanced:hover .card-learn-more {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-learn-more-arrow {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.card-enhanced:hover .card-learn-more-arrow {
+  transform: translateX(0.25rem);
+}
+
+.card-link {
+  display: block;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BADGE
+   ────────────────────────────────────────────────────────────────────────────
+   Small label/tag component with size and variant options.
+*/
+
+.badge {
+  display: inline-block;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.badge-sm {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-md {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-lg {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-accent {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.badge-accent:hover {
+  opacity: 0.9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.badge-primary {
+  background-color: var(--text-primary, #0f172a);
+  color: white;
+}
+
+.badge-primary:hover {
+  opacity: 0.85;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.badge-secondary {
+  background-color: var(--bg-muted, #f8fafc);
+  color: var(--text-primary, #0f172a);
+  border: 1px solid var(--border-color, #e2e8f0);
+}
+
+.badge-secondary:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}

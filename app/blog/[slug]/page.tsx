@@ -5,7 +5,6 @@ import { client } from '@/lib/sanity';
 import { PortableText } from '@portabletext/react';
 import { BlogRelated } from '@/components/sections';
 import { portableTextComponents } from '@/lib/blog/portableTextComponents';
-import '@/app/css/blog.css';
 
 interface BlogPostDocument {
   _id: string;

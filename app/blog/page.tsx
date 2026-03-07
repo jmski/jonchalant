@@ -3,7 +3,6 @@ import { client } from '@/lib/sanity';
 import { Heading } from '@/components/typography';
 import { CTA, BlogFeatured, BlogPosts } from '@/components/sections';
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout';
-import '@/app/css/blog.css';
 
 export const metadata: Metadata = {
   title: 'Leadership Blog | Executive Presence & Quiet Command - Jonchalant',

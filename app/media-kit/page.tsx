@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { PageHero, CTA, KeyMetrics, PlatformBreakdown, ContentMix, AudienceProfile, HeroStats, CollaborationPackages } from "@/components/sections";
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
-import '@/app/css/media-kit.css';
 
 export const metadata: Metadata = {
   title: "Media Kit & Collaboration Opportunities | TikTok, Instagram, YouTube | Jonchalant",

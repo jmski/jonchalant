@@ -1,9 +1,16 @@
-/* ============================================================================
+/* ═════════════════════════════════════════════════════════════════════════════
+   PAGES.CSS - Page-Specific & Form Component Styles
+   
+   Consolidated styles for contact forms, page-specific styling (blog, dance,
+   lessons, programs, media kit, about), and all page-exclusive elements
+   ════════════════════════════════════════════════════════════════════════════
+
+/* ─────────────────────────────────────────────────────────────────────────────
    INQUIRY FORM - SegmentedInquiryForm Component Styling
    
    Form inputs, labels, buttons, and status messages
-   Replaces inline Tailwind utilities with CSS variables and classes
-   ============================================================================ */
+   ────────────────────────────────────────────────────────────────────────────
+*/
 
 /* Form container */
 .inquiry-form {

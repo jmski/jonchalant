@@ -1,5 +1,4 @@
 import React from 'react';
-import '@/app/css/hero-section.css';
 
 interface HeroProps {
   heading: React.ReactNode;

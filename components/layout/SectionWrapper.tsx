@@ -1,5 +1,4 @@
 import React from 'react';
-import '@/app/css/section-wrapper.css';
 
 interface SectionWrapperProps {
   children: React.ReactNode;

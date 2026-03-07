@@ -3,7 +3,6 @@ import { Hero as AboutHero, Origin, Services as AboutServices, Philosophy, Intro
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
-import '@/app/css/about.css';
 
 export const metadata: Metadata = {
   title: "About Jon | Leadership Coach & Choreographer | Jonchalant",

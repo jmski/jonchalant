@@ -3,7 +3,6 @@ import { PageTransition, SectionWrapper, SectionContent } from "@/components/lay
 import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
 import { getLessons } from "@/lib/sanity";
-import '@/app/css/lessons.css';
 
 import type { Metadata } from 'next';
 

@@ -40,6 +40,7 @@ export { FeaturedVideo, Approach as DanceApproach, Portfolio as DancePortfolio }
 // ─────────────── OTHER SECTIONS ────────────────
 export { LessonCategory } from './lessons';
 export { KeyMetrics, PlatformBreakdown, ContentMix, AudienceProfile, HeroStats, CollaborationPackages } from './media-kit';
+export { FocusAreas, SupplementalLearning } from './programs';
 
 // ─────────────── SHARED UTILITY COMPONENTS ────────────────
 export { Badge } from '@/components/utilities/badges';

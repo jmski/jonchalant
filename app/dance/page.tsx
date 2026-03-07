@@ -2,7 +2,6 @@ import { CTA, FeaturedVideo, DanceApproach, DancePortfolio } from "@/components/
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import type { Metadata } from 'next';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
-import '@/app/css/dance.css';
 
 export const metadata: Metadata = {
   title: "Dance Choreography Portfolio | Hip-Hop & Contemporary | Jonchalant",

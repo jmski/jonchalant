@@ -1,11 +1,9 @@
-import { CTA, PageHero, Programs as ProgramsSection } from "@/components/sections";
+import { CTA, PageHero, Programs as ProgramsSection, FocusAreas, SupplementalLearning } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
 import { CourseSchema } from "@/lib/schema";
-import '@/app/css/programs.css';
 
 import type { Metadata } from 'next';
 
@@ -103,59 +101,7 @@ export default async function Programs() {
                 { label: 'Explore Programs', href: '#programs-section', variant: 'primary' },
                 { label: 'Start Audit (Free)', href: '#inquiry-form', variant: 'secondary' },
               ]}
-              rightColumn={
-                <div className="space-y-6">
-                  <style>{`
-                    .pillar-card {
-                      transition: all 300ms ease-in-out;
-                    }
-                    .pillar-card:hover {
-                      box-shadow: 0 8px 24px rgba(107, 142, 99, 0.12);
-                      transform: translateY(-4px);
-                    }
-                  `}</style>
-                  {focusItems.length > 0 ? (
-                    focusItems.map((pillar, idx) => (
-                      <div
-                        key={idx}
-                        className="pillar-card p-6 sm:p-8 rounded-sm border-l-4"
-                        style={{
-                          backgroundColor: 'var(--bg-secondary)',
-                          borderLeftColor: 'var(--accent-primary)',
-                          borderLeftWidth: '4px'
-                        }}
-                      >
-                        <div className="flex items-start gap-4">
-                          <div 
-                            className="text-4xl shrink-0"
-                            style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                          >
-                            {pillar.icon}
-                          </div>
-                          <div className="flex-1 space-y-2">
-                            <h2 
-                              className="font-headline font-bold text-lg"
-                              style={{ color: 'var(--text-primary)' }}
-                            >
-                              {pillar.title}
-                            </h2>
-                            <p 
-                              className="text-sm leading-relaxed"
-                              style={{ color: 'var(--text-tertiary)' }}
-                            >
-                              {pillar.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-8" style={{ color: 'var(--text-tertiary)' }}>
-                      Loading program focus areas...
-                    </div>
-                  )}
-                </div>
-              }
+              rightColumn={<FocusAreas items={focusItems} />}
             />
           </SectionContent>
         </SectionWrapper>
@@ -178,22 +124,7 @@ export default async function Programs() {
         {/* SUPPLEMENTAL LEARNING CTA */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <section>
-              <div className="text-center space-y-4">
-                <h3 className="text-2xl sm:text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                  Learn at Your Own Pace
-                </h3>
-                <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                  Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
-                </p>
-                <TextLink 
-                  href="/lessons" 
-                  className="programs-cta-button"
-                >
-                  Explore Leadership Lessons →
-                </TextLink>
-              </div>
-            </section>
+            <SupplementalLearning />
           </SectionContent>
         </SectionWrapper>
 
