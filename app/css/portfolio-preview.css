@@ -33,7 +33,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
-  auto-rows: 1fr;
+  -ms-grid-rows: 1fr;
 }
 
 @media (min-width: 768px) {

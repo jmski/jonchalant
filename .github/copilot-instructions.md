@@ -48,10 +48,11 @@ components/
 │   │   ├── services/          # Services.tsx
 │   │   ├── philosophy/        # Philosophy.tsx
 │   │   └── introvert/         # Introvert.tsx
+│   ├── blog/                    # Blog page sections (Featured, Posts, Related)
 │   ├── dance/                   # Dance page sections
 │   │   └── featured-video/    # FeaturedVideo.tsx
 │   ├── lesson-section/          # Lesson category section
-│   └── index.ts                 # Central export hub (aliases for backward compatibility)
+│   └── index.ts                 # Central export hub
 ├── shared/                      # Reusable section components (used across pages)
 │   ├── cta/                    # CTA.tsx
 │   ├── faq/                    # FAQ.tsx
@@ -104,26 +105,50 @@ components/
 - **StatsGrid**: Display statistics/metrics in a responsive grid
 - **CardGrid**: Generic grid layout for card components
 
-### Shared Section Components Pattern
+### Page/Feature-Scoped Section Components Pattern
 
-All shared sections follow this pattern:
+**Location**: `components/sections/{page-or-feature}/`
+
+Sections that belong to a specific page or feature:
 
 ```tsx
-// ✅ CORRECT: Named export, dedicated CSS file, CSS class names only
-export function SectionName({ data }) {
+// ✅ CORRECT: Named exports in feature folder
+// Location: components/sections/blog/Featured.tsx
+export function Featured({ posts }) {
   return (
-    <section className="section-name">
-      <div className="section-name-header">
-        <h2 className="section-name-title">Title</h2>
-      </div>
-      <div className="section-name-content">
-        {data.map((item) => (
-          <ItemCard key={item.id} {...item} />
-        ))}
-      </div>
+    <section className="blog-featured-section">
+      <h2 className="blog-featured-section-title">Featured</h2>
+      {/* content */}
     </section>
   );
 }
+
+// ✅ CORRECT: Multiple exports from same folder
+export function Posts({ posts }) { ... }
+export function Related({ posts }) { ... }
+
+// ✅ CORRECT: Exported from sections/index.ts with aliases
+// export { Featured as BlogFeatured, Posts as BlogPosts, Related as BlogRelated }
+
+// ❌ WRONG: Don't use "Section" suffix
+// export function BlogFeaturedSection() { }
+```
+
+### Shared Section Components Pattern
+
+**Location**: `components/shared/{component-name}/`
+
+Sections that are reused across multiple different pages/features:
+
+```tsx
+// ✅ CORRECT: Single export or default export
+// Location: components/shared/testimonials/Testimonials.tsx
+export function Testimonials({ data }) {
+  return <section className="testimonials-section">{/* content */}</section>;
+}
+
+// ✅ CORRECT: Can use default export
+// export default Testimonials
 ```
 
 **Export convention**: Shared components use _named exports_. The `index.ts` file may re-export as default for convenience:
@@ -165,27 +190,37 @@ export { default as CTA } from "./CTA"; // Default export in component file
 
 ### Architecture Highlights
 
-**Separation of Concerns**:
+**Separation of Concerns** (Critical):
 
-- ✅ Page-specific sections in `components/sections/{page}/`
-- ✅ Reusable sections in `components/shared/`
-- ✅ Utility components (cards, badges, grids) in `components/utilities/`
-- ✅ No naming redundancy (`Hero` instead of `HeroSection`)
+- ✅ **Page-specific sections** in `components/sections/{page}/` (e.g., `components/sections/about/`, `components/sections/dance/`)
+- ✅ **Feature-scoped sections** in `components/sections/{feature}/` (e.g., `components/sections/blog/` for blog pages)
+- ✅ **Truly reusable sections** in `components/shared/` (e.g., `components/shared/testimonials/`, `components/shared/cta/`)
+- ✅ **Utility components** (cards, badges, grids) in `components/utilities/`
+- ✅ **No naming redundancy** - Use `Featured`, `Posts`, `Related` instead of `FeaturedSection`, `PostsSection`
+
+**How to Determine Placement**:
+
+1. **Is this specific to one "page" or "feature"?** → Place in `components/sections/{page-or-feature}/`
+   - Example: Blog-specific sections → `components/sections/blog/`
+   - Example: Home page sections → `components/sections/home/`
+2. **Is this reusable across multiple different features?** → Place in `components/shared/{name}/`
+   - Example: Testimonials used on multiple pages → `components/shared/testimonials/`
+3. **Is this a small reusable card/badge/utility?** → Place in `components/utilities/{category}/{name}/`
 
 **Export Strategy**:
 
-- Page-specific sections like `About/Hero` exported from `sections/index.ts` with backward-compatible aliases
-  - `export { Hero as AboutHeroSection } from '@/components/sections/about/hero'`
-- This allows existing code using old names to continue working
-- New code should use the simpler names directly
+- All sections are exported from `sections/index.ts` with descriptive aliases
+  - Page-specific: `export { Hero as AboutHero }`
+  - Feature-scoped: `export { Featured as BlogFeatured }`
+  - Shared: `export { Testimonials }`
+- This maintains consistency and makes imports predictable
 
 **Folder Organization Benefits**:
 
-- ✅ Clear page association (all about sections grouped)
-- ✅ Scalable (new pages easy to add)
-- ✅ Easier imports: `import { Hero } from '@/components/sections/about/hero'`
-- ✅ Shared components aren't nested under page-specific content
-- ✅ Utilities are at top level for easy access
+- ✅ Clear separation: `sections/` for page/feature-specific, `shared/` for truly reusable
+- ✅ Easy to identify scope: is it used only for blog pages? → sections/blog
+- ✅ No ambiguous nesting: no `sections/shared/` confusion
+- ✅ Scalable: new pages/features go in `sections/{name}` automatically
 
 ## Styling System
 

@@ -19,6 +19,9 @@ export { CaseStudy } from '@/components/shared/case-study';
 export { Services } from '@/components/shared/services';
 export { Stats } from '@/components/shared/stats';
 
+// ─────────────── BLOG SECTIONS ────────────────
+export { Featured as BlogFeatured, Posts as BlogPosts, Related as BlogRelated } from '@/components/sections/blog';
+
 // ─────────────── SHARED GENERIC COMPONENTS ────────────────
 export { CTA } from '@/components/shared/cta';
 export { FAQ } from '@/components/shared/faq';

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { client } from '@/lib/sanity';
 import { PortableText } from '@portabletext/react';
+import { BlogRelated } from '@/components/sections';
+import { portableTextComponents } from '@/lib/blog/portableTextComponents';
 import '@/app/css/blog.css';
 
 interface BlogPostDocument {
@@ -112,68 +114,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const portableTextComponents = {
-  types: {
-    block: ({ value }: any) => {
-      const style = value._type === 'block' ? value.style : 'normal';
-
-      if (style === 'h2') {
-        return <h2 className="blog-content h2">{value.children.map((child: any) => child.text).join('')}</h2>;
-      }
-      if (style === 'h3') {
-        return <h3 className="blog-content h3">{value.children.map((child: any) => child.text).join('')}</h3>;
-      }
-      if (style === 'blockquote') {
-        return (
-          <blockquote className="blog-content blockquote">
-            {value.children.map((child: any) => child.text).join('')}
-          </blockquote>
-        );
-      }
-
-      return (
-        <p className="blog-content p">
-          {value.children?.map((child: any) => (
-            <span key={child._key || Math.random()}>
-              {child.text}
-            </span>
-          ))}
-        </p>
-      );
-    },
-  },
-  list: {
-    bullet: ({ children }: any) => (
-      <ul className="blog-content ul">
-        {children}
-      </ul>
-    ),
-    number: ({ children }: any) => (
-      <ol className="blog-content ol">
-        {children}
-      </ol>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }: any) => <li>{children}</li>,
-    number: ({ children }: any) => <li>{children}</li>,
-  },
-  marks: {
-    strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
-    em: ({ children }: any) => <em className="italic">{children}</em>,
-    code: ({ children }: any) => (
-      <code className="blog-content code">
-        {children}
-      </code>
-    ),
-    link: ({ value, children }: any) => (
-      <a href={value?.href} className="blog-content a">
-        {children}
-      </a>
-    ),
-  },
-};
-
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
@@ -183,18 +123,22 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const relatedPosts = await getRelatedPosts(post.pillar, slug);
-  const publishDate = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }) : null;
+  const publishDate = post.publishedAt
+    ? new Date(post.publishedAt).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null;
 
   return (
     <main className="blog-main">
       {/* Breadcrumb */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="blog-breadcrumb">
-          <Link href="/blog" className="blog-breadcrumb-link">Blog</Link>
+          <Link href="/blog" className="blog-breadcrumb-link">
+            Blog
+          </Link>
           <span>/</span>
           <span className="blog-breadcrumb-current">{post.title}</span>
         </div>
@@ -251,36 +195,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
-          <section className="blog-related">
-            <h2 className="blog-related-title">Related Articles</h2>
-            <div className="blog-related-grid">
-              {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost._id} href={`/blog/${relatedPost.slug.current}`} className="blog-related-card">
-                  <span className="blog-related-card-pillar">
-                    {relatedPost.pillar}
-                  </span>
-                  <h3 className="blog-related-card-title">
-                    {relatedPost.title}
-                  </h3>
-                  {relatedPost.excerpt && (
-                    <p className="blog-related-card-excerpt">
-                      {relatedPost.excerpt}
-                    </p>
-                  )}
-                  <div className="blog-related-card-footer">
-                    {relatedPost.readingTime && (
-                      <span className="blog-related-card-readtime">
-                        {relatedPost.readingTime} min read
-                      </span>
-                    )}
-                    <span className="blog-related-card-link">
-                      Read →
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
+          <BlogRelated posts={relatedPosts} />
         )}
       </article>
 
