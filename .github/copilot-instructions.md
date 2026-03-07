@@ -1,199 +1,464 @@
-# AI Coding Guidelines for jonchalon
+# AI Coding Guidelines for jonchalant
 
 ## Architecture Overview
 
-**Tech Stack**: Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS v4
+**Tech Stack**: Next.js 16.1.1 (App Router) + React 19 + TypeScript + CSS-First Styling (Tailwind v4 for utilities only)
 
-This is a **Professional Brand Hub & Digital Media Kit** for Jon—a multi-niche content creator with dance as the primary professional skill. The site integrates dance portfolio, hobby showcases (Gunpla/Pokémon), collaboration opportunities, and media metrics. **Design philosophy**: Clean, modern, minimalist with professional typography and strategic accent colors to appeal to brands and collaborators.
+This is a **Professional Executive Presence Coaching Platform** for Jon—transforming confidence and leadership presence in busy professionals and introverts. The site features coaching programs, blog content, case studies, testimonials, and a comprehensive media kit. **Design philosophy**: Japanese Zen-inspired aesthetic with editorial typography, generous whitespace, and a muted palette (burnt indigo & muted moss accents) that appeals to corporate clients and coaching prospects.
 
-**Key Architectural Decisions**:
+**Core Architecture**:
 
-- **App Router (not Pages Router)**: Simplifies file-based routing and enables server components by default
-- **React Compiler Enabled**: Automatic memoization without manual `useMemo`/`useCallback`
-- **Minimal Glassmorphism**: Shift from Pokemon playfulness to sleek, professional UI with clean lines and purposeful whitespace
-- **Video Integration**: Hero and portfolio sections embed videos (YouTube/Vimeo) with lazy-loading and responsive sizing
-- **Media Gallery**: High-quality image galleries for dance, Gunpla, Pokémon with professional mockups
-- **Minimal Client State**: Most components are server components; interactive elements (toggles, video players) use `'use client'` sparingly
+- **Component-First Design**: Build reusable components first, compose into pages second. All child components should be props-driven and not depend on context or external state.
+- **Next.js App Router**: Server components by default (smaller bundle, faster initial load)
+- **React 19 Compiler**: Automatic memoization without manual `useMemo`/`useCallback`
+- **CSS-First Styling**: 10 consolidated CSS files organized by architectural purpose, CSS variables for theming, BEM naming convention
+- **Sanity CMS Integration**: Server components fetch content (case studies, testimonials, blog posts, services)
+- **Minimal Client State**: Interactive components (`'use client'`) only for carousel logic, forms, modals
+- **TypeScript Strict Mode**: Enforced at build time; failing types block production
 
-**New Page Structure** (`app/` directory):
+**Build System**:
 
-- `page.tsx` - **Home**: Hero section with dance video loop, headline, CTA to collaborations
-- `dance/page.tsx` - **Dance Portfolio**: Categorized videos (choreography, freestyle, performances), professional photography
-- `showcase/page.tsx` - **Hobby Showcase**: Sub-sections for Gunpla (builds, timelapse) and Pokémon (collection, unboxings)
-- `collaborations/page.tsx` - **Collaborations & Services**: "Let's Work Together" focus with past projects, collaboration types, inquiry form
-- `media-kit/page.tsx` - **Media Kit**: Audience demographics, reach, engagement metrics (boilerplate/placeholder)
-- `about/page.tsx` - **About**: Short punchy bio connecting dance background with otaku culture and content creation
-- `contact/page.tsx` - **Contact**: Direct inquiry form and email
-  npm run dev # Starts http://localhost:3000 with hot reload
-  npm run build # Production build (optimizes with React Compiler + Turbopack)
-  npm run start # Runs production build locally
-  npm run lint # Runs ESLint (warns on Next.js best practices + TypeScript errors)
+```bash
+npm run dev      # Starts http://localhost:3000 with hot reload
+npm run build    # Optimized production build (11-12 seconds with Turbopack)
+npm run start    # Runs production build locally
+npm run lint     # ESLint validation (Next.js + TypeScript strict rules)
+```
 
-````
+**Key Config**:
 
-**Build Process Details**:
-
-- **Turbopack** enabled in `next.config.ts` for faster builds
-- **React Compiler** (`babel-plugin-react-compiler`) automatically optimizes components
-- **Type checking**: TypeScript runs during build; failing types block production
-- **Linting**: ESLint enforces Next.js best practices and TypeScript strict mode
-- **Video Optimization**: Next.js Image component for thumbnails, external embeds (YouTube/Vimeo) for video content
-
-**Common Tasks**:
-
-- **Add a new page**: Create `app/newpage/page.tsx`, import Navbar, follow page structure template
-- **Embed video**: Use `<iframe>` for YouTube/Vimeo with lazy loading, or build custom `VideoEmbed.tsx` component
-- **Add images to gallery**: Place in `public/` folder, use `next/image` with responsive sizing
-- **Update media kit stats**: Edit boilerplate numbers in `media-kit/page.tsx` (placeholder data for now)
-- **Test responsive design**: Check `sm:`, `md:`, `lg:` breakpoints on mobile/tablet/desktop
-- **Dark mode**: Adjust for professional context (may be minimal dark mode or removed entirely)
+- **Turbopack** enabled for 2x faster builds
+- **React Compiler** automatically optimizes component rendering
+- **TypeScript** strict mode enforced
+- **ESLint** flat config extending Next.js best practices
 
 ## Component Architecture
 
-**Core Components** (`components/` directory):
+**Directory Structure** (`components/` folder):
 
-- **Navbar.tsx** - Clean navigation (Home, Dance, Showcase, Collaborations, Media Kit, About, Contact)
-- **Hero.tsx** - Homepage hero with background dance video loop, headline, CTA button
-- **VideoEmbed.tsx** (`'use client'`) - Lazy-loaded YouTube/Vimeo embeds with play button overlay, responsive aspect ratio
-- **Gallery.tsx** (`'use client'`) - Lightbox/modal image gallery for Gunpla builds, Pokémon collection, dance photography
-- **PortfolioCard.tsx** - Clean card component for portfolio items (image, title, description, category badge)
-- **StatsGrid.tsx** - Media kit metrics display (followers, engagement rate, avg views—boilerplate values)
-- **CollaborationForm.tsx** (`'use client'`) - Contact/inquiry form for collaboration requests
-
-**Key Component Patterns**:
-
-**VideoEmbed Example**:
-```tsx
-<VideoEmbed
-  src="https://www.youtube.com/embed/VIDEO_ID"
-  title="Dance Choreography: [Song Name]"
-  aspectRatio="16:9"
-/>
-````
-
-Handles responsive sizing, lazy loading, and accessibility.
-
-**Gallery Example**:
-
-```tsx
-<Gallery
-  images={[{src: '/dance/photo1.jpg', alt: 'Dance performance'}, ...]}
-  category="dance"
-/>
+```
+components/
+├── sections/                    # Page-specific sections
+│   ├── home/                    # Home page sections
+│   │   ├── hero/              # Hero.tsx
+│   │   ├── featured-areas/     # FeaturedAreas.tsx
+│   │   └── blog-cards/         # BlogCards.tsx
+│   ├── about/                   # About page sections
+│   │   ├── hero/              # Hero.tsx
+│   │   ├── origin/            # Origin.tsx
+│   │   ├── services/          # Services.tsx
+│   │   ├── philosophy/        # Philosophy.tsx
+│   │   └── introvert/         # Introvert.tsx
+│   ├── blog/                    # Blog page sections (Featured, Posts, Related)
+│   ├── dance/                   # Dance page sections
+│   │   └── featured-video/    # FeaturedVideo.tsx
+│   ├── lesson-section/          # Lesson category section
+│   └── index.ts                 # Central export hub
+├── shared/                      # Reusable section components (used across pages)
+│   ├── cta/                    # CTA.tsx
+│   ├── faq/                    # FAQ.tsx
+│   ├── hero/                   # Hero.tsx (generic)
+│   ├── page-hero/              # PageHero.tsx
+│   ├── featured-blog/          # FeaturedBlog.tsx
+│   ├── carousel/               # Carousel.tsx
+│   ├── case-studies/           # CaseStudies.tsx
+│   ├── case-study/             # CaseStudy.tsx
+│   ├── collaboration/          # Collaboration.tsx
+│   ├── programs/               # Programs.tsx
+│   ├── services/               # Services.tsx
+│   ├── stats/                  # Stats.tsx
+│   ├── testimonials/           # Testimonials.tsx
+│   └── three-pillars/          # ThreePillars.tsx
+├── utilities/                   # Reusable utility components
+│   ├── badges/                 # Badge.tsx
+│   ├── cards/                  # TestimonialCard.tsx, CaseStudyCard.tsx, BlogCard.tsx, LessonCard.tsx, ServiceCard.tsx
+│   └── grids/                  # StatsGrid.tsx, CardGrid.tsx
+├── layout/                      # Layout wrappers
+├── navigation/                  # Navbar, navigation
+├── typography/                  # Text/heading components
+├── effects/                     # Animations, decorative effects
+├── forms/                       # Form components
+├── decorative/                  # SVG, decorative elements
+└── animations/                  # Reusable animation hooks
 ```
 
-Click-to-expand modal with navigation arrows, captions, category filtering.
+### Utility Components Pattern
+
+**Badge** (`components/utilities/badges/Badge.tsx`):
+
+- Reusable badge/label component
+- Props: `size` (sm/md/lg), `variant` (accent/primary/secondary), `children`
+- Styling: `.badge` classes from `badge.css`
+- Usage: Tags, labels, section headers
+
+**Cards** (`components/utilities/cards/`):
+
+- **TestimonialCard**: Displays quote, client name, role, company, optional result
+- **CaseStudyCard**: Displays case study with image, challenge, solution, results
+- **BlogCard**: Blog post preview card
+- **LessonCard**: Lesson/dance category card
+- **ServiceCard**: Service/offering card
+- All are stateless, accept data as props
+- Styled via dedicated CSS files (no inline styles, no Tailwind classes)
+
+**Grids** (`components/utilities/grids/`):
+
+- **StatsGrid**: Display statistics/metrics in a responsive grid
+- **CardGrid**: Generic grid layout for card components
+
+### Page/Feature-Scoped Section Components Pattern
+
+**Location**: `components/sections/{page-or-feature}/`
+
+Sections that belong to a specific page or feature:
+
+```tsx
+// ✅ CORRECT: Named exports in feature folder
+// Location: components/sections/blog/Featured.tsx
+export function Featured({ posts }) {
+  return (
+    <section className="blog-featured-section">
+      <h2 className="blog-featured-section-title">Featured</h2>
+      {/* content */}
+    </section>
+  );
+}
+
+// ✅ CORRECT: Multiple exports from same folder
+export function Posts({ posts }) { ... }
+export function Related({ posts }) { ... }
+
+// ✅ CORRECT: Exported from sections/index.ts with aliases
+// export { Featured as BlogFeatured, Posts as BlogPosts, Related as BlogRelated }
+
+// ❌ WRONG: Don't use "Section" suffix
+// export function BlogFeaturedSection() { }
+```
+
+### Shared Section Components Pattern
+
+**Location**: `components/shared/{component-name}/`
+
+Sections that are reused across multiple different pages/features:
+
+```tsx
+// ✅ CORRECT: Single export or default export
+// Location: components/shared/testimonials/Testimonials.tsx
+export function Testimonials({ data }) {
+  return <section className="testimonials-section">{/* content */}</section>;
+}
+
+// ✅ CORRECT: Can use default export
+// export default Testimonials
+```
+
+**Export convention**: Shared components use _named exports_. The `index.ts` file may re-export as default for convenience:
+
+```tsx
+// components/shared/carousel/index.ts
+export { Carousel } from "./Carousel"; // Named export
+
+// components/shared/cta/index.ts
+export { default as CTA } from "./CTA"; // Default export in component file
+```
+
+**Example: Carousel** (`components/shared/carousel/`):
+
+- Type: `'use client'` (manages carousel state)
+- Features: Auto-play (6s interval), dot indicators, keyboard navigation
+- Data: Passed as prop from parent (home page)
+- Used by: `Testimonials` section
+
+**Example: CaseStudies** (`components/shared/case-studies/`):
+
+- Type: Server component (can fetch from Sanity if needed)
+- Features: Responsive grid (1→2 cols), uses `CaseStudyCard`
+- Data: Passed as prop from parent
+- Styling: Dedicated CSS file
+
+### Page-Specific Section Components
+
+**About page sections** (`components/sections/about/`):
+
+- No "Section" suffix (e.g., `Hero`, `Origin`, `Services`, `Philosophy`, `Introvert`)
+- Each in its own folder with `index.ts`
+- Re-exported from `sections/index.ts` with aliases for backward compatibility
+
+**Home page sections** (`components/sections/home/`):
+
+- No "Section" suffix (e.g., `Hero`, `FeaturedAreas`, `BlogCards`)
+- Similar structure to about sections
+
+### Architecture Highlights
+
+**Separation of Concerns** (Critical):
+
+- ✅ **Page-specific sections** in `components/sections/{page}/` (e.g., `components/sections/about/`, `components/sections/dance/`)
+- ✅ **Feature-scoped sections** in `components/sections/{feature}/` (e.g., `components/sections/blog/` for blog pages)
+- ✅ **Truly reusable sections** in `components/shared/` (e.g., `components/shared/testimonials/`, `components/shared/cta/`)
+- ✅ **Utility components** (cards, badges, grids) in `components/utilities/`
+- ✅ **No naming redundancy** - Use `Featured`, `Posts`, `Related` instead of `FeaturedSection`, `PostsSection`
+
+**How to Determine Placement**:
+
+1. **Is this specific to one "page" or "feature"?** → Place in `components/sections/{page-or-feature}/`
+   - Example: Blog-specific sections → `components/sections/blog/`
+   - Example: Home page sections → `components/sections/home/`
+2. **Is this reusable across multiple different features?** → Place in `components/shared/{name}/`
+   - Example: Testimonials used on multiple pages → `components/shared/testimonials/`
+3. **Is this a small reusable card/badge/utility?** → Place in `components/utilities/{category}/{name}/`
+
+**Export Strategy**:
+
+- All sections are exported from `sections/index.ts` with descriptive aliases
+  - Page-specific: `export { Hero as AboutHero }`
+  - Feature-scoped: `export { Featured as BlogFeatured }`
+  - Shared: `export { Testimonials }`
+- This maintains consistency and makes imports predictable
+
+**Folder Organization Benefits**:
+
+- ✅ Clear separation: `sections/` for page/feature-specific, `shared/` for truly reusable
+- ✅ Easy to identify scope: is it used only for blog pages? → sections/blog
+- ✅ No ambiguous nesting: no `sections/shared/` confusion
+- ✅ Scalable: new pages/features go in `sections/{name}` automatically
 
 ## Styling System
 
-### Modern Minimalist Color Palette
+**CSS-First Architecture**: All component styling uses dedicated CSS files with BEM-inspired class names. No inline styles (except truly dynamic values). No Tailwind utility classes in component JSX.
 
-**Primary Colors**:
+### CSS File Organization
 
-- **`--slate-900: #0f172a`** - Deep charcoal for headings, main text (professional, clean)
-- **`--slate-700: #334155`** - Secondary text, borders (muted contrast)
-- **`--white: #ffffff`** - Clean backgrounds, cards
+CSS is organized into **10 consolidated files** by **architectural purpose**, not individual components:
 
-**Accent Colors** (choose one pair):
+```
+app/css/
+├── variables.css         # Design tokens (colors, spacing, fonts, transitions)
+├── base.css              # HTML resets and default element styling
+├── components.css        # Reusable UI patterns (buttons, badges, patterns)
+├── typography.css        # Text hierarchy system (headings, body, sizes)
+├── interactions.css      # Hover states, transitions, animations
+├── layout.css            # Grid systems, flexbox, responsive layouts
+├── cards.css             # All card types (testimonial, case-study, blog, lesson, service, etc.)
+├── sections.css          # Full-width section components (hero, carousel, CTA, etc.)
+├── pages.css             # Form and page-specific styles (contact, blog, dance, etc.)
+└── utilities.css         # Spacing, color utilities, responsive breakpoints, patterns
+```
 
-1. **Option A - Vibrant Professional**:
-   - `--accent-primary: #2563eb` (deep blue - trust, professionalism)
-   - `--accent-secondary: #f97316` (warm orange - energy, creativity)
-2. **Option B - Minimal Elegant**:
-   - `--accent-primary: #7c3aed` (deep purple - luxury, creativity)
-   - `--accent-secondary: #06b6d4` (cyan - modern, tech-forward)
-3. **Option C - Bold Modern**:
-   - `--accent-primary: #dc2626` (red - bold, confident)
-   - `--accent-secondary: #0891b2` (teal - cool, balance)
+Import structure in `app/globals.css`:
 
-**Backgrounds & Borders**:
+```css
+@layer components {
+  @import url("./css/components.css");
+  @import url("./css/typography.css");
+  @import url("./css/layout.css");
+  @import url("./css/cards.css");
+  @import url("./css/sections.css");
+  @import url("./css/pages.css");
+}
+@layer utilities {
+  @import url("./css/utilities.css");
+}
+@layer base {
+  @import url("./css/variables.css");
+  @import url("./css/base.css");
+}
+@layer interactive {
+  @import url("./css/interactions.css");
+}
+```
 
-- `--bg-light: #ffffff` - Cards, sections
-- `--bg-muted: #f8fafc` - Subtle backgrounds, hover states
-- `--border: #e2e8f0` - Clean lines, dividers
-- `--shadow-sm: 0 1px 2px rgba(0,0,0,0.05)` - Subtle elevation
+**Architectural Layers** (cascade order):
 
-**Recommended**: Option A (Blue + Orange) for professional appeal with energy for collaborations.
+1. `variables.css` — Design foundation
+2. `base.css` — HTML resets
+3. `components.css`, `typography.css` — Core patterns
+4. `layout.css`, `cards.css`, `sections.css`, `pages.css` — Structural layers
+5. `utilities.css` — Responsive helpers
+6. `interactions.css` — Hover/animation overrides
 
-### Design Principles
+### CSS Naming Convention (BEM-Inspired)
 
-- **Clean Typography**: Sans-serif only (no decorative fonts), generous whitespace, clear hierarchy
-- **Professional Cards**: Simple borders, subtle shadows, no glassmorphism (too playful)
-- **Video Focus**: Dark overlays for video thumbnails, play buttons on hover
-- **Image Gallery**: Full-bleed images, minimal captions, category badges with accent color
-- **CTA Buttons**: Solid accent color with hover state (slight scale/shadow increase)
+Use kebab-case class names matching component names:
 
-### CSS Custom Properties in `globals.css`
+```css
+/* Component name: TestimonialCard */
+.testimonial-card {
+} /* Base element */
+.testimonial-card-quote {
+} /* Child element */
+.testimonial-card-footer {
+} /* Another child */
+.testimonial-card:hover .testimonial-card-cta {
+} /* Hover state */
+
+/* Component name: Badge */
+.badge {
+} /* Base */
+.badge--sm {
+} /* Variant/modifier */
+.badge--accent {
+} /* Color variant */
+
+/* Component name: TestimonialSection */
+.testimonial-section {
+} /* Base section */
+.testimonial-section-header {
+} /* Header area */
+.testimonial-carousel {
+} /* Carousel track */
+.testimonial-carousel-dot {
+} /* Indicator dots */
+.testimonial-carousel-dot.active {
+} /* Active state */
+```
+
+### Color System (CSS Variables) — Zen Design System
+
+**The Kinetic Leader** uses a Japanese Zen-inspired, light-mode-only color system. All colors defined in `:root` in `app/css/variables.css`:
 
 ```css
 :root {
-  /* Colors */
-  --slate-900: #0f172a;
-  --slate-700: #334155;
-  --slate-500: #64748b;
-  --white: #ffffff;
-  --accent-primary: #2563eb; /* Change based on chosen palette */
-  --accent-secondary: #f97316; /* Change based on chosen palette */
+  /* Background - Rice Paper/Bone */
+  --bg-primary: #f8f8f5; /* Rice paper/bone background */
+  --bg-secondary: #fafaf8; /* Slightly warmer */
+  --bg-tertiary: #f0ede8; /* Warm sand accent */
 
-  /* Backgrounds */
-  --bg-light: #ffffff;
-  --bg-muted: #f8fafc;
+  /* Text - Sumie Ink (deep, commanding) */
+  --text-primary: #1a1a1a; /* Headings, primary text */
+  --text-secondary: #3d3d3d; /* Secondary text */
+  --text-tertiary: #7a7a7a; /* Very muted text */
 
-  /* Borders & Shadows */
-  --border: #e2e8f0;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  /* Borders - Hairline aesthetic */
+  --border-color: #d4cfc7; /* Subtle, warm */
+  --border-subtle: #e8e3db; /* Very faint */
 
-  /* Fonts */
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Kinetic Accents - Zen Palette (light mode only) */
+  --color-burnt-indigo: #4a3a5c; /* Deep, contemplative */
+  --color-burnt-indigo-light: #6b5a7a; /* Hover variant */
+  --color-muted-moss: #6b8e63; /* Natural, growth (PRIMARY GREEN) */
+  --color-moss-light: #8aa87a; /* Softened variant */
+
+  /* Status Colors */
+  --color-success: #5a8a6a; /* Moss-inspired */
+  --color-warning: #b89a5f; /* Warm amber */
+  --color-error: #8a5a5a; /* Muted burgundy */
+  --color-info: #6a8aaa; /* Soft indigo */
+
+  /* Accent Interactive */
+  --accent-primary: #6b8e63; /* Muted Moss (PRIMARY ACCENT) */
+  --accent-hover: #8aa87a; /* Moss light - hover state */
+  --accent-tertiary: #6a8aaa; /* Soft indigo - category color */
+  --btn-primary-text: #ffffff; /* Button text on accent */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --slate-900: #ffffff;
-    --slate-700: #e2e8f0;
-    --bg-light: #1e293b;
-    --bg-muted: #0f172a;
-    --border: #334155;
+/* NOTE: Light mode only - no dark mode support */
+```
+
+**Design Principles** (Zen Philosophy):
+
+- **Ikigai**: Purpose-driven, intentional design
+- **Kaizen**: Continuous refinement through subtlety
+- **Ma**: Generous whitespace, breathing room
+- **Wabi-Sabi**: Beauty in imperfection and simplicity
+
+### Example: CSS File Pattern
+
+**testimonial-card.css**:
+
+```css
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-light);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-card-quote {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  font-style: italic;
+}
+
+.testimonial-card-result {
+  background: var(--bg-muted);
+  padding: 1rem;
+  border-left: 3px solid var(--accent-primary);
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.testimonial-card-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.testimonial-card-client-name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+  .testimonial-card {
+    padding: 1.75rem;
   }
 }
 ```
 
-### Minimal Custom Classes
+### Brand Identity Details
 
-| Class              | Purpose                                    | Usage                         |
-| ------------------ | ------------------------------------------ | ----------------------------- |
-| `.card`            | Clean card with subtle shadow and border   | Portfolio items, stats blocks |
-| `.btn-primary`     | Solid accent color button with hover scale | CTAs, form submit             |
-| `.badge`           | Small accent color label                   | Category tags, skill badges   |
-| `.video-container` | Responsive 16:9 video embed wrapper        | YouTube/Vimeo embeds          |
+**Primary Accent Elements**:
 
-### Typography
+- **Muted Moss** (`#6b8e63`) - Growth, natural leadership, grounded presence
+- **Burnt Indigo** (`#4a3a5c`) - Depth, contemplation, sophistication
+- **Soft Indigo** (`#6a8aaa`) - Secondary category, alternative accent
 
-- **Headings**: System sans-serif (Segoe UI, Roboto), bold weight, `--slate-900` color
-- **Body**: System sans-serif, regular weight, `--slate-700` color, 16px base size
-- **Accents**: Use accent color for important text, badges, links, CTAs
-- **No decorative fonts** - Keep professional for brand credibility
+**Visual Language**:
+
+- Clean editorial typography (serif headlines, sans-serif body)
+- Professional cards with minimal borders and subtle shadows
+- Full-bleed images with soft overlays
+- Generous whitespace throughout (Ma principle)
+- Decorative elements: Enso circles, fluid shapes, blueprint grids (all muted, low opacity)
+- CTA buttons with muted moss accent, subtle hover scale transitions
 
 ## Page Structure & Responsive Design
 
-All pages follow this clean, minimalist template:
+All pages follow this clean, editorial template:
 
 ```tsx
 import Navbar from "@/components/Navbar";
 
 export default function PageName() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div style={{ backgroundColor: "var(--bg-primary)" }}>
       <Navbar />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         {/* Hero Section */}
         <div className="mb-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-4">
+          <h1
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4"
+            style={{ color: "var(--text-primary)" }}
+          >
             Page Title
           </h1>
-          <p className="text-lg text-slate-700 dark:text-slate-300 max-w-2xl">
+          <p
+            className="text-lg leading-relaxed max-w-2xl"
+            style={{ color: "var(--text-secondary)" }}
+          >
             Compelling subtitle or description
           </p>
         </div>
@@ -209,8 +474,8 @@ export default function PageName() {
 ```
 
 **Mobile-first breakpoints**: `sm:` (≥640px), `md:` (≥768px), `lg:` (≥1024px)
-**Common patterns**: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`, `text-3xl sm:text-4xl lg:text-5xl`, `p-6 sm:p-8 lg:p-10`
-**Key principle**: Generous whitespace, clean typography, minimal visual noise
+**Spacing system**: Uses CSS variables (`--spacing-sm`, `--spacing-md`, `--spacing-lg`, etc.) for consistent rhythm
+**Key principle**: Generous whitespace (Ma), editorial typography (Kaizen), minimal visual noise, light mode only
 
 ## Code Patterns & Conventions
 
@@ -248,49 +513,144 @@ export default function Gallery({ images, category }) {
 }
 ```
 
-### Typography & Styling
+### Styling Approach: CSS-First
 
-Use system sans-serif (auto-loaded via CSS), Tailwind color classes for consistency:
+**Current Standard**: All component styling uses consolidated CSS files (10 files total) with BEM-inspired naming. No inline styles except truly dynamic values. Minimal Tailwind utilities—only for text sizing/weight and responsive breakpoints.
 
-```tsx
-<h1 className="text-4xl font-bold text-slate-900 dark:text-white">Heading</h1>
-<p className="text-lg text-slate-700 dark:text-slate-300">Body text</p>
-<span className="px-3 py-1 bg-accent-primary text-white rounded text-sm font-medium badge">Tag</span>
-```
+**Never use `!important`** — if you need to override a style, the issue is CSS specificity or cascade layers. Revisit the CSS layer structure. `!important` breaks cascade predictability and makes debugging exponentially harder.
 
-**Never use decorative fonts** - Keep professional appeal for collaborations.
+**Pattern**:
 
-### Styling Preference Order
-
-1. **Tailwind utilities**: `text-slate-900`, `bg-white`, `p-6`, `rounded`, `border`
-2. **Custom CSS classes**: `.card`, `.btn-primary`, `.badge`, `.video-container`
-3. **Inline styles**: Only for truly dynamic values (rarely needed)
-
-### Animations & Transitions
-
-Minimal animations for professional feel—subtle hover effects and smooth transitions:
+Component JSX (`TestimonialCard.tsx`) — Props-driven, no external dependencies:
 
 ```tsx
-/* Smooth color/shadow transitions */
-<button className="transition-all duration-200 hover:shadow-md">CTA</button>
-
-/* Lazy load images with fade-in */
-<img className="opacity-0 animate-fadeIn" src="..." />
+export function TestimonialCard({ quote, clientName, role, company, result }) {
+  return (
+    <div className="testimonial-card">
+      <p className="testimonial-card-quote">{quote}</p>
+      {result && (
+        <div className="testimonial-card-result">
+          <p className="testimonial-card-result-text">Key Result: {result}</p>
+        </div>
+      )}
+      <div className="testimonial-card-footer">
+        <p className="testimonial-card-client-name">{clientName}</p>
+        <p className="testimonial-card-role">{role}</p>
+        <p className="testimonial-card-company">{company}</p>
+      </div>
+    </div>
+  );
+}
 ```
 
-Keep animations subtle and purposeful (no playful bounces).
+CSS in consolidated file (`app/css/cards.css`):
 
-### Dark Mode (Optional)
+```css
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-primary);
+  transition: all var(--transition-base);
+}
 
-If dark mode is desired, use Tailwind's `dark:` classes with CSS variable overrides:
+.testimonial-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(107, 142, 99, 0.08);
+}
+
+.testimonial-card-quote {
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  font-style: italic;
+}
+```
+
+**Advantages**:
+
+- Cleaner JSX (no className bloat)
+- Centralized styling (easier to maintain)
+- Predictable cascade using @layer structure
+- Components are fully reusable and portable
+- Easy to adjust responsive behavior globally
+- Better performance (smaller JS bundles)
+
+### Client vs Server Components
+
+Use `'use client'` **only** for interactive state management: carousels, form handling, modals, toggles. **Most components are server components** (fetching data, rendering static content).
+
+**Example Server Component** (CaseStudySection):
 
 ```tsx
-<div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-  Content adapts automatically
-</div>
+// No 'use client' - fetches from Sanity
+export async function CaseStudySection() {
+  const caseStudies = await getCaseStudies(true);
+
+  return (
+    <section className="case-study-section">
+      <div className="case-study-section-grid">
+        {caseStudies.map((study) => (
+          <CaseStudyCard key={study._id} {...study} />
+        ))}
+      </div>
+    </section>
+  );
+}
 ```
 
-For professional contexts, light mode may be preferred (easier to read portfolios/media kits).
+**Example Client Component** (TestimonialSection):
+
+```tsx
+"use client";
+import { useState, useEffect } from "react";
+
+export function TestimonialSection({ testimonials }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  return (
+    <section className="testimonial-section">
+      <div className="testimonial-carousel">
+        {testimonials.map((testimonial, idx) => (
+          <div key={idx} className={idx === currentIndex ? "active" : ""}>
+            <TestimonialCard {...testimonial} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+```
+
+### Typography & Text Classes
+
+For page headers and standard text, use **minimal Tailwind utilities** (size/weight only) + **CSS variables for colors**:
+
+```tsx
+<h2 className="text-5xl sm:text-6xl font-bold mb-6" style={{ color: "var(--text-primary)" }}>Title</h2>
+<p className="text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>Description</p>
+<span className="badge badge--accent">Tag</span>
+```
+
+**Keep it simple**:
+
+- ✅ Tailwind: `text-lg`, `font-bold`, `sm:text-xl`, `leading-relaxed`
+- ✅ CSS variables: `color: var(--text-primary)`, `background: var(--bg-secondary)`, `border-color: var(--border-color)`
+- ❌ Never: `.p-6 .flex .gap-4 inlined` — use a CSS class instead
+- ❌ Never: `!important` — fix specificity and cascade layers instead
+
+Complex styling? Use a CSS class in the appropriate consolidated file (cards.css, sections.css, pages.css, etc.).
 
 ## Configuration Files
 
@@ -298,16 +658,45 @@ For professional contexts, light mode may be preferred (easier to read portfolio
 - **`tsconfig.json`**: ES2017 target, bundler resolution, `paths: {"@/*": ["./"]}`
 - **`eslint.config.mjs`**: Flat config extending Next.js + TypeScript rules
 - **`postcss.config.mjs`**: Tailwind CSS v4 plugin
-- **`app/globals.css`**: Tailwind import, defines CSS variables (colors, fonts, shadows), custom classes (`.card`, `.btn-primary`, `.badge`, `.video-container`), minimal animations
+- **`app/globals.css`**: Tailwind import, defines CSS variables, imports 10 consolidated CSS files organized by @layer (base, components, utilities, interactive)
 
 ## Development Tips
 
 - **New page**: Create `app/newpage/page.tsx`, import Navbar, follow page structure template
-- **Video embeds**: Use `VideoEmbed.tsx` component for YouTube/Vimeo with lazy loading
-- **Image galleries**: Use `Gallery.tsx` (`'use client'`) for modal galleries with category filtering
-- **Update media kit**: Edit boilerplate stats in `media-kit/page.tsx` with real data when available
-- **Accent colors**: Choose one palette option (A, B, or C) and update CSS variables in `globals.css`
-- **Responsive testing**: Mobile-first; test `sm:`, `md:`, `lg:` breakpoints for all gallery/video sections
-- **Professional checks**: Verify no decorative fonts, minimal animations, clean whitespace, consistent brand colors
-- **Debugging**: Layout issues → inspect grid/gaps; type errors → `npm run lint`; video not loading → check embed URL</content>
+- **New utility component** (small reusable element like Badge):
+  1. Create `components/utilities/{category}/ComponentName.tsx` with props interface
+  2. Add styles to `app/css/components.css` using BEM naming (`.badge`, `.badge--sm`, etc.)
+  3. Export from `components/utilities/{category}/index.ts`
+  4. ✅ No new CSS file needed — styles go in components.css
+- **New shared section** (reusable across pages):
+  1. Create `components/shared/section-name/SectionName.tsx`
+  2. Create `index.ts` with named export
+  3. Add styles to `app/css/sections.css` using BEM naming (`.section-name`, `.section-name-header`, etc.)
+  4. Re-export from `components/sections/index.ts`
+  5. ✅ No new CSS file needed — styles go in sections.css
+- **New page-specific section**:
+  1. Create `components/sections/{page}/section-name/SectionName.tsx`
+  2. Create `index.ts` with export (no "Section" suffix in component name)
+  3. Add styles to `app/css/sections.css` using BEM naming
+  4. Import directly in page file
+  5. ✅ No new CSS file needed — styles go in sections.css
+- **New card component**:
+  1. Create `components/utilities/cards/YourCard.tsx`
+  2. Add styles to `app/css/cards.css` using BEM naming (`.your-card`, `.your-card-title`, etc.)
+  3. Export from `components/utilities/cards/index.ts`
+  4. ✅ No new CSS file needed — styles go in cards.css
+- **New form or page-specific styles**:
+  1. Add styles to `app/css/pages.css` using descriptive naming (`.contact-form`, `.blog-header`, etc.)
+  2. ✅ No new CSS file needed — styles go in pages.css
+- **Fetch from Sanity**: Use async server components with `getCaseStudies()`, `getTestimonials()`, etc. from `@/lib/sanity`
+- **Styling workflow**:
+  1. Identify which file your component belongs to (cards.css, sections.css, components.css, pages.css, etc.)
+  2. Add your BEM-named classes to that file
+  3. Use CSS variable references (`--accent-primary`, `--border-color`, etc.)
+  4. Test responsive behavior with media queries in utilities.css breakpoints
+- **Responsive design**: Build mobile-first with `@media (min-width: 640px)`, `@media (min-width: 768px)`, `@media (min-width: 1024px)` (consolidated in utilities.css)
+- **Test build**: `npm run build` validates TypeScript and CSS compilation (required before committing)
+- **Debug CSS**: Inspect classes in `.css` files in `app/css/` using browser DevTools
+- **Imports**: Use `@/components/sections`, `@/components/shared`, `@/components/utilities` with consistent paths
+- **Do NOT create new .css files** — use the consolidated structure (10 files only)</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md

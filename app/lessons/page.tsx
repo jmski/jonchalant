@@ -1,9 +1,8 @@
-import { CTASection } from "@/components/sections";
+import { CTA, LessonCategory, GenericHero } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
 import { getLessons } from "@/lib/sanity";
-import '@/app/css/lessons.css';
 
 import type { Metadata } from 'next';
 
@@ -48,73 +47,21 @@ export default async function Lessons() {
     // Falls back to MOCK_LESSONS if Sanity fails
   }
 
-  const LessonCategory = ({ level, pillarColor, lessons }: { level: string; pillarColor: string; lessons: any[] }) => (
-    <section className="mb-24">
-      <div className="mb-12 pb-6 border-b border-slate-200">
-        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-          {level === 'Beginner' && '🎯 Beginner: Build Your Foundation'}
-          {level === 'Intermediate' && '🚀 Intermediate: Deepen Your Command'}
-          {level === 'Advanced' && '👑 Advanced: Master Your Impact'}
-        </h2>
-        <p className="text-lg text-slate-700 max-w-3xl">
-          {level === 'Beginner' && 'Learn what presence actually is—and isn\'t. These fundamentals cover body awareness, vocal clarity, and the psychology of how people perceive authority. Master these first.'}
-          {level === 'Intermediate' && 'Apply the fundamentals in complex situations. Learn to read rooms, navigate power dynamics, manage your energy in high-stakes moments, and lead without being loud.'}
-          {level === 'Advanced' && 'Command rooms, shape culture, and amplify your influence across teams and organizations. Executive presence that scales and sustains.'}
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {lessons.map((lesson) => (
-          <div
-            key={lesson._id}
-            className="border border-slate-200 hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col"
-          >
-            <div className="h-32 bg-slate-100 flex items-center justify-center text-4xl">
-              {lesson.icon}
-            </div>
-            <div className="flex-1 p-8 flex flex-col">
-              <span className="text-xs uppercase tracking-widest font-medium text-slate-600 mb-3">
-                {lesson.pillar}
-              </span>
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                {lesson.title}
-              </h3>
-              <p className="text-slate-700 leading-relaxed flex-1 mb-4">
-                {lesson.description}
-              </p>
-              <div className="flex justify-between items-center pt-4 border-t border-slate-200">
-                <span className="text-xs text-slate-600">{lesson.duration}</span>
-                <a href="#" className="text-sm font-medium text-slate-900 hover:text-slate-600">
-                  Read →
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-
   return (
     <div className="lessons-main">
       <PageTransition animation="fade">
         {/* HERO */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <section>
-              <div className="lessons-hero-intro">
-                <span>Structured Learning</span>
-              </div>
-              <h1 className="lessons-hero-title">
-                Master Quiet Command: Leadership Lessons
-              </h1>
-              <p className="lessons-hero-description">
-                Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves.
-              </p>
+            <GenericHero
+              subheading="Structured Learning"
+              heading="Master Quiet Command: Leadership Lessons"
+              description="Bite-sized lessons and deep-dives on building Quiet Command. Learn frameworks, scripts, and techniques that help introverts leverage their natural strengths to lead without losing themselves."
+            >
               <p className="lessons-hero-meta">
                 Organized by skill level: Beginner → Intermediate → Advanced
               </p>
-            </section>
+            </GenericHero>
           </SectionContent>
         </SectionWrapper>
 
@@ -137,8 +84,7 @@ export default async function Lessons() {
         <SectionWrapper variant="primary">
           <SectionContent>
             <LessonCategory 
-              level="Beginner" 
-              pillarColor="text-primary"
+              level="Beginner"
               lessons={lessons.filter((l) => l.category === 'Beginner')} 
             />
           </SectionContent>
@@ -148,8 +94,7 @@ export default async function Lessons() {
         <SectionWrapper variant="secondary">
           <SectionContent>
             <LessonCategory 
-              level="Intermediate" 
-              pillarColor="text-primary"
+              level="Intermediate"
               lessons={lessons.filter((l) => l.category === 'Intermediate')} 
             />
           </SectionContent>
@@ -159,8 +104,7 @@ export default async function Lessons() {
         <SectionWrapper variant="primary">
           <SectionContent>
             <LessonCategory 
-              level="Advanced" 
-              pillarColor="text-primary"
+              level="Advanced"
               lessons={lessons.filter((l) => l.category === 'Advanced')} 
             />
           </SectionContent>
@@ -170,7 +114,7 @@ export default async function Lessons() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section>
-              <CTASection
+              <CTA
                 title="Learn Better with Coaching"
                 description="These lessons teach the frameworks. But transformation happens through application. Get personalized guidance, real-time feedback, and accountability through a coaching program."
                 buttonText="Find Your Program"

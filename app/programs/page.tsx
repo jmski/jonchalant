@@ -1,16 +1,9 @@
-import { CTASection, PageHeroSection } from "@/components/sections";
+import { CTA, PageHero, Programs as ProgramsSection, FocusAreas, SupplementalLearning } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { TextLink } from "@/components/typography";
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
 import { CourseSchema } from "@/lib/schema";
-import '@/app/css/programs.css';
-
-const ProgramCardsSection = dynamic(() => import('@/components/sections').then(mod => ({ default: mod.ProgramCardsSection })), {
-  loading: () => <div className="py-16 md:py-24">Loading programs...</div>,
-  ssr: true
-});
 
 import type { Metadata } from 'next';
 
@@ -99,7 +92,7 @@ export default async function Programs() {
         {/* HERO SECTION */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <PageHeroSection
+            <PageHero
               eyebrow="Coaching Programs"
               headline={['Transform Your', 'Executive Presence']}
               subheading="Building quiet command isn't complicated. It's methodical. Pick your format and commit to the process."
@@ -108,59 +101,7 @@ export default async function Programs() {
                 { label: 'Explore Programs', href: '#programs-section', variant: 'primary' },
                 { label: 'Start Audit (Free)', href: '#inquiry-form', variant: 'secondary' },
               ]}
-              rightColumn={
-                <div className="space-y-6">
-                  <style>{`
-                    .pillar-card {
-                      transition: all 300ms ease-in-out;
-                    }
-                    .pillar-card:hover {
-                      box-shadow: 0 8px 24px rgba(107, 142, 99, 0.12);
-                      transform: translateY(-4px);
-                    }
-                  `}</style>
-                  {focusItems.length > 0 ? (
-                    focusItems.map((pillar, idx) => (
-                      <div
-                        key={idx}
-                        className="pillar-card p-6 sm:p-8 rounded-sm border-l-4"
-                        style={{
-                          backgroundColor: 'var(--bg-secondary)',
-                          borderLeftColor: 'var(--accent-primary)',
-                          borderLeftWidth: '4px'
-                        }}
-                      >
-                        <div className="flex items-start gap-4">
-                          <div 
-                            className="text-4xl shrink-0"
-                            style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                          >
-                            {pillar.icon}
-                          </div>
-                          <div className="flex-1 space-y-2">
-                            <h2 
-                              className="font-headline font-bold text-lg"
-                              style={{ color: 'var(--text-primary)' }}
-                            >
-                              {pillar.title}
-                            </h2>
-                            <p 
-                              className="text-sm leading-relaxed"
-                              style={{ color: 'var(--text-tertiary)' }}
-                            >
-                              {pillar.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-8" style={{ color: 'var(--text-tertiary)' }}>
-                      Loading program focus areas...
-                    </div>
-                  )}
-                </div>
-              }
+              rightColumn={<FocusAreas items={focusItems} />}
             />
           </SectionContent>
         </SectionWrapper>
@@ -170,7 +111,7 @@ export default async function Programs() {
           <SectionContent>
             <section id="programs-section">
               {programCards.length > 0 ? (
-                <ProgramCardsSection programs={programCards} />
+                <ProgramsSection programs={programCards} />
               ) : (
                 <div className="py-12 text-center" style={{ color: 'var(--text-tertiary)' }}>
                   <p>Loading coaching programs...</p>
@@ -183,22 +124,7 @@ export default async function Programs() {
         {/* SUPPLEMENTAL LEARNING CTA */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <section>
-              <div className="text-center space-y-4">
-                <h3 className="text-2xl sm:text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                  Learn at Your Own Pace
-                </h3>
-                <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                  Before committing to a program, explore foundational lessons on quiet command, executive presence, and body-aware leadership.
-                </p>
-                <TextLink 
-                  href="/lessons" 
-                  className="programs-cta-button"
-                >
-                  Explore Leadership Lessons →
-                </TextLink>
-              </div>
-            </section>
+            <SupplementalLearning />
           </SectionContent>
         </SectionWrapper>
 
@@ -206,7 +132,7 @@ export default async function Programs() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section>
-              <CTASection
+              <CTA
                 title="Ready to Build Real Executive Presence?"
                 description="Don't guess which program is right. Schedule a free 30-minute Presence Audit where we'll assess where you are now, identify your biggest opportunities, and create a custom roadmap to get you there."
                 buttonText="Book Your Free Audit"

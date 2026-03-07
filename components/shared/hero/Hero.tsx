@@ -1,0 +1,43 @@
+import React from 'react';
+
+interface HeroProps {
+  heading: React.ReactNode;
+  subheading?: React.ReactNode;
+  description?: React.ReactNode;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+/**
+ * Hero component - Provides consistent hero styling for pages.
+ * Uses CSS variables for all colors and typography.
+ */
+export default function Hero({
+  heading,
+  subheading,
+  description,
+  className = '',
+  children,
+}: HeroProps) {
+  return (
+    <div className={`hero-section ${className}`}>
+      {subheading && (
+        <div className="hero-subheading">
+          {subheading}
+        </div>
+      )}
+      
+      <h1 className="hero-heading">
+        {heading}
+      </h1>
+
+      {description && (
+        <p className="hero-description">
+          {description}
+        </p>
+      )}
+
+      {children}
+    </div>
+  );
+}

@@ -25,32 +25,15 @@
 @layer components {
   @import "./css/components.css";
   @import "./css/typography.css";
-  @import "./css/typography-sizes.css";
-  @import "./css/text-utilities.css";
   @import "./css/layout.css";
-  @import "./css/grid-flex.css";
-  @import "./css/link.css";
-  @import "./css/section-wrapper.css";
-  @import "./css/section-content.css";
-  @import "./css/hero-section.css";
-  @import "./css/card.css";
-  @import "./css/grid.css";
-  @import "./css/text-link.css";
-  @import "./css/cta-section.css";
-  @import "./css/three-pillars.css";
-  @import "./css/spacing.css";
-  @import "./css/dance-card.css";
-  @import "./css/dance-filter.css";
-  @import "./css/form-inquiry.css";
-  @import "./css/featured-video-hero.css";
-  @import "./css/featured-blog.css";
-  @import "./css/program-cards.css";
+  @import "./css/cards.css";
+  @import "./css/sections.css";
+  @import "./css/pages.css";
 }
 
 /* Utility Classes & Patterns */
 @layer utilities {
   @import "./css/utilities.css";
-  @import "./css/responsive.css";
 }
 
 /* Interactive Effects (hover, focus, animations) */
