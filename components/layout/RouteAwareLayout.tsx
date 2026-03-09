@@ -1,33 +1,19 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useState, useCallback } from 'react';
-import { Sidebar } from '@/components/layout';
-import { SidebarToggle } from '@/components/layout';
-import { SidebarOverlay } from '@/components/layout';
-
 interface RouteAwareLayoutProps {
   children: React.ReactNode;
 }
 
+/**
+ * Route-Aware Layout
+ * Simple wrapper for main site pages
+ * Navigation is now handled by the top-level Navbar component
+ * Portal and Admin pages have their own sidebar layouts
+ */
 export default function RouteAwareLayout({ children }: RouteAwareLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = useCallback(() => setSidebarOpen((prev) => !prev), []);
-  const closeSidebar = useCallback(() => setSidebarOpen(false), []);
-
   return (
-    <>
-      <SidebarToggle onClick={toggleSidebar} />
-      <SidebarOverlay isOpen={sidebarOpen} onClick={closeSidebar} />
-
-      <div className="layout-with-sidebar">
-        <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
-
-        <main className="main-content" id="main-content">
-          {children}
-        </main>
-      </div>
-    </>
+    <main className="main-content" id="main-content">
+      {children}
+    </main>
   );
 }

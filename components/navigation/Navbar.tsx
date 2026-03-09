@@ -1,0 +1,297 @@
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { getContactInfo } from '@/lib/sanity';
+
+interface SocialLink {
+  label: string;
+  href: string;
+  icon: string;
+}
+
+interface NavSection {
+  title: string;
+  links: Array<{
+    label: string;
+    href: string;
+    subitems?: Array<{
+      label: string;
+      href: string;
+    }>;
+  }>;
+}
+
+const NAV_SECTIONS: NavSection[] = [
+  {
+    title: 'Essentials',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
+    ],
+  },
+  {
+    title: 'Coaching',
+    links: [
+      {
+        label: '',
+        href: '#',
+        subitems: [
+          { label: 'Programs', href: '/programs' },
+          { label: 'Lessons', href: '/lessons' },
+          { label: 'Blog', href: '/blog' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Media',
+    links: [
+      {
+        label: '',
+        href: '#',
+        subitems: [
+          { label: 'Dance', href: '/dance' },
+          { label: 'Media Kit', href: '/media-kit' },
+        ],
+      },
+    ],
+  },
+];
+
+// Flattened structure for desktop navbar
+const FLAT_NAV_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'Coaching', href: '#', dropdown: [
+    { label: 'Programs', href: '/programs' },
+    { label: 'Lessons', href: '/lessons' },
+    { label: 'Blog', href: '/blog' },
+  ]},
+  { label: 'About', href: '/about' },
+  { label: 'Media', href: '#', dropdown: [
+    { label: 'Dance', href: '/dance' },
+    { label: 'Media Kit', href: '/media-kit' },
+  ]},
+  { label: 'Contact', href: '/contact' },
+];
+
+export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
+  const dropdownTimers = useRef<Record<string, NodeJS.Timeout>>({});
+  const pathname = usePathname();
+
+  // Hydration safety
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setOpenDropdown(null);
+  }, [pathname]);
+
+  // Fetch social links
+  useEffect(() => {
+    const fetchSocialLinks = async () => {
+      try {
+        const contactInfo = await getContactInfo();
+        if (contactInfo?.contactMethods) {
+          // Filter only social media links and map to SocialLink
+          const socials = contactInfo.contactMethods
+            .filter((method) => ['Instagram', 'TikTok', 'YouTube'].includes(method.label))
+            .map((method) => ({
+              label: method.label,
+              href: method.href,
+              icon: method.label.toLowerCase().includes('instagram') ? 'ig' : method.label.toLowerCase().includes('youtube') ? 'yt' : 'tk',
+            }));
+          setSocialLinks(socials);
+        }
+      } catch (error) {
+        console.error('Error fetching social links:', error);
+      }
+    };
+
+    if (mounted) {
+      fetchSocialLinks();
+    }
+  }, [mounted]);
+
+  const handleDropdownEnter = (label: string) => {
+    // Clear any pending close timeout
+    if (dropdownTimers.current[label]) {
+      clearTimeout(dropdownTimers.current[label]);
+    }
+    setOpenDropdown(label);
+  };
+
+  const handleDropdownLeave = (label: string) => {
+    // Delay closing to allow moving to submenu
+    dropdownTimers.current[label] = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150);
+  };
+
+  const isActive = (href: string): boolean => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        {/* Logo/Brand */}
+        <Link href="/" className="navbar-brand">
+          JONCHALANT
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="navbar-menu">
+          {FLAT_NAV_LINKS.map((link) => (
+            <div
+              key={link.label}
+              className="navbar-item"
+              onMouseEnter={() => link.dropdown && handleDropdownEnter(link.label)}
+              onMouseLeave={() => link.dropdown && handleDropdownLeave(link.label)}
+            >
+              <Link
+                href={link.href}
+                className={`navbar-link ${isActive(link.href) ? 'active' : ''} ${link.dropdown ? 'has-dropdown' : ''}`}
+              >
+                {link.label}
+                {link.dropdown && <span className="navbar-dropdown-arrow">▼</span>}
+              </Link>
+
+              {/* Dropdown Menu */}
+              {link.dropdown && (
+                <div
+                  className={`navbar-dropdown ${openDropdown === link.label ? 'visible' : ''}`}
+                  onMouseEnter={() => handleDropdownEnter(link.label)}
+                  onMouseLeave={() => handleDropdownLeave(link.label)}
+                >
+                  {link.dropdown.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`navbar-dropdown-item ${isActive(item.href) ? 'active' : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Portal Login Button */}
+        <Link href="/login" className="navbar-login-btn">
+          Portal Login
+        </Link>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="navbar-mobile-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          {mobileMenuOpen ? '✕' : '☰'}
+        </button>
+
+        {/* Mobile Navigation - Sidebar-like with sections */}
+        {mobileMenuOpen && (
+          <div className="navbar-mobile-menu">
+            {/* Mobile Menu Header */}
+            <div className="navbar-mobile-header">
+              <h6>JONCHALANT</h6>
+            </div>
+
+            {/* Mobile Menu Sections */}
+            <nav className="navbar-mobile-sections">
+              {NAV_SECTIONS.map((section) => (
+                <div key={section.title} className="navbar-mobile-section">
+                  <div className="navbar-mobile-section-title">{section.title}</div>
+                  <ul className="navbar-mobile-links">
+                    {section.links.map((link) => (
+                      <li key={link.href}>
+                        {link.subitems ? (
+                          <>
+                            {link.label && (
+                              <span className="navbar-mobile-category">
+                                {link.label}
+                              </span>
+                            )}
+                            <ul className="navbar-mobile-subitems">
+                              {link.subitems.map((subitem) => (
+                                <li key={subitem.href}>
+                                  <Link
+                                    href={subitem.href}
+                                    className={`navbar-mobile-link ${isActive(subitem.href) ? 'active' : ''}`}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                  >
+                                    {subitem.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className={`navbar-mobile-link ${isActive(link.href) ? 'active' : ''}`}
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {link.label}
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </nav>
+
+            {/* Mobile Menu Footer */}
+            <div className="navbar-mobile-footer">
+              {/* Portal Login Button for Mobile */}
+              <Link
+                href="/login"
+                className="navbar-mobile-login-btn"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Portal Login
+              </Link>
+
+              {/* Social Links */}
+              {mounted && socialLinks.length > 0 && (
+                <div className="navbar-mobile-social-links">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="navbar-mobile-social-link"
+                      title={social.label}
+                      aria-label={social.label}
+                    >
+                      <span className="navbar-mobile-social-icon">{social.icon}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+}

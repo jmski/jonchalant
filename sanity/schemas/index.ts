@@ -16,6 +16,8 @@ import programsPageContent from './programsPageContent'
 import serviceCategory from './serviceCategory'
 import collaborationPackage from './collaborationPackage'
 import blogPost from './blogPost'
+import module from './module'
+import portalLesson from './portalLesson'
 
 export const schemaTypes = [
   portfolio,
@@ -36,4 +38,6 @@ export const schemaTypes = [
   serviceCategory,
   collaborationPackage,
   blogPost,
+  module,
+  portalLesson,
 ]

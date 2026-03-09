@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@supabase/supabase-js';
+import { AdminNavbar } from '@/components/navigation';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -22,15 +23,13 @@ interface Inquiry {
   created_at: string;
 }
 
-interface ModalInquiry extends Inquiry {}
-
 export default function AdminDashboard() {
   const router = useRouter();
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [user, setUser] = useState<{ email?: string } | null>(null);
-  const [modalInquiry, setModalInquiry] = useState<ModalInquiry | null>(null);
+  const [modalInquiry, setModalInquiry] = useState<Inquiry | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -94,142 +93,248 @@ export default function AdminDashboard() {
     router.push('/admin/login');
   };
 
-  const filteredInquiries = selectedStatus
-    ? inquiries.filter((inq) => inq.status === selectedStatus)
-    : inquiries;
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-slate-600">Loading...</div>
+      <div className="admin-dashboard admin-dashboard-loading">
+        <div className="admin-dashboard-loader">Loading...</div>
       </div>
     );
   }
 
+  // Calculate metrics
+  const totalInquiries = inquiries.length;
+  const newCount = inquiries.filter((inq) => inq.status === 'new').length;
+  const contactedCount = inquiries.filter((inq) => inq.status === 'contacted').length;
+  const interestedCount = inquiries.filter((inq) => inq.status === 'interested').length;
+  const closedCount = inquiries.filter((inq) => inq.status === 'closed').length;
+
+  // Calculate conversion rate
+  const conversionRate = totalInquiries > 0 ? Math.round((closedCount / totalInquiries) * 100) : 0;
+
+  // Get recent inquiries (last 5)
+  const recentInquiries = inquiries.slice(0, 5);
+
+  // Get inquiry types distribution
+  const typeCounts = inquiries.reduce(
+    (acc, inq) => {
+      acc[inq.inquiry_type] = (acc[inq.inquiry_type] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
+  // Get top 3 inquiry types
+  const topTypes = Object.entries(typeCounts)
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, 3);
+
+  const filteredInquiries = selectedStatus
+    ? inquiries.filter((inq) => inq.status === selectedStatus)
+    : inquiries;
+
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-slate-900">Inquiry Dashboard</h1>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-slate-600">{user?.email}</span>
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition"
-            >
-              Logout
-            </button>
+    <>
+      <AdminNavbar />
+      <div className="admin-dashboard-wrapper">
+      {/* Page Header */}
+      <div className="admin-dashboard-header">
+        <h1 className="admin-dashboard-title">Dashboard</h1>
+        <p className="admin-dashboard-subtitle">Manage and track coaching inquiries</p>
+      </div>
+
+      {/* Key Metrics Grid */}
+      <div className="admin-metrics-grid">
+        {/* Total Inquiries Card */}
+        <div className="admin-metric-card">
+          <div className="admin-metric-header">
+            <h3 className="admin-metric-label">Total Inquiries</h3>
+            <span className="admin-metric-icon">📊</span>
+          </div>
+          <div className="admin-metric-value">{totalInquiries}</div>
+          <p className="admin-metric-trend">All inquiries</p>
+        </div>
+
+        {/* New Inquiries Card */}
+        <div className="admin-metric-card admin-metric-card--new">
+          <div className="admin-metric-header">
+            <h3 className="admin-metric-label">New</h3>
+            <span className="admin-metric-icon">🆕</span>
+          </div>
+          <div className="admin-metric-value">{newCount}</div>
+          <p className="admin-metric-trend">Awaiting contact</p>
+        </div>
+
+        {/* Contacted Card */}
+        <div className="admin-metric-card admin-metric-card--contacted">
+          <div className="admin-metric-header">
+            <h3 className="admin-metric-label">Contacted</h3>
+            <span className="admin-metric-icon">📞</span>
+          </div>
+          <div className="admin-metric-value">{contactedCount}</div>
+          <p className="admin-metric-trend">In progress</p>
+        </div>
+
+        {/* Interested Card */}
+        <div className="admin-metric-card admin-metric-card--interested">
+          <div className="admin-metric-header">
+            <h3 className="admin-metric-label">Interested</h3>
+            <span className="admin-metric-icon">💚</span>
+          </div>
+          <div className="admin-metric-value">{interestedCount}</div>
+          <p className="admin-metric-trend">Qualified leads</p>
+        </div>
+
+        {/* Conversion Rate Card */}
+        <div className="admin-metric-card admin-metric-card--conversion">
+          <div className="admin-metric-header">
+            <h3 className="admin-metric-label">Conversion Rate</h3>
+            <span className="admin-metric-icon">🎯</span>
+          </div>
+          <div className="admin-metric-value">{conversionRate}%</div>
+          <p className="admin-metric-trend">{closedCount} closed</p>
+        </div>
+
+        {/* Response Rate Card */}
+        <div className="admin-metric-card admin-metric-card--response">
+          <div className="admin-metric-header">
+            <h3 className="admin-metric-label">Response Rate</h3>
+            <span className="admin-metric-icon">✅</span>
+          </div>
+          <div className="admin-metric-value">
+            {totalInquiries > 0 ? Math.round(((totalInquiries - newCount) / totalInquiries) * 100) : 0}%
+          </div>
+          <p className="admin-metric-trend">{totalInquiries - newCount} responded</p>
+        </div>
+      </div>
+
+      {/* Inquiry Types & Recent Activity */}
+      <div className="admin-dashboard-grid-2">
+        {/* Top Inquiry Types */}
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <h2 className="admin-card-title">Top Inquiry Types</h2>
+          </div>
+          <div className="admin-card-content">
+            {topTypes.length > 0 ? (
+              <div className="admin-type-list">
+                {topTypes.map(([type, count]) => (
+                  <div key={type} className="admin-type-item">
+                    <span className="admin-type-name">{type}</span>
+                    <div className="admin-type-bar-container">
+                      <div
+                        className="admin-type-bar"
+                        style={{
+                          width: `${(count / Math.max(...topTypes.map(([, c]) => c))) * 100}%`,
+                        }}
+                      />
+                    </div>
+                    <span className="admin-type-count">{count}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="admin-empty-state">No inquiry types yet</p>
+            )}
+          </div>
+        </div>
+
+        {/* Status Breakdown */}
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <h2 className="admin-card-title">Status Breakdown</h2>
+          </div>
+          <div className="admin-card-content">
+            <div className="admin-status-breakdown">
+              <div className="admin-status-item">
+                <div className="admin-status-label">
+                  <span className="admin-status-dot admin-status-dot--new" />
+                  <span>New</span>
+                </div>
+                <span className="admin-status-percentage">{newCount}</span>
+              </div>
+              <div className="admin-status-item">
+                <div className="admin-status-label">
+                  <span className="admin-status-dot admin-status-dot--contacted" />
+                  <span>Contacted</span>
+                </div>
+                <span className="admin-status-percentage">{contactedCount}</span>
+              </div>
+              <div className="admin-status-item">
+                <div className="admin-status-label">
+                  <span className="admin-status-dot admin-status-dot--interested" />
+                  <span>Interested</span>
+                </div>
+                <span className="admin-status-percentage">{interestedCount}</span>
+              </div>
+              <div className="admin-status-item">
+                <div className="admin-status-label">
+                  <span className="admin-status-dot admin-status-dot--closed" />
+                  <span>Closed</span>
+                </div>
+                <span className="admin-status-percentage">{closedCount}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white p-4 rounded-lg border border-slate-200">
-            <p className="text-sm text-slate-600">Total Inquiries</p>
-            <p className="text-2xl font-bold text-slate-900">{inquiries.length}</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg border border-slate-200">
-            <p className="text-sm text-slate-600">New</p>
-            <p className="text-2xl font-bold text-blue-600">
-              {inquiries.filter((inq) => inq.status === 'new').length}
-            </p>
-          </div>
-          <div className="bg-white p-4 rounded-lg border border-slate-200">
-            <p className="text-sm text-slate-600">Contacted</p>
-            <p className="text-2xl font-bold text-yellow-600">
-              {inquiries.filter((inq) => inq.status === 'contacted').length}
-            </p>
-          </div>
-          <div className="bg-white p-4 rounded-lg border border-slate-200">
-            <p className="text-sm text-slate-600">Interested</p>
-            <p className="text-2xl font-bold text-green-600">
-              {inquiries.filter((inq) => inq.status === 'interested').length}
-            </p>
-          </div>
+      {/* Inquiries List Section */}
+      <div className="admin-card">
+        <div className="admin-card-header">
+          <h2 className="admin-card-title">All Inquiries</h2>
+          <p className="admin-card-subtitle">Showing {filteredInquiries.length} inquiries</p>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white p-4 rounded-lg border border-slate-200 mb-6">
-          <div className="flex gap-2 flex-wrap">
+        {/* Status Filters */}
+        <div className="admin-card-filters">
+          <button
+            onClick={() => setSelectedStatus(null)}
+            className={`admin-filter-btn ${selectedStatus === null ? 'admin-filter-btn--active' : ''}`}
+          >
+            All ({totalInquiries})
+          </button>
+          {['new', 'contacted', 'interested', 'closed'].map((status) => (
             <button
-              onClick={() => setSelectedStatus(null)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                selectedStatus === null
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              key={status}
+              onClick={() => setSelectedStatus(status)}
+              className={`admin-filter-btn ${selectedStatus === status ? 'admin-filter-btn--active' : ''}`}
             >
-              All ({inquiries.length})
+              {status.charAt(0).toUpperCase() + status.slice(1)} (
+              {inquiries.filter((inq) => inq.status === status).length})
             </button>
-            {['new', 'contacted', 'interested', 'closed'].map((status) => (
-              <button
-                key={status}
-                onClick={() => setSelectedStatus(status)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                  selectedStatus === status
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                }`}
-              >
-                {status.charAt(0).toUpperCase() + status.slice(1)} (
-                {inquiries.filter((inq) => inq.status === status).length})
-              </button>
-            ))}
-          </div>
+          ))}
         </div>
 
-        {/* Table */}
-        <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
+        {/* Inquiries Table */}
+        <div className="admin-card-content">
           {filteredInquiries.length === 0 ? (
-            <div className="p-8 text-center text-slate-600">
-              No inquiries found.
-            </div>
+            <div className="admin-empty-state">No inquiries found.</div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-slate-50 border-b border-slate-200">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900">
-                      Name
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900">
-                      Email
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900">
-                      Type
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900">
-                      Date
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900">
-                      Actions
-                    </th>
+            <div className="admin-table-wrapper">
+              <table className="admin-table">
+                <thead>
+                  <tr className="admin-table-header-row">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody>
                   {filteredInquiries.map((inquiry) => (
-                    <tr key={inquiry.id} className="hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 text-sm text-slate-900 font-medium">
-                        {inquiry.name}
+                    <tr key={inquiry.id} className="admin-table-row">
+                      <td className="admin-table-cell-name">{inquiry.name}</td>
+                      <td className="admin-table-cell-email">{inquiry.email}</td>
+                      <td className="admin-table-cell-type">
+                        <span className="admin-inquiry-type-badge">{inquiry.inquiry_type}</span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-600">{inquiry.email}</td>
-                      <td className="px-6 py-4 text-sm">
-                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
-                          {inquiry.inquiry_type}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-sm">
+                      <td className="admin-table-cell-status">
                         <select
                           value={inquiry.status}
                           onChange={(e) => updateStatus(inquiry.id, e.target.value)}
-                          className="px-3 py-1 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="admin-status-select"
                         >
                           <option value="new">New</option>
                           <option value="contacted">Contacted</option>
@@ -237,19 +342,19 @@ export default function AdminDashboard() {
                           <option value="closed">Closed</option>
                         </select>
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-600">
+                      <td className="admin-table-cell-date">
                         {new Date(inquiry.created_at).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 text-sm space-x-2">
+                      <td className="admin-table-cell-actions">
                         <button
                           onClick={() => setModalInquiry(inquiry)}
-                          className="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition text-xs font-medium"
+                          className="admin-btn-view"
                         >
                           View
                         </button>
                         <button
                           onClick={() => deleteInquiry(inquiry.id)}
-                          className="px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition text-xs font-medium"
+                          className="admin-btn-delete"
                         >
                           Delete
                         </button>
@@ -263,64 +368,57 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Detail Modal */}
       {modalInquiry && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-96 overflow-y-auto">
-            <div className="p-6 border-b border-slate-200 sticky top-0 bg-white flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-900">
-                Inquiry from {modalInquiry.name}
-              </h2>
+        <div className="admin-modal-overlay" onClick={() => setModalInquiry(null)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="admin-modal-header">
+              <h2 className="admin-modal-title">Inquiry from {modalInquiry.name}</h2>
               <button
                 onClick={() => setModalInquiry(null)}
-                className="text-slate-400 hover:text-slate-600 text-2xl font-bold"
+                className="admin-modal-close"
               >
                 ✕
               </button>
             </div>
-            <div className="p-6 space-y-4">
-              <div>
-                <p className="text-xs font-semibold text-slate-600 uppercase">Email</p>
-                <p className="text-slate-900">{modalInquiry.email}</p>
+            <div className="admin-modal-content">
+              <div className="admin-modal-field">
+                <p className="admin-modal-label">Email</p>
+                <p className="admin-modal-value">{modalInquiry.email}</p>
               </div>
               {modalInquiry.phone && (
-                <div>
-                  <p className="text-xs font-semibold text-slate-600 uppercase">Phone</p>
-                  <p className="text-slate-900">{modalInquiry.phone}</p>
+                <div className="admin-modal-field">
+                  <p className="admin-modal-label">Phone</p>
+                  <p className="admin-modal-value">{modalInquiry.phone}</p>
                 </div>
               )}
               {modalInquiry.company && (
-                <div>
-                  <p className="text-xs font-semibold text-slate-600 uppercase">Company</p>
-                  <p className="text-slate-900">{modalInquiry.company}</p>
+                <div className="admin-modal-field">
+                  <p className="admin-modal-label">Company</p>
+                  <p className="admin-modal-value">{modalInquiry.company}</p>
                 </div>
               )}
               {modalInquiry.budget && (
-                <div>
-                  <p className="text-xs font-semibold text-slate-600 uppercase">Budget</p>
-                  <p className="text-slate-900">{modalInquiry.budget}</p>
+                <div className="admin-modal-field">
+                  <p className="admin-modal-label">Budget</p>
+                  <p className="admin-modal-value">{modalInquiry.budget}</p>
                 </div>
               )}
               {modalInquiry.timeline && (
-                <div>
-                  <p className="text-xs font-semibold text-slate-600 uppercase">Timeline</p>
-                  <p className="text-slate-900">{modalInquiry.timeline}</p>
+                <div className="admin-modal-field">
+                  <p className="admin-modal-label">Timeline</p>
+                  <p className="admin-modal-value">{modalInquiry.timeline}</p>
                 </div>
               )}
-              <div>
-                <p className="text-xs font-semibold text-slate-600 uppercase">Message</p>
-                <p className="text-slate-900 whitespace-pre-wrap">{modalInquiry.message}</p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-600 uppercase">Submitted</p>
-                <p className="text-slate-900">
-                  {new Date(modalInquiry.created_at).toLocaleString()}
-                </p>
+              <div className="admin-modal-field">
+                <p className="admin-modal-label">Message</p>
+                <p className="admin-modal-value admin-modal-message">{modalInquiry.message}</p>
               </div>
             </div>
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
