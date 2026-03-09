@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
+import { Navbar } from "@/components/navigation";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
 import { AuthProvider } from "@/lib/auth-context";
 
@@ -103,7 +104,10 @@ export default function RootLayout({
             Skip to main content
           </a>
           
-          {/* Route-Aware Layout: Home shows ToC, content pages show sidebar */}
+          {/* Main Navigation Navbar */}
+          <Navbar />
+          
+          {/* Route-Aware Layout: Renders main pages and portal/admin with their own sidebars */}
           <RouteAwareLayout>
             {children}
           </RouteAwareLayout>
