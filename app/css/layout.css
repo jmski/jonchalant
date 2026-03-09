@@ -1467,6 +1467,106 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
+   ADMIN NAVBAR - Admin Page Navigation
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.admin-navbar {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+}
+
+.admin-navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 50px;
+  gap: 2rem;
+}
+
+.admin-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-navbar-link {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.admin-navbar-link:hover {
+  color: var(--accent-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.admin-navbar-link.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.admin-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.admin-navbar-logout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1rem;
+  height: 2rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: 0.375rem;
+  font-family: var(--font-sans);
+}
+
+.admin-navbar-logout:hover:not(:disabled) {
+  background-color: var(--bg-tertiary);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.admin-navbar-logout:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.admin-navbar-logout:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
    PORTAL SIDEBAR - Portal-Specific Navigation
    ════════════════════════════════════════════════════════════════════════════ */
 

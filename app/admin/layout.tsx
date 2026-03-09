@@ -4,7 +4,7 @@ interface AdminLayoutProps {
 
 /**
  * Admin Layout
- * Simple layout wrapper for admin pages
+ * Wrapper for admin pages
  */
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
