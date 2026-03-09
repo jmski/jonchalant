@@ -6,21 +6,22 @@
    ============================================================================ */
 
 /* ========== LAYOUT WITH SIDEBAR ========== */
+/* Admin and Portal pages: 60% main content, 40% sidebar */
 .layout-with-sidebar {
   display: flex;
   flex-direction: row-reverse;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--bg-primary);
   overflow: hidden;
 }
 
 .sidebar {
-  flex: 0 0 250px;
+  flex: 0 0 40%;
   flex-shrink: 0;
   position: sticky;
-  top: 0;
-  height: 100%;
-  max-height: 100vh;
+  top: 70px;
+  height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
   padding: 0 2rem 2rem 2rem;
   background-color: var(--bg-secondary);
   border-left: 1px solid var(--border-color);
@@ -197,6 +198,7 @@
 
 .main-content {
   flex: 1;
+  width: 100%;
   padding: 3rem;
   padding-top: calc(70px + 3rem);
   overflow-y: auto;
@@ -204,6 +206,25 @@
   /* Hide scrollbar while preserving scroll functionality */
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+@media (min-width: 640px) {
+  .main-content {
+    padding: 3rem;
+    padding-top: calc(70px + 3rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    padding: 4rem;
+    padding-top: calc(70px + 4rem);
+  }
+}
+
+/* Admin/Portal pages use flex: 0 0 60% for main content */
+.layout-with-sidebar .main-content {
+  flex: 0 0 60%;
 }
 
 .main-content::-webkit-scrollbar {
@@ -258,19 +279,6 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 30;
-}
-
-/* ========== CONTAINER ========== */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-.container-sm {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 var(--gutter);
 }
 
 /* ========== SINGLE COLUMN LAYOUT ========== */
@@ -376,10 +384,6 @@
 /* ========== MOBILE RESPONSIVE BREAKPOINTS ========== */
 /* Tablet: 768px and up */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 1.5rem;
-  }
-
   .two-column-offset {
     grid-template-columns: 1fr;
     gap: var(--element-gap);
@@ -405,14 +409,6 @@
 
 /* Mobile: 640px and down */
 @media (max-width: 640px) {
-  .container {
-    padding: 0 1rem;
-  }
-
-  .container-sm {
-    padding: 0 1rem;
-  }
-
   .three-column {
     grid-template-columns: 1fr;
   }
@@ -435,7 +431,7 @@
   width: calc(100% + 4rem);
   margin-left: -2rem;
   margin-right: -2rem;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   background-color: var(--bg-primary);
   transition: background-color var(--transition-base);
 }
@@ -445,7 +441,7 @@
     width: calc(100% + 6rem);
     margin-left: -3rem;
     margin-right: -3rem;
-    padding: 6rem 3rem;
+    padding: 4rem 3rem;
   }
 }
 
@@ -454,7 +450,7 @@
     width: calc(100% + 8rem);
     margin-left: -4rem;
     margin-right: -4rem;
-    padding: 6rem 4rem;
+    padding: 4.5rem 4rem;
   }
 }
 
@@ -503,8 +499,7 @@
 */
 
 .section-content {
-  max-width: 72rem;
-  margin: 0 auto;
+  width: 100%;
   padding: 0 1rem;
 }
 
@@ -1476,7 +1471,7 @@
    ════════════════════════════════════════════════════════════════════════════ */
 
 .portal-sidebar {
-  flex: 0 0 250px;
+  flex: 0 0 40%;
   flex-shrink: 0;
   position: sticky;
   top: 70px;
@@ -1633,7 +1628,7 @@
    ════════════════════════════════════════════════════════════════════════════ */
 
 .admin-sidebar {
-  flex: 0 0 250px;
+  flex: 0 0 40%;
   flex-shrink: 0;
   position: sticky;
   top: 70px;
