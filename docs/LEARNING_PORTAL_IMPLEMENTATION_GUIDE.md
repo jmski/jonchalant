@@ -3,6 +3,7 @@
 ## Overview
 
 You now have a **fully architected** Learning Portal system with:
+
 - ✅ Sanity schemas (Module & PortalLesson)
 - ✅ Supabase auth & progress tracking
 - ✅ Protected routes (/login, /portal, /portal/[slug])
@@ -12,6 +13,7 @@ You now have a **fully architected** Learning Portal system with:
 ## Files Created/Updated
 
 ### Sanity
+
 - `sanity/schemas/module.ts` - Module curriculum container
 - `sanity/schemas/portalLesson.ts` - Individual lesson with video
 - `sanity/schemas/index.ts` - Updated exports
@@ -19,6 +21,7 @@ You now have a **fully architected** Learning Portal system with:
 - `docs/LEARNING_PORTAL_SANITY_SETUP.md` - Setup instructions
 
 ### Supabase & Auth
+
 - `lib/supabase.ts` - Supabase client initialization
 - `lib/auth-context.tsx` - Auth provider & useAuth hook
 - `lib/portal-progress.ts` - Progress tracking helpers
@@ -26,6 +29,7 @@ You now have a **fully architected** Learning Portal system with:
 - `docs/LEARNING_PORTAL_SUPABASE_SETUP.md` - Setup instructions
 
 ### Pages & Components
+
 - `app/login/page.tsx` - Login/signup page
 - `app/portal/page.tsx` - Dashboard (module list + progress)
 - `app/portal/[slug]/page.tsx` - Video player + notes
@@ -34,12 +38,14 @@ You now have a **fully architected** Learning Portal system with:
 ## Implementation Checklist
 
 ### Step 1: Sanity Setup (10 minutes)
+
 - [ ] Go to [sanity.io/manage](https://sanity.io/manage)
 - [ ] Create dataset named `learning-portal`
 - [ ] Schemas are already configured in your code
 - [ ] Follow: `docs/LEARNING_PORTAL_SANITY_SETUP.md` for deployment
 
 ### Step 2: Supabase Setup (15 minutes)
+
 - [ ] Create or use existing Supabase project
 - [ ] Get API URL and `anon` key from Settings → API
 - [ ] Update `.env.local` with Supabase credentials:
@@ -55,10 +61,12 @@ You now have a **fully architected** Learning Portal system with:
 - [ ] Enable Email/Password auth in Supabase Dashboard
 
 ### Step 3: App Setup (5 minutes)
+
 - [ ] Add AuthProvider to `app/layout.tsx`:
+
   ```tsx
-  import { AuthProvider } from '@/lib/auth-context'
-  
+  import { AuthProvider } from "@/lib/auth-context";
+
   export default function RootLayout({ children }) {
     return (
       <html>
@@ -66,11 +74,12 @@ You now have a **fully architected** Learning Portal system with:
           <AuthProvider>{children}</AuthProvider>
         </body>
       </html>
-    )
+    );
   }
   ```
 
 ### Step 4: Sanity Data Integration (10 minutes)
+
 - [ ] Update your Sanity client to support switching datasets
 - [ ] In `lib/sanity.ts`, add support for `NEXT_PUBLIC_SANITY_PORTAL_DATASET`
 - [ ] Update `/portal/page.tsx` and `/portal/[slug]/page.tsx` to query learning-portal dataset
@@ -79,13 +88,14 @@ You now have a **fully architected** Learning Portal system with:
   // Create a separate Sanity client for portal
   const portalSanity = createClient({
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.NEXT_PUBLIC_SANITY_PORTAL_DATASET || 'learning-portal',
-    apiVersion: '2024-01-01',
+    dataset: process.env.NEXT_PUBLIC_SANITY_PORTAL_DATASET || "learning-portal",
+    apiVersion: "2024-01-01",
     useCdn: false,
-  })
+  });
   ```
 
 ### Step 5: Test & Go Live (20 minutes)
+
 - [ ] Populate sample data in Sanity (at least 1 Module + 3 Lessons)
 - [ ] Test login flow: `/login` → create account → verify email
 - [ ] Test dashboard: See modules, lessons, progress bars
@@ -96,6 +106,7 @@ You now have a **fully architected** Learning Portal system with:
 ## Key Architecture Decisions
 
 ### Auth Flow
+
 ```
 1. User visits /portal
    ↓
@@ -115,6 +126,7 @@ You now have a **fully architected** Learning Portal system with:
 ```
 
 ### Progress Tracking
+
 ```
 1. User opens lesson page
    ↓
@@ -134,6 +146,7 @@ You now have a **fully architected** Learning Portal system with:
 ```
 
 ### Styling Approach
+
 - **Monospace fonts**: IBM Plex Mono (can use system fallback)
 - **Layout**: High-contrast black borders (1px solid #000)
 - **Accent**: Orange (#FF5F1F) for active elements & CTAs
@@ -157,6 +170,7 @@ SUPABASE_SERVICE_ROLE_KEY=eyJxxx...  # Server-side only
 ## Database & API Reference
 
 ### Supabase Table: `lesson_progress`
+
 ```sql
 id              UUID (primary key)
 user_id         UUID (FK to auth.users)
@@ -170,6 +184,7 @@ updated_at      TIMESTAMP
 ```
 
 ### Supabase RPC: `mark_lesson_complete()`
+
 ```sql
 CALL mark_lesson_complete(
   p_user_id: UUID,
@@ -192,6 +207,7 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 ## Testing Scenarios
 
 ### Test 1: First-Time User
+
 1. Go to `/login`
 2. Click "Sign Up"
 3. Enter email & password
@@ -203,6 +219,7 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 **Expected**: User is authenticated, dashboard loads, no progress yet
 
 ### Test 2: Complete a Lesson
+
 1. Click on a lesson in module
 2. Video should load from YouTube
 3. Scroll down, see "Technical Description" & "Social Logic"
@@ -215,6 +232,7 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 **Expected**: Checkmark persists, progress saved to Supabase
 
 ### Test 3: Session Persistence
+
 1. Complete a lesson (checkmark visible)
 2. Refresh page (F5/Cmd+R)
 3. Progress should still show as completed
@@ -222,6 +240,7 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 **Expected**: Progress data survives page refresh from Supabase DB
 
 ### Test 4: Auth Protection
+
 1. Logout from dashboard
 2. Try to visit `/portal` directly
 3. Should redirect to `/login`
@@ -233,6 +252,7 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 ## Troubleshooting
 
 ### "Session not found after login"
+
 - ✓ Verify NEXT_PUBLIC_SUPABASE_URL is correct
 - ✓ Verify NEXT_PUBLIC_SUPABASE_ANON_KEY is correct
 - ✓ Check Supabase email auth is enabled
@@ -240,12 +260,14 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 - ✓ Check browser cookies are not blocked
 
 ### "Can't see lessons in dashboard"
+
 - ✓ Verify Sanity learning-portal dataset has Module & Lesson documents
 - ✓ Verify your query in `/portal/page.tsx` targets the right dataset
 - ✓ Run Sanity vision query: `*[_type == "module"]`
 - ✓ Check portalLesson documents are referenced in module.lessons array
 
 ### "Progress doesn't save"
+
 - ✓ Check lesson_progress table exists in Supabase
 - ✓ Check RLS policy allows INSERT for authenticated users
 - ✓ Verify user_id matches authenticated user
@@ -253,6 +275,7 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 - ✓ Check Supabase browser console for errors
 
 ### "Video won't play"
+
 - ✓ Verify videoId is correct YouTube video ID (11 chars)
 - ✓ Video URL format should be `https://www.youtube.com/watch?v={videoId}`
 - ✓ Check video is publicly accessible
@@ -271,7 +294,9 @@ No inline styles or Tailwind classes in portal components. All styling is CSS-fi
 ## Support & Debugging
 
 ### GitHub Copilot Instructions
+
 Your project includes `.github/copilot-instructions.md` which documents:
+
 - Project architecture (Next.js 16, React 19, Sanity, CSS-first styling)
 - Component patterns
 - Styling system
@@ -280,6 +305,7 @@ Your project includes `.github/copilot-instructions.md` which documents:
 Refer to this for consistency when adding features.
 
 ### Monorepo Structure
+
 ```
 /jonchalant/          # Main portfolio site
 ├── /app               # Next.js app (pages)
@@ -294,6 +320,7 @@ Refer to this for consistency when adding features.
 ## Questions?
 
 Review these docs in order:
+
 1. `docs/LEARNING_PORTAL_SANITY_SETUP.md` - Sanity configuration
 2. `docs/LEARNING_PORTAL_SUPABASE_SETUP.md` - Supabase database
 3. `.github/copilot-instructions.md` - Project conventions

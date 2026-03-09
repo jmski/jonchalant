@@ -73,6 +73,7 @@
 ## Data Flow Diagram
 
 ### 1. Login Flow
+
 ```
 User visits /portal
     │
@@ -103,6 +104,7 @@ User visits /portal
 ```
 
 ### 2. Dashboard (Module List) Flow
+
 ```
 /portal/page.tsx (Server Component)
     │
@@ -135,6 +137,7 @@ User visits /portal
 ```
 
 ### 3. Video Player Flow
+
 ```
 /portal/[slug]/page.tsx (Client Component)
     │
@@ -350,6 +353,7 @@ SUPABASE_SERVICE_ROLE_KEY=eyJ... (server-side only)
 ## Request/Response Flow Example
 
 ### User completes lesson
+
 ```
 POST /api/lesson/complete
 {

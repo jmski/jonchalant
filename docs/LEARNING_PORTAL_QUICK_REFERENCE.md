@@ -5,19 +5,19 @@
 ### 1. Add to `app/layout.tsx` (Required for Auth to Work)
 
 ```tsx
-import type { Metadata } from 'next'
-import { AuthProvider } from '@/lib/auth-context'
-import '@/app/globals.css'
+import type { Metadata } from "next";
+import { AuthProvider } from "@/lib/auth-context";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
-  title: 'The Kinetic Leader',
-  description: 'Technical Manual for Social Fluency',
-}
+  title: "The Kinetic Leader",
+  description: "Technical Manual for Social Fluency",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -26,7 +26,7 @@ export default function RootLayout({
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -51,27 +51,30 @@ NEXT_PUBLIC_SANITY_DATASET=production
 Append this to your existing `lib/sanity.ts`:
 
 ```typescript
-import { createClient } from 'next-sanity'
+import { createClient } from "next-sanity";
 
 // Existing production client
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2024-01-01',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  apiVersion: "2024-01-01",
   useCdn: false,
-})
+});
 
 // NEW: Portal client for learning-portal dataset
 export const portalClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_PORTAL_DATASET || 'learning-portal',
-  apiVersion: '2024-01-01',
+  dataset: process.env.NEXT_PUBLIC_SANITY_PORTAL_DATASET || "learning-portal",
+  apiVersion: "2024-01-01",
   useCdn: false,
-})
+});
 
 // Query helper using portal client
-export async function fetchPortalData(query: string, params?: Record<string, unknown>) {
-  return portalClient.fetch(query, params)
+export async function fetchPortalData(
+  query: string,
+  params?: Record<string, unknown>,
+) {
+  return portalClient.fetch(query, params);
 }
 ```
 
@@ -80,7 +83,7 @@ export async function fetchPortalData(query: string, params?: Record<string, unk
 **In `app/portal/page.tsx`, update `getModulesAndLessons()` function:**
 
 ```typescript
-import { fetchPortalData } from '@/lib/sanity'
+import { fetchPortalData } from "@/lib/sanity";
 
 async function getModulesAndLessons() {
   try {
@@ -100,13 +103,13 @@ async function getModulesAndLessons() {
           order
         }
       }
-    `
+    `;
 
-    const modules = await fetchPortalData(query)
-    return modules || []
+    const modules = await fetchPortalData(query);
+    return modules || [];
   } catch (error) {
-    console.error('Error fetching modules:', error)
-    return []
+    console.error("Error fetching modules:", error);
+    return [];
   }
 }
 ```
@@ -114,7 +117,7 @@ async function getModulesAndLessons() {
 **In `app/portal/[slug]/page.tsx`, update `fetchLesson()` function:**
 
 ```typescript
-import { fetchPortalData } from '@/lib/sanity'
+import { fetchPortalData } from "@/lib/sanity";
 
 async function fetchLesson(slug: string): Promise<Lesson | null> {
   try {
@@ -140,20 +143,20 @@ async function fetchLesson(slug: string): Promise<Lesson | null> {
           slug { current }
         }
       }
-    `
+    `;
 
-    const lesson = await fetchPortalData(query, { slug })
-    
-    if (!lesson) return null
-    
+    const lesson = await fetchPortalData(query, { slug });
+
+    if (!lesson) return null;
+
     // Transform slug from object to string if needed
     return {
       ...lesson,
       slug: lesson.slug?.current || slug,
-    }
+    };
   } catch (error) {
-    console.error('Error fetching lesson:', error)
-    return null
+    console.error("Error fetching lesson:", error);
+    return null;
   }
 }
 ```
@@ -163,19 +166,19 @@ async function fetchLesson(slug: string): Promise<Lesson | null> {
 Create `app/api/auth/logout/route.ts`:
 
 ```typescript
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
-  const cookieStore = await cookies()
-  
+  const cookieStore = await cookies();
+
   // Clear Supabase session cookies
-  cookieStore.delete('sb-access-token')
-  cookieStore.delete('sb-refresh-token')
-  cookieStore.delete('sb-sessions')
-  
+  cookieStore.delete("sb-access-token");
+  cookieStore.delete("sb-refresh-token");
+  cookieStore.delete("sb-sessions");
+
   // Redirect to login
-  redirect('/login')
+  redirect("/login");
 }
 ```
 
@@ -184,6 +187,7 @@ export async function POST(request: Request) {
 Once you've deployed schemas, create this document in Sanity:
 
 **Document 1: Module**
+
 ```
 name: module
 title: Foundation: Physical Grounding
@@ -195,6 +199,7 @@ lessons: [reference to lesson below]
 ```
 
 **Document 2: PortalLesson**
+
 ```
 name: portalLesson
 title: The Grounding Stance: Building Kinetic Confidence
@@ -216,32 +221,34 @@ technicalNotes: [
 ## API Quick Reference
 
 ### useAuth Hook
+
 ```typescript
 import { useAuth } from '@/lib/auth-context'
 
 export function MyComponent() {
   const { session, user, isLoading } = useAuth()
-  
+
   if (isLoading) return <div>Loading...</div>
   if (!session) return <div>Not authenticated</div>
-  
+
   return <div>Welcome, {user?.email}!</div>
 }
 ```
 
 ### Progress Tracking
+
 ```typescript
 import {
   markLessonComplete,
   getUserLessonProgress,
   getModuleCompletionPercentage,
-} from '@/lib/portal-progress'
+} from "@/lib/portal-progress";
 
 // Mark a lesson as complete
-await markLessonComplete(userId, 'lesson-slug', 480) // 480 seconds watched
+await markLessonComplete(userId, "lesson-slug", 480); // 480 seconds watched
 
 // Check if lesson is completed
-const progress = await getUserLessonProgress(userId, 'lesson-slug')
+const progress = await getUserLessonProgress(userId, "lesson-slug");
 if (progress?.is_completed) {
   // Show checkmark
 }
@@ -249,31 +256,34 @@ if (progress?.is_completed) {
 // Get module progress
 const { completed, total, percentage } = await getModuleCompletionPercentage(
   userId,
-  ['lesson-1', 'lesson-2', 'lesson-3']
-)
+  ["lesson-1", "lesson-2", "lesson-3"],
+);
 ```
 
 ### Supabase Auth
+
 ```typescript
-import { supabase } from '@/lib/supabase'
+import { supabase } from "@/lib/supabase";
 
 // Sign up
 const { error } = await supabase.auth.signUp({
-  email: 'user@example.com',
-  password: 'secure-password',
-})
+  email: "user@example.com",
+  password: "secure-password",
+});
 
 // Sign in
 const { error } = await supabase.auth.signInWithPassword({
-  email: 'user@example.com',
-  password: 'password',
-})
+  email: "user@example.com",
+  password: "password",
+});
 
 // Sign out
-await supabase.auth.signOut()
+await supabase.auth.signOut();
 
 // Get current session
-const { data: { session } } = await supabase.auth.getSession()
+const {
+  data: { session },
+} = await supabase.auth.getSession();
 ```
 
 ## CSS Testing
@@ -281,6 +291,7 @@ const { data: { session } } = await supabase.auth.getSession()
 Before going live, test these styles:
 
 ### Login Page
+
 - [ ] Visit `/login` - should show minimalist form with black borders
 - [ ] Orange button on hover
 - [ ] Toggle between Sign Up / Sign In
@@ -288,6 +299,7 @@ Before going live, test these styles:
 - [ ] Back link styled correctly
 
 ### Dashboard
+
 - [ ] Module boxes have 1px black borders
 - [ ] Progress bar shows orange fill
 - [ ] Lesson items show checkmark (✓) when completed
@@ -295,6 +307,7 @@ Before going live, test these styles:
 - [ ] Responsive on mobile (single column)
 
 ### Video Player
+
 - [ ] Video loads full width with 16:9 aspect ratio
 - [ ] Technical notes display in 3-column grid
 - [ ] Orange button for "Mark Complete"
@@ -304,27 +317,35 @@ Before going live, test these styles:
 ## Common Errors & Solutions
 
 ### "Cannot find module '@/lib/auth-context'"
+
 **Fix**: Ensure `lib/auth-context.tsx` exists. Check file path is correct.
 
 ### "Supabase URL not found"
+
 **Fix**: Add `NEXT_PUBLIC_SUPABASE_URL` to `.env.local`
 
 ### "Cannot find dataset 'learning-portal'"
+
 **Fix**: Go to Sanity dashboard, create dataset manually:
+
 1. Go to Settings → Datasets
-2. Click "+ Create dataset" 
+2. Click "+ Create dataset"
 3. Name: `learning-portal`
 4. Clone from: `production` (optional)
 
 ### "502 Bad Gateway from Sanity"
+
 **Fix**: Ensure you've deployed schemas to learning-portal dataset:
+
 ```bash
 cd sanity
 SANITY_DATASET=learning-portal npx sanity schema deploy
 ```
 
 ### "Video won't load: 404 Not Found"
+
 **Fix**: YouTube video ID format:
+
 - ✓ Correct: `dQw4w9WgXcQ` (11 chars, alphanumeric + underscore + hyphen)
 - ✗ Wrong: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
 - ✗ Wrong: `youtube.com/watch?v=dQw4w9WgXcQ`
@@ -334,11 +355,13 @@ Extract just the ID!
 ## Running Build Check
 
 Before deploying:
+
 ```bash
 npm run build
 ```
 
 This will validate:
+
 - TypeScript types
 - ESLint rules
 - Metadata & paths

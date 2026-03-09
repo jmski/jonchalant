@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
+import { AuthProvider } from "@/lib/auth-context";
 
 export const metadata: Metadata = {
   title: "Leadership Coaching for Introverts | Executive Presence & Quiet Command | Jonchalant",
@@ -90,21 +91,23 @@ export default function RootLayout({
         )}
       </head>
       <body suppressHydrationWarning>
-        {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 bg-accent text-white"
-          style={{
-            fontWeight: 'bold'
-          }}
-        >
-          Skip to main content
-        </a>
-        
-        {/* Route-Aware Layout: Home shows ToC, content pages show sidebar */}
-        <RouteAwareLayout>
-          {children}
-        </RouteAwareLayout>
+        <AuthProvider>
+          {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 bg-accent text-white"
+            style={{
+              fontWeight: 'bold'
+            }}
+          >
+            Skip to main content
+          </a>
+          
+          {/* Route-Aware Layout: Home shows ToC, content pages show sidebar */}
+          <RouteAwareLayout>
+            {children}
+          </RouteAwareLayout>
+        </AuthProvider>
       </body>
     </html>
   );

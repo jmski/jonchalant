@@ -3,6 +3,7 @@
 ## Overview
 
 The Learning Portal uses Supabase for:
+
 - **User Authentication** (email/password, Google, GitHub, etc.)
 - **Lesson Progress Tracking** (which lessons are started/completed)
 - **User Progress Persistence** (survives across sessions)
@@ -10,7 +11,9 @@ The Learning Portal uses Supabase for:
 ## Part 1: Environment Setup
 
 ### 1. Get Supabase Credentials
+
 Go to [supabase.com](https://supabase.com):
+
 1. Create a new project (or use existing one)
 2. Go to **Settings** → **API**
 3. Copy these values to your `.env.local`:
@@ -23,6 +26,7 @@ SUPABASE_SERVICE_ROLE_KEY=eyJxxx...  # (Keep this private, server-side only)
 ```
 
 ### 2. Update Environment Files
+
 Create/update `.env.local`:
 
 ```bash
@@ -42,6 +46,7 @@ SUPABASE_SERVICE_ROLE_KEY=eyJ...
 Create these tables in Supabase SQL Editor:
 
 ### Table: `lesson_progress`
+
 Tracks user progress for each lesson.
 
 ```sql
@@ -56,7 +61,7 @@ CREATE TABLE IF NOT EXISTS lesson_progress (
   duration_watched INTEGER DEFAULT 0, -- seconds
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
-  
+
   -- Unique constraint: user can only have one progress record per lesson
   UNIQUE(user_id, lesson_id)
 );
@@ -68,6 +73,7 @@ CREATE INDEX idx_lesson_progress_completed ON lesson_progress(is_completed);
 ```
 
 ### RPC Function: Mark Lesson Complete
+
 This function updates progress when a user finishes a video.
 
 ```sql
@@ -89,7 +95,7 @@ BEGIN
     duration_watched = EXCLUDED.duration_watched,
     updated_at = NOW()
   RETURNING * INTO v_record;
-  
+
   RETURN v_record;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
@@ -126,6 +132,7 @@ CREATE POLICY "Users can update their own progress"
 ## Part 3: Setup in Next.js
 
 ### 1. Add Supabase Files (Already Created ✅)
+
 - `lib/supabase.ts` - Client initialization
 - `lib/auth-context.tsx` - Auth provider & useAuth hook
 - `lib/portal-progress.ts` - Progress helper functions
@@ -135,12 +142,12 @@ CREATE POLICY "Users can update their own progress"
 Wrap your app with the AuthProvider:
 
 ```tsx
-import { AuthProvider } from '@/lib/auth-context'
+import { AuthProvider } from "@/lib/auth-context";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -149,13 +156,14 @@ export default function RootLayout({
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ### 3. Enable Auth in Supabase Dashboard
 
 Go to **Authentication** → **Providers**:
+
 1. **Email/Password** - Enable (default)
 2. **Google**, **GitHub** (optional) - Turn on if desired
 3. Go to **URL Configuration** and add your site URL:
@@ -165,6 +173,7 @@ Go to **Authentication** → **Providers**:
 ## Part 4: How It Works
 
 ### Login Flow
+
 ```
 User visits /portal
   ↓ (not authenticated)
@@ -178,6 +187,7 @@ Load lesson & progress
 ```
 
 ### Progress Tracking Flow
+
 ```
 User watches video in /portal/[slug]
   ↓ (clicks "Complete Lesson" button)
@@ -193,32 +203,37 @@ User sees checkmark next to lesson
 Most functions are pre-built in `lib/portal-progress.ts`:
 
 ```typescript
-import { useAuth } from '@/lib/auth-context'
-import { markLessonComplete, getUserLessonProgress } from '@/lib/portal-progress'
+import { useAuth } from "@/lib/auth-context";
+import {
+  markLessonComplete,
+  getUserLessonProgress,
+} from "@/lib/portal-progress";
 
 // In a component
-const { user } = useAuth()
+const { user } = useAuth();
 
 // Mark lesson complete when user finishes video
 const handleCompleteLesson = async () => {
-  if (!user) return
-  await markLessonComplete(user.id, 'lesson-slug', 480) // 480 seconds watched
-}
+  if (!user) return;
+  await markLessonComplete(user.id, "lesson-slug", 480); // 480 seconds watched
+};
 
 // Check if lesson is already completed
-const progress = await getUserLessonProgress(user.id, 'lesson-slug')
-const isCompleted = progress?.is_completed || false
+const progress = await getUserLessonProgress(user.id, "lesson-slug");
+const isCompleted = progress?.is_completed || false;
 ```
 
 ## Part 6: Testing
 
 ### Test Authentication
+
 1. Go to `/login`
 2. Sign up with email
 3. Confirm email (check inbox or Supabase auth dashboard)
 4. Should redirect to `/portal`
 
 ### Test Progress Tracking
+
 1. Login and navigate to `/portal/lesson-1`
 2. Click "Complete Lesson" button
 3. Go back to dashboard (should see checkmark)
@@ -227,21 +242,25 @@ const isCompleted = progress?.is_completed || false
 ## Troubleshooting
 
 **Session not persisting?**
+
 - Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set
 - Verify AuthProvider wraps your app in layout.tsx
 - Check browser localStorage (Supabase stores session there)
 
 **Progress not saving?**
+
 - Verify lesson_progress table exists
 - Check RLS policies allow INSERT/UPDATE for authenticated users
 - Verify user_id matches authenticated user in Supabase
 
 **Can't login?**
+
 - Verify email auth is enabled in Supabase
 - Check URL configuration includes your site domain
 - Check email confirmation (Supabase sends verification link)
 
 ## Next Steps
+
 1. ✅ Sanity schemas created
 2. ✅ Supabase auth helpers created
 3. ⏳ Create database tables in Supabase SQL

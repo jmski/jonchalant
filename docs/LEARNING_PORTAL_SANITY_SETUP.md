@@ -3,9 +3,11 @@
 ## What We've Created
 
 ### 1. **Module** Schema (`module.ts`)
+
 Container for lessons within the learning portal.
 
 **Fields:**
+
 - `title` (string, required): Module name (e.g., "Foundation: Physical Grounding")
 - `slug` (slug, auto-generated from title): URL-friendly identifier
 - `description` (text): Brief overview of the module
@@ -15,9 +17,11 @@ Container for lessons within the learning portal.
 - `createdAt` (datetime): Timestamp
 
 ### 2. **PortalLesson** Schema (`portalLesson.ts`)
+
 Individual lessons within a module - the core curriculum unit.
 
 **Key Fields:**
+
 - `title` (string, required): Lesson title
 - `slug` (slug): URL-friendly identifier for `[slug]` route
 - `technicalDescription` (text, required): Detailed technical explanation
@@ -37,6 +41,7 @@ Individual lessons within a module - the core curriculum unit.
 ## Setup Instructions
 
 ### Step 1: Create New Dataset in Sanity
+
 1. Go to [sanity.io/manage](https://sanity.io/manage) → Your Project
 2. Click **Datasets** in the sidebar
 3. Click **+ Create dataset**
@@ -45,6 +50,7 @@ Individual lessons within a module - the core curriculum unit.
 6. Click **Create**
 
 ### Step 2: Environment Configuration
+
 Update your `.env.local` file to support both datasets:
 
 ```bash
@@ -58,20 +64,24 @@ SANITY_API_TOKEN=YOUR_SANITY_API_TOKEN
 ```
 
 ### Step 3: Deploy Schemas to Learning Portal Dataset
+
 The schemas are now added to your Sanity config. To deploy them to the `learning-portal` dataset:
 
 **Option A: Via Sanity CLI**
+
 ```bash
 cd sanity
 SANITY_DATASET=learning-portal npx sanity schema deploy
 ```
 
 **Option B: Via Sanity Studio**
+
 1. Start Sanity Studio: `npm run sanity:dev`
 2. Go to Vision in Studio
 3. Run mutation to create documents (below)
 
 ### Step 4: Create Sample Data
+
 Create at least one Module and one PortalLesson in Sanity Studio to test:
 
 1. **Create Module:**
@@ -102,6 +112,7 @@ Module (1) ──┬── has many ─► PortalLesson (many)
 ## Preview in Sanity Studio
 
 Once deployed, you'll see:
+
 - **Content** → **Module**: Creates new modules
 - **Content** → **Portal Lesson**: Creates new lessons
 

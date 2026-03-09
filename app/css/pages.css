@@ -264,7 +264,8 @@
   min-height: 100vh;
   background: white;
   padding: var(--spacing-xl) var(--spacing-lg);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
 }
 
@@ -283,7 +284,7 @@
   color: #666;
   text-decoration: none;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   border: none;
   background: none;
   padding: 0;
@@ -293,7 +294,7 @@
 }
 
 .portal-login-back:hover {
-  color: #FF5F1F;
+  color: #ff5f1f;
 }
 
 /* Header section */
@@ -314,7 +315,7 @@
 .portal-login-subtitle {
   font-size: 0.875rem;
   color: #666;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   margin: 0;
 }
@@ -343,7 +344,7 @@
   font-size: 0.875rem;
   color: #666;
   margin: 0;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 /* Fieldset styling */
@@ -361,7 +362,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: #000;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -372,14 +373,14 @@
   border: 1px solid #000;
   background: white;
   font-size: 1rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   color: #000;
   transition: all 0.2s ease;
 }
 
 .portal-login-input:focus {
   outline: none;
-  border: 1px solid #FF5F1F;
+  border: 1px solid #ff5f1f;
   box-shadow: 0 0 0 2px rgba(255, 95, 31, 0.1);
 }
 
@@ -408,14 +409,14 @@
   width: 100%;
   padding: var(--spacing-md) var(--spacing-lg);
   margin-top: var(--spacing-lg);
-  background: #FF5F1F;
+  background: #ff5f1f;
   color: white;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: 1px solid #FF5F1F;
+  border: 1px solid #ff5f1f;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -448,16 +449,16 @@
   font-size: 0.875rem;
   color: #666;
   margin: 0;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-login-toggle-button {
   background: none;
   border: none;
-  color: #FF5F1F;
+  color: #ff5f1f;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-decoration: underline;
   cursor: pointer;
   padding: 0;
@@ -484,7 +485,7 @@
   font-size: 0.75rem;
   color: #999;
   margin: 0;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   line-height: 1.6;
 }
 
@@ -499,7 +500,8 @@
   min-height: 100vh;
   background: white;
   padding: var(--spacing-xl) var(--spacing-lg);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .portal-dashboard-container {
@@ -530,14 +532,14 @@
   color: #000;
   margin: 0;
   letter-spacing: 0.1em;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-dashboard-subtitle {
   font-size: 0.875rem;
   color: #666;
   margin: var(--spacing-sm) 0 var(--spacing-lg);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-dashboard-user-info {
@@ -550,7 +552,7 @@
 
 .portal-dashboard-user-label {
   font-size: 0.75rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   color: #999;
   letter-spacing: 0.05em;
@@ -558,7 +560,7 @@
 
 .portal-dashboard-user-email {
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   color: #000;
   font-weight: 500;
 }
@@ -576,7 +578,7 @@
   border: 1px solid #000;
   text-align: center;
   color: #666;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 /* Modules */
@@ -620,7 +622,7 @@
   font-weight: 600;
   color: #000;
   margin: 0;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-dashboard-module-progress {
@@ -632,7 +634,7 @@
 
 .portal-dashboard-progress-label {
   font-size: 0.75rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   color: #666;
   text-align: right;
   text-transform: uppercase;
@@ -648,7 +650,7 @@
 
 .portal-dashboard-progress-fill {
   height: 100%;
-  background: #FF5F1F;
+  background: #ff5f1f;
   transition: width 0.3s ease;
 }
 
@@ -686,11 +688,11 @@
   color: #666;
   min-width: 24px;
   text-align: center;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-dashboard-lesson--completed .portal-dashboard-lesson-checkbox {
-  color: #FF5F1F;
+  color: #ff5f1f;
 }
 
 .portal-dashboard-checkmark {
@@ -724,7 +726,7 @@
   margin-top: var(--spacing-xs);
   font-size: 0.75rem;
   color: #999;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-dashboard-lesson-difficulty {
@@ -760,7 +762,7 @@
 
 .portal-dashboard-sidebar-label {
   font-size: 0.75rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   color: #999;
   letter-spacing: 0.05em;
@@ -771,7 +773,7 @@
   font-size: 1rem;
   font-weight: 600;
   color: #000;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 /* Footer */
@@ -797,7 +799,7 @@
   color: #000;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -812,7 +814,7 @@
 .portal-dashboard-footer-text {
   font-size: 0.75rem;
   color: #999;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   margin: 0;
 }
 
@@ -826,7 +828,8 @@
 .portal-lesson-page {
   min-height: 100vh;
   background: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Navigation */
@@ -848,7 +851,7 @@
   border: 1px solid #000;
   color: #000;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -862,7 +865,7 @@
 .portal-lesson-nav-breadcrumb {
   font-size: 0.875rem;
   color: #666;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 /* Main container */
@@ -930,21 +933,21 @@
   align-items: center;
   gap: var(--spacing-lg);
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   color: #666;
 }
 
 /* Complete Button */
 .portal-lesson-complete-button {
   padding: var(--spacing-md) var(--spacing-lg);
-  background: #FF5F1F;
+  background: #ff5f1f;
   color: white;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: 1px solid #FF5F1F;
+  border: 1px solid #ff5f1f;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -963,8 +966,8 @@
 
 .portal-lesson-complete-button--done {
   background: white;
-  color: #FF5F1F;
-  border: 2px solid #FF5F1F;
+  color: #ff5f1f;
+  border: 2px solid #ff5f1f;
 }
 
 /* Section Headers */
@@ -975,7 +978,7 @@
   margin: 0 0 var(--spacing-lg);
   padding-bottom: var(--spacing-md);
   border-bottom: 1px solid #000;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -1037,7 +1040,7 @@
   padding: var(--spacing-lg);
   border: 1px solid #000;
   background: white;
-  border-left: 4px solid #FF5F1F;
+  border-left: 4px solid #ff5f1f;
 }
 
 .portal-lesson-note-label {
@@ -1045,7 +1048,7 @@
   font-weight: 600;
   color: #000;
   margin: 0 0 var(--spacing-sm);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -1089,7 +1092,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   display: inline-block;
   transition: all 0.2s ease;
@@ -1106,7 +1109,7 @@
   min-height: 400px;
   font-size: 1rem;
   color: #666;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 /* Footer */
@@ -1132,7 +1135,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   transition: all 0.2s ease;
 }
@@ -1145,7 +1148,7 @@
 .portal-lesson-footer-text {
   font-size: 0.75rem;
   color: #999;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   margin: 0;
 }
 
@@ -1158,5 +1161,5 @@
   min-height: 400px;
   font-size: 1rem;
   color: #666;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
