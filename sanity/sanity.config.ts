@@ -19,6 +19,8 @@ import programsPageContent from './schemas/programsPageContent'
 import service from './schemas/service'
 import serviceCategory from './schemas/serviceCategory'
 import testimonial from './schemas/testimonial'
+import module from './schemas/module'
+import portalLesson from './schemas/portalLesson'
 
 export default defineConfig({
   name: 'default',
@@ -49,6 +51,8 @@ export default defineConfig({
       service,
       serviceCategory,
       testimonial,
+      module,
+      portalLesson,
     ] as any,
   } as any,
 } as any)
