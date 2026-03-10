@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getCaseStudies } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
 
@@ -134,6 +135,18 @@ export async function CaseStudies() {
                       </ul>
                     </div>
                   )}
+
+                  {/* CTA */}
+                  <div className="pt-2">
+                    <Link
+                      href="/contact"
+                      className="cta-link"
+                      style={{ fontSize: '0.875rem' }}
+                    >
+                      Work Together
+                      <span className="cta-link-arrow">→</span>
+                    </Link>
+                  </div>
 
                 </div>
               </article>

@@ -83,11 +83,33 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
   const dropdownTimers = useRef<Record<string, NodeJS.Timeout>>({});
+  const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
   // Hydration safety
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Close dropdown on outside click or Escape key
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpenDropdown(null);
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   // Close mobile menu when route changes
@@ -145,7 +167,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" ref={navRef}>
       <div className="navbar-container">
         {/* Logo/Brand */}
         <Link href="/" className="navbar-brand">
