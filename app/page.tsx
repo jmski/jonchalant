@@ -1,16 +1,10 @@
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { Marquee } from "@/components/effects";
 import { 
   Hero,
   Stats,
-  Services, 
-  FeaturedBlog, 
-  Testimonials, 
-  CaseStudy,
+  Services,
+  Testimonials,
   CTA,
-  ImpactSection,
-  PortfolioPreview,
-  WhyWorkTogether,
 } from '@/components/sections';
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -96,21 +90,6 @@ export default async function Home() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* MARQUEE BANNER */}
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <Marquee
-              items={[
-                'Movement-Based Leadership',
-                'Dance • Coaching • Professional Presence',
-                'From Stage to Boardroom',
-                'Quiet Command Through Motion'
-              ]}
-              speed={30}
-            />
-          </SectionContent>
-        </SectionWrapper>
-
         {/* KEY STATS SECTION - Impact at a Glance */}
         <SectionWrapper variant="primary">
           <SectionContent>
@@ -119,18 +98,6 @@ export default async function Home() {
               heading="Proven Results"
               description="Real outcomes from real coaching. These numbers represent transformations in confidence, presence, and professional impact."
               columns={3}
-            />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* FEATURED AREAS SECTION */}
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <ImpactSection
-              headline={homeContent?.impactSectionHeadline}
-              featuredMainTitle={homeContent?.featuredMainTitle}
-              featuredMainDescription={homeContent?.featuredMainDescription}
-              sidebarFeatures={homeContent?.sidebarFeatures}
             />
           </SectionContent>
         </SectionWrapper>
@@ -146,43 +113,12 @@ export default async function Home() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* FEATURED AREAS - PORTFOLIO CARDS */}
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <PortfolioPreview />
-          </SectionContent>
-        </SectionWrapper>
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <WhyWorkTogether />
-          </SectionContent>
-        </SectionWrapper>
-
         {/* CLIENT TESTIMONIALS SECTION */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            {/* Testimonials Carousel */}
-            {testimonials && testimonials.length > 0 ? (
-              <Testimonials testimonials={testimonials} />
-            ) : (
-              <div className="text-center py-12 text-slate-600">
-                <p>Loading testimonials...</p>
-              </div>
+            {testimonials && testimonials.length > 0 && (
+              <Testimonials testimonials={testimonials.slice(0, 3)} />
             )}
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* CASE STUDIES SECTION */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <CaseStudy />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* FEATURED BLOG SECTION */}
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <FeaturedBlog />
           </SectionContent>
         </SectionWrapper>
 

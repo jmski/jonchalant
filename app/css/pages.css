@@ -1414,7 +1414,11 @@
 
 .admin-type-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-hover));
+  background: linear-gradient(
+    90deg,
+    var(--accent-primary),
+    var(--accent-hover)
+  );
   border-radius: 4px;
 }
 
@@ -1717,4 +1721,139 @@
 .admin-modal-message {
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BLOG OPT-IN (Quiet Command Starter Guide)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.blog-optin {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: 0.5rem;
+}
+
+.blog-optin-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .blog-optin-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 2.5rem;
+  }
+}
+
+/* Copy column */
+.blog-optin-eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.blog-optin-title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin: 0 0 0.65rem;
+}
+
+.blog-optin-description {
+  font-size: 0.925rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Form column */
+.blog-optin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.blog-optin-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 480px) {
+  .blog-optin-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.blog-optin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.blog-optin-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.blog-optin-input {
+  /* Inherits .form-input styles; override padding for tighter card feel */
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.blog-optin-submit {
+  /* Inherits .form-submit; stretch to fill */
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.blog-optin-disclaimer {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin: 0;
+}
+
+.blog-optin-error {
+  font-size: 0.85rem;
+  color: var(--color-error);
+  margin: 0;
+}
+
+/* Success state */
+.blog-optin-success {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--color-success);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.blog-optin-success-title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-success);
+  margin: 0 0 0.5rem;
+}
+
+.blog-optin-success-body {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  margin: 0;
 }

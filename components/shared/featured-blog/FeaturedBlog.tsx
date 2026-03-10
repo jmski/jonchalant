@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { client } from '@/lib/sanity';
+import { BlogOptIn } from '@/components/forms/BlogOptIn';
 
 interface BlogPost {
   _id: string;
@@ -86,6 +87,9 @@ export async function FeaturedBlog() {
             </Link>
           ))}
         </div>
+
+        {/* Email opt-in — Quiet Command Starter Guide */}
+        <BlogOptIn />
 
         {/* CTA to Blog */}
         <div className="featured-blog-footer">

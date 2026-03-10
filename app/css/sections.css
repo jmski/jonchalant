@@ -36,13 +36,13 @@
 .home-hero-texture {
   position: absolute;
   inset: 0;
-  opacity: 0.03;
   pointer-events: none;
-  background-image: radial-gradient(
-    circle at 20% 50%,
-    rgba(74, 58, 92, 0.1) 0%,
-    transparent 50%
-  );
+  z-index: 1;
+  /* Two-angle wash: burnt indigo from top-right, moss from bottom-left */
+  /* Creates diagonal directionality without any visible element */
+  background:
+    linear-gradient(162deg, rgba(74, 58, 92, 0.055) 0%, transparent 42%),
+    linear-gradient(342deg, rgba(107, 142, 99, 0.045) 0%, transparent 38%);
 }
 
 .home-hero-grid {
@@ -114,6 +114,18 @@
   color: var(--accent-primary);
 }
 
+/* Accent rule — a single hairline that marks the beat of the headline */
+.home-hero-headline-accent::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 1.5px;
+  background: var(--accent-primary);
+  margin-top: 0.625rem;
+  transform-origin: left center;
+  opacity: 0.5;
+}
+
 .home-hero-description {
   font-size: 1rem;
   line-height: 1.6;
@@ -163,6 +175,17 @@
   transform: translateY(-2px);
 }
 
+/* Arrow that drifts forward on hover — communicates direction */
+.home-hero-cta-primary::after {
+  content: " →";
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-hero-cta-primary:hover::after {
+  transform: translateX(4px);
+}
+
 .home-hero-cta-secondary {
   display: inline-flex;
   align-items: center;
@@ -186,6 +209,20 @@
   background: var(--bg-muted);
 }
 
+.home-hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.home-hero-cta-microcopy {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
 .home-hero-visual {
   display: none;
   align-items: center;
@@ -195,6 +232,82 @@
 @media (min-width: 1024px) {
   .home-hero-visual {
     display: flex;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   HOME HERO — KINETIC MOTION
+   All effects gated behind prefers-reduced-motion for accessibility.
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+/* Keyframe: content enters from just below, opacity 0 → 1 */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframe: accent underline expands left → right */
+@keyframes heroAccentLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Keyframe: IkigaiSymbol breathes slowly — scale + opacity */
+@keyframes heroVisualBreath {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.88;
+  }
+  50% {
+    transform: scale(1.018);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Staggered entrance — each content block arrives 100ms after the last */
+  .home-hero-badge {
+    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .home-hero-headline {
+    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 100ms;
+  }
+
+  .home-hero-description {
+    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 200ms;
+  }
+
+  .home-hero-ctas {
+    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 300ms;
+  }
+
+  /* Accent underline expands after the headline has arrived */
+  .home-hero-headline-accent::after {
+    transform: scaleX(0);
+    animation: heroAccentLine 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 480ms;
+  }
+
+  /* IkigaiSymbol breathes — 5 second cycle, continuous */
+  .ikigai-symbol {
+    animation: heroVisualBreath 5s ease-in-out infinite;
+    transform-origin: center center;
   }
 }
 

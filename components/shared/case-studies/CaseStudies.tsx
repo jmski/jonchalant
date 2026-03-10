@@ -62,11 +62,8 @@ export async function CaseStudies() {
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-fr">
           {caseStudies.map((caseStudy) => (
-            <Link
-              key={caseStudy._id}
-              href={`/case-studies/${caseStudy.slug.current}`}
-            >
-              <article className="group h-full flex flex-col border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 bg-white">
+            <div key={caseStudy._id}>
+              <article className="h-full flex flex-col border border-slate-200 rounded-lg overflow-hidden bg-white">
                 {/* Image Section */}
                 {caseStudy.image && (
                   <div className="relative h-48 sm:h-56 overflow-hidden bg-slate-200">
@@ -140,15 +137,20 @@ export async function CaseStudies() {
                   )}
 
                   {/* CTA */}
-                  <div className="pt-4 border-t border-slate-100">
-                    <span className="inline-flex items-center gap-2 text-accent font-semibold text-sm group-hover:gap-3 transition-all">
-                      Read Full Case Study
-                      <span className="group-hover:translate-x-1 transition-transform">→</span>
-                    </span>
+                  <div className="pt-2">
+                    <Link
+                      href="/contact"
+                      className="cta-link"
+                      style={{ fontSize: '0.875rem' }}
+                    >
+                      Work Together
+                      <span className="cta-link-arrow">→</span>
+                    </Link>
                   </div>
+
                 </div>
               </article>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

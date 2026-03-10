@@ -49,6 +49,7 @@ export function LessonCategory({ level, lessons }: LessonCategoryProps) {
             pillar={lesson.pillar}
             icon={lesson.icon}
             duration={lesson.duration}
+            slug={lesson.slug?.current}
           />
         ))}
       </div>

@@ -1112,7 +1112,8 @@
   border: none;
   background: none;
   cursor: pointer;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  text-transform: none;
 }
 
 .navbar-link:hover {
