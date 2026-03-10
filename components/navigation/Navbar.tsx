@@ -82,7 +82,7 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
-  const dropdownTimers = useRef<Record<string, NodeJS.Timeout>>({});
+  const closeTimer = useRef<NodeJS.Timeout | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
@@ -145,18 +145,17 @@ export default function Navbar() {
   }, [mounted]);
 
   const handleDropdownEnter = (label: string) => {
-    // Clear any pending close timeout
-    if (dropdownTimers.current[label]) {
-      clearTimeout(dropdownTimers.current[label]);
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
     }
     setOpenDropdown(label);
   };
 
-  const handleDropdownLeave = (label: string) => {
-    // Delay closing to allow moving to submenu
-    dropdownTimers.current[label] = setTimeout(() => {
+  const handleDropdownLeave = () => {
+    closeTimer.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 150);
+    }, 300);
   };
 
   const isActive = (href: string): boolean => {
@@ -181,7 +180,7 @@ export default function Navbar() {
               key={link.label}
               className="navbar-item"
               onMouseEnter={() => link.dropdown && handleDropdownEnter(link.label)}
-              onMouseLeave={() => link.dropdown && handleDropdownLeave(link.label)}
+              onMouseLeave={() => link.dropdown && handleDropdownLeave()}
             >
               {link.dropdown ? (
                 <button
@@ -207,7 +206,7 @@ export default function Navbar() {
                 <div
                   className={`navbar-dropdown ${openDropdown === link.label ? 'visible' : ''}`}
                   onMouseEnter={() => handleDropdownEnter(link.label)}
-                  onMouseLeave={() => handleDropdownLeave(link.label)}
+                  onMouseLeave={() => handleDropdownLeave()}
                 >
                   {link.dropdown.map((item) => (
                     <Link
