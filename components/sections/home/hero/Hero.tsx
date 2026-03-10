@@ -10,15 +10,17 @@ interface HeroProps {
   ctaText?: string;
   ctaLink?: string;
   badge?: string;
+  auditMicrocopy?: string;
 }
 
 export function Hero({ 
   headline = 'Body-Led Leadership',
   subheadline = 'for Introverts',
   description = 'Build executive presence, quiet command, and confident communication through movement-based coaching designed for introverts.',
-  ctaText = 'Start Your Transformation',
+  ctaText = 'Book Your Free Presence Audit',
   ctaLink = '/contact',
-  badge = '✓ Now Accepting Coaching Clients'
+  badge = '✓ Now Accepting Coaching Clients',
+  auditMicrocopy = 'Free · 30 minutes · No commitment required'
 }: HeroProps) {
   return (
     <section className="home-hero-section">
@@ -56,9 +58,14 @@ export function Hero({
 
           {/* CTA Button */}
           <div className="home-hero-ctas">
-            <Link href={ctaLink} className="home-hero-cta-primary">
-              {ctaText}
-            </Link>
+            <div className="home-hero-cta-group">
+              <Link href={ctaLink} className="home-hero-cta-primary">
+                {ctaText}
+              </Link>
+              {auditMicrocopy && (
+                <p className="home-hero-cta-microcopy">{auditMicrocopy}</p>
+              )}
+            </div>
             <Link href="/about" className="home-hero-cta-secondary">
               Learn About My Approach
             </Link>

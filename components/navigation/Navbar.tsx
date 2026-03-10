@@ -161,13 +161,24 @@ export default function Navbar() {
               onMouseEnter={() => link.dropdown && handleDropdownEnter(link.label)}
               onMouseLeave={() => link.dropdown && handleDropdownLeave(link.label)}
             >
-              <Link
-                href={link.href}
-                className={`navbar-link ${isActive(link.href) ? 'active' : ''} ${link.dropdown ? 'has-dropdown' : ''}`}
-              >
-                {link.label}
-                {link.dropdown && <span className="navbar-dropdown-arrow">▼</span>}
-              </Link>
+              {link.dropdown ? (
+                <button
+                  className={`navbar-link has-dropdown ${link.dropdown.some((item) => isActive(item.href)) ? 'active' : ''}`}
+                  onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                  aria-expanded={openDropdown === link.label}
+                  aria-haspopup="true"
+                >
+                  {link.label}
+                  <span className="navbar-dropdown-arrow">▼</span>
+                </button>
+              ) : (
+                <Link
+                  href={link.href}
+                  className={`navbar-link ${isActive(link.href) ? 'active' : ''}`}
+                >
+                  {link.label}
+                </Link>
+              )}
 
               {/* Dropdown Menu */}
               {link.dropdown && (
@@ -220,8 +231,8 @@ export default function Navbar() {
                 <div key={section.title} className="navbar-mobile-section">
                   <div className="navbar-mobile-section-title">{section.title}</div>
                   <ul className="navbar-mobile-links">
-                    {section.links.map((link) => (
-                      <li key={link.href}>
+                    {section.links.map((link, linkIdx) => (
+                      <li key={link.label || linkIdx}>
                         {link.subitems ? (
                           <>
                             {link.label && (

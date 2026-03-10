@@ -5,9 +5,10 @@ interface LessonCardProps {
   pillar: string;
   icon: string;
   duration: string;
+  slug?: string;
 }
 
-export function LessonCard({ _id, title, description, pillar, icon, duration }: LessonCardProps) {
+export function LessonCard({ _id, title, description, pillar, icon, duration, slug }: LessonCardProps) {
   return (
     <div 
       key={_id}
@@ -28,9 +29,15 @@ export function LessonCard({ _id, title, description, pillar, icon, duration }: 
         </p>
         <div className="lesson-card-footer">
           <span className="lesson-card-duration">{duration}</span>
-          <a href="#" className="lesson-card-cta">
-            Read →
-          </a>
+          {slug ? (
+            <a href={`/portal/${slug}`} className="lesson-card-cta">
+              Read →
+            </a>
+          ) : (
+            <span className="lesson-card-cta lesson-card-cta--disabled">
+              Coming soon
+            </span>
+          )}
         </div>
       </div>
     </div>
