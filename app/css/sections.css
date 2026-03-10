@@ -403,12 +403,12 @@
 .testimonial-carousel {
   position: relative;
   width: 100%;
+  overflow: hidden;
 }
 
 .testimonial-carousel-track {
   display: flex;
   transition: transform 0.5s ease-out;
-  overflow: hidden;
 }
 
 .testimonial-carousel-slide {
