@@ -6,20 +6,21 @@ Complete reference for the jonchalant.com website codebase. Updated: March 2026.
 
 ## Tech Stack & Versions
 
-| Tool | Version |
-|------|---------|
-| Next.js | 16.1.1 (App Router) |
-| React | 19.2.3 |
-| TypeScript | ^5 |
-| Tailwind CSS | ^4 (utility-only) |
-| Sanity CMS | ^4.22.0 |
-| @sanity/client | ^6.29.1 |
-| next-sanity | ^11.6.12 |
-| @supabase/supabase-js | ^2.98.0 |
-| styled-components | ^6.3.11 |
-| resend | ^6.9.3 |
+| Tool                  | Version             |
+| --------------------- | ------------------- |
+| Next.js               | 16.1.1 (App Router) |
+| React                 | 19.2.3              |
+| TypeScript            | ^5                  |
+| Tailwind CSS          | ^4 (utility-only)   |
+| Sanity CMS            | ^4.22.0             |
+| @sanity/client        | ^6.29.1             |
+| next-sanity           | ^11.6.12            |
+| @supabase/supabase-js | ^2.98.0             |
+| styled-components     | ^6.3.11             |
+| resend                | ^6.9.3              |
 
 **Build commands:**
+
 ```bash
 npm run dev          # http://localhost:3000 with hot reload
 npm run build        # Production build (Turbopack)
@@ -30,6 +31,7 @@ npm run sanity:deploy # cd sanity && npm run deploy
 ```
 
 **Key config (next.config.ts):**
+
 - `reactCompiler: true` — automatic memoization, no manual useMemo/useCallback
 - `turbopack: { root: __dirname }` — faster builds
 - Remote image patterns: `images.unsplash.com`, `picsum.photos`
@@ -81,6 +83,7 @@ app/
 ## CSS Architecture
 
 ### app/globals.css imports:
+
 ```css
 @layer reset, variables, base, components, utilities, interactive;
 
@@ -90,41 +93,35 @@ app/
                     ./css/layout.css, ./css/cards.css,
                     ./css/sections.css, ./css/pages.css
 @layer utilities  → ./css/utilities.css
-@layer interactive → ./css/interactions.css
+@layer interactive → ./css/interactions.css;
 ```
 
 ### 10 CSS files (app/css/):
-| File | Purpose |
-|------|---------|
-| `variables.css` | Design tokens: colors, spacing, fonts, transitions |
-| `base.css` | HTML/body resets, default element styles |
-| `components.css` | Reusable UI patterns: buttons, badges |
-| `typography.css` | Text hierarchy: headings, body, sizes |
-| `layout.css` | Grid systems, flexbox, responsive layouts |
-| `cards.css` | All card types: testimonial, blog, case study, lesson, service |
-| `sections.css` | Full-width section components: hero, carousel, CTA, etc. |
-| `pages.css` | Form + page-specific styles: contact, blog, dance, etc. |
-| `utilities.css` | Spacing, color utilities, responsive breakpoints |
-| `interactions.css` | Hover states, transitions, animations |
+
+| File               | Purpose                                                        |
+| ------------------ | -------------------------------------------------------------- |
+| `variables.css`    | Design tokens: colors, spacing, fonts, transitions             |
+| `base.css`         | HTML/body resets, default element styles                       |
+| `components.css`   | Reusable UI patterns: buttons, badges                          |
+| `typography.css`   | Text hierarchy: headings, body, sizes                          |
+| `layout.css`       | Grid systems, flexbox, responsive layouts                      |
+| `cards.css`        | All card types: testimonial, blog, case study, lesson, service |
+| `sections.css`     | Full-width section components: hero, carousel, CTA, etc.       |
+| `pages.css`        | Form + page-specific styles: contact, blog, dance, etc.        |
+| `utilities.css`    | Spacing, color utilities, responsive breakpoints               |
+| `interactions.css` | Hover states, transitions, animations                          |
 
 ### Key CSS variables (variables.css):
+
 ```css
---bg-primary: #f8f8f5        /* Rice paper/bone */
---bg-secondary: #fafaf8
---bg-tertiary: #f0ede8       /* Warm sand */
---text-primary: #1a1a1a
---text-secondary: #3d3d3d
---text-tertiary: #7a7a7a
---border-color: #d4cfc7
---border-subtle: #e8e3db
---color-burnt-indigo: #4a3a5c
---color-burnt-indigo-light: #6b5a7a
---color-muted-moss: #6b8e63  /* PRIMARY GREEN */
---color-moss-light: #8aa87a
---accent-primary: #6b8e63    /* Muted Moss — primary CTA accent */
---accent-hover: #8aa87a
---accent-tertiary: #6a8aaa   /* Soft indigo */
---btn-primary-text: #ffffff
+--bg-primary: #f8f8f5 /* Rice paper/bone */ --bg-secondary: #fafaf8
+  --bg-tertiary: #f0ede8 /* Warm sand */ --text-primary: #1a1a1a
+  --text-secondary: #3d3d3d --text-tertiary: #7a7a7a --border-color: #d4cfc7
+  --border-subtle: #e8e3db --color-burnt-indigo: #4a3a5c
+  --color-burnt-indigo-light: #6b5a7a --color-muted-moss: #6b8e63
+  /* PRIMARY GREEN */ --color-moss-light: #8aa87a --accent-primary: #6b8e63
+  /* Muted Moss — primary CTA accent */ --accent-hover: #8aa87a
+  --accent-tertiary: #6a8aaa /* Soft indigo */ --btn-primary-text: #ffffff;
 ```
 
 **Rules:** No `!important`. No new CSS files — all styles go in the existing 10 files. No inline styles except truly dynamic values. No Tailwind utility classes on component JSX (only text sizing, font weight, responsive breakpoints allowed). Light mode only — no dark mode.
@@ -280,53 +277,74 @@ components/
 
 ```ts
 // HOME PAGE
-export { Hero } from './home/hero';
-export { FeaturedAreas } from './home/featured-areas';
-export { BlogCards } from './home/blog-cards';
-export { ImpactSection } from './home/impact';
-export { PortfolioPreview } from './home/portfolio-preview';
-export { WhyWorkTogether } from './home/why-work-together';
+export { Hero } from "./home/hero";
+export { FeaturedAreas } from "./home/featured-areas";
+export { BlogCards } from "./home/blog-cards";
+export { ImpactSection } from "./home/impact";
+export { PortfolioPreview } from "./home/portfolio-preview";
+export { WhyWorkTogether } from "./home/why-work-together";
 
 // ABOUT PAGE
-export { Hero as AboutHero } from './about/hero';
-export { Origin } from './about/origin';
-export { Services as AboutServices } from './about/services';
-export { Philosophy } from './about/philosophy';
-export { Introvert } from './about/introvert';
+export { Hero as AboutHero } from "./about/hero";
+export { Origin } from "./about/origin";
+export { Services as AboutServices } from "./about/services";
+export { Philosophy } from "./about/philosophy";
+export { Introvert } from "./about/introvert";
 
 // SHARED SECTIONS (reusable)
-export { Testimonials } from '@/components/shared/testimonials';
-export { CaseStudy } from '@/components/shared/case-study';
-export { Services } from '@/components/shared/services';
-export { Stats } from '@/components/shared/stats';
+export { Testimonials } from "@/components/shared/testimonials";
+export { CaseStudy } from "@/components/shared/case-study";
+export { Services } from "@/components/shared/services";
+export { Stats } from "@/components/shared/stats";
 
 // BLOG
-export { Featured as BlogFeatured, Posts as BlogPosts, Related as BlogRelated } from '@/components/sections/blog';
+export {
+  Featured as BlogFeatured,
+  Posts as BlogPosts,
+  Related as BlogRelated,
+} from "@/components/sections/blog";
 
 // SHARED GENERIC
-export { CTA } from '@/components/shared/cta';
-export { FAQ } from '@/components/shared/faq';
-export { PageHero } from '@/components/shared/page-hero';
-export { Hero as GenericHero } from '@/components/shared/hero';
-export { FeaturedBlog } from '@/components/shared/featured-blog';
-export { ThreePillars } from '@/components/shared/three-pillars';
-export { Programs } from '@/components/shared/programs';
-export { Collaboration } from '@/components/shared/collaboration';
-export { Carousel } from '@/components/shared/carousel';
-export { CaseStudies } from '@/components/shared/case-studies';
+export { CTA } from "@/components/shared/cta";
+export { FAQ } from "@/components/shared/faq";
+export { PageHero } from "@/components/shared/page-hero";
+export { Hero as GenericHero } from "@/components/shared/hero";
+export { FeaturedBlog } from "@/components/shared/featured-blog";
+export { ThreePillars } from "@/components/shared/three-pillars";
+export { Programs } from "@/components/shared/programs";
+export { Collaboration } from "@/components/shared/collaboration";
+export { Carousel } from "@/components/shared/carousel";
+export { CaseStudies } from "@/components/shared/case-studies";
 
 // DANCE
-export { FeaturedVideo, Approach as DanceApproach, Portfolio as DancePortfolio } from './dance';
+export {
+  FeaturedVideo,
+  Approach as DanceApproach,
+  Portfolio as DancePortfolio,
+} from "./dance";
 
 // OTHER PAGE-SPECIFIC
-export { LessonCategory } from './lessons';
-export { KeyMetrics, PlatformBreakdown, ContentMix, AudienceProfile, HeroStats, CollaborationPackages } from './media-kit';
-export { FocusAreas, SupplementalLearning } from './programs';
+export { LessonCategory } from "./lessons";
+export {
+  KeyMetrics,
+  PlatformBreakdown,
+  ContentMix,
+  AudienceProfile,
+  HeroStats,
+  CollaborationPackages,
+} from "./media-kit";
+export { FocusAreas, SupplementalLearning } from "./programs";
 
 // UTILITY RE-EXPORTS
-export { Badge } from '@/components/utilities/badges';
-export { TestimonialCard, CaseStudyCard, LessonCard, BlogCard, ServiceCard } from '@/components/utilities/cards';
-export { StatsGrid, CardGrid } from '@/components/utilities/grids';
+export { Badge } from "@/components/utilities/badges";
+export {
+  TestimonialCard,
+  CaseStudyCard,
+  LessonCard,
+  BlogCard,
+  ServiceCard,
+} from "@/components/utilities/cards";
+export { StatsGrid, CardGrid } from "@/components/utilities/grids";
 ```
 
 ---
@@ -334,9 +352,11 @@ export { StatsGrid, CardGrid } from '@/components/utilities/grids';
 ## Page Section Breakdown
 
 ### app/page.tsx (Home)
+
 Fetches: `getHomePageContent()`, `getServices()`, `getTestimonials()`
 
 Sections (in order):
+
 1. `<Hero />` — home/hero
 2. `<Stats />` — with `homeContent.stats`, heading "Proven Results"
 3. `<Services />` — with Sanity services
@@ -348,9 +368,11 @@ Wrappers: `<PageTransition animation="fade">` + `<SectionWrapper variant="primar
 Also includes: `AggregateRatingSchema` JSON-LD script
 
 ### app/about/page.tsx
+
 Fetches: `getAboutPageContent()`, `getServices()`
 
 Sections (in order):
+
 1. `<AboutHero />` — about/hero, passes `heroHeadline`, `heroDescription`
 2. `<Origin />` — about/origin, passes `originSectionHeadline`, `originSectionDescription`, `phases`
 3. `<Stats />` — with `aboutContent.stats`, heading "Proven Results From Real Leaders"
@@ -361,18 +383,22 @@ Sections (in order):
 8. `<CTA />` — "Your Presence Matters. Let's Amplify It."
 
 ### app/blog/page.tsx
+
 Fetches: Direct `client.fetch()` for `*[_type == "blogPost"]`
 
 Sections (in order):
+
 1. Blog page header (inline heading via `<Heading level={1}>`)
 2. `<BlogFeatured />` — sections/blog/Featured (only if featuredPosts.length > 0)
 3. `<BlogPosts />` — sections/blog/Posts (regular non-featured posts)
 4. `<CTA />` — "Ready to Build Your Executive Presence?"
 
 ### app/programs/page.tsx
+
 Fetches: `getPrograms()`, `getProgramsFocusItems()`
 
 Sections (in order):
+
 1. `<PageHero />` — with `<FocusAreas items={focusItems} />` as rightColumn
 2. `<ProgramsSection />` — shared/programs (id="programs-section")
 3. SupplementalLearning + CTA (remaining content)
@@ -380,18 +406,22 @@ Sections (in order):
 Also includes: `CourseSchema` JSON-LD for 8-Week program and Group Workshop
 
 ### app/dance/page.tsx
+
 Fetches: `getPortfolioItems()`, `getFeaturedPortfolioItem()`
 
 Sections (in order):
+
 1. `<FeaturedVideo />` — dance/FeaturedVideo (if featuredItem exists)
 2. `<DancePortfolio />` — dance/Portfolio
 3. `<DanceApproach />` — dance/Approach
 4. `<CTA />` — "Ready to Integrate Movement into Your Leadership?"
 
 ### app/lessons/page.tsx
+
 Fetches: `getLessons()`
 
 Sections (in order):
+
 1. `<GenericHero />` — shared/hero, heading "Master Quiet Command"
 2. Supplemental text panel (inline, links to /dance)
 3. `<LessonCategory level="Beginner" />` — filtered lessons
@@ -400,9 +430,11 @@ Sections (in order):
 6. `<CTA />` — "Learn Better with Coaching"
 
 ### app/media-kit/page.tsx
+
 Fetches: `getMediaKitData()`, `getPageMetadata('mediaKit')`, `getCollaborationPackages()`
 
 Sections (in order):
+
 1. `<PageHero />` — with `<HeroStats />` as rightColumn
 2. `<KeyMetrics />` — media-kit/KeyMetrics
 3. `<PlatformBreakdown />` — media-kit/PlatformBreakdown
@@ -412,6 +444,7 @@ Sections (in order):
 7. `<CTA />`
 
 ### app/contact/page.tsx
+
 Fetches: `getContactInfo()`, `getPageMetadata('contact')`
 Delegates entirely to `<ContactClient />` (client component, contains `SegmentedInquiryForm`)
 
@@ -433,6 +466,7 @@ All pages use these wrappers from `@/components/layout`:
 ## Sanity CMS
 
 ### Studio location: `sanity/` folder
+
 - `sanity.config.ts` — main Sanity Studio config
 - `sanity.cli.ts` — CLI config
 - `structure.ts` — custom Studio desk structure
@@ -440,93 +474,115 @@ All pages use these wrappers from `@/components/layout`:
 - `schemas/` — individual schema files
 
 ### All Schema Types (19 total):
-| Schema | Type | Description |
-|--------|------|-------------|
-| `aboutPage` | document | About page content (hero, origin, phases, stats, philosophies, introvertTraits) |
-| `blogPost` | document | Blog posts (title, slug, excerpt, pillar, readingTime, publishedAt, featured) |
-| `caseStudy` | document | Case studies (challenge, solution, results, testimonial, image) |
-| `collaboration` | document | Portfolio collaborations (category, price, deliverables, timeline) |
-| `collaborationPackage` | document | Media kit collaboration packages (packages array) |
-| `contactInfo` | document | Contact methods (label, value, href, description) |
-| `danceCategoryFilter` | document | Dance filter categories (categories array) |
-| `homePageContent` | document | Home page dynamic content (stats, headlines, descriptions) |
-| `lesson` | document | Lessons (category: Beginner/Intermediate/Advanced, pillar, duration, icon) |
-| `mediaKitData` | document | Metrics, platforms, content categories, audience demographics |
-| `pageMetadata` | document | Page-level SEO/CTA metadata per page slug |
-| `portfolio` | document | Dance portfolio items (videoUrl, thumbnail, category, duration) |
-| `program` | document | Coaching programs (category, investment, features) |
-| `programFocus` | document | Program focus area items (title, description, icon) |
-| `programsPageContent` | document | Programs page dynamic content |
-| `service` | document | Coaching services (icon, features, isPrimary, color) |
-| `serviceCategory` | document | Service categories (categories array with items) |
-| `testimonial` | document | Testimonials (clientName, role, company, quote, result, featured, serviceType) |
-| `portalLesson` | document | Portal lesson content (in sanity/schemas/portalLesson.ts) |
+
+| Schema                 | Type     | Description                                                                     |
+| ---------------------- | -------- | ------------------------------------------------------------------------------- |
+| `aboutPage`            | document | About page content (hero, origin, phases, stats, philosophies, introvertTraits) |
+| `blogPost`             | document | Blog posts (title, slug, excerpt, pillar, readingTime, publishedAt, featured)   |
+| `caseStudy`            | document | Case studies (challenge, solution, results, testimonial, image)                 |
+| `collaboration`        | document | Portfolio collaborations (category, price, deliverables, timeline)              |
+| `collaborationPackage` | document | Media kit collaboration packages (packages array)                               |
+| `contactInfo`          | document | Contact methods (label, value, href, description)                               |
+| `danceCategoryFilter`  | document | Dance filter categories (categories array)                                      |
+| `homePageContent`      | document | Home page dynamic content (stats, headlines, descriptions)                      |
+| `lesson`               | document | Lessons (category: Beginner/Intermediate/Advanced, pillar, duration, icon)      |
+| `mediaKitData`         | document | Metrics, platforms, content categories, audience demographics                   |
+| `pageMetadata`         | document | Page-level SEO/CTA metadata per page slug                                       |
+| `portfolio`            | document | Dance portfolio items (videoUrl, thumbnail, category, duration)                 |
+| `program`              | document | Coaching programs (category, investment, features)                              |
+| `programFocus`         | document | Program focus area items (title, description, icon)                             |
+| `programsPageContent`  | document | Programs page dynamic content                                                   |
+| `service`              | document | Coaching services (icon, features, isPrimary, color)                            |
+| `serviceCategory`      | document | Service categories (categories array with items)                                |
+| `testimonial`          | document | Testimonials (clientName, role, company, quote, result, featured, serviceType)  |
+| `portalLesson`         | document | Portal lesson content (in sanity/schemas/portalLesson.ts)                       |
 
 Note: `module.ts` also exists in `sanity/schemas/` (portal module groupings).
 
 ### Sanity client (lib/sanity.ts):
+
 ```ts
-export const client = createClient({ projectId, dataset, apiVersion: '2024-01-01', useCdn: true })
-export function urlFor(source) // image URL builder
+export const client = createClient({
+  projectId,
+  dataset,
+  apiVersion: "2024-01-01",
+  useCdn: true,
+});
+export function urlFor(source); // image URL builder
 ```
 
 ### All data fetching functions (lib/sanity.ts):
 
 **Portfolio (dance videos):**
+
 - `getPortfolioItems()` — all, ordered by `order`
 - `getPortfolioByCategory(category)` — filtered
 - `getPortfolioItem(slug)` — single
 - `getFeaturedPortfolioItem()` — `featured == true`
 
 **Services:**
+
 - `getServices()` — all, ordered
 - `getPrimaryService()` — `isPrimary == true`
 - `getService(slug)` — single
 
 **Collaborations:**
+
 - `getCollaborations()` — all
 - `getCollaborationsByCategory(category)` — filtered
 
 **Media Kit:**
+
 - `getMediaKitData()` — keyMetrics, platforms, contentCategories, audience
 
 **Testimonials:**
+
 - `getTestimonials(featured?)` — all or featured-only
 
 **Case Studies:**
+
 - `getCaseStudies(featured?)` — all or featured-only
 - `getCaseStudy(slug)` — single
 
 **Lessons:**
+
 - `getLessons()` — all
 - `getLessonsByCategory(category)` — Beginner/Intermediate/Advanced
 - `getLessonsByPillar(pillar)` — filtered by pillar
 
 **Programs:**
+
 - `getPrograms()` — all
 - `getProgramBySlug(slug)` — single
 - `getProgramsByCategory(category)` — filtered
 - `getProgramsFocusItems()` — `programFocus` type, ordered
 
 **Page Metadata:**
+
 - `getPageMetadata(page)` — per page slug (headline, subheadline, ctaTitle, etc.)
 
 **Contact:**
+
 - `getContactInfo()` — title + contactMethods array
 
 **About Page:**
+
 - `getAboutPageContent()` — full about page content
 
 **Home Page:**
+
 - `getHomePageContent()` — stats, headlines, sidebar features
 
 **Dance Category Filter:**
+
 - `getDanceCategoryFilter()` — categories array
 
 **Service Categories:**
+
 - `getServiceCategories()` — categories with items
 
 **Collaboration Packages:**
+
 - `getCollaborationPackages()` — packages array (name, price, features)
 
 ---
@@ -536,10 +592,14 @@ export function urlFor(source) // image URL builder
 Used for the learning portal and admin features.
 
 ```ts
-export const supabase = createClient(NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY)
+export const supabase = createClient(
+  NEXT_PUBLIC_SUPABASE_URL,
+  NEXT_PUBLIC_SUPABASE_ANON_KEY,
+);
 // anon key — browser/client-side
 
-export const supabaseAdmin = createClient(URL, SUPABASE_SERVICE_ROLE_KEY) | null
+export const supabaseAdmin =
+  createClient(URL, SUPABASE_SERVICE_ROLE_KEY) | null;
 // service role — server-side admin ops only
 ```
 
@@ -547,19 +607,20 @@ export const supabaseAdmin = createClient(URL, SUPABASE_SERVICE_ROLE_KEY) | null
 
 ## Other lib/ Files
 
-| File | Purpose |
-|------|---------|
-| `auth-context.tsx` | React auth context provider |
-| `design-tokens.ts` | JS-accessible design tokens |
-| `imageConfig.ts` | Next.js image config helpers |
-| `optimizedImage.tsx` | Optimized image component wrapper |
-| `pageContent.ts` | Static/fallback page content |
-| `portal-progress.ts` | Learning portal progress tracking |
-| `schema.ts` | JSON-LD structured data schemas (AggregateRatingSchema, CourseSchema) |
-| `blog/portableTextComponents.tsx` | Portable text renderer for blog posts |
-| `hooks/` | Custom React hooks |
+| File                              | Purpose                                                               |
+| --------------------------------- | --------------------------------------------------------------------- |
+| `auth-context.tsx`                | React auth context provider                                           |
+| `design-tokens.ts`                | JS-accessible design tokens                                           |
+| `imageConfig.ts`                  | Next.js image config helpers                                          |
+| `optimizedImage.tsx`              | Optimized image component wrapper                                     |
+| `pageContent.ts`                  | Static/fallback page content                                          |
+| `portal-progress.ts`              | Learning portal progress tracking                                     |
+| `schema.ts`                       | JSON-LD structured data schemas (AggregateRatingSchema, CourseSchema) |
+| `blog/portableTextComponents.tsx` | Portable text renderer for blog posts                                 |
+| `hooks/`                          | Custom React hooks                                                    |
 
 ### Custom hooks (lib/hooks/):
+
 - `useFocusTrap.ts`
 - `useFormValidation.ts`
 - `usePointerPosition.ts`
@@ -572,12 +633,14 @@ export const supabaseAdmin = createClient(URL, SUPABASE_SERVICE_ROLE_KEY) | null
 ## Middleware (middleware.ts)
 
 Minimal pass-through — no blocking at middleware level:
+
 ```ts
 export function middleware(request: NextRequest) {
-  return NextResponse.next()
+  return NextResponse.next();
 }
-export const config = { matcher: ['/api/auth/:path*'] }
+export const config = { matcher: ["/api/auth/:path*"] };
 ```
+
 Auth is handled client-side via `useAuth` hook (from `lib/auth-context.tsx`) and in API route handlers.
 
 ---
@@ -615,5 +678,6 @@ SUPABASE_SERVICE_ROLE_KEY=   # optional, admin only
 ## Fonts
 
 Loaded via Google Fonts (globals.css):
+
 - **Fraunces** (9..144 optical size, 300–700 weight, italic) — serif display/headings
 - **DM Sans** (300, 400, 500, 600 weight, italic 400) — body text
