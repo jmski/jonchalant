@@ -199,8 +199,8 @@
 .main-content {
   flex: 1;
   width: 100%;
-  padding: 3rem;
-  padding-top: calc(70px + 3rem);
+  padding: 1.25rem;
+  padding-top: calc(70px + 1.25rem);
   overflow-y: auto;
   overflow-x: hidden;
   /* Hide scrollbar while preserving scroll functionality */
@@ -428,10 +428,12 @@
 */
 
 .section-wrapper {
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding: 3rem 2rem;
+  width: calc(
+    100% + 2.5rem
+  ); /* negates main-content 1.25rem padding on mobile */
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  padding: 3rem 1.25rem;
   background-color: var(--bg-primary);
   transition: background-color var(--transition-base);
 }
@@ -1193,8 +1195,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem; /* 44px minimum touch target */
+  height: 2.75rem; /* 44px minimum touch target */
   padding: 0;
   border: 1px solid var(--border-color);
   background-color: var(--bg-secondary);
@@ -1342,7 +1344,7 @@
 
 .navbar-mobile-category {
   display: block;
-  padding: 0.25rem 0.75rem;
+  padding: 0.75rem 0.75rem; /* min 44px touch target height */
   color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -1351,7 +1353,7 @@
 
 .navbar-mobile-link {
   display: block;
-  padding: 0.25rem 0.75rem;
+  padding: 0.75rem 0.75rem; /* min 44px touch target height */
   color: var(--text-secondary);
   text-decoration: none;
   border-left: 2px solid transparent;
@@ -1667,7 +1669,7 @@
 
 .portal-sidebar-link {
   display: block;
-  padding: 0.25rem 0.75rem;
+  padding: 0.75rem 0.75rem; /* min 44px touch target height */
   color: var(--text-secondary);
   text-decoration: none;
   border-left: 2px solid transparent;
@@ -1824,7 +1826,7 @@
 
 .admin-sidebar-link {
   display: block;
-  padding: 0.25rem 0.75rem;
+  padding: 0.75rem 0.75rem; /* min 44px touch target height */
   color: var(--text-secondary);
   text-decoration: none;
   border-left: 2px solid transparent;

@@ -424,23 +424,39 @@
   margin-top: 2rem;
 }
 
+/* Dot button uses 44×44 touch area; visual dot rendered via ::before */
 .testimonial-carousel-dot {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 2.75rem; /* 44px minimum touch target */
+  height: 2.75rem; /* 44px minimum touch target */
   border-radius: 9999px;
   border: none;
-  background-color: var(--border-color, #e2e8f0);
+  background-color: transparent;
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.testimonial-carousel-dot[data-active="true"] {
+.testimonial-carousel-dot::before {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--border-color, #e2e8f0);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.testimonial-carousel-dot[data-active="true"]::before {
   background-color: var(--accent-primary);
   width: 2rem;
 }
 
-.testimonial-carousel-dot:hover {
+.testimonial-carousel-dot:hover::before {
   background-color: var(--accent-primary);
 }
 
