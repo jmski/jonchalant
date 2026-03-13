@@ -1108,7 +1108,7 @@
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast);
   border: none;
   background: none;
   cursor: pointer;
@@ -1118,7 +1118,6 @@
 
 .navbar-link:hover {
   color: var(--accent-primary);
-  background-color: var(--bg-secondary);
 }
 
 .navbar-link.active {

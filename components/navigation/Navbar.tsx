@@ -183,15 +183,23 @@ export default function Navbar() {
               onMouseLeave={() => link.dropdown && handleDropdownLeave()}
             >
               {link.dropdown ? (
-                <button
+                <span
                   className={`navbar-link has-dropdown ${link.dropdown.some((item) => isActive(item.href)) ? 'active' : ''}`}
                   onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setOpenDropdown(openDropdown === link.label ? null : link.label);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                   aria-expanded={openDropdown === link.label}
                   aria-haspopup="true"
                 >
                   {link.label}
                   <span className="navbar-dropdown-arrow">▼</span>
-                </button>
+                </span>
               ) : (
                 <Link
                   href={link.href}

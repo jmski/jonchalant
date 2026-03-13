@@ -2456,7 +2456,10 @@
   font-family: var(--font-body);
   color: var(--text-secondary);
   cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    background var(--transition-fast);
 }
 
 .blog-share-btn:hover {
@@ -2876,4 +2879,186 @@
   font-size: 0.925rem;
   color: var(--text-secondary);
   margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PROGRAMS PAGE — Three-Track Layout
+   Leadership Programs, Movement Coaching, Brand Collaboration
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+/* Section wrapper */
+.program-tracks-section {
+  padding: var(--spacing-2xl) 0;
+}
+
+/* Section header */
+.program-tracks-header {
+  max-width: 680px;
+  margin: 0 auto var(--spacing-3xl);
+  text-align: center;
+}
+
+.program-tracks-header .program-tracks-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.program-tracks-title {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 var(--spacing-md);
+}
+
+.program-tracks-subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Track list */
+.program-tracks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Individual track article */
+.program-track {
+  padding: var(--spacing-2xl) 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.program-track:last-child {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Inner two-column grid */
+.program-track-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .program-track-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+  }
+
+  /* Reverse layout for alternating tracks */
+  .program-track--reverse .program-track-inner {
+    direction: rtl;
+  }
+
+  .program-track--reverse .program-track-inner > * {
+    direction: ltr;
+  }
+}
+
+/* ── Left column: narrative ── */
+.program-track-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.program-track-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin: 0;
+}
+
+.program-track-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 2.125rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.program-track-description {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.program-track-cta {
+  align-self: flex-start;
+  margin-top: var(--spacing-sm);
+  text-decoration: none;
+}
+
+/* ── Right column: details ── */
+.program-track-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.program-track-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.program-track-block-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.program-track-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.program-track-list-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.program-track-check {
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  min-width: 1rem;
+}
+
+.program-track-bullet {
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  color: var(--color-burnt-indigo);
+  min-width: 1rem;
 }

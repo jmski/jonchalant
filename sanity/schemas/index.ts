@@ -18,6 +18,7 @@ import collaborationPackage from './collaborationPackage'
 import blogPost from './blogPost'
 import module from './module'
 import portalLesson from './portalLesson'
+import programTrack from './programTrack'
 
 export const schemaTypes = [
   portfolio,
@@ -40,4 +41,5 @@ export const schemaTypes = [
   blogPost,
   module,
   portalLesson,
+  programTrack,
 ]
