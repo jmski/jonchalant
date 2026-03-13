@@ -1000,3 +1000,359 @@
   color: var(--text-secondary);
   font-size: 1rem;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ABOUT PAGE SECTIONS
+   Hero, Origin, Methodology, Services, Values (Introvert)
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+/* ── About: shared eyebrow label ── */
+.about-hero-intro,
+.about-philosophy-eyebrow,
+.about-services-eyebrow,
+.about-introvert-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ── About Hero ── */
+.about-hero-section {
+  padding: var(--spacing-3xl) 0 var(--spacing-xl);
+}
+
+.about-hero-container {
+  max-width: 720px;
+}
+
+.about-hero-title {
+  font-family: var(--font-headline);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-lg);
+}
+
+.about-hero-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 60ch;
+  margin: 0;
+}
+
+.about-hero-divider {
+  margin-top: var(--spacing-2xl);
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ── About Origin ── */
+.about-origin-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  padding: var(--spacing-2xl) 0;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .about-origin-section {
+    grid-template-columns: 3fr 2fr;
+    gap: var(--spacing-3xl);
+  }
+}
+
+.about-origin-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-lg);
+}
+
+.about-origin-description {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-xl);
+  max-width: 60ch;
+}
+
+.about-phases {
+  margin-top: var(--spacing-xl);
+}
+
+.about-phases-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--spacing-lg);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.about-phases-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.about-phase-item-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-xs);
+}
+
+.about-phase-item-description {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.about-origin-image {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.about-origin-image-text {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ── About Philosophy / Methodology ── */
+.about-philosophy-section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.about-philosophy-header {
+  max-width: 620px;
+  margin: 0 0 var(--spacing-2xl);
+}
+
+.about-philosophy-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-md);
+}
+
+.about-philosophy-subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.about-philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .about-philosophy-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.about-philosophy-card {
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+  border-top: 3px solid var(--accent-primary);
+  background: var(--bg-primary);
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.about-philosophy-emoji {
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.about-philosophy-card-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.about-philosophy-card-description {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── About Services / The Work ── */
+.about-services-section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.about-services-header {
+  max-width: 620px;
+  margin: 0 0 var(--spacing-2xl);
+}
+
+.about-services-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-md);
+}
+
+.about-services-subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.about-services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .about-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.about-service-card {
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-primary);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.about-service-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 16px rgba(107, 142, 99, 0.08);
+}
+
+.about-service-card-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.about-service-card-description {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── About Introvert / Values ── */
+.about-introvert-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  padding: var(--spacing-2xl) 0;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .about-introvert-section {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+  }
+}
+
+.about-introvert-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.about-introvert-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.about-introvert-paragraph {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.about-introvert-cta-text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  margin-top: var(--spacing-xs);
+}
+
+.about-traits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  align-content: start;
+}
+
+@media (max-width: 480px) {
+  .about-traits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-trait-card {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-primary);
+  background: var(--bg-secondary);
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.about-trait-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}

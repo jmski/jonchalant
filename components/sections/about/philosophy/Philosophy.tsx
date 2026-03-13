@@ -13,11 +13,12 @@ export function Philosophy({ philosophies = [] }: PhilosophyProps) {
   return (
     <section className="about-philosophy-section">
       <div className="about-philosophy-header">
+        <p className="about-philosophy-eyebrow">My Methodology</p>
         <h2 className="about-philosophy-title">
-          How I Coach: Three Non-Negotiables
+          This Is How I Actually Work
         </h2>
         <p className="about-philosophy-subtitle">
-          This framework is the backbone of every coaching conversation. It's what makes the transformation real.
+          No scripts. No performance tricks. Just three principles I come back to in every session — because they're the ones that stick.
         </p>
       </div>
 
@@ -38,7 +39,7 @@ export function Philosophy({ philosophies = [] }: PhilosophyProps) {
           ))
         ) : (
           <div className="loading-state">
-            Loading philosophy content...
+            Loading methodology...
           </div>
         )}
       </div>

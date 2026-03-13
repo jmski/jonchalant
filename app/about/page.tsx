@@ -1,4 +1,4 @@
-import { CTA, Stats, FAQ } from "@/components/sections";
+import { CTA, Stats } from "@/components/sections";
 import { Hero as AboutHero, Origin, Services as AboutServices, Philosophy, Introvert } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import type { Metadata } from 'next';
@@ -46,17 +46,11 @@ export default async function About() {
     
     if (sanityAbout) {
       aboutContent = sanityAbout;
-      if (sanityAbout.philosophies) {
-        philosophies = sanityAbout.philosophies;
-      }
-      if (sanityAbout.introvertTraits) {
-        introvertTraits = sanityAbout.introvertTraits;
-      }
+      if (sanityAbout.philosophies) philosophies = sanityAbout.philosophies;
+      if (sanityAbout.introvertTraits) introvertTraits = sanityAbout.introvertTraits;
     }
     
-    if (sanityServices && sanityServices.length > 0) {
-      services = sanityServices;
-    }
+    if (sanityServices && sanityServices.length > 0) services = sanityServices;
   } catch (error) {
     console.warn('Failed to fetch about content from Sanity, using fallback data:', error);
   }
@@ -64,7 +58,8 @@ export default async function About() {
   return (
     <div className="about-main">
       <PageTransition animation="fade">
-        {/* HERO SECTION */}
+
+        {/* 1 — PERSONAL INTRO */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <AboutHero
@@ -74,7 +69,7 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* ORIGIN STORY - 60/40 LAYOUT */}
+        {/* 2 — ORIGIN STORY: why movement + leadership */}
         <SectionWrapper variant="secondary">
           <SectionContent>
             <Origin
@@ -85,43 +80,36 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* KEY STATS */}
-        <SectionWrapper variant="tertiary">
-          <SectionContent>
-            <Stats 
-              stats={aboutContent?.stats || []} 
-              heading="Proven Results From Real Leaders"
-              description="These outcomes matter because they represent how our clients show up differently—at work, with their teams, and in their own eyes."
-              columns={3}
-            />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* WHAT I COACH - Now fetching from Sanity services */}
+        {/* 3 — METHODOLOGY: how the coaching works */}
         <SectionWrapper variant="primary">
-          <SectionContent>
-            <AboutServices services={services} />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* MY PHILOSOPHY */}
-        <SectionWrapper variant="secondary">
           <SectionContent>
             <Philosophy philosophies={philosophies} />
           </SectionContent>
         </SectionWrapper>
 
-        {/* INTROVERT ADVANTAGE */}
-        <SectionWrapper variant="primary">
+        {/* 4a — CREDENTIALS: track record in numbers */}
+        <SectionWrapper variant="tertiary">
           <SectionContent>
-            <Introvert traits={introvertTraits} />
+            <Stats
+              stats={aboutContent?.stats || []}
+              heading="The Work in Numbers"
+              description="Not vanity metrics. These are the outcomes that matter to real people in real jobs."
+              columns={3}
+            />
           </SectionContent>
         </SectionWrapper>
 
-        {/* FAQ SECTION */}
+        {/* 4b — CREDENTIALS: what we actually work on */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <FAQ />
+            <AboutServices services={services} />
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* 5 — VALUES: the introvert advantage */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <Introvert traits={introvertTraits} />
           </SectionContent>
         </SectionWrapper>
 
@@ -130,12 +118,13 @@ export default async function About() {
           <SectionContent>
             <CTA
               title="Your Presence Matters. Let's Amplify It."
-              description="Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today—and the fastest path to where you want to be."
+              description="Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today — and the fastest path to where you want to be."
               buttonText="Get Your Free Audit Now"
               buttonLink="/contact"
             />
           </SectionContent>
         </SectionWrapper>
+
       </PageTransition>
     </div>
   );

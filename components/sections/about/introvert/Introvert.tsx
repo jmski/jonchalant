@@ -8,20 +8,21 @@ export function Introvert({ traits = [] }: IntrovertProps) {
   return (
     <section className="about-introvert-section">
       <div className="about-introvert-content">
+        <p className="about-introvert-eyebrow">What I Believe</p>
         <h2 className="about-introvert-title">
-          Why Your Introversion Is Your Superpower
+          Introversion Isn't a Problem to Solve
         </h2>
 
         <p className="about-introvert-paragraph">
-          You listen more than you speak. You think before you act. You draw energy from depth, not breadth. These aren't weaknesses—they're advantages waiting to be weaponized.
+          You listen more than you speak. You think before you act. You draw energy from depth, not breadth. The world keeps telling you to fix that. I disagree.
         </p>
 
         <p className="about-introvert-paragraph">
-          The world needs more leaders who think before they act, who listen deeply, and who lead from authenticity. That's you.
+          Every trait that makes you feel "too quiet" or "not enough" in the room is actually signal — of a leader who thinks clearly, builds trust slowly but deeply, and doesn't perform authority. That's rare. That's valuable. That's what we work with.
         </p>
 
         <p className="about-introvert-cta-text">
-          See how these principles translate to movement and presence in my{' '}
+          See how these principles show up in movement in my{' '}
           <TextLink href="/dance">
             choreography portfolio
           </TextLink>
@@ -38,7 +39,7 @@ export function Introvert({ traits = [] }: IntrovertProps) {
           ))
         ) : (
           <div className="loading-state">
-            Loading introvert traits...
+            Loading...
           </div>
         )}
       </div>
