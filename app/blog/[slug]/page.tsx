@@ -5,6 +5,9 @@ import { client } from '@/lib/sanity';
 import { PortableText } from '@portabletext/react';
 import { BlogRelated } from '@/components/sections';
 import { portableTextComponents } from '@/lib/blog/portableTextComponents';
+import { BlogToC } from './BlogToC';
+import { extractHeadings } from './headings';
+import { BlogShare } from './BlogShare';
 
 interface BlogPostDocument {
   _id: string;
@@ -142,6 +145,8 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const relatedPosts = await getRelatedPosts(post.pillar, slug);
+  const headings = extractHeadings(post.content ?? []);
+
   const publishDate = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -153,7 +158,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <main className="blog-main">
       {/* Breadcrumb */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="blog-breadcrumb-bar">
         <div className="blog-breadcrumb">
           <Link href="/blog" className="blog-breadcrumb-link">
             Blog
@@ -163,66 +168,87 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Article Header */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
-        <div className="blog-article-header">
-          <div className="blog-meta">
-            <span className="blog-pillar-badge">
-              {post.pillar}
-            </span>
-            {post.readingTime && (
-              <span className="blog-meta-text">
-                {post.readingTime} min read
-              </span>
+      {/* Two-column layout: ToC sidebar + article */}
+      <div className="blog-layout">
+
+        {/* Sticky ToC — only renders on desktop when there are headings */}
+        {headings.length > 0 && (
+          <div className="blog-toc-col">
+            <BlogToC headings={headings} />
+          </div>
+        )}
+
+        {/* Main article column */}
+        <article className="blog-article-col">
+
+          {/* Article Header */}
+          <header className="blog-article-header">
+            <div className="blog-meta">
+              <span className="blog-pillar-badge">{post.pillar}</span>
+
+              {post.readingTime && (
+                <span className="blog-meta-text blog-meta-readtime">
+                  {/* Clock icon */}
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  {post.readingTime} min read
+                </span>
+              )}
+
+              {publishDate && (
+                <span className="blog-meta-text">{publishDate}</span>
+              )}
+            </div>
+
+            <h1 className="blog-title">{post.title}</h1>
+
+            {post.excerpt && (
+              <p className="blog-excerpt">{post.excerpt}</p>
             )}
-            {publishDate && (
-              <span className="blog-meta-text">
-                {publishDate}
-              </span>
+
+            {/* Share buttons — below excerpt, above the rule */}
+            <BlogShare title={post.title} />
+          </header>
+
+          {/* Body content */}
+          <div className="blog-content">
+            {post.content && post.content.length > 0 ? (
+              <PortableText value={post.content} components={portableTextComponents} />
+            ) : (
+              <p>No content available for this post.</p>
             )}
           </div>
 
-          <h1 className="blog-title">
-            {post.title}
-          </h1>
+          {/* Bottom share — after reading the full article */}
+          <div className="blog-share-bottom">
+            <p className="blog-share-bottom-label">Found this useful? Share it.</p>
+            <BlogShare title={post.title} />
+          </div>
 
-          {post.excerpt && (
-            <p className="blog-excerpt">
-              {post.excerpt}
-            </p>
+          {/* Post-level CTA */}
+          {post.cta && post.cta.url && (
+            <div className="blog-cta">
+              <p className="blog-cta-text">{post.cta.text || 'Ready to work with me?'}</p>
+              <Link href={post.cta.url} className="blog-cta-button">
+                Get Started
+              </Link>
+            </div>
           )}
-        </div>
 
-        {/* Content */}
-        <div className="blog-content">
-          {post.content && post.content.length > 0 ? (
-            <PortableText value={post.content} components={portableTextComponents} />
-          ) : (
-            <p>No content available for this post.</p>
+          {/* Related posts from same pillar */}
+          {relatedPosts.length > 0 && (
+            <BlogRelated posts={relatedPosts} />
           )}
-        </div>
 
-        {/* CTA */}
-        {post.cta && post.cta.url && (
-          <div className="blog-cta">
-            <p className="blog-cta-text">{post.cta.text || 'Ready to work with me?'}</p>
-            <Link href={post.cta.url} className="blog-cta-button">
-              Get Started
+          {/* Back link */}
+          <div className="blog-back-section">
+            <Link href="/blog" className="blog-back-link">
+              ← Back to Blog
             </Link>
           </div>
-        )}
-
-        {/* Related Posts */}
-        {relatedPosts.length > 0 && (
-          <BlogRelated posts={relatedPosts} />
-        )}
-      </article>
-
-      {/* Back to Blog */}
-      <div className="blog-back-section max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/blog" className="blog-back-link">
-          ← Back to Blog
-        </Link>
+        </article>
       </div>
     </main>
   );

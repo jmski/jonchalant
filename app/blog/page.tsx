@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { client } from '@/lib/sanity';
-import { Heading } from '@/components/typography';
-import { CTA, BlogFeatured, BlogPosts } from '@/components/sections';
+import { CTA } from '@/components/sections';
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout';
+import { BlogClient } from './BlogClient';
 
 export const metadata: Metadata = {
   title: 'Leadership Blog | Executive Presence & Quiet Command',
@@ -69,41 +69,11 @@ async function getBlogPosts(): Promise<BlogPost[]> {
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
-  const featuredPosts = posts.filter((post) => post.featured);
-  const regularPosts = posts.filter((post) => !post.featured);
 
   return (
     <main className="blog-page-main">
       <PageTransition animation="fade">
-        {/* Header */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <div className="blog-page-header">
-              <Heading level={1} className="blog-page-title">
-                Leadership Blog
-              </Heading>
-              <p className="blog-page-subtitle">
-                Articles on executive presence, quiet command, confidence coaching, and leadership for introverts.
-              </p>
-            </div>
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* Featured Posts */}
-        {featuredPosts.length > 0 && (
-          <SectionWrapper variant="secondary">
-            <SectionContent>
-              <BlogFeatured posts={featuredPosts} />
-            </SectionContent>
-          </SectionWrapper>
-        )}
-
-        {/* All Posts */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <BlogPosts posts={regularPosts} />
-          </SectionContent>
-        </SectionWrapper>
+        <BlogClient posts={posts} />
 
         {/* CTA Section */}
         <SectionWrapper variant="tertiary">
