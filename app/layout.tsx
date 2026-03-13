@@ -3,7 +3,7 @@ import Script from "next/script";
 import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
-import { Navbar } from "@/components/navigation";
+import { Navbar, SiteFooter } from "@/components/navigation";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
 import { getContactInfo } from "@/lib/sanity";
 
@@ -106,11 +106,13 @@ export default async function RootLayout({
     const contactInfo = await getContactInfo();
     if (contactInfo?.contactMethods) {
       socialLinks = contactInfo.contactMethods
-        .filter((m) => ['Instagram', 'TikTok', 'YouTube'].includes(m.label))
+        .filter((m) => ['LinkedIn', 'Instagram', 'TikTok', 'YouTube'].includes(m.label))
         .map((m) => ({
           label: m.label,
           href: m.href,
-          icon: m.label.toLowerCase().includes('instagram')
+          icon: m.label.toLowerCase().includes('linkedin')
+            ? 'in'
+            : m.label.toLowerCase().includes('instagram')
             ? 'ig'
             : m.label.toLowerCase().includes('youtube')
             ? 'yt'
@@ -167,6 +169,9 @@ export default async function RootLayout({
           <RouteAwareLayout>
             {children}
           </RouteAwareLayout>
+
+          {/* Site Footer — hidden on portal/admin routes via internal pathname check */}
+          <SiteFooter socialLinks={socialLinks} />
 
         {/* Google Analytics — afterInteractive defers load until the page is interactive */}
         {process.env.NEXT_PUBLIC_GA_ID && (
