@@ -414,6 +414,46 @@ export async function getProgramsFocusItems() {
 }
 
 // ============================================================================
+// PROGRAM TRACKS
+// ============================================================================
+
+export interface ProgramTrackItem {
+  _id: string;
+  title: string;
+  eyebrow?: string;
+  trackType: 'leadership' | 'movement' | 'collaboration';
+  description: string;
+  includes: { text: string }[];
+  audience: { text: string }[];
+  ctaText: string;
+  ctaHref: string;
+  order: number;
+}
+
+export async function getProgramTracks(): Promise<ProgramTrackItem[]> {
+  const query = `*[_type == "programTrack"] | order(order asc) {
+    _id,
+    title,
+    eyebrow,
+    trackType,
+    description,
+    "includes": includes[].text,
+    "audience": audience[].text,
+    ctaText,
+    ctaHref,
+    order
+  }`
+  const raw = await client.fetch(query)
+  // Normalise: GROQ projection returns plain string arrays;
+  // component expects { text: string }[] — map back here.
+  return raw.map((t: any) => ({
+    ...t,
+    includes: (t.includes ?? []).map((text: string) => ({ text })),
+    audience: (t.audience ?? []).map((text: string) => ({ text })),
+  }))
+}
+
+// ============================================================================
 // PAGE METADATA (Headlines, CTAs, Descriptions)
 // ============================================================================
 

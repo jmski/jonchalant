@@ -1,14 +1,14 @@
-import { CTA, PageHero, Programs as ProgramsSection, FocusAreas, SupplementalLearning } from "@/components/sections";
+import { CTA, PageHero, ProgramTracks, FocusAreas, SupplementalLearning } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import dynamic from 'next/dynamic';
 import Script from 'next/script';
-import { getPrograms, getProgramsFocusItems } from "@/lib/sanity";
+import { getProgramsFocusItems, getProgramTracks } from "@/lib/sanity";
+import type { ProgramTrackItem } from "@/lib/sanity";
 import { CourseSchema } from "@/lib/schema";
 
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Leadership Coaching Programs | Quiet Command & Executive Presence | Jonchalant",
+  title: "Leadership Coaching Programs | Quiet Command & Executive Presence",
   description: "8-12 week programs for building executive presence and quiet command. Body-aware coaching for introverts to develop confidence and professional presence.",
   keywords: "leadership coaching programs, executive presence training, quiet command coaching, introvert leadership program, professional presence coaching, body-aware leadership",
   openGraph: {
@@ -38,16 +38,14 @@ export const metadata: Metadata = {
 
 
 export default async function Programs() {
-  let programCards = [];
   let focusItems: { title: string; description: string; icon: string }[] = [];
+  let programTracks: ProgramTrackItem[] = [];
 
   try {
-    const sanityPrograms = await getPrograms();
-    if (sanityPrograms && sanityPrograms.length > 0) {
-      programCards = sanityPrograms;
-    }
+    const tracks = await getProgramTracks();
+    if (tracks && tracks.length > 0) programTracks = tracks;
   } catch (error) {
-    console.warn('Failed to fetch programs from Sanity:', error);
+    console.warn('Failed to fetch program tracks from Sanity:', error);
   }
 
   try {
@@ -106,18 +104,10 @@ export default async function Programs() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* PROGRAM CARDS */}
+        {/* PROGRAM TRACKS */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <section id="programs-section">
-              {programCards.length > 0 ? (
-                <ProgramsSection programs={programCards} />
-              ) : (
-                <div className="py-12 text-center" style={{ color: 'var(--text-tertiary)' }}>
-                  <p>Loading coaching programs...</p>
-                </div>
-              )}
-            </section>
+            <ProgramTracks tracks={programTracks} />
           </SectionContent>
         </SectionWrapper>
 

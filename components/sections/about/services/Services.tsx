@@ -12,11 +12,12 @@ export function Services({ services = [] }: ServicesProps) {
   return (
     <section className="about-services-section">
       <div className="about-services-header">
+        <p className="about-services-eyebrow">The Work</p>
         <h2 className="about-services-title">
-          What I Coach
+          What We Work On Together
         </h2>
         <p className="about-services-subtitle">
-          Three core pillars that transform how you show up professionally.
+          Not theory, not templates. Real, focused work in the areas that move the needle fastest for quiet leaders.
         </p>
       </div>
 
@@ -34,7 +35,7 @@ export function Services({ services = [] }: ServicesProps) {
           ))
         ) : (
           <div className="loading-state">
-            Loading coaching services...
+            Loading coaching focus areas...
           </div>
         )}
       </div>

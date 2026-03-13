@@ -1,5 +1,6 @@
 import { ScrollStagger, ScrollStaggerItem } from '@/components/animations';
 import { BlogCard } from '@/components/utilities/cards';
+import { BlogOptIn } from '@/components/forms/BlogOptIn';
 
 interface BlogPost {
   _id: string;
@@ -43,6 +44,8 @@ export function Posts({ posts }: PostsProps) {
           ))}
         </div>
       </ScrollStagger>
+
+      <BlogOptIn />
     </section>
   );
 }

@@ -3,12 +3,15 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { getContactInfo } from '@/lib/sanity';
 
 interface SocialLink {
   label: string;
   href: string;
   icon: string;
+}
+
+interface NavbarProps {
+  socialLinks?: SocialLink[];
 }
 
 interface NavSection {
@@ -77,19 +80,12 @@ const FLAT_NAV_LINKS = [
   { label: 'Contact', href: '/contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ socialLinks = [] }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
-  const dropdownTimers = useRef<Record<string, NodeJS.Timeout>>({});
+  const closeTimer = useRef<NodeJS.Timeout | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
-
-  // Hydration safety
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Close dropdown on outside click or Escape key
   useEffect(() => {
@@ -118,45 +114,18 @@ export default function Navbar() {
     setOpenDropdown(null);
   }, [pathname]);
 
-  // Fetch social links
-  useEffect(() => {
-    const fetchSocialLinks = async () => {
-      try {
-        const contactInfo = await getContactInfo();
-        if (contactInfo?.contactMethods) {
-          // Filter only social media links and map to SocialLink
-          const socials = contactInfo.contactMethods
-            .filter((method) => ['Instagram', 'TikTok', 'YouTube'].includes(method.label))
-            .map((method) => ({
-              label: method.label,
-              href: method.href,
-              icon: method.label.toLowerCase().includes('instagram') ? 'ig' : method.label.toLowerCase().includes('youtube') ? 'yt' : 'tk',
-            }));
-          setSocialLinks(socials);
-        }
-      } catch (error) {
-        console.error('Error fetching social links:', error);
-      }
-    };
-
-    if (mounted) {
-      fetchSocialLinks();
-    }
-  }, [mounted]);
-
   const handleDropdownEnter = (label: string) => {
-    // Clear any pending close timeout
-    if (dropdownTimers.current[label]) {
-      clearTimeout(dropdownTimers.current[label]);
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
     }
     setOpenDropdown(label);
   };
 
-  const handleDropdownLeave = (label: string) => {
-    // Delay closing to allow moving to submenu
-    dropdownTimers.current[label] = setTimeout(() => {
+  const handleDropdownLeave = () => {
+    closeTimer.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 150);
+    }, 300);
   };
 
   const isActive = (href: string): boolean => {
@@ -181,18 +150,26 @@ export default function Navbar() {
               key={link.label}
               className="navbar-item"
               onMouseEnter={() => link.dropdown && handleDropdownEnter(link.label)}
-              onMouseLeave={() => link.dropdown && handleDropdownLeave(link.label)}
+              onMouseLeave={() => link.dropdown && handleDropdownLeave()}
             >
               {link.dropdown ? (
-                <button
+                <span
                   className={`navbar-link has-dropdown ${link.dropdown.some((item) => isActive(item.href)) ? 'active' : ''}`}
                   onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setOpenDropdown(openDropdown === link.label ? null : link.label);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                   aria-expanded={openDropdown === link.label}
                   aria-haspopup="true"
                 >
                   {link.label}
                   <span className="navbar-dropdown-arrow">▼</span>
-                </button>
+                </span>
               ) : (
                 <Link
                   href={link.href}
@@ -207,7 +184,7 @@ export default function Navbar() {
                 <div
                   className={`navbar-dropdown ${openDropdown === link.label ? 'visible' : ''}`}
                   onMouseEnter={() => handleDropdownEnter(link.label)}
-                  onMouseLeave={() => handleDropdownLeave(link.label)}
+                  onMouseLeave={() => handleDropdownLeave()}
                 >
                   {link.dropdown.map((item) => (
                     <Link
@@ -304,7 +281,7 @@ export default function Navbar() {
               </Link>
 
               {/* Social Links */}
-              {mounted && socialLinks.length > 0 && (
+              {socialLinks.length > 0 && (
                 <div className="navbar-mobile-social-links">
                   {socialLinks.map((social) => (
                     <a

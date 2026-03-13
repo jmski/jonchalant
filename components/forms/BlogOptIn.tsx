@@ -1,6 +1,8 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
+
+const STORAGE_KEY = 'jonchalant_subscribed'
 
 interface OptInState {
   isSubmitting: boolean
@@ -11,11 +13,19 @@ interface OptInState {
 export function BlogOptIn() {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false)
   const [state, setState] = useState<OptInState>({
     isSubmitting: false,
     submitted: false,
     error: null,
   })
+
+  // Check localStorage on mount — hide form if already subscribed
+  useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem(STORAGE_KEY) === 'true') {
+      setAlreadySubscribed(true)
+    }
+  }, [])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -34,6 +44,7 @@ export function BlogOptIn() {
         throw new Error(result.error || 'Failed to subscribe')
       }
 
+      localStorage.setItem(STORAGE_KEY, 'true')
       setState({ isSubmitting: false, submitted: true, error: null })
     } catch (err) {
       setState({
@@ -42,6 +53,10 @@ export function BlogOptIn() {
         error: err instanceof Error ? err.message : 'Something went wrong. Please try again.',
       })
     }
+  }
+
+  if (alreadySubscribed) {
+    return null
   }
 
   if (state.submitted) {

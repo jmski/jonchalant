@@ -12,7 +12,7 @@ import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
 import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Executive Presence Coaching for Introverts | 8-Week Program | Jonchalant",
+  title: "Executive Presence Coaching for Introverts | 8-Week Program",
   description: "Build executive presence and quiet command in 8-12 weeks. Leadership coaching for introverts using evidence-based, body-aware techniques. Master confident communication.",
   keywords: "executive presence coaching, leadership coaching for introverts, quiet command, confidence coaching, introvert leadership, professional presence",
   openGraph: {

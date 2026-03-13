@@ -3,21 +3,31 @@
  * Used in both blog listing and individual post pages
  */
 
+/** Converts a heading string to a URL-safe anchor id. */
+function toAnchorId(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
 export const portableTextComponents = {
   types: {
     block: ({ value }: any) => {
       const style = value._type === 'block' ? value.style : 'normal';
+      const text: string = value.children?.map((c: any) => c.text).join('') ?? '';
 
       if (style === 'h2') {
         return (
-          <h2 className="blog-content h2">
+          <h2 id={toAnchorId(text)} className="blog-content h2">
             {value.children.map((child: any) => child.text).join('')}
           </h2>
         );
       }
       if (style === 'h3') {
         return (
-          <h3 className="blog-content h3">
+          <h3 id={toAnchorId(text)} className="blog-content h3">
             {value.children.map((child: any) => child.text).join('')}
           </h3>
         );

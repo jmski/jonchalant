@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     qualities: [75, 80],
     remotePatterns: [
       {

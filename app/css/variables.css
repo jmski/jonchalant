@@ -17,10 +17,11 @@
 
 /* ========== TYPOGRAPHY SYSTEM ========== */
 :root {
-  /* Premium Editorial Typography */
-  --font-headline: "Fraunces", "Palatino Linotype", Georgia, serif;
+  /* Premium Editorial Typography — CSS variables injected by next/font/google */
+  --font-headline: var(--font-fraunces), "Palatino Linotype", Georgia, serif;
   --font-body:
-    "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    var(--font-dm-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   --font-mono: "Monaco", "Courier New", monospace;
 
   /* Aliases used in base.css */
@@ -109,4 +110,33 @@
     99,
     0.03
   ); /* Blueprint grid - increased opacity */
+}
+
+/* ========== MISSING / ALIAS VARIABLES ========== */
+/* These were dropped in a CSS refactor but are still referenced across CSS files. */
+:root {
+  /* Background aliases */
+  --bg-light: #ffffff; /* Card surfaces — lifts off the rice-paper bg */
+  --bg-muted: var(--bg-tertiary); /* Subtle section/header tint (warm sand) */
+
+  /* Shadow scale */
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Accent / text aliases */
+  --accent-primary-hover: var(--accent-hover);
+  --text-muted: var(--text-tertiary);
+  --border-accent: var(--accent-primary);
+
+  /* Spacing alias */
+  --section-gap: var(--spacing-xl);
+
+  /* Typography aliases */
+  --font-sans: var(--font-body);
+  --font-monospace: var(--font-mono);
+  --font-display: var(--font-headline); /* Old "display" usage → Fraunces */
+  --font-retro: var(--font-mono); /* Old "retro/tech" usage → mono */
+
+  /* Letter-spacing token */
+  --tracking-widest: 0.15em;
 }
