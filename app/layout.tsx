@@ -1,10 +1,29 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
 import { Navbar } from "@/components/navigation";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
-import { AuthProvider } from "@/lib/auth-context";
+import { getContactInfo } from "@/lib/sanity";
+
+// next/font self-hosts both typefaces — no external request, no render block
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   // metadataBase lets Next.js resolve relative OG/Twitter image URLs from /public
@@ -76,51 +95,80 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch social links server-side so Sanity client stays out of the client JS bundle
+  let socialLinks: { label: string; href: string; icon: string }[] = [];
+  try {
+    const contactInfo = await getContactInfo();
+    if (contactInfo?.contactMethods) {
+      socialLinks = contactInfo.contactMethods
+        .filter((m) => ['Instagram', 'TikTok', 'YouTube'].includes(m.label))
+        .map((m) => ({
+          label: m.label,
+          href: m.href,
+          icon: m.label.toLowerCase().includes('instagram')
+            ? 'ig'
+            : m.label.toLowerCase().includes('youtube')
+            ? 'yt'
+            : 'tk',
+        }));
+    }
+  } catch {
+    // Non-critical — navbar social icons are optional
+  }
   return (
-    <html lang="en" data-theme="default" suppressHydrationWarning>
+    <html lang="en" data-theme="default" suppressHydrationWarning className={`${fraunces.variable} ${dmSans.variable}`}>
       <head>
-        <meta name="color-scheme" content="light dark" />
-        {/* FOUC Prevention: Apply stored theme before page renders */}
+        {/* Light-only site — tells browser not to apply forced dark-mode styles */}
+        <meta name="color-scheme" content="light" />
+
+        {/* Warm the connection before GA scripts load (no data sent) */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <link rel="preconnect" href="https://www.googletagmanager.com" />
+            <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+          </>
+        )}
+
+        {/* JSON-LD Structured Data — plain <script> is inlined in initial HTML so crawlers see it immediately */}
         <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const stored = localStorage.getItem('jonchalon-theme') || 'default';
-                document.documentElement.setAttribute('data-theme', stored);
-              })();
-            `,
-          }}
-        />
-        
-        {/* JSON-LD Structured Data */}
-        <Script
-          id="person-schema"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(PersonSchema()),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PersonSchema()) }}
         />
-        <Script
-          id="organization-schema"
+        <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(OrganizationSchema()),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(OrganizationSchema()) }}
         />
-        <Script
-          id="local-business-schema"
+        <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(LocalBusinessSchema()),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(LocalBusinessSchema()) }}
         />
-        
-        {/* Google Analytics */}
+      </head>
+      <body suppressHydrationWarning>
+          {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 bg-accent text-white"
+            style={{
+              fontWeight: 'bold'
+            }}
+          >
+            Skip to main content
+          </a>
+          
+          {/* Main Navigation Navbar */}
+          <Navbar socialLinks={socialLinks} />
+          
+          {/* Route-Aware Layout: Renders main pages and portal/admin with their own sidebars */}
+          <RouteAwareLayout>
+            {children}
+          </RouteAwareLayout>
+
+        {/* Google Analytics — afterInteractive defers load until the page is interactive */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script
@@ -141,28 +189,6 @@ export default function RootLayout({
             />
           </>
         )}
-      </head>
-      <body suppressHydrationWarning>
-        <AuthProvider>
-          {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 bg-accent text-white"
-            style={{
-              fontWeight: 'bold'
-            }}
-          >
-            Skip to main content
-          </a>
-          
-          {/* Main Navigation Navbar */}
-          <Navbar />
-          
-          {/* Route-Aware Layout: Renders main pages and portal/admin with their own sidebars */}
-          <RouteAwareLayout>
-            {children}
-          </RouteAwareLayout>
-        </AuthProvider>
       </body>
     </html>
   );

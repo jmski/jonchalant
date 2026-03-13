@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { AuthProvider } from '@/lib/auth-context';
 
 // Auth-gated portal: prevent search engines from indexing lesson content
 export const metadata: Metadata = {
@@ -24,8 +25,10 @@ interface PortalLayoutProps {
  */
 export default function PortalLayout({ children }: PortalLayoutProps) {
   return (
-    <main className="main-content" id="main-content">
-      {children}
-    </main>
+    <AuthProvider>
+      <main className="main-content" id="main-content">
+        {children}
+      </main>
+    </AuthProvider>
   );
 }

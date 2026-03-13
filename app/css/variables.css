@@ -17,10 +17,11 @@
 
 /* ========== TYPOGRAPHY SYSTEM ========== */
 :root {
-  /* Premium Editorial Typography */
-  --font-headline: "Fraunces", "Palatino Linotype", Georgia, serif;
+  /* Premium Editorial Typography — CSS variables injected by next/font/google */
+  --font-headline: var(--font-fraunces), "Palatino Linotype", Georgia, serif;
   --font-body:
-    "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    var(--font-dm-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   --font-mono: "Monaco", "Courier New", monospace;
 
   /* Aliases used in base.css */
