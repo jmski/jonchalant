@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "About Jon | Leadership Coach & Choreographer | Jonchalant",
+  title: "About Jon | Leadership Coach & Choreographer",
   description: "Learn how Jon combines professional dance choreography with leadership development to help introverts build executive presence, quiet command, and confident communication skills.",
   keywords: "leadership coach introverts, choreographer, body-aware leadership, executive presence coach, introvert strengths, movement-based coaching",
   openGraph: {

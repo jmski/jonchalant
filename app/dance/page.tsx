@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { getPortfolioItems, getFeaturedPortfolioItem } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Dance Choreography Portfolio | Hip-Hop & Contemporary | Jonchalant",
+  title: "Dance Choreography Portfolio | Hip-Hop & Contemporary",
   description: "Explore professional choreography portfolio with 30+ original hip-hop and contemporary videos. Premium choreography for brands, events, and performers.",
   keywords: "dance choreography, hip-hop choreography, contemporary dance, freestyle dance, professional choreographer, dance videos, movement coaching",
   openGraph: {

@@ -3,7 +3,7 @@ import ContactClient from './ContactClient';
 import { getContactInfo, getPageMetadata } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Contact & Inquiry | Leadership Coaching & Choreography Services | Jonchalant",
+  title: "Contact Jon | Leadership Coaching & Choreography Inquiries",
   description: "Get in touch for leadership coaching, choreography services, or collaboration inquiries. Let's work together on your professional growth or creative project.",
   keywords: "leadership coaching inquiry, choreography services, collaboration, contact coach, professional development, dance services",
   openGraph: {

@@ -4,7 +4,7 @@ import { PageHero, CTA, KeyMetrics, PlatformBreakdown, ContentMix, AudienceProfi
 import { getMediaKitData, getPageMetadata, getCollaborationPackages } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Media Kit & Collaboration Opportunities | TikTok, Instagram, YouTube | Jonchalant",
+  title: "Media Kit & Collaboration Opportunities | TikTok, Instagram, YouTube",
   description: "Audience insights, platform metrics, and collaboration opportunities. Connect with Jon on TikTok, Instagram, and YouTube for brand partnerships.",
   keywords: "media kit, creator collaboration, TikTok influencer, Instagram partnership, YouTube collaborations, brand creator, influencer marketing, social media metrics, content creator",
   openGraph: {

@@ -99,16 +99,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const description = post.metaDescription || post.excerpt || post.title;
+
   return {
-    title: `${post.title} | Jonchalant`,
-    description: post.metaDescription || post.excerpt || post.title,
-    keywords: [post.pillar, 'executive presence', 'leadership coaching', 'confidence'].join(', '),
+    title: post.title,
+    description,
+    keywords: [post.pillar, 'executive presence', 'leadership coaching', 'introvert leadership', 'confidence'].join(', '),
+    authors: [{ name: 'Jon', url: 'https://jonchalant.com/about' }],
     openGraph: {
       title: post.title,
-      description: post.metaDescription || post.excerpt,
+      description,
       type: 'article',
       publishedTime: post.publishedAt,
       url: `https://jonchalant.com/blog/${post.slug.current}`,
+      siteName: 'Jonchalant',
+      locale: 'en_US',
+      images: {
+        url: 'https://jonchalant.com/social/og-blog-1200x630.png',
+        width: 1200,
+        height: 630,
+        alt: post.title,
+        type: 'image/png',
+      },
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@jonchalant',
+      creator: '@jonchalant',
+      title: post.title,
+      description,
+      images: ['https://jonchalant.com/social/og-blog-1200x630.png'],
     },
   };
 }

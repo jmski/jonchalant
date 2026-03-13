@@ -7,21 +7,72 @@ import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/sch
 import { AuthProvider } from "@/lib/auth-context";
 
 export const metadata: Metadata = {
-  title: "Leadership Coaching for Introverts | Executive Presence & Quiet Command | Jonchalant",
-  description: "Build executive presence and quiet command through body-aware leadership coaching. Transform your confidence with dance-based techniques designed for introverts and shy professionals.",
-  keywords: "leadership coaching for introverts, executive presence coaching, quiet command, confidence coaching, introvert leadership development, body-aware leadership, movement coaching",
+  // metadataBase lets Next.js resolve relative OG/Twitter image URLs from /public
+  metadataBase: new URL("https://jonchalant.com"),
+
+  // title.template appends "| Jonchalant" to every page title automatically.
+  // Individual pages should omit the "| Jonchalant" suffix from their own title strings.
+  // title.default is used by pages with no metadata export (e.g. portal, login).
+  title: {
+    default: "Jonchalant | Executive Presence Coaching for Introverts",
+    template: "%s | Jonchalant",
+  },
+
+  description:
+    "Build executive presence and quiet command through body-aware leadership coaching. Transform your confidence with dance-based techniques designed for introverts and shy professionals.",
+  keywords: [
+    "leadership coaching for introverts",
+    "executive presence coaching",
+    "quiet command",
+    "confidence coaching",
+    "introvert leadership development",
+    "body-aware leadership",
+    "movement coaching",
+  ],
+  authors: [{ name: "Jon", url: "https://jonchalant.com/about" }],
+  creator: "Jon",
+  publisher: "Jonchalant",
+
+  // Default robots directives — auth-gated routes override these with noindex
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  // Fallback OG block — individual pages override title/description/url/images
   openGraph: {
-    title: "Leadership Coaching for Introverts | Executive Presence | Jonchalant",
-    description: "Build executive presence and quiet command through body-aware coaching. Originally trained in dance, Jon helps introverts develop professional confidence.",
-    url: "https://jonchalant.com",
     type: "website",
     siteName: "Jonchalant",
+    locale: "en_US",
+    title: "Jonchalant | Executive Presence Coaching for Introverts",
+    description:
+      "Build executive presence and quiet command through body-aware coaching for introverts and shy professionals.",
+    url: "https://jonchalant.com",
+    images: {
+      url: "/social/og-home-1200x630.png",
+      width: 1200,
+      height: 630,
+      alt: "Jonchalant — Executive Presence Coaching for Introverts",
+      type: "image/png",
+    },
   },
+
+  // Fallback Twitter card — individual pages override title/description/images
   twitter: {
     card: "summary_large_image",
-    title: "Leadership Coaching for Introverts | Jonchalant",
-    description: "Build executive presence, quiet command, and professional confidence",
+    site: "@jonchalant",
     creator: "@jonchalant",
+    title: "Jonchalant | Executive Presence Coaching for Introverts",
+    description:
+      "Build executive presence and quiet command through body-aware coaching for introverts.",
+    images: ["/social/og-home-1200x630.png"],
   },
 };
 

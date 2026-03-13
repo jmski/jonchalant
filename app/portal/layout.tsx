@@ -1,3 +1,19 @@
+import type { Metadata } from 'next';
+
+// Auth-gated portal: prevent search engines from indexing lesson content
+export const metadata: Metadata = {
+  title: {
+    default: 'Learning Portal | The Kinetic Leader',
+    template: '%s | Kinetic Leader Portal',
+  },
+  description: 'Access your Kinetic Leader learning portal. Complete lessons, track your progress, and develop executive presence through body-aware leadership training.',
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false },
+  },
+};
+
 interface PortalLayoutProps {
   children: React.ReactNode;
 }

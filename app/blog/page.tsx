@@ -5,14 +5,31 @@ import { CTA, BlogFeatured, BlogPosts } from '@/components/sections';
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout';
 
 export const metadata: Metadata = {
-  title: 'Leadership Blog | Executive Presence & Quiet Command - Jonchalant',
-  description: 'Read articles on executive presence coaching, quiet command, leadership for introverts, and professional presence from expert coach Jon.',
-  keywords: 'executive presence, leadership coaching, quiet command, confidence, professional presence, introvert leadership',
+  title: 'Leadership Blog | Executive Presence & Quiet Command',
+  description: 'Read articles on executive presence coaching, quiet command, and leadership for introverts. Expert perspectives from coach Jon on confident communication and professional presence.',
+  keywords: 'executive presence, leadership coaching, quiet command, confidence, professional presence, introvert leadership, body language, nonverbal communication',
   openGraph: {
-    title: 'Leadership Blog - Jonchalant',
-    description: 'Expert insights on executive presence, quiet command, and leadership coaching for introverts.',
+    title: 'Leadership Blog | Executive Presence & Quiet Command',
+    description: 'Expert insights on executive presence, quiet command, and leadership coaching for introverts and shy professionals.',
     type: 'website',
     url: 'https://jonchalant.com/blog',
+    siteName: 'Jonchalant',
+    locale: 'en_US',
+    images: {
+      url: 'https://jonchalant.com/social/og-blog-1200x630.png',
+      width: 1200,
+      height: 630,
+      alt: 'Leadership Blog — Jonchalant',
+      type: 'image/png',
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@jonchalant',
+    creator: '@jonchalant',
+    title: 'Leadership Blog | Executive Presence & Quiet Command',
+    description: 'Expert insights on executive presence, leadership coaching, and quiet command for introverts.',
+    images: ['https://jonchalant.com/social/og-blog-1200x630.png'],
   },
 };
 

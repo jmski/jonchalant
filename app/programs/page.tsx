@@ -8,7 +8,7 @@ import { CourseSchema } from "@/lib/schema";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Leadership Coaching Programs | Quiet Command & Executive Presence | Jonchalant",
+  title: "Leadership Coaching Programs | Quiet Command & Executive Presence",
   description: "8-12 week programs for building executive presence and quiet command. Body-aware coaching for introverts to develop confidence and professional presence.",
   keywords: "leadership coaching programs, executive presence training, quiet command coaching, introvert leadership program, professional presence coaching, body-aware leadership",
   openGraph: {
