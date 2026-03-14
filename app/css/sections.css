@@ -425,7 +425,7 @@
 
 .testimonial-carousel-indicators {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0.25rem;
   margin-top: 1.25rem;
 }
@@ -454,7 +454,7 @@
   transition: all 0.3s ease;
 }
 
-.testimonial-carousel-dot[data-active="true"]::before {
+.testimonial-carousel-dot.active::before {
   background-color: var(--color-muted-moss);
   width: 1.5rem;
 }

@@ -60,8 +60,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className="testimonial-carousel-dot"
-                data-active={idx === currentIndex}
+                className={`testimonial-carousel-dot${idx === currentIndex ? ' active' : ''}`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}

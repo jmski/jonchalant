@@ -219,11 +219,6 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
         {/* Mobile Navigation - Sidebar-like with sections */}
         {mobileMenuOpen && (
           <div className="navbar-mobile-menu">
-            {/* Mobile Menu Header */}
-            <div className="navbar-mobile-header">
-              <h6>JONCHALANT</h6>
-            </div>
-
             {/* Mobile Menu Sections */}
             <nav className="navbar-mobile-sections">
               {NAV_SECTIONS.map((section) => (
