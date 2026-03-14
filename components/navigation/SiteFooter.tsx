@@ -178,6 +178,7 @@ export function SiteFooter({ socialLinks = [] }: SiteFooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="site-footer-social-link"
+                data-platform={link.label.toLowerCase()}
                 aria-label={link.label}
               >
                 {link.icon}

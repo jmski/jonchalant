@@ -2194,8 +2194,18 @@
 }
 
 .site-footer-social-link:hover {
-  background-color: var(--accent-primary);
-  border-color: var(--accent-primary);
+  color: #fff;
+}
+
+.site-footer-social-link[data-platform="linkedin"]:hover {
+  background-color: #0a66c2;
+  border-color: #0a66c2;
+  color: #fff;
+}
+
+.site-footer-social-link[data-platform="instagram"]:hover {
+  background-color: #e4405f;
+  border-color: #e4405f;
   color: #fff;
 }
 
