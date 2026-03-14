@@ -3480,7 +3480,6 @@
   margin: 0;
 }
 
-
 /* ═════════════════════════════════════════════════════════════════════════════
    IKIGAI PAGE — /ikigai
    Three sections: Intro (editorial) · Quiz (animated) · Results (visual)
@@ -3566,10 +3565,18 @@
   background: var(--bg-secondary);
 }
 
-.ikigai-intro-quadrant--passion  { border-left: 3px solid #4a3a5c; }
-.ikigai-intro-quadrant--mission  { border-left: 3px solid #6b8e63; }
-.ikigai-intro-quadrant--vocation { border-left: 3px solid #b89a5f; }
-.ikigai-intro-quadrant--profession { border-left: 3px solid #6a8aaa; }
+.ikigai-intro-quadrant--passion {
+  border-left: 3px solid #4a3a5c;
+}
+.ikigai-intro-quadrant--mission {
+  border-left: 3px solid #6b8e63;
+}
+.ikigai-intro-quadrant--vocation {
+  border-left: 3px solid #b89a5f;
+}
+.ikigai-intro-quadrant--profession {
+  border-left: 3px solid #6a8aaa;
+}
 
 .ikigai-intro-quadrant-name {
   font-size: 0.8rem;
@@ -3699,7 +3706,9 @@
   gap: var(--spacing-sm);
   opacity: 1;
   transform: translateX(0);
-  transition: opacity 0.28s ease, transform 0.28s ease;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
 }
 
 .ikigai-question-card.is-exiting {
@@ -3739,10 +3748,18 @@
   color: #fff;
 }
 
-.ikigai-quadrant-tag--passion    { background: #4a3a5c; }
-.ikigai-quadrant-tag--mission    { background: #6b8e63; }
-.ikigai-quadrant-tag--vocation   { background: #b89a5f; }
-.ikigai-quadrant-tag--profession { background: #6a8aaa; }
+.ikigai-quadrant-tag--passion {
+  background: #4a3a5c;
+}
+.ikigai-quadrant-tag--mission {
+  background: #6b8e63;
+}
+.ikigai-quadrant-tag--vocation {
+  background: #b89a5f;
+}
+.ikigai-quadrant-tag--profession {
+  background: #6a8aaa;
+}
 
 .ikigai-question-text {
   font-size: 1.15rem;
@@ -3769,7 +3786,10 @@
   border-radius: 0.75rem;
   background: var(--bg-secondary);
   cursor: pointer;
-  transition: border-color var(--transition-subtle), background var(--transition-subtle), transform var(--transition-subtle);
+  transition:
+    border-color var(--transition-subtle),
+    background var(--transition-subtle),
+    transform var(--transition-subtle);
   text-align: center;
 }
 
@@ -3796,7 +3816,9 @@
   font-weight: 700;
   color: var(--text-primary);
   background: var(--bg-tertiary);
-  transition: background var(--transition-subtle), color var(--transition-subtle);
+  transition:
+    background var(--transition-subtle),
+    color var(--transition-subtle);
 }
 
 .ikigai-option:hover .ikigai-option-value,
@@ -3945,10 +3967,18 @@
   width: 0%;
 }
 
-.ikigai-bar-fill--passion    { background: #4a3a5c; }
-.ikigai-bar-fill--mission    { background: #6b8e63; }
-.ikigai-bar-fill--vocation   { background: #b89a5f; }
-.ikigai-bar-fill--profession { background: #6a8aaa; }
+.ikigai-bar-fill--passion {
+  background: #4a3a5c;
+}
+.ikigai-bar-fill--mission {
+  background: #6b8e63;
+}
+.ikigai-bar-fill--vocation {
+  background: #b89a5f;
+}
+.ikigai-bar-fill--profession {
+  background: #6a8aaa;
+}
 
 .ikigai-bar-fill.is-dominant {
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
@@ -3980,10 +4010,18 @@
   gap: var(--spacing-xs);
 }
 
-.ikigai-dominant-callout--passion    { border-top-color: #4a3a5c; }
-.ikigai-dominant-callout--mission    { border-top-color: #6b8e63; }
-.ikigai-dominant-callout--vocation   { border-top-color: #b89a5f; }
-.ikigai-dominant-callout--profession { border-top-color: #6a8aaa; }
+.ikigai-dominant-callout--passion {
+  border-top-color: #4a3a5c;
+}
+.ikigai-dominant-callout--mission {
+  border-top-color: #6b8e63;
+}
+.ikigai-dominant-callout--vocation {
+  border-top-color: #b89a5f;
+}
+.ikigai-dominant-callout--profession {
+  border-top-color: #6a8aaa;
+}
 
 .ikigai-dominant-header {
   display: flex;
@@ -4063,7 +4101,9 @@
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  transition: background var(--transition-subtle), transform var(--transition-subtle);
+  transition:
+    background var(--transition-subtle),
+    transform var(--transition-subtle);
 }
 
 .ikigai-cta-btn:hover {
@@ -4080,7 +4120,10 @@
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  transition: color var(--transition-subtle), border-color var(--transition-subtle), background var(--transition-subtle);
+  transition:
+    color var(--transition-subtle),
+    border-color var(--transition-subtle),
+    background var(--transition-subtle);
 }
 
 .ikigai-retake-btn:hover {
@@ -4088,4 +4131,3 @@
   border-color: rgba(255, 255, 255, 0.65);
   background: rgba(255, 255, 255, 0.08);
 }
-
