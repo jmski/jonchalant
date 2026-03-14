@@ -15,7 +15,6 @@ export { Introvert } from './about/introvert';
 
 // ─────────────── SHARED SECTIONS (Reusable across pages) ────────────────
 export { Testimonials } from '@/components/shared/testimonials';
-export { CaseStudy } from '@/components/shared/case-study';
 export { Services } from '@/components/shared/services';
 export { Stats } from '@/components/shared/stats';
 
@@ -27,12 +26,9 @@ export { CTA } from '@/components/shared/cta';
 export { FAQ } from '@/components/shared/faq';
 export { PageHero } from '@/components/shared/page-hero';
 export { Hero as GenericHero } from '@/components/shared/hero';
-export { FeaturedBlog } from '@/components/shared/featured-blog';
-export { ThreePillars } from '@/components/shared/three-pillars';
 export { Programs } from '@/components/shared/programs';
 export { Collaboration } from '@/components/shared/collaboration';
 export { Carousel } from '@/components/shared/carousel';
-export { CaseStudies } from '@/components/shared/case-studies';
 
 // ─────────────── DANCE SECTIONS ────────────────
 export { FeaturedVideo, Approach as DanceApproach, Portfolio as DancePortfolio } from './dance';
