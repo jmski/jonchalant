@@ -30,13 +30,11 @@ button {
 button:hover {
   background-color: var(--accent-hover);
   border-color: var(--accent-hover);
-  transform: translateY(-1px); /* Minimal motion */
   box-shadow: none;
 }
 
 .btn:active,
 button:active {
-  transform: translateY(0);
   outline: none;
 }
 

@@ -12,6 +12,7 @@
     "sanity:deploy": "cd sanity && npm run deploy"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.5.0",
     "@sanity/client": "^6.29.1",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.22.0",
@@ -23,7 +24,8 @@
     "react-dom": "19.2.3",
     "resend": "^6.9.3",
     "sanity": "^4.22.0",
-    "styled-components": "^6.3.11"
+    "styled-components": "^6.3.11",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

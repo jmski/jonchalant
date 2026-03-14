@@ -200,7 +200,7 @@
   flex: 1;
   width: 100%;
   padding: 1.25rem;
-  padding-top: calc(70px + 1.25rem);
+  padding-top: calc(70px + 1rem);
   overflow-y: auto;
   overflow-x: clip;
   /* Hide scrollbar while preserving scroll functionality */
@@ -211,14 +211,14 @@
 @media (min-width: 640px) {
   .main-content {
     padding: 3rem;
-    padding-top: calc(70px + 3rem);
+    padding-top: calc(70px + 1.5rem);
   }
 }
 
 @media (min-width: 1024px) {
   .main-content {
     padding: 4rem;
-    padding-top: calc(70px + 4rem);
+    padding-top: 70px; /* exact navbar height — no extra gap, hero fills viewport flush */
   }
 }
 
@@ -466,6 +466,13 @@
 
 .section-wrapper-tertiary {
   background-color: var(--bg-tertiary);
+}
+
+/* Flush variant: removes SectionWrapper padding — used for hero.
+   No negative margins needed: at 1024px+ main-content padding-top is exactly
+   70px (navbar height), so hero starts flush without any offset tricks. */
+.section-wrapper--flush {
+  padding: 0;
 }
 
 .section-wrapper {

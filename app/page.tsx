@@ -82,12 +82,10 @@ export default async function Home() {
         }}
       />
       
-      <PageTransition animation="fade" className="-mt-6 lg:-mt-16">
-        {/* HERO SECTION */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <Hero />
-          </SectionContent>
+      <PageTransition animation="fade">
+        {/* HERO SECTION — flush wrapper so hero fills viewport on desktop */}
+        <SectionWrapper variant="primary" className="section-wrapper--flush">
+          <Hero />
         </SectionWrapper>
 
         {/* KEY STATS SECTION - Impact at a Glance */}
