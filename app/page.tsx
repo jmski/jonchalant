@@ -82,16 +82,14 @@ export default async function Home() {
         }}
       />
       
-      <PageTransition animation="fade" className="-mt-6 lg:-mt-16">
-        {/* HERO SECTION */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <Hero />
-          </SectionContent>
+      <PageTransition animation="fade">
+        {/* HERO SECTION — flush wrapper so hero fills viewport on desktop */}
+        <SectionWrapper variant="primary" className="section-wrapper--flush">
+          <Hero />
         </SectionWrapper>
 
         {/* KEY STATS SECTION - Impact at a Glance */}
-        <SectionWrapper variant="primary">
+        <SectionWrapper variant="primary" className="section-wrapper--indigo">
           <SectionContent>
             <Stats 
               stats={homeContent?.stats || []} 
@@ -114,10 +112,10 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* CLIENT TESTIMONIALS SECTION */}
-        <SectionWrapper variant="secondary">
+        <SectionWrapper variant="secondary" className="section-wrapper--moss">
           <SectionContent>
             {testimonials && testimonials.length > 0 && (
-              <Testimonials testimonials={testimonials.slice(0, 3)} />
+              <Testimonials testimonials={testimonials} />
             )}
           </SectionContent>
         </SectionWrapper>

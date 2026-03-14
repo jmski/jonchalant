@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import IkigaiSymbol from '@/components/decorative/IkigaiSymbol';
+import dynamic from 'next/dynamic';
+
+const HeroCanvas = dynamic(() => import('./HeroCanvas'), { ssr: false });
 
 interface HeroProps {
   headline?: string;
@@ -9,7 +11,6 @@ interface HeroProps {
   description?: string;
   ctaText?: string;
   ctaLink?: string;
-  badge?: string;
   auditMicrocopy?: string;
 }
 
@@ -19,44 +20,32 @@ export function Hero({
   description = 'Build executive presence, quiet command, and confident communication through movement-based coaching designed for introverts.',
   ctaText = 'Book Your Free Presence Audit',
   ctaLink = '/contact',
-  badge = '✓ Now Accepting Coaching Clients',
   auditMicrocopy = 'Free · 30 minutes · No commitment required'
 }: HeroProps) {
   return (
     <section className="home-hero-section">
-      {/* Background texture */}
-      <div className="home-hero-texture" />
+      {/* Gradient wash */}
+      <div className="home-hero-texture" aria-hidden="true" />
 
-      {/* Main content: Editorial 60/40 split */}
+      {/* Floating ambient orbs */}
+      <div className="home-hero-orb home-hero-orb--1" aria-hidden="true" />
+      <div className="home-hero-orb home-hero-orb--2" aria-hidden="true" />
+
+      {/* Main grid */}
       <div className="home-hero-grid">
-        
-        {/* LEFT: Content (60%) */}
+
+        {/* LEFT: Content */}
         <div className="home-hero-content">
-          {/* Status badge */}
-          {badge && (
-            <div className="home-hero-badge">
-              <span>{badge}</span>
-            </div>
-          )}
 
-          {/* Headline */}
-          <div className="home-hero-headline">
-            <div className="home-hero-headline-main">
-              {headline}
-            </div>
-            <div className="home-hero-headline-accent">
-              {subheadline}
-            </div>
-          </div>
+          <h1 className="home-hero-headline">
+            <span className="home-hero-headline-line">{headline}</span>
+            <span className="home-hero-headline-accent">{subheadline}</span>
+          </h1>
 
-          {/* Description */}
           {description && (
-            <p className="home-hero-description">
-              {description}
-            </p>
+            <p className="home-hero-description">{description}</p>
           )}
 
-          {/* CTA Button */}
           <div className="home-hero-ctas">
             <div className="home-hero-cta-group">
               <Link href={ctaLink} className="home-hero-cta-primary">
@@ -70,11 +59,29 @@ export function Hero({
               Learn About My Approach
             </Link>
           </div>
+
+          {/* Stats strip */}
+          <div className="home-hero-stats">
+            <div className="home-hero-stat">
+              <span className="home-hero-stat-value">47+</span>
+              <span className="home-hero-stat-label">Leaders coached</span>
+            </div>
+            <div className="home-hero-stat-divider" aria-hidden="true" />
+            <div className="home-hero-stat">
+              <span className="home-hero-stat-value">92%</span>
+              <span className="home-hero-stat-label">Report measurable results</span>
+            </div>
+            <div className="home-hero-stat-divider" aria-hidden="true" />
+            <div className="home-hero-stat">
+              <span className="home-hero-stat-value">8 wk</span>
+              <span className="home-hero-stat-label">Core program</span>
+            </div>
+          </div>
         </div>
 
-        {/* RIGHT: Ikigai Symbol (40%) */}
-        <div className="home-hero-visual">
-          <IkigaiSymbol />
+        {/* RIGHT: Interactive 3D particle sphere */}
+        <div className="home-hero-visual" aria-hidden="true">
+          <HeroCanvas />
         </div>
       </div>
     </section>

@@ -18,91 +18,69 @@ interface TestimonialsProps {
 
 export function Testimonials({ testimonials }: TestimonialsProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlay, setIsAutoPlay] = useState(true)
 
-  const itemsPerPage = 1
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index * itemsPerPage)
-    setIsAutoPlay(false)
-  }
-
-  // Auto-play effect
   useEffect(() => {
-    if (!isAutoPlay || testimonials.length === 0) return
-
+    if (testimonials.length <= 1) return
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex + itemsPerPage >= testimonials.length ? 0 : prevIndex + itemsPerPage
-      )
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
     }, 6000)
-
     return () => clearInterval(timer)
-  }, [isAutoPlay, testimonials.length, itemsPerPage])
+  }, [testimonials.length])
 
-  if (!testimonials || testimonials.length === 0) {
-    return null
-  }
-
-  const numSlides = Math.ceil(testimonials.length / itemsPerPage)
-  const currentSlide = Math.floor(currentIndex / itemsPerPage)
+  if (!testimonials?.length) return null
 
   return (
     <section className="testimonial-section">
-      <div className="testimonial-section-container">
-        {/* Section Header */}
-        <div className="testimonial-section-header">
-          <span className="testimonial-section-badge">
-            Transformation Stories
-          </span>
-          <h2 className="testimonial-section-title">
-            See Real Results from Real Clients
-          </h2>
-          <p className="testimonial-section-description">
-            These leaders transformed how they show up. From speaking up in meetings to commanding rooms with quiet confidence—see what they achieved.
-          </p>
-        </div>
+      <header className="testimonial-section-header">
+        <span className="testimonial-section-eyebrow">Client Stories</span>
+        <h2 className="testimonial-section-title">Real Results. Real People.</h2>
+      </header>
 
-        {/* Carousel Container */}
-        <div className="testimonial-carousel">
-          {/* Slides */}
-          <div
-            className="testimonial-carousel-track"
-            style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
-            }}
-          >
-            {testimonials.map((testimonial, idx) => (
-              <div
-                key={testimonial._id || idx}
-                className="testimonial-carousel-slide"
-              >
-                <TestimonialCard
-                  quote={testimonial.quote}
-                  clientName={testimonial.clientName}
-                  role={testimonial.role}
-                  company={testimonial.company}
-                  result={testimonial.result}
-                />
-              </div>
+      {/* Mobile: autoplay carousel */}
+      <div className="testimonial-carousel">
+        <div
+          className="testimonial-carousel-track"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {testimonials.map((t, idx) => (
+            <div key={t._id || idx} className="testimonial-carousel-slide">
+              <TestimonialCard
+                quote={t.quote}
+                clientName={t.clientName}
+                role={t.role}
+                company={t.company}
+                result={t.result}
+              />
+            </div>
+          ))}
+        </div>
+        {testimonials.length > 1 && (
+          <div className="testimonial-carousel-indicators">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className="testimonial-carousel-dot"
+                data-active={idx === currentIndex}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
             ))}
           </div>
+        )}
+      </div>
 
-          {/* Dot Indicators */}
-          {testimonials.length > 1 && (
-            <div className="testimonial-carousel-indicators">
-              {Array.from({ length: numSlides }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => goToSlide(idx)}
-                  className="testimonial-carousel-dot"
-                  data-active={idx === currentSlide}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+      {/* Desktop: full grid — all testimonials visible, scales with dataset */}
+      <div className="testimonial-grid">
+        {testimonials.map((t, idx) => (
+          <TestimonialCard
+            key={t._id || idx}
+            quote={t.quote}
+            clientName={t.clientName}
+            role={t.role}
+            company={t.company}
+            result={t.result}
+          />
+        ))}
       </div>
     </section>
   )

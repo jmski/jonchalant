@@ -90,13 +90,13 @@ ol {
 
 /* Link base styles */
 a {
-  color: var(--accent-vibrant);
+  color: var(--accent-primary);
   text-decoration: none;
   transition: color var(--transition-base);
 }
 
 a:hover {
-  color: var(--accent-vibrant-hover);
+  color: var(--accent-hover);
 }
 
 /* Code/Pre blocks */
