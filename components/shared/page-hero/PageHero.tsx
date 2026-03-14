@@ -29,7 +29,7 @@ export default function PageHero({
   const accentLineIndex = headlineLines.length - 1;
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-32 relative">
       {/* Background decorative elements */}
       <BlueprintGrid
         size={500}
@@ -117,40 +117,15 @@ export default function PageHero({
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <style>{`
-              .page-hero-btn-primary:hover {
-                box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.2);
-                opacity: 0.95;
-              }
-              .page-hero-btn-secondary:hover {
-                border-color: var(--accent-primary);
-                color: var(--accent-primary);
-              }
-            `}</style>
             {ctaButtons.map((btn, idx) => (
               <a
                 key={idx}
                 href={btn.href}
-                className={`${
+                className={
                   btn.variant === 'secondary'
                     ? 'page-hero-btn-secondary'
                     : 'page-hero-btn-primary'
-                } px-8 py-4 font-body font-semibold uppercase text-sm tracking-wider transition-all duration-300 text-center`}
-                style={{
-                  backgroundColor:
-                    btn.variant === 'secondary'
-                      ? 'transparent'
-                      : 'var(--accent-primary)',
-                  color:
-                    btn.variant === 'secondary'
-                      ? 'var(--text-primary)'
-                      : 'white',
-                  borderRadius: '0px',
-                  border:
-                    btn.variant === 'secondary'
-                      ? '1px solid var(--border-color)'
-                      : '1px solid var(--accent-primary)',
-                }}
+                }
               >
                 {btn.label}
               </a>

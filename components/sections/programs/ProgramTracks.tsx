@@ -110,6 +110,7 @@ export function ProgramTracks({ tracks: propTracks }: ProgramTracksProps) {
                   >
                     {track.title}
                   </h3>
+                  <div className="program-track-image-placeholder" aria-hidden="true" />
                   <p className="program-track-description">{track.description}</p>
 
                   <a

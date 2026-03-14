@@ -14,7 +14,7 @@ export function SupplementalLearning() {
           href="/lessons" 
           className="programs-cta-button"
         >
-          Explore Leadership Lessons →
+          Explore Leadership Lessons <span className="programs-cta-arrow">→</span>
         </TextLink>
       </div>
     </section>
