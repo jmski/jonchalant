@@ -5,7 +5,6 @@ import aboutPage from './schemas/aboutPage'
 import blogPost from './schemas/blogPost'
 import caseStudy from './schemas/caseStudy'
 import collaboration from './schemas/collaboration'
-import collaborationPackage from './schemas/collaborationPackage'
 import contactInfo from './schemas/contactInfo'
 import danceCategoryFilter from './schemas/danceCategoryFilter'
 import homePageContent from './schemas/homePageContent'
@@ -15,9 +14,7 @@ import pageMetadata from './schemas/pageMetadata'
 import portfolio from './schemas/portfolio'
 import program from './schemas/program'
 import programFocus from './schemas/programFocus'
-import programsPageContent from './schemas/programsPageContent'
 import service from './schemas/service'
-import serviceCategory from './schemas/serviceCategory'
 import testimonial from './schemas/testimonial'
 import module from './schemas/module'
 import portalLesson from './schemas/portalLesson'
@@ -37,7 +34,6 @@ export default defineConfig({
       blogPost,
       caseStudy,
       collaboration,
-      collaborationPackage,
       contactInfo,
       danceCategoryFilter,
       homePageContent,
@@ -47,9 +43,7 @@ export default defineConfig({
       portfolio,
       program,
       programFocus,
-      programsPageContent,
       service,
-      serviceCategory,
       testimonial,
       module,
       portalLesson,

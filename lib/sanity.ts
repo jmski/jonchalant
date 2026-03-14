@@ -424,32 +424,12 @@ export async function getDanceCategoryFilter() {
 }
 
 // ============================================================================
-// SERVICE CATEGORIES
-// ============================================================================
-
-export async function getServiceCategories() {
-  const query = `*[_type == "serviceCategory" && title == "Service Categories"][0] {
-    categories | order(order asc) {
-      name,
-      items,
-      order
-    }
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
 // COLLABORATION PACKAGES
 // ============================================================================
 
 export async function getCollaborationPackages() {
-  const query = `*[_type == "collaborationPackage" && title == "Collaboration Packages"][0] {
-    packages | order(order asc) {
-      name,
-      price,
-      features,
-      order
-    }
-  }`
-  return await client.fetch(query)
+  const packages = await client.fetch(
+    `*[_type == "collaboration"] | order(order asc) { "name": title, price, "features": deliverables, order }`
+  )
+  return { packages }
 }

@@ -12,9 +12,6 @@ import aboutPage from './aboutPage'
 import homePageContent from './homePageContent'
 import danceCategoryFilter from './danceCategoryFilter'
 import programFocus from './programFocus'
-import programsPageContent from './programsPageContent'
-import serviceCategory from './serviceCategory'
-import collaborationPackage from './collaborationPackage'
 import blogPost from './blogPost'
 import module from './module'
 import portalLesson from './portalLesson'
@@ -35,9 +32,6 @@ export const schemaTypes = [
   homePageContent,
   danceCategoryFilter,
   programFocus,
-  programsPageContent,
-  serviceCategory,
-  collaborationPackage,
   blogPost,
   module,
   portalLesson,
