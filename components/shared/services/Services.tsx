@@ -13,13 +13,15 @@ interface ServicesProps {
   services: Service[];
   heading?: string;
   description?: string;
+  eyebrow?: string;
 }
 
-export function Services({ services, heading, description }: ServicesProps) {
+export function Services({ services, heading, description, eyebrow }: ServicesProps) {
   return (
     <section className="services-section">
-      {(heading || description) && (
+      {(eyebrow || heading || description) && (
         <div className="services-section-header">
+          {eyebrow && <span className="services-section-eyebrow">{eyebrow}</span>}
           {heading && <h2 className="services-section-heading">{heading}</h2>}
           {description && <p className="services-section-description">{description}</p>}
         </div>

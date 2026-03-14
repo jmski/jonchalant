@@ -56,20 +56,43 @@ textarea:focus-visible {
   ring-offset: 2px;
 }
 
-/* Enhanced Link Hover */
+/* Text links — no underlines globally */
 a {
-  transition: color 0.2s ease;
-  position: relative;
   text-decoration: none;
 }
 
 a:hover {
   color: var(--accent-primary);
+  text-decoration: none;
 }
 
 a:focus-visible {
-  outline: 2px solid var(--accent-vibrant);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
+}
+
+/* ── Primary button anchors ──────────────────────────────────────────────────
+   Locked in interactive layer (highest priority) so generic a:hover can never
+   override text color or add underlines.
+   Hover behaviour matches the footer opt-in button standard:
+   lighter-green background + 1px lift, white text always.
+────────────────────────────────────────────────────────────────────────────── */
+.cta-section-button,
+.navbar-login-btn,
+.navbar-mobile-login-btn {
+  color: white;
+  text-decoration: none;
+}
+
+.cta-section-button:hover,
+.navbar-login-btn:hover,
+.navbar-mobile-login-btn:hover {
+  color: white;
+  text-decoration: none;
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 142, 99, 0.2);
 }
 
 /* Input Field Focus */

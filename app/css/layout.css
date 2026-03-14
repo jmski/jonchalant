@@ -1069,7 +1069,7 @@
   text-transform: uppercase;
   color: var(--text-primary);
   text-decoration: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   white-space: nowrap;
   transition: color var(--transition-fast);
 }
@@ -1236,7 +1236,7 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   border-radius: 0.375rem;
-  font-family: var(--font-monospace);
+  font-family: var(--font-body);
   white-space: nowrap;
 }
 
@@ -1300,7 +1300,7 @@
   line-height: 1.4;
   margin: 0;
   padding: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1324,7 +1324,7 @@
 }
 
 .navbar-mobile-section-title {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1346,7 +1346,7 @@
   display: block;
   padding: 0.75rem 0.75rem; /* min 44px touch target height */
   color: var(--text-secondary);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -1358,7 +1358,7 @@
   text-decoration: none;
   border-left: 2px solid transparent;
   transition: all var(--transition-fast);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.85rem;
 }
 
@@ -1408,7 +1408,7 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   border-radius: 0.375rem;
-  font-family: var(--font-monospace);
+  font-family: var(--font-body);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
