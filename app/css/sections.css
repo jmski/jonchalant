@@ -628,24 +628,134 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    STATS SECTION
-   ────────────────────────────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────────
 */
 .stats-section {
-  width: 100%;
-  background: var(--bg-muted);
-  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+
+.stats-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  max-width: 44rem;
+}
+
+.stats-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.stats-section-eyebrow::before {
+  content: "";
+  display: block;
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.stats-section-heading {
+  font-family: var(--font-headline);
+  font-size: clamp(1.875rem, 5vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.stats-section-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.stats-section-grid {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 @media (min-width: 640px) {
-  .stats-section {
-    padding: 4rem 1.5rem;
+  .stats-section-grid[data-columns="2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-section-grid[data-columns="3"] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .stats-section-grid[data-columns="4"] {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .stats-section {
-    padding: 4rem 2rem;
+  .stats-section-grid[data-columns="4"] {
+    grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.stats-section-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stats-section-item:last-child {
+  border-bottom: none;
+}
+
+/* Green accent bar above number */
+.stats-section-item::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .stats-section-item {
+    padding: 0 0 0 2rem;
+    border-bottom: none;
+    border-left: 1px solid var(--border-color);
+  }
+
+  .stats-section-item:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .stats-section-item::before {
+    margin-bottom: 1rem;
+  }
+}
+
+.stats-section-value {
+  font-family: var(--font-headline);
+  font-size: clamp(2.75rem, 7vw, 3.75rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stats-section-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  line-height: 1.55;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -679,6 +789,8 @@
   color: var(--text-primary);
   line-height: 1.15;
   max-width: 36rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .services-section-description {
