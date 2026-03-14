@@ -248,7 +248,6 @@
 .btn-primary:hover {
   background-color: var(--accent-vibrant-hover);
   border-color: var(--accent-vibrant-hover);
-  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 82, 204, 0.2);
 }
 .btn-secondary {
@@ -259,7 +258,6 @@
 .btn-secondary:hover {
   background-color: var(--accent-secondary);
   color: var(--bg-primary);
-  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 188, 212, 0.2);
 }
 
@@ -268,7 +266,6 @@
   transition: all var(--transition-base);
 }
 .interactive-element:hover {
-  transform: translateY(-2px);
 }
 
 /* SECTION HEADER - Typography with accent */
@@ -315,7 +312,6 @@
   box-shadow:
     0 0 30px rgba(255, 255, 255, 0.2),
     0 0 60px rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
 }
 .btn-glow-vibrant {
   box-shadow:
@@ -702,16 +698,15 @@
   transition: all var(--transition-base);
 }
 .hover-lift:hover {
-  transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Smooth scale on hover */
 .hover-scale {
-  transition: transform var(--transition-base);
+  transition: box-shadow var(--transition-base);
 }
 .hover-scale:hover {
-  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Color transition on hover */
@@ -720,7 +715,6 @@
 }
 .hover-glow:hover {
   text-shadow: 0 0 8px currentColor;
-  transform: scale(1.01);
 }
 
 /* Underline animation on hover */

@@ -3031,14 +3031,11 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-top: 2px solid var(--accent-primary);
-  transition:
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+  transition: box-shadow 0.25s ease;
 }
 
 .focus-area-card:hover {
   box-shadow: 0 4px 16px rgba(107, 142, 99, 0.09);
-  transform: translateY(-2px);
 }
 
 .focus-area-card-inner {
@@ -3325,20 +3322,16 @@
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition:
-    background var(--transition-base),
-    transform var(--transition-base);
+  transition: background var(--transition-base);
 }
 
 .presence-audit-cta:hover:not(:disabled) {
   background: var(--accent-hover);
-  transform: translateY(-1px);
 }
 
 .presence-audit-cta:disabled {
   opacity: 0.45;
   cursor: not-allowed;
-  transform: none;
 }
 
 /* Back button (ghost) */

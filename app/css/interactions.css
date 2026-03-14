@@ -15,12 +15,10 @@
 }
 
 .card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .card.hoverable:hover {
-  transform: translateY(-6px);
   box-shadow:
     0 25px 50px rgba(0, 0, 0, 0.2),
     0 0 30px rgba(var(--accent-vibrant-rgb, 37, 99, 235), 0.15);
@@ -223,7 +221,6 @@ select:focus:not(.no-ring) {
 }
 
 .badge:hover {
-  transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -288,14 +285,6 @@ select {
 
 @media (hover: hover) {
   /* Only apply hover effects on devices that support hover */
-  .card:hover {
-    transform: translateY(-4px);
-  }
-
-  button:hover:not(:disabled) {
-    transform: translateY(-2px);
-  }
-
   .gallery-item:hover {
     transform: scale(1.05);
   }
