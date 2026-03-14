@@ -41,71 +41,133 @@ export interface ContactInfo {
 }
 
 // ============================================================================
+// GENERIC QUERY HELPERS
+// ============================================================================
+
+/** Fetch an ordered array of documents, with an optional extra GROQ filter clause. */
+async function fetchList(type: string, fields: string, extra?: string) {
+  const filter = extra ? ` && ${extra}` : ''
+  return client.fetch(`*[_type == "${type}"${filter}] | order(order asc) {${fields}}`)
+}
+
+/** Fetch a single document by an additional GROQ filter clause. */
+async function fetchOne(type: string, fields: string, filter: string) {
+  return client.fetch(`*[_type == "${type}" && ${filter}][0] {${fields}}`)
+}
+
+// ============================================================================
+// FIELD PROJECTIONS (shared field selections per content type)
+// ============================================================================
+
+const PORTFOLIO_FIELDS = `
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    videoUrl,
+    thumbnail,
+    duration,
+    publishedAt,
+    order
+  `
+
+const SERVICE_FIELDS = `
+    _id,
+    title,
+    slug,
+    description,
+    fullDescription,
+    icon,
+    features,
+    isPrimary,
+    color,
+    order
+  `
+
+const COLLABORATION_FIELDS = `
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    price,
+    deliverables,
+    timelineWeeks,
+    order
+  `
+
+const TESTIMONIAL_FIELDS = `
+    _id,
+    clientName,
+    role,
+    company,
+    quote,
+    result,
+    image,
+    featured,
+    serviceType,
+    order
+  `
+
+const CASE_STUDY_FIELDS = `
+    _id,
+    title,
+    slug,
+    clientName,
+    industry,
+    challenge,
+    solution,
+    results,
+    testimonial,
+    image,
+    featured,
+    order
+  `
+
+const LESSON_FIELDS = `
+    _id,
+    title,
+    slug,
+    category,
+    pillar,
+    description,
+    duration,
+    image,
+    icon,
+    order
+  `
+
+const PROGRAM_FIELDS = `
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    investment,
+    features,
+    image,
+    order
+  `
+
+// ============================================================================
 // PORTFOLIO (Dance Videos)
 // ============================================================================
 
 export async function getPortfolioItems() {
-  const query = `*[_type == "portfolioItem"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    videoUrl,
-    thumbnail,
-    duration,
-    publishedAt,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('portfolioItem', PORTFOLIO_FIELDS)
 }
 
 export async function getPortfolioByCategory(category: string) {
-  const query = `*[_type == "portfolioItem" && category == "${category}"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    videoUrl,
-    thumbnail,
-    duration,
-    publishedAt,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('portfolioItem', PORTFOLIO_FIELDS, `category == "${category}"`)
 }
 
 export async function getPortfolioItem(slug: string) {
-  const query = `*[_type == "portfolioItem" && slug.current == "${slug}"][0] {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    videoUrl,
-    thumbnail,
-    duration,
-    publishedAt,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchOne('portfolioItem', PORTFOLIO_FIELDS, `slug.current == "${slug}"`)
 }
 
 export async function getFeaturedPortfolioItem() {
-  const query = `*[_type == "portfolioItem" && featured == true][0] {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    videoUrl,
-    thumbnail,
-    duration,
-    publishedAt,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchOne('portfolioItem', PORTFOLIO_FIELDS, 'featured == true')
 }
 
 // ============================================================================
@@ -114,51 +176,15 @@ export async function getFeaturedPortfolioItem() {
 // ============================================================================
 
 export async function getServices() {
-  const query = `*[_type == "service"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    description,
-    fullDescription,
-    icon,
-    features,
-    isPrimary,
-    color,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('service', SERVICE_FIELDS)
 }
 
 export async function getPrimaryService() {
-  const query = `*[_type == "service" && isPrimary == true][0] {
-    _id,
-    title,
-    slug,
-    description,
-    fullDescription,
-    icon,
-    features,
-    isPrimary,
-    color,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchOne('service', SERVICE_FIELDS, 'isPrimary == true')
 }
 
 export async function getService(slug: string) {
-  const query = `*[_type == "service" && slug.current == "${slug}"][0] {
-    _id,
-    title,
-    slug,
-    description,
-    fullDescription,
-    icon,
-    features,
-    isPrimary,
-    color,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchOne('service', SERVICE_FIELDS, `slug.current == "${slug}"`)
 }
 
 // ============================================================================
@@ -166,33 +192,11 @@ export async function getService(slug: string) {
 // ============================================================================
 
 export async function getCollaborations() {
-  const query = `*[_type == "collaboration"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    price,
-    deliverables,
-    timelineWeeks,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('collaboration', COLLABORATION_FIELDS)
 }
 
 export async function getCollaborationsByCategory(category: string) {
-  const query = `*[_type == "collaboration" && category == "${category}"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    price,
-    deliverables,
-    timelineWeeks,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('collaboration', COLLABORATION_FIELDS, `category == "${category}"`)
 }
 
 // ============================================================================
@@ -237,23 +241,7 @@ export async function getMediaKitData() {
 // ============================================================================
 
 export async function getTestimonials(featured?: boolean) {
-  let query = `*[_type == "testimonial"`
-  if (featured) {
-    query += ` && featured == true`
-  }
-  query += `] | order(order asc) {
-    _id,
-    clientName,
-    role,
-    company,
-    quote,
-    result,
-    image,
-    featured,
-    serviceType,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('testimonial', TESTIMONIAL_FIELDS, featured ? 'featured == true' : undefined)
 }
 
 // ============================================================================
@@ -261,43 +249,11 @@ export async function getTestimonials(featured?: boolean) {
 // ============================================================================
 
 export async function getCaseStudies(featured?: boolean) {
-  let query = `*[_type == "caseStudy"`
-  if (featured) {
-    query += ` && featured == true`
-  }
-  query += `] | order(order asc) {
-    _id,
-    title,
-    slug,
-    clientName,
-    industry,
-    challenge,
-    solution,
-    results,
-    testimonial,
-    image,
-    featured,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('caseStudy', CASE_STUDY_FIELDS, featured ? 'featured == true' : undefined)
 }
 
 export async function getCaseStudy(slug: string) {
-  const query = `*[_type == "caseStudy" && slug.current == "${slug}"][0] {
-    _id,
-    title,
-    slug,
-    clientName,
-    industry,
-    challenge,
-    solution,
-    results,
-    testimonial,
-    image,
-    featured,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchOne('caseStudy', CASE_STUDY_FIELDS, `slug.current == "${slug}"`)
 }
 
 // ============================================================================
@@ -305,51 +261,15 @@ export async function getCaseStudy(slug: string) {
 // ============================================================================
 
 export async function getLessons() {
-  const query = `*[_type == "lesson"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    pillar,
-    description,
-    duration,
-    image,
-    icon,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('lesson', LESSON_FIELDS)
 }
 
 export async function getLessonsByCategory(category: string) {
-  const query = `*[_type == "lesson" && category == "${category}"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    pillar,
-    description,
-    duration,
-    image,
-    icon,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('lesson', LESSON_FIELDS, `category == "${category}"`)
 }
 
 export async function getLessonsByPillar(pillar: string) {
-  const query = `*[_type == "lesson" && pillar == "${pillar}"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    pillar,
-    description,
-    duration,
-    image,
-    icon,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('lesson', LESSON_FIELDS, `pillar == "${pillar}"`)
 }
 
 // ============================================================================
@@ -357,48 +277,15 @@ export async function getLessonsByPillar(pillar: string) {
 // ============================================================================
 
 export async function getPrograms() {
-  const query = `*[_type == "program"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    investment,
-    features,
-    image,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('program', PROGRAM_FIELDS)
 }
 
 export async function getProgramBySlug(slug: string) {
-  const query = `*[_type == "program" && slug.current == "${slug}"][0] {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    investment,
-    features,
-    image,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchOne('program', PROGRAM_FIELDS, `slug.current == "${slug}"`)
 }
 
 export async function getProgramsByCategory(category: string) {
-  const query = `*[_type == "program" && category == "${category}"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    investment,
-    features,
-    image,
-    order
-  }`
-  return await client.fetch(query)
+  return fetchList('program', PROGRAM_FIELDS, `category == "${category}"`)
 }
 
 export async function getProgramsFocusItems() {
