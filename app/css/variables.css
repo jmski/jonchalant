@@ -139,4 +139,11 @@
 
   /* Letter-spacing token */
   --tracking-widest: 0.15em;
+
+  /* Layout gap tokens */
+  --column-gap: 1.5rem;  /* Grid/flex column gaps */
+  --element-gap: 1rem;   /* Intra-component element gaps */
+
+  /* Moss opacity token */
+  --color-moss-subtle: rgba(107, 142, 99, 0.18); /* Decorative pseudo-element tint */
 }
