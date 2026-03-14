@@ -429,7 +429,7 @@ export async function getDanceCategoryFilter() {
 
 export async function getCollaborationPackages() {
   const packages = await client.fetch(
-    `*[_type == "collaboration"] | order(order asc) { "name": title, price, "features": deliverables, order }`
+    `*[_type == "collaboration"] | order(order asc) { "name": title, price, "features": coalesce(deliverables, []), order }`
   )
   return { packages }
 }
