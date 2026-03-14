@@ -89,7 +89,7 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* KEY STATS SECTION - Impact at a Glance */}
-        <SectionWrapper variant="primary">
+        <SectionWrapper variant="primary" className="section-wrapper--indigo">
           <SectionContent>
             <Stats 
               stats={homeContent?.stats || []} 
@@ -112,10 +112,10 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* CLIENT TESTIMONIALS SECTION */}
-        <SectionWrapper variant="secondary">
+        <SectionWrapper variant="secondary" className="section-wrapper--moss">
           <SectionContent>
             {testimonials && testimonials.length > 0 && (
-              <Testimonials testimonials={testimonials.slice(0, 3)} />
+              <Testimonials testimonials={testimonials} />
             )}
           </SectionContent>
         </SectionWrapper>

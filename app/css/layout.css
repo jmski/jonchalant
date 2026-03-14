@@ -467,6 +467,14 @@
   background-color: var(--bg-tertiary);
 }
 
+.section-wrapper--indigo {
+  background-color: var(--color-burnt-indigo);
+}
+
+.section-wrapper--moss {
+  background-color: #e8f2e4;
+}
+
 /* Flush variant: removes SectionWrapper padding — used for hero.
    No negative margins needed: at 1024px+ main-content padding-top is exactly
    70px (navbar height), so hero starts flush without any offset tricks. */

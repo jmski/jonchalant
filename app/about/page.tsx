@@ -88,7 +88,7 @@ export default async function About() {
         </SectionWrapper>
 
         {/* 4a — CREDENTIALS: track record in numbers */}
-        <SectionWrapper variant="tertiary">
+        <SectionWrapper variant="tertiary" className="section-wrapper--indigo">
           <SectionContent>
             <Stats
               stats={aboutContent?.stats || []}
