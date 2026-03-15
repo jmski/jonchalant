@@ -260,6 +260,25 @@ export async function getMediaKitData() {
   const query = `*[_type == "mediaKitData"][0] {
     _id,
     title,
+    heroBadge,
+    heroHeadline,
+    heroSubheadline,
+    shortBio,
+    longBio,
+    stats | order(order asc) {
+      value,
+      label,
+      order
+    },
+    expertiseAreas | order(order asc) {
+      title,
+      description,
+      order
+    },
+    pressAssetsPdfUrl,
+    pressAssetsLabel,
+    contactHeadline,
+    contactSubheadline,
     keyMetrics | order(order asc) {
       label,
       value,
