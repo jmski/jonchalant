@@ -1,5 +1,17 @@
 import { defineType, defineField } from 'sanity'
 
+async function isUnique(slug: string, context: any) {
+  const { document, getClient } = context
+  const client = getClient({ apiVersion: '2024-01-01' })
+  const id = document._id.replace(/^drafts\./, '')
+  const query = `!defined(*[_type == "lesson" && slug.current == $slug && !(_id in [$draft, $published])][0]._id)`
+  return client.fetch(query, {
+    slug,
+    draft: `drafts.${id}`,
+    published: id,
+  })
+}
+
 export default defineType({
   name: 'lesson',
   title: 'Lesson',
@@ -18,6 +30,7 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique,
       },
     }),
     defineField({
@@ -48,6 +61,7 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'text',
+      validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: 'duration',
@@ -74,6 +88,59 @@ export default defineType({
       title: 'Display Order',
       type: 'number',
       description: 'Lower numbers appear first',
+      validation: (Rule: any) => Rule.required(),
+    }),
+    defineField({
+      name: 'videoUrl',
+      title: 'Video URL',
+      type: 'url',
+      description: 'URL for embedded video (YouTube, Vimeo, etc.)',
+    }),
+    defineField({
+      name: 'body',
+      title: 'Body Content',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
+      description: 'Rich text content for the lesson',
+    }),
+    defineField({
+      name: 'estimatedDuration',
+      title: 'Estimated Duration',
+      type: 'string',
+      description: 'e.g. "8 min", "15 min read"',
+    }),
+    defineField({
+      name: 'isFreePreview',
+      title: 'Free Preview',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Allow public access to this lesson without enrollment',
+    }),
+    defineField({
+      name: 'module',
+      title: 'Parent Module',
+      type: 'reference',
+      to: [{ type: 'module' }],
+      validation: (Rule: any) => Rule.required(),
+      description: 'The module this lesson belongs to',
     }),
     defineField({
       name: 'publishedAt',

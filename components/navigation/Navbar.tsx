@@ -44,6 +44,7 @@ const NAV_SECTIONS: NavSection[] = [
         subitems: [
           { label: 'Programs', href: '/programs' },
           { label: 'Lessons', href: '/lessons' },
+          { label: 'Ikigai', href: '/ikigai' },
           { label: 'Blog', href: '/blog' },
         ],
       },
@@ -70,6 +71,7 @@ const FLAT_NAV_LINKS = [
   { label: 'Coaching', href: '#', dropdown: [
     { label: 'Programs', href: '/programs' },
     { label: 'Lessons', href: '/lessons' },
+    { label: 'Ikigai', href: '/ikigai' },
     { label: 'Blog', href: '/blog' },
   ]},
   { label: 'About', href: '/about' },
@@ -219,11 +221,6 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
         {/* Mobile Navigation - Sidebar-like with sections */}
         {mobileMenuOpen && (
           <div className="navbar-mobile-menu">
-            {/* Mobile Menu Header */}
-            <div className="navbar-mobile-header">
-              <h6>JONCHALANT</h6>
-            </div>
-
             {/* Mobile Menu Sections */}
             <nav className="navbar-mobile-sections">
               {NAV_SECTIONS.map((section) => (

@@ -21,6 +21,7 @@ interface Lesson {
   _id: string
   title: string
   slug: string
+  courseSlug?: string
   technicalDescription: string
   videoId: string
   socialLogic: string
@@ -122,7 +123,7 @@ export default function LessonPage({ params }: Props) {
       const progressData = await markLessonComplete(
         user.id,
         slug,
-        lesson.duration * 60 // Convert to seconds
+        lesson.courseSlug ?? ''
       )
       setProgress(progressData)
       // Show success feedback
@@ -224,12 +225,12 @@ export default function LessonPage({ params }: Props) {
           </div>
           <button
             onClick={handleMarkComplete}
-            disabled={isMarking || progress?.is_completed}
+            disabled={isMarking || progress?.completed}
             className={`portal-lesson-complete-button ${
-              progress?.is_completed ? 'portal-lesson-complete-button--done' : ''
+              progress?.completed ? 'portal-lesson-complete-button--done' : ''
             }`}
           >
-            {progress?.is_completed ? '✓ Complete' : 'Mark Complete'}
+            {progress?.completed ? '✓ Complete' : 'Mark Complete'}
           </button>
         </header>
 

@@ -94,7 +94,7 @@ export function ProgramTracks({ tracks: propTracks }: ProgramTracksProps) {
 
       <div className="program-tracks-list">
         {tracks.map((track, idx) => (
-          <ScrollFade key={track._id} delay={idx * 80}>
+          <ScrollFade key={track._id ?? `track-${idx}`} delay={idx * 80}>
             <article
               id={track._id}
               className={`program-track${idx % 2 === 1 ? " program-track--reverse" : ""}`}
