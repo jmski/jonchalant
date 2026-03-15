@@ -1053,6 +1053,105 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   PAGE HERO — Programs & Media Kit
+   Editorial header matching the about-hero Zen aesthetic.
+   Eyebrow → headline (all text-primary) → subheading → description → CTAs.
+   Optional split layout when a rightColumn is passed.
+   ────────────────────────────────────────────────────────────────────────────
+*/
+.page-hero-section {
+  padding: var(--spacing-3xl) 0 var(--spacing-xl);
+}
+
+.page-hero-inner {
+  max-width: 720px;
+}
+
+/* Split layout: right column slot */
+.page-hero-inner--split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3xl);
+  align-items: start;
+  max-width: none;
+}
+
+@media (min-width: 1024px) {
+  .page-hero-inner--split {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.page-hero-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-hero-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.page-hero-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-lg);
+  display: block;
+}
+
+.page-hero-headline-line {
+  display: block;
+}
+
+.page-hero-subheading {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 60ch;
+  margin: 0 0 var(--spacing-md);
+}
+
+.page-hero-description {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-tertiary);
+  max-width: 60ch;
+  margin: 0;
+}
+
+.page-hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .page-hero-ctas {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+/* page-hero-aside: right column slot — content inside defines its own styles */
+
+.page-hero-divider {
+  margin-top: var(--spacing-2xl);
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    PAGE HERO BUTTONS
    Matches site-standard primary button look (same as .cta-section-button).
    Hover / focus locked in interactions.css (highest layer).
