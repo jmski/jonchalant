@@ -90,15 +90,25 @@ export function PresenceAuditFlow() {
       {/* Step indicator — only on steps 1 and 2 */}
       {step !== 3 && (
         <div className="presence-audit-steps" aria-label="Progress">
-          {([1, 2] as const).map(n => (
+          <div className="presence-audit-step">
             <div
-              key={n}
-              className={`presence-audit-step-dot${step === n ? ' active' : ''}${step > n ? ' done' : ''}`}
-              aria-current={step === n ? 'step' : undefined}
+              className={`presence-audit-step-dot${step === 1 ? ' active' : ''}${step > 1 ? ' done' : ''}`}
+              aria-current={step === 1 ? 'step' : undefined}
             >
-              <span>{step > n ? '✓' : n}</span>
+              <span>{step > 1 ? '✓' : '1'}</span>
             </div>
-          ))}
+            <span className={`presence-audit-step-label${step === 1 ? ' active' : ''}`}>Your challenge</span>
+          </div>
+          <div className={`presence-audit-step-connector${step > 1 ? ' done' : ''}`} aria-hidden="true" />
+          <div className="presence-audit-step">
+            <div
+              className={`presence-audit-step-dot${step === 2 ? ' active' : ''}`}
+              aria-current={step === 2 ? 'step' : undefined}
+            >
+              <span>2</span>
+            </div>
+            <span className={`presence-audit-step-label${step === 2 ? ' active' : ''}`}>Your details</span>
+          </div>
         </div>
       )}
 
@@ -121,10 +131,8 @@ export function PresenceAuditFlow() {
                 className={`presence-audit-choice${selectedChallenge === challenge.id ? ' selected' : ''}`}
                 aria-pressed={selectedChallenge === challenge.id}
               >
-                {selectedChallenge === challenge.id && (
-                  <span className="presence-audit-choice-check" aria-hidden="true">✓</span>
-                )}
-                <span>{challenge.text}</span>
+                <span className="presence-audit-choice-text">{challenge.text}</span>
+                <span className="presence-audit-choice-radio" aria-hidden="true" />
               </button>
             ))}
           </div>
