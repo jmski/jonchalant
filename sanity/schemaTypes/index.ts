@@ -17,6 +17,8 @@ import program from '../schemas/program'
 import programFocus from '../schemas/programFocus'
 import service from '../schemas/service'
 import testimonial from '../schemas/testimonial'
+import danceCategory from '../schemas/danceCategory'
+import instagramReel from '../schemas/instagramReel'
 
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
@@ -36,6 +38,8 @@ export const types = [
   programFocus,
   service,
   testimonial,
+  danceCategory,
+  instagramReel,
 ] as const
 
 export const schema: { types: SchemaTypeDefinition[] } = {

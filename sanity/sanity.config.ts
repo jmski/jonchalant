@@ -19,6 +19,8 @@ import service from './schemas/service'
 import testimonial from './schemas/testimonial'
 import module from './schemas/module'
 import portalLesson from './schemas/portalLesson'
+import danceCategory from './schemas/danceCategory'
+import instagramReel from './schemas/instagramReel'
 
 export default defineConfig({
   name: 'default',
@@ -49,6 +51,8 @@ export default defineConfig({
       testimonial,
       module,
       portalLesson,
+      danceCategory,
+      instagramReel,
     ] as any,
   } as any,
 } as any)

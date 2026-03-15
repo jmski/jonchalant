@@ -514,3 +514,37 @@ export async function getLesson(courseSlug: string, lessonSlug: string) {
 export async function getModulesByCourse(courseSlug: string) {
   return fetchList('module', MODULE_FIELDS, `course->slug.current == "${courseSlug}"`)
 }
+
+// ============================================================================
+// DANCE
+// ============================================================================
+
+const DANCE_CATEGORY_FIELDS = `
+    _id,
+    title,
+    slug,
+    leadershipPrinciple,
+    description,
+    icon,
+    order,
+    videos[] {
+      title,
+      videoUrl,
+      duration,
+      caption
+    }
+  `
+
+const INSTAGRAM_REEL_FIELDS = `
+    _id,
+    reelUrl,
+    order
+  `
+
+export async function getDanceCategories() {
+  return fetchList('danceCategory', DANCE_CATEGORY_FIELDS)
+}
+
+export async function getInstagramReels() {
+  return fetchList('instagramReel', INSTAGRAM_REEL_FIELDS)
+}
