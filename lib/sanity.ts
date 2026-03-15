@@ -150,6 +150,59 @@ const PROGRAM_FIELDS = `
     order
   `
 
+const COURSE_FIELDS = `
+    _id,
+    title,
+    slug,
+    description,
+    thumbnail,
+    difficulty,
+    isFeatured,
+    order,
+    modules[]-> {
+      _id,
+      title,
+      slug,
+      description,
+      order,
+      lessons[]-> {
+        slug,
+        title,
+        isFreePreview,
+        estimatedDuration,
+        order
+      }
+    }
+  `
+
+const MODULE_FIELDS = `
+    _id,
+    title,
+    slug,
+    description,
+    order,
+    lessons[]-> {
+      _id,
+      slug,
+      title,
+      isFreePreview,
+      estimatedDuration,
+      order
+    }
+  `
+
+const LESSON_FIELDS_FULL = `
+    _id,
+    title,
+    slug,
+    description,
+    body,
+    videoUrl,
+    isFreePreview,
+    estimatedDuration,
+    order
+  `
+
 // ============================================================================
 // PORTFOLIO (Dance Videos)
 // ============================================================================
@@ -432,4 +485,32 @@ export async function getCollaborationPackages() {
     `*[_type == "collaboration"] | order(order asc) { "name": title, price, "features": coalesce(deliverables, []), order }`
   )
   return { packages }
+}
+
+// ============================================================================
+// COURSES
+// ============================================================================
+
+export async function getCourses() {
+  return fetchList('course', COURSE_FIELDS)
+}
+
+export async function getCourse(slug: string) {
+  return fetchOne('course', COURSE_FIELDS, `slug.current == "${slug}"`)
+}
+
+export async function getFeaturedCourses() {
+  return fetchList('course', COURSE_FIELDS, 'isFeatured == true')
+}
+
+export async function getLesson(courseSlug: string, lessonSlug: string) {
+  return fetchOne(
+    'lesson',
+    LESSON_FIELDS_FULL,
+    `slug.current == "${lessonSlug}" && module->course->slug.current == "${courseSlug}"`
+  )
+}
+
+export async function getModulesByCourse(courseSlug: string) {
+  return fetchList('module', MODULE_FIELDS, `course->slug.current == "${courseSlug}"`)
 }

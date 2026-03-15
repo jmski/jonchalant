@@ -5,6 +5,7 @@ import mediaKitData from './mediaKitData'
 import testimonial from './testimonial'
 import caseStudy from './caseStudy'
 import lesson from './lesson'
+import course from './course'
 import program from './program'
 import pageMetadata from './pageMetadata'
 import contactInfo from './contactInfo'
@@ -25,6 +26,7 @@ export const schemaTypes = [
   testimonial,
   caseStudy,
   lesson,
+  course,
   program,
   pageMetadata,
   contactInfo,

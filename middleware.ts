@@ -1,30 +1,24 @@
-import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { updateSession } from '@/utils/supabase/middleware'
 
 /**
- * Lightweight middleware for request validation
- * 
- * Modern pattern: Middleware is minimal, auth checks happen client-side
- * via useAuth hook or in route handlers.
- * 
- * This middleware:
- * - Passes through all requests
- * - Uses response headers for any needed metadata
- * - Auth protection is handled by:
- *   1. Client-side useAuth hook with redirect
- *   2. Protected route handlers (API routes)
+ * Root middleware.
+ *
+ * Delegates session refresh to the Supabase SSR helper so auth cookies stay
+ * current on every request.  All auth-gate logic lives client-side (useAuth
+ * hook) or in Route Handlers — not here.
  */
-
-export function middleware(request: NextRequest) {
-  // All requests pass through - no blocking at middleware level
-  // Auth checks happen client-side via useAuth hook
-  return NextResponse.next()
+export async function middleware(request: NextRequest) {
+  return updateSession(request)
 }
 
-// Configure which routes this middleware runs on (minimal scope)
 export const config = {
   matcher: [
-    // Only match API routes that might need auth
-    '/api/auth/:path*',
+    /*
+     * Run on every request EXCEPT:
+     * - Next.js internals (_next/static, _next/image)
+     * - Static files (favicon, images, etc.)
+     */
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

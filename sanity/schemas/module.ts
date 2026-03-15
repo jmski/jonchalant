@@ -1,5 +1,17 @@
 import { defineType, defineField } from 'sanity'
 
+async function isUnique(slug: string, context: any) {
+  const { document, getClient } = context
+  const client = getClient({ apiVersion: '2024-01-01' })
+  const id = document._id.replace(/^\/drafts\./, '')
+  const query = `!defined(*[_type == "module" && slug.current == $slug && !(_id in [$draft, $published])][0]._id)`
+  return client.fetch(query, {
+    slug,
+    draft: `drafts.${id}`,
+    published: id,
+  })
+}
+
 export default defineType({
   name: 'module',
   title: 'Module (Learning Portal)',
@@ -19,6 +31,7 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique,
       },
       validation: (Rule: any) => Rule.required(),
     }),
@@ -47,9 +60,17 @@ export default defineType({
       type: 'array',
       of: [{
         type: 'reference',
-        to: [{ type: 'portalLesson' }],
+        to: [{ type: 'lesson' }, { type: 'portalLesson' }],
       }],
       description: 'Add lesson references to build out the module curriculum',
+    }),
+    defineField({
+      name: 'course',
+      title: 'Parent Course',
+      type: 'reference',
+      to: [{ type: 'course' }],
+      validation: (Rule: any) => Rule.required(),
+      description: 'The course this module belongs to',
     }),
     defineField({
       name: 'createdAt',
