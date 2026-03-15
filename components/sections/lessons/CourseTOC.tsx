@@ -10,7 +10,7 @@ interface TocLesson {
   slug: { current: string }
   title: string
   isFreePreview: boolean
-  estimatedDuration: number
+  estimatedDuration: string
   order: number
 }
 
@@ -37,10 +37,11 @@ export interface CourseTOCProps {
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-function formatDuration(minutes: number): string {
-  if (!minutes) return ''
-  const h = Math.floor(minutes / 60)
-  const m = minutes % 60
+function formatDuration(minutes: string): string {
+  const n = parseInt(minutes, 10)
+  if (!n) return ''
+  const h = Math.floor(n / 60)
+  const m = n % 60
   if (h > 0 && m > 0) return `${h}h ${m}m`
   if (h > 0) return `${h}h`
   return `${m}m`
