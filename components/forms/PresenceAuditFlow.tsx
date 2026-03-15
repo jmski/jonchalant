@@ -115,6 +115,7 @@ export function PresenceAuditFlow() {
       {/* ── Step 1: Challenge selection ── */}
       {step === 1 && (
         <div className="presence-audit-panel">
+          <span className="presence-audit-panel-context">Step 1 of 2 — Honest recognition</span>
           <h2 className="presence-audit-panel-title">
             What's your biggest challenge right now?
           </h2>
@@ -131,8 +132,7 @@ export function PresenceAuditFlow() {
                 className={`presence-audit-choice${selectedChallenge === challenge.id ? ' selected' : ''}`}
                 aria-pressed={selectedChallenge === challenge.id}
               >
-                <span className="presence-audit-choice-text">{challenge.text}</span>
-                <span className="presence-audit-choice-radio" aria-hidden="true" />
+                {challenge.text}
               </button>
             ))}
           </div>
@@ -159,6 +159,7 @@ export function PresenceAuditFlow() {
             ← Back
           </button>
 
+          <span className="presence-audit-panel-context">Step 2 of 2 — Where to find you</span>
           <h2 className="presence-audit-panel-title">
             Where should Jon send your audit?
           </h2>

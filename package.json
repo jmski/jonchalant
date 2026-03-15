@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint",
     "sanity:dev": "cd sanity && npm run dev",
-    "sanity:deploy": "cd sanity && npm run deploy"
+    "sanity:deploy": "cd sanity && npm run deploy",
+    "seed:dance-categories": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-dance-categories.ts",
+    "seed:instagram-reels": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-instagram-reels.ts"
   },
   "dependencies": {
     "@react-three/fiber": "^9.5.0",

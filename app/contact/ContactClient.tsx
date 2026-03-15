@@ -12,6 +12,7 @@ export default function ContactClient() {
           <SectionContent>
             <div className="presence-audit-page">
               <div className="presence-audit-page-header">
+                <div className="presence-audit-opening-mark" aria-hidden="true" />
                 <span className="presence-audit-eyebrow">Free Presence Audit</span>
                 <h1 className="presence-audit-page-title">
                   Find Out Where Your Presence Is Breaking Down
@@ -21,6 +22,10 @@ export default function ContactClient() {
                   your biggest presence gap — free, within 48 hours. No sales
                   pitch. Just a real read.
                 </p>
+                <blockquote className="presence-audit-jon-note">
+                  <p>"Most people I work with have never had someone sit with them and honestly name what's holding their presence back. That's what this is — straight talk, no pitch."</p>
+                  <cite>— Jon</cite>
+                </blockquote>
               </div>
 
               <PresenceAuditFlow />

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import LoginClient from './LoginClient'
 
 // Login pages must not be indexed — no value for search users
@@ -13,5 +14,9 @@ export const metadata: Metadata = {
 }
 
 export default function LoginPage() {
-  return <LoginClient />
+  return (
+    <Suspense>
+      <LoginClient />
+    </Suspense>
+  )
 }

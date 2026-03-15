@@ -909,7 +909,8 @@
   background: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Top bar */
@@ -1041,7 +1042,9 @@
   background: var(--bg-secondary);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .portal-course-card:hover {
@@ -1149,7 +1152,9 @@
   font-size: 1rem;
   color: var(--text-tertiary);
   flex-shrink: 0;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .portal-quicklink-card:hover .portal-quicklink-arrow {
@@ -3484,93 +3489,126 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   PRESENCE AUDIT FLOW - Contact Page Booking Flow
-   Steps: Challenge selection → Contact details → Confirmation
+   PRESENCE AUDIT FLOW — The Threshold
+   A journey of self-discovery beginning with honest recognition.
+   Steps: Challenge → Details → Confirmation
    ────────────────────────────────────────────────────────────────────────────
 */
 
-/* Page wrapper */
+/* ── Page wrapper ── */
 .presence-audit-page {
-  max-width: 40rem;
+  max-width: 38rem;
   margin: 0 auto;
-  padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-3xl);
+  padding: 2rem 1.25rem 5rem;
 }
 
 @media (min-width: 640px) {
   .presence-audit-page {
-    padding: var(--spacing-3xl) 0 var(--spacing-3xl);
+    padding: 4rem 0 6rem;
   }
 }
 
-/* Page header */
+/* ── Decorative opening mark above the eyebrow ── */
+.presence-audit-opening-mark {
+  width: 2.5rem;
+  height: 2px;
+  background: var(--accent-primary);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Page header ── */
 .presence-audit-page-header {
-  margin-bottom: var(--spacing-2xl);
-  padding-bottom: var(--spacing-xl);
-  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 3rem;
 }
 
 .presence-audit-eyebrow {
-  display: inline-flex;
-  align-items: center;
+  display: block;
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent-primary);
-  background: rgba(107, 142, 99, 0.1);
-  padding: 0.3rem 0.75rem;
-  border-radius: 2rem;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 1rem;
 }
 
+/* Editorial serif title */
 .presence-audit-page-title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: var(--font-headline);
+  font-size: 2.125rem;
+  font-weight: 300;
   color: var(--text-primary);
   line-height: 1.15;
-  margin-bottom: var(--spacing-md);
-  letter-spacing: -0.02em;
+  margin-bottom: 1.125rem;
+  letter-spacing: -0.025em;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
 @media (min-width: 640px) {
   .presence-audit-page-title {
-    font-size: 2.625rem;
+    font-size: 2.875rem;
   }
 }
 
 .presence-audit-page-subtitle {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   color: var(--text-secondary);
-  line-height: 1.7;
-  margin: 0;
+  line-height: 1.75;
+  margin: 0 0 2rem;
 }
 
-/* ── Step indicator with connecting line ── */
+/* Jon's contextual note — sets the tone before the flow begins */
+.presence-audit-jon-note {
+  margin: 0;
+  padding: 1.25rem 1.25rem 1.25rem 1.375rem;
+  border-left: 2px solid var(--color-burnt-indigo);
+  background: rgba(74, 58, 92, 0.03);
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.presence-audit-jon-note p {
+  font-family: var(--font-headline);
+  font-style: italic;
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0 0 0.625rem;
+}
+
+.presence-audit-jon-note cite {
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-burnt-indigo);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Step indicator with connector ── */
 .presence-audit-steps {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 1.75rem;
 }
 
 .presence-audit-step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .presence-audit-step-dot {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
-  border: 2px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-tertiary);
   background: var(--bg-primary);
@@ -3580,22 +3618,23 @@
 .presence-audit-step-dot.active {
   border-color: var(--accent-primary);
   color: var(--accent-primary);
-  background: rgba(107, 142, 99, 0.06);
+  background: rgba(107, 142, 99, 0.07);
 }
 
 .presence-audit-step-dot.done {
   border-color: var(--accent-primary);
   background: var(--accent-primary);
   color: #fff;
+  font-size: 0.625rem;
 }
 
 .presence-audit-step-connector {
-  width: 4rem;
-  height: 2px;
+  width: 3.5rem;
+  height: 1px;
   background: var(--border-color);
-  margin-top: 1.125rem;
+  margin-top: 1rem;
   flex-shrink: 0;
-  transition: background var(--transition-base);
+  transition: background var(--transition-slow);
 }
 
 .presence-audit-step-connector.done {
@@ -3603,135 +3642,146 @@
 }
 
 .presence-audit-step-label {
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 500;
   color: var(--text-tertiary);
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+  letter-spacing: 0.03em;
   text-transform: none;
+  white-space: nowrap;
 }
 
 .presence-audit-step-label.active {
   color: var(--accent-primary);
+  font-weight: 600;
 }
 
 /* ── Panel card (steps 1 & 2) ── */
 .presence-audit-panel {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  border-radius: 1rem;
-  padding: var(--spacing-xl);
-  overflow: hidden;
+  border-radius: 0.75rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 20px rgba(26, 26, 26, 0.04);
 }
 
 @media (min-width: 640px) {
   .presence-audit-panel {
-    padding: var(--spacing-2xl);
+    padding: 2.5rem;
   }
 }
 
+/* Small uppercase step context above the panel title */
+.presence-audit-panel-context {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.625rem;
+}
+
+/* Editorial serif panel title */
 .presence-audit-panel-title {
-  font-size: 1.3125rem;
-  font-weight: 700;
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 300;
   color: var(--text-primary);
-  margin-bottom: 0.375rem;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 @media (min-width: 640px) {
   .presence-audit-panel-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 }
 
 .presence-audit-panel-subtitle {
   font-size: 0.9375rem;
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 2rem;
   line-height: 1.65;
 }
 
-/* ── Challenge tiles ── */
+/* ── Challenge tiles — left-accent selection pattern ── */
 .presence-audit-choices {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: var(--spacing-xl);
+  gap: 0.4375rem;
+  margin-bottom: 2rem;
 }
 
+/* Tiles use ::before for the left accent — no child element to overflow */
 .presence-audit-choice {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+  position: relative;
+  display: block;
   width: 100%;
   text-align: left;
-  padding: 0.875rem 1rem;
-  border: 1.5px solid var(--border-color);
-  border-radius: 0.625rem;
+  padding: 0.9375rem 1.125rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
   background: var(--bg-primary);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-size: 0.9375rem;
   font-family: inherit;
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
+  line-height: 1.6;
   cursor: pointer;
+  overflow: hidden;
   transition:
     border-color var(--transition-base),
     background var(--transition-base),
-    box-shadow var(--transition-base);
-  overflow-wrap: break-word;
-  word-break: break-word;
+    color var(--transition-base);
+}
+
+.presence-audit-choice::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background var(--transition-base);
 }
 
 .presence-audit-choice:hover {
-  border-color: var(--color-muted-moss);
-  background: rgba(107, 142, 99, 0.02);
+  background: rgba(107, 142, 99, 0.025);
+  color: var(--text-primary);
+}
+
+.presence-audit-choice:hover::before {
+  background: rgba(107, 142, 99, 0.35);
 }
 
 .presence-audit-choice.selected {
-  border-color: var(--accent-primary);
-  border-width: 2px;
-  background: rgba(107, 142, 99, 0.06);
+  border-color: rgba(107, 142, 99, 0.3);
+  background: rgba(107, 142, 99, 0.05);
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
-.presence-audit-choice-text {
-  flex: 1;
-  line-height: 1.5;
-}
-
-.presence-audit-choice-radio {
-  flex-shrink: 0;
-  width: 1.125rem;
-  height: 1.125rem;
-  border-radius: 50%;
-  border: 2px solid var(--border-color);
-  background: var(--bg-primary);
-  display: block;
-  transition: all var(--transition-base);
-}
-
-.presence-audit-choice.selected .presence-audit-choice-radio {
-  border-color: var(--accent-primary);
+.presence-audit-choice.selected::before {
   background: var(--accent-primary);
-  box-shadow: inset 0 0 0 3px var(--bg-primary);
 }
 
-/* ── CTA button ── */
+/* ── CTA button — deep indigo for committing to the journey ── */
 .presence-audit-cta {
   width: 100%;
-  padding: 0.9375rem var(--spacing-lg);
-  background: var(--accent-primary);
-  color: #fff;
-  font-size: 0.9375rem;
-  font-weight: 600;
+  padding: 1rem 2rem;
+  background: var(--color-burnt-indigo);
+  color: #f8f8f5;
+  font-size: 0.875rem;
+  font-weight: 500;
   font-family: inherit;
   text-transform: none;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
   border: none;
-  border-radius: 0.625rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition:
     background var(--transition-base),
@@ -3739,12 +3789,12 @@
 }
 
 .presence-audit-cta:hover:not(:disabled) {
-  background: var(--accent-hover);
+  background: var(--color-burnt-indigo-light);
   transform: translateY(-1px);
 }
 
 .presence-audit-cta:disabled {
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: not-allowed;
   transform: none;
 }
@@ -3757,8 +3807,8 @@
   background: none;
   border: none;
   padding: 0;
-  margin-bottom: var(--spacing-lg);
-  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   text-transform: none;
   letter-spacing: 0;
@@ -3776,7 +3826,7 @@
 .presence-audit-form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 1.5rem;
 }
 
 .presence-audit-field {
@@ -3798,15 +3848,15 @@
 .presence-audit-hint {
   font-size: 0.8125rem;
   color: var(--text-tertiary);
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
 }
 
 .presence-audit-error {
   font-size: 0.875rem;
   color: var(--color-error);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid rgba(138, 90, 90, 0.25);
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(138, 90, 90, 0.2);
   border-radius: 0.375rem;
   background: rgba(138, 90, 90, 0.04);
 }
@@ -3815,78 +3865,87 @@
 .presence-audit-confirmation {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  border-top: 3px solid var(--accent-primary);
-  border-radius: 1rem;
-  padding: var(--spacing-2xl);
+  border-radius: 0.75rem;
+  padding: 3rem 2rem;
   text-align: center;
+  box-shadow: 0 2px 20px rgba(26, 26, 26, 0.04);
 }
 
+@media (min-width: 640px) {
+  .presence-audit-confirmation {
+    padding: 3.5rem 3rem;
+  }
+}
+
+/* Enso-style ring — open circle, not filled */
 .presence-audit-confirm-icon {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
-  background: rgba(107, 142, 99, 0.12);
+  border: 2px solid var(--accent-primary);
   color: var(--accent-primary);
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-lg);
+  margin: 0 auto 1.75rem;
 }
 
 .presence-audit-confirm-title {
-  font-size: 1.625rem;
-  font-weight: 700;
+  font-family: var(--font-headline);
+  font-size: 1.875rem;
+  font-weight: 300;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-sm);
-  letter-spacing: -0.01em;
+  margin-bottom: 0.875rem;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 
 .presence-audit-confirm-body {
   font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 0;
 }
 
 .presence-audit-confirm-body strong {
-  color: var(--accent-primary);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
-/* ── Next steps list ── */
+/* ── What happens next ── */
 .presence-audit-next-steps {
   list-style: none;
   padding: 0;
-  margin: var(--spacing-xl) 0 0;
+  margin: 2.5rem 0 0;
   border-top: 1px solid var(--border-subtle);
-  padding-top: var(--spacing-xl);
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 1.5rem;
   text-align: left;
 }
 
 .presence-audit-next-step {
   display: flex;
-  gap: var(--spacing-md);
+  gap: 1rem;
   align-items: flex-start;
 }
 
 .presence-audit-next-step-num {
   flex-shrink: 0;
-  width: 1.625rem;
-  height: 1.625rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   background: rgba(107, 142, 99, 0.1);
   color: var(--accent-primary);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.2rem;
+  margin-top: 0.175rem;
 }
 
 .presence-audit-next-step strong {
@@ -3894,7 +3953,7 @@
   font-weight: 600;
   font-size: 0.9375rem;
   color: var(--text-primary);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.25rem;
 }
 
 .presence-audit-next-step p {
@@ -6088,4 +6147,85 @@
 .media-kit-contact-btn:hover {
   background: var(--text-primary);
   color: var(--bg-primary);
+}
+/* ============================================================
+   PRIVACY PAGE
+   ============================================================ */
+
+.privacy-page {
+  padding: 4rem 1.25rem 6rem;
+}
+
+.privacy-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.privacy-effective-date {
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.75rem;
+}
+
+.privacy-title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+
+.privacy-intro {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.privacy-container h2 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.privacy-container p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.125rem;
+}
+
+.privacy-container a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.privacy-container a:hover {
+  color: var(--accent-hover);
+}
+
+.privacy-back {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.9375rem;
+}
+
+.privacy-back a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.privacy-back a:hover {
+  color: var(--accent-primary);
 }
