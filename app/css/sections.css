@@ -421,7 +421,7 @@
    ────────────────────────────────────────────────────────────────────────────
 */
 .case-study-section {
-  background-color: var(--bg-muted, #f8fafc);
+  background-color: var(--bg-secondary);
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
