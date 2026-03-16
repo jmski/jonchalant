@@ -12,31 +12,21 @@
 @layer reset, variables, base, components, utilities, interactive;
 
 /* Design System Foundation */
-@layer variables {
-  @import "./css/variables.css";
-}
+@import "./css/variables.css" layer(variables);
 
 /* Global Reset & HTML/Body Styles */
-@layer base {
-  @import "./css/base.css";
-}
+@import "./css/base.css" layer(base);
 
 /* Reusable Components (buttons, cards, forms, etc.) */
-@layer components {
-  @import "./css/components.css";
-  @import "./css/typography.css";
-  @import "./css/layout.css";
-  @import "./css/cards.css";
-  @import "./css/sections.css";
-  @import "./css/pages.css";
-}
+@import "./css/components.css" layer(components);
+@import "./css/typography.css" layer(components);
+@import "./css/layout.css" layer(components);
+@import "./css/cards.css" layer(components);
+@import "./css/sections.css" layer(components);
+@import "./css/pages.css" layer(components);
 
 /* Utility Classes & Patterns */
-@layer utilities {
-  @import "./css/utilities.css";
-}
+@import "./css/utilities.css" layer(utilities);
 
 /* Interactive Effects (hover, focus, animations) */
-@layer interactive {
-  @import "./css/interactions.css";
-}
+@import "./css/interactions.css" layer(interactive);
