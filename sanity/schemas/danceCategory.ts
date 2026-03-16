@@ -71,11 +71,12 @@ export default defineType({
               description: 'YouTube or Vimeo URL',
               validation: (Rule) => Rule.required(),
             }),
+            // Duration in minutes — display formatting handled in components
             defineField({
               name: 'duration',
               title: 'Duration',
-              type: 'string',
-              description: 'e.g. "3:42"',
+              type: 'number',
+              description: 'Duration in minutes',
             }),
             defineField({
               name: 'caption',

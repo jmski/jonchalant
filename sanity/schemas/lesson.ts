@@ -1,4 +1,6 @@
+// Public-facing lesson cards shown on /lessons. Not gated content.
 import { defineType, defineField } from 'sanity'
+import type { StringRule, NumberRule } from 'sanity'
 
 async function isUnique(slug: string, context: any) {
   const { document, getClient } = context
@@ -21,7 +23,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -61,13 +63,14 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'text',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
+    // Duration in minutes — display formatting handled in components
     defineField({
       name: 'duration',
       title: 'Duration',
-      type: 'string',
-      description: 'e.g., "8 min read" or "12 min read"',
+      type: 'number',
+      description: 'Duration in minutes',
     }),
     defineField({
       name: 'image',
@@ -88,7 +91,7 @@ export default defineType({
       title: 'Display Order',
       type: 'number',
       description: 'Lower numbers appear first',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: NumberRule) => Rule.required(),
     }),
     defineField({
       name: 'videoUrl',

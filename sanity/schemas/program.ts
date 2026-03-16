@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import type { StringRule, SlugRule } from 'sanity'
 
 export default defineType({
   name: 'program',
@@ -9,7 +10,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -18,6 +19,7 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
     }),
     defineField({
@@ -38,7 +40,7 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'text',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'investment',
