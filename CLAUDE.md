@@ -55,16 +55,31 @@ app/
 │   └── [slug]/           → Blog post (dynamic)
 ├── programs/page.tsx     → Coaching programs
 ├── dance/page.tsx        → Choreography portfolio
-├── lessons/page.tsx      → Lessons by level
+├── lessons/
+│   ├── page.tsx          → Lessons by level
+│   └── [courseSlug]/
+│       ├── page.tsx      → Course detail with sticky TOC
+│       └── [lessonSlug]/page.tsx → Lesson page with video + progress tracking
 ├── media-kit/page.tsx    → Media kit & collaboration
 ├── contact/
 │   ├── page.tsx          → Server wrapper
 │   └── ContactClient.tsx → Client component (form)
-├── login/page.tsx        → Login
+├── login/
+│   ├── page.tsx          → Auth page (email + Google OAuth)
+│   └── LoginClient.tsx   → Client form component
 ├── portal/
 │   ├── layout.tsx
-│   ├── page.tsx          → Learning portal
-│   └── [slug]/           → Portal lesson (dynamic)
+│   ├── page.tsx          → Protected dashboard (requires Supabase auth)
+│   ├── PortalCourseCard.tsx
+│   ├── SignOutButton.tsx
+│   └── [slug]/
+│       ├── page.tsx      → Portal lesson page (server, gated)
+│       └── LessonActions.tsx
+├── ikigai/
+│   ├── page.tsx          → Interactive Ikigai quiz with SVG diagram
+│   └── IkigaiClient.tsx  → Client component
+├── privacy/page.tsx      → Privacy policy (static)
+├── auth/callback/        → OAuth callback route (Supabase SSR)
 ├── admin/
 │   ├── layout.tsx
 │   ├── page.tsx
@@ -74,7 +89,7 @@ app/
 │   └── reset-password/
 ├── api/
 │   ├── inquiries/        → Inquiry form API route
-│   └── subscribe/        → Email subscribe API route
+│   └── subscribe/        → Email subscribe API route (Kit/ConvertKit)
 └── css/                  → 10 consolidated CSS files
 ```
 
@@ -141,20 +156,12 @@ components/
 │   ├── DanceFilter.tsx
 │   └── index.ts
 ├── decorative/
-│   ├── BlueprintGrid.tsx
-│   ├── EnsoCircle.tsx
 │   ├── FluidShape.tsx
-│   ├── IkigaiSymbol.tsx
-│   └── index.ts
-├── effects/
-│   ├── Marquee.tsx
 │   └── index.ts
 ├── forms/
 │   ├── BlogOptIn.tsx
 │   └── SegmentedInquiryForm.tsx
 ├── layout/
-│   ├── Card.tsx
-│   ├── Grid.tsx
 │   ├── PageTransition.tsx
 │   ├── RouteAwareLayout.tsx
 │   ├── SectionContent.tsx
@@ -197,6 +204,9 @@ components/
 │   ├── collaboration/
 │   │   ├── Collaboration.tsx
 │   │   └── index.ts
+│   ├── copy-button/
+│   │   ├── CopyButton.tsx          ('use client')
+│   │   └── index.ts
 │   ├── cta/
 │   │   ├── CTA.tsx
 │   │   └── index.ts
@@ -208,6 +218,9 @@ components/
 │   │   └── index.ts
 │   ├── hero/
 │   │   ├── Hero.tsx                (GenericHero)
+│   │   └── index.ts
+│   ├── instagram-embed/
+│   │   ├── InstagramEmbed.tsx      ('use client')
 │   │   └── index.ts
 │   ├── page-hero/
 │   │   ├── PageHero.tsx
@@ -227,6 +240,9 @@ components/
 │   └── three-pillars/
 │       ├── ThreePillars.tsx
 │       └── index.ts
+│   ├── video-embed/
+│   │   ├── VideoEmbed.tsx          ('use client')
+│   │   └── index.ts
 └── sections/                       ← Page/feature-scoped sections
     ├── index.ts                    ← Central export hub (see below)
     ├── about/
@@ -459,7 +475,6 @@ All pages use these wrappers from `@/components/layout`:
 - `<SectionContent>` — constrains max-width, handles inner padding
 - `<RouteAwareLayout>` — in app/layout.tsx, handles Navbar visibility
 - `<SidebarOverlay>` — mobile nav overlay
-- `<Card>`, `<Grid>` — generic layout primitives
 
 ---
 
@@ -587,21 +602,31 @@ export function urlFor(source); // image URL builder
 
 ---
 
-## Supabase (lib/supabase.ts)
+## Supabase Auth & Database
 
-Used for the learning portal and admin features.
+Used for the learning portal (authentication + progress tracking).
+
+### SSR-Safe Auth Clients
+
+**Never import `lib/supabase.ts`** — that file has been deleted. Use the SSR-safe helpers from `utils/supabase/`:
 
 ```ts
-export const supabase = createClient(
-  NEXT_PUBLIC_SUPABASE_URL,
-  NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
-// anon key — browser/client-side
+// Server components & Route Handlers
+import { createClient } from "@/utils/supabase/server";
 
-export const supabaseAdmin =
-  createClient(URL, SUPABASE_SERVICE_ROLE_KEY) | null;
-// service role — server-side admin ops only
+// Client components ('use client')
+import { createClient } from "@/utils/supabase/client";
+
+// Middleware (session refresh)
+import { updateSession } from "@/utils/supabase/middleware";
 ```
+
+The root `middleware.ts` delegates to `updateSession` to keep auth cookies fresh on every request. All auth-gate logic lives client-side (via the `useAuth` hook in `lib/auth-context.tsx`) or inside Route Handlers — not in middleware.
+
+### Database
+
+- `lesson_progress` table with Row Level Security (RLS)
+- Progress helpers in `lib/portal-progress.ts` — `markLessonComplete`, `getLessonProgress`, `getCourseProgress`
 
 ---
 
@@ -616,6 +641,7 @@ export const supabaseAdmin =
 | `pageContent.ts`                  | Static/fallback page content                                          |
 | `portal-progress.ts`              | Learning portal progress tracking                                     |
 | `schema.ts`                       | JSON-LD structured data schemas (AggregateRatingSchema, CourseSchema) |
+| `types.ts`                        | All shared TypeScript interfaces (Sanity + portal types)              |
 | `blog/portableTextComponents.tsx` | Portable text renderer for blog posts                                 |
 | `hooks/`                          | Custom React hooks                                                    |
 
@@ -632,16 +658,24 @@ export const supabaseAdmin =
 
 ## Middleware (middleware.ts)
 
-Minimal pass-through — no blocking at middleware level:
+Delegates session refresh to the Supabase SSR helper — no blocking at middleware level:
 
 ```ts
-export function middleware(request: NextRequest) {
-  return NextResponse.next();
+import type { NextRequest } from "next/server";
+import { updateSession } from "@/utils/supabase/middleware";
+
+export async function middleware(request: NextRequest) {
+  return updateSession(request);
 }
-export const config = { matcher: ["/api/auth/:path*"] };
+
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+};
 ```
 
-Auth is handled client-side via `useAuth` hook (from `lib/auth-context.tsx`) and in API route handlers.
+All auth-gate logic lives client-side (via the `useAuth` hook in `lib/auth-context.tsx`) or inside Route Handlers — not in middleware.
 
 ---
 
@@ -654,6 +688,8 @@ SANITY_API_TOKEN=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=   # optional, admin only
+KIT_API_KEY=                 # Kit (ConvertKit) API key
+KIT_FORM_ID=                 # Kit form ID for /api/subscribe endpoint
 ```
 
 ---
@@ -672,6 +708,8 @@ SUPABASE_SERVICE_ROLE_KEY=   # optional, admin only
 10. **All sections exported from `components/sections/index.ts`** with descriptive aliases.
 11. **Sanity fallback pattern**: `try { const data = await getSanityData(); if (data) use it } catch { use fallback/mock }`.
 12. **Wrappers pattern for all pages**: `<PageTransition>` → `<SectionWrapper variant>` → `<SectionContent>` → component.
+13. **Auth (Supabase SSR)**: Server components use `utils/supabase/server.ts`; client components use `utils/supabase/client.ts`. Never import `lib/supabase.ts` (deleted). All auth-gate logic lives client-side in the `useAuth` hook.
+14. **Shared TypeScript types**: All Sanity + portal interfaces live in `lib/types.ts`. Import from there; do not re-declare inline.
 
 ---
 

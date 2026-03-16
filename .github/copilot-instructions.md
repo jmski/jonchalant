@@ -58,17 +58,20 @@ components/
 │   ├── cta/                    # CTA.tsx
 │   ├── faq/                    # FAQ.tsx
 │   ├── hero/                   # Hero.tsx (generic)
+│   ├── instagram-embed/        # InstagramEmbed.tsx ('use client')
 │   ├── page-hero/              # PageHero.tsx
 │   ├── featured-blog/          # FeaturedBlog.tsx
 │   ├── carousel/               # Carousel.tsx
 │   ├── case-studies/           # CaseStudies.tsx
 │   ├── case-study/             # CaseStudy.tsx
 │   ├── collaboration/          # Collaboration.tsx
+│   ├── copy-button/            # CopyButton.tsx ('use client')
 │   ├── programs/               # Programs.tsx
 │   ├── services/               # Services.tsx
 │   ├── stats/                  # Stats.tsx
 │   ├── testimonials/           # Testimonials.tsx
-│   └── three-pillars/          # ThreePillars.tsx
+│   ├── three-pillars/          # ThreePillars.tsx
+│   └── video-embed/            # VideoEmbed.tsx ('use client')
 ├── utilities/                   # Reusable utility components
 │   ├── badges/                 # Badge.tsx
 │   ├── cards/                  # TestimonialCard.tsx, CaseStudyCard.tsx, BlogCard.tsx, LessonCard.tsx, ServiceCard.tsx
@@ -76,9 +79,8 @@ components/
 ├── layout/                      # Layout wrappers
 ├── navigation/                  # Navbar, navigation
 ├── typography/                  # Text/heading components
-├── effects/                     # Animations, decorative effects
 ├── forms/                       # Form components
-├── decorative/                  # SVG, decorative elements
+├── decorative/                  # SVG, decorative elements (FluidShape only)
 └── animations/                  # Reusable animation hooks
 ```
 
@@ -432,7 +434,7 @@ Use kebab-case class names matching component names:
 - Professional cards with minimal borders and subtle shadows
 - Full-bleed images with soft overlays
 - Generous whitespace throughout (Ma principle)
-- Decorative elements: Enso circles, fluid shapes, blueprint grids (all muted, low opacity)
+- Decorative elements: fluid shapes (FluidShape only — Enso circles and blueprint grid components were removed)
 - CTA buttons with muted moss accent, subtle hover scale transitions
 
 ## Page Structure & Responsive Design
@@ -698,5 +700,8 @@ Complex styling? Use a CSS class in the appropriate consolidated file (cards.css
 - **Test build**: `npm run build` validates TypeScript and CSS compilation (required before committing)
 - **Debug CSS**: Inspect classes in `.css` files in `app/css/` using browser DevTools
 - **Imports**: Use `@/components/sections`, `@/components/shared`, `@/components/utilities` with consistent paths
-- **Do NOT create new .css files** — use the consolidated structure (10 files only)</content>
+- **Do NOT create new .css files** — use the consolidated structure (10 files only)
+- **Auth (Supabase SSR)**: Server components use `utils/supabase/server.ts`; client components (`'use client'`) use `utils/supabase/client.ts`. Never import `lib/supabase.ts` (deleted). All auth-gate logic lives client-side in the `useAuth` hook (`lib/auth-context.tsx`).
+- **Shared TypeScript types**: All Sanity + portal interfaces live in `lib/types.ts`. Import from there; do not re-declare inline.
+- **CSS architecture note**: `pages.css` has a table of contents at the top (24 entries). The portal login section intentionally uses non-brand colors — this is not a bug.</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md
