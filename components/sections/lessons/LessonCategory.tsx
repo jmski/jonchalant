@@ -1,8 +1,19 @@
 import { LessonCard } from '@/components/utilities/cards';
 
+/** Shape returned by getLessons() / getLessonsByCategory() for the old /lessons page. */
+interface LegacyLessonItem {
+  _id: string;
+  title: string;
+  description: string;
+  pillar: string;
+  icon: string;
+  duration: string;
+  slug?: { current: string };
+}
+
 interface LessonCategoryProps {
   level: 'Beginner' | 'Intermediate' | 'Advanced';
-  lessons: any[];
+  lessons: LegacyLessonItem[];
 }
 
 export function LessonCategory({ level, lessons }: LessonCategoryProps) {

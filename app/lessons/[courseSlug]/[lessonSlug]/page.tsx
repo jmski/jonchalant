@@ -5,6 +5,7 @@ import { createClient } from '@/utils/supabase/server'
 import { getCourseProgress } from '@/lib/portal-progress'
 import { CourseTOC } from '@/components/sections/lessons'
 import { LessonContent } from '@/components/sections/lessons'
+import type { Course, Lesson, Module } from '@/lib/types'
 
 interface PageProps {
   params: Promise<{ courseSlug: string; lessonSlug: string }>
@@ -13,14 +14,14 @@ interface PageProps {
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 /** Sort and flatten all lessons across all modules in display order. */
-function flattenLessons(modules: any[]): any[] {
+function flattenLessons(modules: Module[]): Lesson[] {
   return (modules ?? [])
     .slice()
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
     .flatMap((m) =>
       (m.lessons ?? [])
         .slice()
-        .sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0))
+        .sort((a: Lesson, b: Lesson) => (a.order ?? 0) - (b.order ?? 0))
     )
 }
 
@@ -28,7 +29,7 @@ function flattenLessons(modules: any[]): any[] {
 // Only pre-render free-preview lessons. Gated lessons are server-rendered at runtime.
 
 export async function generateStaticParams() {
-  const courses: any[] = await getCourses().catch(() => [])
+  const courses: Course[] = await getCourses().catch(() => [])
   return courses
     .flatMap((course: any) =>
       (course.modules ?? []).flatMap((mod: any) =>
@@ -64,8 +65,8 @@ export default async function LessonDetailPage({ params }: PageProps) {
 
   // Fetch lesson data and full course (for TOC + navigation) in parallel
   const [lesson, course] = await Promise.all([
-    getLesson(courseSlug, lessonSlug).catch(() => null),
-    getCourse(courseSlug).catch(() => null),
+    getLesson(courseSlug, lessonSlug).catch(() => null) as Promise<Lesson | null>,
+    getCourse(courseSlug).catch(() => null) as Promise<Course | null>,
   ])
 
   if (!lesson || !course) notFound()
@@ -91,7 +92,7 @@ export default async function LessonDetailPage({ params }: PageProps) {
   // Prev / Next navigation across module boundaries
   const allLessons = flattenLessons(course.modules ?? [])
   const currentIndex = allLessons.findIndex(
-    (l: any) => l.slug?.current === lessonSlug
+    (l) => l.slug?.current === lessonSlug
   )
   const prevLesson =
     currentIndex > 0

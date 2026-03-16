@@ -7,6 +7,7 @@ import { PageTransition, SectionWrapper, SectionContent } from '@/components/lay
 import { CourseCard } from '@/components/utilities/cards'
 import type { CourseProgress } from '@/components/utilities/cards'
 import { CTA } from '@/components/shared/cta'
+import type { Course } from '@/lib/types'
 
 export const metadata: Metadata = {
   title: "The Quiet Command Curriculum | Jonchalant",
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
 
 export default async function LessonsPage() {
   // ── Sanity: fetch all courses (with nested modules + lessons) ──────────────
-  const courses: any[] = await getCourses().catch(() => [])
+  const courses: Course[] = await getCourses().catch(() => [])
 
   // ── Auth: check session without redirecting unauthenticated users ──────────
   const supabase = await createClient()
@@ -54,9 +55,9 @@ export default async function LessonsPage() {
   if (user) {
     const [progressResults, lastLesson] = await Promise.all([
       Promise.all(
-        courses.map(async (course) => {
+          courses.map(async (course: Course) => {
           const total: number = (course.modules ?? []).reduce(
-            (sum: number, m: any) => sum + (m.lessons?.length ?? 0),
+            (sum: number, m) => sum + (m.lessons?.length ?? 0),
             0
           )
           const { completedSlugs } = await getCourseProgress(

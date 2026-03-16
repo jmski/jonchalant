@@ -1,18 +1,8 @@
 import { createClient } from '@/utils/supabase/client'
 import type { SupabaseClient } from '@supabase/supabase-js'
+import type { LessonProgress } from '@/lib/types'
 
-/**
- * User progress record in Supabase — matches lesson_progress migration schema.
- */
-export interface LessonProgress {
-  id: string
-  user_id: string
-  lesson_slug: string
-  course_slug: string
-  completed: boolean
-  completed_at: string | null
-  created_at: string
-}
+export type { LessonProgress }
 
 /** Internal helper — lazily creates a browser client when no server client is provided. */
 function getClient(client?: SupabaseClient): SupabaseClient {

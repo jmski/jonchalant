@@ -4,6 +4,7 @@ import { getCourse, getCourses } from '@/lib/sanity'
 import { createClient } from '@/utils/supabase/server'
 import { getCourseProgress } from '@/lib/portal-progress'
 import { CourseTOC, CourseOverview } from '@/components/sections/lessons'
+import type { Course } from '@/lib/types'
 
 interface PageProps {
   params: Promise<{ courseSlug: string }>
@@ -12,7 +13,7 @@ interface PageProps {
 // ── Static generation ────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
-  const courses: any[] = await getCourses().catch(() => [])
+  const courses: Course[] = await getCourses().catch(() => [])
   return courses
     .map((c) => ({ courseSlug: c.slug?.current ?? '' }))
     .filter((p) => p.courseSlug)
@@ -67,8 +68,8 @@ export default async function CourseDetailPage({ params }: PageProps) {
   // First free-preview lesson for the "Start" CTA
   const firstFreeLesson: { slug: { current: string }; title: string } | null =
     (course.modules ?? [])
-      .flatMap((m: any) => m.lessons ?? [])
-      .find((l: any) => l.isFreePreview) ?? null
+      .flatMap((m) => m.lessons ?? [])
+      .find((l) => l.isFreePreview) ?? null
 
   return (
     <div className="course-detail-page">
