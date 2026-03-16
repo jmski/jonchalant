@@ -90,21 +90,32 @@ export function PresenceAuditFlow() {
       {/* Step indicator — only on steps 1 and 2 */}
       {step !== 3 && (
         <div className="presence-audit-steps" aria-label="Progress">
-          {([1, 2] as const).map(n => (
+          <div className="presence-audit-step">
             <div
-              key={n}
-              className={`presence-audit-step-dot${step === n ? ' active' : ''}${step > n ? ' done' : ''}`}
-              aria-current={step === n ? 'step' : undefined}
+              className={`presence-audit-step-dot${step === 1 ? ' active' : ''}${step > 1 ? ' done' : ''}`}
+              aria-current={step === 1 ? 'step' : undefined}
             >
-              <span>{step > n ? '✓' : n}</span>
+              <span>{step > 1 ? '✓' : '1'}</span>
             </div>
-          ))}
+            <span className={`presence-audit-step-label${step === 1 ? ' active' : ''}`}>Your challenge</span>
+          </div>
+          <div className={`presence-audit-step-connector${step > 1 ? ' done' : ''}`} aria-hidden="true" />
+          <div className="presence-audit-step">
+            <div
+              className={`presence-audit-step-dot${step === 2 ? ' active' : ''}`}
+              aria-current={step === 2 ? 'step' : undefined}
+            >
+              <span>2</span>
+            </div>
+            <span className={`presence-audit-step-label${step === 2 ? ' active' : ''}`}>Your details</span>
+          </div>
         </div>
       )}
 
       {/* ── Step 1: Challenge selection ── */}
       {step === 1 && (
         <div className="presence-audit-panel">
+          <span className="presence-audit-panel-context">Step 1 of 2 — Honest recognition</span>
           <h2 className="presence-audit-panel-title">
             What's your biggest challenge right now?
           </h2>
@@ -121,10 +132,7 @@ export function PresenceAuditFlow() {
                 className={`presence-audit-choice${selectedChallenge === challenge.id ? ' selected' : ''}`}
                 aria-pressed={selectedChallenge === challenge.id}
               >
-                {selectedChallenge === challenge.id && (
-                  <span className="presence-audit-choice-check" aria-hidden="true">✓</span>
-                )}
-                <span>{challenge.text}</span>
+                {challenge.text}
               </button>
             ))}
           </div>
@@ -151,6 +159,7 @@ export function PresenceAuditFlow() {
             ← Back
           </button>
 
+          <span className="presence-audit-panel-context">Step 2 of 2 — Where to find you</span>
           <h2 className="presence-audit-panel-title">
             Where should Jon send your audit?
           </h2>

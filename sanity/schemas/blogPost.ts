@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import type { StringRule, SlugRule } from 'sanity'
 
 export default defineType({
   name: 'blogPost',
@@ -9,7 +10,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -18,8 +19,9 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: SlugRule) => Rule.required(),
     }),
     defineField({
       name: 'pillar',
@@ -42,13 +44,29 @@ export default defineType({
       title: 'Meta Description',
       type: 'string',
       description: 'SEO meta description (150-160 chars)',
-      validation: (Rule: any) => Rule.max(160),
+      validation: (Rule: StringRule) => Rule.max(160),
     }),
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
       description: 'Short summary for listing pages',
+    }),
+    defineField({
+      name: 'coverImage',
+      title: 'Cover Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe the image for screen readers and SEO',
+        }),
+      ],
     }),
     defineField({
       name: 'content',
@@ -87,6 +105,7 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published Date',
       type: 'datetime',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'featured',

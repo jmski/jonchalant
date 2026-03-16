@@ -1,14 +1,8 @@
-'use client'
-
-import { useEffect, useState } from 'react'
+import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
-import { useAuth } from '@/lib/auth-context'
-import { useRouter } from 'next/navigation'
-import {
-  markLessonComplete,
-  getUserLessonProgress,
-  type LessonProgress,
-} from '@/lib/portal-progress'
+import { createClient } from '@/utils/supabase/server'
+import { client } from '@/lib/sanity'
+import LessonActions from './LessonActions'
 
 interface TechnicalNote {
   column?: number
@@ -17,11 +11,10 @@ interface TechnicalNote {
   _key?: string
 }
 
-interface Lesson {
+interface PortalLesson {
   _id: string
   title: string
   slug: string
-  courseSlug?: string
   technicalDescription: string
   videoId: string
   socialLogic: string
@@ -36,136 +29,50 @@ interface Lesson {
 }
 
 interface Props {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>
 }
 
-async function fetchLesson(slug: string): Promise<Lesson | null> {
-  try {
-    // TODO: Update this to query the learning-portal dataset
-    // For now, returning null - you'll implement the Sanity query
-    return null
-  } catch (error) {
-    console.error('Error fetching lesson:', error)
-    return null
-  }
+async function getPortalLesson(slug: string): Promise<PortalLesson | null> {
+  return client.fetch(
+    `*[_type == "portalLesson" && slug.current == $slug][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      technicalDescription,
+      videoId,
+      socialLogic,
+      technicalNotes[] {
+        column,
+        label,
+        content,
+        _key
+      },
+      duration,
+      difficulty,
+      module-> {
+        _id,
+        title,
+        "slug": slug.current
+      }
+    }`,
+    { slug }
+  )
 }
 
-export default function LessonPage({ params }: Props) {
-  const { user, isLoading: authLoading, session } = useAuth()
-  const router = useRouter()
-  const [lesson, setLesson] = useState<Lesson | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [progress, setProgress] = useState<LessonProgress | null>(null)
-  const [isMarking, setIsMarking] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+export default async function LessonPage({ params }: Props) {
+  const { slug } = await params
 
-  const slug = params.slug
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
-  // Redirect to login if no session
-  useEffect(() => {
-    if (!authLoading && !session) {
-      router.push('/login')
-    }
-  }, [session, authLoading, router])
-
-  useEffect(() => {
-    const loadLesson = async () => {
-      setIsLoading(true)
-      try {
-        // TODO: Implement Sanity query to fetch lesson by slug
-        // For now, using placeholder
-        const lessonData = await fetchLesson(slug)
-        if (!lessonData) {
-          setError('Lesson not found')
-          return
-        }
-        setLesson(lessonData)
-      } catch (err: any) {
-        setError(err.message || 'Error loading lesson')
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    if (user) {
-      loadLesson()
-    }
-  }, [slug, user])
-
-  // Check progress when user and lesson are available
-  useEffect(() => {
-    const checkProgress = async () => {
-      if (!user || !lesson) return
-
-      try {
-        const progressData = await getUserLessonProgress(user.id, slug)
-        setProgress(progressData)
-
-        // If lesson just started, mark it as started
-        if (!progressData) {
-          // You could call markLessonStarted here if you want to track views
-        }
-      } catch (err) {
-        console.error('Error checking progress:', err)
-      }
-    }
-
-    checkProgress()
-  }, [user, lesson, slug])
-
-  const handleMarkComplete = async () => {
-    if (!user || !lesson) return
-
-    setIsMarking(true)
-    try {
-      const progressData = await markLessonComplete(
-        user.id,
-        slug,
-        lesson.courseSlug ?? ''
-      )
-      setProgress(progressData)
-      // Show success feedback
-      alert('Lesson marked as complete! ✓')
-    } catch (err: any) {
-      setError(err.message || 'Error marking lesson complete')
-    } finally {
-      setIsMarking(false)
-    }
+  if (!user) {
+    redirect(`/login?redirect=/portal/${slug}`)
   }
 
-  if (authLoading) {
-    return (
-      <div className="portal-lesson-page">
-        <div className="portal-lesson-loading">Loading...</div>
-      </div>
-    )
-  }
-
-  if (!session) {
-    return null // Will redirect via useEffect
-  }
-
-  if (isLoading) {
-    return (
-      <div className="portal-lesson-page">
-        <div className="portal-lesson-loading">Loading lesson...</div>
-      </div>
-    )
-  }
+  const lesson = await getPortalLesson(slug)
 
   if (!lesson) {
-    return (
-      <div className="portal-lesson-page">
-        <div className="portal-lesson-error">
-          <p>{error || 'Lesson not found'}</p>
-          <Link href="/portal" className="portal-lesson-error-link">
-            Back to Dashboard
-          </Link>
-        </div>
-      </div>
-    )
+    notFound()
   }
 
   // Group technical notes by column
@@ -223,15 +130,11 @@ export default function LessonPage({ params }: Props) {
               </span>
             </div>
           </div>
-          <button
-            onClick={handleMarkComplete}
-            disabled={isMarking || progress?.completed}
-            className={`portal-lesson-complete-button ${
-              progress?.completed ? 'portal-lesson-complete-button--done' : ''
-            }`}
-          >
-            {progress?.completed ? '✓ Complete' : 'Mark Complete'}
-          </button>
+          <LessonActions
+            userId={user.id}
+            lessonSlug={slug}
+            courseSlug={lesson.module?.slug ?? ''}
+          />
         </header>
 
         {/* Technical Description Section */}
@@ -279,11 +182,6 @@ export default function LessonPage({ params }: Props) {
               ))}
             </div>
           </section>
-        )}
-
-        {/* Error Display */}
-        {error && (
-          <div className="portal-lesson-error-banner">{error}</div>
         )}
       </div>
 

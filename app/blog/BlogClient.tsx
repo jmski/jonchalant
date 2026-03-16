@@ -195,14 +195,21 @@ export function BlogClient({ posts }: BlogClientProps) {
             </SectionWrapper>
           )}
 
-          {/* All articles */}
-          <SectionWrapper variant="primary">
-            <SectionContent>
-              {regularPosts.length === 0 ? (
+          {/* Empty state — only when there are truly no posts at all */}
+          {posts.length === 0 && (
+            <SectionWrapper variant="primary">
+              <SectionContent>
                 <div className="blog-empty-state">
                   <p className="blog-empty-message">No blog posts yet. Check back soon!</p>
                 </div>
-              ) : (
+              </SectionContent>
+            </SectionWrapper>
+          )}
+
+          {/* All articles */}
+          {regularPosts.length > 0 && (
+            <SectionWrapper variant="primary">
+              <SectionContent>
                 <section className="blog-posts-section">
                   <div className="blog-posts-section-header">
                     <h2 className="blog-posts-section-title">All Articles</h2>
@@ -218,9 +225,9 @@ export function BlogClient({ posts }: BlogClientProps) {
                   </ScrollStagger>
                   <BlogOptIn />
                 </section>
-              )}
-            </SectionContent>
-          </SectionWrapper>
+              </SectionContent>
+            </SectionWrapper>
+          )}
         </>
       )}
     </>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { urlFor } from '@/lib/sanity';
+import type { SanityImage } from '@/lib/types';
 
 interface CaseStudyCardProps {
   title: string;
@@ -8,7 +9,7 @@ interface CaseStudyCardProps {
   challenge?: string;
   solution?: string;
   results?: string[];
-  image?: any;
+  image?: SanityImage;
   slug: { current: string };
 }
 

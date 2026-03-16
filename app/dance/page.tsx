@@ -3,6 +3,7 @@ import { PageTransition, SectionWrapper, SectionContent } from '@/components/lay
 import { VideoEmbed } from '@/components/shared/VideoEmbed'
 import { InstagramEmbed } from '@/components/shared/InstagramEmbed'
 import { getDanceCategories, getInstagramReels } from '@/lib/sanity'
+import type { DanceCategory, DanceVideo, InstagramReel } from '@/lib/types'
 
 export const metadata: Metadata = {
   title: 'Dance Curriculum | Movement as Leadership',
@@ -36,8 +37,8 @@ export const metadata: Metadata = {
 
 export default async function Dance() {
   const [categories, reels] = await Promise.all([
-    getDanceCategories().catch(() => [] as any[]),
-    getInstagramReels().catch(() => [] as any[]),
+    getDanceCategories().catch(() => [] as DanceCategory[]),
+    getInstagramReels().catch(() => [] as InstagramReel[]),
   ])
 
   return (
@@ -69,7 +70,7 @@ export default async function Dance() {
               {categories.length === 0 ? (
                 <p className="dance-curriculum-empty">Curriculum coming soon.</p>
               ) : (
-                categories.map((category: any, idx: number) => (
+                categories.map((category: DanceCategory, idx: number) => (
                   <div key={category._id} className="dance-curriculum-category">
                     {idx > 0 && <hr className="dance-curriculum-divider" />}
 
@@ -86,7 +87,7 @@ export default async function Dance() {
 
                     {category.videos && category.videos.length > 0 && (
                       <div className="dance-curriculum-video-grid">
-                        {category.videos.map((video: any, vIdx: number) => (
+                        {category.videos.map((video: DanceVideo, vIdx: number) => (
                           <div key={vIdx} className="dance-curriculum-video-item">
                             <VideoEmbed url={video.videoUrl} title={video.title} />
                             <p className="dance-curriculum-video-title">{video.title}</p>
@@ -117,7 +118,7 @@ export default async function Dance() {
                 <p className="dance-instagram-empty">Check back soon for new content.</p>
               ) : (
                 <div className="dance-instagram-grid">
-                  {reels.map((reel: any) => (
+                  {reels.map((reel: InstagramReel) => (
                     <InstagramEmbed key={reel._id} reelUrl={reel.reelUrl} />
                   ))}
                 </div>

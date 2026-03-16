@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import type { StringRule, SlugRule } from 'sanity'
 
 export default defineType({
   name: 'portfolioItem',
@@ -9,7 +10,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -18,6 +19,7 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
     }),
     defineField({
@@ -31,7 +33,7 @@ export default defineType({
           { title: 'Performance', value: 'performance' },
         ],
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'description',
@@ -42,7 +44,7 @@ export default defineType({
       name: 'videoUrl',
       title: 'YouTube/Vimeo Embed URL',
       type: 'url',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'thumbnail',
