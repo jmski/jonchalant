@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@/utils/supabase/client'
 import type { SupabaseClient } from '@supabase/supabase-js'
 
 /**
@@ -14,14 +14,21 @@ export interface LessonProgress {
   created_at: string
 }
 
+/** Internal helper — lazily creates a browser client when no server client is provided. */
+function getClient(client?: SupabaseClient): SupabaseClient {
+  return client ?? createClient()
+}
+
 /**
  * Fetch user's progress for a set of lesson slugs within a course.
  */
 export async function getUserModuleProgress(
   userId: string,
-  lessonSlugs: string[]
+  lessonSlugs: string[],
+  client?: SupabaseClient
 ): Promise<LessonProgress[]> {
-  const { data, error } = await supabase
+  const db = getClient(client)
+  const { data, error } = await db
     .from('lesson_progress')
     .select('*')
     .eq('user_id', userId)
@@ -40,9 +47,11 @@ export async function getUserModuleProgress(
  */
 export async function getUserLessonProgress(
   userId: string,
-  lessonSlug: string
+  lessonSlug: string,
+  client?: SupabaseClient
 ): Promise<LessonProgress | null> {
-  const { data, error } = await supabase
+  const db = getClient(client)
+  const { data, error } = await db
     .from('lesson_progress')
     .select('*')
     .eq('user_id', userId)
@@ -63,14 +72,16 @@ export async function getUserLessonProgress(
 export async function markLessonComplete(
   userId: string,
   lessonSlug: string,
-  courseSlug: string
+  courseSlug: string,
+  client?: SupabaseClient
 ): Promise<LessonProgress | null> {
+  const db = getClient(client)
   const now = new Date().toISOString()
 
-  const existing = await getUserLessonProgress(userId, lessonSlug)
+  const existing = await getUserLessonProgress(userId, lessonSlug, db)
 
   if (existing) {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('lesson_progress')
       .update({
         completed: true,
@@ -87,7 +98,7 @@ export async function markLessonComplete(
 
     return data
   } else {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('lesson_progress')
       .insert({
         user_id: userId,
@@ -115,13 +126,15 @@ export async function markLessonComplete(
 export async function markLessonStarted(
   userId: string,
   lessonSlug: string,
-  courseSlug: string
+  courseSlug: string,
+  client?: SupabaseClient
 ): Promise<LessonProgress | null> {
-  const existing = await getUserLessonProgress(userId, lessonSlug)
+  const db = getClient(client)
+  const existing = await getUserLessonProgress(userId, lessonSlug, db)
 
   if (existing) return existing
 
-  const { data, error } = await supabase
+  const { data, error } = await db
     .from('lesson_progress')
     .insert({
       user_id: userId,
@@ -141,18 +154,99 @@ export async function markLessonStarted(
 }
 
 /**
- * Get completion percentage for a module
+ * Sets the completed flag to false for a lesson without removing the row.
+ * Migrated from lib/progress.ts.
+ */
+export async function markLessonIncomplete(
+  userId: string,
+  lessonSlug: string,
+  courseSlug: string,
+  client?: SupabaseClient
+): Promise<void> {
+  const db = getClient(client)
+  const { error } = await db.from('lesson_progress').upsert(
+    {
+      user_id: userId,
+      lesson_slug: lessonSlug,
+      course_slug: courseSlug,
+      completed: false,
+      completed_at: null,
+    },
+    { onConflict: 'user_id,lesson_slug' },
+  )
+
+  if (error) {
+    console.error('[markLessonIncomplete]', error.message)
+    throw error
+  }
+}
+
+/**
+ * Returns completed lesson slugs for a given user + course.
+ * Migrated from lib/progress.ts.
+ */
+export async function getLessonProgress(
+  userId: string,
+  courseSlug: string,
+  client?: SupabaseClient
+): Promise<string[]> {
+  const db = getClient(client)
+  const { data, error } = await db
+    .from('lesson_progress')
+    .select('lesson_slug')
+    .eq('user_id', userId)
+    .eq('course_slug', courseSlug)
+    .eq('completed', true)
+
+  if (error) {
+    console.error('[getLessonProgress]', error.message)
+    return []
+  }
+
+  return (data ?? []).map((row) => row.lesson_slug)
+}
+
+/**
+ * Returns course completion as an integer percentage (0–100).
+ * Migrated from lib/progress.ts.
+ */
+export async function getCourseProgressPercent(
+  userId: string,
+  courseSlug: string,
+  totalLessons: number,
+  client?: SupabaseClient
+): Promise<number> {
+  if (totalLessons <= 0) return 0
+  const db = getClient(client)
+  const { count, error } = await db
+    .from('lesson_progress')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', userId)
+    .eq('course_slug', courseSlug)
+    .eq('completed', true)
+
+  if (error) {
+    console.error('[getCourseProgressPercent]', error.message)
+    return 0
+  }
+
+  return Math.floor(((count ?? 0) / totalLessons) * 100)
+}
+
+/**
+ * Get completion percentage for a module.
  * Returns: { completed: 3, total: 5, percentage: 60 }
  */
 export async function getModuleCompletionPercentage(
   userId: string,
-  moduleLessonIds: string[]
+  moduleLessonIds: string[],
+  client?: SupabaseClient
 ): Promise<{
   completed: number
   total: number
   percentage: number
 }> {
-  const progress = await getUserModuleProgress(userId, moduleLessonIds)
+  const progress = await getUserModuleProgress(userId, moduleLessonIds, client)
   const completed = progress.filter((p) => p.completed).length
   const total = moduleLessonIds.length
 
@@ -220,11 +314,12 @@ export async function getLastActiveLesson(
 }
 
 /**
- * Get stats for dashboard
- * Usage: { modulesStarted: 2, modulesCompleted: 1, lessonsCom pleted: 7 }
+ * Get stats for dashboard.
+ * Returns: { lessonsStarted: number, lessonsCompleted: number }
  */
-export async function getUserStatistics(userId: string) {
-  const { data, error } = await supabase
+export async function getUserStatistics(userId: string, client?: SupabaseClient) {
+  const db = getClient(client)
+  const { data, error } = await db
     .from('lesson_progress')
     .select('completed, lesson_slug')
     .eq('user_id', userId)

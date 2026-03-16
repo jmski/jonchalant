@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { getCourses } from '@/lib/sanity'
-import { getCourseProgress } from '@/lib/progress'
+import { getCourseProgressPercent } from '@/lib/portal-progress'
 import Link from 'next/link'
 import SignOutButton from './SignOutButton'
 import PortalCourseCard from './PortalCourseCard'
@@ -29,7 +29,7 @@ export default async function PortalDashboard() {
       const totalLessons = (course.modules ?? []).flatMap(
         (m: any) => m.lessons ?? [],
       ).length
-      return getCourseProgress(user.id, course.slug.current, totalLessons)
+      return getCourseProgressPercent(user.id, course.slug.current, totalLessons)
     }),
   )
 
