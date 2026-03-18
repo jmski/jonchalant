@@ -113,6 +113,11 @@ export default async function PortalDashboard() {
               <span className="portal-quicklink-title">Presence Score Assessment</span>
               <span className="portal-quicklink-arrow">→</span>
             </Link>
+            <Link href="/portal/tonality" className="portal-quicklink-card">
+              {/* [COPY] */}
+              <span className="portal-quicklink-title">Tonality Analysis</span>
+              <span className="portal-quicklink-arrow">→</span>
+            </Link>
             <Link href="/contact" className="portal-quicklink-card">
               {/* [COPY] */}
               <span className="portal-quicklink-title">Book a Session</span>
