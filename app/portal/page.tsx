@@ -5,6 +5,7 @@ import { getCourseProgressPercent } from '@/lib/portal-progress'
 import Link from 'next/link'
 import SignOutButton from './SignOutButton'
 import PortalCourseCard from './PortalCourseCard'
+import { PresenceCoach } from '@/components/portal/PresenceCoach'
 
 export default async function PortalDashboard() {
   const supabase = await createClient()
@@ -83,6 +84,15 @@ export default async function PortalDashboard() {
           )}
         </section>
 
+        {/* ── AI Presence Coach ── */}
+        <section className="portal-section portal-section--coach">
+          {/* [COPY] Section label */}
+          <h2 className="portal-section-label">Your AI Presence Coach</h2>
+          <div className="portal-coach-panel">
+            <PresenceCoach userId={user.id} firstName={firstName} />
+          </div>
+        </section>
+
         {/* ── Quick Links ── */}
         <section className="portal-section">
           {/* [COPY] Section label */}
@@ -96,6 +106,21 @@ export default async function PortalDashboard() {
             <Link href="/ikigai" className="portal-quicklink-card">
               {/* [COPY] */}
               <span className="portal-quicklink-title">Discover Your Ikigai</span>
+              <span className="portal-quicklink-arrow">→</span>
+            </Link>
+            <Link href="/portal/presence-score" className="portal-quicklink-card">
+              {/* [COPY] */}
+              <span className="portal-quicklink-title">Presence Score Assessment</span>
+              <span className="portal-quicklink-arrow">→</span>
+            </Link>
+            <Link href="/portal/tonality" className="portal-quicklink-card">
+              {/* [COPY] */}
+              <span className="portal-quicklink-title">Tonality Analysis</span>
+              <span className="portal-quicklink-arrow">→</span>
+            </Link>
+            <Link href="/portal/movement-plan" className="portal-quicklink-card">
+              {/* [COPY] */}
+              <span className="portal-quicklink-title">Movement Plan Generator</span>
               <span className="portal-quicklink-arrow">→</span>
             </Link>
             <Link href="/contact" className="portal-quicklink-card">
