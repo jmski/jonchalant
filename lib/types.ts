@@ -155,3 +155,42 @@ export interface LessonProgress {
   completed_at: string | null
   created_at: string
 }
+
+export interface PlanExercise {
+  name: string
+  duration: string
+  instruction: string
+  leadershipConnection: string
+}
+
+export interface PlanSession {
+  day: string
+  duration: string
+  category: string
+  exercises: PlanExercise[]
+}
+
+export interface PlanWeek {
+  weekNumber: number
+  theme: string
+  focus: string
+  sessions: PlanSession[]
+}
+
+export interface GeneratedPlan {
+  title: string
+  summary: string
+  weeks: PlanWeek[]
+  progressionNote: string
+  adaptations: string
+}
+
+export interface MovementPlan {
+  id: string
+  user_id: string
+  title: string
+  goals?: string
+  limitations?: string
+  plan_data: GeneratedPlan
+  created_at: string
+}

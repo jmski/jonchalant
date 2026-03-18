@@ -1,14 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
+import type { MovementPlan, GeneratedPlan } from '@/lib/types'
 
-export interface MovementPlan {
-  id: string
-  user_id: string
-  title: string
-  goals: string | null
-  limitations: string | null
-  plan_data: Record<string, unknown>
-  created_at: string
-}
+export type { MovementPlan, GeneratedPlan }
 
 /**
  * Returns all movement plans for a user, ordered by most recent first.
@@ -38,9 +31,9 @@ export async function saveMovementPlan(
   supabase: SupabaseClient,
   userId: string,
   title: string,
-  goals: string | null,
-  limitations: string | null,
-  planData: Record<string, unknown>,
+  goals: string | null | undefined,
+  limitations: string | null | undefined,
+  planData: GeneratedPlan,
 ): Promise<MovementPlan | null> {
   const { data, error } = await supabase
     .from('movement_plans')
