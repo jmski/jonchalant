@@ -5,6 +5,7 @@ import { getCourseProgressPercent } from '@/lib/portal-progress'
 import Link from 'next/link'
 import SignOutButton from './SignOutButton'
 import PortalCourseCard from './PortalCourseCard'
+import { PresenceCoach } from '@/components/portal/PresenceCoach'
 
 export default async function PortalDashboard() {
   const supabase = await createClient()
@@ -81,6 +82,15 @@ export default async function PortalDashboard() {
             // [COPY] Empty state
             <p className="portal-empty">No courses available yet. Check back soon.</p>
           )}
+        </section>
+
+        {/* ── AI Presence Coach ── */}
+        <section className="portal-section portal-section--coach">
+          {/* [COPY] Section label */}
+          <h2 className="portal-section-label">Your AI Presence Coach</h2>
+          <div className="portal-coach-panel">
+            <PresenceCoach userId={user.id} firstName={firstName} />
+          </div>
         </section>
 
         {/* ── Quick Links ── */}
