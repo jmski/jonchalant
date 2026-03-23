@@ -35,6 +35,65 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'turningPointHeadline',
+      title: 'Turning Point — Section Label',
+      description: 'Short label/eyebrow for the school performance story section',
+      type: 'string',
+    }),
+    defineField({
+      name: 'turningPointBody',
+      title: 'Turning Point — Body Copy',
+      description: 'Full narrative body for the turning point section (3 paragraphs)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'methodologyHeadline',
+      title: 'Methodology — Section Label',
+      description: 'Short label/eyebrow for the freestyle/choreography section',
+      type: 'string',
+    }),
+    defineField({
+      name: 'methodologyBody',
+      title: 'Methodology — Body Copy',
+      description: 'Full narrative body for the methodology section',
+      type: 'text',
+    }),
+    defineField({
+      name: 'whyExistsHeadline',
+      title: 'Why This Exists — Section Label',
+      type: 'string',
+    }),
+    defineField({
+      name: 'whyExistsBody',
+      title: 'Why This Exists — Body Copy',
+      type: 'text',
+    }),
+    defineField({
+      name: 'whoForHeadline',
+      title: 'Who This Is For — Section Label',
+      type: 'string',
+    }),
+    defineField({
+      name: 'whoForBody',
+      title: 'Who This Is For — Body Copy',
+      type: 'text',
+    }),
+    defineField({
+      name: 'closingHeadline',
+      title: 'Closing — Section Label / CTA Headline',
+      type: 'string',
+    }),
+    defineField({
+      name: 'closingBody',
+      title: 'Closing — Body Copy',
+      type: 'text',
+    }),
+    defineField({
+      name: 'ctaButtonText',
+      title: 'CTA Button Label',
+      type: 'string',
+    }),
+    defineField({
       name: 'phases',
       title: 'Three Phases',
       type: 'array',

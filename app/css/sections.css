@@ -1278,7 +1278,11 @@
 .about-hero-intro,
 .about-philosophy-eyebrow,
 .about-services-eyebrow,
-.about-introvert-eyebrow {
+.about-introvert-eyebrow,
+.about-turning-point-label,
+.about-methodology-narrative-label,
+.about-why-exists-label,
+.about-who-for-label {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
@@ -1621,5 +1625,84 @@
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-primary);
+  margin: 0;
+}
+
+/* ── About Turning Point ── */
+.about-turning-point-section {
+  padding: var(--spacing-2xl) 0;
+  max-width: 720px;
+}
+
+.about-turning-point-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.about-turning-point-paragraph {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── About Methodology Narrative ── */
+/* Background shift handled by SectionWrapper variant="secondary" in page.tsx */
+.about-methodology-narrative-section {
+  padding: var(--spacing-2xl) 0;
+  max-width: 720px;
+}
+
+.about-methodology-narrative-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.about-methodology-narrative-paragraph {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── About Why Exists ── */
+.about-why-exists-section {
+  padding: var(--spacing-2xl) 0;
+  max-width: 720px;
+}
+
+.about-why-exists-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.about-why-exists-paragraph {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── About Who For ── */
+.about-who-for-section {
+  padding: var(--spacing-2xl) 0;
+  max-width: 720px;
+}
+
+.about-who-for-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding-left: var(--spacing-xl);
+  border-left: 3px solid var(--accent-primary);
+}
+
+.about-who-for-paragraph {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
   margin: 0;
 }
