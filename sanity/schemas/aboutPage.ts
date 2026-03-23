@@ -1,4 +1,5 @@
-import { defineType, defineField } from 'sanity';
+import { defineField, defineType } from 'sanity';
+import type { StringRule, ArrayRule } from 'sanity';
 
 export default defineType({
   name: 'aboutPage',
@@ -10,19 +11,19 @@ export default defineType({
       title: 'Page Title',
       type: 'string',
       initialValue: 'About',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'heroHeadline',
       title: 'Hero Headline',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'heroDescription',
       title: 'Hero Description',
       type: 'text',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'originSectionHeadline',
@@ -106,18 +107,18 @@ export default defineType({
               name: 'title',
               title: 'Phase Title',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule: StringRule) => Rule.required(),
             }),
             defineField({
               name: 'description',
               title: 'Phase Description',
               type: 'text',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule: StringRule) => Rule.required(),
             }),
           ]
         }
       ],
-      validation: (Rule) => Rule.length(3),
+      validation: (Rule: ArrayRule) => Rule.length(3),
     }),
     defineField({
       name: 'stats',
@@ -132,13 +133,13 @@ export default defineType({
               name: 'label',
               title: 'Label',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule: StringRule) => Rule.required(),
             }),
             defineField({
               name: 'value',
               title: 'Value',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule: StringRule) => Rule.required(),
             }),
           ]
         }
@@ -158,13 +159,13 @@ export default defineType({
               name: 'title',
               title: 'Philosophy Title',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule: StringRule) => Rule.required(),
             }),
             defineField({
               name: 'description',
               title: 'Philosophy Description',
               type: 'text',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule: StringRule) => Rule.required(),
             }),
           ]
         }
