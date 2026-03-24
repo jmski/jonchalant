@@ -1,5 +1,5 @@
 import { CTA, Stats } from "@/components/sections";
-import { Hero as AboutHero, Origin, Services as AboutServices, Philosophy, Introvert } from "@/components/sections/about";
+import { Hero as AboutHero, Origin, Services as AboutServices, Philosophy, Introvert, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import type { Metadata } from 'next';
 import { getAboutPageContent, getServices } from "@/lib/sanity";
@@ -80,14 +80,38 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 3 — METHODOLOGY: how the coaching works */}
+        {/* 3 — TURNING POINT: school performance story */}
+        {aboutContent?.turningPointHeadline && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <TurningPoint
+                headline={aboutContent.turningPointHeadline}
+                body={aboutContent.turningPointBody ?? ''}
+              />
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 4 — METHODOLOGY: freestyle/choreography narrative (secondary bg via SectionWrapper) */}
+        {aboutContent?.methodologyHeadline && (
+          <SectionWrapper variant="secondary">
+            <SectionContent>
+              <MethodologyNarrative
+                headline={aboutContent.methodologyHeadline}
+                body={aboutContent.methodologyBody ?? ''}
+              />
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 5 — METHODOLOGY: philosophy card grid */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <Philosophy philosophies={philosophies} />
           </SectionContent>
         </SectionWrapper>
 
-        {/* 4a — CREDENTIALS: track record in numbers */}
+        {/* 6 — CREDENTIALS: track record in numbers */}
         <SectionWrapper variant="tertiary" className="section-wrapper--indigo">
           <SectionContent>
             <Stats
@@ -99,27 +123,51 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 4b — CREDENTIALS: what we actually work on */}
+        {/* 7 — WHY THIS EXISTS */}
+        {aboutContent?.whyExistsHeadline && (
+          <SectionWrapper variant="secondary">
+            <SectionContent>
+              <WhyExists
+                headline={aboutContent.whyExistsHeadline}
+                body={aboutContent.whyExistsBody ?? ''}
+              />
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 8 — WHO THIS IS FOR */}
+        {aboutContent?.whoForHeadline && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <WhoFor
+                headline={aboutContent.whoForHeadline}
+                body={aboutContent.whoForBody ?? ''}
+              />
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 9 — CREDENTIALS: what we actually work on */}
         <SectionWrapper variant="secondary">
           <SectionContent>
             <AboutServices services={services} />
           </SectionContent>
         </SectionWrapper>
 
-        {/* 5 — VALUES: the introvert advantage */}
+        {/* 10 — VALUES: the introvert advantage */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <Introvert traits={introvertTraits} />
           </SectionContent>
         </SectionWrapper>
 
-        {/* CTA */}
+        {/* CTA — driven by Sanity closing* fields with hardcoded fallbacks */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <CTA
-              title="Your Presence Matters. Let's Amplify It."
-              description="Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today — and the fastest path to where you want to be."
-              buttonText="Get Your Free Audit Now"
+              title={aboutContent?.closingHeadline ?? "Your Presence Matters. Let's Amplify It."}
+              description={aboutContent?.closingBody ?? "Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today — and the fastest path to where you want to be."}
+              buttonText={aboutContent?.ctaButtonText ?? "Get Your Free Audit Now"}
               buttonLink="/contact"
             />
           </SectionContent>
