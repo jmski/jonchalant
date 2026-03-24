@@ -1,8 +1,8 @@
 import { CTA, Stats } from "@/components/sections";
-import { Hero as AboutHero, Origin, Services as AboutServices, Philosophy, Introvert, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
+import { Hero as AboutHero, Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import type { Metadata } from 'next';
-import { getAboutPageContent, getServices } from "@/lib/sanity";
+import { getAboutPageContent } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "About Jon | Leadership Coach & Choreographer",
@@ -34,23 +34,9 @@ export const metadata: Metadata = {
 
 export default async function About() {
   let aboutContent = null;
-  let services = [];
-  let philosophies = [];
-  let introvertTraits = [];
 
   try {
-    const [sanityAbout, sanityServices] = await Promise.all([
-      getAboutPageContent(),
-      getServices()
-    ]);
-    
-    if (sanityAbout) {
-      aboutContent = sanityAbout;
-      if (sanityAbout.philosophies) philosophies = sanityAbout.philosophies;
-      if (sanityAbout.introvertTraits) introvertTraits = sanityAbout.introvertTraits;
-    }
-    
-    if (sanityServices && sanityServices.length > 0) services = sanityServices;
+    aboutContent = await getAboutPageContent();
   } catch (error) {
     console.warn('Failed to fetch about content from Sanity, using fallback data:', error);
   }
@@ -75,7 +61,6 @@ export default async function About() {
             <Origin
               headline={aboutContent?.originSectionHeadline}
               description={aboutContent?.originSectionDescription}
-              phases={aboutContent?.phases}
             />
           </SectionContent>
         </SectionWrapper>
@@ -104,14 +89,7 @@ export default async function About() {
           </SectionWrapper>
         )}
 
-        {/* 5 — METHODOLOGY: philosophy card grid */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <Philosophy philosophies={philosophies} />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* 6 — CREDENTIALS: track record in numbers */}
+        {/* 5 — CREDENTIALS: track record in numbers */}
         <SectionWrapper variant="tertiary" className="section-wrapper--indigo">
           <SectionContent>
             <Stats
@@ -123,7 +101,7 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 7 — WHY THIS EXISTS */}
+        {/* 6 — WHY THIS EXISTS */}
         {aboutContent?.whyExistsHeadline && (
           <SectionWrapper variant="secondary">
             <SectionContent>
@@ -135,7 +113,7 @@ export default async function About() {
           </SectionWrapper>
         )}
 
-        {/* 8 — WHO THIS IS FOR */}
+        {/* 7 — WHO THIS IS FOR */}
         {aboutContent?.whoForHeadline && (
           <SectionWrapper variant="primary">
             <SectionContent>
@@ -146,20 +124,6 @@ export default async function About() {
             </SectionContent>
           </SectionWrapper>
         )}
-
-        {/* 9 — CREDENTIALS: what we actually work on */}
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <AboutServices services={services} />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* 10 — VALUES: the introvert advantage */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <Introvert traits={introvertTraits} />
-          </SectionContent>
-        </SectionWrapper>
 
         {/* CTA — driven by Sanity closing* fields with hardcoded fallbacks */}
         <SectionWrapper variant="tertiary">
