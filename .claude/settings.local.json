@@ -4,7 +4,9 @@
       "Bash(npx tsc:*)",
       "Bash(node_modules/.bin/tsc --noEmit)",
       "Bash(npm run:*)",
-      "Bash(ls \"c:\\\\Users\\\\jonch\\\\OneDrive\\\\Documents\\\\GitHub\\\\jonchalant\\\\node_modules\\\\.bin\"\" 2>/dev/null | head -5 || echo \"no node_modules \")"
+      "Bash(ls \"c:\\\\Users\\\\jonch\\\\OneDrive\\\\Documents\\\\GitHub\\\\jonchalant\\\\node_modules\\\\.bin\"\" 2>/dev/null | head -5 || echo \"no node_modules \")",
+      "Bash(npm --version)",
+      "Bash(git --version)"
     ]
   }
 }
