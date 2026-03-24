@@ -1327,18 +1327,7 @@
 
 /* ── About Origin ── */
 .about-origin-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-2xl);
   padding: var(--spacing-2xl) 0;
-  align-items: start;
-}
-
-@media (min-width: 768px) {
-  .about-origin-section {
-    grid-template-columns: 3fr 2fr;
-    gap: var(--spacing-3xl);
-  }
 }
 
 .about-origin-title {
@@ -1355,61 +1344,8 @@
   font-size: 1rem;
   line-height: 1.75;
   color: var(--text-secondary);
-  margin: 0 0 var(--spacing-xl);
+  margin: 0;
   max-width: 60ch;
-}
-
-.about-phases {
-  margin-top: var(--spacing-xl);
-}
-
-.about-phases-title {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin: 0 0 var(--spacing-lg);
-  padding-bottom: var(--spacing-xs);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.about-phases-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.about-phase-item-title {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 0 0 var(--spacing-xs);
-}
-
-.about-phase-item-description {
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.about-origin-image {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 0.5rem;
-  aspect-ratio: 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 280px;
-}
-
-.about-origin-image-text {
-  font-size: 0.8125rem;
-  color: var(--text-tertiary);
-  font-style: italic;
-  margin: 0;
 }
 
 /* ── About Philosophy / Methodology ── */
