@@ -44,11 +44,15 @@ components/
 │   │   ├── featured-areas/     # FeaturedAreas.tsx
 │   │   └── blog-cards/         # BlogCards.tsx
 │   ├── about/                   # About page sections
-│   │   ├── hero/              # Hero.tsx
-│   │   ├── origin/            # Origin.tsx
-│   │   ├── services/          # Services.tsx
-│   │   ├── philosophy/        # Philosophy.tsx
-│   │   └── introvert/         # Introvert.tsx
+│   │   ├── hero/                    # Hero.tsx
+│   │   ├── origin/                  # Origin.tsx
+│   │   ├── turning-point/           # TurningPoint.tsx
+│   │   ├── methodology-narrative/   # MethodologyNarrative.tsx
+│   │   ├── why-exists/              # WhyExists.tsx
+│   │   ├── who-for/                 # WhoFor.tsx
+│   │   ├── services/                # Services.tsx (not rendered on About page)
+│   │   ├── philosophy/              # Philosophy.tsx (not rendered on About page)
+│   │   └── introvert/               # Introvert.tsx (not rendered on About page)
 │   ├── blog/                    # Blog page sections (Featured, Posts, Related)
 │   ├── dance/                   # Dance page sections
 │   │   └── featured-video/    # FeaturedVideo.tsx
@@ -182,9 +186,13 @@ export { default as CTA } from "./CTA"; // Default export in component file
 
 **About page sections** (`components/sections/about/`):
 
-- No "Section" suffix (e.g., `Hero`, `Origin`, `Services`, `Philosophy`, `Introvert`)
+Rendered on the About page (in order): `Hero`, `Origin`, `TurningPoint`, `MethodologyNarrative`, `WhyExists`, `WhoFor`
+
+Not currently rendered but kept as files — do not delete, may be repurposed: `Philosophy`, `Services` (AboutServices), `Introvert`
+
+- No "Section" suffix on any component name
 - Each in its own folder with `index.ts`
-- Re-exported from `sections/index.ts` with aliases for backward compatibility
+- All exported from `sections/index.ts` (rendered and dormant alike)
 
 **Home page sections** (`components/sections/home/`):
 

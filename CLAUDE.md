@@ -385,18 +385,18 @@ Also includes: `AggregateRatingSchema` JSON-LD script
 
 ### app/about/page.tsx
 
-Fetches: `getAboutPageContent()`, `getServices()`
+Fetches: `getAboutPageContent()`
 
 Sections (in order):
 
 1. `<AboutHero />` — about/hero, passes `heroHeadline`, `heroDescription`
-2. `<Origin />` — about/origin, passes `originSectionHeadline`, `originSectionDescription`, `phases`
-3. `<Stats />` — with `aboutContent.stats`, heading "Proven Results From Real Leaders"
-4. `<AboutServices />` — about/services, passes `services`
-5. `<Philosophy />` — about/philosophy, passes `philosophies`
-6. `<Introvert />` — about/introvert, passes `introvertTraits`
-7. `<FAQ />` — shared/faq
-8. `<CTA />` — "Your Presence Matters. Let's Amplify It."
+2. `<Origin />` — about/origin, passes `originSectionHeadline`, `originSectionDescription` (phases array and image placeholder removed)
+3. `<TurningPoint />` — about/turning-point, passes `turningPointHeadline`, `turningPointBody` (conditional on Sanity field)
+4. `<MethodologyNarrative />` — about/methodology-narrative, passes `methodologyHeadline`, `methodologyBody` (conditional on Sanity field)
+5. `<Stats />` — with `aboutContent.stats`, heading "The Work in Numbers"
+6. `<WhyExists />` — about/why-exists, passes `whyExistsHeadline`, `whyExistsBody` (conditional on Sanity field)
+7. `<WhoFor />` — about/who-for, passes `whoForHeadline`, `whoForBody` (conditional on Sanity field)
+8. `<CTA />` — driven by Sanity `closingHeadline`, `closingBody`, `ctaButtonText`
 
 ### app/blog/page.tsx
 
@@ -492,7 +492,7 @@ All pages use these wrappers from `@/components/layout`:
 
 | Schema                 | Type     | Description                                                                     |
 | ---------------------- | -------- | ------------------------------------------------------------------------------- |
-| `aboutPage`            | document | About page content (hero, origin, phases, stats, philosophies, introvertTraits) |
+| `aboutPage`            | document | About page content (heroHeadline, heroDescription, originSectionHeadline, originSectionDescription, turningPointHeadline, turningPointBody, methodologyHeadline, methodologyBody, whyExistsHeadline, whyExistsBody, whoForHeadline, whoForBody, closingHeadline, closingBody, ctaButtonText, phases, stats, philosophies, introvertTraits) |
 | `blogPost`             | document | Blog posts (title, slug, excerpt, pillar, readingTime, publishedAt, featured)   |
 | `caseStudy`            | document | Case studies (challenge, solution, results, testimonial, image)                 |
 | `collaboration`        | document | Portfolio collaborations (category, price, deliverables, timeline)              |
@@ -641,7 +641,7 @@ The root `middleware.ts` delegates to `updateSession` to keep auth cookies fresh
 | `pageContent.ts`                  | Static/fallback page content                                          |
 | `portal-progress.ts`              | Learning portal progress tracking                                     |
 | `schema.ts`                       | JSON-LD structured data schemas (AggregateRatingSchema, CourseSchema) |
-| `types.ts`                        | All shared TypeScript interfaces (Sanity + portal types)              |
+| `types.ts`                        | 16 shared TypeScript interfaces: `SanitySlug`, `SanityImage`, `Course`, `Module`, `Lesson`, `PortalLesson`, `BlogPost`, `Program`, `Testimonial`, `DanceCategory`, `DanceVideo`, `InstagramReel`, `MediaKit`, `MediaKitStat`, `MediaKitExpertise`, `LessonProgress` |
 | `blog/portableTextComponents.tsx` | Portable text renderer for blog posts                                 |
 | `hooks/`                          | Custom React hooks                                                    |
 
