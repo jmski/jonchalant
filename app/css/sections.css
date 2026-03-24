@@ -531,170 +531,6 @@
   flex-direction: column;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   STATS SECTION
-   ─────────────────────────────────────────────────────────────────────────────
-*/
-.stats-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2.75rem;
-}
-
-.stats-section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-  max-width: 44rem;
-}
-
-.stats-section-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent-primary);
-}
-
-.stats-section-eyebrow::before {
-  content: "";
-  display: block;
-  width: 1.75rem;
-  height: 1px;
-  background: currentColor;
-  flex-shrink: 0;
-}
-
-.stats-section-heading {
-  font-family: var(--font-headline);
-  font-size: clamp(1.875rem, 5vw, 2.75rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-.stats-section-description {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
-.stats-section-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 640px) {
-  .stats-section-grid[data-columns="2"] {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .stats-section-grid[data-columns="3"] {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .stats-section-grid[data-columns="4"] {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .stats-section-grid[data-columns="4"] {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.stats-section-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.75rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.stats-section-item:last-child {
-  border-bottom: none;
-}
-
-/* Green accent bar above number */
-.stats-section-item::before {
-  content: "";
-  display: block;
-  width: 2rem;
-  height: 2px;
-  background: var(--accent-primary);
-  margin-bottom: 0.5rem;
-}
-
-@media (min-width: 640px) {
-  .stats-section-item {
-    padding: 0 0 0 2rem;
-    border-bottom: none;
-    border-left: 1px solid var(--border-color);
-  }
-
-  .stats-section-item:first-child {
-    padding-left: 0;
-    border-left: none;
-  }
-
-  .stats-section-item::before {
-    margin-bottom: 1rem;
-  }
-}
-
-.stats-section-value {
-  font-family: var(--font-headline);
-  font-size: clamp(2.75rem, 7vw, 3.75rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.stats-section-label {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  line-height: 1.55;
-}
-
-/* Purple background context (section-wrapper--indigo) */
-.section-wrapper--indigo .stats-section-eyebrow {
-  color: var(--color-moss-light);
-}
-
-.section-wrapper--indigo .stats-section-eyebrow::before {
-  background: var(--color-moss-light);
-}
-
-.section-wrapper--indigo .stats-section-heading {
-  color: #fff;
-}
-
-.section-wrapper--indigo .stats-section-description {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.section-wrapper--indigo .stats-section-value {
-  color: #fff;
-}
-
-.section-wrapper--indigo .stats-section-label {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.section-wrapper--indigo .stats-section-item::before {
-  background: var(--color-moss-light);
-}
-
-.section-wrapper--indigo .stats-section-item {
-  border-color: rgba(255, 255, 255, 0.15);
-}
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SERVICES SECTION
@@ -939,34 +775,42 @@
    ────────────────────────────────────────────────────────────────────────────
 */
 .cta-section {
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 96px 0;
 }
 
-.cta-section-content {
+.cta-section-left {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--spacing-md);
+  gap: 40px;
 }
 
 .cta-section-title {
-  font-size: clamp(1.875rem, 4vw, 3rem);
+  font-family: Fraunces, serif;
+  font-size: clamp(28px, 3vw, 40px);
   font-weight: 700;
-  line-height: var(--leading-tight);
-  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0;
+  text-align: left;
 }
 
 .cta-section-description {
-  font-size: 1rem;
-  line-height: var(--leading-relaxed);
-  color: var(--text-secondary);
-  max-width: 36rem;
-  margin: var(--spacing-md) auto;
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: none;
+  margin: 0;
+  text-align: left;
 }
 
 .cta-section-button {
   display: inline-block;
+  align-self: flex-start;
   padding: 0.875rem 2rem;
   background-color: var(--accent-primary);
   color: white;
@@ -978,7 +822,6 @@
   border: 1px solid var(--accent-primary);
   cursor: pointer;
   transition: all var(--transition-base);
-  margin-top: var(--spacing-md);
 }
 
 .cta-section-button:hover {
@@ -990,6 +833,14 @@
 .cta-section-button:focus {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .cta-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 72px 0;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -1279,6 +1130,7 @@
 .about-philosophy-eyebrow,
 .about-services-eyebrow,
 .about-introvert-eyebrow,
+.about-origin-label,
 .about-turning-point-label,
 .about-methodology-narrative-label,
 .about-why-exists-label,
@@ -1294,7 +1146,8 @@
 
 /* ── About Hero ── */
 .about-hero-section {
-  padding: var(--spacing-3xl) 0 var(--spacing-xl);
+  padding-top: 100px;
+  padding-bottom: 64px;
 }
 
 .about-hero-container {
@@ -1327,7 +1180,8 @@
 
 /* ── About Origin ── */
 .about-origin-section {
-  padding: var(--spacing-2xl) 0;
+  padding-top: 72px;
+  padding-bottom: 72px;
 }
 
 .about-origin-title {
@@ -1341,11 +1195,10 @@
 }
 
 .about-origin-description {
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.75;
   color: var(--text-secondary);
   margin: 0;
-  max-width: 60ch;
 }
 
 /* ── About Philosophy / Methodology ── */
@@ -1566,7 +1419,8 @@
 
 /* ── About Turning Point ── */
 .about-turning-point-section {
-  padding: var(--spacing-2xl) 0;
+  padding-top: 72px;
+  padding-bottom: 72px;
   max-width: 720px;
 }
 
@@ -1577,7 +1431,7 @@
 }
 
 .about-turning-point-paragraph {
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.75;
   color: var(--text-secondary);
   margin: 0;
@@ -1586,7 +1440,8 @@
 /* ── About Methodology Narrative ── */
 /* Background shift handled by SectionWrapper variant="secondary" in page.tsx */
 .about-methodology-narrative-section {
-  padding: var(--spacing-2xl) 0;
+  padding-top: 72px;
+  padding-bottom: 72px;
   max-width: 720px;
 }
 
@@ -1597,7 +1452,7 @@
 }
 
 .about-methodology-narrative-paragraph {
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.75;
   color: var(--text-secondary);
   margin: 0;
@@ -1605,7 +1460,8 @@
 
 /* ── About Why Exists ── */
 .about-why-exists-section {
-  padding: var(--spacing-2xl) 0;
+  padding-top: 72px;
+  padding-bottom: 72px;
   max-width: 720px;
 }
 
@@ -1616,7 +1472,7 @@
 }
 
 .about-why-exists-paragraph {
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.75;
   color: var(--text-secondary);
   margin: 0;
@@ -1624,7 +1480,8 @@
 
 /* ── About Who For ── */
 .about-who-for-section {
-  padding: var(--spacing-2xl) 0;
+  padding-top: 72px;
+  padding-bottom: 72px;
   max-width: 720px;
 }
 
@@ -1632,13 +1489,23 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-  padding-left: var(--spacing-xl);
-  border-left: 3px solid var(--accent-primary);
 }
 
 .about-who-for-paragraph {
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.75;
   color: var(--text-secondary);
   margin: 0;
+}
+
+.about-highlight {
+  display: block;
+  font-family: Fraunces, serif;
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
 }

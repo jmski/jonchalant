@@ -454,23 +454,25 @@ export async function getAboutPageContent() {
   const query = `*[_type == "aboutPage" && title == "About"][0] {
     heroHeadline,
     heroDescription,
+    originSectionLabel,
     originSectionHeadline,
     originSectionDescription,
+    originSectionHighlight,
     turningPointHeadline,
     turningPointBody,
+    turningPointHighlight,
     methodologyHeadline,
     methodologyBody,
+    methodologyHighlight,
     whyExistsHeadline,
     whyExistsBody,
+    whyExistsHighlight,
     whoForHeadline,
     whoForBody,
+    whoForHighlight,
     closingHeadline,
     closingBody,
-    ctaButtonText,
-    phases,
-    stats,
-    philosophies,
-    introvertTraits
+    ctaButtonText
   }`
   return await client.fetch(query)
 }
