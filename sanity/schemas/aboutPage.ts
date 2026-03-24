@@ -118,7 +118,7 @@ export default defineType({
           ]
         }
       ],
-      validation: (Rule: ArrayRule) => Rule.length(3),
+      validation: (Rule: ArrayRule<unknown>) => Rule.length(3),
     }),
     defineField({
       name: 'stats',
