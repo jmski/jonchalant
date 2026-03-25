@@ -12,16 +12,25 @@ interface HeroProps {
   ctaText?: string;
   ctaLink?: string;
   auditMicrocopy?: string;
+  secondaryCtaText?: string;
+  stats?: { value: string; label: string }[];
 }
 
-export function Hero({ 
-  headline = 'Body-Led Leadership',
-  subheadline = 'for Introverts',
-  description = 'Build executive presence, quiet command, and confident communication through movement-based coaching designed for introverts.',
+export function Hero({
+  headline = 'Nobody Gets Confident',
+  subheadline = 'by Thinking About It.',
+  description = "You already know what you want to say. The problem isn't your ideas — it's that nobody ever trained you on how your body carries them. That's what we fix.",
   ctaText = 'Book Your Free Presence Audit',
   ctaLink = '/contact',
-  auditMicrocopy = 'Free · 30 minutes · No commitment required'
+  auditMicrocopy = 'Free · 30 minutes · No commitment required',
+  secondaryCtaText = 'Learn About My Approach',
+  stats,
 }: HeroProps) {
+  const displayStats = (stats && stats.length > 0) ? stats : [
+    { value: '10+', label: 'Years coaching & fitness' },
+    { value: '8 wk', label: 'Core Program' },
+    { value: 'Free', label: 'Presence Audit' },
+  ];
   return (
     <section className="home-hero-section">
       {/* Gradient wash */}
@@ -56,26 +65,19 @@ export function Hero({
               )}
             </div>
             <Link href="/about" className="home-hero-cta-secondary">
-              Learn About My Approach
+              {secondaryCtaText}
             </Link>
           </div>
 
           {/* Stats strip */}
           <div className="home-hero-stats">
-            <div className="home-hero-stat">
-              <span className="home-hero-stat-value">47+</span>
-              <span className="home-hero-stat-label">Leaders coached</span>
-            </div>
-            <div className="home-hero-stat-divider" aria-hidden="true" />
-            <div className="home-hero-stat">
-              <span className="home-hero-stat-value">92%</span>
-              <span className="home-hero-stat-label">Report measurable results</span>
-            </div>
-            <div className="home-hero-stat-divider" aria-hidden="true" />
-            <div className="home-hero-stat">
-              <span className="home-hero-stat-value">8 wk</span>
-              <span className="home-hero-stat-label">Core program</span>
-            </div>
+            {displayStats.filter(stat => stat.value).flatMap((stat, i) => [
+              i > 0 ? <div key={`divider-${i}`} className="home-hero-stat-divider" aria-hidden="true" /> : null,
+              <div key={stat.label} className="home-hero-stat">
+                <span className="home-hero-stat-value">{stat.value}</span>
+                <span className="home-hero-stat-label">{stat.label}</span>
+              </div>,
+            ])}
           </div>
         </div>
 

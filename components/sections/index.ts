@@ -5,6 +5,7 @@ export { BlogCards } from './home/blog-cards';
 export { ImpactSection } from './home/impact';
 export { PortfolioPreview } from './home/portfolio-preview';
 export { WhyWorkTogether } from './home/why-work-together';
+export { WhyItWorks } from './home/why-it-works';
 
 // ─────────────── ABOUT PAGE SECTIONS ────────────────
 export { Hero as AboutHero } from './about/hero';
@@ -20,7 +21,6 @@ export { WhoFor } from './about/who-for';
 // ─────────────── SHARED SECTIONS (Reusable across pages) ────────────────
 export { Testimonials } from '@/components/shared/testimonials';
 export { Services } from '@/components/shared/services';
-export { Stats } from '@/components/shared/stats';
 
 // ─────────────── BLOG SECTIONS ────────────────
 export { Featured as BlogFeatured, Posts as BlogPosts, Related as BlogRelated } from '@/components/sections/blog';

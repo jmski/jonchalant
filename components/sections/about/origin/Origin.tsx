@@ -1,16 +1,17 @@
 interface OriginProps {
+  label?: string;
   headline?: string;
   description?: string;
+  highlight?: string;
 }
 
-export function Origin({ headline, description }: OriginProps) {
+export function Origin({ label, headline, description, highlight }: OriginProps) {
   return (
     <section className="about-origin-section">
       {headline ? (
         <>
-          <h2 className="about-origin-title">
-            {headline}
-          </h2>
+          <span className="about-origin-label">{label ?? 'WHAT CHANGED EVERYTHING'}</span>
+          {highlight && <span className="about-highlight">{highlight}</span>}
           <p className="about-origin-description">
             {description}
           </p>

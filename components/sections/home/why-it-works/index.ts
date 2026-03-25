@@ -1,0 +1,1 @@
+export { WhyItWorks } from './WhyItWorks';

@@ -35,9 +35,9 @@ export default defineType({
     }),
     defineField({
       name: 'icon',
-      title: 'Icon (SVG ID or emoji)',
+      title: 'Card Number',
       type: 'string',
-      description: 'e.g., "coaching", "dance", "collab" (maps to SVG) or emoji',
+      description: 'Display number shown above the card title — e.g. "01", "02", "03".',
     }),
     defineField({
       name: 'features',

@@ -455,6 +455,12 @@
   }
 }
 
+/* About page: sections carry their own vertical padding; wrapper provides only horizontal */
+.about-main .section-wrapper {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .section-wrapper-primary {
   background-color: var(--bg-primary);
 }
@@ -465,10 +471,6 @@
 
 .section-wrapper-tertiary {
   background-color: var(--bg-tertiary);
-}
-
-.section-wrapper--indigo {
-  background-color: var(--color-burnt-indigo);
 }
 
 .section-wrapper--moss {

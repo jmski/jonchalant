@@ -32,6 +32,7 @@
    25. PRESENCE COACH ..................... AI chat panel component
    26. PRESENCE SCORE ..................... /portal/presence-score assessment
    27. TONALITY ANALYSIS .................. /portal/tonality speech & text tool
+   28. ABOUT PAGE .......................... /about page-specific overrides
    28. MOVEMENT PLAN ...................... /portal/movement-plan generator
    ════════════════════════════════════════════════════════════════════════════ */
 
@@ -8367,6 +8368,12 @@
   gap: 0.5rem;
   flex-shrink: 0;
 }
+
+/* ═════════════════════════════════════════════════════════════════════════════
+   28. ABOUT PAGE
+   ─────────────────────────────────────────────────────────────────────────────
+*/
+
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 

@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import type { StringRule, ArrayRule } from 'sanity';
+import type { StringRule } from 'sanity';
 
 export default defineType({
   name: 'aboutPage',
@@ -26,6 +26,12 @@ export default defineType({
       validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
+      name: 'originSectionLabel',
+      title: 'Origin Section — Eyebrow Label',
+      type: 'string',
+      description: 'Short uppercase label shown above the headline (e.g. "What Changed Everything").',
+    }),
+    defineField({
       name: 'originSectionHeadline',
       title: 'Origin Section Headline',
       type: 'string',
@@ -34,6 +40,12 @@ export default defineType({
       name: 'originSectionDescription',
       title: 'Origin Section Description',
       type: 'text',
+    }),
+    defineField({
+      name: 'originSectionHighlight',
+      title: 'Highlight — What Changed Everything',
+      type: 'string',
+      description: 'Bold sentence shown at the top of the "What Changed Everything" section',
     }),
     defineField({
       name: 'turningPointHeadline',
@@ -48,6 +60,12 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'turningPointHighlight',
+      title: 'Highlight — The Moment It Clicked',
+      type: 'string',
+      description: 'Bold sentence shown at the top of the "The Moment It Clicked" section',
+    }),
+    defineField({
       name: 'methodologyHeadline',
       title: 'Methodology — Section Label',
       description: 'Short label/eyebrow for the freestyle/choreography section',
@@ -60,6 +78,12 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'methodologyHighlight',
+      title: 'Highlight — What I Actually Believe',
+      type: 'string',
+      description: 'Bold sentence shown at the top of the "What I Actually Believe" section',
+    }),
+    defineField({
       name: 'whyExistsHeadline',
       title: 'Why This Exists — Section Label',
       type: 'string',
@@ -70,6 +94,12 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'whyExistsHighlight',
+      title: 'Highlight — Why This Exists',
+      type: 'string',
+      description: 'Bold sentence shown at the top of the "Why This Exists" section',
+    }),
+    defineField({
       name: 'whoForHeadline',
       title: 'Who This Is For — Section Label',
       type: 'string',
@@ -78,6 +108,12 @@ export default defineType({
       name: 'whoForBody',
       title: 'Who This Is For — Body Copy',
       type: 'text',
+    }),
+    defineField({
+      name: 'whoForHighlight',
+      title: 'Highlight — Who This Is For',
+      type: 'string',
+      description: 'Bold sentence shown at the top of the "Who This Is For" section',
     }),
     defineField({
       name: 'closingHeadline',
@@ -93,94 +129,6 @@ export default defineType({
       name: 'ctaButtonText',
       title: 'CTA Button Label',
       type: 'string',
-    }),
-    defineField({
-      name: 'phases',
-      title: 'Three Phases',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          name: 'phase',
-          fields: [
-            defineField({
-              name: 'title',
-              title: 'Phase Title',
-              type: 'string',
-              validation: (Rule: StringRule) => Rule.required(),
-            }),
-            defineField({
-              name: 'description',
-              title: 'Phase Description',
-              type: 'text',
-              validation: (Rule: StringRule) => Rule.required(),
-            }),
-          ]
-        }
-      ],
-      validation: (Rule: ArrayRule<unknown>) => Rule.length(3),
-    }),
-    defineField({
-      name: 'stats',
-      title: 'Key Stats',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          name: 'stat',
-          fields: [
-            defineField({
-              name: 'label',
-              title: 'Label',
-              type: 'string',
-              validation: (Rule: StringRule) => Rule.required(),
-            }),
-            defineField({
-              name: 'value',
-              title: 'Value',
-              type: 'string',
-              validation: (Rule: StringRule) => Rule.required(),
-            }),
-          ]
-        }
-      ],
-    }),
-    defineField({
-      name: 'philosophies',
-      title: 'My Philosophy (How I Work)',
-      description: 'Three core principles guiding the coaching approach',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          name: 'philosophy',
-          fields: [
-            defineField({
-              name: 'title',
-              title: 'Philosophy Title',
-              type: 'string',
-              validation: (Rule: StringRule) => Rule.required(),
-            }),
-            defineField({
-              name: 'description',
-              title: 'Philosophy Description',
-              type: 'text',
-              validation: (Rule: StringRule) => Rule.required(),
-            }),
-          ]
-        }
-      ],
-    }),
-    defineField({
-      name: 'introvertTraits',
-      title: 'Introvert Traits / Superpowers',
-      description: 'List of trait names representing introvert strengths',
-      type: 'array',
-      of: [
-        {
-          type: 'string',
-        }
-      ],
     }),
   ],
   preview: {

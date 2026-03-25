@@ -1,4 +1,4 @@
-import { CTA, Stats } from "@/components/sections";
+import { CTA } from "@/components/sections";
 import { Hero as AboutHero, Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import type { Metadata } from 'next';
@@ -59,8 +59,10 @@ export default async function About() {
         <SectionWrapper variant="secondary">
           <SectionContent>
             <Origin
+              label={aboutContent?.originSectionLabel}
               headline={aboutContent?.originSectionHeadline}
               description={aboutContent?.originSectionDescription}
+              highlight={aboutContent?.originSectionHighlight}
             />
           </SectionContent>
         </SectionWrapper>
@@ -72,6 +74,7 @@ export default async function About() {
               <TurningPoint
                 headline={aboutContent.turningPointHeadline}
                 body={aboutContent.turningPointBody ?? ''}
+                highlight={aboutContent.turningPointHighlight}
               />
             </SectionContent>
           </SectionWrapper>
@@ -84,42 +87,33 @@ export default async function About() {
               <MethodologyNarrative
                 headline={aboutContent.methodologyHeadline}
                 body={aboutContent.methodologyBody ?? ''}
+                highlight={aboutContent.methodologyHighlight}
               />
             </SectionContent>
           </SectionWrapper>
         )}
 
-        {/* 5 — CREDENTIALS: track record in numbers */}
-        <SectionWrapper variant="tertiary" className="section-wrapper--indigo">
-          <SectionContent>
-            <Stats
-              stats={aboutContent?.stats || []}
-              heading="The Work in Numbers"
-              description="Not vanity metrics. These are the outcomes that matter to real people in real jobs."
-              columns={3}
-            />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* 6 — WHY THIS EXISTS */}
+        {/* 5 — WHY THIS EXISTS */}
         {aboutContent?.whyExistsHeadline && (
-          <SectionWrapper variant="secondary">
+          <SectionWrapper variant="primary">
             <SectionContent>
               <WhyExists
                 headline={aboutContent.whyExistsHeadline}
                 body={aboutContent.whyExistsBody ?? ''}
+                highlight={aboutContent.whyExistsHighlight}
               />
             </SectionContent>
           </SectionWrapper>
         )}
 
-        {/* 7 — WHO THIS IS FOR */}
+        {/* 6 — WHO THIS IS FOR */}
         {aboutContent?.whoForHeadline && (
-          <SectionWrapper variant="primary">
+          <SectionWrapper variant="secondary">
             <SectionContent>
               <WhoFor
                 headline={aboutContent.whoForHeadline}
                 body={aboutContent.whoForBody ?? ''}
+                highlight={aboutContent.whoForHighlight}
               />
             </SectionContent>
           </SectionWrapper>
