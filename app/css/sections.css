@@ -14,7 +14,7 @@
   width: 100%;
   overflow: clip;
   background: var(--bg-primary);
-  padding: 3rem 0 2.5rem;
+  padding: 5rem 0 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@
 
 @media (min-width: 640px) {
   .home-hero-section {
-    padding: 3.5rem 0 3.5rem;
+    padding: 4.5rem 0 4rem;
   }
 }
 
@@ -158,16 +158,6 @@
   color: var(--accent-primary);
 }
 
-.home-hero-headline-accent::after {
-  content: "";
-  display: block;
-  width: 2.5rem;
-  height: 1.5px;
-  background: var(--accent-primary);
-  margin-top: 0.75rem;
-  transform-origin: left center;
-  opacity: 0.5;
-}
 
 /* Description */
 .home-hero-description {
@@ -324,15 +314,6 @@
   }
 }
 
-@keyframes heroAccentLine {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .home-hero-headline {
     animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -348,11 +329,6 @@
   .home-hero-stats {
     animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: 320ms;
-  }
-  .home-hero-headline-accent::after {
-    transform: scaleX(0);
-    animation: heroAccentLine 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 400ms;
   }
 }
 
@@ -563,8 +539,6 @@
   color: var(--text-primary);
   line-height: 1.15;
   max-width: 36rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .services-section-description {
@@ -771,6 +745,38 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   WHY IT WORKS SECTION (home page)
+   ────────────────────────────────────────────────────────────────────────────
+*/
+.home-why-works-section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.home-why-works-label {
+  display: inline-block;
+  font-family: Fraunces, serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 1.25rem;
+}
+
+.home-why-works-paragraph {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  max-width: none;
+}
+
+.home-why-works-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    CTA SECTION
    ────────────────────────────────────────────────────────────────────────────
 */
@@ -794,7 +800,7 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
-  color: #ffffff;
+  color: var(--text-primary);
   margin: 0;
   text-align: left;
 }
@@ -802,7 +808,7 @@
 .cta-section-description {
   font-size: 17px;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text-secondary);
   max-width: none;
   margin: 0;
   text-align: left;

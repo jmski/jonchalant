@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -17,7 +17,7 @@ export const client = createClient({
   token: process.env.SANITY_API_TOKEN,
 })
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 export function urlFor(source: any) {
   return builder.image(source)
@@ -483,13 +483,27 @@ export async function getAboutPageContent() {
 
 export async function getHomePageContent() {
   const query = `*[_type == "homePageContent" && title == "Home Page"][0] {
-    stats,
-    impactSectionHeadline,
-    featuredMainTitle,
-    featuredMainDescription,
-    sidebarFeatures,
+    heroHeadline,
+    heroAccent,
+    heroDescription,
+    heroCtaText,
+    heroCtaLink,
+    heroMicrocopy,
+    heroSecondaryCtaText,
+    heroStats,
     servicesHeadline,
-    servicesDescription
+    servicesDescription,
+    whyItWorksLabel,
+    whyItWorksHighlight,
+    whyItWorksParagraph1,
+    whyItWorksParagraph2,
+    whyItWorksParagraph3,
+    testimonialsEyebrow,
+    testimonialsHeading,
+    ctaTitle,
+    ctaDescription,
+    ctaButtonText,
+    ctaButtonHref
   }`
   return await client.fetch(query)
 }

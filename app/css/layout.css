@@ -473,10 +473,6 @@
   background-color: var(--bg-tertiary);
 }
 
-.section-wrapper--indigo {
-  background-color: var(--color-burnt-indigo);
-}
-
 .section-wrapper--moss {
   background-color: #e8f2e4;
 }

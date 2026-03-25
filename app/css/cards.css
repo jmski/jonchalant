@@ -634,9 +634,14 @@
 }
 
 .service-card-icon {
-  font-size: 2rem;
+  display: inline-block;
+  font-family: Fraunces, serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
   margin-bottom: 1.25rem;
-  line-height: 1;
 }
 
 .service-card-title {

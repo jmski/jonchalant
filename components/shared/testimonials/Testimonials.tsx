@@ -11,16 +11,18 @@ interface Testimonial {
 
 interface TestimonialsProps {
   testimonials: Testimonial[]
+  eyebrow?: string
+  heading?: string
 }
 
-export function Testimonials({ testimonials }: TestimonialsProps) {
+export function Testimonials({ testimonials, eyebrow, heading }: TestimonialsProps) {
   if (!testimonials?.length) return null
 
   return (
     <section className="testimonial-section">
       <header className="testimonial-section-header">
-        <span className="testimonial-section-eyebrow">Client Stories</span>
-        <h2 className="testimonial-section-title">Real Results. Real People.</h2>
+        <span className="testimonial-section-eyebrow">{eyebrow ?? 'Client Stories'}</span>
+        <h2 className="testimonial-section-title">{heading ?? 'Real Results. Real People.'}</h2>
       </header>
 
       <div className="testimonial-grid">

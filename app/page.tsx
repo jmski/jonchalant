@@ -1,8 +1,8 @@
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { 
+import {
   Hero,
-  Stats,
   Services,
+  WhyItWorks,
   Testimonials,
   CTA,
 } from '@/components/sections';
@@ -85,19 +85,16 @@ export default async function Home() {
       <PageTransition animation="fade">
         {/* HERO SECTION — flush wrapper so hero fills viewport on desktop */}
         <SectionWrapper variant="primary" className="section-wrapper--flush">
-          <Hero />
-        </SectionWrapper>
-
-        {/* KEY STATS SECTION - Impact at a Glance */}
-        <SectionWrapper variant="primary" className="section-wrapper--indigo">
-          <SectionContent>
-            <Stats 
-              stats={homeContent?.stats || []} 
-              heading="Proven Results"
-              description="Real outcomes from real coaching. These numbers represent transformations in confidence, presence, and professional impact."
-              columns={3}
-            />
-          </SectionContent>
+          <Hero
+            headline={homeContent?.heroHeadline}
+            subheadline={homeContent?.heroAccent}
+            description={homeContent?.heroDescription}
+            ctaText={homeContent?.heroCtaText}
+            ctaLink={homeContent?.heroCtaLink}
+            auditMicrocopy={homeContent?.heroMicrocopy}
+            secondaryCtaText={homeContent?.heroSecondaryCtaText}
+            stats={homeContent?.heroStats}
+          />
         </SectionWrapper>
 
         {/* SERVICES OVERVIEW */}
@@ -111,11 +108,28 @@ export default async function Home() {
           </SectionContent>
         </SectionWrapper>
 
+        {/* WHY IT WORKS — bridge between services and social proof */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <WhyItWorks
+              label={homeContent?.whyItWorksLabel}
+              highlight={homeContent?.whyItWorksHighlight}
+              paragraph1={homeContent?.whyItWorksParagraph1}
+              paragraph2={homeContent?.whyItWorksParagraph2}
+              paragraph3={homeContent?.whyItWorksParagraph3}
+            />
+          </SectionContent>
+        </SectionWrapper>
+
         {/* CLIENT TESTIMONIALS SECTION */}
         <SectionWrapper variant="secondary" className="section-wrapper--moss">
           <SectionContent>
             {testimonials && testimonials.length > 0 && (
-              <Testimonials testimonials={testimonials} />
+              <Testimonials
+                testimonials={testimonials}
+                eyebrow={homeContent?.testimonialsEyebrow}
+                heading={homeContent?.testimonialsHeading}
+              />
             )}
           </SectionContent>
         </SectionWrapper>
@@ -123,11 +137,11 @@ export default async function Home() {
         {/* FINAL CTA */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
-            <CTA 
-              title="Ready to Transform Your Executive Presence?"
-              description="Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."
-              buttonText="Schedule Your Free Audit"
-              buttonLink="/contact"
+            <CTA
+              title={homeContent?.ctaTitle ?? "Ready to Transform Your Executive Presence?"}
+              description={homeContent?.ctaDescription ?? "Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."}
+              buttonText={homeContent?.ctaButtonText ?? "Schedule Your Free Audit"}
+              buttonLink={homeContent?.ctaButtonHref ?? "/contact"}
             />
           </SectionContent>
         </SectionWrapper>

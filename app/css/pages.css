@@ -8374,12 +8374,6 @@
    ─────────────────────────────────────────────────────────────────────────────
 */
 
-/* CTA description is a <div>, not a <p>, so it inherits --text-primary from
-   .section-wrapper rather than picking up the .section-wrapper p rule.
-   Explicitly override to ensure readable contrast on section-wrapper-tertiary. */
-.about-main .cta-section-description {
-  color: var(--text-secondary);
-}
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 
