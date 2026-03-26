@@ -14,7 +14,7 @@
   width: 100%;
   overflow: clip;
   background: var(--bg-primary);
-  padding: 5rem 0 3rem;
+  padding: 3.5rem 0 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,14 +108,14 @@
   padding: 0 1.25rem;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
 @media (min-width: 768px) {
   .home-hero-grid {
     padding: 0 1.5rem;
-    grid-template-columns: 6fr 5fr;
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
   }
 }
@@ -123,6 +123,7 @@
 @media (min-width: 1024px) {
   .home-hero-grid {
     padding: 0 2rem;
+    grid-template-columns: 6fr 5fr;
     gap: 4rem;
   }
 }
@@ -283,18 +284,69 @@
 
 /* Visual column — 3D interactive canvas */
 .home-hero-visual {
-  display: none;
+  display: block;
   width: 100%;
-  max-width: 460px;
-  aspect-ratio: 1;
+  max-width: 420px;
+  aspect-ratio: 3 / 4;
   position: relative;
-  justify-self: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .home-hero-visual {
+    max-width: 480px;
+  }
 }
 
 @media (min-width: 768px) {
   .home-hero-visual {
-    display: block;
+    max-width: 100%;
+    aspect-ratio: 4 / 5;
+    margin: 0;
+    justify-self: center;
   }
+}
+
+/* GLTF canvas container — fills the visual column completely */
+.hero-canvas-container {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.hero-canvas-loading-pulse {
+  animation: heroCanvasContainerPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes heroCanvasContainerPulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+
+/* GLTF canvas loading indicator */
+.hero-canvas-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-canvas-loading-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-burnt-indigo);
+  opacity: 0.35;
+  animation: heroCanvasPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes heroCanvasPulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.85); }
+  50%       { opacity: 0.55; transform: scale(1.15); }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
