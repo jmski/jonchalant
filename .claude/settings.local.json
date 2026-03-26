@@ -7,7 +7,13 @@
       "Bash(ls \"c:\\\\Users\\\\jonch\\\\OneDrive\\\\Documents\\\\GitHub\\\\jonchalant\\\\node_modules\\\\.bin\"\" 2>/dev/null | head -5 || echo \"no node_modules \")",
       "Bash(npm --version)",
       "Bash(git --version)",
-      "Bash(node scripts/patch-home-content.mjs)"
+      "Bash(node scripts/patch-home-content.mjs)",
+      "Bash(node -e \"const p = require.resolve\\(''''three/package.json''''\\); const pkg = require\\(p\\); console.log\\(JSON.stringify\\(Object.keys\\(pkg.exports || {}\\).filter\\(k => k.includes\\(''''gltf''''\\) || k.includes\\(''''addons''''\\)\\).slice\\(0,10\\)\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); exports=p.get\\(''''exports'''',{}\\); print\\([k for k in exports if ''''addon'''' in k.lower\\(\\) or ''''gltf'''' in k.lower\\(\\)][:5]\\)\")",
+      "Bash(find c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/three -name *.d.ts)",
+      "Bash(find c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/three/src -name *.d.ts)",
+      "Bash(find c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/three/build -name *.d.ts)",
+      "Bash(npm i:*)"
     ]
   }
 }
