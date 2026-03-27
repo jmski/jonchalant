@@ -86,8 +86,8 @@ export default async function Home() {
         {/* HERO SECTION — flush wrapper so hero fills viewport on desktop */}
         <SectionWrapper variant="primary" className="section-wrapper--flush">
           <Hero
-            headline={homeContent?.heroHeadline}
-            subheadline={homeContent?.heroAccent}
+            heroHeadline={homeContent?.heroHeadline}
+            cyclingOutcomes={homeContent?.heroCyclingOutcomes}
             description={homeContent?.heroDescription}
             ctaText={homeContent?.heroCtaText}
             ctaLink={homeContent?.heroCtaLink}

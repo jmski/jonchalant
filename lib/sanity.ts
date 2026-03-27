@@ -484,7 +484,7 @@ export async function getAboutPageContent() {
 export async function getHomePageContent() {
   const query = `*[_type == "homePageContent" && title == "Home Page"][0] {
     heroHeadline,
-    heroAccent,
+    heroCyclingOutcomes,
     heroDescription,
     heroCtaText,
     heroCtaLink,
