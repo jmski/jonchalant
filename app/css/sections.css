@@ -99,73 +99,96 @@
   }
 }
 
-/* Two-column grid */
+/* Full-width centred content column */
 .home-hero-grid {
   position: relative;
   z-index: 10;
+  width: 100%;
   max-width: 80rem;
   margin: 0 auto;
-  padding: 0 1.25rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: center;
+  padding: 4rem 1.25rem 3rem;
 }
 
 @media (min-width: 768px) {
   .home-hero-grid {
-    padding: 0 1.5rem;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    padding: 5rem 1.5rem 4rem;
   }
 }
 
 @media (min-width: 1024px) {
   .home-hero-grid {
-    padding: 0 2rem;
-    grid-template-columns: 6fr 5fr;
-    gap: 4rem;
+    padding: 6rem 2rem 5rem;
   }
 }
 
-/* Content column */
 .home-hero-content {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2rem;
 }
 
 /* Headline */
 .home-hero-headline {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
-  line-height: 1.1;
+  gap: 0;
 }
 
 .home-hero-headline-line {
   font-family: var(--font-headline);
-  font-size: clamp(2.5rem, 8vw, 4.25rem);
-  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 300;
   letter-spacing: -0.01em;
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  line-height: 1.2;
 }
 
-.home-hero-headline-accent {
+/* Slot machine */
+.home-hero-slot {
+  --slot-h: clamp(3.3rem, 8.8vw, 6.05rem);
+  overflow: hidden;
+  height: calc(var(--slot-h) * 2);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.home-hero-slot-track {
+  /* no transition by default — snap back is instant */
+}
+
+.home-hero-slot-track--animating {
+  transform: translateY(calc(var(--slot-h) * -1));
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-hero-slot-item {
+  display: block;
+  height: var(--slot-h);
   font-family: var(--font-headline);
-  font-size: clamp(2.25rem, 7.5vw, 4rem);
+  font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--accent-primary);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* Resting state */
+.home-hero-slot-item--current  { opacity: 1; }
+.home-hero-slot-item--next,
+.home-hero-slot-item--upcoming { opacity: 0.2; }
+
+/* On animation start: swap highlight to the incoming item immediately */
+.home-hero-slot-track--animating .home-hero-slot-item--current { opacity: 0.2; }
+.home-hero-slot-track--animating .home-hero-slot-item--next    { opacity: 1; }
 
 /* Description */
 .home-hero-description {
   font-size: 1rem;
   line-height: 1.7;
   color: var(--text-secondary);
-  max-width: 30rem;
 }
 
 @media (min-width: 640px) {
@@ -282,29 +305,25 @@
   flex-shrink: 0;
 }
 
-/* Visual column — 3D interactive canvas */
+/* Background canvas — absolute, full bleed, subtle */
 .home-hero-visual {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 420px;
-  aspect-ratio: 3 / 4;
-  position: relative;
-  margin: 0 auto;
+  height: 100%;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
 }
 
-@media (min-width: 640px) {
-  .home-hero-visual {
-    max-width: 480px;
-  }
-}
-
-@media (min-width: 768px) {
-  .home-hero-visual {
-    max-width: 100%;
-    aspect-ratio: 4 / 5;
-    margin: 0;
-    justify-self: center;
-  }
+/* Lower content block — description + CTAs + stats */
+.home-hero-lower {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 38rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
 /* GLTF canvas container — fills the visual column completely */
@@ -370,17 +389,9 @@
   .home-hero-headline {
     animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .home-hero-description {
+  .home-hero-lower {
     animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: 100ms;
-  }
-  .home-hero-ctas {
-    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: 200ms;
-  }
-  .home-hero-stats {
-    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: 320ms;
+    animation-delay: 150ms;
   }
 }
 
