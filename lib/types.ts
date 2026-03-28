@@ -166,6 +166,18 @@ export interface MediaKitExpertise {
   order: number
 }
 
+// ── Email opt-in ──────────────────────────────────────────────────────────────
+
+export interface EmailOptInContent {
+  eyebrow?: string
+  heading?: string
+  description?: string
+  submitButtonText?: string
+  disclaimer?: string
+  successTitle?: string
+  successBody?: string
+}
+
 // ── Database ──────────────────────────────────────────────────────────────────
 
 export interface LessonProgress {

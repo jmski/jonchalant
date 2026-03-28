@@ -18,6 +18,7 @@ import testimonial from '../schemas/testimonial'
 import danceCategory from '../schemas/danceCategory'
 import instagramReel from '../schemas/instagramReel'
 import programsPageContent from '../schemas/programsPageContent'
+import emailOptIn from '../schemas/emailOptIn'
 
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
@@ -38,6 +39,7 @@ export const types = [
   testimonial,
   danceCategory,
   instagramReel,
+  emailOptIn,
 ] as const
 
 export const schema: { types: SchemaTypeDefinition[] } = {

@@ -17,6 +17,7 @@ import portalLesson from './portalLesson'
 import programsPageContent from './programsPageContent'
 import danceCategory from './danceCategory'
 import instagramReel from './instagramReel'
+import emailOptIn from './emailOptIn'
 
 export const schemaTypes = [
   portfolio,
@@ -38,4 +39,5 @@ export const schemaTypes = [
   programsPageContent,
   danceCategory,
   instagramReel,
+  emailOptIn,
 ]

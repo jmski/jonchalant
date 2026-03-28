@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, FormEvent } from 'react'
+import { useState, useEffect } from 'react'
+import type { EmailOptInContent } from '@/lib/types'
 
 const STORAGE_KEY = 'jonchalant_subscribed'
 
@@ -10,7 +11,11 @@ interface OptInState {
   error: string | null
 }
 
-export function BlogOptIn() {
+interface BlogOptInProps {
+  optIn?: EmailOptInContent | null
+}
+
+export function BlogOptIn({ optIn }: BlogOptInProps) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [alreadySubscribed, setAlreadySubscribed] = useState(false)
@@ -27,7 +32,7 @@ export function BlogOptIn() {
     }
   }, [])
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setState({ isSubmitting: true, submitted: false, error: null })
 
@@ -62,10 +67,12 @@ export function BlogOptIn() {
   if (state.submitted) {
     return (
       <div className="blog-optin blog-optin--success">
-        <p className="blog-optin-success-title">You're in. ✓</p>
-        <p className="blog-optin-success-body">
-          Check your inbox — the Quiet Command Starter Guide is on its way.
-        </p>
+        {optIn?.successTitle && (
+          <p className="blog-optin-success-title">{optIn.successTitle}</p>
+        )}
+        {optIn?.successBody && (
+          <p className="blog-optin-success-body">{optIn.successBody}</p>
+        )}
       </div>
     )
   }
@@ -74,13 +81,15 @@ export function BlogOptIn() {
     <div className="blog-optin">
       <div className="blog-optin-inner">
         <div className="blog-optin-copy">
-          <p className="blog-optin-eyebrow">Free for introverts</p>
-          <h3 className="blog-optin-title">
-            Get the Quiet Command Starter Guide
-          </h3>
-          <p className="blog-optin-description">
-            The 5 body-aware habits that help introverts build executive presence — without performing or pretending.
-          </p>
+          {optIn?.eyebrow && (
+            <p className="blog-optin-eyebrow">{optIn.eyebrow}</p>
+          )}
+          {optIn?.heading && (
+            <h3 className="blog-optin-title">{optIn.heading}</h3>
+          )}
+          {optIn?.description && (
+            <p className="blog-optin-description">{optIn.description}</p>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="blog-optin-form">
@@ -128,12 +137,12 @@ export function BlogOptIn() {
             disabled={state.isSubmitting}
             className="form-submit blog-optin-submit"
           >
-            {state.isSubmitting ? 'Sending…' : 'Send Me the Guide'}
+            {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
           </button>
 
-          <p className="blog-optin-disclaimer">
-            No spam. Unsubscribe any time.
-          </p>
+          {optIn?.disclaimer && (
+            <p className="blog-optin-disclaimer">{optIn.disclaimer}</p>
+          )}
         </form>
       </div>
     </div>

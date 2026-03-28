@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
-import { client } from '@/lib/sanity';
+import { client, getEmailOptIn } from '@/lib/sanity';
 import { CTA } from '@/components/sections';
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout';
 import { BlogClient } from './BlogClient';
+import type { EmailOptInContent } from '@/lib/types';
 
 export const metadata: Metadata = {
   title: 'Leadership Blog | Executive Presence & Quiet Command',
@@ -68,12 +69,15 @@ async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
+  const [posts, optIn] = await Promise.all([
+    getBlogPosts(),
+    getEmailOptIn() as Promise<EmailOptInContent | null>,
+  ]);
 
   return (
     <main className="blog-page-main">
       <PageTransition animation="fade">
-        <BlogClient posts={posts} />
+        <BlogClient posts={posts} optIn={optIn} />
 
         {/* CTA Section */}
         <SectionWrapper variant="tertiary">

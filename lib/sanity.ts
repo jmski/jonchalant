@@ -466,6 +466,25 @@ export async function getHomePageContent() {
 }
 
 // ============================================================================
+// EMAIL OPT-IN
+// ============================================================================
+
+export type { EmailOptInContent } from './types'
+
+export async function getEmailOptIn() {
+  const query = `*[_type == "emailOptIn"][0] {
+    eyebrow,
+    heading,
+    description,
+    submitButtonText,
+    disclaimer,
+    successTitle,
+    successBody
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
 // DANCE CATEGORY FILTER
 // ============================================================================
 

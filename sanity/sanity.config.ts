@@ -20,6 +20,7 @@ import module from './schemas/module'
 import portalLesson from './schemas/portalLesson'
 import danceCategory from './schemas/danceCategory'
 import instagramReel from './schemas/instagramReel'
+import emailOptIn from './schemas/emailOptIn'
 
 export default defineConfig({
   name: 'default',
@@ -51,6 +52,7 @@ export default defineConfig({
       portalLesson,
       danceCategory,
       instagramReel,
+      emailOptIn,
     ] as any,
   } as any,
 } as any)

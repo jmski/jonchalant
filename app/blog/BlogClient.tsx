@@ -5,6 +5,7 @@ import { BlogCard } from '@/components/utilities/cards';
 import { BlogOptIn } from '@/components/forms/BlogOptIn';
 import { ScrollStagger, ScrollStaggerItem } from '@/components/animations';
 import { SectionWrapper, SectionContent } from '@/components/layout';
+import type { EmailOptInContent } from '@/lib/types';
 
 const CATEGORIES = ['All', 'Executive Presence', 'Introvert Leadership', 'Confidence'] as const;
 type Category = (typeof CATEGORIES)[number];
@@ -22,9 +23,10 @@ interface BlogPost {
 
 interface BlogClientProps {
   posts: BlogPost[];
+  optIn?: EmailOptInContent | null;
 }
 
-export function BlogClient({ posts }: BlogClientProps) {
+export function BlogClient({ posts, optIn }: BlogClientProps) {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<Category>('All');
 
@@ -166,7 +168,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                     ))}
                   </div>
                 </ScrollStagger>
-                <BlogOptIn />
+                <BlogOptIn optIn={optIn} />
               </section>
             )}
           </SectionContent>
@@ -223,7 +225,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                       ))}
                     </div>
                   </ScrollStagger>
-                  <BlogOptIn />
+                  <BlogOptIn optIn={optIn} />
                 </section>
               </SectionContent>
             </SectionWrapper>
