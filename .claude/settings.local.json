@@ -13,7 +13,11 @@
       "Bash(find c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/three -name *.d.ts)",
       "Bash(find c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/three/src -name *.d.ts)",
       "Bash(find c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/three/build -name *.d.ts)",
-      "Bash(npm i:*)"
+      "Bash(npm i:*)",
+      "Bash(grep -r \"FocusAreas\\\\|SupplementalLearning\\\\|ProgramTracks\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant --include=*.tsx --include=*.ts -n)",
+      "Bash(grep -r \"programTrack\\\\|programPageContent\\\\|programFocus\\\\|program\\\\.ts\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant --include=*.tsx --include=*.ts -n)",
+      "Bash(node -e \"require\\(''''@sanity/client''''\\)\")",
+      "Bash(node --env-file=.env.local scripts/migrate-programs-page.mjs)"
     ]
   }
 }

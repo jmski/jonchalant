@@ -13,12 +13,11 @@ import course from '../schemas/course'
 import mediaKitData from '../schemas/mediaKitData'
 import pageMetadata from '../schemas/pageMetadata'
 import portfolio from '../schemas/portfolio'
-import program from '../schemas/program'
-import programFocus from '../schemas/programFocus'
 import service from '../schemas/service'
 import testimonial from '../schemas/testimonial'
 import danceCategory from '../schemas/danceCategory'
 import instagramReel from '../schemas/instagramReel'
+import programsPageContent from '../schemas/programsPageContent'
 
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
@@ -34,8 +33,7 @@ export const types = [
   mediaKitData,
   pageMetadata,
   portfolio,
-  program,
-  programFocus,
+  programsPageContent,
   service,
   testimonial,
   danceCategory,

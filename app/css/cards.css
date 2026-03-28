@@ -1125,3 +1125,117 @@
     padding: 1.75rem;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PROGRAM TRACK CARD
+   ─────────────────────────────────────────────────────────────────────────────
+*/
+
+.program-track-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--bg-primary);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.program-track-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.program-track-card--featured {
+  border-color: var(--accent-primary);
+  border-width: 2px;
+}
+
+.program-track-card-header {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.875rem 1.75rem 0;
+}
+
+.program-track-card--featured .program-track-card-header {
+  background-color: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-primary) 20%, transparent);
+  padding-bottom: 0.875rem;
+}
+
+.program-track-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1.25rem;
+  padding: 1.75rem;
+}
+
+.program-track-card-cta {
+  padding: 0 1.75rem 1.75rem;
+}
+
+.program-track-card-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.program-track-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.program-track-card-price {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin: 0;
+}
+
+.program-track-card-description {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+}
+
+.program-track-card-includes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.25rem;
+}
+
+.program-track-card-includes-item {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.program-track-card-includes-check {
+  color: var(--accent-primary);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.1em;
+}
+

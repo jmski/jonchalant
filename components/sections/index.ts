@@ -30,7 +30,6 @@ export { CTA } from '@/components/shared/cta';
 export { FAQ } from '@/components/shared/faq';
 export { PageHero } from '@/components/shared/page-hero';
 export { Hero as GenericHero } from '@/components/shared/hero';
-export { Programs } from '@/components/shared/programs';
 export { Collaboration } from '@/components/shared/collaboration';
 export { Carousel } from '@/components/shared/carousel';
 
@@ -40,7 +39,6 @@ export { FeaturedVideo, Approach as DanceApproach, Portfolio as DancePortfolio }
 // ─────────────── OTHER SECTIONS ────────────────
 export { LessonCategory } from './lessons';
 export { KeyMetrics, PlatformBreakdown, ContentMix, AudienceProfile, HeroStats, CollaborationPackages } from './media-kit';
-export { FocusAreas, SupplementalLearning, ProgramTracks } from './programs';
 
 // ─────────────── SHARED UTILITY COMPONENTS ────────────────
 export { Badge } from '@/components/utilities/badges';
