@@ -71,12 +71,34 @@ export interface BlogPost {
 
 // ── Programs & services ───────────────────────────────────────────────────────
 
-export interface Program {
+export interface ProgramsPageContent {
+  heroEyebrow?: string
+  heroHeadline?: string
+  heroSubheading?: string
+  offersEyebrow?: string
+  offersHeading?: string
+  offersSubtext?: string
+  offerCards?: ProgramTrackItem[]
+  whoForHeading?: string
+  whoForBody?: string[]
+  ctaHeading?: string
+  ctaDescription?: string
+  ctaButtonText?: string
+  ctaButtonHref?: string
+  ctaMicrocopy?: string
+}
+
+export interface ProgramTrackItem {
   _id: string
   title: string
-  slug: SanitySlug
-  description?: string
-  category?: string
+  eyebrow?: string
+  trackType: 'course' | 'program' | 'coaching'
+  description: string
+  price: string
+  includes: string[]
+  ctaText: string
+  ctaHref: string
+  isFeatured: boolean
   order: number
 }
 

@@ -1,19 +1,18 @@
-import { CTA, PageHero, ProgramTracks, FocusAreas, SupplementalLearning } from "@/components/sections";
+import { PageHero } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import Script from 'next/script';
-import { getProgramsFocusItems, getProgramTracks } from "@/lib/sanity";
-import type { ProgramTrackItem } from "@/lib/sanity";
-import { CourseSchema } from "@/lib/schema";
+import { ScrollFade } from "@/components/animations";
+import { ProgramTrackCard } from "@/components/utilities/cards";
+import { getProgramsPageContent } from "@/lib/sanity";
+import type { ProgramsPageContent } from "@/lib/types";
 
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Leadership Coaching Programs | Quiet Command & Executive Presence",
-  description: "8-12 week programs for building executive presence and quiet command. Body-aware coaching for introverts to develop confidence and professional presence.",
-  keywords: "leadership coaching programs, executive presence training, quiet command coaching, introvert leadership program, professional presence coaching, body-aware leadership",
+  title: "Coaching Programs | Executive Presence & Quiet Command",
+  description: "Three ways to build executive presence with Jon. Self-paced course, guided program, or 1-on-1 coaching — all rooted in physical presence and body-aware leadership.",
   openGraph: {
-    title: "Leadership Coaching Programs | Jonchalant",
-    description: "Transform your professional presence with 8-12 week coaching programs for introverts.",
+    title: "Coaching Programs | Jonchalant",
+    description: "Three ways to build executive presence. Find the format that fits.",
     type: "website",
     url: "https://jonchalant.com/programs",
     siteName: "Jonchalant",
@@ -21,117 +20,112 @@ export const metadata: Metadata = {
       url: "https://jonchalant.com/social/og-programs-1200x630.png",
       width: 1200,
       height: 630,
-      alt: "Leadership Coaching Programs",
+      alt: "Coaching Programs",
       type: "image/png",
     },
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Leadership Coaching Programs | Jonchalant",
-    description: "Transform your professional presence with 8-12 week coaching programs.",
+    title: "Coaching Programs | Jonchalant",
+    description: "Three ways to build executive presence. Find the format that fits.",
     images: ["https://jonchalant.com/social/og-programs-1200x630.png"],
     creator: "@jonchalant",
   },
 };
 
-
-
 export default async function Programs() {
-  let focusItems: { title: string; description: string; icon: string }[] = [];
-  let programTracks: ProgramTrackItem[] = [];
-
-  try {
-    const tracks = await getProgramTracks();
-    if (tracks && tracks.length > 0) programTracks = tracks;
-  } catch (error) {
-    console.warn('Failed to fetch program tracks from Sanity:', error);
-  }
-
-  try {
-    const focusItemsData = await getProgramsFocusItems();
-    if (Array.isArray(focusItemsData) && focusItemsData.length > 0) {
-      focusItems = focusItemsData;
-    }
-  } catch (error) {
-    console.warn('Failed to fetch program focus items from Sanity:', error);
-  }
+  const page = await getProgramsPageContent() as ProgramsPageContent | null;
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Course Schema - Featured programs */}
-      <Script
-        id="8week-course-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(CourseSchema({
-            name: "8-Week Executive Presence & Quiet Command Program",
-            description: "Transform your professional presence in 8 weeks through body-aware leadership coaching designed for introverts and shy professionals.",
-            price: "1,997",
-            duration: "P8W",
-            level: "Intermediate"
-          })),
-        }}
-      />
-      <Script
-        id="group-workshop-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(CourseSchema({
-            name: "Group Workshop: Building Quiet Command",
-            description: "Interactive group workshop on developing executive presence and professional confidence for introvert leaders.",
-            duration: "P1D",
-            level: "Beginner"
-          })),
-        }}
-      />
-      
-      <PageTransition animation="fade">
-        {/* HERO SECTION */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <PageHero
-              eyebrow="Coaching Programs"
-              headline={['Transform Your', 'Executive Presence']}
-              subheading="Building quiet command isn't complicated. It's methodical. Pick your format and commit to the process."
-              description="From self-paced courses ($297) to premium 1-on-1 coaching (custom). Find the program that matches your goals, timeline, and investment level."
-              ctaButtons={[
-                { label: 'Explore Programs', href: '#programs-section', variant: 'primary' },
-                { label: 'Start Audit (Free)', href: '#inquiry-form', variant: 'secondary' },
-              ]}
-              rightColumn={<FocusAreas items={focusItems} />}
-            />
-          </SectionContent>
-        </SectionWrapper>
+    <PageTransition animation="fade">
+      {/* HERO */}
+      <SectionWrapper variant="primary">
+        <SectionContent>
+          <PageHero
+            eyebrow={page?.heroEyebrow ?? ''}
+            headline={page?.heroHeadline ?? ''}
+            subheading={page?.heroSubheading ?? ''}
+            rightColumn={
+              (page?.whoForHeading || page?.whoForBody?.length) ? (
+                <div className="programs-hero-aside">
+                  {page.whoForHeading && (
+                    <h2 className="programs-hero-aside-heading">{page.whoForHeading}</h2>
+                  )}
+                  {page.whoForBody?.map((paragraph, i) => (
+                    <p key={i} className="programs-hero-aside-body">{paragraph}</p>
+                  ))}
+                </div>
+              ) : undefined
+            }
+          />
+        </SectionContent>
+      </SectionWrapper>
 
-        {/* PROGRAM TRACKS */}
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <ProgramTracks tracks={programTracks} />
-          </SectionContent>
-        </SectionWrapper>
+      {/* OFFER CARDS */}
+      <SectionWrapper variant="secondary">
+        <SectionContent>
+          {(page?.offersEyebrow || page?.offersHeading || page?.offersSubtext) && (
+            <ScrollFade>
+              <div className="programs-offers-header">
+                {page.offersEyebrow && (
+                  <p className="programs-offers-eyebrow">{page.offersEyebrow}</p>
+                )}
+                {page.offersHeading && (
+                  <h2 className="programs-offers-heading">{page.offersHeading}</h2>
+                )}
+                {page.offersSubtext && (
+                  <p className="programs-offers-subtext">{page.offersSubtext}</p>
+                )}
+              </div>
+            </ScrollFade>
+          )}
+          <div className="programs-tracks-grid">
+            {page?.offerCards?.map((card, idx) => (
+              <ScrollFade key={idx} delay={idx * 80}>
+                <ProgramTrackCard
+                  title={card.title}
+                  eyebrow={card.eyebrow}
+                  price={card.price}
+                  description={card.description}
+                  includes={card.includes ?? []}
+                  ctaText={card.ctaText}
+                  ctaHref={card.ctaHref}
+                  isFeatured={card.isFeatured ?? false}
+                />
+              </ScrollFade>
+            ))}
+          </div>
+        </SectionContent>
+      </SectionWrapper>
 
-        {/* SUPPLEMENTAL LEARNING CTA */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <SupplementalLearning />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* CTA */}
+      {/* CTA */}
+      {(page?.ctaHeading || page?.ctaButtonText) && (
         <SectionWrapper variant="tertiary">
           <SectionContent>
-            <section>
-              <CTA
-                title="Ready to Build Real Executive Presence?"
-                description="Don't guess which program is right. Schedule a free 30-minute Presence Audit where we'll assess where you are now, identify your biggest opportunities, and create a custom roadmap to get you there."
-                buttonText="Book Your Free Audit"
-                buttonLink="/contact"
-              />
-            </section>
+            <ScrollFade>
+              <div className="cta-section">
+                <div className="cta-section-left">
+                  {page.ctaHeading && (
+                    <h2 className="cta-section-title">{page.ctaHeading}</h2>
+                  )}
+                  {page.ctaButtonText && page.ctaButtonHref && (
+                    <a href={page.ctaButtonHref} className="cta-section-button">
+                      {page.ctaButtonText}
+                    </a>
+                  )}
+                  {page.ctaMicrocopy && (
+                    <p className="programs-cta-microcopy">{page.ctaMicrocopy}</p>
+                  )}
+                </div>
+                {page.ctaDescription && (
+                  <div className="cta-section-description">{page.ctaDescription}</div>
+                )}
+              </div>
+            </ScrollFade>
           </SectionContent>
         </SectionWrapper>
-      </PageTransition>
-    </div>
+      )}
+    </PageTransition>
   );
 }

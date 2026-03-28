@@ -138,17 +138,6 @@ const LESSON_FIELDS = `
     order
   `
 
-const PROGRAM_FIELDS = `
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    investment,
-    features,
-    image,
-    order
-  `
 
 const COURSE_FIELDS = `
     _id,
@@ -345,71 +334,39 @@ export async function getLessonsByPillar(pillar: string) {
 }
 
 // ============================================================================
-// PROGRAMS
-// ============================================================================
-
-export async function getPrograms() {
-  return fetchList('program', PROGRAM_FIELDS)
-}
-
-export async function getProgramBySlug(slug: string) {
-  return fetchOne('program', PROGRAM_FIELDS, `slug.current == "${slug}"`)
-}
-
-export async function getProgramsByCategory(category: string) {
-  return fetchList('program', PROGRAM_FIELDS, `category == "${category}"`)
-}
-
-export async function getProgramsFocusItems() {
-  const query = `*[_type == "programFocus"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    description,
-    icon,
-    order
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
 // PROGRAM TRACKS
 // ============================================================================
 
-export interface ProgramTrackItem {
-  _id: string;
-  title: string;
-  eyebrow?: string;
-  trackType: 'leadership' | 'movement' | 'collaboration';
-  description: string;
-  includes: { text: string }[];
-  audience: { text: string }[];
-  ctaText: string;
-  ctaHref: string;
-  order: number;
-}
+export type { ProgramTrackItem, ProgramsPageContent } from './types';
 
-export async function getProgramTracks(): Promise<ProgramTrackItem[]> {
-  const query = `*[_type == "programTrack"] | order(order asc) {
-    _id,
-    title,
-    eyebrow,
-    trackType,
-    description,
-    "includes": includes[].text,
-    "audience": audience[].text,
-    ctaText,
-    ctaHref,
-    order
+export async function getProgramsPageContent() {
+  const query = `*[_type == "programsPageContent"][0] {
+    heroEyebrow,
+    heroHeadline,
+    heroSubheading,
+    offersEyebrow,
+    offersHeading,
+    offersSubtext,
+    offerCards[] {
+      title,
+      eyebrow,
+      trackType,
+      price,
+      isFeatured,
+      description,
+      includes,
+      ctaText,
+      ctaHref
+    },
+    whoForHeading,
+    whoForBody,
+    ctaHeading,
+    ctaDescription,
+    ctaButtonText,
+    ctaButtonHref,
+    ctaMicrocopy
   }`
-  const raw = await client.fetch(query)
-  // Normalise: GROQ projection returns plain string arrays;
-  // component expects { text: string }[] — map back here.
-  return raw.map((t: any) => ({
-    ...t,
-    includes: (t.includes ?? []).map((text: string) => ({ text })),
-    audience: (t.audience ?? []).map((text: string) => ({ text })),
-  }))
+  return await client.fetch(query)
 }
 
 // ============================================================================

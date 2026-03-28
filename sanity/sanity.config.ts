@@ -13,8 +13,7 @@ import course from './schemas/course'
 import mediaKitData from './schemas/mediaKitData'
 import pageMetadata from './schemas/pageMetadata'
 import portfolio from './schemas/portfolio'
-import program from './schemas/program'
-import programFocus from './schemas/programFocus'
+import programsPageContent from './schemas/programsPageContent'
 import service from './schemas/service'
 import testimonial from './schemas/testimonial'
 import module from './schemas/module'
@@ -45,8 +44,7 @@ export default defineConfig({
       mediaKitData,
       pageMetadata,
       portfolio,
-      program,
-      programFocus,
+      programsPageContent,
       service,
       testimonial,
       module,
