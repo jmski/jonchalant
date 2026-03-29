@@ -41,8 +41,12 @@ components/
 ├── sections/                    # Page-specific sections
 │   ├── home/                    # Home page sections
 │   │   ├── hero/              # Hero.tsx
-│   │   ├── featured-areas/     # FeaturedAreas.tsx
-│   │   └── blog-cards/         # BlogCards.tsx
+│   │   ├── featured-areas/    # FeaturedAreas.tsx
+│   │   ├── blog-cards/        # BlogCards.tsx
+│   │   ├── impact/            # ImpactSection.tsx
+│   │   ├── portfolio-preview/ # PortfolioPreview.tsx
+│   │   ├── why-work-together/ # WhyWorkTogether.tsx
+│   │   └── why-it-works/      # WhyItWorks.tsx
 │   ├── about/                   # About page sections
 │   │   ├── hero/                    # Hero.tsx
 │   │   ├── origin/                  # Origin.tsx
@@ -50,9 +54,9 @@ components/
 │   │   ├── methodology-narrative/   # MethodologyNarrative.tsx
 │   │   ├── why-exists/              # WhyExists.tsx
 │   │   ├── who-for/                 # WhoFor.tsx
-│   │   ├── services/                # Services.tsx (not rendered on About page)
-│   │   ├── philosophy/              # Philosophy.tsx (not rendered on About page)
-│   │   └── introvert/               # Introvert.tsx (not rendered on About page)
+│   │   ├── services/                # Services.tsx (dormant — not rendered on About page)
+│   │   ├── philosophy/              # Philosophy.tsx (dormant — not rendered on About page)
+│   │   └── introvert/               # Introvert.tsx (dormant — not rendered on About page)
 │   ├── blog/                    # Blog page sections (Featured, Posts, Related)
 │   ├── dance/                   # Dance page sections
 │   │   └── featured-video/    # FeaturedVideo.tsx
@@ -62,20 +66,15 @@ components/
 │   ├── cta/                    # CTA.tsx
 │   ├── faq/                    # FAQ.tsx
 │   ├── hero/                   # Hero.tsx (generic)
-│   ├── instagram-embed/        # InstagramEmbed.tsx ('use client')
 │   ├── page-hero/              # PageHero.tsx
-│   ├── featured-blog/          # FeaturedBlog.tsx
 │   ├── carousel/               # Carousel.tsx
-│   ├── case-studies/           # CaseStudies.tsx
-│   ├── case-study/             # CaseStudy.tsx
 │   ├── collaboration/          # Collaboration.tsx
 │   ├── copy-button/            # CopyButton.tsx ('use client')
 │   ├── programs/               # Programs.tsx
 │   ├── services/               # Services.tsx
-│   ├── stats/                  # Stats.tsx
 │   ├── testimonials/           # Testimonials.tsx
-│   ├── three-pillars/          # ThreePillars.tsx
-│   └── video-embed/            # VideoEmbed.tsx ('use client')
+│   ├── InstagramEmbed.tsx      # ('use client') — loose file, no subdirectory
+│   └── VideoEmbed.tsx          # ('use client') — loose file, no subdirectory
 ├── utilities/                   # Reusable utility components
 │   ├── badges/                 # Badge.tsx
 │   ├── cards/                  # TestimonialCard.tsx, CaseStudyCard.tsx, BlogCard.tsx, LessonCard.tsx, ServiceCard.tsx
@@ -711,5 +710,5 @@ Complex styling? Use a CSS class in the appropriate consolidated file (cards.css
 - **Do NOT create new .css files** — use the consolidated structure (10 files only)
 - **Auth (Supabase SSR)**: Server components use `utils/supabase/server.ts`; client components (`'use client'`) use `utils/supabase/client.ts`. Never import `lib/supabase.ts` (deleted). All auth-gate logic lives client-side in the `useAuth` hook (`lib/auth-context.tsx`).
 - **Shared TypeScript types**: All Sanity + portal interfaces live in `lib/types.ts`. Import from there; do not re-declare inline.
-- **CSS architecture note**: `pages.css` has a table of contents at the top (24 entries). The portal login section intentionally uses non-brand colors — this is not a bug.</content>
+- **CSS architecture note**: `pages.css` is organized by page/feature sections. The portal login section intentionally uses non-brand colors — this is not a bug. Do not add back `featured-blog-*`, `portal-dashboard-*`, `program-track-*` (non-card), `focus-area-card`, or `programs-for-*` CSS — these were removed as dead code in March 2026.</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md

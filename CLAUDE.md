@@ -213,14 +213,8 @@ components/
 │   ├── faq/
 │   │   ├── FAQ.tsx
 │   │   └── index.ts
-│   ├── featured-blog/
-│   │   ├── FeaturedBlog.tsx
-│   │   └── index.ts
 │   ├── hero/
 │   │   ├── Hero.tsx                (GenericHero)
-│   │   └── index.ts
-│   ├── instagram-embed/
-│   │   ├── InstagramEmbed.tsx      ('use client')
 │   │   └── index.ts
 │   ├── page-hero/
 │   │   ├── PageHero.tsx
@@ -231,26 +225,23 @@ components/
 │   ├── services/
 │   │   ├── Services.tsx
 │   │   └── index.ts
-│   ├── stats/
-│   │   ├── Stats.tsx
-│   │   └── index.ts
 │   ├── testimonials/
 │   │   ├── Testimonials.tsx
 │   │   └── index.ts
-│   └── three-pillars/
-│       ├── ThreePillars.tsx
-│       └── index.ts
-│   ├── video-embed/
-│   │   ├── VideoEmbed.tsx          ('use client')
-│   │   └── index.ts
+│   ├── InstagramEmbed.tsx          ('use client') ← loose file, no subdirectory
+│   └── VideoEmbed.tsx              ('use client') ← loose file, no subdirectory
 └── sections/                       ← Page/feature-scoped sections
     ├── index.ts                    ← Central export hub (see below)
     ├── about/
-    │   ├── hero/        Hero.tsx + index.ts
-    │   ├── introvert/   Introvert.tsx + index.ts
-    │   ├── origin/      Origin.tsx + index.ts
-    │   ├── philosophy/  Philosophy.tsx + index.ts
-    │   ├── services/    Services.tsx + index.ts
+    │   ├── hero/                    Hero.tsx + index.ts
+    │   ├── origin/                  Origin.tsx + index.ts
+    │   ├── turning-point/           TurningPoint.tsx + index.ts
+    │   ├── methodology-narrative/   MethodologyNarrative.tsx + index.ts
+    │   ├── why-exists/              WhyExists.tsx + index.ts
+    │   ├── who-for/                 WhoFor.tsx + index.ts
+    │   ├── introvert/               Introvert.tsx + index.ts  ← dormant
+    │   ├── philosophy/              Philosophy.tsx + index.ts ← dormant
+    │   ├── services/                Services.tsx + index.ts   ← dormant
     │   └── index.ts
     ├── blog/
     │   ├── Featured.tsx
@@ -263,12 +254,13 @@ components/
     │   ├── Portfolio.tsx
     │   └── index.ts
     ├── home/
-    │   ├── blog-cards/     BlogCards.tsx + index.ts
-    │   ├── featured-areas/ FeaturedAreas.tsx + index.ts
-    │   ├── hero/           Hero.tsx + index.ts
-    │   ├── impact/         ImpactSection.tsx + index.ts
+    │   ├── blog-cards/        BlogCards.tsx + index.ts
+    │   ├── featured-areas/    FeaturedAreas.tsx + index.ts
+    │   ├── hero/              Hero.tsx + index.ts
+    │   ├── impact/            ImpactSection.tsx + index.ts
     │   ├── portfolio-preview/ PortfolioPreview.tsx + index.ts
     │   ├── why-work-together/ WhyWorkTogether.tsx + index.ts
+    │   ├── why-it-works/      WhyItWorks.tsx + index.ts
     │   └── index.ts
     ├── lessons/
     │   ├── LessonCategory.tsx
@@ -299,19 +291,22 @@ export { BlogCards } from "./home/blog-cards";
 export { ImpactSection } from "./home/impact";
 export { PortfolioPreview } from "./home/portfolio-preview";
 export { WhyWorkTogether } from "./home/why-work-together";
+export { WhyItWorks } from "./home/why-it-works";
 
 // ABOUT PAGE
 export { Hero as AboutHero } from "./about/hero";
 export { Origin } from "./about/origin";
-export { Services as AboutServices } from "./about/services";
-export { Philosophy } from "./about/philosophy";
-export { Introvert } from "./about/introvert";
+export { TurningPoint } from "./about/turning-point";
+export { MethodologyNarrative } from "./about/methodology-narrative";
+export { WhyExists } from "./about/why-exists";
+export { WhoFor } from "./about/who-for";
+export { Services as AboutServices } from "./about/services"; // dormant
+export { Philosophy } from "./about/philosophy";             // dormant
+export { Introvert } from "./about/introvert";               // dormant
 
 // SHARED SECTIONS (reusable)
 export { Testimonials } from "@/components/shared/testimonials";
-export { CaseStudy } from "@/components/shared/case-study";
 export { Services } from "@/components/shared/services";
-export { Stats } from "@/components/shared/stats";
 
 // BLOG
 export {
@@ -325,12 +320,8 @@ export { CTA } from "@/components/shared/cta";
 export { FAQ } from "@/components/shared/faq";
 export { PageHero } from "@/components/shared/page-hero";
 export { Hero as GenericHero } from "@/components/shared/hero";
-export { FeaturedBlog } from "@/components/shared/featured-blog";
-export { ThreePillars } from "@/components/shared/three-pillars";
-export { Programs } from "@/components/shared/programs";
 export { Collaboration } from "@/components/shared/collaboration";
 export { Carousel } from "@/components/shared/carousel";
-export { CaseStudies } from "@/components/shared/case-studies";
 
 // DANCE
 export {
@@ -349,7 +340,6 @@ export {
   HeroStats,
   CollaborationPackages,
 } from "./media-kit";
-export { FocusAreas, SupplementalLearning } from "./programs";
 
 // UTILITY RE-EXPORTS
 export { Badge } from "@/components/utilities/badges";

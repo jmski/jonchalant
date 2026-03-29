@@ -17,7 +17,11 @@
       "Bash(grep -r \"FocusAreas\\\\|SupplementalLearning\\\\|ProgramTracks\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant --include=*.tsx --include=*.ts -n)",
       "Bash(grep -r \"programTrack\\\\|programPageContent\\\\|programFocus\\\\|program\\\\.ts\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant --include=*.tsx --include=*.ts -n)",
       "Bash(node -e \"require\\(''''@sanity/client''''\\)\")",
-      "Bash(node --env-file=.env.local scripts/migrate-programs-page.mjs)"
+      "Bash(node --env-file=.env.local scripts/migrate-programs-page.mjs)",
+      "Bash(grep -c \"^/\\\\*\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
+      "Bash(grep -n \"[[:space:]]*\\\\/\\\\*.*:\\\\|:[[:space:]]*\\\\/\\\\*\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
+      "Bash(grep -E \"^[[:space:]]+\\\\/\\\\/.+|^[[:space:]]+\\\\/\\\\*[^═=].+\\\\*\\\\/$\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/components/shared/case-study* /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/components/shared/case-studies*)"
     ]
   }
 }
