@@ -166,6 +166,59 @@ export interface MediaKitExpertise {
   order: number
 }
 
+// ── Audit page ────────────────────────────────────────────────────────────────
+
+export interface AuditResultBand {
+  band: 'foundation' | 'developing' | 'refining'
+  headline: string
+  body: string
+}
+
+export interface AuditPageContent {
+  pageHeaderBadge?: string
+  pageHeaderHeadline?: string
+  pageHeaderBody?: string
+  pageFooterNote?: string
+  captureBadge?: string
+  captureHeadline?: string
+  captureBody?: string
+  capturePrivacyNote?: string
+  resultBands?: AuditResultBand[]
+  resultNextHeading?: string
+  resultNextBody?: string
+  resultCtaText?: string
+  resultCtaButtonLabel?: string
+  resultCtaHref?: string
+}
+
+// ── Contact page ──────────────────────────────────────────────────────────────
+
+export interface ContactAuditStat {
+  number: string
+  label: string
+}
+
+export interface ContactSidebarItem {
+  title: string
+  body: string
+}
+
+export interface ContactPageContent {
+  auditPromptBadge?: string
+  auditPromptHeadline?: string
+  auditPromptBody?: string
+  auditPromptButtonText?: string
+  auditPromptNote?: string
+  auditStats?: ContactAuditStat[]
+  coachingPathHeading?: string
+  coachingPathBody?: string
+  coachingCalendlyHref?: string
+  coachingCalendlyLabel?: string
+  sidebarHeading?: string
+  sidebarItems?: ContactSidebarItem[]
+  sidebarEmailText?: string
+}
+
 // ── Email opt-in ──────────────────────────────────────────────────────────────
 
 export interface EmailOptInContent {

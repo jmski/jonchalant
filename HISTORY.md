@@ -4,6 +4,41 @@ A running log of significant codebase changes, refactors, and cleanups. Most rec
 
 ---
 
+## 2026-03-29 — Audit & Contact Pages: Hardcoded Text Removed
+
+All page copy moved out of components into the correct data layer.
+
+**New Sanity schemas:**
+
+- `sanity/schemas/auditPage.ts` — all Presence Audit page copy: page header (badge, headline, body, footer note), capture stage, result bands (foundation/developing/refining), "What happens next" section, result CTA
+- `sanity/schemas/contactPage.ts` — contact page marketing blocks: audit prompt block (badge, headline, body, stats array), coaching path (heading, body, Calendly href), sidebar notes (heading, items array, email text)
+
+Both registered in `sanity/schemaTypes/index.ts`.
+
+**New lib file:**
+
+- `lib/auditData.ts` — quiz questions, `getBand()` helper, `SCORE_THRESHOLDS` constant extracted from `AuditClient.tsx`. Questions stay here (not Sanity) because scoring thresholds are coupled to question/option structure.
+
+**Updated fetch functions (`lib/sanity.ts`):**
+
+- `getAuditPageContent()` — fetches `auditPage` document
+- `getContactPageContent()` — fetches `contactPage` document
+
+**Updated pages:**
+
+- `app/audit/page.tsx` — now `async`, fetches audit content, renders server-side header, passes `content` prop to `AuditClient`
+- `app/audit/AuditClient.tsx` — imports questions from `lib/auditData`, accepts `content` prop, all copy uses `content?.field ?? 'fallback'` pattern
+- `app/contact/page.tsx` — now `async`, fetches contact content, passes `content` prop to `ContactClient`
+- `app/contact/ContactClient.tsx` — accepts `content` prop, marketing blocks use Sanity content with fallbacks; form labels/placeholders remain hardcoded (UI concerns)
+
+**New TypeScript interfaces (`lib/types.ts`):**
+
+`AuditPageContent`, `AuditResultBand`, `ContactPageContent`, `ContactAuditStat`, `ContactSidebarItem`
+
+**Next step:** Create `auditPage` and `contactPage` documents in Sanity Studio with the current copy. Pages render with hardcoded fallbacks until documents exist.
+
+---
+
 ## 2026-03-29 — CSS & Component Cleanup
 
 **Dead CSS removed from `app/css/pages.css`:**

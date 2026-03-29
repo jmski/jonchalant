@@ -38,10 +38,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Destructure and validate form data
+    // Accept both `type` (new clients) and `inquiry_type` (legacy) as the type field
     const {
       name,
       email,
-      inquiry_type,
+      inquiry_type: inquiry_type_raw,
+      type: type_raw,
       message,
       phone,
       company,
@@ -49,12 +51,14 @@ export async function POST(request: NextRequest) {
       timeline,
     } = body;
 
+    const inquiry_type = inquiry_type_raw || type_raw;
+
     // Validate required fields
     if (!name || !email || !inquiry_type || !message) {
       return NextResponse.json(
         {
           success: false,
-          error: "Missing required fields: name, email, inquiry_type, message",
+          error: "Missing required fields: name, email, type, message",
         },
         { status: 400 },
       );
@@ -70,7 +74,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate inquiry type
-    const validInquiryTypes = ["coaching", "collaboration", "media", "other"];
+    const validInquiryTypes = [
+      "coaching", "collaboration", "media", "other",
+      "1-on-1-coaching", "general", "presence-audit",
+    ];
     if (!validInquiryTypes.includes(inquiry_type)) {
       return NextResponse.json(
         {

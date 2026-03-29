@@ -33,7 +33,9 @@
    26. PRESENCE SCORE ..................... /portal/presence-score assessment
    27. TONALITY ANALYSIS .................. /portal/tonality speech & text tool
    28. ABOUT PAGE .......................... /about page-specific overrides
-   28. MOVEMENT PLAN ...................... /portal/movement-plan generator
+   29. MOVEMENT PLAN ...................... /portal/movement-plan generator
+   30. PRESENCE AUDIT PAGE ................ /audit self-assessment flow
+   31. CONTACT PAGE — RESTRUCTURED ........ /contact with audit prompt + form
    ════════════════════════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -7685,5 +7687,772 @@
   .mp-intake-title,
   .mp-plan-title {
     font-size: 1.625rem;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PRESENCE AUDIT PAGE  (/audit)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.audit-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding-bottom: 6rem;
+}
+
+/* Header */
+.audit-header {
+  padding: 5rem 1.5rem 3rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.audit-header-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.audit-header-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  padding: 0.3rem 0.85rem;
+  border-radius: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.audit-header-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.audit-header-body {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Container */
+.audit-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+/* Progress */
+.audit-progress-track {
+  height: 3px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.audit-progress-fill {
+  height: 100%;
+  background: var(--accent-primary);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.audit-progress-label {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-bottom: 3rem;
+}
+
+/* Question block */
+.audit-question-block {
+  animation: auditFadeUp 0.3s ease both;
+}
+
+@keyframes auditFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.audit-question-number {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  margin-bottom: 0.75rem;
+}
+
+.audit-question-text {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 2.5rem;
+}
+
+/* Options */
+.audit-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.audit-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.audit-option:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.audit-option.selected {
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary));
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Back button */
+.audit-back {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.audit-back:hover {
+  color: var(--text-secondary);
+}
+
+/* Capture stage */
+.audit-capture {
+  animation: auditFadeUp 0.35s ease both;
+}
+
+.audit-capture-header {
+  margin-bottom: 2.5rem;
+}
+
+.audit-capture-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-burnt-indigo);
+  background: color-mix(in srgb, var(--color-burnt-indigo) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-burnt-indigo) 20%, transparent);
+  padding: 0.3rem 0.85rem;
+  border-radius: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.audit-capture-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.audit-capture-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.audit-capture-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.audit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.audit-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.audit-input {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  transition: border-color 0.15s ease;
+  width: 100%;
+}
+
+.audit-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.audit-submit {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.audit-capture-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.audit-error {
+  font-size: 0.875rem;
+  color: var(--color-error);
+}
+
+/* Result stage */
+.audit-result {
+  animation: auditFadeUp 0.4s ease both;
+  text-align: center;
+}
+
+.audit-result-score-block {
+  margin-bottom: 2rem;
+}
+
+.audit-score-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 140px;
+}
+
+.audit-score-svg {
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.audit-score-track {
+  fill: none;
+  stroke: var(--border-subtle);
+  stroke-width: 6;
+}
+
+.audit-score-arc {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.8s ease;
+}
+
+.audit-score-label {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+}
+
+.audit-score-number {
+  font-family: 'Fraunces', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.audit-score-denom {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+}
+
+.audit-result-band {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1.75rem;
+}
+
+.audit-band-foundation {
+  background: color-mix(in srgb, var(--color-warning) 12%, transparent);
+  color: color-mix(in srgb, var(--color-warning) 80%, var(--text-primary));
+  border: 1px solid color-mix(in srgb, var(--color-warning) 30%, transparent);
+}
+
+.audit-band-developing {
+  background: color-mix(in srgb, var(--accent-tertiary) 12%, transparent);
+  color: color-mix(in srgb, var(--accent-tertiary) 80%, var(--text-primary));
+  border: 1px solid color-mix(in srgb, var(--accent-tertiary) 30%, transparent);
+}
+
+.audit-band-refining {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: color-mix(in srgb, var(--accent-primary) 80%, var(--text-primary));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
+}
+
+.audit-result-body {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  text-align: left;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+}
+
+.audit-result-next {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+  text-align: left;
+  margin-bottom: 2.5rem;
+}
+
+.audit-result-next-heading {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.75rem;
+}
+
+.audit-result-next-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.audit-result-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.audit-result-cta-text {
+  font-size: 0.9375rem;
+  color: var(--text-tertiary);
+}
+
+/* Footer note */
+.audit-footer-note {
+  text-align: center;
+  padding: 1rem 1.5rem 3rem;
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+}
+
+.audit-footer-link {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CONTACT PAGE — RESTRUCTURED
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.contact-client {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+/* Audit prompt block */
+.contact-audit-prompt {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.contact-audit-prompt-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.contact-audit-prompt-text {
+  flex: 1;
+}
+
+.contact-audit-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+}
+
+.contact-audit-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.contact-audit-body {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.contact-audit-btn {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.contact-audit-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.contact-audit-prompt-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-left: 2rem;
+  border-left: 1px solid var(--border-color);
+  min-width: 110px;
+}
+
+.contact-audit-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-audit-stat-number {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.contact-audit-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 0.15rem;
+}
+
+/* Divider */
+.contact-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.contact-divider::before,
+.contact-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.contact-divider-text {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+/* Form section */
+.contact-form-section {
+  margin-bottom: 4rem;
+}
+
+.contact-form-heading {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.75rem;
+}
+
+/* Type selector */
+.contact-type-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.contact-type-btn:hover {
+  border-color: var(--accent-primary);
+}
+
+.contact-type-btn.selected {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 6%, var(--bg-primary));
+}
+
+.contact-type-btn-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-type-btn-sub {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* Coaching path prompt */
+.contact-coaching-path {
+  animation: auditFadeUp 0.25s ease both;
+}
+
+.contact-coaching-prompt {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-coaching-prompt-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.contact-coaching-prompt-body {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.contact-coaching-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-top: 0.75rem;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: auditFadeUp 0.25s ease both;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.contact-input,
+.contact-textarea {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+  width: 100%;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.contact-error {
+  font-size: 0.875rem;
+  color: var(--color-error);
+}
+
+.contact-form-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* Success */
+.contact-success {
+  text-align: center;
+  padding: 5rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.contact-success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  font-size: 1.25rem;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
+
+.contact-success-title {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.contact-success-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Sidebar notes */
+.contact-sidebar-notes {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 3rem;
+}
+
+.contact-sidebar-heading {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 1.5rem;
+}
+
+.contact-sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-sidebar-item {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--border-color);
+}
+
+.contact-sidebar-item-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-sidebar-email {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+.contact-inline-link {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .contact-audit-prompt-inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-audit-prompt-aside {
+    flex-direction: row;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding-left: 0;
+    padding-top: 1.5rem;
+    gap: 2rem;
+  }
+
+  .contact-type-selector {
+    grid-template-columns: 1fr;
   }
 }

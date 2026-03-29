@@ -53,6 +53,9 @@ app/
 ├── blog/
 │   ├── page.tsx          → Blog index
 │   └── [slug]/           → Blog post (dynamic)
+├── audit/
+│   ├── page.tsx          → Presence Audit (server wrapper, fetches auditPage content)
+│   └── AuditClient.tsx   → Client component (multi-step quiz, capture, result stages)
 ├── programs/page.tsx     → Coaching programs
 ├── dance/page.tsx        → Choreography portfolio
 ├── lessons/
@@ -62,8 +65,8 @@ app/
 │       └── [lessonSlug]/page.tsx → Lesson page with video + progress tracking
 ├── media-kit/page.tsx    → Media kit & collaboration
 ├── contact/
-│   ├── page.tsx          → Server wrapper
-│   └── ContactClient.tsx → Client component (form)
+│   ├── page.tsx          → Server wrapper (fetches contactPage content, passes props)
+│   └── ContactClient.tsx → Client component (audit prompt + inquiry form)
 ├── login/
 │   ├── page.tsx          → Auth page (email + Google OAuth)
 │   └── LoginClient.tsx   → Client form component
@@ -449,10 +452,17 @@ Sections (in order):
 6. `<CollaborationPackages />` — media-kit/CollaborationPackages (id="collaboration-section")
 7. `<CTA />`
 
+### app/audit/page.tsx
+
+Fetches: `getAuditPageContent()`
+Renders: page header (badge, headline, body) + footer note directly in server component, delegates quiz/capture/result logic to `<AuditClient content={auditContent} />`
+
+Quiz questions + scoring bands live in `lib/auditData.ts` (not CMS — tied to scoring thresholds).
+
 ### app/contact/page.tsx
 
-Fetches: `getContactInfo()`, `getPageMetadata('contact')`
-Delegates entirely to `<ContactClient />` (client component, contains `SegmentedInquiryForm`)
+Fetches: `getContactPageContent()`
+Delegates to `<ContactClient content={contactContent} />` (client component)
 
 ---
 
@@ -478,11 +488,13 @@ All pages use these wrappers from `@/components/layout`:
 - `schemaTypes/index.ts` — schema registry
 - `schemas/` — individual schema files
 
-### All Schema Types (19 total):
+### All Schema Types (21 total):
 
 | Schema                 | Type     | Description                                                                     |
 | ---------------------- | -------- | ------------------------------------------------------------------------------- |
 | `aboutPage`            | document | About page content (heroHeadline, heroDescription, originSectionHeadline, originSectionDescription, turningPointHeadline, turningPointBody, methodologyHeadline, methodologyBody, whyExistsHeadline, whyExistsBody, whoForHeadline, whoForBody, closingHeadline, closingBody, ctaButtonText, phases, stats, philosophies, introvertTraits) |
+| `auditPage`            | document | Presence Audit page copy (pageHeaderBadge/Headline/Body, pageFooterNote, captureBadge/Headline/Body/PrivacyNote, resultBands array [{band, headline, body}], resultNextHeading/Body, resultCtaText/ButtonLabel/Href) |
+| `contactPage`          | document | Contact page marketing blocks (auditPromptBadge/Headline/Body/ButtonText/Note, auditStats array [{number, label}], coachingPathHeading/Body/CalendlyHref/CalendlyLabel, sidebarHeading/Items array [{title, body}]/EmailText) |
 | `blogPost`             | document | Blog posts (title, slug, excerpt, pillar, readingTime, publishedAt, featured)   |
 | `caseStudy`            | document | Case studies (challenge, solution, results, testimonial, image)                 |
 | `collaboration`        | document | Portfolio collaborations (category, price, deliverables, timeline)              |
@@ -590,6 +602,14 @@ export function urlFor(source); // image URL builder
 
 - `getCollaborationPackages()` — packages array (name, price, features)
 
+**Audit Page:**
+
+- `getAuditPageContent()` — all page copy (header, capture stage, result bands, CTA)
+
+**Contact Page:**
+
+- `getContactPageContent()` — marketing blocks (audit prompt, coaching path, sidebar notes)
+
 ---
 
 ## Supabase Auth & Database
@@ -628,10 +648,11 @@ The root `middleware.ts` delegates to `updateSession` to keep auth cookies fresh
 | `design-tokens.ts`                | JS-accessible design tokens                                           |
 | `imageConfig.ts`                  | Next.js image config helpers                                          |
 | `optimizedImage.tsx`              | Optimized image component wrapper                                     |
-| `pageContent.ts`                  | Static/fallback page content                                          |
+| `auditData.ts`                    | Presence Audit quiz questions, scoring thresholds, `getBand()` helper |
+| `pageContent.ts`                  | Static/fallback page content (largely superseded by Sanity)           |
 | `portal-progress.ts`              | Learning portal progress tracking                                     |
 | `schema.ts`                       | JSON-LD structured data schemas (AggregateRatingSchema, CourseSchema) |
-| `types.ts`                        | 16 shared TypeScript interfaces: `SanitySlug`, `SanityImage`, `Course`, `Module`, `Lesson`, `PortalLesson`, `BlogPost`, `Program`, `Testimonial`, `DanceCategory`, `DanceVideo`, `InstagramReel`, `MediaKit`, `MediaKitStat`, `MediaKitExpertise`, `LessonProgress` |
+| `types.ts`                        | 21 shared TypeScript interfaces: `SanitySlug`, `SanityImage`, `Course`, `Module`, `Lesson`, `PortalLesson`, `BlogPost`, `Program`, `Testimonial`, `DanceCategory`, `DanceVideo`, `InstagramReel`, `MediaKit`, `MediaKitStat`, `MediaKitExpertise`, `LessonProgress`, `AuditPageContent`, `AuditResultBand`, `ContactPageContent`, `ContactAuditStat`, `ContactSidebarItem` |
 | `blog/portableTextComponents.tsx` | Portable text renderer for blog posts                                 |
 | `hooks/`                          | Custom React hooks                                                    |
 

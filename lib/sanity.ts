@@ -466,6 +466,63 @@ export async function getHomePageContent() {
 }
 
 // ============================================================================
+// AUDIT PAGE CONTENT
+// ============================================================================
+
+export async function getAuditPageContent() {
+  const query = `*[_type == "auditPage"][0] {
+    pageHeaderBadge,
+    pageHeaderHeadline,
+    pageHeaderBody,
+    pageFooterNote,
+    captureBadge,
+    captureHeadline,
+    captureBody,
+    capturePrivacyNote,
+    resultBands[] {
+      band,
+      headline,
+      body
+    },
+    resultNextHeading,
+    resultNextBody,
+    resultCtaText,
+    resultCtaButtonLabel,
+    resultCtaHref
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// CONTACT PAGE CONTENT
+// ============================================================================
+
+export async function getContactPageContent() {
+  const query = `*[_type == "contactPage"][0] {
+    auditPromptBadge,
+    auditPromptHeadline,
+    auditPromptBody,
+    auditPromptButtonText,
+    auditPromptNote,
+    auditStats[] {
+      number,
+      label
+    },
+    coachingPathHeading,
+    coachingPathBody,
+    coachingCalendlyHref,
+    coachingCalendlyLabel,
+    sidebarHeading,
+    sidebarItems[] {
+      title,
+      body
+    },
+    sidebarEmailText
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
 // EMAIL OPT-IN
 // ============================================================================
 

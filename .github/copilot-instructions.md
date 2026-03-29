@@ -710,5 +710,7 @@ Complex styling? Use a CSS class in the appropriate consolidated file (cards.css
 - **Do NOT create new .css files** — use the consolidated structure (10 files only)
 - **Auth (Supabase SSR)**: Server components use `utils/supabase/server.ts`; client components (`'use client'`) use `utils/supabase/client.ts`. Never import `lib/supabase.ts` (deleted). All auth-gate logic lives client-side in the `useAuth` hook (`lib/auth-context.tsx`).
 - **Shared TypeScript types**: All Sanity + portal interfaces live in `lib/types.ts`. Import from there; do not re-declare inline.
+- **No hardcoded page copy**: All marketing text on pages/components must come from Sanity (via a fetch function) or a lib data file. Fallback strings (`?? 'fallback'`) are acceptable but all primary copy is CMS-driven.
+- **Audit quiz data**: Quiz questions and scoring logic live in `lib/auditData.ts` — not in Sanity and not hardcoded in the component. The scoring thresholds are coupled to the question structure; do not move questions to Sanity without updating thresholds.
 - **CSS architecture note**: `pages.css` is organized by page/feature sections. The portal login section intentionally uses non-brand colors — this is not a bug. Do not add back `featured-blog-*`, `portal-dashboard-*`, `program-track-*` (non-card), `focus-area-card`, or `programs-for-*` CSS — these were removed as dead code in March 2026.</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md
