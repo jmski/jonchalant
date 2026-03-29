@@ -5,6 +5,8 @@ import { PageTransition, SectionWrapper, SectionContent } from '@/components/lay
 import { BlogClient } from './BlogClient';
 import type { EmailOptInContent } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Leadership Blog | Executive Presence & Quiet Command',
   description: 'Read articles on executive presence coaching, quiet command, and leadership for introverts. Expert perspectives from coach Jon on confident communication and professional presence.',
