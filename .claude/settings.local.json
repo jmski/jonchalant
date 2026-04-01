@@ -28,7 +28,9 @@
       "Bash(choco --version)",
       "Bash(winget --version)",
       "Bash(winget install:*)",
-      "Bash(powershell.exe -Command \"stripe login\")"
+      "Bash(powershell.exe -Command \"stripe login\")",
+      "Bash(node -e \"const s = require\\(''c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/stripe''\\); console.log\\(s.LATEST_API_VERSION ?? require\\(''c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/stripe/package.json''\\).version\\)\")",
+      "Bash(node -e \"const Stripe = require\\(''c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/node_modules/stripe''\\); const s = new Stripe\\(''sk_test_dummy''\\); console.log\\(s.VERSION, s._api?.version\\)\")"
     ]
   }
 }

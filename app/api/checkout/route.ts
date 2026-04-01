@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 import { createClient } from '@/utils/supabase/server'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-03-31.basil',
+  apiVersion: '2026-03-25.dahlia',
 })
 
 const PRICE_IDS: Record<string, string> = {
@@ -30,18 +30,24 @@ export async function POST(req: NextRequest) {
 
   const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://jonchalant.com'
 
-  const session = await stripe.checkout.sessions.create({
-    mode: 'payment',
-    line_items: [{ price: priceId, quantity: 1 }],
-    customer_email: user.email,
-    metadata: {
-      user_id: user.id,
-      course_slug: COURSE_SLUG,
-      tier,
-    },
-    success_url: `${origin}/portal?enrolled=true`,
-    cancel_url: `${origin}/foundation?checkout=cancelled`,
-  })
+  let session
+  try {
+    session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      line_items: [{ price: priceId, quantity: 1 }],
+      customer_email: user.email,
+      metadata: {
+        user_id: user.id,
+        course_slug: COURSE_SLUG,
+        tier,
+      },
+      success_url: `${origin}/portal?enrolled=true`,
+      cancel_url: `${origin}/foundation?checkout=cancelled`,
+    })
+  } catch (err: any) {
+    console.error('[checkout] stripe error:', err.message)
+    return NextResponse.json({ error: err.message }, { status: 500 })
+  }
 
   return NextResponse.json({ url: session.url })
 }
