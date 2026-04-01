@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
+import EnrollButton from '@/components/foundation/EnrollButton'
 
 export const metadata: Metadata = {
   title: 'The Foundation | Jonchalant',
@@ -42,6 +43,7 @@ const HOW_IT_WORKS = [
 const PRICING = [
   {
     tier: 'Self-Paced',
+    tierKey: 'self_paced' as const,
     price: '$197',
     description: 'Full course access. All 8 weeks, all lessons, at your own pace.',
     features: [
@@ -51,11 +53,11 @@ const PRICING = [
       'Personal follow-up from Jon',
     ],
     cta: 'Enroll — $197',
-    href: '/login?redirect=/portal',
     primary: false,
   },
   {
     tier: 'With Weekly Check-ins',
+    tierKey: 'with_checkins' as const,
     price: '$497',
     description: 'Everything in self-paced, plus a weekly 1:1 call with Jon to work through what\'s coming up for you.',
     features: [
@@ -65,7 +67,6 @@ const PRICING = [
       'Prioritised scheduling',
     ],
     cta: 'Enroll — $497',
-    href: '/login?redirect=/portal',
     primary: true,
   },
 ]
@@ -176,7 +177,7 @@ export default function FoundationPage() {
               <h2 className="foundation-section-title">Two ways in.</h2>
             </div>
             <div className="foundation-pricing-grid">
-              {PRICING.map(({ tier, price, description, features, cta, href, primary }) => (
+              {PRICING.map(({ tier, tierKey, price, description, features, cta, primary }) => (
                 <div key={tier} className={`foundation-pricing-card${primary ? ' foundation-pricing-card--primary' : ''}`}>
                   {primary && <span className="foundation-pricing-badge">Most popular</span>}
                   <p className="foundation-pricing-tier">{tier}</p>
@@ -187,9 +188,7 @@ export default function FoundationPage() {
                       <li key={f} className="foundation-pricing-feature">{f}</li>
                     ))}
                   </ul>
-                  <Link href={href} className={primary ? 'btn btn-primary' : 'btn btn-secondary'}>
-                    {cta}
-                  </Link>
+                  <EnrollButton tier={tierKey} label={cta} primary={primary} />
                 </div>
               ))}
             </div>

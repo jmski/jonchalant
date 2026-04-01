@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
+import { isEnrolled } from '@/utils/supabase/enrollments'
 import { getCourses } from '@/lib/sanity'
 import { getCourseProgressPercent } from '@/lib/portal-progress'
 import Link from 'next/link'
@@ -13,6 +14,11 @@ export default async function PortalDashboard() {
 
   if (!user) {
     redirect('/login?redirect=/portal')
+  }
+
+  const enrolled = await isEnrolled(user.id, 'the-foundation')
+  if (!enrolled) {
+    redirect('/foundation')
   }
 
   // Derive first name from Google full_name or email prefix

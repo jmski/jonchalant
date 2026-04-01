@@ -12,13 +12,13 @@ export const FOOTER_NAV = [
     links: [
       { label: 'Programs', href: '/programs' },
       { label: 'The Foundation', href: '/foundation' },
-      { label: 'Blog', href: '/blog' },
     ],
   },
   {
     heading: 'Media',
     links: [
       { label: 'Dance', href: '/dance' },
+      { label: 'Blog', href: '/blog' },
     ],
   },
 ];

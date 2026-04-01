@@ -1,6 +1,7 @@
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/server'
+import { isEnrolled } from '@/utils/supabase/enrollments'
 import { client } from '@/lib/sanity'
 import LessonActions from './LessonActions'
 
@@ -63,6 +64,11 @@ export default async function LessonPage({ params }: Props) {
 
   if (!user) {
     redirect(`/login?redirect=/portal/${slug}`)
+  }
+
+  const enrolled = await isEnrolled(user.id, 'the-foundation')
+  if (!enrolled) {
+    redirect('/foundation')
   }
 
   const lesson = await getPortalLesson(slug)
