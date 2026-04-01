@@ -11,7 +11,7 @@ export const FOOTER_NAV = [
     heading: 'Coaching',
     links: [
       { label: 'Programs', href: '/programs' },
-      { label: 'Lessons', href: '/lessons' },
+      { label: 'The Foundation', href: '/foundation' },
       { label: 'Blog', href: '/blog' },
     ],
   },
@@ -19,7 +19,6 @@ export const FOOTER_NAV = [
     heading: 'Media',
     links: [
       { label: 'Dance', href: '/dance' },
-      { label: 'Media Kit', href: '/media-kit' },
     ],
   },
 ];

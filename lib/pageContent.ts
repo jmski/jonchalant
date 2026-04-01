@@ -42,10 +42,6 @@ export const PAGE_CONTENT = {
     ]
   },
 
-  mediaKit: {
-    headline: 'Media Kit',
-    subheadline: 'Audience statistics and engagement metrics'
-  }
 };
 
 export const DANCE_FILTER_CATEGORIES = ["All", "choreography", "freestyle", "performance"];

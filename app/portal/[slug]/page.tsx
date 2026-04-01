@@ -5,7 +5,6 @@ import { client } from '@/lib/sanity'
 import LessonActions from './LessonActions'
 
 interface TechnicalNote {
-  column?: number
   label: string
   content: string
   _key?: string
@@ -15,12 +14,11 @@ interface PortalLesson {
   _id: string
   title: string
   slug: string
-  technicalDescription: string
+  description: string
   videoId: string
-  socialLogic: string
+  socialLogic?: string
   technicalNotes?: TechnicalNote[]
-  duration: number
-  difficulty: string
+  duration?: number
   module?: {
     _id: string
     title: string
@@ -34,21 +32,19 @@ interface Props {
 
 async function getPortalLesson(slug: string): Promise<PortalLesson | null> {
   return client.fetch(
-    `*[_type == "portalLesson" && slug.current == $slug][0] {
+    `*[_type == "lesson" && slug.current == $slug][0] {
       _id,
       title,
       "slug": slug.current,
-      technicalDescription,
+      description,
       videoId,
       socialLogic,
       technicalNotes[] {
-        column,
         label,
         content,
         _key
       },
       duration,
-      difficulty,
       module-> {
         _id,
         title,
@@ -75,16 +71,7 @@ export default async function LessonPage({ params }: Props) {
     notFound()
   }
 
-  // Group technical notes by column
-  const notesByColumn = (lesson.technicalNotes || []).reduce(
-    (acc: Record<number, TechnicalNote[]>, note: TechnicalNote) => {
-      const col = note.column || 1
-      if (!acc[col]) acc[col] = []
-      acc[col].push(note)
-      return acc
-    },
-    {}
-  )
+  const technicalNotes = lesson.technicalNotes || []
 
   return (
     <div className="portal-lesson-page">
@@ -120,14 +107,11 @@ export default async function LessonPage({ params }: Props) {
           <div className="portal-lesson-header-content">
             <h1 className="portal-lesson-title">{lesson.title}</h1>
             <div className="portal-lesson-meta">
-              <span className="portal-lesson-duration">
-                {lesson.duration} minute video
-              </span>
-              <span className="portal-lesson-difficulty">
-                {lesson.difficulty
-                  .charAt(0)
-                  .toUpperCase() + lesson.difficulty.slice(1)}
-              </span>
+              {lesson.duration && (
+                <span className="portal-lesson-duration">
+                  {lesson.duration} min
+                </span>
+              )}
             </div>
           </div>
           <LessonActions
@@ -137,47 +121,36 @@ export default async function LessonPage({ params }: Props) {
           />
         </header>
 
-        {/* Technical Description Section */}
-        <section className="portal-lesson-description">
-          <h2 className="portal-lesson-section-title">Technical Description</h2>
-          <div className="portal-lesson-description-text">
-            {lesson.technicalDescription}
-          </div>
-        </section>
+        {/* Description */}
+        {lesson.description && (
+          <section className="portal-lesson-description">
+            <div className="portal-lesson-description-text">
+              {lesson.description}
+            </div>
+          </section>
+        )}
 
-        {/* Social Logic Section */}
-        <section className="portal-lesson-social-logic">
-          <h2 className="portal-lesson-section-title">
-            Social Logic: Dance-to-Social Parallel
-          </h2>
-          <div className="portal-lesson-social-logic-text">
-            {lesson.socialLogic}
-          </div>
-        </section>
+        {/* Social Logic */}
+        {lesson.socialLogic && (
+          <section className="portal-lesson-social-logic">
+            <h2 className="portal-lesson-section-title">
+              Social Logic: Dance-to-Leadership Parallel
+            </h2>
+            <div className="portal-lesson-social-logic-text">
+              {lesson.socialLogic}
+            </div>
+          </section>
+        )}
 
-        {/* Technical Notes Grid */}
-        {lesson.technicalNotes && lesson.technicalNotes.length > 0 && (
+        {/* Technical Notes */}
+        {technicalNotes.length > 0 && (
           <section className="portal-lesson-notes">
             <h2 className="portal-lesson-section-title">Technical Notes</h2>
             <div className="portal-lesson-notes-grid">
-              {[1, 2, 3].map((col) => (
-                <div
-                  key={col}
-                  className="portal-lesson-notes-column"
-                >
-                  {notesByColumn[col]?.map((note: TechnicalNote, idx: number) => (
-                    <div
-                      key={note._key || idx}
-                      className="portal-lesson-note-card"
-                    >
-                      <h3 className="portal-lesson-note-label">
-                        {note.label}
-                      </h3>
-                      <p className="portal-lesson-note-content">
-                        {note.content}
-                      </p>
-                    </div>
-                  ))}
+              {technicalNotes.map((note: TechnicalNote, idx: number) => (
+                <div key={note._key || idx} className="portal-lesson-note-card">
+                  <h3 className="portal-lesson-note-label">{note.label}</h3>
+                  <p className="portal-lesson-note-content">{note.content}</p>
                 </div>
               ))}
             </div>

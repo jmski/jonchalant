@@ -21,7 +21,8 @@
       "Bash(grep -c \"^/\\\\*\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
       "Bash(grep -n \"[[:space:]]*\\\\/\\\\*.*:\\\\|:[[:space:]]*\\\\/\\\\*\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
       "Bash(grep -E \"^[[:space:]]+\\\\/\\\\/.+|^[[:space:]]+\\\\/\\\\*[^═=].+\\\\*\\\\/$\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
-      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/components/shared/case-study* /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/components/shared/case-studies*)"
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/components/shared/case-study* /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/components/shared/case-studies*)",
+      "Bash(node -e \":*)"
     ]
   }
 }

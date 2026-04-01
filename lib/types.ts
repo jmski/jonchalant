@@ -34,26 +34,26 @@ export interface Module {
   order: number
 }
 
+export interface TechnicalNote {
+  _key?: string
+  label: string
+  content: string
+}
+
 export interface Lesson {
   _id: string
   title: string
   slug: SanitySlug
-  description: string
-  videoUrl?: string
-  body?: any[]
-  estimatedDuration?: number
-  isFreePreview: boolean
-  order: number
-}
-
-export interface PortalLesson {
-  _id: string
-  title: string
-  slug: SanitySlug
+  access: 'free' | 'enrolled'
+  description?: string
   videoId?: string
+  body?: any[]
+  socialLogic?: string
+  technicalNotes?: TechnicalNote[]
   duration?: number
   order: number
-  module?: { slug: SanitySlug }
+  module?: { _id: string; title: string; slug: SanitySlug }
+  publishedAt?: string
 }
 
 // ── Blog ─────────────────────────────────────────────────────────────────────
@@ -134,35 +134,6 @@ export interface DanceVideo {
 export interface InstagramReel {
   _id: string
   reelUrl: string
-  order: number
-}
-
-// ── Media kit ─────────────────────────────────────────────────────────────────
-
-export interface MediaKit {
-  title: string
-  heroBadge?: string
-  heroHeadline: string
-  heroSubheadline?: string
-  shortBio: string
-  longBio: string
-  stats: MediaKitStat[]
-  expertiseAreas: MediaKitExpertise[]
-  pressAssetsPdfUrl?: string
-  pressAssetsLabel?: string
-  contactHeadline?: string
-  contactSubheadline?: string
-}
-
-export interface MediaKitStat {
-  value: string
-  label: string
-  order: number
-}
-
-export interface MediaKitExpertise {
-  title: string
-  description: string
   order: number
 }
 

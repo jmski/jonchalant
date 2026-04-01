@@ -17,7 +17,6 @@ export default defineType({
           { title: 'Programs', value: 'programs' },
           { title: 'Collaborations', value: 'collaborations' },
           { title: 'Contact', value: 'contact' },
-          { title: 'Media Kit', value: 'mediaKit' },
           { title: 'Home', value: 'home' },
         ]
       }
