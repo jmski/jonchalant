@@ -34,7 +34,7 @@ export async function generateStaticParams() {
     .flatMap((course: any) =>
       (course.modules ?? []).flatMap((mod: any) =>
         (mod.lessons ?? [])
-          .filter((lesson: any) => lesson.isFreePreview)
+          .filter((lesson: any) => lesson.access === 'free')
           .map((lesson: any) => ({
             courseSlug: course.slug?.current ?? '',
             lessonSlug: lesson.slug?.current ?? '',
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${lesson.title} | Jonchalant`,
     description: lesson.description ?? undefined,
-    robots: lesson.isFreePreview ? undefined : { index: false, follow: false },
+    robots: lesson.access === 'free' ? undefined : { index: false, follow: false },
   }
 }
 
@@ -87,7 +87,7 @@ export default async function LessonDetailPage({ params }: PageProps) {
   const isThisCompleted = completedSlugs.includes(lessonSlug)
 
   // Access control: locked if gated and not logged in
-  const isLocked = !lesson.isFreePreview && !user
+  const isLocked = lesson.access !== 'free' && !user
 
   // Prev / Next navigation across module boundaries
   const allLessons = flattenLessons(course.modules ?? [])
