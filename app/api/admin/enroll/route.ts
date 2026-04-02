@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import type { User } from '@supabase/supabase-js'
 import { createServiceClient } from '@/utils/supabase/service'
 
 /**
@@ -38,10 +39,11 @@ export async function POST(req: NextRequest) {
   const supabase = createServiceClient()
 
   // Look up user by email
-  const { data: { users }, error: userError } = await supabase.auth.admin.listUsers()
-  if (userError) {
+  const listResult = await supabase.auth.admin.listUsers()
+  if (listResult.error) {
     return NextResponse.json({ error: 'Failed to query users' }, { status: 500 })
   }
+  const users = listResult.data.users as User[]
 
   const user = users.find((u) => u.email === email)
   if (!user) {
