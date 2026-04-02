@@ -4,6 +4,61 @@ A running log of significant codebase changes, refactors, and cleanups. Most rec
 
 ---
 
+## 2026-04-02 — Portal Design Revamp + Enrollment Debug Tooling
+
+### Enrollment bug diagnosis
+
+After a test Stripe payment the portal still redirected to `/foundation` (not enrolled state). Root cause: **Stripe webhooks cannot reach `localhost` in local dev** — the `checkout.session.completed` event that writes to `enrollments` never fires without Stripe CLI forwarding (`stripe listen --forward-to localhost:3000/api/webhooks/stripe`). The webhook handler and Supabase write logic were correct.
+
+**New file:**
+
+- `app/api/admin/enroll/route.ts` — `POST /api/admin/enroll` endpoint that manually writes an enrollment record to Supabase, bypassing Stripe. Protected by `Authorization: Bearer ${ADMIN_SECRET}`. Accepts `{ email, courseSlug, tier? }`. Use during local dev or to grant access manually.
+
+```bash
+# Usage example (local dev):
+curl -X POST http://localhost:3000/api/admin/enroll \
+  -H "Authorization: Bearer YOUR_ADMIN_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com","courseSlug":"the-foundation"}'
+```
+
+Add `ADMIN_SECRET=any-random-string` to your `.env.local`. Without it the endpoint returns 503.
+
+### Portal UI redesign
+
+Full visual overhaul of all portal pages to match the Jonchalant brand (burnt-indigo + muted-moss palette, Fraunces serif headings, editorial whitespace).
+
+**CSS changes (`app/css/pages.css` — `portal-*` section):**
+
+- **Topbar**: Now uses `var(--color-burnt-indigo)` background with white Fraunces brand wordmark. Sign-out button uses ghost white style.
+- **Dashboard layout**: New two-column layout via `.portal-body` wrapper — `portal-main` (flex: 1) + `portal-sidebar` (17rem, sticky). Collapses to single column below 900px.
+- **Welcome section**: Added `.portal-welcome-eyebrow` label ("Learning Portal"). Greeting bumped to `clamp(2rem, 5vw, 2.75rem)` in Fraunces.
+- **Section labels**: Now include a bottom border for visual separation.
+- **Course cards**: Added `border-top: 3px solid var(--accent-primary)` (green) that transitions to burnt-indigo on hover, plus subtle lift animation (`translateY(-2px)`). Title uses Fraunces serif.
+- **Coach section**: Left-border accent in burnt-indigo instead of background box.
+- **Sidebar links** (`.portal-sidebar-link`): New component replacing quick-links grid on dashboard.
+- **Lesson page**: Two-column layout — `portal-lesson-layout` wraps `portal-lesson-main` + `portal-lesson-outline` sidebar (17rem, sticky). Sidebar shows all modules and lessons with completion state (✓ prefix for done, bold green for current).
+- **Video wrapper**: Removed black 1px border, uses border-radius 4px.
+- **Lesson header**: Now uses Fraunces for title, removed heavy black borders.
+- **"Mark Complete" button**: Aligned to brand green (`var(--accent-primary)`) instead of orange. Done state shows outline variant.
+- **Section sub-headings**: Fraunces serif, lighter weight, bottom border for separation.
+- **Social Logic block**: Subtle burnt-indigo left border + tinted background instead of plain box.
+- **Technical note cards**: Muted-moss left border.
+- **Module list** (course overview): Left border in `var(--color-burnt-indigo-light)`. Module number uses indigo color. Lesson row hover uses green-tinted background.
+- **Lesson outline items**: Three states — default, `--current` (green tint + green text), `--done` (muted with ✓ prefix).
+- **Pagination**: unchanged structure, improved hover states.
+
+**JSX changes:**
+
+- `app/portal/page.tsx`: Restructured to `portal-body` > `portal-main` + `<aside className="portal-sidebar">`. Quick links moved to sidebar as `portal-sidebar-link` items. Added `portal-welcome-eyebrow`.
+- `app/portal/[courseSlug]/[lessonSlug]/page.tsx`: Added `portal-lesson-outline` sidebar with per-module lesson list and completion state. Fetches `completedSlugs` via `getCourseProgress`. Added portal topbar (burnt-indigo) + `portal-lesson-nav` sub-breadcrumb bar. Wrapped content in `portal-lesson-layout` / `portal-lesson-main`.
+
+### Folder structure clarification
+
+There is **no** `app/portal/lessons/` directory. What appears as nested in VS Code is the `[courseSlug]/[lessonSlug]` dynamic route. The `app/lessons/` directory is a **separate public curriculum page** (not deprecated) — it serves as the public-facing course catalog with SEO metadata and a "Resume where you left off" banner for logged-in users.
+
+---
+
 ## 2026-03-29 — Audit & Contact Pages: Hardcoded Text Removed
 
 All page copy moved out of components into the correct data layer.

@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/server'
+import { createServiceClient } from '@/utils/supabase/service'
 
 export interface Enrollment {
   id: string
@@ -45,7 +46,7 @@ export async function enroll({
   stripeSessionId: string
   tier: 'self_paced' | 'with_checkins'
 }): Promise<void> {
-  const supabase = await createClient()
+  const supabase = createServiceClient()
   const { error } = await supabase.from('enrollments').insert({
     user_id: userId,
     course_slug: courseSlug,

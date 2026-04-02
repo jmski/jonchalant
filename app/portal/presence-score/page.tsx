@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
+import { isEnrolled } from '@/utils/supabase/enrollments'
 import { PresenceScoreClient } from './PresenceScoreClient'
 
 export default async function PresenceScorePage() {
@@ -8,6 +9,11 @@ export default async function PresenceScorePage() {
 
   if (!user) {
     redirect('/login?redirect=/portal/presence-score')
+  }
+
+  const enrolled = await isEnrolled(user.id, 'the-foundation')
+  if (!enrolled) {
+    redirect('/foundation')
   }
 
   const fullName = user.user_metadata?.full_name as string | undefined

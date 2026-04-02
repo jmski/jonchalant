@@ -7,13 +7,31 @@ import Link from 'next/link'
 
 type Mode = 'signin' | 'signup' | 'forgot'
 
+function getContextualCopy(redirectTo: string) {
+  if (redirectTo.includes('/foundation')) {
+    return {
+      intent: 'Create an account to complete your enrollment.',
+      defaultMode: 'signup' as Mode,
+    }
+  }
+  if (redirectTo.includes('/portal')) {
+    return {
+      intent: 'Sign in to access your course.',
+      defaultMode: 'signin' as Mode,
+    }
+  }
+  return { intent: null, defaultMode: 'signin' as Mode }
+}
+
 export default function LoginClient() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get('redirect') || '/portal'
   const callbackError = searchParams.get('error')
 
-  const [mode, setMode] = useState<Mode>('signin')
+  const { intent, defaultMode } = getContextualCopy(redirectTo)
+
+  const [mode, setMode] = useState<Mode>(defaultMode)
   const [isLoading, setIsLoading] = useState(false)
   const [isCheckingSession, setIsCheckingSession] = useState(true)
   const [error, setError] = useState<string | null>(
@@ -27,7 +45,7 @@ export default function LoginClient() {
 
   const supabase = createClient()
 
-  // Already-logged-in guard: bounce to portal immediately
+  // Already-logged-in guard: bounce to destination immediately
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) {
@@ -91,7 +109,6 @@ export default function LoginClient() {
       setError(oauthError.message)
       setIsLoading(false)
     }
-    // On success the browser navigates away — no further action needed
   }
 
   const switchMode = (next: Mode) => {
@@ -110,13 +127,11 @@ export default function LoginClient() {
       <div className="portal-login-container">
         {/* Header */}
         <div className="portal-login-header">
-          <Link href="/" className="portal-login-back">
-            ← Back to site
-          </Link>
-          <h1 className="portal-login-title">The Kinetic Leader Portal</h1>
-          <p className="portal-login-subtitle">
-            Technical Manual for Social Fluency
-          </p>
+          <Link href="/" className="portal-login-back">← Back to site</Link>
+          <h1 className="portal-login-title">Jonchalant Portal</h1>
+          {intent && (
+            <p className="portal-login-intent">{intent}</p>
+          )}
         </div>
 
         {/* Form Card */}
@@ -129,8 +144,8 @@ export default function LoginClient() {
               {isForgot
                 ? "Enter your email and we'll send a reset link."
                 : isSignUp
-                  ? 'New to the portal? Create an account below.'
-                  : 'Enter your credentials to access the learning portal.'}
+                  ? 'Create an account to get started.'
+                  : 'Enter your credentials to continue.'}
             </p>
           </div>
 
@@ -153,12 +168,10 @@ export default function LoginClient() {
           )}
 
           {!isForgot && (
-            <div className="portal-login-divider">
-              <span>or</span>
-            </div>
+            <div className="portal-login-divider"><span>or</span></div>
           )}
 
-          {/* Email Field */}
+          {/* Email */}
           <fieldset className="portal-login-fieldset">
             <label htmlFor="email" className="portal-login-label">Email</label>
             <input
@@ -173,7 +186,7 @@ export default function LoginClient() {
             />
           </fieldset>
 
-          {/* Password Field — hidden on forgot-password mode */}
+          {/* Password */}
           {!isForgot && (
             <fieldset className="portal-login-fieldset">
               <div className="portal-login-label-row">
@@ -205,10 +218,10 @@ export default function LoginClient() {
           {error && <div className="portal-login-error" role="alert">{error}</div>}
           {successMessage && <div className="portal-login-success" role="status">{successMessage}</div>}
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button type="submit" disabled={isLoading} className="portal-login-submit">
             {isLoading
-              ? 'Loading...'
+              ? (isSignUp ? 'Creating account…' : isForgot ? 'Sending…' : 'Signing in…')
               : isForgot
                 ? 'Send Reset Link'
                 : isSignUp
@@ -243,10 +256,10 @@ export default function LoginClient() {
           </div>
         </form>
 
-        {/* Footer Info */}
         <div className="portal-login-footer">
           <p className="portal-login-footer-text">
-            This is a gated learning portal. Access is granted to enrolled students only.
+            Portal access is granted to enrolled students only.
+            Not enrolled? <Link href="/foundation" className="portal-login-footer-link">See The Foundation →</Link>
           </p>
         </div>
       </div>

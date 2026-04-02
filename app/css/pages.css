@@ -333,12 +333,15 @@
   line-height: 1.2;
 }
 
-.portal-login-subtitle {
+.portal-login-intent {
   font-size: 0.875rem;
-  color: #666;
-  font-family: "IBM Plex Mono", monospace;
-  font-weight: 400;
-  margin: 0;
+  color: var(--accent-primary);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 500;
+  margin: 0.25rem 0 0;
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  border-radius: 4px;
 }
 
 /* Form container */
@@ -590,9 +593,50 @@
   line-height: 1.6;
 }
 
+.portal-login-footer-link {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.portal-login-footer-link:hover {
+  color: var(--text-primary);
+}
+
+/* ── Enrollment welcome banner ─────────────────────────────────────────── */
+.portal-enrollment-banner {
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.portal-enrollment-banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 540px;
+}
+
+.portal-enrollment-banner-headline {
+  font-family: "Fraunces", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.portal-enrollment-banner-body {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
-   PORTAL PAGE — New server-component dashboard (course cards + quick links)
-   Calmer, functional aesthetic — distinct from marketing site
+   PORTAL PAGE — Authenticated learning portal
+   Editorial, brand-aligned design using burnt-indigo + muted-moss palette
    ────────────────────────────────────────────────────────────────────────────
 */
 
@@ -601,107 +645,161 @@
   background: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Top bar */
+/* ── Top bar ─────────────────────────────────────────────────────────────── */
 .portal-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--spacing-lg);
-  height: 3.5rem;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  padding: 0 var(--spacing-xl);
+  height: 4rem;
+  background: var(--color-burnt-indigo);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
 }
 
 .portal-topbar-brand {
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--text-primary);
+  font-family: "Fraunces", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
-  font-family: "IBM Plex Mono", monospace;
+  transition: color 0.2s ease;
 }
 
 .portal-topbar-brand:hover {
-  color: var(--accent-primary);
+  color: white;
 }
 
 .portal-topbar-actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
 
 .portal-topbar-signout {
   background: none;
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.8125rem;
-  font-family: "IBM Plex Mono", monospace;
-  padding: 0.375rem 0.875rem;
+  letter-spacing: 0.04em;
+  padding: 0.375rem 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 2px;
 }
 
 .portal-topbar-signout:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* Main content area */
-.portal-main {
+/* ── Body layout (main + sidebar) ────────────────────────────────────────── */
+.portal-body {
+  display: flex;
   flex: 1;
-  max-width: 56rem;
+  align-items: flex-start;
+  max-width: 82rem;
   width: 100%;
   margin: 0 auto;
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  gap: var(--spacing-2xl);
+}
+
+/* Main content column */
+.portal-main {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2xl);
 }
 
-/* Welcome section */
+/* Sidebar column */
+.portal-sidebar {
+  width: 17rem;
+  flex-shrink: 0;
+  position: sticky;
+  top: 5rem;
+}
+
+@media (max-width: 900px) {
+  .portal-body {
+    flex-direction: column;
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+  .portal-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+
+/* ── Welcome section ─────────────────────────────────────────────────────── */
 .portal-welcome {
   padding-bottom: var(--spacing-xl);
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.portal-welcome-greeting {
-  font-size: clamp(1.5rem, 4vw, 2rem);
+.portal-welcome-eyebrow {
+  font-size: 0.6875rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent-primary);
+  margin: 0 0 0.75rem;
+}
+
+.portal-welcome-greeting {
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 500;
   color: var(--text-primary);
-  margin: 0 0 0.375rem;
+  margin: 0 0 0.5rem;
   letter-spacing: -0.02em;
-  font-family: var(--font-headline, serif);
+  line-height: 1.1;
 }
 
 .portal-welcome-subtitle {
   font-size: 0.9375rem;
   color: var(--text-secondary);
   margin: 0;
+  line-height: 1.6;
 }
 
-/* Generic section */
+/* ── Generic section ─────────────────────────────────────────────────────── */
 .portal-section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
 }
 
+.portal-section--coach {
+  background: color-mix(in srgb, var(--color-burnt-indigo) 4%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--color-burnt-indigo) 15%, transparent);
+  border-left: 3px solid var(--color-burnt-indigo);
+  padding: var(--spacing-xl);
+}
+
+.portal-coach-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Section labels ──────────────────────────────────────────────────────── */
 .portal-section-label {
   font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-tertiary);
   margin: 0;
-  font-family: "IBM Plex Mono", monospace;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .portal-empty {
@@ -710,16 +808,16 @@
   margin: 0;
 }
 
-/* Course cards grid */
+/* ── Course cards grid ───────────────────────────────────────────────────── */
 .portal-courses-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-md);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 560px) {
   .portal-courses-grid {
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
   }
 }
 
@@ -729,50 +827,53 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--spacing-lg);
-  padding: var(--spacing-lg);
-  border: 1px solid var(--border-color);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--accent-primary);
   background: var(--bg-secondary);
   text-decoration: none;
   color: inherit;
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    border-top-color 0.2s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
 }
 
 .portal-course-card:hover {
-  border-color: var(--accent-primary);
-  box-shadow: 0 2px 8px rgba(107, 142, 99, 0.08);
+  border-top-color: var(--color-burnt-indigo);
+  box-shadow: 0 6px 20px rgba(74, 58, 92, 0.10);
+  transform: translateY(-2px);
 }
 
 .portal-course-card-body {
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
+  gap: 0.5rem;
 }
 
 .portal-course-card-title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: "Fraunces", serif;
+  font-size: 1.125rem;
+  font-weight: 500;
   color: var(--text-primary);
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 .portal-course-card-meta {
   font-size: 0.8125rem;
   color: var(--text-tertiary);
   margin: 0;
-  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-course-card-footer {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.625rem;
 }
 
 .portal-course-card-progress-track {
-  height: 3px;
+  height: 4px;
   background: var(--border-subtle);
   border-radius: 9999px;
   overflow: hidden;
@@ -782,7 +883,7 @@
   height: 100%;
   background: var(--accent-primary);
   border-radius: 9999px;
-  transition: width 0.4s ease;
+  transition: width 0.5s ease;
 }
 
 .portal-course-card-progress-row {
@@ -794,17 +895,68 @@
 .portal-course-card-progress-label {
   font-size: 0.75rem;
   color: var(--text-tertiary);
-  font-family: "IBM Plex Mono", monospace;
 }
 
 .portal-course-card-cta {
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--accent-primary);
-  font-family: "IBM Plex Mono", monospace;
 }
 
-/* Quick links grid */
+/* ── Sidebar quick links ─────────────────────────────────────────────────── */
+.portal-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.portal-sidebar-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 0.625rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.portal-sidebar-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  border-radius: 2px;
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+.portal-sidebar-link:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--accent-primary) 5%, var(--bg-secondary));
+}
+
+.portal-sidebar-link-arrow {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.portal-sidebar-link:hover .portal-sidebar-link-arrow {
+  color: var(--accent-primary);
+  transform: translateX(3px);
+}
+
+/* Legacy quicklinks (kept for fallback) */
 .portal-quicklinks-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -823,10 +975,11 @@
   justify-content: space-between;
   gap: var(--spacing-sm);
   padding: var(--spacing-md) var(--spacing-lg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   background: var(--bg-secondary);
   text-decoration: none;
   color: inherit;
+  border-radius: 2px;
   transition: border-color 0.2s ease;
 }
 
@@ -855,75 +1008,158 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   PORTAL LESSON PAGE - Video Player & Technical Notes
-
-   
-   Video-focused layout with multi-column technical notes grid below
+   PORTAL LESSON PAGE — Two-column layout: main content + lesson outline sidebar
    ────────────────────────────────────────────────────────────────────────────
 */
 
 .portal-lesson-page {
   min-height: 100vh;
-  background: white;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-primary);
 }
 
-/* Navigation */
+/* Navigation bar (inherits portal topbar styling from portal-page) */
 .portal-lesson-nav {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  border-bottom: 1px solid #000;
-  background: white;
+  padding: 0 var(--spacing-xl);
+  height: 3.25rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
   position: sticky;
-  top: 0;
+  top: 4rem; /* sits below the topbar */
   z-index: 10;
 }
 
-.portal-lesson-nav-back {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: none;
-  border: 1px solid #000;
-  color: #000;
-  font-size: 0.875rem;
-  font-family: "IBM Plex Mono", monospace;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.portal-lesson-nav-back:hover {
-  background: #000;
-  color: white;
-}
-
-.portal-lesson-nav-breadcrumb {
-  font-size: 0.875rem;
-  color: #666;
-  font-family: "IBM Plex Mono", monospace;
-}
-
-/* Main container */
-.portal-lesson-container {
-  max-width: 1200px;
+/* Two-column layout */
+.portal-lesson-layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 90rem;
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-lg);
+  min-height: calc(100vh - 7.25rem);
+}
+
+.portal-lesson-main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+}
+
+/* Lesson sidebar (course outline) */
+.portal-lesson-outline {
+  width: 17rem;
+  flex-shrink: 0;
+  border-left: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 7.25rem;
+  max-height: calc(100vh - 7.25rem);
+  overflow-y: auto;
+  padding: var(--spacing-lg);
+  background: var(--bg-secondary);
+}
+
+@media (max-width: 1024px) {
+  .portal-lesson-layout {
+    flex-direction: column;
+  }
+  .portal-lesson-outline {
+    width: 100%;
+    position: static;
+    max-height: none;
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    order: 2;
+  }
+  .portal-lesson-main {
+    order: 1;
+  }
+}
+
+/* Outline header */
+.portal-lesson-outline-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+  margin: 0 0 1rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: block;
+}
+
+/* Outline modules */
+.portal-lesson-outline-module {
+  margin-bottom: 1.25rem;
+}
+
+.portal-lesson-outline-module-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  margin: 0 0 0.375rem;
+}
+
+.portal-lesson-outline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.portal-lesson-outline-item {
+  display: block;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  padding: 0.375rem 0.625rem;
+  border-radius: 2px;
+  transition: background 0.15s ease, color 0.15s ease;
+  line-height: 1.4;
+}
+
+.portal-lesson-outline-item:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.portal-lesson-outline-item--current {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.portal-lesson-outline-item--done {
+  color: var(--text-tertiary);
+}
+
+.portal-lesson-outline-item--done::before {
+  content: "✓ ";
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+/* Main content area (lesson container legacy alias) */
+.portal-lesson-container {
+  max-width: 52rem;
 }
 
 /* Video Section */
 .portal-lesson-video-section {
   margin-bottom: var(--spacing-2xl);
-  border: 1px solid #000;
   background: #000;
+  border-radius: 4px;
   overflow: hidden;
 }
 
 .portal-lesson-video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%; /* 16:9 */
   height: 0;
 }
 
@@ -942,12 +1178,13 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--spacing-lg);
-  padding: var(--spacing-xl);
-  border: 1px solid #000;
-  margin-bottom: var(--spacing-xl);
-  background: white;
+  margin-bottom: var(--spacing-2xl);
+  padding-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--border-subtle);
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 640px) {
+  .portal-lesson-header {
     flex-direction: column;
   }
 }
@@ -957,43 +1194,46 @@
 }
 
 .portal-lesson-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #000;
-  margin: 0 0 var(--spacing-sm);
-  letter-spacing: -0.01em;
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.625rem;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 .portal-lesson-meta {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
-  font-size: 0.875rem;
-  font-family: "IBM Plex Mono", monospace;
-  color: #666;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.portal-lesson-duration {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
 }
 
 /* Complete Button */
 .portal-lesson-complete-button {
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: #ff5f1f;
+  padding: 0.625rem 1.25rem;
+  background: var(--accent-primary);
   color: white;
   font-weight: 600;
   font-size: 0.875rem;
-  font-family: "IBM Plex Mono", monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 1px solid #ff5f1f;
+  letter-spacing: 0.02em;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  border-radius: 2px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .portal-lesson-complete-button:hover:not(:disabled) {
-  background: #e54a15;
-  border-color: #e54a15;
-  box-shadow: 0 4px 12px rgba(255, 95, 31, 0.3);
+  background: var(--accent-hover);
+  box-shadow: 0 2px 8px rgba(107, 142, 99, 0.3);
 }
 
 .portal-lesson-complete-button:disabled {
@@ -1002,67 +1242,71 @@
 }
 
 .portal-lesson-complete-button--done {
-  background: white;
-  color: #ff5f1f;
-  border: 2px solid #ff5f1f;
+  background: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
 }
 
-/* Section Headers */
+.portal-lesson-complete-button--done:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  box-shadow: none;
+}
+
+/* Section sub-headings */
 .portal-lesson-section-title {
+  font-family: "Fraunces", serif;
   font-size: 1.25rem;
-  font-weight: 600;
-  color: #000;
+  font-weight: 500;
+  color: var(--text-primary);
   margin: 0 0 var(--spacing-lg);
-  padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid #000;
-  font-family: "IBM Plex Mono", monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 /* Description */
 .portal-lesson-description {
   margin-bottom: var(--spacing-2xl);
-  padding: var(--spacing-xl);
-  border: 1px solid #e0e0e0;
-  background: #fafafa;
 }
 
 .portal-lesson-description-text {
-  color: #333;
-  line-height: 1.8;
+  color: var(--text-secondary);
+  line-height: 1.75;
   font-size: 1rem;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 
-/* Social Logic */
+/* Social Logic / Dance-to-Leadership */
 .portal-lesson-social-logic {
   margin-bottom: var(--spacing-2xl);
   padding: var(--spacing-xl);
-  border: 1px solid #e0e0e0;
-  background: #fafafa;
+  background: color-mix(in srgb, var(--color-burnt-indigo) 4%, var(--bg-secondary));
+  border-left: 3px solid var(--color-burnt-indigo-light);
+  border-radius: 0 2px 2px 0;
 }
 
 .portal-lesson-social-logic-text {
-  color: #333;
-  line-height: 1.8;
+  color: var(--text-secondary);
+  line-height: 1.75;
   font-size: 1rem;
   white-space: pre-wrap;
   word-wrap: break-word;
+  margin: 0;
 }
 
-/* Technical Notes Grid */
+/* Technical Notes */
 .portal-lesson-notes {
   margin-bottom: var(--spacing-2xl);
 }
 
 .portal-lesson-notes-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   gap: var(--spacing-lg);
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 640px) {
+  .portal-lesson-notes-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1075,68 +1319,330 @@
 
 .portal-lesson-note-card {
   padding: var(--spacing-lg);
-  border: 1px solid #000;
-  background: white;
-  border-left: 4px solid #ff5f1f;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: 0 2px 2px 0;
 }
 
 .portal-lesson-note-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #000;
-  margin: 0 0 var(--spacing-sm);
-  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .portal-lesson-note-content {
-  font-size: 0.95rem;
-  color: #333;
-  line-height: 1.6;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
   margin: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 
-/* Footer */
+/* Footer (legacy — unused in new layout) */
 .portal-lesson-footer {
-  border-top: 2px solid #000;
+  border-top: 1px solid var(--border-subtle);
   padding: var(--spacing-xl);
-  background: white;
+  background: var(--bg-secondary);
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: var(--spacing-lg);
-  }
 }
 
 .portal-lesson-footer-link {
   padding: var(--spacing-md) var(--spacing-lg);
-  background: white;
-  border: 1px solid #000;
-  color: #000;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.875rem;
-  font-family: "IBM Plex Mono", monospace;
-  text-transform: uppercase;
   transition: all 0.2s ease;
 }
 
 .portal-lesson-footer-link:hover {
-  background: #000;
-  color: white;
+  border-color: var(--text-primary);
+  color: var(--text-primary);
 }
 
 .portal-lesson-footer-text {
   font-size: 0.75rem;
-  color: #999;
-  font-family: "IBM Plex Mono", monospace;
+  color: var(--text-tertiary);
   margin: 0;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────────────────── */
+.portal-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.portal-breadcrumb-link {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.portal-breadcrumb-link:hover {
+  color: var(--text-primary);
+}
+
+.portal-breadcrumb-sep {
+  opacity: 0.35;
+}
+
+.portal-breadcrumb-current {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ── Course overview ────────────────────────────────────────────────────── */
+.portal-course-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.portal-course-title {
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.portal-course-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 60ch;
+  margin: 0 0 1.75rem;
+}
+
+.portal-course-progress {
+  max-width: 26rem;
+}
+
+.portal-course-progress-track {
+  height: 5px;
+  background: var(--border-subtle);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.portal-course-progress-fill {
+  height: 100%;
+  background: var(--accent-primary);
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+}
+
+.portal-course-progress-label {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* ── Module list ────────────────────────────────────────────────────────── */
+.portal-module-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.portal-module {
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--color-burnt-indigo-light);
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.portal-module-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 1.125rem 1.5rem 0.875rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-tertiary);
+  flex-wrap: wrap;
+}
+
+.portal-module-number {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-burnt-indigo-light);
+  flex-shrink: 0;
+}
+
+.portal-module-title {
+  font-family: "Fraunces", serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.portal-module-meta {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.portal-module-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: 0.75rem 1.5rem;
+  margin: 0;
+  line-height: 1.55;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ── Lesson list (inside module) ────────────────────────────────────────── */
+.portal-lesson-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.portal-lesson-row {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.portal-lesson-row:first-child {
+  border-top: none;
+}
+
+.portal-lesson-row-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1.5rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: background 0.15s ease;
+}
+
+.portal-lesson-row-link:hover {
+  background: color-mix(in srgb, var(--accent-primary) 5%, var(--bg-secondary));
+}
+
+.portal-lesson-row-number {
+  width: 1.5rem;
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  font-weight: 500;
+}
+
+.portal-lesson-row--done .portal-lesson-row-number {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.portal-lesson-row-title {
+  flex: 1;
+  font-size: 0.9375rem;
+}
+
+.portal-lesson-row--done .portal-lesson-row-title {
+  color: var(--text-tertiary);
+}
+
+.portal-lesson-row-duration {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.portal-lesson-row-arrow {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.portal-lesson-row-link:hover .portal-lesson-row-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ── Lesson module badge ─────────────────────────────────────────────────── */
+.portal-lesson-module {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-burnt-indigo-light);
+  background: color-mix(in srgb, var(--color-burnt-indigo) 8%, transparent);
+  padding: 0.2rem 0.625rem;
+  border-radius: 2px;
+}
+
+/* ── Prev / Next pagination ─────────────────────────────────────────────── */
+.portal-lesson-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.portal-lesson-pagination-prev,
+.portal-lesson-pagination-next {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  background: var(--bg-secondary);
+}
+
+.portal-lesson-pagination-prev {
+  align-items: flex-start;
+}
+
+.portal-lesson-pagination-next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.portal-lesson-pagination-prev:hover,
+.portal-lesson-pagination-next:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-tertiary);
+}
+
+.portal-lesson-pagination-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.portal-lesson-pagination-title {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
 }
 
 /* ════════════════════════════════════════════════════════════════════════════

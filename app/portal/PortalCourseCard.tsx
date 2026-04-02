@@ -18,7 +18,7 @@ export default function PortalCourseCard({
   const hasStarted = progress > 0
 
   return (
-    <Link href={`/lessons/${slug}`} className="portal-course-card">
+    <Link href={`/portal/${slug}`} className="portal-course-card">
       <div className="portal-course-card-body">
         {/* [COPY] Course title comes from Sanity */}
         <h3 className="portal-course-card-title">{title}</h3>

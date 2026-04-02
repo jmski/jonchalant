@@ -4,8 +4,8 @@ import LoginClient from './LoginClient'
 
 // Login pages must not be indexed — no value for search users
 export const metadata: Metadata = {
-  title: 'Sign In | Kinetic Leader Portal',
-  description: 'Sign in to access The Kinetic Leader learning portal and your enrolled course content.',
+  title: 'Sign In | Jonchalant Portal',
+  description: 'Sign in to access The Foundation learning portal and your enrolled course content.',
   robots: {
     index: false,
     follow: false,
