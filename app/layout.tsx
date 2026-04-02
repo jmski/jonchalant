@@ -5,7 +5,8 @@ import "./globals.css";
 import { RouteAwareLayout } from "@/components/layout";
 import { Navbar, SiteFooter } from "@/components/navigation";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
-import { getContactInfo } from "@/lib/sanity";
+import { getContactInfo, getEmailOptIn } from "@/lib/sanity";
+import type { EmailOptInContent } from "@/lib/types";
 
 // next/font self-hosts both typefaces — no external request, no render block
 const fraunces = Fraunces({
@@ -100,10 +101,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Fetch social links server-side so Sanity client stays out of the client JS bundle
+  // Fetch server-side so Sanity client stays out of the client JS bundle
   let socialLinks: { label: string; href: string; icon: string }[] = [];
+  let optIn: EmailOptInContent | null = null;
   try {
-    const contactInfo = await getContactInfo();
+    const [contactInfo, emailOptIn] = await Promise.all([
+      getContactInfo(),
+      getEmailOptIn(),
+    ]);
     if (contactInfo?.contactMethods) {
       socialLinks = contactInfo.contactMethods
         .filter((m) => ['LinkedIn', 'Instagram', 'TikTok', 'YouTube'].includes(m.label))
@@ -119,8 +124,9 @@ export default async function RootLayout({
             : 'tk',
         }));
     }
+    optIn = emailOptIn ?? null;
   } catch {
-    // Non-critical — navbar social icons are optional
+    // Non-critical — footer and navbar extras are optional
   }
   return (
     <html lang="en" data-theme="default" suppressHydrationWarning className={`${fraunces.variable} ${dmSans.variable}`}>
@@ -171,7 +177,7 @@ export default async function RootLayout({
           </RouteAwareLayout>
 
           {/* Site Footer — hidden on portal/admin routes via internal pathname check */}
-          <SiteFooter socialLinks={socialLinks} />
+          <SiteFooter socialLinks={socialLinks} optIn={optIn} />
 
         {/* Google Analytics — afterInteractive defers load until the page is interactive */}
         {process.env.NEXT_PUBLIC_GA_ID && (

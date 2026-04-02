@@ -1,6 +1,8 @@
-// Public-facing lesson cards shown on /lessons. Not gated content.
+// Unified lesson schema — covers both free preview and enrolled (gated) content.
+// access: 'free' → publicly visible on /program/preview
+// access: 'enrolled' → only accessible inside /portal after payment
 import { defineType, defineField } from 'sanity'
-import type { StringRule, NumberRule } from 'sanity'
+import type { StringRule, NumberRule, SlugRule } from 'sanity'
 
 async function isUnique(slug: string, context: any) {
   const { document, getClient } = context
@@ -23,7 +25,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule: StringRule) => Rule.required(),
+      validation: (Rule: StringRule) => Rule.required().min(3).max(100),
     }),
     defineField({
       name: 'slug',
@@ -34,74 +36,42 @@ export default defineType({
         maxLength: 96,
         isUnique,
       },
+      validation: (Rule: SlugRule) => Rule.required(),
     }),
     defineField({
-      name: 'category',
-      title: 'Category',
+      name: 'access',
+      title: 'Access Level',
       type: 'string',
       options: {
         list: [
-          { title: 'Beginner', value: 'Beginner' },
-          { title: 'Intermediate', value: 'Intermediate' },
-          { title: 'Advanced', value: 'Advanced' },
+          { title: 'Free — publicly visible as preview', value: 'free' },
+          { title: 'Enrolled — requires purchase', value: 'enrolled' },
         ],
+        layout: 'radio',
       },
-    }),
-    defineField({
-      name: 'pillar',
-      title: 'Pillar',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Physical Grounding', value: 'Physical Grounding' },
-          { title: 'Social Scripting', value: 'Social Scripting' },
-          { title: 'Energy Mastery', value: 'Energy Mastery' },
-        ],
-      },
+      initialValue: 'enrolled',
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Short Description',
       type: 'text',
-      validation: (Rule: StringRule) => Rule.required(),
-    }),
-    // Duration in minutes — display formatting handled in components
-    defineField({
-      name: 'duration',
-      title: 'Duration',
-      type: 'number',
-      description: 'Duration in minutes',
+      description: 'Brief summary shown on course overview and lesson cards.',
+      validation: (Rule: StringRule) => Rule.required().min(20),
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: 'icon',
-      title: 'Icon Emoji',
+      name: 'videoId',
+      title: 'YouTube Video ID',
       type: 'string',
-      description: 'Emoji icon for the lesson',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Display Order',
-      type: 'number',
-      description: 'Lower numbers appear first',
-      validation: (Rule: NumberRule) => Rule.required(),
-    }),
-    defineField({
-      name: 'videoUrl',
-      title: 'Video URL',
-      type: 'url',
-      description: 'URL for embedded video (YouTube, Vimeo, etc.)',
+      validation: (Rule: StringRule) =>
+        Rule.regex(/^[a-zA-Z0-9_-]{11}$/).warning(
+          'Should be an 11-character YouTube ID (e.g. "dQw4w9WgXcQ")'
+        ),
+      description: 'Just the ID — e.g. "dQw4w9WgXcQ" from youtube.com/watch?v=dQw4w9WgXcQ',
     }),
     defineField({
       name: 'body',
-      title: 'Body Content',
+      title: 'Lesson Content',
       type: 'array',
       of: [
         { type: 'block' },
@@ -109,33 +79,55 @@ export default defineType({
           type: 'image',
           options: { hotspot: true },
           fields: [
-            defineField({
-              name: 'alt',
-              title: 'Alt Text',
-              type: 'string',
-            }),
-            defineField({
-              name: 'caption',
-              title: 'Caption',
-              type: 'string',
-            }),
+            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+            defineField({ name: 'caption', title: 'Caption', type: 'string' }),
           ],
         },
       ],
-      description: 'Rich text content for the lesson',
+      description: 'Main lesson body — the technical explanation and how to apply it.',
     }),
     defineField({
-      name: 'estimatedDuration',
-      title: 'Estimated Duration',
-      type: 'string',
-      description: 'e.g. "8 min", "15 min read"',
+      name: 'socialLogic',
+      title: 'Social Logic',
+      type: 'text',
+      description: 'How this movement/dance concept maps to executive presence and leadership.',
     }),
     defineField({
-      name: 'isFreePreview',
-      title: 'Free Preview',
-      type: 'boolean',
-      initialValue: false,
-      description: 'Allow public access to this lesson without enrollment',
+      name: 'technicalNotes',
+      title: 'Technical Notes',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          {
+            name: 'label',
+            title: 'Label',
+            type: 'string',
+            description: 'e.g. "Breathing Pattern", "Hand Position"',
+          },
+          {
+            name: 'content',
+            title: 'Content',
+            type: 'text',
+            description: 'Detailed explanation.',
+          },
+        ],
+      }],
+      description: 'Structured key points displayed below the video.',
+    }),
+    defineField({
+      name: 'duration',
+      title: 'Duration (minutes)',
+      type: 'number',
+      description: 'Video length in minutes.',
+      validation: (Rule: NumberRule) => Rule.min(1).max(180),
+    }),
+    defineField({
+      name: 'order',
+      title: 'Lesson Order',
+      type: 'number',
+      description: 'Lower numbers appear first within a module.',
+      validation: (Rule: NumberRule) => Rule.required().min(0),
     }),
     defineField({
       name: 'module',
@@ -143,12 +135,27 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'module' }],
       validation: (Rule: any) => Rule.required(),
-      description: 'The module this lesson belongs to',
+      description: 'The module this lesson belongs to.',
     }),
     defineField({
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
+      initialValue: () => new Date().toISOString(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      access: 'access',
+      duration: 'duration',
+    },
+    prepare(selection) {
+      const { title, access, duration } = selection
+      return {
+        title,
+        subtitle: `${access === 'free' ? 'Free preview' : 'Enrolled'} • ${duration ?? '?'} min`,
+      }
+    },
+  },
 })

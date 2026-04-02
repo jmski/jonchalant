@@ -13,7 +13,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
+  useCdn: false,
   token: process.env.SANITY_API_TOKEN,
 })
 
@@ -129,12 +129,9 @@ const LESSON_FIELDS = `
     _id,
     title,
     slug,
-    category,
-    pillar,
+    access,
     description,
     duration,
-    image,
-    icon,
     order
   `
 
@@ -157,8 +154,8 @@ const COURSE_FIELDS = `
       lessons[]-> {
         slug,
         title,
-        isFreePreview,
-        estimatedDuration,
+        access,
+        duration,
         order
       }
     }
@@ -174,8 +171,8 @@ const MODULE_FIELDS = `
       _id,
       slug,
       title,
-      isFreePreview,
-      estimatedDuration,
+      access,
+      duration,
       order
     }
   `
@@ -184,12 +181,15 @@ const LESSON_FIELDS_FULL = `
     _id,
     title,
     slug,
+    access,
     description,
+    videoId,
     body,
-    videoUrl,
-    isFreePreview,
-    estimatedDuration,
-    order
+    socialLogic,
+    technicalNotes[] { label, content, _key },
+    duration,
+    order,
+    module-> { _id, title, "slug": slug.current }
   `
 
 // ============================================================================
@@ -241,61 +241,6 @@ export async function getCollaborationsByCategory(category: string) {
   return fetchList('collaboration', COLLABORATION_FIELDS, `category == "${category}"`)
 }
 
-// ============================================================================
-// MEDIA KIT DATA
-// ============================================================================
-
-export async function getMediaKitData() {
-  const query = `*[_type == "mediaKitData"][0] {
-    _id,
-    title,
-    heroBadge,
-    heroHeadline,
-    heroSubheadline,
-    shortBio,
-    longBio,
-    stats | order(order asc) {
-      value,
-      label,
-      order
-    },
-    expertiseAreas | order(order asc) {
-      title,
-      description,
-      order
-    },
-    pressAssetsPdfUrl,
-    pressAssetsLabel,
-    contactHeadline,
-    contactSubheadline,
-    keyMetrics | order(order asc) {
-      label,
-      value,
-      change,
-      order
-    },
-    platforms | order(order asc) {
-      name,
-      handle,
-      followers,
-      avgViews,
-      category,
-      order
-    },
-    contentCategories | order(order asc) {
-      name,
-      percentage,
-      description,
-      order
-    },
-    audience {
-      age,
-      gender,
-      locations
-    }
-  }`
-  return await client.fetch(query)
-}
 
 // ============================================================================
 // TESTIMONIALS
@@ -325,12 +270,8 @@ export async function getLessons() {
   return fetchList('lesson', LESSON_FIELDS)
 }
 
-export async function getLessonsByCategory(category: string) {
-  return fetchList('lesson', LESSON_FIELDS, `category == "${category}"`)
-}
-
-export async function getLessonsByPillar(pillar: string) {
-  return fetchList('lesson', LESSON_FIELDS, `pillar == "${pillar}"`)
+export async function getFreeLessons() {
+  return fetchList('lesson', LESSON_FIELDS, `access == "free"`)
 }
 
 // ============================================================================
@@ -466,6 +407,82 @@ export async function getHomePageContent() {
 }
 
 // ============================================================================
+// AUDIT PAGE CONTENT
+// ============================================================================
+
+export async function getAuditPageContent() {
+  const query = `*[_type == "auditPage"][0] {
+    pageHeaderBadge,
+    pageHeaderHeadline,
+    pageHeaderBody,
+    pageFooterNote,
+    captureBadge,
+    captureHeadline,
+    captureBody,
+    capturePrivacyNote,
+    resultBands[] {
+      band,
+      headline,
+      body
+    },
+    resultNextHeading,
+    resultNextBody,
+    resultCtaText,
+    resultCtaButtonLabel,
+    resultCtaHref
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// CONTACT PAGE CONTENT
+// ============================================================================
+
+export async function getContactPageContent() {
+  const query = `*[_type == "contactPage"][0] {
+    auditPromptBadge,
+    auditPromptHeadline,
+    auditPromptBody,
+    auditPromptButtonText,
+    auditPromptNote,
+    auditStats[] {
+      number,
+      label
+    },
+    coachingPathHeading,
+    coachingPathBody,
+    coachingCalendlyHref,
+    coachingCalendlyLabel,
+    sidebarHeading,
+    sidebarItems[] {
+      title,
+      body
+    },
+    sidebarEmailText
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// EMAIL OPT-IN
+// ============================================================================
+
+export type { EmailOptInContent } from './types'
+
+export async function getEmailOptIn() {
+  const query = `*[_type == "emailOptIn"][0] {
+    eyebrow,
+    heading,
+    description,
+    submitButtonText,
+    disclaimer,
+    successTitle,
+    successBody
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
 // DANCE CATEGORY FILTER
 // ============================================================================
 
@@ -479,16 +496,6 @@ export async function getDanceCategoryFilter() {
   return await client.fetch(query)
 }
 
-// ============================================================================
-// COLLABORATION PACKAGES
-// ============================================================================
-
-export async function getCollaborationPackages() {
-  const packages = await client.fetch(
-    `*[_type == "collaboration"] | order(order asc) { "name": title, price, "features": coalesce(deliverables, []), order }`
-  )
-  return { packages }
-}
 
 // ============================================================================
 // COURSES

@@ -10,16 +10,15 @@ import danceCategoryFilter from './schemas/danceCategoryFilter'
 import homePageContent from './schemas/homePageContent'
 import lesson from './schemas/lesson'
 import course from './schemas/course'
-import mediaKitData from './schemas/mediaKitData'
 import pageMetadata from './schemas/pageMetadata'
 import portfolio from './schemas/portfolio'
 import programsPageContent from './schemas/programsPageContent'
 import service from './schemas/service'
 import testimonial from './schemas/testimonial'
 import module from './schemas/module'
-import portalLesson from './schemas/portalLesson'
 import danceCategory from './schemas/danceCategory'
 import instagramReel from './schemas/instagramReel'
+import emailOptIn from './schemas/emailOptIn'
 
 export default defineConfig({
   name: 'default',
@@ -41,16 +40,15 @@ export default defineConfig({
       homePageContent,
       lesson,
       course,
-      mediaKitData,
       pageMetadata,
       portfolio,
       programsPageContent,
       service,
       testimonial,
       module,
-      portalLesson,
       danceCategory,
       instagramReel,
+      emailOptIn,
     ] as any,
   } as any,
 } as any)

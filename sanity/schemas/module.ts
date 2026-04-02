@@ -60,7 +60,7 @@ export default defineType({
       type: 'array',
       of: [{
         type: 'reference',
-        to: [{ type: 'lesson' }, { type: 'portalLesson' }],
+        to: [{ type: 'lesson' }],
       }],
       description: 'Add lesson references to build out the module curriculum',
     }),

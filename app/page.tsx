@@ -122,17 +122,17 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* CLIENT TESTIMONIALS SECTION */}
-        <SectionWrapper variant="secondary" className="section-wrapper--moss">
-          <SectionContent>
-            {testimonials && testimonials.length > 0 && (
+        {testimonials && testimonials.length > 0 && (
+          <SectionWrapper variant="secondary" className="section-wrapper--moss">
+            <SectionContent>
               <Testimonials
                 testimonials={testimonials}
                 eyebrow={homeContent?.testimonialsEyebrow}
                 heading={homeContent?.testimonialsHeading}
               />
-            )}
-          </SectionContent>
-        </SectionWrapper>
+            </SectionContent>
+          </SectionWrapper>
+        )}
 
         {/* FINAL CTA */}
         <SectionWrapper variant="tertiary">

@@ -69,7 +69,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
   const firstFreeLesson: { slug: { current: string }; title: string } | null =
     (course.modules ?? [])
       .flatMap((m) => m.lessons ?? [])
-      .find((l) => l.isFreePreview) ?? null
+      .find((l) => l.access === 'free') ?? null
 
   return (
     <div className="course-detail-page">

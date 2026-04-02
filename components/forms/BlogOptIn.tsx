@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, FormEvent } from 'react'
+import { useState, useEffect } from 'react'
+import type { EmailOptInContent } from '@/lib/types'
 
 const STORAGE_KEY = 'jonchalant_subscribed'
 
@@ -10,7 +11,12 @@ interface OptInState {
   error: string | null
 }
 
-export function BlogOptIn() {
+interface BlogOptInProps {
+  optIn?: EmailOptInContent | null
+  variant?: 'blog' | 'footer'
+}
+
+export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [alreadySubscribed, setAlreadySubscribed] = useState(false)
@@ -20,14 +26,13 @@ export function BlogOptIn() {
     error: null,
   })
 
-  // Check localStorage on mount — hide form if already subscribed
   useEffect(() => {
     if (typeof window !== 'undefined' && localStorage.getItem(STORAGE_KEY) === 'true') {
       setAlreadySubscribed(true)
     }
   }, [])
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     setState({ isSubmitting: true, submitted: false, error: null })
 
@@ -55,17 +60,89 @@ export function BlogOptIn() {
     }
   }
 
-  if (alreadySubscribed) {
-    return null
+  if (alreadySubscribed) return null
+
+  if (variant === 'footer') {
+    if (state.submitted) {
+      return (
+        <div className="site-footer-optin-inner">
+          <div className="site-footer-optin-success">
+            <span className="site-footer-optin-success-icon">✓</span>
+            {optIn?.successTitle && (
+              <p className="site-footer-optin-success-title">{optIn.successTitle}</p>
+            )}
+            {optIn?.successBody && (
+              <p className="site-footer-optin-success-body">{optIn.successBody}</p>
+            )}
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="site-footer-optin-inner">
+        <div className="site-footer-optin-copy">
+          {optIn?.eyebrow && (
+            <span className="site-footer-optin-eyebrow">{optIn.eyebrow}</span>
+          )}
+          {optIn?.heading && (
+            <h3 className="site-footer-optin-title">{optIn.heading}</h3>
+          )}
+          {optIn?.description && (
+            <p className="site-footer-optin-description">{optIn.description}</p>
+          )}
+        </div>
+
+        <form onSubmit={handleSubmit} className="site-footer-optin-form" noValidate>
+          <div className="site-footer-optin-fields">
+            <input
+              type="text"
+              name="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First name"
+              required
+              autoComplete="given-name"
+              className="site-footer-optin-input"
+              disabled={state.isSubmitting}
+            />
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              autoComplete="email"
+              className="site-footer-optin-input"
+              disabled={state.isSubmitting}
+            />
+            <button
+              type="submit"
+              className="site-footer-optin-btn"
+              disabled={state.isSubmitting}
+            >
+              {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
+            </button>
+          </div>
+          {state.error && (
+            <p className="site-footer-optin-error" role="alert">{state.error}</p>
+          )}
+        </form>
+      </div>
+    )
   }
 
+  // blog variant (default)
   if (state.submitted) {
     return (
       <div className="blog-optin blog-optin--success">
-        <p className="blog-optin-success-title">You're in. ✓</p>
-        <p className="blog-optin-success-body">
-          Check your inbox — the Quiet Command Starter Guide is on its way.
-        </p>
+        {optIn?.successTitle && (
+          <p className="blog-optin-success-title">{optIn.successTitle}</p>
+        )}
+        {optIn?.successBody && (
+          <p className="blog-optin-success-body">{optIn.successBody}</p>
+        )}
       </div>
     )
   }
@@ -74,13 +151,15 @@ export function BlogOptIn() {
     <div className="blog-optin">
       <div className="blog-optin-inner">
         <div className="blog-optin-copy">
-          <p className="blog-optin-eyebrow">Free for introverts</p>
-          <h3 className="blog-optin-title">
-            Get the Quiet Command Starter Guide
-          </h3>
-          <p className="blog-optin-description">
-            The 5 body-aware habits that help introverts build executive presence — without performing or pretending.
-          </p>
+          {optIn?.eyebrow && (
+            <p className="blog-optin-eyebrow">{optIn.eyebrow}</p>
+          )}
+          {optIn?.heading && (
+            <h3 className="blog-optin-title">{optIn.heading}</h3>
+          )}
+          {optIn?.description && (
+            <p className="blog-optin-description">{optIn.description}</p>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="blog-optin-form">
@@ -128,12 +207,12 @@ export function BlogOptIn() {
             disabled={state.isSubmitting}
             className="form-submit blog-optin-submit"
           >
-            {state.isSubmitting ? 'Sending…' : 'Send Me the Guide'}
+            {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
           </button>
 
-          <p className="blog-optin-disclaimer">
-            No spam. Unsubscribe any time.
-          </p>
+          {optIn?.disclaimer && (
+            <p className="blog-optin-disclaimer">{optIn.disclaimer}</p>
+          )}
         </form>
       </div>
     </div>

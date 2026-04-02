@@ -43,9 +43,8 @@ const NAV_SECTIONS: NavSection[] = [
         href: '#',
         subitems: [
           { label: 'Programs', href: '/programs' },
-          { label: 'Lessons', href: '/lessons' },
+          { label: 'The Foundation', href: '/foundation' },
           { label: 'Ikigai', href: '/ikigai' },
-          { label: 'Blog', href: '/blog' },
         ],
       },
     ],
@@ -58,7 +57,7 @@ const NAV_SECTIONS: NavSection[] = [
         href: '#',
         subitems: [
           { label: 'Dance', href: '/dance' },
-          { label: 'Media Kit', href: '/media-kit' },
+          { label: 'Blog', href: '/blog' },
         ],
       },
     ],
@@ -70,14 +69,13 @@ const FLAT_NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Coaching', href: '#', dropdown: [
     { label: 'Programs', href: '/programs' },
-    { label: 'Lessons', href: '/lessons' },
+    { label: 'The Foundation', href: '/foundation' },
     { label: 'Ikigai', href: '/ikigai' },
-    { label: 'Blog', href: '/blog' },
   ]},
   { label: 'About', href: '/about' },
   { label: 'Media', href: '#', dropdown: [
     { label: 'Dance', href: '/dance' },
-    { label: 'Media Kit', href: '/media-kit' },
+    { label: 'Blog', href: '/blog' },
   ]},
   { label: 'Contact', href: '/contact' },
 ];

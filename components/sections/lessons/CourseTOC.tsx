@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 interface TocLesson {
   slug: { current: string }
   title: string
-  isFreePreview: boolean
+  access: 'free' | 'enrolled'
   estimatedDuration?: number
   order: number
 }
@@ -109,7 +109,7 @@ export function CourseTOC({
                 <ol className="course-toc-lessons">
                   {(mod.lessons ?? []).map((lesson) => {
                     const slug = lesson.slug?.current ?? ''
-                    const isLocked = !lesson.isFreePreview && !isLoggedIn
+                    const isLocked = lesson.access !== 'free' && !isLoggedIn
                     const isCompleted = completedSlugs.includes(slug)
                     const isActive = slug === activeLessonSlug
 

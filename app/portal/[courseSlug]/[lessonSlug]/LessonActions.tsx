@@ -28,7 +28,6 @@ export default function LessonActions({ userId, lessonSlug, courseSlug }: Props)
     try {
       const progressData = await markLessonComplete(userId, lessonSlug, courseSlug)
       setProgress(progressData)
-      alert('Lesson marked as complete! ✓')
     } catch (err: any) {
       console.error('Error marking lesson complete:', err.message)
     } finally {
@@ -42,7 +41,7 @@ export default function LessonActions({ userId, lessonSlug, courseSlug }: Props)
       disabled={isMarking || !!progress?.completed}
       className={`portal-lesson-complete-button${progress?.completed ? ' portal-lesson-complete-button--done' : ''}`}
     >
-      {progress?.completed ? '✓ Complete' : 'Mark Complete'}
+      {progress?.completed ? '✓ Complete' : isMarking ? 'Saving…' : 'Mark Complete'}
     </button>
   )
 }

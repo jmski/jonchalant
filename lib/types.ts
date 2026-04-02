@@ -34,26 +34,26 @@ export interface Module {
   order: number
 }
 
+export interface TechnicalNote {
+  _key?: string
+  label: string
+  content: string
+}
+
 export interface Lesson {
   _id: string
   title: string
   slug: SanitySlug
-  description: string
-  videoUrl?: string
-  body?: any[]
-  estimatedDuration?: number
-  isFreePreview: boolean
-  order: number
-}
-
-export interface PortalLesson {
-  _id: string
-  title: string
-  slug: SanitySlug
+  access: 'free' | 'enrolled'
+  description?: string
   videoId?: string
+  body?: any[]
+  socialLogic?: string
+  technicalNotes?: TechnicalNote[]
   duration?: number
   order: number
-  module?: { slug: SanitySlug }
+  module?: { _id: string; title: string; slug: SanitySlug }
+  publishedAt?: string
 }
 
 // ── Blog ─────────────────────────────────────────────────────────────────────
@@ -137,33 +137,69 @@ export interface InstagramReel {
   order: number
 }
 
-// ── Media kit ─────────────────────────────────────────────────────────────────
+// ── Audit page ────────────────────────────────────────────────────────────────
 
-export interface MediaKit {
-  title: string
-  heroBadge?: string
-  heroHeadline: string
-  heroSubheadline?: string
-  shortBio: string
-  longBio: string
-  stats: MediaKitStat[]
-  expertiseAreas: MediaKitExpertise[]
-  pressAssetsPdfUrl?: string
-  pressAssetsLabel?: string
-  contactHeadline?: string
-  contactSubheadline?: string
+export interface AuditResultBand {
+  band: 'foundation' | 'developing' | 'refining'
+  headline: string
+  body: string
 }
 
-export interface MediaKitStat {
-  value: string
+export interface AuditPageContent {
+  pageHeaderBadge?: string
+  pageHeaderHeadline?: string
+  pageHeaderBody?: string
+  pageFooterNote?: string
+  captureBadge?: string
+  captureHeadline?: string
+  captureBody?: string
+  capturePrivacyNote?: string
+  resultBands?: AuditResultBand[]
+  resultNextHeading?: string
+  resultNextBody?: string
+  resultCtaText?: string
+  resultCtaButtonLabel?: string
+  resultCtaHref?: string
+}
+
+// ── Contact page ──────────────────────────────────────────────────────────────
+
+export interface ContactAuditStat {
+  number: string
   label: string
-  order: number
 }
 
-export interface MediaKitExpertise {
+export interface ContactSidebarItem {
   title: string
-  description: string
-  order: number
+  body: string
+}
+
+export interface ContactPageContent {
+  auditPromptBadge?: string
+  auditPromptHeadline?: string
+  auditPromptBody?: string
+  auditPromptButtonText?: string
+  auditPromptNote?: string
+  auditStats?: ContactAuditStat[]
+  coachingPathHeading?: string
+  coachingPathBody?: string
+  coachingCalendlyHref?: string
+  coachingCalendlyLabel?: string
+  sidebarHeading?: string
+  sidebarItems?: ContactSidebarItem[]
+  sidebarEmailText?: string
+}
+
+// ── Email opt-in ──────────────────────────────────────────────────────────────
+
+export interface EmailOptInContent {
+  eyebrow?: string
+  heading?: string
+  description?: string
+  submitButtonText?: string
+  disclaimer?: string
+  successTitle?: string
+  successBody?: string
 }
 
 // ── Database ──────────────────────────────────────────────────────────────────

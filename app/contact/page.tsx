@@ -1,34 +1,21 @@
-import type { Metadata } from 'next';
-import ContactClient from './ContactClient';
+import type { Metadata } from 'next'
+import { getContactPageContent } from '@/lib/sanity'
+import type { ContactPageContent } from '@/lib/types'
+import ContactClient from './ContactClient'
 
 export const metadata: Metadata = {
-  title: "Free Presence Audit | Find Your Leadership Presence Gap",
-  description: "Take Jon's free Presence Audit. Answer two questions and receive a personalized breakdown of your biggest executive presence gap — within 48 hours.",
-  keywords: "executive presence audit, leadership presence, introvert leadership coaching, confidence coaching, presence gap",
-  openGraph: {
-    title: "Free Presence Audit — Jonchalant",
-    description: "Two questions. One personalized audit. Find out where your presence is breaking down.",
-    type: "website",
-    url: "https://jonchalant.com/contact",
-    siteName: "Jonchalant",
-    images: {
-      url: "https://jonchalant.com/social/og-contact-1200x630.png",
-      width: 1200,
-      height: 630,
-      alt: "Free Presence Audit with Jon",
-      type: "image/png",
-    },
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Presence Audit — Jonchalant",
-    description: "Two questions. One personalized audit. Find out where your presence is breaking down.",
-    images: ["https://jonchalant.com/social/og-contact-1200x630.png"],
-    creator: "@jonchalant",
-  },
-};
+  title: 'Contact | Jonchalant',
+  description: 'Get in touch with Jon — take the Presence Audit or send a message directly.',
+}
 
-export default function Contact() {
-  return <ContactClient />;
+export default async function Contact() {
+  let contactContent: ContactPageContent | null = null
+
+  try {
+    contactContent = await getContactPageContent()
+  } catch {
+    // Renders with hardcoded fallbacks in ContactClient
+  }
+
+  return <ContactClient content={contactContent} />
 }

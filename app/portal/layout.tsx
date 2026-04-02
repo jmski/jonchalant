@@ -4,10 +4,10 @@ import { AuthProvider } from '@/lib/auth-context';
 // Auth-gated portal: prevent search engines from indexing lesson content
 export const metadata: Metadata = {
   title: {
-    default: 'Learning Portal | The Kinetic Leader',
-    template: '%s | Kinetic Leader Portal',
+    default: 'Learning Portal | Jonchalant',
+    template: '%s | Jonchalant Portal',
   },
-  description: 'Access your Kinetic Leader learning portal. Complete lessons, track your progress, and develop executive presence through body-aware leadership training.',
+  description: 'Access your Jonchalant learning portal. Complete lessons, track your progress, and develop executive presence through body-aware leadership training.',
   robots: {
     index: false,
     follow: false,

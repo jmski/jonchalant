@@ -20,7 +20,7 @@ export interface LessonContentProps {
     description?: string
     body?: any[]
     videoUrl?: string
-    isFreePreview: boolean
+    access: 'free' | 'enrolled'
     estimatedDuration?: number
     slug: { current: string }
   }
@@ -113,7 +113,7 @@ export function LessonContent({
       {/* ── Header ── */}
       <header className="lesson-content-header">
         {/* COPYWRITER: free preview badge label */}
-        {lesson.isFreePreview && (
+        {lesson.access === 'free' && (
           <span className="lesson-content-preview-badge">Free Preview</span>
         )}
         <h1 className="lesson-content-title">{lesson.title}</h1>

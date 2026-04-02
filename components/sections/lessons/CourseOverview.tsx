@@ -5,7 +5,7 @@ import Link from 'next/link'
 interface OverviewLesson {
   slug: { current: string }
   title: string
-  isFreePreview: boolean
+  access: 'free' | 'enrolled'
   estimatedDuration?: number
 }
 
