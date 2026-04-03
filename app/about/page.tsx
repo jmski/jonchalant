@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { CTA } from "@/components/sections";
 import { Hero as AboutHero, Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";

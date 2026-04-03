@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
 import { VideoEmbed } from '@/components/shared/VideoEmbed'
 import { InstagramEmbed } from '@/components/shared/InstagramEmbed'
-import { getDanceCategories, getInstagramReels } from '@/lib/sanity'
+import { getDanceCategories, getInstagramReels, getDancePageContent } from '@/lib/sanity'
 import type { DanceCategory, DanceVideo, InstagramReel } from '@/lib/types'
 
 export const metadata: Metadata = {
@@ -36,28 +37,27 @@ export const metadata: Metadata = {
 }
 
 export default async function Dance() {
-  const [categories, reels] = await Promise.all([
+  const [categories, reels, pageContent] = await Promise.all([
     getDanceCategories().catch(() => [] as DanceCategory[]),
     getInstagramReels().catch(() => [] as InstagramReel[]),
+    getDancePageContent().catch(() => null),
   ])
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <PageTransition animation="fade">
+    <PageTransition animation="fade">
 
         {/* ── SECTION 1: HERO ─────────────────────────────────────────────── */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <section className="dance-page-hero">
-              {/* COPYWRITER: Refine the eyebrow label */}
-              <p className="dance-page-hero-eyebrow">Movement &amp; Leadership</p>
-              {/* COPYWRITER: Craft the primary headline */}
-              <h1 className="dance-page-hero-headline">The Body Leads First</h1>
-              {/* COPYWRITER: Write the subheadline — 2–3 sentences, editorial tone */}
+              <p className="dance-page-hero-eyebrow">
+                {pageContent?.heroEyebrow ?? 'Movement & Leadership'}
+              </p>
+              <h1 className="dance-page-hero-headline">
+                {pageContent?.heroHeadline ?? 'The Body Leads First'}
+              </h1>
               <p className="dance-page-hero-subheadline">
-                Every principle of executive presence has a physical root. Before the words, before
-                the strategy — there is movement. This curriculum teaches leadership through the
-                body.
+                {pageContent?.heroSubheadline ?? 'Every principle of executive presence has a physical root. Before the words, before the strategy — there is movement. This curriculum teaches leadership through the body.'}
               </p>
             </section>
           </SectionContent>
@@ -111,8 +111,9 @@ export default async function Dance() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section className="dance-instagram">
-              {/* COPYWRITER: Refine the section headline */}
-              <h2 className="dance-instagram-headline">On Instagram</h2>
+              <h2 className="dance-instagram-headline">
+                {pageContent?.instagramHeadline ?? 'On Instagram'}
+              </h2>
 
               {reels.length === 0 ? (
                 <p className="dance-instagram-empty">Check back soon for new content.</p>
@@ -131,22 +132,19 @@ export default async function Dance() {
         <SectionWrapper variant="primary">
           <SectionContent>
             <section className="dance-cta">
-              {/* COPYWRITER: Write a compelling headline — connect movement to coaching transformation */}
-              <h2 className="dance-cta-headline">Your Presence Is Built in the Body</h2>
-              {/* COPYWRITER: 1–2 sentences. Bridge the curriculum to the coaching offer. */}
+              <h2 className="dance-cta-headline">
+                {pageContent?.ctaHeadline ?? 'Your Presence Is Built in the Body'}
+              </h2>
               <p className="dance-cta-body">
-                These movement principles are the physical foundation of every coaching program.
-                If you are ready to embody your leadership presence, explore the full curriculum.
+                {pageContent?.ctaBody ?? 'These movement principles are the physical foundation of every coaching program. If you are ready to embody your leadership presence, explore the full curriculum.'}
               </p>
-              <a href="/programs" className="dance-cta-button">
-                {/* COPYWRITER: Confirm or refine button text */}
-                Explore Coaching Programs
-              </a>
+              <Link href={pageContent?.ctaButtonHref ?? '/programs'} className="btn btn-primary">
+                {pageContent?.ctaButtonLabel ?? 'Explore Coaching Programs'}
+              </Link>
             </section>
           </SectionContent>
         </SectionWrapper>
 
-      </PageTransition>
-    </div>
+    </PageTransition>
   )
 }

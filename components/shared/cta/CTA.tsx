@@ -19,7 +19,7 @@ export default function CTA({
       <div className="cta-section">
         <div className="cta-section-left">
           <h2 className="cta-section-title">{title}</h2>
-          <a href={buttonLink} className="cta-section-button">{buttonText}</a>
+          <a href={buttonLink} className="btn btn-primary">{buttonText}</a>
         </div>
         <div className="cta-section-description">
           {description}

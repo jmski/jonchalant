@@ -23,7 +23,18 @@
 @import "./css/layout.css" layer(components);
 @import "./css/cards.css" layer(components);
 @import "./css/sections.css" layer(components);
-@import "./css/pages.css" layer(components);
+
+/* Page-scoped styles (split from pages.css for maintainability) */
+@import "./css/pages-forms.css" layer(components);
+@import "./css/pages-portal.css" layer(components);
+@import "./css/pages-blog.css" layer(components);
+@import "./css/pages-audit.css" layer(components);
+@import "./css/pages-ikigai.css" layer(components);
+@import "./css/pages-lessons.css" layer(components);
+@import "./css/pages-dance.css" layer(components);
+@import "./css/pages-portal-tools.css" layer(components);
+@import "./css/pages-contact.css" layer(components);
+@import "./css/pages-foundation.css" layer(components);
 
 /* Utility Classes & Patterns */
 @import "./css/utilities.css" layer(utilities);

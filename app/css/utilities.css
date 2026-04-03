@@ -226,53 +226,11 @@
   }
 }
 
-/* BUTTON UTILITIES - Consistent hover and active states */
-.btn-base {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.875rem;
-  transition: all var(--transition-base);
-  cursor: pointer;
-}
-.btn-primary {
-  border-color: var(--accent-vibrant);
-  background-color: var(--accent-vibrant);
-  color: var(--bg-primary);
-}
-.btn-primary:hover {
-  background-color: var(--accent-vibrant-hover);
-  border-color: var(--accent-vibrant-hover);
-  box-shadow: 0 6px 16px rgba(0, 82, 204, 0.2);
-}
-.btn-secondary {
-  border-color: var(--accent-secondary);
-  color: var(--accent-secondary);
-  background-color: transparent;
-}
-.btn-secondary:hover {
-  background-color: var(--accent-secondary);
-  color: var(--bg-primary);
-  box-shadow: 0 6px 16px rgba(0, 188, 212, 0.2);
-}
-
 /* INTERACTIVE ELEMENTS - Smooth transitions */
 .interactive-element {
   transition: all var(--transition-base);
 }
 .interactive-element:hover {
-}
-
-/* SECTION HEADER - Typography with accent */
-.section-header {
-  border-bottom: 3px solid var(--accent-vibrant);
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
 }
 
 /* TEXT UTILITIES - Readability focused */

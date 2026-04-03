@@ -88,7 +88,7 @@
   --accent-hover: #8aa87a; /* Moss light - hover state */
   --accent-vibrant: #6b8e63; /* Alias for primary accent (backward compatibility) */
   --accent-vibrant-hover: #8aa87a; /* Alias for hover (backward compatibility) */
-  --btn-primary-text: #ffffff; /* Button text color */
+  --btn-primary-text: #f8f8f8; /* Button text — dark for contrast on muted moss */
 
   /* Overlay & Effects */
   --overlay-dark: rgba(26, 26, 26, 0.08);

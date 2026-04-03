@@ -1,0 +1,648 @@
+
+/* ── Section 1: Intro ───────────────────────────────────────────────────────── */
+
+.ikigai-intro {
+  padding: var(--spacing-xl) 0 var(--spacing-lg);
+}
+
+.ikigai-intro-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .ikigai-intro-content {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+  }
+}
+
+.ikigai-intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.ikigai-intro-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 0.25rem;
+}
+
+.ikigai-intro-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.ikigai-intro-body {
+  font-size: 1.05rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.ikigai-intro-body em {
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+.ikigai-intro-body strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Four quadrant chips below body copy */
+.ikigai-intro-quadrants {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: var(--spacing-xs);
+}
+
+.ikigai-intro-quadrant {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+.ikigai-intro-quadrant--passion {
+  border-left: 3px solid #4a3a5c;
+}
+.ikigai-intro-quadrant--mission {
+  border-left: 3px solid #6b8e63;
+}
+.ikigai-intro-quadrant--vocation {
+  border-left: 3px solid #b89a5f;
+}
+.ikigai-intro-quadrant--profession {
+  border-left: 3px solid #6a8aaa;
+}
+
+.ikigai-intro-quadrant-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.ikigai-intro-quadrant-desc {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.ikigai-intro-cta {
+  align-self: flex-start;
+  margin-top: var(--spacing-xs);
+  cursor: pointer;
+}
+
+/* SVG diagram wrapper */
+.ikigai-intro-diagram {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.ikigai-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Section 2: Quiz ─────────────────────────────────────────────────────────── */
+
+.ikigai-quiz {
+  padding: var(--spacing-xl) 0;
+  scroll-margin-top: 88px;
+}
+
+.ikigai-quiz-inner {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.ikigai-quiz-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.ikigai-quiz-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.ikigai-quiz-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+.ikigai-quiz-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* Progress bar */
+.ikigai-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ikigai-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ikigai-progress-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.ikigai-progress-pct {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.ikigai-progress-track {
+  height: 4px;
+  background: var(--border-subtle);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ikigai-progress-fill {
+  height: 100%;
+  background: var(--accent-primary);
+  border-radius: 999px;
+}
+
+/* Question card — animated container */
+.ikigai-question-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+.ikigai-question-card.is-exiting {
+  opacity: 0;
+  transform: translateX(-22px);
+}
+
+@keyframes ikigai-question-enter {
+  from {
+    opacity: 0;
+    transform: translateX(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ikigai-question-card.is-entering {
+  animation: ikigai-question-enter 0.32s ease forwards;
+  transition: none;
+}
+
+/* Quadrant tag above question */
+.ikigai-question-meta {
+  display: flex;
+  align-items: center;
+}
+
+.ikigai-quadrant-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  color: #fff;
+}
+
+.ikigai-quadrant-tag--passion {
+  background: #4a3a5c;
+}
+.ikigai-quadrant-tag--mission {
+  background: #6b8e63;
+}
+.ikigai-quadrant-tag--vocation {
+  background: #b89a5f;
+}
+.ikigai-quadrant-tag--profession {
+  background: #6a8aaa;
+}
+
+.ikigai-question-text {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: var(--leading-relaxed);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* 2×2 answer grid */
+.ikigai-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.ikigai-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-subtle),
+    background var(--transition-subtle),
+    transform var(--transition-subtle);
+  text-align: center;
+}
+
+.ikigai-option:hover,
+.ikigai-option:focus-visible {
+  border-color: var(--accent-primary);
+  background: var(--bg-primary);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.ikigai-option:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-primary);
+}
+
+.ikigai-option-value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  transition:
+    background var(--transition-subtle),
+    color var(--transition-subtle);
+}
+
+.ikigai-option:hover .ikigai-option-value,
+.ikigai-option:focus-visible .ikigai-option-value {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+.ikigai-option-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+/* Quiz complete state */
+.ikigai-quiz-complete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-align: center;
+  padding: var(--spacing-md) 0;
+}
+
+.ikigai-quiz-complete-head {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ikigai-quiz-complete-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 480px;
+  margin: 0;
+}
+
+.ikigai-submit-btn {
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ── Section 3: Results ───────────────────────────────────────────────────────── */
+
+.ikigai-results {
+  padding: var(--spacing-xl) 0;
+  scroll-margin-top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.ikigai-results-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ikigai-results-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.ikigai-results-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+.ikigai-results-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  max-width: 560px;
+}
+
+/* Bar chart */
+.ikigai-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 640px;
+}
+
+.ikigai-bar-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 48px;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .ikigai-bar-row {
+    grid-template-columns: 140px 1fr 40px;
+    gap: 0.6rem;
+  }
+}
+
+.ikigai-bar-row.is-dominant .ikigai-bar-meta {
+  color: var(--text-primary);
+}
+
+.ikigai-bar-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ikigai-bar-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ikigai-bar-desc {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+}
+
+.ikigai-bar-track {
+  height: 10px;
+  background: var(--border-subtle);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ikigai-bar-row.is-dominant .ikigai-bar-track {
+  height: 12px;
+}
+
+.ikigai-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  width: 0%;
+}
+
+.ikigai-bar-fill--passion {
+  background: #4a3a5c;
+}
+.ikigai-bar-fill--mission {
+  background: #6b8e63;
+}
+.ikigai-bar-fill--vocation {
+  background: #b89a5f;
+}
+.ikigai-bar-fill--profession {
+  background: #6a8aaa;
+}
+
+.ikigai-bar-fill.is-dominant {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+}
+
+.ikigai-bar-score {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.ikigai-bar-total {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+/* Dominant callout */
+.ikigai-dominant-callout {
+  padding: var(--spacing-md);
+  border-radius: 1rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-top-width: 3px;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.ikigai-dominant-callout--passion {
+  border-top-color: #4a3a5c;
+}
+.ikigai-dominant-callout--mission {
+  border-top-color: #6b8e63;
+}
+.ikigai-dominant-callout--vocation {
+  border-top-color: #b89a5f;
+}
+.ikigai-dominant-callout--profession {
+  border-top-color: #6a8aaa;
+}
+
+.ikigai-dominant-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ikigai-dominant-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.ikigai-dominant-title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+.ikigai-dominant-body {
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Results CTA */
+.ikigai-results-cta {
+  padding: var(--spacing-md);
+  border-radius: 1rem;
+  background: var(--color-burnt-indigo);
+  color: #fff;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.ikigai-results-cta-headline {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+.ikigai-results-cta-body {
+  font-size: 0.95rem;
+  line-height: var(--leading-relaxed);
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.ikigai-results-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.ikigai-cta-btn {
+  background: var(--color-muted-moss);
+  color: var(--btn-primary-text);
+  border: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition:
+    background var(--transition-subtle),
+    transform var(--transition-subtle);
+}
+
+.ikigai-cta-btn:hover {
+  background: var(--color-moss-light);
+  transform: translateY(-1px);
+}
+
+.ikigai-retake-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color var(--transition-subtle),
+    border-color var(--transition-subtle),
+    background var(--transition-subtle);
+}
+
+.ikigai-retake-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.08);
+}
+

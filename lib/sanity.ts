@@ -558,3 +558,52 @@ export async function getDanceCategories() {
 export async function getInstagramReels() {
   return fetchList('instagramReel', INSTAGRAM_REEL_FIELDS)
 }
+
+export async function getDancePageContent() {
+  const query = `*[_type == "dancePageContent"][0] {
+    heroEyebrow,
+    heroHeadline,
+    heroSubheadline,
+    instagramHeadline,
+    ctaHeadline,
+    ctaBody,
+    ctaButtonLabel,
+    ctaButtonHref
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// FOUNDATION PAGE
+// ============================================================================
+
+export async function getFoundationPageContent() {
+  const query = `*[_type == "foundationPage"][0] {
+    heroEyebrow,
+    heroHeadline,
+    heroSubheadline,
+    heroBody,
+    heroPrimaryCtaLabel,
+    heroSecondaryCtaLabel,
+    heroNote,
+    insideEyebrow,
+    insideTitle,
+    insideBody,
+    modules[] { week, title, description },
+    whoEyebrow,
+    whoTitle,
+    whoItems,
+    howEyebrow,
+    howTitle,
+    howCards[] { label, body },
+    pricingEyebrow,
+    pricingTitle,
+    pricingNote,
+    pricingTiers[] { tier, tierKey, price, description, features, cta, primary },
+    ctaTitle,
+    ctaBody,
+    ctaButtonLabel,
+    ctaNote
+  }`
+  return await client.fetch(query)
+}

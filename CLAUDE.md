@@ -1,696 +1,149 @@
-# CLAUDE.md — Jonchalant Codebase Context
+# CLAUDE.md — Jonchalant Codebase Rules
 
-Complete reference for the jonchalant.com website codebase. Updated: March 2026.
+Rules and conventions for the jonchalant.com codebase. For detailed reference (component trees, page breakdowns, Sanity schemas, data fetching functions), see `.github/copilot-instructions.md`.
 
 ---
 
-## Tech Stack & Versions
+## Stack & Build
 
-| Tool                  | Version             |
-| --------------------- | ------------------- |
-| Next.js               | 16.1.1 (App Router) |
-| React                 | 19.2.3              |
-| TypeScript            | ^5                  |
-| Tailwind CSS          | ^4 (utility-only)   |
-| Sanity CMS            | ^4.22.0             |
-| @sanity/client        | ^6.29.1             |
-| next-sanity           | ^11.6.12            |
-| @supabase/supabase-js | ^2.98.0             |
-| styled-components     | ^6.3.11             |
-| resend                | ^6.9.3              |
-
-**Build commands:**
+Next.js 16.1.1 (App Router) | React 19 | TypeScript 5 | Tailwind v4 (utility-only) | Sanity CMS | Supabase Auth | Resend
 
 ```bash
-npm run dev          # http://localhost:3000 with hot reload
-npm run build        # Production build (Turbopack)
-npm run start        # Run production build locally
-npm run lint         # ESLint
-npm run sanity:dev   # cd sanity && npm run dev
-npm run sanity:deploy # cd sanity && npm run deploy
+npm run dev           # localhost:3000
+npm run build         # Production build (Turbopack)
+npm run lint          # ESLint
+npm run sanity:dev    # Sanity Studio dev
+npm run sanity:deploy # Deploy Sanity Studio
 ```
 
-**Key config (next.config.ts):**
-
-- `reactCompiler: true` — automatic memoization, no manual useMemo/useCallback
-- `turbopack: { root: __dirname }` — faster builds
-- Remote image patterns: `images.unsplash.com`, `picsum.photos`
+Config: `reactCompiler: true` (no manual useMemo/useCallback), `turbopack` enabled.
 
 ---
 
 ## Project Purpose
 
-**Professional Executive Presence Coaching Platform** for Jon. The site offers coaching programs, blog content, lessons, case studies, testimonials, dance choreography portfolio, and a media kit. Target audience: introverts, shy professionals, and corporate clients. Design philosophy: Japanese Zen-inspired (burnt indigo + muted moss palette, editorial typography, generous whitespace).
+Executive Presence Coaching Platform for Jon. Coaching programs, blog, lessons, dance portfolio, media kit. Target: introverts & corporate clients. Design: Japanese Zen-inspired (burnt indigo + muted moss palette, editorial typography, generous whitespace). Light mode only.
 
 ---
 
-## Routing Structure (App Router)
+## Strict Rules
 
-```
-app/
-├── page.tsx              → Home page
-├── about/page.tsx        → About Jon
-├── blog/
-│   ├── page.tsx          → Blog index
-│   └── [slug]/           → Blog post (dynamic)
-├── audit/
-│   ├── page.tsx          → Presence Audit (server wrapper, fetches auditPage content)
-│   └── AuditClient.tsx   → Client component (multi-step quiz, capture, result stages)
-├── programs/page.tsx     → Coaching programs
-├── dance/page.tsx        → Choreography portfolio
-├── lessons/
-│   ├── page.tsx          → Lessons by level
-│   └── [courseSlug]/
-│       ├── page.tsx      → Course detail with sticky TOC
-│       └── [lessonSlug]/page.tsx → Lesson page with video + progress tracking
-├── media-kit/page.tsx    → Media kit & collaboration
-├── contact/
-│   ├── page.tsx          → Server wrapper (fetches contactPage content, passes props)
-│   └── ContactClient.tsx → Client component (audit prompt + inquiry form)
-├── login/
-│   ├── page.tsx          → Auth page (email + Google OAuth)
-│   └── LoginClient.tsx   → Client form component
-├── portal/
-│   ├── layout.tsx
-│   ├── page.tsx          → Protected dashboard (requires Supabase auth)
-│   ├── PortalCourseCard.tsx
-│   ├── SignOutButton.tsx
-│   └── [slug]/
-│       ├── page.tsx      → Portal lesson page (server, gated)
-│       └── LessonActions.tsx
-├── ikigai/
-│   ├── page.tsx          → Interactive Ikigai quiz with SVG diagram
-│   └── IkigaiClient.tsx  → Client component
-├── privacy/page.tsx      → Privacy policy (static)
-├── auth/callback/        → OAuth callback route (Supabase SSR)
-├── admin/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   ├── auth/
-│   ├── inquiries/
-│   ├── login/
-│   └── reset-password/
-├── api/
-│   ├── inquiries/        → Inquiry form API route
-│   └── subscribe/        → Email subscribe API route (Kit/ConvertKit)
-└── css/                  → 10 consolidated CSS files
-```
+### CSS Rules
+1. **No `!important`** — fix specificity/cascade instead
+2. **No new CSS files** — 19 files exist (9 system + 10 page-scoped). Add styles to the relevant one
+3. **No inline styles** except truly dynamic values
+4. **No Tailwind in component JSX** — only `text-*`, `font-*`, `leading-*`, responsive breakpoint prefixes allowed
+5. **BEM-inspired kebab-case naming**: `.section-name`, `.section-name-header`, `.section-name-title`
+6. **Light mode only** — no dark mode
+
+### Component Rules
+7. **No "Section" suffix** on component names (`Hero` not `HeroSection`)
+8. **Server components by default** — only `'use client'` for interactive state (carousels, forms, toggles)
+9. **Import alias `@/` always** — never relative paths from deep files
+10. **All sections exported from `components/sections/index.ts`** with descriptive aliases
+
+### Data Rules
+11. **Sanity fallback pattern**: `try { fetch } catch { use fallback }`
+12. **No hardcoded page copy** — all marketing text from Sanity or lib data files. Fallback strings (`?? 'fallback'`) acceptable
+13. **Audit quiz data** stays in `lib/auditData.ts` (not Sanity) — scoring thresholds are coupled to question structure
+14. **Shared TypeScript types** live in `lib/types.ts` — import from there, don't re-declare inline
+
+### Auth Rules
+15. **Never import `lib/supabase.ts`** (deleted). Use SSR-safe helpers:
+    - Server: `import { createClient } from "@/utils/supabase/server"`
+    - Client: `import { createClient } from "@/utils/supabase/client"`
+16. **Auth-gate logic lives client-side** in the `useAuth` hook (`lib/auth-context.tsx`) — not in middleware
 
 ---
 
 ## CSS Architecture
 
-### app/globals.css imports:
-
-```css
-@layer reset, variables, base, components, utilities, interactive;
-
-@layer variables  → ./css/variables.css
-@layer base       → ./css/base.css
-@layer components → ./css/components.css, ./css/typography.css,
-                    ./css/layout.css, ./css/cards.css,
-                    ./css/sections.css, ./css/pages.css
-@layer utilities  → ./css/utilities.css
-@layer interactive → ./css/interactions.css;
+### Layer order (globals.css):
+```
+@layer reset → variables → base → components → utilities → interactive
 ```
 
-### 10 CSS files (app/css/):
+### 9 system files (app/css/):
+| File | Purpose |
+|------|---------|
+| `variables.css` | Design tokens: colors, spacing, fonts |
+| `base.css` | HTML/body resets |
+| `components.css` | Buttons, badges, FAQ, section-header utils |
+| `typography.css` | Text hierarchy |
+| `layout.css` | Grid systems, flexbox |
+| `cards.css` | All card types |
+| `sections.css` | Hero, carousel, CTA sections |
+| `utilities.css` | Spacing, responsive breakpoints |
+| `interactions.css` | Hover states, transitions, animations |
 
-| File               | Purpose                                                        |
-| ------------------ | -------------------------------------------------------------- |
-| `variables.css`    | Design tokens: colors, spacing, fonts, transitions             |
-| `base.css`         | HTML/body resets, default element styles                       |
-| `components.css`   | Reusable UI patterns: buttons, badges                          |
-| `typography.css`   | Text hierarchy: headings, body, sizes                          |
-| `layout.css`       | Grid systems, flexbox, responsive layouts                      |
-| `cards.css`        | All card types: testimonial, blog, case study, lesson, service |
-| `sections.css`     | Full-width section components: hero, carousel, CTA, etc.       |
-| `pages.css`        | Form + page-specific styles: contact, blog, dance, etc.        |
-| `utilities.css`    | Spacing, color utilities, responsive breakpoints               |
-| `interactions.css` | Hover states, transitions, animations                          |
+### 10 page-scoped files:
+`pages-forms.css` | `pages-portal.css` | `pages-blog.css` | `pages-audit.css` | `pages-ikigai.css` | `pages-lessons.css` | `pages-dance.css` | `pages-portal-tools.css` | `pages-contact.css` | `pages-foundation.css`
 
-### Key CSS variables (variables.css):
-
-```css
---bg-primary: #f8f8f5 /* Rice paper/bone */ --bg-secondary: #fafaf8
-  --bg-tertiary: #f0ede8 /* Warm sand */ --text-primary: #1a1a1a
-  --text-secondary: #3d3d3d --text-tertiary: #7a7a7a --border-color: #d4cfc7
-  --border-subtle: #e8e3db --color-burnt-indigo: #4a3a5c
-  --color-burnt-indigo-light: #6b5a7a --color-muted-moss: #6b8e63
-  /* PRIMARY GREEN */ --color-moss-light: #8aa87a --accent-primary: #6b8e63
-  /* Muted Moss — primary CTA accent */ --accent-hover: #8aa87a
-  --accent-tertiary: #6a8aaa /* Soft indigo */ --btn-primary-text: #ffffff;
-```
-
-**Rules:** No `!important`. No new CSS files — all styles go in the existing 10 files. No inline styles except truly dynamic values. No Tailwind utility classes on component JSX (only text sizing, font weight, responsive breakpoints allowed). Light mode only — no dark mode.
+### Key colors:
+- `--accent-primary: #6b8e63` (Muted Moss — primary CTA)
+- `--color-burnt-indigo: #4a3a5c` (depth/contemplation)
+- `--bg-primary: #f8f8f5` (rice paper), `--text-primary: #1a1a1a`
 
 ---
 
-## Component Directory Tree
+## Component Organization
 
+### Placement rules:
+- **Page-specific sections** → `components/sections/{page}/` (e.g., `sections/home/hero/`)
+- **Reusable sections** → `components/shared/{name}/` (e.g., `shared/cta/`, `shared/testimonials/`)
+- **Utility components** (cards, badges, grids) → `components/utilities/{category}/`
+- Each component gets its own folder with `ComponentName.tsx` + `index.ts`
+
+### Page wrapper pattern (all pages):
+```tsx
+<PageTransition animation="fade">
+  <SectionWrapper variant="primary|secondary|tertiary">
+    <SectionContent>
+      {/* component */}
+    </SectionContent>
+  </SectionWrapper>
+</PageTransition>
 ```
-components/
-├── animations/
-│   ├── ScrollFade.tsx
-│   ├── ScrollStagger.tsx
-│   └── index.ts
-├── content/
-│   ├── DanceCard.tsx
-│   ├── DanceFilter.tsx
-│   └── index.ts
-├── decorative/
-│   ├── FluidShape.tsx
-│   └── index.ts
-├── forms/
-│   ├── BlogOptIn.tsx
-│   └── SegmentedInquiryForm.tsx
-├── layout/
-│   ├── PageTransition.tsx
-│   ├── RouteAwareLayout.tsx
-│   ├── SectionContent.tsx
-│   ├── SectionWrapper.tsx
-│   ├── SidebarOverlay.tsx
-│   └── index.ts
-├── navigation/
-│   ├── AdminNavbar.tsx
-│   ├── Navbar.tsx
-│   └── index.ts
-├── typography/
-│   ├── Heading.tsx
-│   ├── TextLink.tsx
-│   └── index.ts
-├── utilities/
-│   ├── badges/
-│   │   ├── Badge.tsx
-│   │   └── index.ts
-│   ├── cards/
-│   │   ├── BlogCard.tsx
-│   │   ├── CaseStudyCard.tsx
-│   │   ├── LessonCard.tsx
-│   │   ├── ServiceCard.tsx
-│   │   ├── TestimonialCard.tsx
-│   │   └── index.ts
-│   └── grids/
-│       ├── CardGrid.tsx
-│       ├── StatsGrid.tsx
-│       └── index.ts
-├── shared/                         ← Reusable across multiple pages
-│   ├── carousel/
-│   │   ├── Carousel.tsx            ('use client')
-│   │   └── index.ts
-│   ├── case-studies/
-│   │   ├── CaseStudies.tsx
-│   │   └── index.ts
-│   ├── case-study/
-│   │   ├── CaseStudy.tsx
-│   │   └── index.ts
-│   ├── collaboration/
-│   │   ├── Collaboration.tsx
-│   │   └── index.ts
-│   ├── copy-button/
-│   │   ├── CopyButton.tsx          ('use client')
-│   │   └── index.ts
-│   ├── cta/
-│   │   ├── CTA.tsx
-│   │   └── index.ts
-│   ├── faq/
-│   │   ├── FAQ.tsx
-│   │   └── index.ts
-│   ├── hero/
-│   │   ├── Hero.tsx                (GenericHero)
-│   │   └── index.ts
-│   ├── page-hero/
-│   │   ├── PageHero.tsx
-│   │   └── index.ts
-│   ├── programs/
-│   │   ├── Programs.tsx
-│   │   └── index.ts
-│   ├── services/
-│   │   ├── Services.tsx
-│   │   └── index.ts
-│   ├── testimonials/
-│   │   ├── Testimonials.tsx
-│   │   └── index.ts
-│   ├── InstagramEmbed.tsx          ('use client') ← loose file, no subdirectory
-│   └── VideoEmbed.tsx              ('use client') ← loose file, no subdirectory
-└── sections/                       ← Page/feature-scoped sections
-    ├── index.ts                    ← Central export hub (see below)
-    ├── about/
-    │   ├── hero/                    Hero.tsx + index.ts
-    │   ├── origin/                  Origin.tsx + index.ts
-    │   ├── turning-point/           TurningPoint.tsx + index.ts
-    │   ├── methodology-narrative/   MethodologyNarrative.tsx + index.ts
-    │   ├── why-exists/              WhyExists.tsx + index.ts
-    │   ├── who-for/                 WhoFor.tsx + index.ts
-    │   ├── introvert/               Introvert.tsx + index.ts  ← dormant
-    │   ├── philosophy/              Philosophy.tsx + index.ts ← dormant
-    │   ├── services/                Services.tsx + index.ts   ← dormant
-    │   └── index.ts
-    ├── blog/
-    │   ├── Featured.tsx
-    │   ├── Posts.tsx
-    │   ├── Related.tsx
-    │   └── index.ts
-    ├── dance/
-    │   ├── Approach.tsx
-    │   ├── FeaturedVideo.tsx
-    │   ├── Portfolio.tsx
-    │   └── index.ts
-    ├── home/
-    │   ├── blog-cards/        BlogCards.tsx + index.ts
-    │   ├── featured-areas/    FeaturedAreas.tsx + index.ts
-    │   ├── hero/              Hero.tsx + index.ts
-    │   ├── impact/            ImpactSection.tsx + index.ts
-    │   ├── portfolio-preview/ PortfolioPreview.tsx + index.ts
-    │   ├── why-work-together/ WhyWorkTogether.tsx + index.ts
-    │   ├── why-it-works/      WhyItWorks.tsx + index.ts
-    │   └── index.ts
-    ├── lessons/
-    │   ├── LessonCategory.tsx
-    │   └── index.ts
-    ├── media-kit/
-    │   ├── AudienceProfile.tsx
-    │   ├── CollaborationPackages.tsx
-    │   ├── ContentMix.tsx
-    │   ├── HeroStats.tsx
-    │   ├── KeyMetrics.tsx
-    │   ├── PlatformBreakdown.tsx
-    │   └── index.ts
-    └── programs/
-        ├── FocusAreas.tsx
-        ├── SupplementalLearning.tsx
-        └── index.ts
-```
+
+### Where to add new styles:
+- New card → `cards.css`
+- New section → `sections.css`
+- New page-specific style → relevant `pages-*.css` file
+- New utility component → `components.css`
+- Form styles → `pages-forms.css`
 
 ---
 
-## sections/index.ts — All Exports
+## Key Files
 
-```ts
-// HOME PAGE
-export { Hero } from "./home/hero";
-export { FeaturedAreas } from "./home/featured-areas";
-export { BlogCards } from "./home/blog-cards";
-export { ImpactSection } from "./home/impact";
-export { PortfolioPreview } from "./home/portfolio-preview";
-export { WhyWorkTogether } from "./home/why-work-together";
-export { WhyItWorks } from "./home/why-it-works";
-
-// ABOUT PAGE
-export { Hero as AboutHero } from "./about/hero";
-export { Origin } from "./about/origin";
-export { TurningPoint } from "./about/turning-point";
-export { MethodologyNarrative } from "./about/methodology-narrative";
-export { WhyExists } from "./about/why-exists";
-export { WhoFor } from "./about/who-for";
-export { Services as AboutServices } from "./about/services"; // dormant
-export { Philosophy } from "./about/philosophy";             // dormant
-export { Introvert } from "./about/introvert";               // dormant
-
-// SHARED SECTIONS (reusable)
-export { Testimonials } from "@/components/shared/testimonials";
-export { Services } from "@/components/shared/services";
-
-// BLOG
-export {
-  Featured as BlogFeatured,
-  Posts as BlogPosts,
-  Related as BlogRelated,
-} from "@/components/sections/blog";
-
-// SHARED GENERIC
-export { CTA } from "@/components/shared/cta";
-export { FAQ } from "@/components/shared/faq";
-export { PageHero } from "@/components/shared/page-hero";
-export { Hero as GenericHero } from "@/components/shared/hero";
-export { Collaboration } from "@/components/shared/collaboration";
-export { Carousel } from "@/components/shared/carousel";
-
-// DANCE
-export {
-  FeaturedVideo,
-  Approach as DanceApproach,
-  Portfolio as DancePortfolio,
-} from "./dance";
-
-// OTHER PAGE-SPECIFIC
-export { LessonCategory } from "./lessons";
-export {
-  KeyMetrics,
-  PlatformBreakdown,
-  ContentMix,
-  AudienceProfile,
-  HeroStats,
-  CollaborationPackages,
-} from "./media-kit";
-
-// UTILITY RE-EXPORTS
-export { Badge } from "@/components/utilities/badges";
-export {
-  TestimonialCard,
-  CaseStudyCard,
-  LessonCard,
-  BlogCard,
-  ServiceCard,
-} from "@/components/utilities/cards";
-export { StatsGrid, CardGrid } from "@/components/utilities/grids";
-```
+| File | Purpose |
+|------|---------|
+| `lib/sanity.ts` | Sanity client + all data fetching functions |
+| `lib/types.ts` | 21 shared TypeScript interfaces |
+| `lib/auditData.ts` | Audit quiz questions + scoring |
+| `lib/auth-context.tsx` | React auth context (useAuth hook) |
+| `lib/portal-progress.ts` | Portal lesson progress tracking |
+| `lib/schema.ts` | JSON-LD structured data |
+| `components/sections/index.ts` | Central export hub for all sections |
+| `middleware.ts` | Supabase session refresh only |
 
 ---
 
-## Page Section Breakdown
+## Routes (Quick Reference)
 
-### app/page.tsx (Home)
-
-Fetches: `getHomePageContent()`, `getServices()`, `getTestimonials()`
-
-Sections (in order):
-
-1. `<Hero />` — home/hero
-2. `<Stats />` — with `homeContent.stats`, heading "Proven Results"
-3. `<Services />` — with Sanity services
-4. `<Testimonials />` — first 3 testimonials
-5. `<CTA />` — "Ready to Transform Your Executive Presence?"
-
-Wrappers: `<PageTransition animation="fade">` + `<SectionWrapper variant="primary|secondary|tertiary">` + `<SectionContent>`
-
-Also includes: `AggregateRatingSchema` JSON-LD script
-
-### app/about/page.tsx
-
-Fetches: `getAboutPageContent()`
-
-Sections (in order):
-
-1. `<AboutHero />` — about/hero, passes `heroHeadline`, `heroDescription`
-2. `<Origin />` — about/origin, passes `originSectionHeadline`, `originSectionDescription` (phases array and image placeholder removed)
-3. `<TurningPoint />` — about/turning-point, passes `turningPointHeadline`, `turningPointBody` (conditional on Sanity field)
-4. `<MethodologyNarrative />` — about/methodology-narrative, passes `methodologyHeadline`, `methodologyBody` (conditional on Sanity field)
-5. `<Stats />` — with `aboutContent.stats`, heading "The Work in Numbers"
-6. `<WhyExists />` — about/why-exists, passes `whyExistsHeadline`, `whyExistsBody` (conditional on Sanity field)
-7. `<WhoFor />` — about/who-for, passes `whoForHeadline`, `whoForBody` (conditional on Sanity field)
-8. `<CTA />` — driven by Sanity `closingHeadline`, `closingBody`, `ctaButtonText`
-
-### app/blog/page.tsx
-
-Fetches: Direct `client.fetch()` for `*[_type == "blogPost"]`
-
-Sections (in order):
-
-1. Blog page header (inline heading via `<Heading level={1}>`)
-2. `<BlogFeatured />` — sections/blog/Featured (only if featuredPosts.length > 0)
-3. `<BlogPosts />` — sections/blog/Posts (regular non-featured posts)
-4. `<CTA />` — "Ready to Build Your Executive Presence?"
-
-### app/programs/page.tsx
-
-Fetches: `getPrograms()`, `getProgramsFocusItems()`
-
-Sections (in order):
-
-1. `<PageHero />` — with `<FocusAreas items={focusItems} />` as rightColumn
-2. `<ProgramsSection />` — shared/programs (id="programs-section")
-3. SupplementalLearning + CTA (remaining content)
-
-Also includes: `CourseSchema` JSON-LD for 8-Week program and Group Workshop
-
-### app/dance/page.tsx
-
-Fetches: `getPortfolioItems()`, `getFeaturedPortfolioItem()`
-
-Sections (in order):
-
-1. `<FeaturedVideo />` — dance/FeaturedVideo (if featuredItem exists)
-2. `<DancePortfolio />` — dance/Portfolio
-3. `<DanceApproach />` — dance/Approach
-4. `<CTA />` — "Ready to Integrate Movement into Your Leadership?"
-
-### app/lessons/page.tsx
-
-Fetches: `getLessons()`
-
-Sections (in order):
-
-1. `<GenericHero />` — shared/hero, heading "Master Quiet Command"
-2. Supplemental text panel (inline, links to /dance)
-3. `<LessonCategory level="Beginner" />` — filtered lessons
-4. `<LessonCategory level="Intermediate" />` — filtered lessons
-5. `<LessonCategory level="Advanced" />` — filtered lessons
-6. `<CTA />` — "Learn Better with Coaching"
-
-### app/media-kit/page.tsx
-
-Fetches: `getMediaKitData()`, `getPageMetadata('mediaKit')`, `getCollaborationPackages()`
-
-Sections (in order):
-
-1. `<PageHero />` — with `<HeroStats />` as rightColumn
-2. `<KeyMetrics />` — media-kit/KeyMetrics
-3. `<PlatformBreakdown />` — media-kit/PlatformBreakdown
-4. `<ContentMix />` — media-kit/ContentMix
-5. `<AudienceProfile />` — media-kit/AudienceProfile
-6. `<CollaborationPackages />` — media-kit/CollaborationPackages (id="collaboration-section")
-7. `<CTA />`
-
-### app/audit/page.tsx
-
-Fetches: `getAuditPageContent()`
-Renders: page header (badge, headline, body) + footer note directly in server component, delegates quiz/capture/result logic to `<AuditClient content={auditContent} />`
-
-Quiz questions + scoring bands live in `lib/auditData.ts` (not CMS — tied to scoring thresholds).
-
-### app/contact/page.tsx
-
-Fetches: `getContactPageContent()`
-Delegates to `<ContactClient content={contactContent} />` (client component)
-
----
-
-## Layout Components
-
-All pages use these wrappers from `@/components/layout`:
-
-- `<PageTransition animation="fade">` — wraps entire page content, handles route transitions
-- `<SectionWrapper variant="primary|secondary|tertiary">` — sets section background color
-- `<SectionContent>` — constrains max-width, handles inner padding
-- `<RouteAwareLayout>` — in app/layout.tsx, handles Navbar visibility
-- `<SidebarOverlay>` — mobile nav overlay
+`/` Home | `/about` | `/blog` + `/blog/[slug]` | `/programs` | `/dance` | `/lessons` + nested | `/media-kit` | `/contact` | `/audit` | `/ikigai` | `/login` | `/portal` (protected) | `/admin` | `/privacy` | `/api/inquiries` | `/api/subscribe`
 
 ---
 
 ## Sanity CMS
 
-### Studio location: `sanity/` folder
+21 schema types in `sanity/schemas/`. Key ones: `blogPost`, `service`, `program`, `testimonial`, `portfolio`, `lesson`, `caseStudy`, `homePageContent`, `aboutPage`, `contactPage`, `auditPage`, `portalLesson`.
 
-- `sanity.config.ts` — main Sanity Studio config
-- `sanity.cli.ts` — CLI config
-- `structure.ts` — custom Studio desk structure
-- `schemaTypes/index.ts` — schema registry
-- `schemas/` — individual schema files
-
-### All Schema Types (21 total):
-
-| Schema                 | Type     | Description                                                                     |
-| ---------------------- | -------- | ------------------------------------------------------------------------------- |
-| `aboutPage`            | document | About page content (heroHeadline, heroDescription, originSectionHeadline, originSectionDescription, turningPointHeadline, turningPointBody, methodologyHeadline, methodologyBody, whyExistsHeadline, whyExistsBody, whoForHeadline, whoForBody, closingHeadline, closingBody, ctaButtonText, phases, stats, philosophies, introvertTraits) |
-| `auditPage`            | document | Presence Audit page copy (pageHeaderBadge/Headline/Body, pageFooterNote, captureBadge/Headline/Body/PrivacyNote, resultBands array [{band, headline, body}], resultNextHeading/Body, resultCtaText/ButtonLabel/Href) |
-| `contactPage`          | document | Contact page marketing blocks (auditPromptBadge/Headline/Body/ButtonText/Note, auditStats array [{number, label}], coachingPathHeading/Body/CalendlyHref/CalendlyLabel, sidebarHeading/Items array [{title, body}]/EmailText) |
-| `blogPost`             | document | Blog posts (title, slug, excerpt, pillar, readingTime, publishedAt, featured)   |
-| `caseStudy`            | document | Case studies (challenge, solution, results, testimonial, image)                 |
-| `collaboration`        | document | Portfolio collaborations (category, price, deliverables, timeline)              |
-| `collaborationPackage` | document | Media kit collaboration packages (packages array)                               |
-| `contactInfo`          | document | Contact methods (label, value, href, description)                               |
-| `danceCategoryFilter`  | document | Dance filter categories (categories array)                                      |
-| `homePageContent`      | document | Home page dynamic content (stats, headlines, descriptions)                      |
-| `lesson`               | document | Lessons (category: Beginner/Intermediate/Advanced, pillar, duration, icon)      |
-| `mediaKitData`         | document | Metrics, platforms, content categories, audience demographics                   |
-| `pageMetadata`         | document | Page-level SEO/CTA metadata per page slug                                       |
-| `portfolio`            | document | Dance portfolio items (videoUrl, thumbnail, category, duration)                 |
-| `program`              | document | Coaching programs (category, investment, features)                              |
-| `programFocus`         | document | Program focus area items (title, description, icon)                             |
-| `programsPageContent`  | document | Programs page dynamic content                                                   |
-| `service`              | document | Coaching services (icon, features, isPrimary, color)                            |
-| `serviceCategory`      | document | Service categories (categories array with items)                                |
-| `testimonial`          | document | Testimonials (clientName, role, company, quote, result, featured, serviceType)  |
-| `portalLesson`         | document | Portal lesson content (in sanity/schemas/portalLesson.ts)                       |
-
-Note: `module.ts` also exists in `sanity/schemas/` (portal module groupings).
-
-### Sanity client (lib/sanity.ts):
-
-```ts
-export const client = createClient({
-  projectId,
-  dataset,
-  apiVersion: "2024-01-01",
-  useCdn: true,
-});
-export function urlFor(source); // image URL builder
-```
-
-### All data fetching functions (lib/sanity.ts):
-
-**Portfolio (dance videos):**
-
-- `getPortfolioItems()` — all, ordered by `order`
-- `getPortfolioByCategory(category)` — filtered
-- `getPortfolioItem(slug)` — single
-- `getFeaturedPortfolioItem()` — `featured == true`
-
-**Services:**
-
-- `getServices()` — all, ordered
-- `getPrimaryService()` — `isPrimary == true`
-- `getService(slug)` — single
-
-**Collaborations:**
-
-- `getCollaborations()` — all
-- `getCollaborationsByCategory(category)` — filtered
-
-**Media Kit:**
-
-- `getMediaKitData()` — keyMetrics, platforms, contentCategories, audience
-
-**Testimonials:**
-
-- `getTestimonials(featured?)` — all or featured-only
-
-**Case Studies:**
-
-- `getCaseStudies(featured?)` — all or featured-only
-- `getCaseStudy(slug)` — single
-
-**Lessons:**
-
-- `getLessons()` — all
-- `getLessonsByCategory(category)` — Beginner/Intermediate/Advanced
-- `getLessonsByPillar(pillar)` — filtered by pillar
-
-**Programs:**
-
-- `getPrograms()` — all
-- `getProgramBySlug(slug)` — single
-- `getProgramsByCategory(category)` — filtered
-- `getProgramsFocusItems()` — `programFocus` type, ordered
-
-**Page Metadata:**
-
-- `getPageMetadata(page)` — per page slug (headline, subheadline, ctaTitle, etc.)
-
-**Contact:**
-
-- `getContactInfo()` — title + contactMethods array
-
-**About Page:**
-
-- `getAboutPageContent()` — full about page content
-
-**Home Page:**
-
-- `getHomePageContent()` — stats, headlines, sidebar features
-
-**Dance Category Filter:**
-
-- `getDanceCategoryFilter()` — categories array
-
-**Service Categories:**
-
-- `getServiceCategories()` — categories with items
-
-**Collaboration Packages:**
-
-- `getCollaborationPackages()` — packages array (name, price, features)
-
-**Audit Page:**
-
-- `getAuditPageContent()` — all page copy (header, capture stage, result bands, CTA)
-
-**Contact Page:**
-
-- `getContactPageContent()` — marketing blocks (audit prompt, coaching path, sidebar notes)
+All data fetching lives in `lib/sanity.ts` — functions follow pattern `get{ContentType}()`.
 
 ---
 
-## Supabase Auth & Database
-
-Used for the learning portal (authentication + progress tracking).
-
-### SSR-Safe Auth Clients
-
-**Never import `lib/supabase.ts`** — that file has been deleted. Use the SSR-safe helpers from `utils/supabase/`:
-
-```ts
-// Server components & Route Handlers
-import { createClient } from "@/utils/supabase/server";
-
-// Client components ('use client')
-import { createClient } from "@/utils/supabase/client";
-
-// Middleware (session refresh)
-import { updateSession } from "@/utils/supabase/middleware";
-```
-
-The root `middleware.ts` delegates to `updateSession` to keep auth cookies fresh on every request. All auth-gate logic lives client-side (via the `useAuth` hook in `lib/auth-context.tsx`) or inside Route Handlers — not in middleware.
-
-### Database
-
-- `lesson_progress` table with Row Level Security (RLS)
-- Progress helpers in `lib/portal-progress.ts` — `markLessonComplete`, `getLessonProgress`, `getCourseProgress`
-
----
-
-## Other lib/ Files
-
-| File                              | Purpose                                                               |
-| --------------------------------- | --------------------------------------------------------------------- |
-| `auth-context.tsx`                | React auth context provider                                           |
-| `design-tokens.ts`                | JS-accessible design tokens                                           |
-| `imageConfig.ts`                  | Next.js image config helpers                                          |
-| `optimizedImage.tsx`              | Optimized image component wrapper                                     |
-| `auditData.ts`                    | Presence Audit quiz questions, scoring thresholds, `getBand()` helper |
-| `pageContent.ts`                  | Static/fallback page content (largely superseded by Sanity)           |
-| `portal-progress.ts`              | Learning portal progress tracking                                     |
-| `schema.ts`                       | JSON-LD structured data schemas (AggregateRatingSchema, CourseSchema) |
-| `types.ts`                        | 21 shared TypeScript interfaces: `SanitySlug`, `SanityImage`, `Course`, `Module`, `Lesson`, `PortalLesson`, `BlogPost`, `Program`, `Testimonial`, `DanceCategory`, `DanceVideo`, `InstagramReel`, `MediaKit`, `MediaKitStat`, `MediaKitExpertise`, `LessonProgress`, `AuditPageContent`, `AuditResultBand`, `ContactPageContent`, `ContactAuditStat`, `ContactSidebarItem` |
-| `blog/portableTextComponents.tsx` | Portable text renderer for blog posts                                 |
-| `hooks/`                          | Custom React hooks                                                    |
-
-### Custom hooks (lib/hooks/):
-
-- `useFocusTrap.ts`
-- `useFormValidation.ts`
-- `usePointerPosition.ts`
-- `useScrollAnimation.ts`
-- `useScrollTrigger.ts`
-- `useSwipeGesture.ts`
-
----
-
-## Middleware (middleware.ts)
-
-Delegates session refresh to the Supabase SSR helper — no blocking at middleware level:
-
-```ts
-import type { NextRequest } from "next/server";
-import { updateSession } from "@/utils/supabase/middleware";
-
-export async function middleware(request: NextRequest) {
-  return updateSession(request);
-}
-
-export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
-};
-```
-
-All auth-gate logic lives client-side (via the `useAuth` hook in `lib/auth-context.tsx`) or inside Route Handlers — not in middleware.
-
----
-
-## Environment Variables Required
+## Environment Variables
 
 ```bash
 NEXT_PUBLIC_SANITY_PROJECT_ID=
@@ -699,34 +152,13 @@ SANITY_API_TOKEN=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=   # optional, admin only
-KIT_API_KEY=                 # Kit (ConvertKit) API key
-KIT_FORM_ID=                 # Kit form ID for /api/subscribe endpoint
+KIT_API_KEY=                 # Kit/ConvertKit
+KIT_FORM_ID=                 # /api/subscribe endpoint
 ```
-
----
-
-## Key Conventions
-
-1. **Import alias**: Always `@/` (maps to project root). Never relative paths from deep files.
-2. **Server components by default**. Only add `'use client'` for interactive state (carousels, forms, toggles).
-3. **CSS naming**: BEM-inspired kebab-case. `.section-name`, `.section-name-header`, `.section-name-title`, `.section-name-title:hover`.
-4. **No new CSS files** — styles go in one of the 10 consolidated files.
-5. **No `!important`** — fix cascade/specificity instead.
-6. **No Tailwind in component JSX** (except `text-*`, `font-*`, `leading-*`, responsive breakpoint prefixes).
-7. **No "Section" suffix** on component names (e.g., `Hero` not `HeroSection`).
-8. **Page-specific sections** → `components/sections/{page}/`. **Reusable sections** → `components/shared/`.
-9. **Utility components** (cards, badges, grids) → `components/utilities/{category}/`.
-10. **All sections exported from `components/sections/index.ts`** with descriptive aliases.
-11. **Sanity fallback pattern**: `try { const data = await getSanityData(); if (data) use it } catch { use fallback/mock }`.
-12. **Wrappers pattern for all pages**: `<PageTransition>` → `<SectionWrapper variant>` → `<SectionContent>` → component.
-13. **Auth (Supabase SSR)**: Server components use `utils/supabase/server.ts`; client components use `utils/supabase/client.ts`. Never import `lib/supabase.ts` (deleted). All auth-gate logic lives client-side in the `useAuth` hook.
-14. **Shared TypeScript types**: All Sanity + portal interfaces live in `lib/types.ts`. Import from there; do not re-declare inline.
 
 ---
 
 ## Fonts
 
-Loaded via Google Fonts (globals.css):
-
-- **Fraunces** (9..144 optical size, 300–700 weight, italic) — serif display/headings
-- **DM Sans** (300, 400, 500, 600 weight, italic 400) — body text
+- **Fraunces** — serif display/headings
+- **DM Sans** — body text

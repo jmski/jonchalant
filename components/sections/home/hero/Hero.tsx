@@ -88,7 +88,7 @@ export function Hero({
               <div className="home-hero-ctas">
                 <div className="home-hero-cta-group">
                   {ctaText && (
-                    <Link href={ctaLink} className="home-hero-cta-primary">
+                    <Link href={ctaLink} className="btn btn-primary">
                       {ctaText}
                     </Link>
                   )}

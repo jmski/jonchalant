@@ -20,6 +20,8 @@ import danceCategory from '../schemas/danceCategory'
 import instagramReel from '../schemas/instagramReel'
 import programsPageContent from '../schemas/programsPageContent'
 import emailOptIn from '../schemas/emailOptIn'
+import foundationPage from '../schemas/foundationPage'
+import dancePageContent from '../schemas/dancePageContent'
 
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
@@ -42,6 +44,8 @@ export const types = [
   danceCategory,
   instagramReel,
   emailOptIn,
+  foundationPage,
+  dancePageContent,
 ] as const
 
 export const schema: { types: SchemaTypeDefinition[] } = {

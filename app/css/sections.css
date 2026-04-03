@@ -818,7 +818,7 @@
 
 .home-why-works-label {
   display: inline-block;
-  font-family: Fraunces, serif;
+  font-family: var(--font-headline);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -858,8 +858,8 @@
 }
 
 .cta-section-title {
-  font-family: Fraunces, serif;
-  font-size: clamp(28px, 3vw, 40px);
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -1569,8 +1569,8 @@
 
 .about-highlight {
   display: block;
-  font-family: Fraunces, serif;
-  font-size: clamp(20px, 2.2vw, 26px);
+  font-family: var(--font-headline);
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem);
   font-style: normal;
   font-weight: 700;
   letter-spacing: -0.03em;

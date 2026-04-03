@@ -50,14 +50,15 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    title: 'Media',
+    title: 'Learn',
     links: [
       {
         label: '',
         href: '#',
         subitems: [
-          { label: 'Dance', href: '/dance' },
+          { label: 'Lessons', href: '/lessons' },
           { label: 'Blog', href: '/blog' },
+          { label: 'Dance', href: '/dance' },
         ],
       },
     ],
@@ -67,15 +68,16 @@ const NAV_SECTIONS: NavSection[] = [
 // Flattened structure for desktop navbar
 const FLAT_NAV_LINKS = [
   { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
   { label: 'Coaching', href: '#', dropdown: [
     { label: 'Programs', href: '/programs' },
     { label: 'The Foundation', href: '/foundation' },
     { label: 'Ikigai', href: '/ikigai' },
   ]},
-  { label: 'About', href: '/about' },
-  { label: 'Media', href: '#', dropdown: [
-    { label: 'Dance', href: '/dance' },
+  { label: 'Learn', href: '#', dropdown: [
+    { label: 'Lessons', href: '/lessons' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Dance', href: '/dance' },
   ]},
   { label: 'Contact', href: '/contact' },
 ];
@@ -110,8 +112,10 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
 
   // Close mobile menu when route changes
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setOpenDropdown(null);
+    Promise.resolve().then(() => {
+      setMobileMenuOpen(false);
+      setOpenDropdown(null);
+    });
   }, [pathname]);
 
   const handleDropdownEnter = (label: string) => {
@@ -201,10 +205,15 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
           ))}
         </div>
 
-        {/* Portal Login Button */}
-        <Link href="/login" className="navbar-login-btn">
-          Portal Login
-        </Link>
+        {/* CTA + Portal Login Buttons */}
+        <div className="navbar-actions">
+          <Link href="/audit" className="navbar-cta-btn">
+            Free Audit
+          </Link>
+          <Link href="/login" className="navbar-login-btn">
+            Portal
+          </Link>
+        </div>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -266,6 +275,14 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
 
             {/* Mobile Menu Footer */}
             <div className="navbar-mobile-footer">
+              {/* Free Audit CTA for Mobile */}
+              <Link
+                href="/audit"
+                className="btn btn-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Free Audit
+              </Link>
               {/* Portal Login Button for Mobile */}
               <Link
                 href="/login"

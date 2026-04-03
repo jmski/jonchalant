@@ -110,7 +110,7 @@ export default async function Programs() {
                     <h2 className="cta-section-title">{page.ctaHeading}</h2>
                   )}
                   {page.ctaButtonText && page.ctaButtonHref && (
-                    <a href={page.ctaButtonHref} className="cta-section-button">
+                    <a href={page.ctaButtonHref} className="btn btn-primary">
                       {page.ctaButtonText}
                     </a>
                   )}

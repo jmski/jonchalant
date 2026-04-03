@@ -43,7 +43,7 @@ export default function PageHero({
                 <a
                   key={idx}
                   href={btn.href}
-                  className={btn.variant === 'secondary' ? 'page-hero-btn-secondary' : 'page-hero-btn-primary'}
+                  className={btn.variant === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary'}
                 >
                   {btn.label}
                 </a>
