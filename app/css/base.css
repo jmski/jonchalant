@@ -8,7 +8,7 @@
 
 /* GLOBAL HTML/BODY */
 html {
-  font-family: var(--font-serif);
+  font-family: var(--font-headline);
   color: var(--text-primary);
   background-color: var(--bg-primary);
   background-image:
@@ -58,13 +58,13 @@ body::before {
 ::selection {
   background-color: transparent;
   color: inherit;
-  text-decoration: underline wavy var(--accent-vibrant);
+  text-decoration: underline wavy var(--accent-primary);
 }
 
 ::-moz-selection {
   background-color: transparent;
   color: inherit;
-  text-decoration: underline wavy var(--accent-vibrant);
+  text-decoration: underline wavy var(--accent-primary);
 }
 
 /* Remove default margins from elements */
@@ -99,32 +99,6 @@ a:hover {
   color: var(--accent-hover);
 }
 
-/* Code/Pre blocks */
-code {
-  font-family: var(--font-tech);
-  background-color: var(--bg-tertiary);
-  color: var(--accent-secondary);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
-}
-
-pre {
-  font-family: var(--font-tech);
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin-bottom: 1.5rem;
-}
-
-pre code {
-  background-color: transparent;
-  color: inherit;
-  padding: 0;
-}
-
 /* Form reset */
 input,
 textarea,
@@ -145,12 +119,12 @@ button {
 
 /* Focus states for accessibility */
 :focus-visible {
-  outline: 2px solid var(--accent-vibrant);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
 a:focus-visible {
-  outline: 2px solid var(--accent-vibrant);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
   border-radius: 2px;
 }

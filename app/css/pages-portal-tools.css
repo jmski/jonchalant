@@ -2119,7 +2119,7 @@
 }
 
 .programs-hero-aside-heading {
-  font-family: var(--font-serif);
+  font-family: var(--font-headline);
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -2151,7 +2151,7 @@
 }
 
 .programs-offers-heading {
-  font-family: var(--font-serif);
+  font-family: var(--font-headline);
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--text-primary);

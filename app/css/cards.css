@@ -14,10 +14,13 @@
 */
 
 .card {
+  position: relative;
   padding: 1.5rem;
   background-color: white;
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
+  box-sizing: border-box;
+  overflow: visible;
   transition: all var(--transition-base);
 }
 
@@ -58,7 +61,6 @@
 
 .card a:hover {
   color: var(--accent-hover);
-  text-decoration: underline;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -172,7 +174,7 @@
   font-family: var(--font-headline);
   font-size: 4.5rem;
   line-height: 0.75;
-  color: var(--color-moss-subtle);
+  color: rgba(107, 142, 99, 0.18);
   margin-bottom: -0.75rem;
 }
 
@@ -465,7 +467,7 @@
   align-items: center;
   justify-content: center;
   height: 8rem;
-  background: var(--bg-muted);
+  background: var(--bg-tertiary);
   font-size: 2.25rem;
   border-bottom: 1px solid var(--border-color);
 }
@@ -526,7 +528,6 @@
 
 .lesson-card-cta:hover {
   color: var(--accent-primary);
-  text-decoration: underline;
 }
 
 @media (min-width: 640px) {
@@ -1188,7 +1189,7 @@
 }
 
 .program-track-card-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-headline);
   font-size: 1.375rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -1197,7 +1198,7 @@
 }
 
 .program-track-card-price {
-  font-family: var(--font-serif);
+  font-family: var(--font-headline);
   font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);

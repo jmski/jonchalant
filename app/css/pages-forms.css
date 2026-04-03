@@ -63,7 +63,7 @@
 .form-input:disabled,
 .form-select:disabled,
 .form-textarea:disabled {
-  background-color: var(--bg-muted);
+  background-color: var(--bg-tertiary);
   color: var(--text-tertiary);
   cursor: not-allowed;
 }

@@ -24,10 +24,6 @@
     sans-serif;
   --font-mono: "Monaco", "Courier New", monospace;
 
-  /* Aliases used in base.css */
-  --font-serif: var(--font-headline);
-  --font-tech: var(--font-mono);
-
   /* Spacing System - Generous breathing room (Ma principle) */
   --spacing-xs: 0.75rem;
   --spacing-sm: 1.25rem;
@@ -86,8 +82,6 @@
   --accent-secondary: #5a8a6a; /* Moss Success variant */
   --accent-tertiary: #6a8aaa; /* Soft indigo - distinct category color */
   --accent-hover: #8aa87a; /* Moss light - hover state */
-  --accent-vibrant: #6b8e63; /* Alias for primary accent (backward compatibility) */
-  --accent-vibrant-hover: #8aa87a; /* Alias for hover (backward compatibility) */
   --btn-primary-text: #f8f8f8; /* Button text — dark for contrast on muted moss */
 
   /* Overlay & Effects */
@@ -112,43 +106,12 @@
   ); /* Blueprint grid - increased opacity */
 }
 
-/* ========== MISSING / ALIAS VARIABLES ========== */
-/* These were dropped in a CSS refactor but are still referenced across CSS files. */
+/* ========== ADDITIONAL TOKENS ========== */
 :root {
-  /* Background aliases */
   --bg-light: #ffffff; /* Card surfaces — lifts off the rice-paper bg */
-  --bg-muted: var(--bg-tertiary); /* Subtle section/header tint (warm sand) */
-
-  /* Shadow scale */
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
-
-  /* Accent / text aliases */
-  --accent-primary-hover: var(--accent-hover);
-  --text-muted: var(--text-tertiary);
-  --border-accent: var(--accent-primary);
-
-  /* Spacing alias */
-  --section-gap: var(--spacing-xl);
-
-  /* Typography aliases */
-  --font-sans: var(--font-body);
-  --font-monospace: var(--font-mono);
-  --font-display: var(--font-headline); /* Old "display" usage → Fraunces */
-  --font-retro: var(--font-mono); /* Old "retro/tech" usage → mono */
-
-  /* Letter-spacing token */
   --tracking-widest: 0.15em;
-
-  /* Layout gap tokens */
-  --column-gap: 1.5rem; /* Grid/flex column gaps */
-  --element-gap: 1rem; /* Intra-component element gaps */
-
-  /* Moss opacity token */
-  --color-moss-subtle: rgba(
-    107,
-    142,
-    99,
-    0.18
-  ); /* Decorative pseudo-element tint */
+  --column-gap: 1.5rem;
+  --element-gap: 1rem;
 }
