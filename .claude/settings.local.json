@@ -57,7 +57,8 @@
       "Bash(git -C \"c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant\" diff --stat HEAD)",
       "Bash(wc -l \"c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/pages\"*.css)",
       "Bash(grep -B 2 \"text-decoration.*underline\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
-      "Bash(wc -l c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)"
+      "Bash(wc -l c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }

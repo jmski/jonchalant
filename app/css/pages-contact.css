@@ -296,6 +296,72 @@
   line-height: 1.7;
 }
 
+/* What happens next */
+.contact-next-steps {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.contact-next-steps-heading {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 1.75rem;
+}
+
+.contact-next-steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-next-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.contact-next-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-burnt-indigo);
+  color: var(--bg-primary);
+  font-family: var(--font-headline);
+  font-size: 0.875rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.contact-next-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 0.25rem;
+}
+
+.contact-next-step-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-next-step-desc {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
 /* Sidebar notes */
 .contact-sidebar-notes {
   border-top: 1px solid var(--border-subtle);

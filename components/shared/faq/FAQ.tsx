@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { FAQSchema } from '@/lib/schema'
 
 export interface FAQItem {
   question: string
@@ -33,7 +34,14 @@ interface FAQProps {
 export default function FAQ({ items = FALLBACK_ITEMS }: FAQProps) {
   const [expanded, setExpanded] = useState<number | null>(null)
 
+  const schema = FAQSchema(items.map(item => ({ question: item.question, answer: item.answer })))
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
     <div className="faq-list">
       {items.map((item, idx) => (
         <div
@@ -57,5 +65,6 @@ export default function FAQ({ items = FALLBACK_ITEMS }: FAQProps) {
         </div>
       ))}
     </div>
+    </>
   )
 }

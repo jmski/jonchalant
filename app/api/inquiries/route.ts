@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isRateLimited, getClientIp } from "@/lib/rate-limit";
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  if (isRateLimited(ip, 5, 60_000)) {
+    return NextResponse.json(
+      { success: false, error: "Too many requests. Please wait a moment and try again." },
+      { status: 429 },
+    );
+  }
+
   try {
     // Import services only when needed
     const { createClient } = await import("@supabase/supabase-js");

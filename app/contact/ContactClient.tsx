@@ -286,6 +286,34 @@ export default function ContactClient({ content }: ContactClientProps) {
         )}
       </div>
 
+      {/* ── What happens next ─────────────────────────────────────────────── */}
+      <div className="contact-next-steps">
+        <h3 className="contact-next-steps-heading">What happens next</h3>
+        <ol className="contact-next-steps-list">
+          <li className="contact-next-step">
+            <span className="contact-next-step-number">1</span>
+            <div className="contact-next-step-body">
+              <strong className="contact-next-step-title">Submit your inquiry</strong>
+              <span className="contact-next-step-desc">Takes 2 minutes. No prep needed.</span>
+            </div>
+          </li>
+          <li className="contact-next-step">
+            <span className="contact-next-step-number">2</span>
+            <div className="contact-next-step-body">
+              <strong className="contact-next-step-title">We schedule a 15-min call</strong>
+              <span className="contact-next-step-desc">I'll reach out within 2–3 business days to find a time.</span>
+            </div>
+          </li>
+          <li className="contact-next-step">
+            <span className="contact-next-step-number">3</span>
+            <div className="contact-next-step-body">
+              <strong className="contact-next-step-title">We build your custom plan</strong>
+              <span className="contact-next-step-desc">Together we map out the right path forward for you.</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+
       {/* ── Sidebar notes ──────────────────────────────────────────────────── */}
       <div className="contact-sidebar-notes">
         <h3 className="contact-sidebar-heading">

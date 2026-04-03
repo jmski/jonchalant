@@ -1,9 +1,13 @@
+import Image from 'next/image';
+import { urlFor } from '@/lib/sanity';
+
 interface TestimonialCardProps {
   quote: string;
   clientName: string;
   role: string;
   company: string;
   result?: string;
+  image?: unknown;
 }
 
 export function TestimonialCard({
@@ -12,7 +16,10 @@ export function TestimonialCard({
   role,
   company,
   result,
+  image,
 }: TestimonialCardProps) {
+  const avatarUrl = image ? urlFor(image).width(80).height(80).url() : null;
+
   return (
     <div className="testimonial-card">
       {/* Quote */}
@@ -24,7 +31,6 @@ export function TestimonialCard({
       {result && (
         <div className="testimonial-card-result">
           <p className="testimonial-card-result-text">
-            <span className="testimonial-card-result-icon">📈</span>
             Key Result: {result}
           </p>
         </div>
@@ -32,15 +38,20 @@ export function TestimonialCard({
 
       {/* Client info */}
       <div className="testimonial-card-footer">
-        <p className="testimonial-card-client-name">
-          {clientName}
-        </p>
-        <p className="testimonial-card-role">
-          {role}
-        </p>
-        <p className="testimonial-card-company">
-          {company}
-        </p>
+        {avatarUrl && (
+          <Image
+            src={avatarUrl}
+            alt={clientName}
+            width={40}
+            height={40}
+            className="testimonial-card-avatar"
+          />
+        )}
+        <div className="testimonial-card-identity">
+          <p className="testimonial-card-client-name">{clientName}</p>
+          <p className="testimonial-card-role">{role}</p>
+          <p className="testimonial-card-company">{company}</p>
+        </div>
       </div>
     </div>
   );

@@ -14,11 +14,10 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Run on every request EXCEPT:
-     * - Next.js internals (_next/static, _next/image)
-     * - Static files (favicon, images, etc.)
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    // Only run on routes that need Supabase auth cookies —
+    // skips the session round-trip for all public page loads.
+    '/portal/:path*',
+    '/admin/:path*',
+    '/api/:path*',
   ],
 }

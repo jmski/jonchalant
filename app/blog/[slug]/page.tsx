@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { client } from '@/lib/sanity';
 import { PortableText } from '@portabletext/react';
@@ -8,6 +9,7 @@ import { portableTextComponents } from '@/lib/blog/portableTextComponents';
 import { BlogToC } from './BlogToC';
 import { extractHeadings } from './headings';
 import { BlogShare } from './BlogShare';
+import { BlogPostingSchema } from '@/lib/schema';
 
 interface BlogPostDocument {
   _id: string;
@@ -157,6 +159,18 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <main className="blog-main">
+      <Script
+        id="blog-post-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(BlogPostingSchema({
+            title: post.title,
+            description: post.metaDescription || post.excerpt,
+            slug: post.slug.current,
+            publishedAt: post.publishedAt,
+          })),
+        }}
+      />
       {/* Breadcrumb */}
       <div className="blog-breadcrumb-bar">
         <div className="blog-breadcrumb">

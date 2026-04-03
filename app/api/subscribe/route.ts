@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isRateLimited, getClientIp } from '@/lib/rate-limit'
 
 // Basic RFC-aligned email regex — catches obvious malformed addresses
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request)
+  if (isRateLimited(ip, 3, 60_000)) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please wait a moment and try again.' },
+      { status: 429 },
+    )
+  }
+
   try {
     const body = await request.json()
     const { firstName, email } = body

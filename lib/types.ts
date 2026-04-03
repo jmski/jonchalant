@@ -105,10 +105,11 @@ export interface ProgramTrackItem {
 export interface Testimonial {
   _id: string
   quote: string
-  name: string
+  clientName: string
   role?: string
   company?: string
-  keyResult?: string
+  result?: string
+  image?: unknown
 }
 
 // ── Dance curriculum ──────────────────────────────────────────────────────────
