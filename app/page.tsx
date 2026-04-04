@@ -13,7 +13,7 @@ import {
 import { PressStrip } from '@/components/shared/press-strip';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { client, getHomePageContent, getServices, getTestimonials, getPressMentions } from "@/lib/sanity";
+import { getHomePageContent, getServices, getTestimonials, getPressMentions, getRecentBlogPosts } from "@/lib/sanity";
 import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -46,16 +46,6 @@ export const metadata: Metadata = {
     creator: "@jonchalant",
   },
 };
-
-async function getRecentBlogPosts() {
-  try {
-    return await client.fetch(
-      `*[_type == "blogPost"] | order(publishedAt desc) [0...3] { _id, title, slug, excerpt, publishedAt }`
-    );
-  } catch {
-    return [];
-  }
-}
 
 export default async function Home() {
   let homeContent = null;

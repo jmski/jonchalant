@@ -62,7 +62,8 @@
       "WebFetch(domain:localhost)",
       "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -type f \\\\\\( -name \"*.css\" -o -name \"*.scss\" \\\\\\) -exec grep -l \"meet-jon\\\\|about-hero\" {} \\\\;)",
       "Bash(xargs grep:*)",
-      "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -type f -name \"*.tsx\" -exec grep -l \"SanityImage\\\\|getImageUrl\" {} \\\\;)"
+      "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -type f -name \"*.tsx\" -exec grep -l \"SanityImage\\\\|getImageUrl\" {} \\\\;)",
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.ts /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.tsx)"
     ]
   }
 }

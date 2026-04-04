@@ -620,3 +620,18 @@ export async function getPressMentions() {
   }`
   return await client.fetch(query)
 }
+
+// ============================================================================
+// BLOG POSTS
+// ============================================================================
+
+export async function getRecentBlogPosts(count = 3) {
+  const query = `*[_type == "blogPost"] | order(publishedAt desc) [0...$count] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt
+  }`
+  return await client.fetch(query, { count })
+}
