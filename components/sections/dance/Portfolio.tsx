@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { DANCE_FILTER_CATEGORIES } from '@/lib/pageContent';
 
 /** Portfolio item shape expected by DanceFilter — matches DanceFilter's internal DanceItem interface. */
 interface PortfolioItem {
@@ -21,9 +20,22 @@ interface PortfolioProps {
 }
 
 export function Portfolio({ items }: PortfolioProps) {
+  const preferredCategoryOrder = ['choreography', 'freestyle', 'performance'];
+  const uniqueCategories = Array.from(
+    new Set(items.map((item) => item.category).filter(Boolean))
+  );
+  const orderedCategories = [
+    ...preferredCategoryOrder.filter((category) =>
+      uniqueCategories.some((itemCategory) => itemCategory.toLowerCase() === category)
+    ),
+    ...uniqueCategories.filter(
+      (category) => !preferredCategoryOrder.includes(category.toLowerCase())
+    ),
+  ];
+
   return (
     <section>
-      <DanceFilter items={items} categories={DANCE_FILTER_CATEGORIES} />
+      <DanceFilter items={items} categories={orderedCategories} />
     </section>
   );
 }
