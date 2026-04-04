@@ -14,10 +14,13 @@
 */
 
 .card {
+  position: relative;
   padding: 1.5rem;
   background-color: white;
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
+  box-sizing: border-box;
+  overflow: visible;
   transition: all var(--transition-base);
 }
 
@@ -58,7 +61,6 @@
 
 .card a:hover {
   color: var(--accent-hover);
-  text-decoration: underline;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -118,6 +120,23 @@
 .testimonial-card-footer {
   padding-top: 0.5rem;
   border-top: 1px solid var(--border-color, #e2e8f0);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.testimonial-card-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testimonial-card-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .testimonial-card-client-name {
@@ -172,7 +191,7 @@
   font-family: var(--font-headline);
   font-size: 4.5rem;
   line-height: 0.75;
-  color: var(--color-moss-subtle);
+  color: rgba(107, 142, 99, 0.18);
   margin-bottom: -0.75rem;
 }
 
@@ -198,9 +217,8 @@
 
 .testimonial-section .testimonial-card-footer {
   border-top-color: rgba(107, 142, 99, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .testimonial-section .testimonial-card-client-name {
@@ -320,9 +338,10 @@
 }
 
 .case-study-card-title {
+  font-family: var(--font-headline);
   font-size: clamp(1.125rem, 2.5vw, 1.375rem);
-  font-weight: 900;
-  color: var(--text-primary, #0f172a);
+  font-weight: 700;
+  color: var(--text-primary);
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   transition: color 0.3s ease;
@@ -464,7 +483,7 @@
   align-items: center;
   justify-content: center;
   height: 8rem;
-  background: var(--bg-muted);
+  background: var(--bg-tertiary);
   font-size: 2.25rem;
   border-bottom: 1px solid var(--border-color);
 }
@@ -525,7 +544,6 @@
 
 .lesson-card-cta:hover {
   color: var(--accent-primary);
-  text-decoration: underline;
 }
 
 @media (min-width: 640px) {
@@ -635,7 +653,7 @@
 
 .service-card-icon {
   display: inline-block;
-  font-family: Fraunces, serif;
+  font-family: var(--font-headline);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1043,6 +1061,12 @@
   border: 1px solid rgba(107, 142, 99, 0.3);
 }
 
+.course-card-badge--preview {
+  background: rgba(74, 58, 92, 0.1);
+  color: var(--color-burnt-indigo);
+  border: 1px solid rgba(74, 58, 92, 0.25);
+}
+
 .course-card-title {
   font-size: 1.125rem;
   font-weight: 700;
@@ -1182,12 +1206,12 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--accent-primary);
   margin: 0;
 }
 
 .program-track-card-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-headline);
   font-size: 1.375rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -1196,7 +1220,7 @@
 }
 
 .program-track-card-price {
-  font-family: var(--font-serif);
+  font-family: var(--font-headline);
   font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);

@@ -178,17 +178,25 @@ export default function ContactClient({ content }: ContactClientProps) {
               <p className="contact-coaching-prompt-body">
                 {content?.coachingPathBody ?? "The first step is a 20-minute call. No prep needed — just show up and tell me what's going on. We'll figure out together if this is a good fit."}
               </p>
-              {/* TODO: Replace href="#" with Calendly URL once available */}
-              <a
-                href={content?.coachingCalendlyHref ?? '#'}
-                className="btn btn-primary"
-                aria-label="Schedule a discovery call (link coming soon)"
-              >
-                {content?.coachingCalendlyLabel ?? 'Schedule a Call'}
-              </a>
-              <p className="contact-coaching-note">
-                Not ready to book yet? Use the form below instead.
-              </p>
+              {content?.coachingCalendlyHref ? (
+                <>
+                  <a
+                    href={content.coachingCalendlyHref}
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {content.coachingCalendlyLabel ?? 'Schedule a Call'}
+                  </a>
+                  <p className="contact-coaching-note">
+                    Not ready to book yet? Use the form below instead.
+                  </p>
+                </>
+              ) : (
+                <p className="contact-coaching-note">
+                  Online booking coming soon — use the form below to get in touch.
+                </p>
+              )}
             </div>
 
             <form className="contact-form" onSubmit={handleSubmit}>
@@ -284,6 +292,34 @@ export default function ContactClient({ content }: ContactClientProps) {
             </p>
           </form>
         )}
+      </div>
+
+      {/* ── What happens next ─────────────────────────────────────────────── */}
+      <div className="contact-next-steps">
+        <h3 className="contact-next-steps-heading">What happens next</h3>
+        <ol className="contact-next-steps-list">
+          <li className="contact-next-step">
+            <span className="contact-next-step-number">1</span>
+            <div className="contact-next-step-body">
+              <strong className="contact-next-step-title">Submit your inquiry</strong>
+              <span className="contact-next-step-desc">Takes 2 minutes. No prep needed.</span>
+            </div>
+          </li>
+          <li className="contact-next-step">
+            <span className="contact-next-step-number">2</span>
+            <div className="contact-next-step-body">
+              <strong className="contact-next-step-title">We schedule a 15-min call</strong>
+              <span className="contact-next-step-desc">I'll reach out within 2–3 business days to find a time.</span>
+            </div>
+          </li>
+          <li className="contact-next-step">
+            <span className="contact-next-step-number">3</span>
+            <div className="contact-next-step-body">
+              <strong className="contact-next-step-title">We build your custom plan</strong>
+              <span className="contact-next-step-desc">Together we map out the right path forward for you.</span>
+            </div>
+          </li>
+        </ol>
       </div>
 
       {/* ── Sidebar notes ──────────────────────────────────────────────────── */}

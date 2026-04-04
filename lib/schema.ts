@@ -187,6 +187,51 @@ export function FAQSchema(faqs: Array<{ question: string; answer: string }>) {
 }
 
 /**
+ * BlogPosting Schema - for individual blog post pages
+ */
+export function BlogPostingSchema(post: {
+  title: string;
+  description?: string;
+  slug: string;
+  publishedAt?: string;
+  modifiedAt?: string;
+  imageUrl?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description ?? '',
+    url: `https://jonchalant.com/blog/${post.slug}`,
+    ...(post.publishedAt && { datePublished: post.publishedAt }),
+    ...(post.modifiedAt
+      ? { dateModified: post.modifiedAt }
+      : post.publishedAt
+      ? { dateModified: post.publishedAt }
+      : {}),
+    image: post.imageUrl ?? 'https://jonchalant.com/social/og-blog-1200x630.png',
+    author: {
+      '@type': 'Person',
+      name: 'Jon',
+      url: 'https://jonchalant.com/about',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Jonchalant',
+      url: 'https://jonchalant.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://jonchalant.com/logo.svg',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://jonchalant.com/blog/${post.slug}`,
+    },
+  };
+}
+
+/**
  * AggregateRating Schema - for testimonials/reviews
  */
 export function AggregateRatingSchema(ratingData: {

@@ -1,0 +1,434 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   CONTACT PAGE — RESTRUCTURED
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.contact-client {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+
+/* Audit prompt block */
+.contact-audit-prompt {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.contact-audit-prompt-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.contact-audit-prompt-text {
+  flex: 1;
+}
+
+.contact-audit-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+}
+
+.contact-audit-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.contact-audit-body {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.contact-audit-btn {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.contact-audit-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.contact-audit-prompt-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-left: 2rem;
+  border-left: 1px solid var(--border-color);
+  min-width: 110px;
+}
+
+.contact-audit-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-audit-stat-number {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.contact-audit-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 0.15rem;
+}
+
+/* Divider */
+.contact-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.contact-divider::before,
+.contact-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.contact-divider-text {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+/* Form section */
+.contact-form-section {
+  margin-bottom: 4rem;
+}
+
+.contact-form-heading {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.75rem;
+}
+
+/* Type selector */
+.contact-type-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.contact-type-btn:hover {
+  border-color: var(--accent-primary);
+}
+
+.contact-type-btn.selected {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 6%, var(--bg-primary));
+}
+
+.contact-type-btn-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-type-btn-sub {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* Coaching path prompt */
+.contact-coaching-path {
+  animation: auditFadeUp 0.25s ease both;
+}
+
+.contact-coaching-prompt {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-coaching-prompt-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.contact-coaching-prompt-body {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.contact-coaching-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-top: 0.75rem;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: auditFadeUp 0.25s ease both;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.contact-input,
+.contact-textarea {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+  width: 100%;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.contact-error {
+  font-size: 0.875rem;
+  color: var(--color-error);
+}
+
+.contact-form-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* Success */
+.contact-success {
+  text-align: center;
+  padding: 5rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.contact-success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  font-size: 1.25rem;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
+
+.contact-success-title {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.contact-success-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* What happens next */
+.contact-next-steps {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.contact-next-steps-heading {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 1.75rem;
+}
+
+.contact-next-steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-next-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.contact-next-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-burnt-indigo);
+  color: var(--bg-primary);
+  font-family: var(--font-headline);
+  font-size: 0.875rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.contact-next-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 0.25rem;
+}
+
+.contact-next-step-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-next-step-desc {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+/* Sidebar notes */
+.contact-sidebar-notes {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 3rem;
+}
+
+.contact-sidebar-heading {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 1.5rem;
+}
+
+.contact-sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-sidebar-item {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--border-color);
+}
+
+.contact-sidebar-item-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-sidebar-email {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+.contact-inline-link {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .contact-audit-prompt-inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-audit-prompt-aside {
+    flex-direction: row;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding-left: 0;
+    padding-top: 1.5rem;
+    gap: 2rem;
+  }
+
+  .contact-type-selector {
+    grid-template-columns: 1fr;
+  }
+}
+

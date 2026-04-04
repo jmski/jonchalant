@@ -95,6 +95,15 @@ export default defineType({
       title: 'CTA — Button Href',
       type: 'string',
     }),
+    defineField({
+      name: 'meetJonImage',
+      title: 'Meet Jon — Photo',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+      ],
+    }),
   ],
   preview: {
     select: {

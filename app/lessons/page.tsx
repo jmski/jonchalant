@@ -132,6 +132,10 @@ export default async function LessonsPage() {
                 )
                 const progress = progressMap[course.slug?.current ?? ''] ?? null
 
+                const hasPreview = (course.modules ?? []).some((m: any) =>
+                  (m.lessons ?? []).some((l: any) => l.access === 'free')
+                )
+
                 return (
                   <CourseCard
                     key={course._id}
@@ -144,6 +148,7 @@ export default async function LessonsPage() {
                     lessonCount={total}
                     estimatedMinutes={estimatedMinutes}
                     progress={progress}
+                    hasPreview={hasPreview}
                   />
                 )
               })}

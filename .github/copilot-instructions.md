@@ -712,5 +712,156 @@ Complex styling? Use a CSS class in the appropriate consolidated file (cards.css
 - **Shared TypeScript types**: All Sanity + portal interfaces live in `lib/types.ts`. Import from there; do not re-declare inline.
 - **No hardcoded page copy**: All marketing text on pages/components must come from Sanity (via a fetch function) or a lib data file. Fallback strings (`?? 'fallback'`) are acceptable but all primary copy is CMS-driven.
 - **Audit quiz data**: Quiz questions and scoring logic live in `lib/auditData.ts` — not in Sanity and not hardcoded in the component. The scoring thresholds are coupled to the question structure; do not move questions to Sanity without updating thresholds.
-- **CSS architecture note**: `pages.css` is organized by page/feature sections. The portal login section intentionally uses non-brand colors — this is not a bug. Do not add back `featured-blog-*`, `portal-dashboard-*`, `program-track-*` (non-card), `focus-area-card`, or `programs-for-*` CSS — these were removed as dead code in March 2026.</content>
+- **CSS architecture note**: `pages.css` is organized by page/feature sections. The portal login section intentionally uses non-brand colors — this is not a bug. Do not add back `featured-blog-*`, `portal-dashboard-*`, `program-track-*` (non-card), `focus-area-card`, or `programs-for-*` CSS — these were removed as dead code in March 2026.
+
+---
+
+## Reference: Routing Structure (App Router)
+
+```
+app/
+├── page.tsx              → Home page
+├── about/page.tsx        → About Jon
+├── blog/
+│   ├── page.tsx          → Blog index
+│   └── [slug]/           → Blog post (dynamic)
+├── audit/
+│   ├── page.tsx          → Presence Audit (server wrapper)
+│   └── AuditClient.tsx   → Client component (multi-step quiz)
+├── programs/page.tsx     → Coaching programs
+├── dance/page.tsx        → Choreography portfolio
+├── lessons/
+│   ├── page.tsx          → Lessons by level
+│   └── [courseSlug]/
+│       ├── page.tsx      → Course detail with sticky TOC
+│       └── [lessonSlug]/page.tsx → Lesson page with video + progress
+├── media-kit/page.tsx    → Media kit & collaboration
+├── contact/
+│   ├── page.tsx          → Server wrapper
+│   └── ContactClient.tsx → Client component
+├── login/page.tsx        → Auth page (email + Google OAuth)
+├── portal/
+│   ├── page.tsx          → Protected dashboard (Supabase auth)
+│   └── [slug]/page.tsx   → Portal lesson page (gated)
+├── ikigai/page.tsx       → Interactive Ikigai quiz
+├── privacy/page.tsx      → Privacy policy (static)
+├── auth/callback/        → OAuth callback (Supabase SSR)
+├── admin/                → Admin panel + auth
+├── api/inquiries/        → Inquiry form API
+├── api/subscribe/        → Email subscribe API (Kit/ConvertKit)
+└── css/                  → 19 consolidated CSS files
+```
+
+## Reference: Page Section Breakdown
+
+### Home (app/page.tsx)
+Fetches: `getHomePageContent()`, `getServices()`, `getTestimonials()`
+Sections: Hero → Stats → Services → Testimonials → CTA
+
+### About (app/about/page.tsx)
+Fetches: `getAboutPageContent()`
+Sections: AboutHero → Origin → TurningPoint → MethodologyNarrative → Stats → WhyExists → WhoFor → CTA
+
+### Blog (app/blog/page.tsx)
+Fetches: Direct `client.fetch()` for blogPosts
+Sections: Header → BlogFeatured → BlogPosts → CTA
+
+### Programs (app/programs/page.tsx)
+Fetches: `getPrograms()`, `getProgramsFocusItems()`
+Sections: PageHero (with FocusAreas) → ProgramsSection → SupplementalLearning → CTA
+
+### Dance (app/dance/page.tsx)
+Fetches: `getPortfolioItems()`, `getFeaturedPortfolioItem()`
+Sections: FeaturedVideo → DancePortfolio → DanceApproach → CTA
+
+### Lessons (app/lessons/page.tsx)
+Fetches: `getLessons()`
+Sections: GenericHero → LessonCategory (Beginner/Intermediate/Advanced) → CTA
+
+### Media Kit (app/media-kit/page.tsx)
+Fetches: `getMediaKitData()`, `getPageMetadata('mediaKit')`, `getCollaborationPackages()`
+Sections: PageHero (with HeroStats) → KeyMetrics → PlatformBreakdown → ContentMix → AudienceProfile → CollaborationPackages → CTA
+
+### Audit (app/audit/page.tsx)
+Fetches: `getAuditPageContent()`. Quiz data in `lib/auditData.ts`.
+
+### Contact (app/contact/page.tsx)
+Fetches: `getContactPageContent()`. Delegates to ContactClient.
+
+## Reference: Sanity Schema Types (21 total)
+
+| Schema | Description |
+|--------|-------------|
+| `aboutPage` | About page content (hero, origin, turning point, methodology, whyExists, whoFor, closing, stats) |
+| `auditPage` | Presence Audit page copy (header, capture stage, result bands, CTA) |
+| `contactPage` | Contact page marketing blocks (audit prompt, coaching path, sidebar) |
+| `blogPost` | Blog posts (title, slug, excerpt, pillar, readingTime, publishedAt, featured) |
+| `caseStudy` | Case studies (challenge, solution, results, testimonial, image) |
+| `collaboration` | Portfolio collaborations (category, price, deliverables, timeline) |
+| `collaborationPackage` | Media kit collaboration packages |
+| `contactInfo` | Contact methods (label, value, href, description) |
+| `danceCategoryFilter` | Dance filter categories |
+| `homePageContent` | Home page dynamic content (stats, headlines) |
+| `lesson` | Lessons (category, pillar, duration, icon) |
+| `mediaKitData` | Metrics, platforms, content categories, audience |
+| `pageMetadata` | Page-level SEO/CTA metadata |
+| `portfolio` | Dance portfolio items (videoUrl, thumbnail, category, duration) |
+| `program` | Coaching programs (category, investment, features) |
+| `programFocus` | Program focus area items |
+| `programsPageContent` | Programs page dynamic content |
+| `service` | Coaching services (icon, features, isPrimary, color) |
+| `serviceCategory` | Service categories |
+| `testimonial` | Testimonials (clientName, role, company, quote, result, featured) |
+| `portalLesson` | Portal lesson content |
+
+## Reference: All Sanity Data Fetching Functions (lib/sanity.ts)
+
+- `getPortfolioItems()`, `getPortfolioByCategory(cat)`, `getPortfolioItem(slug)`, `getFeaturedPortfolioItem()`
+- `getServices()`, `getPrimaryService()`, `getService(slug)`
+- `getCollaborations()`, `getCollaborationsByCategory(cat)`
+- `getMediaKitData()`
+- `getTestimonials(featured?)`, `getCaseStudies(featured?)`, `getCaseStudy(slug)`
+- `getLessons()`, `getLessonsByCategory(cat)`, `getLessonsByPillar(pillar)`
+- `getPrograms()`, `getProgramBySlug(slug)`, `getProgramsByCategory(cat)`, `getProgramsFocusItems()`
+- `getPageMetadata(page)`, `getContactInfo()`
+- `getAboutPageContent()`, `getHomePageContent()`
+- `getDanceCategoryFilter()`, `getServiceCategories()`, `getCollaborationPackages()`
+- `getAuditPageContent()`, `getContactPageContent()`
+
+## Reference: lib/ Files
+
+| File | Purpose |
+|------|---------|
+| `auth-context.tsx` | React auth context provider |
+| `design-tokens.ts` | JS-accessible design tokens |
+| `imageConfig.ts` | Next.js image config helpers |
+| `optimizedImage.tsx` | Optimized image wrapper |
+| `auditData.ts` | Audit quiz questions, scoring thresholds, `getBand()` |
+| `pageContent.ts` | Static/fallback page content (largely superseded by Sanity) |
+| `portal-progress.ts` | Portal progress tracking (`markLessonComplete`, `getLessonProgress`, `getCourseProgress`) |
+| `schema.ts` | JSON-LD structured data |
+| `types.ts` | 21 shared TypeScript interfaces |
+| `blog/portableTextComponents.tsx` | Portable text renderer |
+
+### Custom hooks (lib/hooks/):
+`useFocusTrap`, `useFormValidation`, `usePointerPosition`, `useScrollAnimation`, `useScrollTrigger`, `useSwipeGesture`
+
+## Reference: Layout Components
+
+All pages use these wrappers from `@/components/layout`:
+- `<PageTransition animation="fade">` — route transitions
+- `<SectionWrapper variant="primary|secondary|tertiary">` — section background
+- `<SectionContent>` — max-width + padding
+- `<RouteAwareLayout>` — Navbar visibility (in app/layout.tsx)
+- `<SidebarOverlay>` — mobile nav
+
+## Reference: sections/index.ts Exports
+
+All sections are exported from `components/sections/index.ts`. Key aliases:
+- Home: `Hero`, `FeaturedAreas`, `BlogCards`, `ImpactSection`, `PortfolioPreview`, `WhyWorkTogether`, `WhyItWorks`
+- About: `AboutHero`, `Origin`, `TurningPoint`, `MethodologyNarrative`, `WhyExists`, `WhoFor`
+- Blog: `BlogFeatured`, `BlogPosts`, `BlogRelated`
+- Dance: `FeaturedVideo`, `DanceApproach`, `DancePortfolio`
+- Shared: `CTA`, `FAQ`, `PageHero`, `GenericHero`, `Collaboration`, `Carousel`, `Testimonials`, `Services`
+- Utilities: `Badge`, `TestimonialCard`, `CaseStudyCard`, `LessonCard`, `BlogCard`, `ServiceCard`, `StatsGrid`, `CardGrid`</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md

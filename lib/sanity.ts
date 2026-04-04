@@ -401,7 +401,8 @@ export async function getHomePageContent() {
     ctaTitle,
     ctaDescription,
     ctaButtonText,
-    ctaButtonHref
+    ctaButtonHref,
+    meetJonImage { asset->{ url }, alt }
   }`
   return await client.fetch(query)
 }
@@ -557,4 +558,80 @@ export async function getDanceCategories() {
 
 export async function getInstagramReels() {
   return fetchList('instagramReel', INSTAGRAM_REEL_FIELDS)
+}
+
+export async function getDancePageContent() {
+  const query = `*[_type == "dancePageContent"][0] {
+    heroEyebrow,
+    heroHeadline,
+    heroSubheadline,
+    instagramHeadline,
+    ctaHeadline,
+    ctaBody,
+    ctaButtonLabel,
+    ctaButtonHref
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// FOUNDATION PAGE
+// ============================================================================
+
+export async function getFoundationPageContent() {
+  const query = `*[_type == "foundationPage"][0] {
+    heroEyebrow,
+    heroHeadline,
+    heroSubheadline,
+    heroBody,
+    heroPrimaryCtaLabel,
+    heroSecondaryCtaLabel,
+    heroNote,
+    insideEyebrow,
+    insideTitle,
+    insideBody,
+    modules[] { week, title, description },
+    whoEyebrow,
+    whoTitle,
+    whoItems,
+    howEyebrow,
+    howTitle,
+    howCards[] { label, body },
+    pricingEyebrow,
+    pricingTitle,
+    pricingNote,
+    pricingTiers[] { tier, tierKey, price, description, features, cta, primary },
+    ctaTitle,
+    ctaBody,
+    ctaButtonLabel,
+    ctaNote
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPressMentions() {
+  const query = `*[_type == "pressMention"] | order(order asc) {
+    _id,
+    outlet,
+    type,
+    url,
+    logo { asset->{ url } },
+    order
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// BLOG POSTS
+// ============================================================================
+
+export async function getRecentBlogPosts(count = 3) {
+  const query = `*[_type == "blogPost"] | order(publishedAt desc) [0...$count] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt
+  }`
+  return await client.fetch(query, { count })
 }

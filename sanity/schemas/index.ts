@@ -16,6 +16,11 @@ import programsPageContent from './programsPageContent'
 import danceCategory from './danceCategory'
 import instagramReel from './instagramReel'
 import emailOptIn from './emailOptIn'
+import pressMention from './pressMention'
+import auditPage from './auditPage'
+import contactPage from './contactPage'
+import dancePageContent from './dancePageContent'
+import foundationPage from './foundationPage'
 
 export const schemaTypes = [
   portfolio,
@@ -36,4 +41,9 @@ export const schemaTypes = [
   danceCategory,
   instagramReel,
   emailOptIn,
+  pressMention,
+  auditPage,
+  contactPage,
+  dancePageContent,
+  foundationPage,
 ]

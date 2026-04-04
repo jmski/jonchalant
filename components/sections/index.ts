@@ -1,5 +1,8 @@
 // ─────────────── HOME PAGE SECTIONS ────────────────
 export { Hero } from './home/hero';
+export { CredibilityStrip } from './home/credibility-strip';
+export { EmailCapture } from './home/email-capture';
+export { MeetJon } from './home/meet-jon';
 export { FeaturedAreas } from './home/featured-areas';
 export { BlogCards } from './home/blog-cards';
 export { ImpactSection } from './home/impact';

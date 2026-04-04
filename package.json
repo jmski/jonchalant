@@ -11,10 +11,10 @@
     "sanity:dev": "cd sanity && npm run dev",
     "sanity:deploy": "cd sanity && npm run deploy",
     "seed:dance-categories": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-dance-categories.ts",
-    "seed:instagram-reels": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-instagram-reels.ts"
+    "seed:instagram-reels": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-instagram-reels.ts",
+    "seed:placeholder": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-placeholder-content.ts"
   },
   "dependencies": {
-    "@react-three/fiber": "^9.5.0",
     "@sanity/client": "^7.17.0",
     "@sanity/image-url": "^2.0.3",
     "@sanity/vision": "^5.16.0",
@@ -27,16 +27,13 @@
     "react-dom": "19.2.3",
     "resend": "^6.9.3",
     "sanity": "^5.16.0",
-    "stripe": "^21.0.1",
-    "styled-components": "^6.3.11",
-    "three": "^0.183.2"
+    "stripe": "^21.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/three": "^0.183.1",
     "autoprefixer": "^10.4.24",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",

@@ -7,9 +7,6 @@ import { ScrollStagger, ScrollStaggerItem } from '@/components/animations';
 import { SectionWrapper, SectionContent } from '@/components/layout';
 import type { EmailOptInContent } from '@/lib/types';
 
-const CATEGORIES = ['All', 'Executive Presence', 'Introvert Leadership', 'Confidence'] as const;
-type Category = (typeof CATEGORIES)[number];
-
 interface BlogPost {
   _id: string;
   title: string;
@@ -27,10 +24,16 @@ interface BlogClientProps {
 }
 
 export function BlogClient({ posts, optIn }: BlogClientProps) {
+  const categories = useMemo(() => {
+    const pillars = posts.map((p) => p.pillar).filter(Boolean)
+    return ['All', ...Array.from(new Set(pillars))]
+  }, [posts])
+
   const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState<Category>('All');
+  const [activeCategory, setActiveCategory] = useState('All');
 
   const isFiltering = search.trim() !== '' || activeCategory !== 'All';
+
 
   const filtered = useMemo(() => {
     let result = posts;
@@ -114,7 +117,7 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
             role="tablist"
             aria-label="Filter articles by category"
           >
-            {CATEGORIES.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 role="tab"

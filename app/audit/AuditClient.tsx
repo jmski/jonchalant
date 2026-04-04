@@ -24,6 +24,24 @@ interface AuditClientProps {
 // Fallback band copy (used when Sanity doc hasn't been created yet)
 // ─────────────────────────────────────────────────────────────────────────────
 
+const BAND_CTA: Record<AuditBand, { intro: string; label: string; href: string }> = {
+  foundation: {
+    intro: 'The Foundation course was built for exactly where you are.',
+    label: 'Enroll — starting at $197',
+    href: '/foundation',
+  },
+  developing: {
+    intro: 'A guided program will accelerate what you\'ve already built.',
+    label: 'Explore Programs',
+    href: '/programs',
+  },
+  refining: {
+    intro: "You're ready for 1-on-1 work.",
+    label: 'Book a Discovery Call',
+    href: '/contact',
+  },
+}
+
 const BAND_FALLBACKS: Record<AuditBand, { headline: string; body: string }> = {
   foundation: {
     headline: 'Building Your Foundation',
@@ -258,13 +276,10 @@ export default function AuditClient({ content }: AuditClientProps) {
 
         <div className="audit-result-cta">
           <p className="audit-result-cta-text">
-            {content?.resultCtaText ?? 'Want to move faster?'}
+            {BAND_CTA[result.band].intro}
           </p>
-          <a
-            href={content?.resultCtaHref ?? '/contact'}
-            className="btn btn-primary"
-          >
-            {content?.resultCtaButtonLabel ?? 'Book a Discovery Call'}
+          <a href={BAND_CTA[result.band].href} className="btn btn-primary">
+            {BAND_CTA[result.band].label}
           </a>
         </div>
       </div>

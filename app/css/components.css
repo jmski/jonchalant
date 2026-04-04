@@ -9,13 +9,15 @@
 .btn,
 button {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  padding: 0.875rem 1.5rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
   border: 1px solid var(--accent-primary);
-  border-radius: 0px;
+  border-radius: 8px;
   background-color: var(--accent-primary);
-  color: white;
+  color: var(--btn-primary-text);
   cursor: pointer;
   transition: all var(--transition-base);
   text-decoration: none;
@@ -23,7 +25,8 @@ button {
   white-space: nowrap;
   text-align: center;
   outline: none;
-  box-shadow: none; /* Zen Sleek: No shadows */
+  box-shadow: none;
+  user-select: none;
 }
 
 .btn:hover,
@@ -41,7 +44,7 @@ button:active {
 /* Button Variants */
 .btn-primary {
   background-color: var(--accent-primary);
-  color: white;
+  color: var(--btn-primary-text);
   border: 1px solid var(--accent-primary);
   outline: none;
 }
@@ -54,15 +57,15 @@ button:active {
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--accent-primary);
+  color: var(--text-primary);
   border: 1px solid var(--border-color);
   border-width: 1px;
   outline: none;
 }
 
 .btn-secondary:hover {
-  background-color: transparent;
-  color: var(--accent-primary);
+  background-color: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  color: var(--text-primary);
   border: 1px solid var(--accent-primary);
   box-shadow: none;
 }
@@ -111,24 +114,6 @@ button:disabled:hover {
 }
 
 /* ========== CARDS ========== */
-.card {
-  position: relative;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 0px;
-  padding: 1.5rem;
-  transition: all var(--transition-base);
-  overflow: visible;
-  box-sizing: border-box;
-  box-shadow: none; /* Zen Sleek: No shadow */
-}
-
-.card:hover {
-  border-color: var(--accent-primary);
-  background-color: var(--bg-secondary);
-  box-shadow: 0 2px 8px rgba(107, 142, 99, 0.06); /* Subtle 2px blur only on hover */
-}
-
 .card-outlined {
   border: 1px solid var(--accent-primary);
   background-color: var(--bg-primary);
@@ -219,26 +204,6 @@ textarea {
 }
 
 /* ========== BADGES ========== */
-.badge {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
-  text-transform: uppercase;
-  display: inline-block;
-  border: 1px solid var(--border-color);
-}
-
-.badge-accent {
-  background-color: var(--accent-primary);
-  color: white;
-  border-color: var(--accent-primary);
-}
-
 .badge-secondary {
   background-color: var(--accent-secondary);
   color: white;
@@ -258,16 +223,7 @@ textarea {
 }
 
 /* ========== LINKS ========== */
-a {
-  color: var(--accent-primary);
-  transition: color var(--transition-fast);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--accent-primary-hover);
-  text-decoration: underline;
-}
+/* Link colors: canonical source is base.css. Hover behavior: interactions.css. */
 
 /* Navigation links */
 .nav-link {
@@ -337,48 +293,12 @@ figcaption {
 }
 
 /* ========== BLOCKQUOTES ========== */
-blockquote {
-  border-left: 4px solid var(--accent-primary);
-  padding: 1rem 1.5rem;
-  margin: 2rem 0;
-  background-color: var(--bg-tertiary);
-  font-style: italic;
-  color: var(--text-secondary);
-  border-radius: 0 4px 4px 0;
-}
-
 blockquote cite {
   display: block;
   margin-top: 1rem;
   font-style: normal;
   font-weight: 600;
   color: var(--text-primary);
-}
-
-/* ========== CODE ========== */
-code {
-  font-family: var(--font-mono);
-  font-size: 0.875em;
-  background-color: var(--bg-tertiary);
-  color: var(--color-navy);
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  word-break: break-word;
-}
-
-pre {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 1.5rem;
-  overflow-x: auto;
-  margin: 2rem 0;
-}
-
-pre code {
-  background-color: transparent;
-  color: var(--text-primary);
-  padding: 0;
 }
 
 /* ========== TABLES ========== */
@@ -413,18 +333,6 @@ tbody tr:hover {
 }
 
 /* ========== UTILITY CLASSES ========== */
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-muted {
-  color: var(--text-tertiary);
-}
-
 .text-gold {
   color: var(--accent-primary);
 }
@@ -477,19 +385,19 @@ tbody tr:hover {
   margin-top: var(--element-gap);
 }
 .mt-2 {
-  margin-top: var(--section-gap);
+  margin-top: var(--spacing-xl);
 }
 .mb-1 {
   margin-bottom: var(--element-gap);
 }
 .mb-2 {
-  margin-bottom: var(--section-gap);
+  margin-bottom: var(--spacing-xl);
 }
 .p-1 {
   padding: var(--element-gap);
 }
 .p-2 {
-  padding: var(--section-gap);
+  padding: var(--spacing-xl);
 }
 
 /* CTA section styles live in sections.css */
@@ -509,4 +417,103 @@ tbody tr:hover {
   select {
     font-size: 16px; /* Prevent zoom on mobile */
   }
+}
+
+/* ── Section Header Utilities ──────────────────────────────────────────────── */
+/* Canonical shared classes for eyebrow + title + description patterns.
+   Use these instead of per-section .foo-eyebrow / .foo-title classes.        */
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 42rem;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.section-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.section-description {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 40rem;
+  margin: 0;
+}
+
+/* ── FAQ Accordion ─────────────────────────────────────────────────────────── */
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: border-color var(--transition-base);
+}
+
+.faq-item--open {
+  border-color: var(--accent-primary);
+}
+
+.faq-item-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 1rem;
+}
+
+.faq-item-trigger:hover {
+  background: var(--bg-secondary);
+}
+
+.faq-item-question {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.faq-item-icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+.faq-item-answer {
+  padding: 0 1.5rem 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
 }

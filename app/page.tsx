@@ -1,20 +1,28 @@
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import {
   Hero,
-  Services,
+  CredibilityStrip,
   WhyItWorks,
+  Services,
+  MeetJon,
   Testimonials,
+  BlogCards,
+  EmailCapture,
   CTA,
 } from '@/components/sections';
+import { PressStrip } from '@/components/shared/press-strip';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
+import { getHomePageContent, getServices, getTestimonials, getPressMentions, getRecentBlogPosts } from "@/lib/sanity";
 import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Executive Presence Coaching for Introverts | 8-Week Program",
-  description: "Build executive presence and quiet command in 8-12 weeks. Leadership coaching for introverts using evidence-based, body-aware techniques. Master confident communication.",
+  title: "Quiet Command | Executive Presence Coaching for Introverts",
+  description: "Quiet Command — executive presence coaching for introverts. Build commanding leadership presence in 8-12 weeks using evidence-based, body-aware techniques.",
   keywords: "executive presence coaching, leadership coaching for introverts, quiet command, confidence coaching, introvert leadership, professional presence",
+  alternates: {
+    canonical: 'https://jonchalant.com',
+  },
   openGraph: {
     title: "Executive Presence Coaching for Introverts | Jonchalant",
     description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for shy professionals and introverts.",
@@ -43,47 +51,46 @@ export default async function Home() {
   let homeContent = null;
   let services = [];
   let testimonials = [];
+  let recentPosts = [];
+  let pressMentions = [];
 
   try {
-    const [sanityHome, sanityServices, sanityTestimonials] = await Promise.all([
+    const [sanityHome, sanityServices, sanityTestimonials, sanityPosts, sanityPress] = await Promise.all([
       getHomePageContent(),
       getServices(),
-      getTestimonials() // Fetch all testimonials
+      getTestimonials(),
+      getRecentBlogPosts(),
+      getPressMentions(),
     ]);
-    
-    if (sanityHome) {
-      homeContent = sanityHome;
-    }
-    
-    if (sanityServices && sanityServices.length > 0) {
-      services = sanityServices;
-    }
-    
-    if (sanityTestimonials && sanityTestimonials.length > 0) {
-      testimonials = sanityTestimonials;
-    }
+
+    if (sanityHome) homeContent = sanityHome;
+    if (sanityServices?.length > 0) services = sanityServices;
+    if (sanityTestimonials?.length > 0) testimonials = sanityTestimonials;
+    if (sanityPosts?.length > 0) recentPosts = sanityPosts;
+    if (sanityPress?.length > 0) pressMentions = sanityPress;
   } catch (error) {
     console.warn('Failed to fetch home content from Sanity, using fallback data:', error);
   }
 
   return (
     <div className="bg-white">
-      {/* Aggregate Rating Schema - Coach reviews */}
-      <Script
-        id="coach-rating-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(AggregateRatingSchema({
-            name: "Jonchalant Leadership Coaching",
-            ratingValue: 4.9,
-            ratingCount: testimonials?.length || 25,
-            reviewCount: testimonials?.length || 25
-          })),
-        }}
-      />
-      
+      {testimonials.length >= 5 && (
+        <Script
+          id="coach-rating-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(AggregateRatingSchema({
+              name: "Jonchalant Leadership Coaching",
+              ratingValue: 4.9,
+              ratingCount: testimonials.length,
+              reviewCount: testimonials.length,
+            })),
+          }}
+        />
+      )}
+
       <PageTransition animation="fade">
-        {/* HERO SECTION — flush wrapper so hero fills viewport on desktop */}
+        {/* 1. HERO */}
         <SectionWrapper variant="primary" className="section-wrapper--flush">
           <Hero
             heroHeadline={homeContent?.heroHeadline}
@@ -92,24 +99,27 @@ export default async function Home() {
             ctaText={homeContent?.heroCtaText}
             ctaLink={homeContent?.heroCtaLink}
             auditMicrocopy={homeContent?.heroMicrocopy}
-            secondaryCtaText={homeContent?.heroSecondaryCtaText}
-            stats={homeContent?.heroStats}
           />
         </SectionWrapper>
 
-        {/* SERVICES OVERVIEW */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <Services 
-              services={services || []} 
-              heading={homeContent?.servicesHeadline}
-              description={homeContent?.servicesDescription}
-            />
-          </SectionContent>
-        </SectionWrapper>
+        {/* 2. CREDIBILITY STRIP */}
+        {homeContent?.heroStats?.length > 0 && (
+          <SectionWrapper variant="primary">
+            <CredibilityStrip stats={homeContent.heroStats} />
+          </SectionWrapper>
+        )}
 
-        {/* WHY IT WORKS — bridge between services and social proof */}
-        <SectionWrapper variant="primary">
+        {/* 3. PRESS STRIP */}
+        {pressMentions.length > 0 && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <PressStrip mentions={pressMentions} />
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 4. WHY IT WORKS / PHILOSOPHY (moved up) */}
+        <SectionWrapper variant="secondary">
           <SectionContent>
             <WhyItWorks
               label={homeContent?.whyItWorksLabel}
@@ -121,8 +131,26 @@ export default async function Home() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* CLIENT TESTIMONIALS SECTION */}
-        {testimonials && testimonials.length > 0 && (
+        {/* 5. SERVICES */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <Services
+              services={services}
+              heading={homeContent?.servicesHeadline}
+              description={homeContent?.servicesDescription}
+            />
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* 6. MEET JON */}
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
+            <MeetJon image={homeContent?.meetJonImage} />
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* 7. TESTIMONIALS */}
+        {testimonials.length > 0 && (
           <SectionWrapper variant="secondary" className="section-wrapper--moss">
             <SectionContent>
               <Testimonials
@@ -134,7 +162,25 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* FINAL CTA */}
+        {/* 8. BLOG PREVIEW */}
+        {recentPosts.length > 0 && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <BlogCards
+                posts={recentPosts}
+                heading="From the Blog"
+                description="Insights on quiet leadership, executive presence, and authentic communication."
+              />
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 9. EMAIL CAPTURE */}
+        <SectionWrapper variant="dark" className="section-wrapper--flush">
+          <EmailCapture />
+        </SectionWrapper>
+
+        {/* 10. FINAL CTA */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <CTA

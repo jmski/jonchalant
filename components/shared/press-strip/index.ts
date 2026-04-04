@@ -1,0 +1,1 @@
+export { PressStrip } from './PressStrip'

@@ -1,0 +1,1 @@
+export { CredibilityStrip } from './CredibilityStrip';

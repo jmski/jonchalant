@@ -7,6 +7,7 @@ interface Testimonial {
   role: string
   company: string
   result?: string
+  image?: unknown
 }
 
 interface TestimonialsProps {
@@ -34,6 +35,7 @@ export function Testimonials({ testimonials, eyebrow, heading }: TestimonialsPro
             role={t.role}
             company={t.company}
             result={t.result}
+            image={t.image}
           />
         ))}
       </div>

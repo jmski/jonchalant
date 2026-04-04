@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
 import { VideoEmbed } from '@/components/shared/VideoEmbed'
 import { InstagramEmbed } from '@/components/shared/InstagramEmbed'
-import { getDanceCategories, getInstagramReels } from '@/lib/sanity'
+import { getDanceCategories, getInstagramReels, getDancePageContent } from '@/lib/sanity'
 import type { DanceCategory, DanceVideo, InstagramReel } from '@/lib/types'
 
 export const metadata: Metadata = {
@@ -36,28 +37,27 @@ export const metadata: Metadata = {
 }
 
 export default async function Dance() {
-  const [categories, reels] = await Promise.all([
+  const [categories, reels, pageContent] = await Promise.all([
     getDanceCategories().catch(() => [] as DanceCategory[]),
     getInstagramReels().catch(() => [] as InstagramReel[]),
+    getDancePageContent().catch(() => null),
   ])
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <PageTransition animation="fade">
+    <PageTransition animation="fade">
 
         {/* ── SECTION 1: HERO ─────────────────────────────────────────────── */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <section className="dance-page-hero">
-              {/* COPYWRITER: Refine the eyebrow label */}
-              <p className="dance-page-hero-eyebrow">Movement &amp; Leadership</p>
-              {/* COPYWRITER: Craft the primary headline */}
-              <h1 className="dance-page-hero-headline">The Body Leads First</h1>
-              {/* COPYWRITER: Write the subheadline — 2–3 sentences, editorial tone */}
+              <p className="dance-page-hero-eyebrow">
+                {pageContent?.heroEyebrow ?? 'Movement & Leadership'}
+              </p>
+              <h1 className="dance-page-hero-headline">
+                {pageContent?.heroHeadline ?? 'The Body Leads First'}
+              </h1>
               <p className="dance-page-hero-subheadline">
-                Every principle of executive presence has a physical root. Before the words, before
-                the strategy — there is movement. This curriculum teaches leadership through the
-                body.
+                {pageContent?.heroSubheadline ?? 'Every principle of executive presence has a physical root. Before the words, before the strategy — there is movement. This curriculum teaches leadership through the body.'}
               </p>
             </section>
           </SectionContent>
@@ -111,8 +111,9 @@ export default async function Dance() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <section className="dance-instagram">
-              {/* COPYWRITER: Refine the section headline */}
-              <h2 className="dance-instagram-headline">On Instagram</h2>
+              <h2 className="dance-instagram-headline">
+                {pageContent?.instagramHeadline ?? 'On Instagram'}
+              </h2>
 
               {reels.length === 0 ? (
                 <p className="dance-instagram-empty">Check back soon for new content.</p>
@@ -127,26 +128,60 @@ export default async function Dance() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* ── SECTION 4: CTA ──────────────────────────────────────────────── */}
-        <SectionWrapper variant="primary">
+        {/* ── SECTION 4: BRIDGE ───────────────────────────────────────────── */}
+        <SectionWrapper variant="secondary">
           <SectionContent>
-            <section className="dance-cta">
-              {/* COPYWRITER: Write a compelling headline — connect movement to coaching transformation */}
-              <h2 className="dance-cta-headline">Your Presence Is Built in the Body</h2>
-              {/* COPYWRITER: 1–2 sentences. Bridge the curriculum to the coaching offer. */}
-              <p className="dance-cta-body">
-                These movement principles are the physical foundation of every coaching program.
-                If you are ready to embody your leadership presence, explore the full curriculum.
+            <section className="dance-bridge">
+              <p className="dance-bridge-eyebrow">
+                {pageContent?.bridgeEyebrow ?? 'From the Studio to the Room'}
               </p>
-              <a href="/programs" className="dance-cta-button">
-                {/* COPYWRITER: Confirm or refine button text */}
-                Explore Coaching Programs
-              </a>
+              <h2 className="dance-bridge-headline">
+                {pageContent?.bridgeHeadline ?? 'What you just watched applies to every room that matters.'}
+              </h2>
+              <div className="dance-bridge-items">
+                <div className="dance-bridge-item">
+                  <p className="dance-bridge-item-context">The boardroom presentation.</p>
+                  <p className="dance-bridge-item-translation">
+                    Grounding your weight before you begin. Holding the pause before your first point. Letting your stillness signal that you don't need the room's permission to take up space.
+                  </p>
+                </div>
+                <div className="dance-bridge-item">
+                  <p className="dance-bridge-item-context">The difficult conversation.</p>
+                  <p className="dance-bridge-item-translation">
+                    Staying physically open when the instinct is to close. Using breath to slow the room. Letting your body communicate calm before your words have to.
+                  </p>
+                </div>
+                <div className="dance-bridge-item">
+                  <p className="dance-bridge-item-context">The performance review.</p>
+                  <p className="dance-bridge-item-translation">
+                    Entering a room with intention, not apology. Eye contact that doesn't waver under pressure. The kind of physical authority that makes people assume competence before you've said a word.
+                  </p>
+                </div>
+              </div>
+              <p className="dance-bridge-close">
+                {pageContent?.bridgeClose ?? 'This is the coaching. The movement is where it starts.'}
+              </p>
             </section>
           </SectionContent>
         </SectionWrapper>
 
-      </PageTransition>
-    </div>
+        {/* ── SECTION 5: CTA ──────────────────────────────────────────────── */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <section className="dance-cta">
+              <h2 className="dance-cta-headline">
+                {pageContent?.ctaHeadline ?? 'Your Presence Is Built in the Body'}
+              </h2>
+              <p className="dance-cta-body">
+                {pageContent?.ctaBody ?? 'These movement principles are the physical foundation of every coaching program. If you are ready to embody your leadership presence, explore the full curriculum.'}
+              </p>
+              <Link href={pageContent?.ctaButtonHref ?? '/programs'} className="btn btn-primary">
+                {pageContent?.ctaButtonLabel ?? 'Take What You Just Learned Into a Room That Matters'}
+              </Link>
+            </section>
+          </SectionContent>
+        </SectionWrapper>
+
+    </PageTransition>
   )
 }

@@ -305,6 +305,14 @@ export default function IkigaiClient() {
   const [questionState, setQuestionState] = useState<QuestionState>('visible');
   const [barAnimated, setBarAnimated] = useState(false);
 
+  // ── Email capture state
+  const [captureFirstName, setCaptureFirstName] = useState('');
+  const [captureEmail, setCaptureEmail] = useState('');
+  const [captureSubmitting, setCaptureSubmitting] = useState(false);
+  const [captureSubmitted, setCaptureSubmitted] = useState(false);
+  const [captureDismissed, setCaptureDismissed] = useState(false);
+  const [captureAlreadySubscribed, setCaptureAlreadySubscribed] = useState(false);
+
   const quizRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -321,6 +329,13 @@ export default function IkigaiClient() {
       };
     }
   }, [showResults]);
+
+  // ── Check if already subscribed
+  useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('jonchalant_subscribed') === 'true') {
+      setCaptureAlreadySubscribed(true);
+    }
+  }, []);
 
   // ── Scores
   const scores: Record<Quadrant, number> = {
@@ -373,6 +388,25 @@ export default function IkigaiClient() {
       quizRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   };
+
+  async function handleCaptureSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setCaptureSubmitting(true);
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName: captureFirstName, email: captureEmail }),
+      });
+      if (!res.ok) throw new Error();
+      localStorage.setItem('jonchalant_subscribed', 'true');
+      setCaptureSubmitted(true);
+    } catch {
+      setCaptureDismissed(true);
+    } finally {
+      setCaptureSubmitting(false);
+    }
+  }
 
   const currentQ = QUESTIONS[currentQuestion];
   const cardClass = `ikigai-question-card${
@@ -551,6 +585,62 @@ export default function IkigaiClient() {
                     {DOMINANT_DESCRIPTIONS[dominantQuadrant].body}
                   </p>
                 </div>
+
+                {/* Email capture */}
+                {!captureAlreadySubscribed && !captureDismissed && (
+                  <div className="ikigai-capture">
+                    <button
+                      className="ikigai-capture-dismiss"
+                      onClick={() => setCaptureDismissed(true)}
+                      aria-label="Dismiss"
+                    >
+                      ×
+                    </button>
+                    {captureSubmitted ? (
+                      <div className="ikigai-capture-success">
+                        <p className="ikigai-capture-success-title">You&apos;re in.</p>
+                        <p className="ikigai-capture-success-body">Your Ikigai profile is on its way.</p>
+                      </div>
+                    ) : (
+                      <>
+                        <span className="ikigai-capture-eyebrow">Save your results</span>
+                        <h3 className="ikigai-capture-title">Get your Ikigai profile in your inbox</h3>
+                        <p className="ikigai-capture-body">
+                          Receive a summary of your scores and what they mean — so you can come back to it.
+                        </p>
+                        <form className="ikigai-capture-form" onSubmit={handleCaptureSubmit}>
+                          <div className="ikigai-capture-fields">
+                            <input
+                              type="text"
+                              className="ikigai-capture-input"
+                              placeholder="First name"
+                              value={captureFirstName}
+                              onChange={(e) => setCaptureFirstName(e.target.value)}
+                              required
+                              autoComplete="given-name"
+                            />
+                            <input
+                              type="email"
+                              className="ikigai-capture-input"
+                              placeholder="your@email.com"
+                              value={captureEmail}
+                              onChange={(e) => setCaptureEmail(e.target.value)}
+                              required
+                              autoComplete="email"
+                            />
+                            <button
+                              type="submit"
+                              className="ikigai-capture-submit"
+                              disabled={captureSubmitting}
+                            >
+                              {captureSubmitting ? 'Sending…' : 'Send me my results'}
+                            </button>
+                          </div>
+                        </form>
+                      </>
+                    )}
+                  </div>
+                )}
 
                 {/* CTA */}
                 <div className="ikigai-results-cta">
