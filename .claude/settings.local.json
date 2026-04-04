@@ -58,7 +58,11 @@
       "Bash(wc -l \"c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/pages\"*.css)",
       "Bash(grep -B 2 \"text-decoration.*underline\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
       "Bash(wc -l c:/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -type f \\\\\\( -name \"*.css\" -o -name \"*.scss\" \\\\\\) -exec grep -l \"meet-jon\\\\|about-hero\" {} \\\\;)",
+      "Bash(xargs grep:*)",
+      "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -type f -name \"*.tsx\" -exec grep -l \"SanityImage\\\\|getImageUrl\" {} \\\\;)"
     ]
   }
 }

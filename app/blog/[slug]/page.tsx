@@ -9,7 +9,7 @@ import { portableTextComponents } from '@/lib/blog/portableTextComponents';
 import { BlogToC } from './BlogToC';
 import { extractHeadings } from './headings';
 import { BlogShare } from './BlogShare';
-import { BlogPostingSchema } from '@/lib/schema';
+import { BlogPostingSchema, BreadcrumbSchema } from '@/lib/schema';
 
 interface BlogPostDocument {
   _id: string;
@@ -21,6 +21,8 @@ interface BlogPostDocument {
   content: any[];
   readingTime?: number;
   publishedAt?: string;
+  _updatedAt?: string;
+  coverImage?: { asset: { url: string } };
   cta?: {
     text?: string;
     url?: string;
@@ -44,6 +46,8 @@ async function getBlogPost(slug: string): Promise<BlogPostDocument | null> {
     content,
     readingTime,
     publishedAt,
+    _updatedAt,
+    coverImage { asset->{ url } },
     cta
   }`;
 
@@ -105,12 +109,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const description = post.metaDescription || post.excerpt || post.title;
+  const ogImage = post.coverImage?.asset?.url ?? 'https://jonchalant.com/social/og-blog-1200x630.png';
 
   return {
     title: post.title,
     description,
     keywords: [post.pillar, 'executive presence', 'leadership coaching', 'introvert leadership', 'confidence'].join(', '),
     authors: [{ name: 'Jon', url: 'https://jonchalant.com/about' }],
+    alternates: {
+      canonical: `https://jonchalant.com/blog/${post.slug.current}`,
+    },
     openGraph: {
       title: post.title,
       description,
@@ -120,7 +128,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'Jonchalant',
       locale: 'en_US',
       images: {
-        url: 'https://jonchalant.com/social/og-blog-1200x630.png',
+        url: ogImage,
         width: 1200,
         height: 630,
         alt: post.title,
@@ -133,7 +141,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       creator: '@jonchalant',
       title: post.title,
       description,
-      images: ['https://jonchalant.com/social/og-blog-1200x630.png'],
+      images: [ogImage],
     },
   };
 }
@@ -168,7 +176,20 @@ export default async function BlogPostPage({ params }: Props) {
             description: post.metaDescription || post.excerpt,
             slug: post.slug.current,
             publishedAt: post.publishedAt,
+            modifiedAt: post._updatedAt,
+            imageUrl: post.coverImage?.asset?.url,
           })),
+        }}
+      />
+      <Script
+        id="blog-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(BreadcrumbSchema([
+            { name: 'Home', url: 'https://jonchalant.com' },
+            { name: 'Blog', url: 'https://jonchalant.com/blog' },
+            { name: post.title, url: `https://jonchalant.com/blog/${post.slug.current}` },
+          ])),
         }}
       />
       {/* Breadcrumb */}

@@ -18,6 +18,7 @@ interface CourseCardProps {
   lessonCount: number
   estimatedMinutes: number
   progress: CourseProgress | null
+  hasPreview?: boolean
 }
 
 function formatDuration(minutes: number): string | null {
@@ -39,6 +40,7 @@ export function CourseCard({
   lessonCount,
   estimatedMinutes,
   progress,
+  hasPreview,
 }: CourseCardProps) {
   const hasProgress = progress != null && progress.completed > 0
   const isComplete = hasProgress && progress.percentage >= 100
@@ -62,11 +64,16 @@ export function CourseCard({
       </div>
 
       <div className="course-card-body">
-        {(difficulty || isComplete) && (
+        {(difficulty || isComplete || hasPreview) && (
           <div className="course-card-badges">
             {difficulty && (
               <span className="course-card-badge course-card-badge--difficulty">
                 {difficulty}
+              </span>
+            )}
+            {hasPreview && !isComplete && (
+              <span className="course-card-badge course-card-badge--preview">
+                Free preview
               </span>
             )}
             {isComplete && (

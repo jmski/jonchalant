@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import { HeroCyclingText } from './HeroCyclingText';
 
 interface HeroProps {
   heroHeadline?: string;
+  cyclingOutcomes?: string[];
+  description?: string;
   ctaText?: string;
   ctaLink?: string;
   auditMicrocopy?: string;
@@ -9,6 +12,8 @@ interface HeroProps {
 
 export function Hero({
   heroHeadline = 'Quiet Command.',
+  cyclingOutcomes,
+  description,
   ctaText,
   ctaLink = '/contact',
   auditMicrocopy,
@@ -21,16 +26,32 @@ export function Hero({
       {/* Floating ambient orbs */}
       <div className="home-hero-orb home-hero-orb--1" aria-hidden="true" />
       <div className="home-hero-orb home-hero-orb--2" aria-hidden="true" />
+      <div className="home-hero-orb home-hero-orb--3" aria-hidden="true" />
 
       {/* Content */}
       <div className="home-hero-grid">
         <div className="home-hero-content">
+
+          <p className="home-hero-eyebrow">Executive Presence Coaching</p>
 
           <h1 className="home-hero-headline">
             {heroHeadline && (
               <span className="home-hero-headline-line">{heroHeadline}</span>
             )}
           </h1>
+
+          <div className="home-hero-accent-bar" aria-hidden="true" />
+
+          {cyclingOutcomes && cyclingOutcomes.length > 0 && (
+            <div className="home-hero-outcomes-row">
+              <span className="home-hero-outcomes-prefix">So you can </span>
+              <HeroCyclingText outcomes={cyclingOutcomes} />
+            </div>
+          )}
+
+          {description && (
+            <p className="home-hero-description">{description}</p>
+          )}
 
           {(ctaText || auditMicrocopy) && (
             <div className="home-hero-lower">

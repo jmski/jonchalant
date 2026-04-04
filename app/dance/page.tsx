@@ -128,7 +128,44 @@ export default async function Dance() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* ── SECTION 4: CTA ──────────────────────────────────────────────── */}
+        {/* ── SECTION 4: BRIDGE ───────────────────────────────────────────── */}
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <section className="dance-bridge">
+              <p className="dance-bridge-eyebrow">
+                {pageContent?.bridgeEyebrow ?? 'From the Studio to the Room'}
+              </p>
+              <h2 className="dance-bridge-headline">
+                {pageContent?.bridgeHeadline ?? 'What you just watched applies to every room that matters.'}
+              </h2>
+              <div className="dance-bridge-items">
+                <div className="dance-bridge-item">
+                  <p className="dance-bridge-item-context">The boardroom presentation.</p>
+                  <p className="dance-bridge-item-translation">
+                    Grounding your weight before you begin. Holding the pause before your first point. Letting your stillness signal that you don't need the room's permission to take up space.
+                  </p>
+                </div>
+                <div className="dance-bridge-item">
+                  <p className="dance-bridge-item-context">The difficult conversation.</p>
+                  <p className="dance-bridge-item-translation">
+                    Staying physically open when the instinct is to close. Using breath to slow the room. Letting your body communicate calm before your words have to.
+                  </p>
+                </div>
+                <div className="dance-bridge-item">
+                  <p className="dance-bridge-item-context">The performance review.</p>
+                  <p className="dance-bridge-item-translation">
+                    Entering a room with intention, not apology. Eye contact that doesn't waver under pressure. The kind of physical authority that makes people assume competence before you've said a word.
+                  </p>
+                </div>
+              </div>
+              <p className="dance-bridge-close">
+                {pageContent?.bridgeClose ?? 'This is the coaching. The movement is where it starts.'}
+              </p>
+            </section>
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* ── SECTION 5: CTA ──────────────────────────────────────────────── */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <section className="dance-cta">
@@ -139,7 +176,7 @@ export default async function Dance() {
                 {pageContent?.ctaBody ?? 'These movement principles are the physical foundation of every coaching program. If you are ready to embody your leadership presence, explore the full curriculum.'}
               </p>
               <Link href={pageContent?.ctaButtonHref ?? '/programs'} className="btn btn-primary">
-                {pageContent?.ctaButtonLabel ?? 'Explore Coaching Programs'}
+                {pageContent?.ctaButtonLabel ?? 'Take What You Just Learned Into a Room That Matters'}
               </Link>
             </section>
           </SectionContent>

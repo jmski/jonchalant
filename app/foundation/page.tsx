@@ -1,12 +1,19 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
 import EnrollButton from '@/components/foundation/EnrollButton'
+import FAQ from '@/components/shared/faq/FAQ'
 import { getFoundationPageContent } from '@/lib/sanity'
+import { CourseSchema } from '@/lib/schema'
+import type { FAQItem } from '@/components/shared/faq/FAQ'
 
 export const metadata: Metadata = {
   title: 'The Foundation | Jonchalant',
   description: 'An 8-week course that teaches introverts and quiet professionals to command a room without changing who they are. Body-aware leadership built on movement principles.',
+  alternates: {
+    canonical: 'https://jonchalant.com/foundation',
+  },
   openGraph: {
     title: 'The Foundation | Jonchalant',
     description: 'An 8-week course that teaches introverts and quiet professionals to command a room without changing who they are.',
@@ -39,6 +46,33 @@ const FALLBACK_HOW_IT_WORKS = [
   { label: 'Self-paced video lessons', body: 'Watch at your own pace. Every lesson is a direct concept — no fluff, no filler.' },
   { label: 'Movement-grounded principles', body: 'Each week draws from professional dance training and translates it into leadership behaviour you can practise immediately.' },
   { label: 'Personal follow-up from Jon', body: 'This isn\'t automated. Jon reads your notes and responds personally — not with a drip sequence.' },
+]
+
+const FOUNDATION_FAQS: FAQItem[] = [
+  {
+    question: 'Is this course right for me if I\'m not a dancer?',
+    answer: 'Absolutely. No dance background needed — or wanted. The movement principles here are used as tools for self-awareness, not performance. If you\'ve ever felt nervous in a high-stakes meeting or unsure how to command attention without raising your voice, this course was built for you.',
+  },
+  {
+    question: 'How much time does each week require?',
+    answer: 'Each week\'s material takes around 60–90 minutes to complete — the video lessons plus a short practice component. The course is self-paced, so you can go faster or slower depending on your schedule. Most students find a rhythm of 2–3 sessions per week.',
+  },
+  {
+    question: 'What makes this different from other confidence or leadership courses?',
+    answer: 'Most courses focus on mindset or communication strategy. The Foundation starts earlier — with the physical signals you\'re already sending. Posture, stillness, eye contact, breath. These are the cues that shape how others perceive authority before a single word is spoken. We address the body first, then build outward from there.',
+  },
+  {
+    question: 'What does "personal follow-up from Jon" mean in practice?',
+    answer: 'After each module, you\'ll have the option to share a brief reflection or question. Jon reads these and responds personally — not with an automated sequence. This isn\'t a guarantee of unlimited 1:1 time, but it means a real person is paying attention to where you are in the process.',
+  },
+  {
+    question: 'Is there a refund policy?',
+    answer: 'Yes. If you complete the first two weeks and feel the course isn\'t right for you, reach out within 14 days of purchase and you\'ll receive a full refund. The only ask is that you actually engage with the material before deciding.',
+  },
+  {
+    question: 'What\'s the difference between the Self-Paced and With Check-ins tiers?',
+    answer: 'Both include full access to all 8 weeks of lessons and materials. The With Check-ins tier adds a weekly 1:1 call with Jon to work through what\'s coming up for you in real time — especially useful for people in high-pressure roles or navigating a specific situation (a promotion, a difficult team, a speaking engagement).',
+  },
 ]
 
 const FALLBACK_PRICING = [
@@ -90,7 +124,23 @@ export default async function FoundationPage() {
       }))
     : FALLBACK_PRICING
 
+  const startingPrice = pricingTiers[0]?.price?.replace(/[^0-9.]/g, '') ?? '197'
+
   return (
+    <>
+      <Script
+        id="foundation-course-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(CourseSchema({
+            name: content?.heroHeadline ?? 'The Foundation',
+            description: content?.heroSubheadline ?? 'An 8-week course teaching executive presence for introverts through body-aware leadership principles.',
+            price: startingPrice,
+            duration: 'P8W',
+            level: 'Beginner',
+          })),
+        }}
+      />
     <PageTransition animation="fade">
 
       {/* ── Hero ──────────────────────────────────────────────────────────────── */}
@@ -215,6 +265,19 @@ export default async function FoundationPage() {
         </SectionContent>
       </SectionWrapper>
 
+      {/* ── FAQ ───────────────────────────────────────────────────────────────── */}
+      <SectionWrapper variant="secondary">
+        <SectionContent>
+          <section className="foundation-faq">
+            <div className="foundation-section-header">
+              <p className="foundation-section-eyebrow">Questions</p>
+              <h2 className="foundation-section-title">Common questions</h2>
+            </div>
+            <FAQ items={FOUNDATION_FAQS} />
+          </section>
+        </SectionContent>
+      </SectionWrapper>
+
       {/* ── Final CTA ─────────────────────────────────────────────────────────── */}
       <SectionWrapper variant="primary">
         <SectionContent>
@@ -232,5 +295,6 @@ export default async function FoundationPage() {
       </SectionWrapper>
 
     </PageTransition>
+    </>
   )
 }

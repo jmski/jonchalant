@@ -646,3 +646,124 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+
+/* ── Email capture (results stage) ─────────────────────────────────────────── */
+.ikigai-capture {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: var(--spacing-md);
+}
+
+.ikigai-capture-dismiss {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+.ikigai-capture-dismiss:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.ikigai-capture-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.4rem;
+}
+
+.ikigai-capture-title {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin: 0 0 0.4rem;
+}
+
+.ikigai-capture-body {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 1rem;
+}
+
+.ikigai-capture-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ikigai-capture-fields {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ikigai-capture-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.6rem 0.875rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  outline: none;
+}
+
+.ikigai-capture-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.ikigai-capture-submit {
+  padding: 0.6rem 1.1rem;
+  background: var(--accent-primary);
+  border: none;
+  border-radius: 0.5rem;
+  color: var(--btn-primary-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-subtle);
+}
+
+.ikigai-capture-submit:hover:not(:disabled) {
+  background: var(--color-moss-dark);
+}
+
+.ikigai-capture-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ikigai-capture-success {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.ikigai-capture-success-title {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+}
+
+.ikigai-capture-success-body {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}

@@ -401,7 +401,8 @@ export async function getHomePageContent() {
     ctaTitle,
     ctaDescription,
     ctaButtonText,
-    ctaButtonHref
+    ctaButtonHref,
+    meetJonImage { asset->{ url }, alt }
   }`
   return await client.fetch(query)
 }
@@ -604,6 +605,18 @@ export async function getFoundationPageContent() {
     ctaBody,
     ctaButtonLabel,
     ctaNote
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPressMentions() {
+  const query = `*[_type == "pressMention"] | order(order asc) {
+    _id,
+    outlet,
+    type,
+    url,
+    logo { asset->{ url } },
+    order
   }`
   return await client.fetch(query)
 }

@@ -178,17 +178,25 @@ export default function ContactClient({ content }: ContactClientProps) {
               <p className="contact-coaching-prompt-body">
                 {content?.coachingPathBody ?? "The first step is a 20-minute call. No prep needed — just show up and tell me what's going on. We'll figure out together if this is a good fit."}
               </p>
-              {/* TODO: Replace href="#" with Calendly URL once available */}
-              <a
-                href={content?.coachingCalendlyHref ?? '#'}
-                className="btn btn-primary"
-                aria-label="Schedule a discovery call (link coming soon)"
-              >
-                {content?.coachingCalendlyLabel ?? 'Schedule a Call'}
-              </a>
-              <p className="contact-coaching-note">
-                Not ready to book yet? Use the form below instead.
-              </p>
+              {content?.coachingCalendlyHref ? (
+                <>
+                  <a
+                    href={content.coachingCalendlyHref}
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {content.coachingCalendlyLabel ?? 'Schedule a Call'}
+                  </a>
+                  <p className="contact-coaching-note">
+                    Not ready to book yet? Use the form below instead.
+                  </p>
+                </>
+              ) : (
+                <p className="contact-coaching-note">
+                  Online booking coming soon — use the form below to get in touch.
+                </p>
+              )}
             </div>
 
             <form className="contact-form" onSubmit={handleSubmit}>

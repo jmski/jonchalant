@@ -2236,4 +2236,74 @@
   }
 }
 
+/* ── Programs FAQ ───────────────────────────────────────────────────────────── */
+.programs-faq {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.programs-faq-header {
+  margin-bottom: 2.5rem;
+}
+
+.programs-faq-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem;
+}
+
+.programs-faq-title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .programs-faq-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ── Programs Case Studies ──────────────────────────────────────────────────── */
+.programs-case-studies-header {
+  max-width: 540px;
+  margin-bottom: 3rem;
+}
+
+.programs-case-studies-title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+}
+
+.programs-case-studies-body {
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.programs-case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 640px) {
+  .programs-case-studies-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .programs-case-studies-title {
+    font-size: 1.5rem;
+  }
+}
+
 

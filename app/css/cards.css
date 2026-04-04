@@ -1061,6 +1061,12 @@
   border: 1px solid rgba(107, 142, 99, 0.3);
 }
 
+.course-card-badge--preview {
+  background: rgba(74, 58, 92, 0.1);
+  color: var(--color-burnt-indigo);
+  border: 1px solid rgba(74, 58, 92, 0.25);
+}
+
 .course-card-title {
   font-size: 1.125rem;
   font-weight: 700;

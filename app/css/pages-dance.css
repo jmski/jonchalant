@@ -317,3 +317,66 @@
   color: var(--accent-primary);
 }
 
+/* ── Dance Bridge Section ────────────────────────────────────────────────────── */
+.dance-bridge {
+  max-width: 640px;
+}
+
+.dance-bridge-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 1rem;
+}
+
+.dance-bridge-headline {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0 0 3rem;
+}
+
+.dance-bridge-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.dance-bridge-item {
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--color-burnt-indigo);
+}
+
+.dance-bridge-item-context {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-burnt-indigo);
+  margin: 0 0 0.5rem;
+}
+
+.dance-bridge-item-translation {
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.dance-bridge-close {
+  font-family: var(--font-headline);
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .dance-bridge-headline {
+    font-size: 1.625rem;
+  }
+}
+

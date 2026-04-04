@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "About Jon | Leadership Coach & Choreographer",
   description: "Learn how Jon combines professional dance choreography with leadership development to help introverts build Quiet Command — executive presence without performance.",
   keywords: "leadership coach introverts, choreographer, body-aware leadership, executive presence coach, introvert strengths, movement-based coaching",
+  alternates: {
+    canonical: 'https://jonchalant.com/about',
+  },
   openGraph: {
     title: "About Jon | Leadership Coach & Choreographer | Jonchalant",
     description: "Dance-trained leadership coach specializing in executive presence for introverts and shy professionals.",

@@ -10,15 +10,19 @@ import {
   EmailCapture,
   CTA,
 } from '@/components/sections';
+import { PressStrip } from '@/components/shared/press-strip';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { client, getHomePageContent, getServices, getTestimonials } from "@/lib/sanity";
+import { client, getHomePageContent, getServices, getTestimonials, getPressMentions } from "@/lib/sanity";
 import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Quiet Command | Executive Presence Coaching for Introverts",
   description: "Quiet Command — executive presence coaching for introverts. Build commanding leadership presence in 8-12 weeks using evidence-based, body-aware techniques.",
   keywords: "executive presence coaching, leadership coaching for introverts, quiet command, confidence coaching, introvert leadership, professional presence",
+  alternates: {
+    canonical: 'https://jonchalant.com',
+  },
   openGraph: {
     title: "Executive Presence Coaching for Introverts | Jonchalant",
     description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for shy professionals and introverts.",
@@ -58,26 +62,29 @@ export default async function Home() {
   let services = [];
   let testimonials = [];
   let recentPosts = [];
+  let pressMentions = [];
 
   try {
-    const [sanityHome, sanityServices, sanityTestimonials, sanityPosts] = await Promise.all([
+    const [sanityHome, sanityServices, sanityTestimonials, sanityPosts, sanityPress] = await Promise.all([
       getHomePageContent(),
       getServices(),
       getTestimonials(),
       getRecentBlogPosts(),
+      getPressMentions(),
     ]);
 
     if (sanityHome) homeContent = sanityHome;
     if (sanityServices?.length > 0) services = sanityServices;
     if (sanityTestimonials?.length > 0) testimonials = sanityTestimonials;
     if (sanityPosts?.length > 0) recentPosts = sanityPosts;
+    if (sanityPress?.length > 0) pressMentions = sanityPress;
   } catch (error) {
     console.warn('Failed to fetch home content from Sanity, using fallback data:', error);
   }
 
   return (
     <div className="bg-white">
-      {testimonials.length > 0 && (
+      {testimonials.length >= 5 && (
         <Script
           id="coach-rating-schema"
           type="application/ld+json"
@@ -97,6 +104,8 @@ export default async function Home() {
         <SectionWrapper variant="primary" className="section-wrapper--flush">
           <Hero
             heroHeadline={homeContent?.heroHeadline}
+            cyclingOutcomes={homeContent?.heroCyclingOutcomes}
+            description={homeContent?.heroDescription}
             ctaText={homeContent?.heroCtaText}
             ctaLink={homeContent?.heroCtaLink}
             auditMicrocopy={homeContent?.heroMicrocopy}
@@ -110,7 +119,16 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* 3. WHY IT WORKS / PHILOSOPHY (moved up) */}
+        {/* 3. PRESS STRIP */}
+        {pressMentions.length > 0 && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <PressStrip mentions={pressMentions} />
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 4. WHY IT WORKS / PHILOSOPHY (moved up) */}
         <SectionWrapper variant="secondary">
           <SectionContent>
             <WhyItWorks
@@ -123,7 +141,7 @@ export default async function Home() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 4. SERVICES */}
+        {/* 5. SERVICES */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <Services
@@ -134,14 +152,14 @@ export default async function Home() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 5. MEET JON */}
+        {/* 6. MEET JON */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
-            <MeetJon />
+            <MeetJon image={homeContent?.meetJonImage} />
           </SectionContent>
         </SectionWrapper>
 
-        {/* 6. TESTIMONIALS */}
+        {/* 7. TESTIMONIALS */}
         {testimonials.length > 0 && (
           <SectionWrapper variant="secondary" className="section-wrapper--moss">
             <SectionContent>
@@ -154,7 +172,7 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* 7. BLOG PREVIEW */}
+        {/* 8. BLOG PREVIEW */}
         {recentPosts.length > 0 && (
           <SectionWrapper variant="primary">
             <SectionContent>
@@ -167,12 +185,12 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* 8. EMAIL CAPTURE */}
+        {/* 9. EMAIL CAPTURE */}
         <SectionWrapper variant="dark" className="section-wrapper--flush">
           <EmailCapture />
         </SectionWrapper>
 
-        {/* 9. FINAL CTA */}
+        {/* 10. FINAL CTA */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <CTA
