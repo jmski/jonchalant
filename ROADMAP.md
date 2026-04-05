@@ -40,7 +40,7 @@
 
 ## Phase 0 — Critical Fixes
 
-### TASK 0.1 — Fix portal 404 and lesson display `[~]`
+### TASK 0.1 — Fix portal 404 and lesson display `[x]`
 
 **Root cause (diagnosed):**
 1. `/portal-thefoundation` 404 — this URL has no corresponding route. The correct path is `/portal/the-foundation`. The broken link is **external to the codebase** (no references found in code). It likely originates from a manually shared link or an email. The Stripe checkout correctly redirects to `/portal?enrolled=true`.
@@ -70,7 +70,7 @@
 
 ---
 
-### TASK 0.2 — Fix email capture contrast on homepage `[ ]`
+### TASK 0.2 — Fix email capture contrast on homepage `[x]`
 
 **Root cause:**
 - Input background: `rgba(248, 248, 245, 0.1)` — nearly invisible on burnt indigo
@@ -83,7 +83,7 @@
 
 ## Phase 1 — Cleanup & Stability
 
-### TASK 1.1 — Fix /lessons navigation `[ ]`
+### TASK 1.1 — Fix /lessons navigation `[x]`
 
 **Problem:** Navbar "Lessons" link 301-redirects to `/foundation`. Deceptive navigation.
 **Recommendation:** Remove redirect. `/lessons` already has a curriculum page (`app/lessons/page.tsx`). Turn it into a public preview funnel with enrollment CTAs.
@@ -153,6 +153,23 @@
 | `lib/schema.ts` (255 lines) | Remove JSON-LD builders for deleted schemas |
 | `lib/sanity.ts` (637 lines) | Remove dead queries (see Task 1.2) |
 | `lib/types.ts` (255 lines) | Remove interfaces for deleted schemas |
+
+---
+
+### TASK 1.6 — Connect PresenceCoach to Claude API `[ ]`
+
+**Problem:** The AI Presence Coach is not connected to the Claude API — currently likely using a placeholder or a different model.
+
+**Files:**
+- `app/api/presence-coach/route.ts` (or equivalent AI route)
+- `lib/` — any AI client config
+
+**Fix:**
+- Replace current AI provider with Anthropic SDK (`@anthropic-ai/sdk`)
+- Use model: `claude-sonnet-4-6` (current production model)
+- Keep system prompt focused on executive presence coaching context
+- Ensure `ANTHROPIC_API_KEY` is in `.env.local` + Vercel env vars
+- Rate limiting must stay in place (`lib/rate-limit.ts`)
 
 ---
 
@@ -239,7 +256,7 @@ Key additions:
 
 - Video above fold (16:9)
 - Sticky course outline sidebar
-- Sticky "Mark Complete" button
+- Sticky "Mark Complete" button + **"Undo Complete" toggle** (re-click to uncomplete — calls same toggle endpoint with inverse state)
 - Breadcrumb: Module → Lesson
 - Keyboard shortcuts: `→` next, `←` prev, `c` complete
 
@@ -250,6 +267,22 @@ Key additions:
 - Audit presence-score, tonality, movement-plan for end-to-end function
 - Apply consistent portal design system
 - Audit `pages-portal-tools.css` (2,309 lines) for dead rules
+
+---
+
+### TASK 3.6 — Fix PresenceCoach viewport sizing `[ ]`
+
+**Problem:** AI Presence Coach chat box is not optimized for small/medium viewports — likely overflows or becomes unusable on mobile.
+
+**Files:**
+- `app/portal/presence-coach/` (or wherever the chat UI lives)
+- `app/css/pages-portal-tools.css` or `pages-portal.css` — chat container styles
+
+**Fix:**
+- Constrain chat container height with `max-height: calc(100dvh - Xrem)` so it doesn't overflow
+- Ensure input bar stays anchored to bottom on mobile
+- Verify message list scrolls independently (not the whole page)
+- Test at 375px, 768px
 
 ---
 
@@ -303,3 +336,6 @@ Launch blockers:
 | Admin analytics dashboard | Medium | Medium |
 | Lesson transcript download | Medium | Low |
 | Affiliate/referral system | Medium | High |
+
+
+## Notes

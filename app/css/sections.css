@@ -417,7 +417,7 @@
   gap: 0.75rem;
 }
 
-.email-capture-heading {
+.email-capture-section .email-capture-heading {
   font-family: var(--font-headline);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 400;
@@ -426,7 +426,7 @@
   line-height: 1.15;
 }
 
-.email-capture-subheading {
+.email-capture-section .email-capture-subheading {
   font-size: 1rem;
   line-height: 1.7;
   color: rgba(248, 248, 245, 0.72);
@@ -456,8 +456,8 @@
 .email-capture-input {
   flex: 1;
   padding: 0.875rem 1rem;
-  background: rgba(248, 248, 245, 0.1);
-  border: 1px solid rgba(248, 248, 245, 0.25);
+  background: rgba(248, 248, 245, 0.15);
+  border: 1px solid rgba(248, 248, 245, 0.4);
   border-radius: 0.375rem;
   font-family: var(--font-body);
   font-size: 0.9375rem;
@@ -467,11 +467,12 @@
 }
 
 .email-capture-input::placeholder {
-  color: rgba(248, 248, 245, 0.4);
+  color: rgba(248, 248, 245, 0.65);
 }
 
 .email-capture-input:focus {
-  border-color: rgba(248, 248, 245, 0.6);
+  border-color: rgba(248, 248, 245, 0.75);
+  background: rgba(248, 248, 245, 0.2);
 }
 
 .email-capture-submit {

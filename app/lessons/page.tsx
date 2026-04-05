@@ -101,7 +101,7 @@ export default async function LessonsPage() {
                 <div className="lessons-resume-banner">
                   <span className="lessons-resume-banner-label">Continue where you left off</span>
                   <Link
-                    href={`/lessons/${lastActive.courseSlug}/${lastActive.lessonSlug}`}
+                    href={`/portal/${lastActive.courseSlug}/${lastActive.lessonSlug}`}
                     className="lessons-resume-banner-link"
                   >
                     Resume lesson →

@@ -56,7 +56,7 @@ const NAV_SECTIONS: NavSection[] = [
         label: '',
         href: '#',
         subitems: [
-          { label: 'Lessons', href: '/lessons' },
+          { label: 'Curriculum', href: '/lessons' },
           { label: 'Blog', href: '/blog' },
           { label: 'Dance', href: '/dance' },
         ],
@@ -75,7 +75,7 @@ const FLAT_NAV_LINKS = [
     { label: 'Ikigai', href: '/ikigai' },
   ]},
   { label: 'Learn', href: '#', dropdown: [
-    { label: 'Lessons', href: '/lessons' },
+    { label: 'Curriculum', href: '/lessons' },
     { label: 'Blog', href: '/blog' },
     { label: 'Dance', href: '/dance' },
   ]},
