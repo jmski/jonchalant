@@ -109,88 +109,88 @@
 
 ---
 
-### TASK 1.3 — Remove orphaned components + CSS audit `[ ]`
+### TASK 1.3 — Remove orphaned components + CSS audit `[x]`
 
-**Confirmed orphans (safe to delete):**
-- `components/shared/collaboration/` — entire folder
-- `components/utilities/cards/TestimonialCard.tsx`
+**Component audit results:**
 
-**Verify before deleting:**
-- `components/content/DanceFilter.tsx`
-- `components/utilities/cards/ServiceCard.tsx`
-- `app/portal/PortalCourseCard.tsx` vs `components/utilities/cards/CourseCard.tsx` — consolidate
+- `components/shared/collaboration/` — deleted in Task 1.2
+- `TestimonialCard`, `ServiceCard`, `DanceFilter`, `DanceCard` — all in active use, not orphans (roadmap assessment was wrong)
+- `PortalCourseCard` vs `CourseCard` — serve different purposes: `PortalCourseCard` is auth portal dashboard (minimal, links to `/portal/${slug}`); `CourseCard` is public curriculum page (rich, has thumbnail/badges/modules). Keep both.
+- No orphaned CSS from deleted schemas (no collaboration/portfolio/danceCategoryFilter/pageMetadata classes in CSS files)
 
-**CSS audit targets (grep class names → check for usage in .tsx):**
-- `pages-portal-tools.css` (2,309 lines)
-- `layout.css` (2,074 lines)
-- `sections.css` (1,857 lines)
-- `pages-portal.css` (1,934 lines) — hold until Phase 3 redesign
+**CSS audit deferred** — large-file audit (`layout.css`, `sections.css`, `pages-portal-tools.css`) needs systematic grep-based pass; deferred to standalone cleanup task. `pages-portal.css` holds until Phase 3 redesign.
 
 ---
 
-### TASK 1.4 — Audit lib/ folder `[ ]`
+### TASK 1.4 — Audit lib/ folder `[x]`
 
-| File | Question |
-|------|----------|
-| `lib/design-tokens.ts` (508 lines) | Is it imported anywhere, or is `variables.css` the source of truth? |
-| `lib/imageConfig.ts` (210 lines) | Are all size presets used? |
-| `lib/optimizedImage.tsx` (110 lines) | Are consuming components using it? |
-| `lib/movement-plans.ts` (80 lines) | Is `/portal/movement-plan` fully functional end-to-end? |
-| `lib/schema.ts` (255 lines) | Remove JSON-LD builders for deleted schemas |
-| `lib/sanity.ts` (637 lines) | Remove dead queries (see Task 1.2) |
-| `lib/types.ts` (255 lines) | Remove interfaces for deleted schemas |
+**Findings:**
 
----
-
-### TASK 1.6 — Connect PresenceCoach to Claude API `[ ]`
-
-**Problem:** The AI Presence Coach is not connected to the Claude API — currently likely using a placeholder or a different model.
-
-**Files:**
-- `app/api/presence-coach/route.ts` (or equivalent AI route)
-- `lib/` — any AI client config
-
-**Fix:**
-- Replace current AI provider with Anthropic SDK (`@anthropic-ai/sdk`)
-- Use model: `claude-sonnet-4-6` (current production model)
-- Keep system prompt focused on executive presence coaching context
-- Ensure `ANTHROPIC_API_KEY` is in `.env.local` + Vercel env vars
-- Rate limiting must stay in place (`lib/rate-limit.ts`)
+| File | Result |
+| ---- | ------ |
+| `lib/design-tokens.ts` | Used by animation hooks (`useScrollAnimation`, `ScrollStagger`, `ScrollFade`) and `imageConfig.ts` — keep |
+| `lib/imageConfig.ts` | Used by `DanceCard.tsx` via `getOptimizedImageProps` — keep |
+| `lib/optimizedImage.tsx` | **Deleted** — no imports found anywhere |
+| `lib/movement-plans.ts` | Used by portal movement-plan pages — keep |
+| `lib/schema.ts` | Removed unused `VideoSchema` (never imported). No deleted-schema builders were present. |
+| `lib/sanity.ts` | Cleaned in Task 1.2 |
+| `lib/types.ts` | No changes needed (verified in Task 1.2) |
 
 ---
 
-### TASK 1.5 — Fix FAQ mobile rendering on /programs and /foundation `[ ]`
+### TASK 1.6 — Connect PresenceCoach to Claude API `[x]`
 
-**Problem:** No `@media` breakpoints in FAQ styles. Fixed padding on small screens.
+**Finding:** Route was already correctly wired to Anthropic API via direct fetch with proper streaming, error handling, rate limiting, and system prompt. Only change needed:
 
-**Fix in `app/css/components.css`:**
-- `@media (max-width: 768px)`: reduce font size, reduce padding, ensure expand icon doesn't overlap
-- Verify tap targets ≥ 44×44px (WCAG 2.5.5)
+- Updated model from `claude-haiku-4-5-20251001` → `claude-sonnet-4-6` in `app/api/presence-coach/route.ts`
+
+**Note:** Rate limiting is inline in the route (daily per-userId window). `lib/rate-limit.ts` exists separately (IP-based, windowed) but isn't used here — both coexist. Ensure `ANTHROPIC_API_KEY` is set in Vercel env vars before launch.
+
+---
+
+### TASK 1.5 — Fix FAQ mobile rendering on /programs and /foundation `[x]`
+
+**Fix applied in `app/css/components.css`:**
+
+- Added `@media (max-width: 768px)` block: reduced trigger padding to `1rem 1.25rem`, added `min-height: 44px` (WCAG 2.5.5), reduced question font to `0.9375rem`, reduced answer padding/font
+- Wrapper containers (`.foundation-faq`, `.programs-faq`) were already fine — `max-width` + `margin: auto`, no overflow risk
 
 ---
 
 ## Phase 2 — Visual Credibility
 
-### TASK 2.1 — Add stock/placeholder images throughout `[ ]`
+### TASK 2.1 — Add stock/placeholder images throughout `[x]`
 
-**Pages needing images:**
-- Homepage: hero bg, MeetJon portrait, WhyWorkTogether
-- Foundation: hero, "Who It's For", pricing cards
-- Programs: hero, track cards, case study cards
-- About: all narrative sections
-- Blog: default cover per post
-- Dance: portfolio grid
+**Code changes done:**
 
-**Sources:** Unsplash (already in `next.config.ts`), Pexels (add to `remotePatterns`)
-**Implementation:** Add URLs to Sanity documents + hardcoded fallback arrays
+- Added `images.pexels.com` to `next.config.ts` remotePatterns
+- Updated `getRecentBlogPosts()` + `getBlogPosts()` to fetch `coverImage { asset->{ url }, alt }`
+- Added `coverImage` prop to `BlogCard` — renders in `default` (homepage) and `featured` (blog page) variants
+- Added `.blog-card-cover` + `.blog-featured-card-cover` CSS (negative-margin bleed, 16:9 aspect, scale-on-hover)
+- `MeetJon` already had image support; `DanceCard` already had image support
+
+**Remaining content work (Sanity Studio):**
+
+- Blog posts: upload `coverImage` to each post
+- MeetJon: upload portrait to `homePageContent.meetJonImage`
+- Other pages (Foundation hero, Programs hero, About sections): these sections don't have image fields in their schemas yet — add fields when real images are ready
 
 ---
 
-### TASK 2.2 — Homepage visual polish `[ ]`
+### TASK 2.2 — Homepage visual polish `[x]`
 
-- Verify CredibilityStrip has press mention content in Sanity
-- Audit HeroCyclingText on mobile
-- Audit all sections at 375px for overflow/cramping
+**Code audit findings:**
+
+- `CredibilityStrip` already renders null when `heroStats` is empty — no code fix needed, populate stats in Sanity
+- `HeroCyclingText` uses `clamp()` font sizes and `flex-wrap: wrap` — handles mobile correctly
+- Hero orbs use fixed px sizes but `overflow: clip` on the section prevents any overflow
+- All homepage sections use `clamp()` sizing and have responsive breakpoints — no overflow issues found in code
+
+**Remaining content/browser tasks:**
+
+- Populate `homePageContent.heroStats` in Sanity (drives CredibilityStrip)
+- Populate `pressMention` documents in Sanity (drives PressStrip)
+- Visual verification at 375px in browser once content is populated
 
 ---
 

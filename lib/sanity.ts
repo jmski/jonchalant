@@ -541,7 +541,8 @@ export async function getRecentBlogPosts(count = 3) {
     title,
     slug,
     excerpt,
-    publishedAt
+    publishedAt,
+    coverImage { asset->{ url }, alt }
   }`
   return await client.fetch(query, { count })
 }

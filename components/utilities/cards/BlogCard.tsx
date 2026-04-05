@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { TextLink } from '@/components/typography';
 
 interface BlogCardProps {
@@ -8,6 +9,7 @@ interface BlogCardProps {
   publishedAt?: string;
   pillar?: string;
   readingTime?: number;
+  coverImage?: { asset?: { url?: string }; alt?: string };
   variant?: 'default' | 'featured' | 'list';
 }
 
@@ -19,6 +21,7 @@ export function BlogCard({
   publishedAt,
   pillar,
   readingTime,
+  coverImage,
   variant = 'default',
 }: BlogCardProps) {
   const slugValue = typeof slug === 'string' ? slug : slug.current;
@@ -29,6 +32,17 @@ export function BlogCard({
       <article className="blog-featured-card">
         <TextLink href={href}>
           <div className="blog-featured-card-inner">
+            {coverImage?.asset?.url && (
+              <div className="blog-featured-card-cover">
+                <Image
+                  src={coverImage.asset.url}
+                  alt={coverImage.alt ?? title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="blog-featured-card-cover-img"
+                />
+              </div>
+            )}
             <div className="blog-featured-card-header">
               {pillar && (
                 <span className="blog-featured-card-pillar">{pillar}</span>
@@ -83,6 +97,17 @@ export function BlogCard({
   // Default variant
   return (
     <article className="blog-card">
+      {coverImage?.asset?.url && (
+        <div className="blog-card-cover">
+          <Image
+            src={coverImage.asset.url}
+            alt={coverImage.alt ?? title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="blog-card-cover-img"
+          />
+        </div>
+      )}
       <div className="blog-card-header">
         <h3 className="blog-card-title">{title}</h3>
         {publishedAt && (
