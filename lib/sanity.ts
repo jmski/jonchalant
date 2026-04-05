@@ -59,19 +59,6 @@ async function fetchOne(type: string, fields: string, filter: string) {
 // FIELD PROJECTIONS (shared field selections per content type)
 // ============================================================================
 
-const PORTFOLIO_FIELDS = `
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    videoUrl,
-    thumbnail,
-    duration,
-    publishedAt,
-    order
-  `
-
 const SERVICE_FIELDS = `
     _id,
     title,
@@ -82,18 +69,6 @@ const SERVICE_FIELDS = `
     features,
     isPrimary,
     color,
-    order
-  `
-
-const COLLABORATION_FIELDS = `
-    _id,
-    title,
-    slug,
-    category,
-    description,
-    price,
-    deliverables,
-    timelineWeeks,
     order
   `
 
@@ -193,28 +168,7 @@ const LESSON_FIELDS_FULL = `
   `
 
 // ============================================================================
-// PORTFOLIO (Dance Videos)
-// ============================================================================
-
-export async function getPortfolioItems() {
-  return fetchList('portfolioItem', PORTFOLIO_FIELDS)
-}
-
-export async function getPortfolioByCategory(category: string) {
-  return fetchList('portfolioItem', PORTFOLIO_FIELDS, `category == "${category}"`)
-}
-
-export async function getPortfolioItem(slug: string) {
-  return fetchOne('portfolioItem', PORTFOLIO_FIELDS, `slug.current == "${slug}"`)
-}
-
-export async function getFeaturedPortfolioItem() {
-  return fetchOne('portfolioItem', PORTFOLIO_FIELDS, 'featured == true')
-}
-
-// ============================================================================
 // SERVICES
-
 // ============================================================================
 
 export async function getServices() {
@@ -228,19 +182,6 @@ export async function getPrimaryService() {
 export async function getService(slug: string) {
   return fetchOne('service', SERVICE_FIELDS, `slug.current == "${slug}"`)
 }
-
-// ============================================================================
-// COLLABORATIONS
-// ============================================================================
-
-export async function getCollaborations() {
-  return fetchList('collaboration', COLLABORATION_FIELDS)
-}
-
-export async function getCollaborationsByCategory(category: string) {
-  return fetchList('collaboration', COLLABORATION_FIELDS, `category == "${category}"`)
-}
-
 
 // ============================================================================
 // TESTIMONIALS
@@ -306,22 +247,6 @@ export async function getProgramsPageContent() {
     ctaButtonText,
     ctaButtonHref,
     ctaMicrocopy
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// PAGE METADATA (Headlines, CTAs, Descriptions)
-// ============================================================================
-
-export async function getPageMetadata(page: string) {
-  const query = `*[_type == "pageMetadata" && page == "${page}"][0] {
-    page,
-    headline,
-    subheadline,
-    ctaTitle,
-    ctaDescription,
-    ctaButtonText
   }`
   return await client.fetch(query)
 }
@@ -482,21 +407,6 @@ export async function getEmailOptIn() {
   }`
   return await client.fetch(query)
 }
-
-// ============================================================================
-// DANCE CATEGORY FILTER
-// ============================================================================
-
-export async function getDanceCategoryFilter() {
-  const query = `*[_type == "danceCategoryFilter" && title == "Dance Categories"][0] {
-    categories | order(order asc) {
-      name,
-      order
-    }
-  }`
-  return await client.fetch(query)
-}
-
 
 // ============================================================================
 // COURSES

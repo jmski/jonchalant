@@ -95,31 +95,17 @@
 
 ---
 
-### TASK 1.2 — Remove deprecated Sanity schemas `[ ]`
+### TASK 1.2 — Remove deprecated Sanity schemas `[x]`
 
-**Remove these schemas:**
-- `sanity/schemas/collaboration.ts`
-- `sanity/schemas/service.ts`
-- `sanity/schemas/contactInfo.ts`
-- `sanity/schemas/danceCategoryFilter.ts`
-- `sanity/schemas/pageMetadata.ts`
-- `sanity/schemas/portfolio.ts`
-- `sanity/schemas/index.ts` — remove their registrations
+**Removed schemas:** `collaboration.ts`, `portfolio.ts`, `danceCategoryFilter.ts`, `pageMetadata.ts`
+**Kept (still in use):** `service.ts` (homepage Services section), `contactInfo.ts` (layout social links)
 
-**Cascading cleanup:**
-- `lib/sanity.ts` — remove: `getCollaborations()`, `getCollaborationsByCategory()`, `getPortfolioItems()`, `getContactInfo()`, `getDanceCategories()`
-- `lib/types.ts` — remove: `Collaboration`, `Portfolio`/`PortfolioItem`, `ContactInfo`, `DanceCategoryFilter`, `PageMetadata`
-- Delete: `components/shared/collaboration/` (confirmed unused)
-- Verify dance page isn't using `portfolio.ts` before deleting
+**Cascading cleanup done:**
+
+- `lib/sanity.ts` — removed: `PORTFOLIO_FIELDS`, `COLLABORATION_FIELDS`, `getPortfolioItems()`, `getPortfolioByCategory()`, `getPortfolioItem()`, `getFeaturedPortfolioItem()`, `getCollaborations()`, `getCollaborationsByCategory()`, `getDanceCategoryFilter()`, `getPageMetadata()`
+- `lib/types.ts` — no changes needed (none of the removed schemas had types there)
+- Deleted: `components/shared/collaboration/` (Collaboration.tsx + index.ts)
 - Run: `npm run sanity:deploy` + `npm run build`
-
-**Safe deletion order:**
-1. Remove from `sanity/schemas/index.ts`
-2. Delete schema `.ts` file
-3. Remove Sanity queries from `lib/sanity.ts`
-4. Remove TypeScript types from `lib/types.ts`
-5. Delete orphaned components
-6. `npm run sanity:deploy` → `npm run build`
 
 ---
 
