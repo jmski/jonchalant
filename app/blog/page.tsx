@@ -46,6 +46,7 @@ interface BlogPost {
   readingTime?: number;
   publishedAt?: string;
   featured?: boolean;
+  coverImage?: { asset?: { url?: string }; alt?: string };
 }
 
 async function getBlogPosts(): Promise<BlogPost[]> {
@@ -58,7 +59,8 @@ async function getBlogPosts(): Promise<BlogPost[]> {
     pillar,
     readingTime,
     publishedAt,
-    featured
+    featured,
+    coverImage { asset->{ url }, alt }
   }`;
 
   try {

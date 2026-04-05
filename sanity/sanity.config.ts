@@ -4,14 +4,10 @@ import {visionTool} from '@sanity/vision'
 import aboutPage from './schemas/aboutPage'
 import blogPost from './schemas/blogPost'
 import caseStudy from './schemas/caseStudy'
-import collaboration from './schemas/collaboration'
 import contactInfo from './schemas/contactInfo'
-import danceCategoryFilter from './schemas/danceCategoryFilter'
 import homePageContent from './schemas/homePageContent'
 import lesson from './schemas/lesson'
 import course from './schemas/course'
-import pageMetadata from './schemas/pageMetadata'
-import portfolio from './schemas/portfolio'
 import programsPageContent from './schemas/programsPageContent'
 import service from './schemas/service'
 import testimonial from './schemas/testimonial'
@@ -19,6 +15,11 @@ import module from './schemas/module'
 import danceCategory from './schemas/danceCategory'
 import instagramReel from './schemas/instagramReel'
 import emailOptIn from './schemas/emailOptIn'
+import pressMention from './schemas/pressMention'
+import auditPage from './schemas/auditPage'
+import contactPage from './schemas/contactPage'
+import dancePageContent from './schemas/dancePageContent'
+import foundationPage from './schemas/foundationPage'
 
 export default defineConfig({
   name: 'default',
@@ -34,14 +35,10 @@ export default defineConfig({
       aboutPage,
       blogPost,
       caseStudy,
-      collaboration,
       contactInfo,
-      danceCategoryFilter,
       homePageContent,
       lesson,
       course,
-      pageMetadata,
-      portfolio,
       programsPageContent,
       service,
       testimonial,
@@ -49,6 +46,11 @@ export default defineConfig({
       danceCategory,
       instagramReel,
       emailOptIn,
+      pressMention,
+      auditPage,
+      contactPage,
+      dancePageContent,
+      foundationPage,
     ] as any,
   } as any,
 } as any)

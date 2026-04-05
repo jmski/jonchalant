@@ -143,32 +143,6 @@ export function BreadcrumbSchema(items: Array<{ name: string; url: string }>) {
 }
 
 /**
- * VideoObject Schema - for featured videos
- */
-export function VideoSchema(videoData: {
-  title: string;
-  description: string;
-  thumbUrl?: string;
-  duration?: string;
-  uploadDate?: string;
-  videoUrl?: string;
-}) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'VideoObject',
-    name: videoData.title,
-    description: videoData.description,
-    ...(videoData.thumbUrl && { thumbnailUrl: videoData.thumbUrl }),
-    ...(videoData.duration && { duration: videoData.duration }),
-    ...(videoData.uploadDate && { uploadDate: videoData.uploadDate }),
-    ...(videoData.videoUrl && {
-      contentUrl: videoData.videoUrl,
-      embedUrl: videoData.videoUrl
-    })
-  };
-}
-
-/**
  * FAQPage Schema - for FAQ sections
  */
 export function FAQSchema(faqs: Array<{ question: string; answer: string }>) {

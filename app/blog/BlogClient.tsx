@@ -16,6 +16,7 @@ interface BlogPost {
   readingTime?: number;
   publishedAt?: string;
   featured?: boolean;
+  coverImage?: { asset?: { url?: string }; alt?: string };
 }
 
 interface BlogClientProps {

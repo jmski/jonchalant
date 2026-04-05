@@ -7,6 +7,7 @@ interface BlogPost {
   slug?: string;
   excerpt?: string;
   publishedAt?: string;
+  coverImage?: { asset?: { url?: string }; alt?: string };
 }
 
 interface BlogCardsProps {
@@ -34,6 +35,7 @@ export function BlogCards({ posts, heading, description, showFeatured }: BlogCar
             slug={post.slug}
             excerpt={post.excerpt}
             publishedAt={post.publishedAt}
+            coverImage={post.coverImage}
           />
         ))}
       </CardGrid>

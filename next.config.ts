@@ -5,9 +5,10 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/lessons',
-        destination: '/foundation',
-        permanent: true,
+        // Catch malformed URL missing the slash: /portal-thefoundation → /portal/the-foundation
+        source: '/portal-thefoundation',
+        destination: '/portal/the-foundation',
+        permanent: false,
       },
     ]
   },
@@ -25,6 +26,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
       },
       {
         protocol: 'https',
