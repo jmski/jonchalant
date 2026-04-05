@@ -61,16 +61,6 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* Text links — no underlines globally, scoped away from btn elements
-a:not(.btn):not(.btn-primary):not(.btn-secondary):not(.btn-tertiary) {
-  text-decoration: none;
-}
-
-a:not(.btn):not(.btn-primary):not(.btn-secondary):not(.btn-tertiary):hover {
-  color: var(--accent-primary);
-  text-decoration: none;
-} */
-
 .site-footer-social-link:hover,
 .site-footer-social-link[data-platform]:hover {
   color: #fff;
