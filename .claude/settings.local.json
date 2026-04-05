@@ -63,7 +63,12 @@
       "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -type f \\\\\\( -name \"*.css\" -o -name \"*.scss\" \\\\\\) -exec grep -l \"meet-jon\\\\|about-hero\" {} \\\\;)",
       "Bash(xargs grep:*)",
       "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -type f -name \"*.tsx\" -exec grep -l \"SanityImage\\\\|getImageUrl\" {} \\\\;)",
-      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.ts /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.tsx)"
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.ts /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.tsx)",
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/portal/[courseSlug]/)",
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/lessons/[courseSlug]/)",
+      "Bash(grep -A 10 \"faq\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
+      "Bash(wc -l /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.ts /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.tsx)",
+      "Bash(grep \"section-wrapper--dark\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)"
     ]
   }
 }
