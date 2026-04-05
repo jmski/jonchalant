@@ -536,6 +536,32 @@
   margin: 0;
 }
 
+.portal-empty-state {
+  padding: 3rem 2rem;
+  text-align: center;
+  border: 1px dashed var(--border-subtle);
+  border-radius: 8px;
+}
+
+.portal-empty-state-headline {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.portal-empty-state-body {
+  font-size: 0.9375rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.portal-empty-state-link {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ── Course cards grid ───────────────────────────────────────────────────── */
 .portal-courses-grid {
   display: grid;

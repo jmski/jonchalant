@@ -78,6 +78,15 @@ export default async function CourseOverviewPage({ params }: Props) {
 
         {/* ── Module list ── */}
         <section className="portal-module-list">
+          {modules.length === 0 && (
+            <div className="portal-empty-state">
+              <p className="portal-empty-state-headline">Course content is being prepared.</p>
+              <p className="portal-empty-state-body">
+                Lessons will appear here once the curriculum is published. Check back soon — or{' '}
+                <a href="/contact" className="portal-empty-state-link">reach out</a> if you have questions.
+              </p>
+            </div>
+          )}
           {modules.map((module: any, moduleIdx: number) => {
             const lessons = (module.lessons ?? []).sort(
               (a: any, b: any) => (a.order ?? 0) - (b.order ?? 0)
