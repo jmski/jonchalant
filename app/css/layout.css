@@ -497,6 +497,17 @@
   background-color: #e8f2e4;
 }
 
+/* Hero gradient wash — applied to SectionWrapper so gradient fills full width.
+   Uses :has() to target wrappers that contain hero elements. */
+.section-wrapper:has(.about-hero-section),
+.section-wrapper:has(.page-hero-section),
+.section-wrapper:has(.dance-page-hero),
+.section-wrapper:has(.blog-page-header),
+.section-wrapper:has(.lessons-hero),
+.section-wrapper:has(.foundation-hero) {
+  background: var(--gradient-hero);
+}
+
 /* Flush variant: removes SectionWrapper padding — used for hero.
    No negative margins needed: at 1024px+ main-content padding-top is exactly
    70px (navbar height), so hero starts flush without any offset tricks. */

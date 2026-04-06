@@ -493,6 +493,7 @@
   padding: 5rem 1.5rem 3rem;
   border-bottom: 1px solid var(--border-subtle);
   text-align: center;
+  background: var(--gradient-hero);
 }
 
 .audit-header-inner {

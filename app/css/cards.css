@@ -16,7 +16,7 @@
 .card {
   position: relative;
   padding: 1.5rem;
-  background-color: white;
+  background: var(--gradient-card);
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   box-sizing: border-box;
@@ -76,7 +76,7 @@
   padding: 1.5rem;
   border: 1px solid var(--border-color, #e2e8f0);
   border-radius: 0.5rem;
-  background: var(--bg-light, #ffffff);
+  background: var(--gradient-card);
   transition: all 0.3s ease;
 }
 
@@ -265,7 +265,7 @@
   border: 1px solid var(--border-color, #e2e8f0);
   border-radius: 0.5rem;
   overflow: hidden;
-  background: var(--bg-light, #ffffff);
+  background: var(--gradient-card);
   transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
@@ -563,7 +563,7 @@
   padding: 1.5rem;
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
-  background: var(--bg-light);
+  background: var(--gradient-card);
   transition: all 0.3s ease;
   height: 100%;
   overflow: hidden;
