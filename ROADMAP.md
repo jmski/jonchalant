@@ -198,7 +198,7 @@
 
 > **Vision:** Premium editorial coaching platform. Think Kajabi/Maven but with the Zen aesthetic. Light mode, whitespace, progress that motivates.
 
-### TASK 3.1 — Route groups architecture `[ ]`
+### TASK 3.1 — Route groups architecture `[x]`
 
 Refactor to route groups separating marketing site from portal:
 
@@ -217,7 +217,7 @@ app/
 
 ---
 
-### TASK 3.2 — Persistent portal sidebar `[ ]`
+### TASK 3.2 — Persistent portal sidebar `[x]`
 
 Build `PortalSidebar` component:
 - Course tree with expandable modules
@@ -228,7 +228,7 @@ Build `PortalSidebar` component:
 
 ---
 
-### TASK 3.3 — Portal dashboard redesign `[ ]`
+### TASK 3.3 — Portal dashboard redesign `[x]`
 
 Key additions:
 - "Continue where you left off" — last incomplete lesson
@@ -236,15 +236,30 @@ Key additions:
 - Tool cards with icons (not plain text links)
 - PresenceCoach as compact widget / floating button
 
+**Implementation:**
+
+- `getEnrollmentDate(client, userId, courseSlug)` added to `utils/supabase/enrollments.ts`
+- `(portal)/layout.tsx` derives `userId` + `firstName`, passes to `PortalShell`
+- `components/portal/PresenceCoachWidget.tsx` — floating FAB (burnt-indigo pill) + always-mounted chat drawer (CSS visibility toggle to preserve chat history)
+- `PortalShell` renders `<PresenceCoachWidget>` when userId is available (accessible on all portal pages)
+- Dashboard page: parallel-fetches `getLastActiveLesson` + `getEnrollmentDate` + courses; derives continue lesson + week focus from Sanity module data; removed inline PresenceCoach section; added 3 tool cards (Presence Score, Tonality Analysis, Movement Plan) in bordered list layout with icons
+
 ---
 
-### TASK 3.4 — Lesson player redesign `[ ]`
+### TASK 3.4 — Lesson player redesign `[x]`
 
 - Video above fold (16:9)
 - Sticky course outline sidebar
 - Sticky "Mark Complete" button + **"Undo Complete" toggle** (re-click to uncomplete — calls same toggle endpoint with inverse state)
 - Breadcrumb: Module → Lesson
 - Keyboard shortcuts: `→` next, `←` prev, `c` complete
+
+**Implementation:**
+
+- `app/(portal)/portal/[courseSlug]/[lessonSlug]/page.tsx` — restructured to two-column layout (`.portal-lesson-layout`): main content left, sticky course outline sidebar right; breadcrumb now includes module (`lesson.module.title`); `LessonActions` receives `initialCompleted` from server-fetched `completedSlugs` (no client-side fetch on load)
+- `LessonActions.tsx` — toggle behavior: `markLessonComplete` / `markLessonIncomplete` called based on current state; `c` keyboard shortcut wired to `handleToggle`; `disabled` only while `isMarking` (not when completed); `title` attribute on done state signals click-to-undo
+- `LessonKeyboard.tsx` (new) — client component, renders `null`; registers `ArrowLeft`/`ArrowRight` handlers; guards against input focus and modifier keys
+- `pages-portal.css` — `.portal-lesson-header` made sticky (`top: 7.25rem`, `z-index: 4`, `background: var(--bg-primary)`); padding tightened for sticky bar; `portal-breadcrumb-module` span style added
 
 ---
 

@@ -426,43 +426,329 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* ── Body layout (main + sidebar) ────────────────────────────────────────── */
-.portal-body {
+/* ── Persistent shell layout ─────────────────────────────────────────────── */
+
+/* Shell body: sidebar + scrollable content, fills viewport below topbar */
+.portal-shell-body {
   display: flex;
   flex: 1;
-  align-items: flex-start;
-  max-width: 82rem;
-  width: 100%;
-  margin: 0 auto;
-  padding: var(--spacing-2xl) var(--spacing-xl);
-  gap: var(--spacing-2xl);
+  height: calc(100dvh - 4rem);
+  overflow: hidden;
 }
 
-/* Main content column */
-.portal-main {
+/* Persistent left sidebar */
+.portal-sidebar {
+  width: 15rem;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-subtle);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+/* Scrollable main content area */
+.portal-content {
   flex: 1;
   min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ── Sidebar internals ─────────────────────────────────────────────── */
+.portal-sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg) 0 var(--spacing-2xl);
+  min-height: 100%;
+}
+
+.portal-sidebar-section {
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.portal-sidebar-section:last-child {
+  border-bottom: none;
+}
+
+.portal-sidebar-section--footer {
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
+}
+
+.portal-sidebar-section-title {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.portal-sidebar-empty {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  padding: var(--spacing-sm) 0;
+  margin: 0;
+}
+
+/* ── Tools / Coaching nav items ────────────────────────────────────── */
+.portal-sidebar-nav-item {
+  display: block;
+  padding: 0.4375rem var(--spacing-sm);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.portal-sidebar-nav-item:hover {
+  background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
+  color: var(--text-primary);
+}
+
+.portal-sidebar-nav-item--active {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+/* ── Course tree ───────────────────────────────────────────────────── */
+.portal-sidebar-course {
+  margin-bottom: var(--spacing-xs);
+}
+
+.portal-sidebar-course-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.4375rem var(--spacing-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.portal-sidebar-course-btn:hover {
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+}
+
+.portal-sidebar-course-btn--active {
+  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+}
+
+.portal-sidebar-course-name {
+  flex: 1;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portal-sidebar-course-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.portal-sidebar-course-pct {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.portal-sidebar-course-chevron {
+  font-size: 0.625rem;
+  color: var(--text-tertiary);
+  line-height: 1;
+}
+
+/* Module list inside expanded course */
+.portal-sidebar-modules {
+  padding-left: var(--spacing-sm);
+  padding-bottom: var(--spacing-xs);
+}
+
+.portal-sidebar-module {
+  margin-bottom: var(--spacing-xs);
+}
+
+.portal-sidebar-module-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: var(--spacing-sm) 0 0.25rem var(--spacing-sm);
+}
+
+.portal-sidebar-lessons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.portal-sidebar-lesson {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.3125rem var(--spacing-sm);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 3px;
+  line-height: 1.35;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.portal-sidebar-lesson:hover {
+  background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+  color: var(--text-primary);
+}
+
+.portal-sidebar-lesson--active {
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.portal-sidebar-lesson--done {
+  color: var(--text-tertiary);
+}
+
+.portal-sidebar-lesson-dot {
+  font-size: 0.625rem;
+  flex-shrink: 0;
+  margin-top: 0.175rem;
+  color: inherit;
+}
+
+.portal-sidebar-lesson-title {
+  min-width: 0;
+  word-break: break-word;
+}
+
+/* ── Sign-out button (sidebar variant) ─────────────────────────────── */
+.portal-sidebar-signout {
+  width: 100%;
+  padding: 0.5rem var(--spacing-sm);
+  background: none;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.portal-sidebar-signout:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+/* ── Main content padding ──────────────────────────────────────────── */
+.portal-main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-xl);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2xl);
 }
 
-/* Sidebar column */
-.portal-sidebar {
-  width: 17rem;
+.portal-lesson-page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-2xl);
+}
+
+/* ── Mobile: hamburger + off-canvas drawer ─────────────────────────── */
+.portal-topbar-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
   flex-shrink: 0;
-  position: sticky;
-  top: 5rem;
+}
+
+.portal-topbar-menu-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 1px;
+  transition: background 0.2s ease;
+}
+
+.portal-sidebar-close {
+  display: none;
 }
 
 @media (max-width: 900px) {
-  .portal-body {
-    flex-direction: column;
-    padding: var(--spacing-xl) var(--spacing-lg);
+  .portal-topbar-menu {
+    display: flex;
   }
+
+  .portal-shell-body {
+    height: calc(100dvh - 4rem);
+    position: relative;
+  }
+
   .portal-sidebar {
+    position: fixed;
+    left: 0;
+    top: 4rem;
+    height: calc(100dvh - 4rem);
+    z-index: 25;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    border-right: 1px solid var(--border-subtle);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .portal-sidebar--open {
+    transform: translateX(0);
+  }
+
+  .portal-sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    font-size: 1rem;
     width: 100%;
-    position: static;
+  }
+
+  .portal-content {
+    overflow-y: auto;
+  }
+
+  .portal-main {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
+  .portal-lesson-page {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-xl);
   }
 }
 
@@ -926,15 +1212,20 @@
   border: none;
 }
 
-/* Lesson Header */
+/* Lesson Header — sticky below breadcrumb nav */
 .portal-lesson-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-2xl);
-  padding-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 7.25rem; /* topbar (4rem) + breadcrumb nav (3.25rem) */
+  z-index: 4;
+  background: var(--bg-primary);
 }
 
 @media (max-width: 640px) {
@@ -1004,6 +1295,8 @@
 .portal-lesson-complete-button--done:hover:not(:disabled) {
   background: color-mix(in srgb, var(--accent-primary) 8%, transparent);
   box-shadow: none;
+  border-color: var(--accent-primary);
+  opacity: 0.85;
 }
 
 /* Section sub-headings */
@@ -1157,6 +1450,12 @@
 .portal-breadcrumb-current {
   color: var(--text-secondary);
   font-weight: 500;
+}
+
+/* Module segment in lesson breadcrumb — non-linked, same style as link */
+.portal-breadcrumb-module {
+  color: var(--text-tertiary);
+  text-decoration: none;
 }
 
 /* ── Course overview ────────────────────────────────────────────────────── */
@@ -1956,5 +2255,305 @@
 .admin-modal-message {
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PORTAL DASHBOARD — Context cards, tool cards, floating coach widget
+   ────────────────────────────────────────────────────────────────────────────
+*/
+
+/* ── Continue + Week Focus two-up cards ─────────────────────────────────── */
+.portal-dashboard-cards {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.portal-continue-card,
+.portal-focus-card {
+  flex: 1;
+  min-width: 16rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg-secondary);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.portal-continue-card {
+  border-left: 3px solid var(--accent-primary);
+}
+
+.portal-focus-card {
+  border-left: 3px solid var(--color-burnt-indigo);
+}
+
+.portal-continue-card:hover,
+.portal-focus-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+}
+
+.portal-card-eyebrow {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.portal-continue-card .portal-card-eyebrow {
+  color: var(--accent-primary);
+}
+
+.portal-focus-card .portal-card-eyebrow {
+  color: var(--color-burnt-indigo);
+}
+
+.portal-card-title {
+  font-family: "Fraunces", serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.portal-card-meta {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.portal-card-cta {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.portal-continue-card .portal-card-cta {
+  color: var(--accent-primary);
+}
+
+.portal-focus-card .portal-card-cta {
+  color: var(--color-burnt-indigo);
+}
+
+/* ── AI Tools grid ──────────────────────────────────────────────────────── */
+.portal-tools-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.portal-tool-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem 1.5rem;
+  background: var(--bg-secondary);
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.15s ease;
+}
+
+.portal-tool-card:last-child {
+  border-bottom: none;
+}
+
+.portal-tool-card:hover {
+  background: color-mix(in srgb, var(--accent-primary) 5%, var(--bg-secondary));
+}
+
+.portal-tool-card-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary));
+  color: var(--accent-primary);
+}
+
+.portal-tool-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.portal-tool-card-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.125rem;
+}
+
+.portal-tool-card-desc {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.portal-tool-card-arrow {
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.portal-tool-card:hover .portal-tool-card-arrow {
+  transform: translateX(3px);
+  color: var(--accent-primary);
+}
+
+/* ── Floating AI Coach widget ──────────────────────────────────────────── */
+.portal-coach-widget {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+/* Chat drawer — always rendered; CSS controls visibility for state persistence */
+.portal-coach-drawer {
+  width: 22rem;
+  height: 32rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Hidden by default */
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    visibility 0s 0.2s,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.portal-coach-drawer--open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition:
+    visibility 0s 0s,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.portal-coach-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--color-burnt-indigo);
+  flex-shrink: 0;
+}
+
+.portal-coach-drawer-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.portal-coach-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.portal-coach-drawer-close:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.portal-coach-drawer-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The PresenceCoach inside the drawer fills the container */
+.portal-coach-drawer-body .presence-coach {
+  border: none;
+  border-radius: 0;
+}
+
+/* Floating action button */
+.portal-coach-fab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-burnt-indigo);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(74, 58, 92, 0.35);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.portal-coach-fab:hover {
+  background: color-mix(in srgb, var(--color-burnt-indigo) 85%, black);
+  box-shadow: 0 6px 18px rgba(74, 58, 92, 0.45);
+  transform: translateY(-1px);
+}
+
+.portal-coach-fab--active {
+  background: color-mix(in srgb, var(--color-burnt-indigo) 80%, black);
+}
+
+.portal-coach-fab-label {
+  line-height: 1;
+}
+
+/* Mobile drawer: full-width, taller */
+@media (max-width: 520px) {
+  .portal-coach-widget {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .portal-coach-drawer {
+    width: calc(100vw - 2rem);
+    height: 70dvh;
+  }
 }
 

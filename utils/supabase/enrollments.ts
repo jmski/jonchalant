@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { createServiceClient } from '@/utils/supabase/service'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 export interface Enrollment {
   id: string
@@ -59,4 +60,24 @@ export async function enroll({
     console.error('[enrollments] enroll error:', error.message)
     throw new Error(`Failed to write enrollment: ${error.message}`)
   }
+}
+
+/**
+ * Returns the enrolled_at timestamp for a user + course, or null if not found.
+ * Used to calculate "This week's focus" on the portal dashboard.
+ */
+export async function getEnrollmentDate(
+  client: SupabaseClient,
+  userId: string,
+  courseSlug: string
+): Promise<string | null> {
+  const { data, error } = await client
+    .from('enrollments')
+    .select('enrolled_at')
+    .eq('user_id', userId)
+    .eq('course_slug', courseSlug)
+    .maybeSingle()
+
+  if (error || !data) return null
+  return data.enrolled_at as string
 }

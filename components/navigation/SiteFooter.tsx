@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { BlogOptIn } from '@/components/forms/BlogOptIn';
 import { FOOTER_NAV, FALLBACK_SOCIAL } from '@/lib/footerData';
 import type { EmailOptInContent } from '@/lib/types';
@@ -18,17 +15,6 @@ interface SiteFooterProps {
 }
 
 export function SiteFooter({ socialLinks = [], optIn }: SiteFooterProps) {
-  const pathname = usePathname();
-
-  // Hide on portal, admin, and login routes — those have their own layouts
-  if (
-    pathname.startsWith('/portal') ||
-    pathname.startsWith('/admin') ||
-    pathname.startsWith('/login')
-  ) {
-    return null;
-  }
-
   // Resolve social links: prefer Sanity data, fall back to hardcoded
   const linkedIn =
     socialLinks.find((s) => s.label.toLowerCase().includes('linkedin')) ??
