@@ -300,6 +300,12 @@
   max-width: 480px;
 }
 
+.foundation-enroll-error {
+  font-size: 0.875rem;
+  color: var(--color-error);
+  margin: 0.75rem 0 0;
+}
+
 /* ── Final CTA ── */
 .foundation-cta {
   padding: 4rem 0;

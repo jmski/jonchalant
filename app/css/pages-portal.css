@@ -705,6 +705,14 @@
     display: flex;
   }
 
+  .portal-topbar {
+    padding: 0 1.25rem;
+  }
+
+  .portal-lesson-nav {
+    padding: 0 1.25rem;
+  }
+
   .portal-shell-body {
     height: calc(100dvh - 4rem);
     position: relative;
@@ -782,6 +790,11 @@
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.6;
+}
+
+.portal-welcome-refresh {
+  margin-top: 2rem;
+  display: inline-block;
 }
 
 /* ── Generic section ─────────────────────────────────────────────────────── */
@@ -1698,6 +1711,17 @@
   color: var(--text-primary);
 }
 
+@media (max-width: 480px) {
+  .portal-lesson-pagination {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-lesson-pagination-next {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
 /* ════════════════════════════════════════════════════════════════════════════
    ADMIN DASHBOARD - Admin Dashboard Styling
    ════════════════════════════════════════════════════════════════════════════ */
@@ -2434,6 +2458,7 @@
 .portal-coach-drawer {
   width: 22rem;
   height: 32rem;
+  max-height: calc(100dvh - 6rem); /* bottom offset (1.5) + FAB (~2.75) + gap (0.75) + buffer (1) */
   background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
@@ -2510,6 +2535,7 @@
 .portal-coach-drawer-body .presence-coach {
   border: none;
   border-radius: 0;
+  flex: 1; /* reliable fill in flex-column context (height: 100% can fail when parent has no explicit height) */
 }
 
 /* Floating action button */
@@ -2544,6 +2570,13 @@
   line-height: 1;
 }
 
+/* Tablet: slightly narrower drawer to avoid blocking content */
+@media (max-width: 768px) {
+  .portal-coach-drawer {
+    width: 20rem;
+  }
+}
+
 /* Mobile drawer: full-width, taller */
 @media (max-width: 520px) {
   .portal-coach-widget {
@@ -2554,6 +2587,7 @@
   .portal-coach-drawer {
     width: calc(100vw - 2rem);
     height: 70dvh;
+    max-height: calc(100dvh - 5rem); /* ensure it fits on very short landscape screens */
   }
 }
 

@@ -352,7 +352,7 @@ export function TonalityClient({ userId }: TonalityClientProps) {
             {wc < 50 ? ' (50 minimum)' : ''}
           </span>
           <button
-            className="ta-analyse-btn"
+            className="tool-btn tool-btn--primary"
             disabled={!canAnalyse}
             onClick={() => void handleAnalyse()}
           >
@@ -363,7 +363,7 @@ export function TonalityClient({ userId }: TonalityClientProps) {
 
         {errorMsg && <p className="ta-error-msg">{errorMsg}</p>}
 
-        <Link href="/portal" className="ta-back-link">
+        <Link href="/portal" className="tool-back-link">
           ← Back to Portal
         </Link>
       </div>
@@ -480,11 +480,11 @@ export function TonalityClient({ userId }: TonalityClientProps) {
 
             {/* Actions */}
             <div className="ta-results-actions">
-              <button className="ta-btn ta-btn--ghost" onClick={() => setReport(null)}>
+              <button className="tool-btn tool-btn--ghost" onClick={() => setReport(null)}>
                 {/* [COPY] */}
                 Analyse Again
               </button>
-              <Link href="/portal" className="ta-btn ta-btn--ghost">
+              <Link href="/portal" className="tool-btn tool-btn--ghost">
                 {/* [COPY] */}
                 ← Back to Portal
               </Link>

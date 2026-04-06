@@ -263,48 +263,95 @@ Key additions:
 
 ---
 
-### TASK 3.5 — Portal tools audit + redesign `[ ]`
+### TASK 3.5 — Portal tools audit + redesign `[x]`
 
-- Audit presence-score, tonality, movement-plan for end-to-end function
-- Apply consistent portal design system
-- Audit `pages-portal-tools.css` (2,309 lines) for dead rules
+**End-to-end audit findings:** All three tools (presence-score, tonality, movement-plan) are correctly wired — auth gate, enrollment check, API route, client state machine all intact.
+
+**Model upgrades:**
+
+- `app/api/presence-score/route.ts` — `claude-haiku-4-5-20251001` → `claude-sonnet-4-6`
+- `app/api/tonality-analysis/route.ts` — `claude-haiku-4-5-20251001` → `claude-sonnet-4-6`
+- `app/api/movement-plan/route.ts` — `claude-haiku-4-5-20251001` → `claude-sonnet-4-6`
+
+**Design system consolidation:**
+
+- Added shared `.tool-btn`, `.tool-btn--primary`, `.tool-btn--ghost`, `.tool-btn--sm`, `.tool-back-link` classes to `pages-portal-tools.css`
+- Removed duplicate `ps-btn`, `ta-btn`, `ta-analyse-btn`, `mp-btn` button CSS (~90 lines removed)
+- Updated `PresenceScoreClient.tsx`, `TonalityClient.tsx`, `MovementPlanClient.tsx` to use shared classes
+
+**CSS cleanup:**
+
+- Removed empty "29. ABOUT PAGE" comment section
+- Removed `!important` from `.no-print` in `@media print` (not needed — print context cascade handles it)
+- `programs-*` classes at end of file confirmed active (used by `/programs` page) — kept
 
 ---
 
-### TASK 3.6 — Fix PresenceCoach viewport sizing `[ ]`
+### TASK 3.6 — Fix PresenceCoach viewport sizing `[x]`
 
-**Problem:** AI Presence Coach chat box is not optimized for small/medium viewports — likely overflows or becomes unusable on mobile.
+**Root cause:** Fixed `height: 32rem` on `.portal-coach-drawer` with no max-height — on short viewports (laptop ≤768px tall) the drawer overflows the top of the screen. Also: `presence-coach` inside drawer-body used `height: 100%` on a flex child with no explicit parent height — unreliable; replaced with `flex: 1`.
 
-**Files:**
-- `app/portal/presence-coach/` (or wherever the chat UI lives)
-- `app/css/pages-portal-tools.css` or `pages-portal.css` — chat container styles
+**Files changed:** `app/css/pages-portal.css`
 
-**Fix:**
-- Constrain chat container height with `max-height: calc(100dvh - Xrem)` so it doesn't overflow
-- Ensure input bar stays anchored to bottom on mobile
-- Verify message list scrolls independently (not the whole page)
-- Test at 375px, 768px
+**Changes:**
+
+- Added `max-height: calc(100dvh - 6rem)` to `.portal-coach-drawer` (accounts for: bottom offset 1.5rem + FAB ~2.75rem + gap 0.75rem + 1rem buffer = 6rem)
+- Added `flex: 1` to `.portal-coach-drawer-body .presence-coach` — reliable fill in flex-column context
+- Added `@media (max-width: 768px)` tablet breakpoint: narrows drawer to `20rem` to avoid blocking content
+- Updated mobile `@media (max-width: 520px)`: added `max-height: calc(100dvh - 5rem)` safety on very short landscape screens
+
+**Layout chain verified correct:**
+
+- `presence-coach-messages`: `flex: 1; overflow-y: auto` — scrolls independently ✓
+- `presence-coach-footer`: `flex-shrink: 0` — anchored at bottom ✓
+- `portal-coach-drawer-body`: `min-height: 0` — prevents classic flex overflow ✓
 
 ---
 
 ## Phase 4 — Launch Readiness
 
-### TASK 4.1 — Enrollment + onboarding flow audit `[ ]`
+### TASK 4.1 — Enrollment + onboarding flow audit `[x]`
 
-Full trace: purchase → webhook → Supabase enrollment → portal access → lessons visible
-- Test with Stripe test card
-- Verify enrollment confirmation email (Resend)
-- Verify success redirect goes to `/portal?enrolled=true`
+Full trace audited: `EnrollButton` → `/api/checkout` (Stripe session with correct metadata) → `success_url: /portal?enrolled=true` → webhook → `enrollments` insert → portal auth + enrollment gate.
+
+**Three issues found and fixed:**
+
+1. **No enrollment email** — Webhook was missing Resend call after DB insert. Added on-brand confirmation email sent to `session.customer_email`. Gracefully skips if `RESEND_API_KEY` is unset. Requires `RESEND_API_KEY` in Vercel env vars.
+
+2. **Race condition: webhook vs. portal redirect** — Stripe webhooks are async. User landing on `/portal?enrolled=true` before the webhook fires got bounced to `/foundation` (`isEnrolled()` returned false). Fixed: portal dashboard now detects `enrolled=true` in URL + unenrolled state → shows "Confirming your enrollment…" screen with manual Refresh button instead of redirecting.
+
+3. **EnrollButton silent errors** — API failure logged to console but showed nothing to user. Fixed: added `error` state + `.foundation-enroll-error` message below button.
+
+**Files changed:**
+
+- `app/api/webhooks/stripe/route.ts` — added Resend enrollment email after successful DB insert
+- `app/(portal)/portal/page.tsx` — processing screen for race condition
+- `components/foundation/EnrollButton.tsx` — added error state + display
+- `app/css/pages-portal.css` — `.portal-welcome-refresh` margin util
+- `app/css/pages-foundation.css` — `.foundation-enroll-error` style
+
+**Still requires manual testing:**
+
+- [ ] Stripe test card end-to-end (requires `STRIPE_WEBHOOK_SECRET` pointed at local or Stripe CLI)
+- [ ] Verify `RESEND_API_KEY` is set in Vercel production env vars
 
 ---
 
-### TASK 4.2 — SEO + metadata `[ ]`
+### TASK 4.2 — SEO + metadata `[x]`
 
-- Unique title/description per public page
-- OG images for homepage, foundation, programs
-- Remove JSON-LD for deleted schemas
-- Add `/sitemap.xml`
-- Confirm portal routes are noindexed
+- Unique title/description per public page — all public marketing pages had metadata already
+- OG images for homepage, foundation, programs — created `opengraph-image.tsx` (Next.js `ImageResponse`) for all three; brand colors (burnt indigo + muted moss on rice paper)
+- Remove JSON-LD for deleted schemas — `lib/schema.ts` was already clean; no schema builders tied to deleted Sanity schemas
+- Add `/sitemap.xml` — `app/sitemap.ts` already existed; removed stale `/media-kit` entry (no route)
+- Confirm portal routes are noindexed — `(portal)/layout.tsx` already had `robots: { index: false }`
+
+**Files changed:**
+
+- `app/(marketing)/opengraph-image.tsx` — new, homepage OG image
+- `app/(marketing)/foundation/opengraph-image.tsx` — new, foundation OG image
+- `app/(marketing)/programs/opengraph-image.tsx` — new, programs OG image
+- `app/(marketing)/programs/page.tsx` — removed hardcoded broken PNG image references from OG/Twitter metadata
+- `app/sitemap.ts` — removed `/media-kit` (no page exists)
 
 ---
 

@@ -69,7 +69,8 @@
       "Bash(grep -A 10 \"faq\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
       "Bash(wc -l /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.ts /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.tsx)",
       "Bash(grep \"section-wrapper--dark\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
-      "Bash(taskkill /F /IM node.exe)"
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/sitemap* /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/robots*)"
     ]
   }
 }

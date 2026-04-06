@@ -63,6 +63,24 @@ export default async function PortalDashboard({
 
   const enrolled = await isEnrolled(user.id, 'the-foundation')
   if (!enrolled) {
+    // If the user just completed checkout, the Stripe webhook may not have
+    // processed yet. Show a processing screen instead of bouncing them away.
+    if (isNewEnrollment) {
+      return (
+        <div className="portal-main">
+          <section className="portal-welcome">
+            <p className="portal-welcome-eyebrow">Almost there</p>
+            <h1 className="portal-welcome-greeting">Confirming your enrollment…</h1>
+            <p className="portal-welcome-subtitle">
+              Your payment was received. We&rsquo;re setting up your access — this usually takes a few seconds.
+            </p>
+            <a href="/portal?enrolled=true" className="btn btn-primary portal-welcome-refresh">
+              Refresh ↻
+            </a>
+          </section>
+        </div>
+      )
+    }
     redirect('/foundation')
   }
 

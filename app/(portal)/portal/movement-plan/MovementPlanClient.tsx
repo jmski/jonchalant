@@ -240,7 +240,7 @@ export function MovementPlanClient({ userId, initialPlans }: MovementPlanClientP
           {/* [COPY] Error headline */}
           <p className="mp-error-title">Something went wrong</p>
           <p className="mp-error-body">{errorMsg}</p>
-          <button className="mp-btn mp-btn--primary" onClick={handleReset}>
+          <button className="tool-btn tool-btn--primary" onClick={handleReset}>
             {/* [COPY] */}
             Try Again
           </button>
@@ -349,7 +349,7 @@ export function MovementPlanClient({ userId, initialPlans }: MovementPlanClientP
           </div>
 
           <button
-            className="mp-btn mp-btn--primary"
+            className="tool-btn tool-btn--primary"
             disabled={!canGenerate}
             onClick={() => void handleGenerate()}
           >
@@ -440,7 +440,7 @@ export function MovementPlanClient({ userId, initialPlans }: MovementPlanClientP
               <>
                 {!savedOk ? (
                   <button
-                    className="mp-btn mp-btn--primary"
+                    className="tool-btn tool-btn--primary"
                     disabled={isSaving}
                     onClick={() => void handleSave()}
                   >
@@ -456,7 +456,7 @@ export function MovementPlanClient({ userId, initialPlans }: MovementPlanClientP
                 {saveError && <p className="mp-save-error">{saveError}</p>}
               </>
             )}
-            <button className="mp-btn mp-btn--ghost" onClick={handleReset}>
+            <button className="tool-btn tool-btn--ghost" onClick={handleReset}>
               {/* [COPY] */}
               {viewingPlan ? '← Back' : 'Generate New Plan'}
             </button>
@@ -516,12 +516,12 @@ function SavedPlansSection({
               {p.goals && <p className="mp-saved-goals">{p.goals}</p>}
             </div>
             <div className="mp-saved-card-actions">
-              <button className="mp-btn mp-btn--sm mp-btn--primary" onClick={() => onOpen(p)}>
+              <button className="tool-btn tool-btn--sm tool-btn--primary" onClick={() => onOpen(p)}>
                 {/* [COPY] */}
                 Open
               </button>
               <button
-                className="mp-btn mp-btn--sm mp-btn--ghost"
+                className="tool-btn tool-btn--sm tool-btn--ghost"
                 disabled={deletingId === p.id}
                 onClick={() => onDelete(p.id)}
               >
