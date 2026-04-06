@@ -206,11 +206,11 @@ export function PresenceScoreClient({ userId, firstName }: PresenceScoreClientPr
           </p>
           {/* [COPY] Time notice */}
           <p className="ps-intro-meta">Takes about 3 minutes. Limited to 3 assessments per day.</p>
-          <button className="ps-btn ps-btn--primary" onClick={() => setStep('questions')}>
+          <button className="tool-btn tool-btn--primary" onClick={() => setStep('questions')}>
             {/* [COPY] CTA */}
             Start Assessment →
           </button>
-          <Link href="/portal" className="ps-back-link">
+          <Link href="/portal" className="tool-back-link">
             ← Back to Portal
           </Link>
         </div>
@@ -275,7 +275,7 @@ export function PresenceScoreClient({ userId, firstName }: PresenceScoreClientPr
           <div className="ps-nav-row">
             {dimIndex > 0 && (
               <button
-                className="ps-btn ps-btn--ghost"
+                className="tool-btn tool-btn--ghost"
                 onClick={() => setDimIndex(i => i - 1)}
               >
                 {/* [COPY] */}
@@ -283,7 +283,7 @@ export function PresenceScoreClient({ userId, firstName }: PresenceScoreClientPr
               </button>
             )}
             <button
-              className="ps-btn ps-btn--primary"
+              className="tool-btn tool-btn--primary"
               disabled={!dimComplete}
               onClick={() => {
                 if (isLast) {
@@ -334,11 +334,11 @@ export function PresenceScoreClient({ userId, firstName }: PresenceScoreClientPr
           <p className="ps-error-title">Something went wrong</p>
           <p className="ps-error-body">{errorMsg}</p>
           <div className="ps-error-actions">
-            <button className="ps-btn ps-btn--primary" onClick={() => void handleFinish()}>
+            <button className="tool-btn tool-btn--primary" onClick={() => void handleFinish()}>
               {/* [COPY] */}
               Try Again
             </button>
-            <button className="ps-btn ps-btn--ghost" onClick={handleRetake}>
+            <button className="tool-btn tool-btn--ghost" onClick={handleRetake}>
               {/* [COPY] */}
               Retake from Start
             </button>
@@ -419,15 +419,15 @@ export function PresenceScoreClient({ userId, firstName }: PresenceScoreClientPr
 
           {/* ── Actions ── */}
           <div className="ps-results-actions no-print">
-            <button className="ps-btn ps-btn--primary" onClick={handlePrint}>
+            <button className="tool-btn tool-btn--primary" onClick={handlePrint}>
               {/* [COPY] */}
               Download Report
             </button>
-            <button className="ps-btn ps-btn--ghost" onClick={handleRetake}>
+            <button className="tool-btn tool-btn--ghost" onClick={handleRetake}>
               {/* [COPY] */}
               Retake Assessment
             </button>
-            <Link href="/portal" className="ps-btn ps-btn--ghost">
+            <Link href="/portal" className="tool-btn tool-btn--ghost">
               {/* [COPY] */}
               ← Back to Portal
             </Link>

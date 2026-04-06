@@ -453,6 +453,12 @@
   }
 }
 
+@media (max-width: 767px) {
+  .email-capture-input {
+    font-size: 16px; /* Prevents iOS auto-zoom (class specificity overrides the global input rule) */
+  }
+}
+
 .email-capture-input {
   flex: 1;
   padding: 0.875rem 1rem;

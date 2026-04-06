@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
-import { RouteAwareLayout } from "@/components/layout";
-import { Navbar, SiteFooter } from "@/components/navigation";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
-import { getContactInfo, getEmailOptIn } from "@/lib/sanity";
-import type { EmailOptInContent } from "@/lib/types";
 
 // next/font self-hosts both typefaces — no external request, no render block
 const fraunces = Fraunces({
@@ -96,38 +92,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Fetch server-side so Sanity client stays out of the client JS bundle
-  let socialLinks: { label: string; href: string; icon: string }[] = [];
-  let optIn: EmailOptInContent | null = null;
-  try {
-    const [contactInfo, emailOptIn] = await Promise.all([
-      getContactInfo(),
-      getEmailOptIn(),
-    ]);
-    if (contactInfo?.contactMethods) {
-      socialLinks = contactInfo.contactMethods
-        .filter((m) => ['LinkedIn', 'Instagram', 'TikTok', 'YouTube'].includes(m.label))
-        .map((m) => ({
-          label: m.label,
-          href: m.href,
-          icon: m.label.toLowerCase().includes('linkedin')
-            ? 'in'
-            : m.label.toLowerCase().includes('instagram')
-            ? 'ig'
-            : m.label.toLowerCase().includes('youtube')
-            ? 'yt'
-            : 'tk',
-        }));
-    }
-    optIn = emailOptIn ?? null;
-  } catch {
-    // Non-critical — footer and navbar extras are optional
-  }
   return (
     <html lang="en" data-theme="default" suppressHydrationWarning className={`${fraunces.variable} ${dmSans.variable}`}>
       <head>
@@ -157,27 +126,7 @@ export default async function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
-          {/* Skip to main content link (WCAG 2.1 Level A - 2.4.1 Bypass Blocks) */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 bg-accent text-white"
-            style={{
-              fontWeight: 'bold'
-            }}
-          >
-            Skip to main content
-          </a>
-          
-          {/* Main Navigation Navbar */}
-          <Navbar socialLinks={socialLinks} />
-          
-          {/* Route-Aware Layout: Renders main pages and portal/admin with their own sidebars */}
-          <RouteAwareLayout>
-            {children}
-          </RouteAwareLayout>
-
-          {/* Site Footer — hidden on portal/admin routes via internal pathname check */}
-          <SiteFooter socialLinks={socialLinks} optIn={optIn} />
+        {children}
 
         {/* Google Analytics — afterInteractive defers load until the page is interactive */}
         {process.env.NEXT_PUBLIC_GA_ID && (

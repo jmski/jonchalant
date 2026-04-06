@@ -12,8 +12,7 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/audit`, priority: 0.7, changeFrequency: 'monthly' },
   { url: `${BASE_URL}/dance`, priority: 0.5, changeFrequency: 'monthly' },
   { url: `${BASE_URL}/lessons`, priority: 0.5, changeFrequency: 'weekly' },
-  { url: `${BASE_URL}/media-kit`, priority: 0.4, changeFrequency: 'monthly' },
-  { url: `${BASE_URL}/ikigai`, priority: 0.4, changeFrequency: 'monthly' },
+{ url: `${BASE_URL}/ikigai`, priority: 0.4, changeFrequency: 'monthly' },
   { url: `${BASE_URL}/privacy`, priority: 0.2, changeFrequency: 'yearly' },
 ];
 
