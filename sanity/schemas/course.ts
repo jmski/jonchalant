@@ -41,6 +41,64 @@ export default defineType({
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
+      name: 'philosophy',
+      title: 'Course Philosophy',
+      type: 'text',
+      rows: 4,
+      description: 'The guiding philosophy behind the course',
+    }),
+    defineField({
+      name: 'targetAudience',
+      title: 'Target Audience',
+      type: 'text',
+      rows: 2,
+      description: 'Who this course is designed for',
+    }),
+    defineField({
+      name: 'totalEstimatedHours',
+      title: 'Total Estimated Hours',
+      type: 'number',
+      description: 'Approximate total content hours (e.g., 213)',
+    }),
+    defineField({
+      name: 'contentPillars',
+      title: 'Content Emphasis Pillars',
+      type: 'array',
+      description: 'Core themes woven throughout every module',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'name', title: 'Pillar Name', type: 'string' }),
+            defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
+          ],
+          preview: {
+            select: { title: 'name' },
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: 'lessonStructure',
+      title: 'Standard Lesson Structure',
+      type: 'array',
+      description: 'The repeatable 5-part lesson format',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'step', title: 'Step Number', type: 'number' }),
+            defineField({ name: 'name', title: 'Step Name', type: 'string' }),
+            defineField({ name: 'durationRange', title: 'Duration Range', type: 'string', description: 'e.g. "10–15 min"' }),
+            defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
+          ],
+          preview: {
+            select: { title: 'name', subtitle: 'durationRange' },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: 'thumbnail',
       title: 'Thumbnail',
       type: 'image',

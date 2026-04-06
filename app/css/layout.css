@@ -497,11 +497,47 @@
   background-color: #e8f2e4;
 }
 
+/* Hero gradient wash — applied to SectionWrapper so gradient fills full width.
+   Uses :has() to target wrappers that contain hero elements. */
+.section-wrapper:has(.about-hero-section),
+.section-wrapper:has(.page-hero-section),
+.section-wrapper:has(.dance-page-hero),
+.section-wrapper:has(.blog-page-header),
+.section-wrapper:has(.lessons-hero),
+.section-wrapper:has(.foundation-hero) {
+  background: var(--gradient-hero);
+}
+
+/* CTA wrappers — smooth gradient transition instead of flat bg-tertiary */
+.section-wrapper:has(.cta-section) {
+  background: var(--gradient-moss-wash);
+}
+
 /* Flush variant: removes SectionWrapper padding — used for hero.
    No negative margins needed: at 1024px+ main-content padding-top is exactly
    70px (navbar height), so hero starts flush without any offset tricks. */
 .section-wrapper--flush {
   padding: 0;
+}
+
+/* Compact variant: minimal vertical padding for inline strips (credibility, press) */
+.section-wrapper--compact {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-wrapper--compact {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-wrapper--compact {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 .section-wrapper {
@@ -1465,6 +1501,31 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+/* Mobile Free Audit CTA */
+.navbar-mobile-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--accent-primary);
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: 0.375rem;
+}
+
+.navbar-mobile-cta-btn:active {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .navbar-mobile-login-btn {

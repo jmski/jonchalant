@@ -1,5 +1,4 @@
 import { ServiceCard } from '@/components/utilities/cards';
-import { CardGrid } from '@/components/utilities/grids';
 
 interface Service {
   _id: string;
@@ -19,14 +18,12 @@ interface ServicesProps {
 export function Services({ services, heading, description, eyebrow }: ServicesProps) {
   return (
     <section className="services-section">
-      {(eyebrow || heading || description) && (
-        <div className="services-section-header">
-          {eyebrow && <span className="services-section-eyebrow">{eyebrow}</span>}
-          {heading && <h2 className="services-section-heading">{heading}</h2>}
-          {description && <p className="services-section-description">{description}</p>}
-        </div>
-      )}
-      <CardGrid columns={3}>
+      <div className="services-section-header">
+        {eyebrow && <span className="services-section-eyebrow">{eyebrow}</span>}
+        {heading && <h2 className="services-section-heading">{heading}</h2>}
+        {description && <p className="services-section-description">{description}</p>}
+      </div>
+      <div className="services-grid">
         {services.map((service) => (
           <ServiceCard
             key={service._id}
@@ -37,7 +34,7 @@ export function Services({ services, heading, description, eyebrow }: ServicesPr
             features={service.features}
           />
         ))}
-      </CardGrid>
+      </div>
     </section>
   );
 }

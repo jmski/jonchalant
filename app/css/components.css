@@ -31,8 +31,9 @@ button {
 
 .btn:hover,
 button:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background-color: transparent;
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
   box-shadow: none;
 }
 
@@ -50,8 +51,9 @@ button:active {
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background-color: transparent;
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
   box-shadow: none;
 }
 
@@ -220,6 +222,12 @@ textarea {
   background-color: var(--color-error);
   color: white;
   border-color: var(--color-error);
+}
+
+.badge-warm {
+  background-color: var(--color-warm-amber);
+  color: white;
+  border-color: var(--color-warm-amber);
 }
 
 /* ========== LINKS ========== */
@@ -500,6 +508,8 @@ tbody tr:hover {
   font-weight: 600;
   color: var(--text-primary);
   line-height: 1.5;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .faq-item-icon {
@@ -534,4 +544,32 @@ tbody tr:hover {
     padding-top: 0.875rem;
     font-size: 0.875rem;
   }
+}
+
+/* ========== CALLOUT BLOCKS ========== */
+.callout {
+  background: color-mix(in srgb, var(--accent-primary) 4%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 15%, var(--border-subtle));
+  border-radius: 0.5rem;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+}
+
+.callout-title {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.callout-body {
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.callout--warm {
+  background: color-mix(in srgb, var(--color-warm-amber) 5%, var(--bg-secondary));
+  border-color: color-mix(in srgb, var(--color-warm-amber) 15%, var(--border-subtle));
 }

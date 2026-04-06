@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
+import { ScrollFade } from '@/components/animations'
 import EnrollButton from '@/components/foundation/EnrollButton'
 import FAQ from '@/components/shared/faq/FAQ'
 import { getFoundationPageContent } from '@/lib/sanity'
@@ -10,13 +11,13 @@ import type { FAQItem } from '@/components/shared/faq/FAQ'
 
 export const metadata: Metadata = {
   title: 'The Foundation | Jonchalant',
-  description: 'An 8-week course that teaches introverts and quiet professionals to command a room without changing who they are. Body-aware leadership built on movement principles.',
+  description: 'A self-paced video course teaching executive presence through dance. 8 modules, 200+ hours. Built for introverts who want to command a room without performing.',
   alternates: {
     canonical: 'https://jonchalant.com/foundation',
   },
   openGraph: {
     title: 'The Foundation | Jonchalant',
-    description: 'An 8-week course that teaches introverts and quiet professionals to command a room without changing who they are.',
+    description: 'A self-paced video course teaching executive presence through dance. 8 modules, 200+ hours. Built for introverts.',
     type: 'website',
     url: 'https://jonchalant.com/foundation',
     siteName: 'Jonchalant',
@@ -24,14 +25,14 @@ export const metadata: Metadata = {
 }
 
 const FALLBACK_MODULES = [
-  { week: 1, title: 'Body Audit', description: 'Understand what you\'re already communicating without knowing it.' },
-  { week: 2, title: 'Posture & Grounding', description: 'Learn how you take up space — and why it changes how others read you.' },
-  { week: 3, title: 'Movement Fundamentals', description: 'Isolation, weight, and rhythm as tools for deliberate physical expression.' },
-  { week: 4, title: 'Stillness & Timing', description: 'The power of not moving. Mastering silence and the pause.' },
-  { week: 5, title: 'Eye Contact, Breath & Voice', description: 'Your physical instruments — used as leadership tools, not performance.' },
-  { week: 6, title: 'High-Stakes Situations', description: 'Presentations, interviews, difficult conversations. Practise under pressure.' },
-  { week: 7, title: 'Building Your Style', description: 'Freestyle principles. Presence that is distinctly yours, not borrowed.' },
-  { week: 8, title: 'Integration', description: 'Putting it all together — and mapping what comes next for you.' },
+  { moduleNumber: 1, title: 'Why Soft Skills Matter', description: 'Problem framing — why traditional leadership training fails and what dance reveals about real human connection.', estimatedHours: '15–20 hours', lessonCount: 12 },
+  { moduleNumber: 2, title: 'The Body as Instrument', description: 'Body control — posture, gesture, spatial awareness, and physical intentionality.', estimatedHours: '25–30 hours', lessonCount: 17 },
+  { moduleNumber: 3, title: 'Active Listening & Attunement', description: 'Listening with the whole body — reading rooms, mirroring, presence in conversation.', estimatedHours: '25–30 hours', lessonCount: 18 },
+  { moduleNumber: 4, title: 'Improvisation & Adaptability', description: 'Thinking on your feet — managing uncertainty, creative problem-solving, spontaneous expression.', estimatedHours: '25–30 hours', lessonCount: 18 },
+  { moduleNumber: 5, title: 'Reciprocation & Influence', description: 'Give-and-take dynamics — building rapport, reciprocal communication, authentic influence.', estimatedHours: '25–30 hours', lessonCount: 18 },
+  { moduleNumber: 6, title: 'Tonality & Vocal Presence', description: 'Voice modulation, pacing, emotion in speech, commanding attention through sound.', estimatedHours: '25–30 hours', lessonCount: 19 },
+  { moduleNumber: 7, title: 'Presence in Practice', description: 'Integrating all concepts — high-stakes scenarios, presentations, performance under pressure.', estimatedHours: '25–30 hours', lessonCount: 18 },
+  { moduleNumber: 8, title: 'The Integrated Leader', description: 'Personal brand, sustaining growth, building a presence practice that lasts.', estimatedHours: '20–25 hours', lessonCount: 14 },
 ]
 
 const FALLBACK_WHO_FOR = [
@@ -136,7 +137,7 @@ export default async function FoundationPage() {
             name: content?.heroHeadline ?? 'The Foundation',
             description: content?.heroSubheadline ?? 'An 8-week course teaching executive presence for introverts through body-aware leadership principles.',
             price: startingPrice,
-            duration: 'P8W',
+            duration: 'PT213H',
             level: 'Beginner',
           })),
         }}
@@ -147,7 +148,7 @@ export default async function FoundationPage() {
       <SectionWrapper variant="primary">
         <SectionContent>
           <section className="foundation-hero">
-            <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? '8-Week Course'}</p>
+            <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? 'Self-Paced Course · 8 Modules'}</p>
             <h1 className="foundation-hero-headline">{content?.heroHeadline ?? 'The Foundation'}</h1>
             <p className="foundation-hero-subheadline">
               {content?.heroSubheadline ?? 'Executive presence for people who think before they speak.'}
@@ -171,32 +172,40 @@ export default async function FoundationPage() {
       {/* ── What's Inside ─────────────────────────────────────────────────────── */}
       <SectionWrapper variant="secondary">
         <SectionContent>
+          <ScrollFade>
           <section className="foundation-inside" id="inside">
             <div className="foundation-section-header">
               <p className="foundation-section-eyebrow">{content?.insideEyebrow ?? 'The curriculum'}</p>
               <h2 className="foundation-section-title">{content?.insideTitle ?? '8 weeks. One week at a time.'}</h2>
               <p className="foundation-section-body">
-                {content?.insideBody ?? 'Each week builds on the last. You can go faster — but the material is sequenced deliberately. Physical groundedness before vocal command. Fundamentals before high-stakes application.'}
+                {content?.insideBody ?? 'Each module builds on the last. You can go faster — but the material is sequenced deliberately. Physical groundedness before vocal command. Fundamentals before high-stakes application.'}
               </p>
             </div>
             <ol className="foundation-module-list">
-              {modules.map(({ week, title, description }: { week: number; title: string; description: string }) => (
-                <li key={week} className="foundation-module-item">
-                  <span className="foundation-module-week">Week {week}</span>
+              {modules.map(({ moduleNumber, title, description, estimatedHours, lessonCount }: { moduleNumber: number; title: string; description: string; estimatedHours?: string; lessonCount?: number }) => (
+                <li key={moduleNumber} className="foundation-module-item">
+                  <span className="foundation-module-week">Module {moduleNumber}</span>
                   <div className="foundation-module-content">
                     <h3 className="foundation-module-title">{title}</h3>
                     <p className="foundation-module-description">{description}</p>
+                    {(lessonCount || estimatedHours) && (
+                      <p className="foundation-module-meta">
+                        {lessonCount ? `${lessonCount} lessons` : ''}{lessonCount && estimatedHours ? ' · ' : ''}{estimatedHours ?? ''}
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}
             </ol>
           </section>
+          </ScrollFade>
         </SectionContent>
       </SectionWrapper>
 
       {/* ── Who It's For ──────────────────────────────────────────────────────── */}
       <SectionWrapper variant="primary">
         <SectionContent>
+          <ScrollFade>
           <section className="foundation-who">
             <div className="foundation-section-header">
               <p className="foundation-section-eyebrow">{content?.whoEyebrow ?? 'Who this is for'}</p>
@@ -211,26 +220,30 @@ export default async function FoundationPage() {
               ))}
             </ul>
           </section>
+          </ScrollFade>
         </SectionContent>
       </SectionWrapper>
 
       {/* ── How It Works ──────────────────────────────────────────────────────── */}
       <SectionWrapper variant="secondary">
         <SectionContent>
+          <ScrollFade>
           <section className="foundation-how">
             <div className="foundation-section-header">
               <p className="foundation-section-eyebrow">{content?.howEyebrow ?? 'How it works'}</p>
               <h2 className="foundation-section-title">{content?.howTitle ?? 'Not a lecture series. A movement practice.'}</h2>
             </div>
             <div className="foundation-how-grid">
-              {howCards.map(({ label, body }: { label: string; body: string }) => (
+              {howCards.map(({ label, body }: { label: string; body: string }, idx: number) => (
                 <div key={label} className="foundation-how-card">
+                  <span className="foundation-how-card-step">{String(idx + 1).padStart(2, '0')}</span>
                   <h3 className="foundation-how-card-label">{label}</h3>
                   <p className="foundation-how-card-body">{body}</p>
                 </div>
               ))}
             </div>
           </section>
+          </ScrollFade>
         </SectionContent>
       </SectionWrapper>
 

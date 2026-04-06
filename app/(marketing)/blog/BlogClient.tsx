@@ -107,12 +107,8 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
               )}
             </div>
           </div>
-        </SectionContent>
-      </SectionWrapper>
 
-      {/* Category Filter */}
-      <SectionWrapper variant="secondary">
-        <SectionContent>
+          {/* Category Filter — directly under search */}
           <div
             className="blog-filter-tabs"
             role="tablist"

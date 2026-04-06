@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getContactPageContent } from '@/lib/sanity'
 import type { ContactPageContent } from '@/lib/types'
+import { PageTransition } from '@/components/layout'
 import ContactClient from './ContactClient'
 
 export const metadata: Metadata = {
@@ -17,5 +18,9 @@ export default async function Contact() {
     // Renders with hardcoded fallbacks in ContactClient
   }
 
-  return <ContactClient content={contactContent} />
+  return (
+    <PageTransition animation="fade">
+      <ContactClient content={contactContent} />
+    </PageTransition>
+  )
 }

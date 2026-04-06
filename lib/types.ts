@@ -12,11 +12,30 @@ export interface SanityImage { asset: { _ref: string }; alt?: string; hotspot?: 
 
 // ── Learning portal / curriculum ──────────────────────────────────────────────
 
+export interface ContentPillar {
+  _key?: string
+  name: string
+  description: string
+}
+
+export interface LessonStructureStep {
+  _key?: string
+  step: number
+  name: string
+  durationRange: string
+  description: string
+}
+
 export interface Course {
   _id: string
   title: string
   slug: SanitySlug
   description: string
+  philosophy?: string
+  targetAudience?: string
+  totalEstimatedHours?: number
+  contentPillars?: ContentPillar[]
+  lessonStructure?: LessonStructureStep[]
   thumbnail?: SanityImage
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
   estimatedDuration: string
@@ -29,7 +48,11 @@ export interface Module {
   _id: string
   title: string
   slug: SanitySlug
+  moduleNumber?: number
   description?: string
+  theme?: string
+  danceIntegration?: string
+  estimatedHours?: string
   lessons: Lesson[]
   order: number
 }
@@ -40,12 +63,17 @@ export interface TechnicalNote {
   content: string
 }
 
+export type LessonEmphasis = 'body_control' | 'active_listening' | 'improvisation' | 'reciprocation' | 'tonality_presence' | 'all_pillars'
+
 export interface Lesson {
   _id: string
   title: string
   slug: SanitySlug
+  lessonNumber?: string
   access: 'free' | 'enrolled'
   description?: string
+  format?: string
+  emphasis?: LessonEmphasis
   videoId?: string
   body?: any[]
   socialLogic?: string

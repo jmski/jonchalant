@@ -82,7 +82,7 @@
   --accent-secondary: #5a8a6a; /* Moss Success variant */
   --accent-tertiary: #6a8aaa; /* Soft indigo - distinct category color */
   --accent-hover: #8aa87a; /* Moss light - hover state */
-  --btn-primary-text: #1a1a1a; /* Button text — dark for contrast on muted moss */
+  --btn-primary-text: #ffffff; /* Button text — white on muted moss */
 
   /* Overlay & Effects */
   --overlay-dark: rgba(26, 26, 26, 0.08);
@@ -104,6 +104,44 @@
     99,
     0.03
   ); /* Blueprint grid - increased opacity */
+}
+
+/* ========== WARM AMBER ACCENT ========== */
+:root {
+  --color-warm-amber: #b89a5f; /* Warm amber — secondary accent for highlights */
+  --color-warm-amber-light: #d4bb82; /* Softened variant for hover/subtle usage */
+}
+
+/* ========== GRADIENT TOKENS ========== */
+:root {
+  /* Hero gradient — subtle directional wash */
+  --gradient-hero: linear-gradient(
+    160deg,
+    var(--bg-primary) 0%,
+    var(--bg-tertiary) 40%,
+    color-mix(in srgb, var(--color-muted-moss) 4%, var(--bg-primary)) 100%
+  );
+
+  /* Section accent gradient — very subtle moss tint */
+  --gradient-moss-wash: linear-gradient(
+    180deg,
+    var(--bg-primary) 0%,
+    color-mix(in srgb, var(--color-muted-moss) 3%, var(--bg-secondary)) 100%
+  );
+
+  /* Warm accent gradient — for pricing, featured, testimonial backgrounds */
+  --gradient-warm: linear-gradient(
+    135deg,
+    var(--bg-secondary) 0%,
+    color-mix(in srgb, var(--color-warm-amber) 5%, var(--bg-primary)) 100%
+  );
+
+  /* Card depth gradient — subtle top-to-bottom tint */
+  --gradient-card: linear-gradient(
+    180deg,
+    var(--bg-light) 0%,
+    color-mix(in srgb, var(--color-muted-moss) 2%, var(--bg-light)) 100%
+  );
 }
 
 /* ========== ADDITIONAL TOKENS ========== */

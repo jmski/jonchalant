@@ -16,7 +16,7 @@
 .card {
   position: relative;
   padding: 1.5rem;
-  background-color: white;
+  background: var(--gradient-card);
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   box-sizing: border-box;
@@ -76,7 +76,7 @@
   padding: 1.5rem;
   border: 1px solid var(--border-color, #e2e8f0);
   border-radius: 0.5rem;
-  background: var(--bg-light, #ffffff);
+  background: var(--gradient-card);
   transition: all 0.3s ease;
 }
 
@@ -265,7 +265,7 @@
   border: 1px solid var(--border-color, #e2e8f0);
   border-radius: 0.5rem;
   overflow: hidden;
-  background: var(--bg-light, #ffffff);
+  background: var(--gradient-card);
   transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
@@ -563,7 +563,7 @@
   padding: 1.5rem;
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
-  background: var(--bg-light);
+  background: var(--gradient-card);
   transition: all 0.3s ease;
   height: 100%;
   overflow: hidden;
@@ -659,20 +659,22 @@
 .service-card {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
-  border: 1px solid var(--border-color);
-  border-left: 3px solid var(--accent-primary);
+  padding: 2rem 1.75rem;
   background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--accent-primary);
+  border-radius: 0.5rem;
   transition:
     border-color var(--transition-base),
+    transform var(--transition-base),
     box-shadow var(--transition-base);
   height: 100%;
 }
 
 .service-card:hover {
-  border-color: var(--color-burnt-indigo);
-  border-left-color: var(--color-burnt-indigo);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(107, 142, 99, 0.1);
 }
 
 .service-card-icon {

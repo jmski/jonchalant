@@ -1,4 +1,5 @@
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { ScrollFade } from "@/components/animations";
 import {
   Hero,
   CredibilityStrip,
@@ -102,50 +103,52 @@ export default async function Home() {
           />
         </SectionWrapper>
 
-        {/* 2. CREDIBILITY STRIP */}
-        {homeContent?.heroStats?.length > 0 && (
-          <SectionWrapper variant="primary">
+        {/* 2. SOCIAL PROOF BAND (Credibility + Press) */}
+        <SectionWrapper variant="primary" className="section-wrapper--compact">
+          {homeContent?.heroStats?.length > 0 && (
             <CredibilityStrip stats={homeContent.heroStats} />
-          </SectionWrapper>
-        )}
-
-        {/* 3. PRESS STRIP */}
-        {pressMentions.length > 0 && (
-          <SectionWrapper variant="primary">
+          )}
+          {pressMentions.length > 0 && (
             <SectionContent>
               <PressStrip mentions={pressMentions} />
             </SectionContent>
-          </SectionWrapper>
-        )}
+          )}
+        </SectionWrapper>
 
         {/* 4. WHY IT WORKS / PHILOSOPHY (moved up) */}
         <SectionWrapper variant="secondary">
           <SectionContent>
-            <WhyItWorks
-              label={homeContent?.whyItWorksLabel}
-              highlight={homeContent?.whyItWorksHighlight}
-              paragraph1={homeContent?.whyItWorksParagraph1}
-              paragraph2={homeContent?.whyItWorksParagraph2}
-              paragraph3={homeContent?.whyItWorksParagraph3}
-            />
+            <ScrollFade>
+              <WhyItWorks
+                label={homeContent?.whyItWorksLabel}
+                highlight={homeContent?.whyItWorksHighlight}
+                paragraph1={homeContent?.whyItWorksParagraph1}
+                paragraph2={homeContent?.whyItWorksParagraph2}
+                paragraph3={homeContent?.whyItWorksParagraph3}
+              />
+            </ScrollFade>
           </SectionContent>
         </SectionWrapper>
 
         {/* 5. SERVICES */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <Services
-              services={services}
-              heading={homeContent?.servicesHeadline}
-              description={homeContent?.servicesDescription}
-            />
+            <ScrollFade>
+              <Services
+                services={services}
+                heading={homeContent?.servicesHeadline}
+                description={homeContent?.servicesDescription}
+              />
+            </ScrollFade>
           </SectionContent>
         </SectionWrapper>
 
         {/* 6. MEET JON */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
-            <MeetJon image={homeContent?.meetJonImage} />
+            <ScrollFade>
+              <MeetJon image={homeContent?.meetJonImage} />
+            </ScrollFade>
           </SectionContent>
         </SectionWrapper>
 
@@ -153,11 +156,13 @@ export default async function Home() {
         {testimonials.length > 0 && (
           <SectionWrapper variant="secondary" className="section-wrapper--moss">
             <SectionContent>
-              <Testimonials
-                testimonials={testimonials}
-                eyebrow={homeContent?.testimonialsEyebrow}
-                heading={homeContent?.testimonialsHeading}
-              />
+              <ScrollFade>
+                <Testimonials
+                  testimonials={testimonials}
+                  eyebrow={homeContent?.testimonialsEyebrow}
+                  heading={homeContent?.testimonialsHeading}
+                />
+              </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
@@ -166,11 +171,13 @@ export default async function Home() {
         {recentPosts.length > 0 && (
           <SectionWrapper variant="primary">
             <SectionContent>
-              <BlogCards
-                posts={recentPosts}
-                heading="From the Blog"
-                description="Insights on quiet leadership, executive presence, and authentic communication."
-              />
+              <ScrollFade>
+                <BlogCards
+                  posts={recentPosts}
+                  heading="From the Blog"
+                  description="Insights on quiet leadership, executive presence, and authentic communication."
+                />
+              </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}

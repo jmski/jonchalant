@@ -66,21 +66,11 @@ export default defineType({
       name: 'modules',
       title: 'Course Modules',
       type: 'array',
-      description: '8-week curriculum. Each item maps to one week.',
+      description: 'References to module documents. Order here controls display order on the marketing page.',
       of: [
         {
-          type: 'object',
-          fields: [
-            defineField({ name: 'week', title: 'Week Number', type: 'number' }),
-            defineField({ name: 'title', title: 'Module Title', type: 'string' }),
-            defineField({ name: 'description', title: 'Module Description', type: 'text', rows: 2 }),
-          ],
-          preview: {
-            select: { title: 'title', subtitle: 'week' },
-            prepare({ title, subtitle }) {
-              return { title: `Week ${subtitle}: ${title}` }
-            },
-          },
+          type: 'reference',
+          to: [{ type: 'module' }],
         },
       ],
     }),
