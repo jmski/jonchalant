@@ -36,10 +36,35 @@ export default defineType({
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
+      name: 'moduleNumber',
+      title: 'Module Number',
+      type: 'number',
+      description: 'Module number within the course (e.g., 1, 2, 3)',
+      validation: (Rule: any) => Rule.required().min(1).max(20),
+    }),
+    defineField({
       name: 'description',
       title: 'Module Description',
       type: 'text',
       description: 'Brief overview of what this module covers',
+    }),
+    defineField({
+      name: 'theme',
+      title: 'Theme',
+      type: 'text',
+      description: 'The overarching theme of this module (e.g., "Problem framing — why traditional leadership training fails")',
+    }),
+    defineField({
+      name: 'danceIntegration',
+      title: 'Dance Integration',
+      type: 'text',
+      description: 'How dance concepts are woven into this module (e.g., "Fundamentals — isolation, alignment, weight shifts, grounding")',
+    }),
+    defineField({
+      name: 'estimatedHours',
+      title: 'Estimated Hours',
+      type: 'string',
+      description: 'e.g., "15–20 hours", "25–30 hours"',
     }),
     defineField({
       name: 'order',
