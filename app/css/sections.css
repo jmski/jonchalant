@@ -1040,16 +1040,66 @@
   margin-bottom: 1.25rem;
 }
 
-.home-why-works-paragraph {
-  font-size: 18px;
-  line-height: 1.75;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  max-width: none;
+.home-why-works-highlight {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 2.5rem;
+  line-height: var(--leading-tight);
 }
 
-.home-why-works-paragraph:last-child {
-  margin-bottom: 0;
+.home-why-works-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .home-why-works-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.home-why-works-card {
+  padding: 2rem 1.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--accent-primary);
+  border-radius: 0.5rem;
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.home-why-works-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(107, 142, 99, 0.1);
+}
+
+.home-why-works-card-step {
+  display: block;
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.home-why-works-card-title {
+  font-family: var(--font-headline);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+}
+
+.home-why-works-card-body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

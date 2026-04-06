@@ -181,14 +181,33 @@
 }
 
 .foundation-how-card {
-  padding: 1.75rem;
+  padding: 2rem 1.75rem;
   background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--accent-primary);
   border-radius: 0.5rem;
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.foundation-how-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(107, 142, 99, 0.1);
+}
+
+.foundation-how-card-step {
+  display: block;
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1;
 }
 
 .foundation-how-card-label {
-  font-size: 0.9375rem;
+  font-family: var(--font-headline);
+  font-size: 1.0625rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.75rem;

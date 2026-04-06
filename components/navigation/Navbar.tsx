@@ -278,7 +278,7 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
               {/* Free Audit CTA for Mobile */}
               <Link
                 href="/audit"
-                className="btn btn-primary"
+                className="navbar-mobile-cta-btn"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Free Audit

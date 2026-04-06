@@ -31,8 +31,9 @@ button {
 
 .btn:hover,
 button:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background-color: transparent;
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
   box-shadow: none;
 }
 
@@ -50,8 +51,9 @@ button:active {
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background-color: transparent;
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
   box-shadow: none;
 }
 
@@ -500,6 +502,8 @@ tbody tr:hover {
   font-weight: 600;
   color: var(--text-primary);
   line-height: 1.5;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .faq-item-icon {

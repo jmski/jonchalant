@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { CTA } from "@/components/sections";
 import { Hero as AboutHero, Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
+import { ScrollFade } from "@/components/animations";
 import type { Metadata } from 'next';
 import { getAboutPageContent } from "@/lib/sanity";
 
@@ -62,12 +63,14 @@ export default async function About() {
         {/* 2 — ORIGIN STORY: why movement + leadership */}
         <SectionWrapper variant="secondary">
           <SectionContent>
+            <ScrollFade>
             <Origin
               label={aboutContent?.originSectionLabel}
               headline={aboutContent?.originSectionHeadline}
               description={aboutContent?.originSectionDescription}
               highlight={aboutContent?.originSectionHighlight}
             />
+            </ScrollFade>
           </SectionContent>
         </SectionWrapper>
 
@@ -75,11 +78,13 @@ export default async function About() {
         {aboutContent?.turningPointHeadline && (
           <SectionWrapper variant="primary">
             <SectionContent>
+              <ScrollFade>
               <TurningPoint
                 headline={aboutContent.turningPointHeadline}
                 body={aboutContent.turningPointBody ?? ''}
                 highlight={aboutContent.turningPointHighlight}
               />
+              </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
@@ -88,11 +93,13 @@ export default async function About() {
         {aboutContent?.methodologyHeadline && (
           <SectionWrapper variant="secondary">
             <SectionContent>
+              <ScrollFade>
               <MethodologyNarrative
                 headline={aboutContent.methodologyHeadline}
                 body={aboutContent.methodologyBody ?? ''}
                 highlight={aboutContent.methodologyHighlight}
               />
+              </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
@@ -101,11 +108,13 @@ export default async function About() {
         {aboutContent?.whyExistsHeadline && (
           <SectionWrapper variant="primary">
             <SectionContent>
+              <ScrollFade>
               <WhyExists
                 headline={aboutContent.whyExistsHeadline}
                 body={aboutContent.whyExistsBody ?? ''}
                 highlight={aboutContent.whyExistsHighlight}
               />
+              </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
@@ -114,11 +123,13 @@ export default async function About() {
         {aboutContent?.whoForHeadline && (
           <SectionWrapper variant="secondary">
             <SectionContent>
+              <ScrollFade>
               <WhoFor
                 headline={aboutContent.whoForHeadline}
                 body={aboutContent.whoForBody ?? ''}
                 highlight={aboutContent.whoForHighlight}
               />
+              </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}

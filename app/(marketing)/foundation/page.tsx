@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
+import { ScrollFade } from '@/components/animations'
 import EnrollButton from '@/components/foundation/EnrollButton'
 import FAQ from '@/components/shared/faq/FAQ'
 import { getFoundationPageContent } from '@/lib/sanity'
@@ -171,6 +172,7 @@ export default async function FoundationPage() {
       {/* ── What's Inside ─────────────────────────────────────────────────────── */}
       <SectionWrapper variant="secondary">
         <SectionContent>
+          <ScrollFade>
           <section className="foundation-inside" id="inside">
             <div className="foundation-section-header">
               <p className="foundation-section-eyebrow">{content?.insideEyebrow ?? 'The curriculum'}</p>
@@ -191,12 +193,14 @@ export default async function FoundationPage() {
               ))}
             </ol>
           </section>
+          </ScrollFade>
         </SectionContent>
       </SectionWrapper>
 
       {/* ── Who It's For ──────────────────────────────────────────────────────── */}
       <SectionWrapper variant="primary">
         <SectionContent>
+          <ScrollFade>
           <section className="foundation-who">
             <div className="foundation-section-header">
               <p className="foundation-section-eyebrow">{content?.whoEyebrow ?? 'Who this is for'}</p>
@@ -211,26 +215,30 @@ export default async function FoundationPage() {
               ))}
             </ul>
           </section>
+          </ScrollFade>
         </SectionContent>
       </SectionWrapper>
 
       {/* ── How It Works ──────────────────────────────────────────────────────── */}
       <SectionWrapper variant="secondary">
         <SectionContent>
+          <ScrollFade>
           <section className="foundation-how">
             <div className="foundation-section-header">
               <p className="foundation-section-eyebrow">{content?.howEyebrow ?? 'How it works'}</p>
               <h2 className="foundation-section-title">{content?.howTitle ?? 'Not a lecture series. A movement practice.'}</h2>
             </div>
             <div className="foundation-how-grid">
-              {howCards.map(({ label, body }: { label: string; body: string }) => (
+              {howCards.map(({ label, body }: { label: string; body: string }, idx: number) => (
                 <div key={label} className="foundation-how-card">
+                  <span className="foundation-how-card-step">{String(idx + 1).padStart(2, '0')}</span>
                   <h3 className="foundation-how-card-label">{label}</h3>
                   <p className="foundation-how-card-body">{body}</p>
                 </div>
               ))}
             </div>
           </section>
+          </ScrollFade>
         </SectionContent>
       </SectionWrapper>
 

@@ -82,7 +82,7 @@
   --accent-secondary: #5a8a6a; /* Moss Success variant */
   --accent-tertiary: #6a8aaa; /* Soft indigo - distinct category color */
   --accent-hover: #8aa87a; /* Moss light - hover state */
-  --btn-primary-text: #1a1a1a; /* Button text — dark for contrast on muted moss */
+  --btn-primary-text: #ffffff; /* Button text — white on muted moss */
 
   /* Overlay & Effects */
   --overlay-dark: rgba(26, 26, 26, 0.08);

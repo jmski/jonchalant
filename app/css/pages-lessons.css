@@ -156,6 +156,8 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-tertiary);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .course-toc-modules {

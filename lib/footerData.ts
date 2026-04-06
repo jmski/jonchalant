@@ -15,10 +15,11 @@ export const FOOTER_NAV = [
     ],
   },
   {
-    heading: 'Media',
+    heading: 'Learn',
     links: [
-      { label: 'Dance', href: '/dance' },
+      { label: 'Curriculum', href: '/lessons' },
       { label: 'Blog', href: '/blog' },
+      { label: 'Free Audit', href: '/audit' },
     ],
   },
 ];
