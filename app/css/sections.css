@@ -791,7 +791,7 @@
 .services-section {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 
 .services-section-header {
@@ -802,26 +802,42 @@
 
 .services-section-eyebrow {
   display: inline-block;
-  font-size: 0.75rem;
+  font-family: var(--font-headline);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent-primary);
 }
 
 .services-section-heading {
-  font-size: clamp(1.875rem, 6vw, 2.5rem);
-  font-weight: 700;
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.15;
-  max-width: 36rem;
+  line-height: var(--leading-tight);
+  margin: 0;
 }
 
 .services-section-description {
   font-size: 1rem;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--text-secondary);
   max-width: 48rem;
+  margin: 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -1029,6 +1045,31 @@
   padding-bottom: 72px;
 }
 
+.home-why-works-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .home-why-works-layout {
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.home-why-works-header {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .home-why-works-header {
+    position: sticky;
+    top: 6rem;
+  }
+}
+
 .home-why-works-label {
   display: inline-block;
   font-family: var(--font-headline);
@@ -1042,60 +1083,91 @@
 
 .home-why-works-highlight {
   font-family: var(--font-headline);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 600;
   color: var(--text-primary);
-  margin: 0 0 2.5rem;
+  margin: 0;
   line-height: var(--leading-tight);
 }
 
-.home-why-works-grid {
+/* Timeline */
+.home-why-works-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.home-why-works-step {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 2.5rem 1fr;
   gap: 1.5rem;
 }
 
-@media (min-width: 768px) {
-  .home-why-works-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
+/* Marker column: icon + connecting line */
+.home-why-works-step-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
 }
 
-.home-why-works-card {
-  padding: 2rem 1.75rem;
+.home-why-works-step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-primary);
   background: var(--bg-primary);
-  border: 1px solid var(--border-subtle);
-  border-top: 3px solid var(--accent-primary);
-  border-radius: 0.5rem;
-  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+  color: var(--accent-primary);
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  transition: background var(--transition-base), color var(--transition-base);
 }
 
-.home-why-works-card:hover {
-  border-color: var(--accent-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(107, 142, 99, 0.1);
+.home-why-works-step:hover .home-why-works-step-icon {
+  background: var(--accent-primary);
+  color: #ffffff;
 }
 
-.home-why-works-card-step {
+.home-why-works-step-line {
+  display: block;
+  width: 1.5px;
+  flex: 1;
+  background: var(--border-color);
+  min-height: 2rem;
+}
+
+/* Content column */
+.home-why-works-step-content {
+  padding-bottom: 2.5rem;
+}
+
+.home-why-works-step:last-child .home-why-works-step-content {
+  padding-bottom: 0;
+}
+
+.home-why-works-step-number {
   display: block;
   font-family: var(--font-headline);
-  font-size: 1.75rem;
-  font-weight: 300;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   color: var(--accent-primary);
-  margin-bottom: 0.75rem;
-  line-height: 1;
+  margin-bottom: 0.375rem;
 }
 
-.home-why-works-card-title {
+.home-why-works-step-title {
   font-family: var(--font-headline);
-  font-size: 1.0625rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.625rem;
+  line-height: var(--leading-tight);
 }
 
-.home-why-works-card-body {
+.home-why-works-step-body {
   font-size: 0.9375rem;
   line-height: 1.7;
   color: var(--text-secondary);
