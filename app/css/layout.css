@@ -508,6 +508,11 @@
   background: var(--gradient-hero);
 }
 
+/* CTA wrappers — smooth gradient transition instead of flat bg-tertiary */
+.section-wrapper:has(.cta-section) {
+  background: var(--gradient-moss-wash);
+}
+
 /* Flush variant: removes SectionWrapper padding — used for hero.
    No negative margins needed: at 1024px+ main-content padding-top is exactly
    70px (navbar height), so hero starts flush without any offset tricks. */
