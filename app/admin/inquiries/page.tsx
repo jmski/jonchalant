@@ -2,15 +2,11 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-);
+import { createClient } from '@/utils/supabase/client';
 
 export default function AdminInquiriesPage() {
   const router = useRouter();
+  const supabase = createClient();
 
   useEffect(() => {
     const checkAuth = async () => {

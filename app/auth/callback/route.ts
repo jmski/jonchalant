@@ -11,8 +11,10 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
 
     if (!error) {
-      const redirectTo = next ? `${origin}${next}` : `${origin}/portal`
-      return NextResponse.redirect(redirectTo)
+      const destination = next || '/portal'
+      // Route through MFA challenge — session starts at aal1
+      const mfaUrl = `${origin}/mfa?redirect=${encodeURIComponent(destination)}`
+      return NextResponse.redirect(mfaUrl)
     }
   }
 

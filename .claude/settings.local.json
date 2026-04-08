@@ -78,7 +78,8 @@
       "Bash(grep -E \"^\\(button|a[{,: ]|a\\\\:\\)\")",
       "Bash(cat .next/static/chunks/*.css)",
       "Bash(grep \"\\\\.btn,button{\")",
-      "Bash(node -e ':*)"
+      "Bash(node -e ':*)",
+      "Bash(echo \"EXIT: $?\")"
     ]
   }
 }
