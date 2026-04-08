@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import type { Metadata } from 'next'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
+import { Button } from '@/components/ui/Button'
 import { VideoEmbed } from '@/components/shared/VideoEmbed'
 import { InstagramEmbed } from '@/components/shared/InstagramEmbed'
 import { getDanceCategories, getInstagramReels, getDancePageContent } from '@/lib/sanity'
@@ -175,9 +175,9 @@ export default async function Dance() {
               <p className="dance-cta-body">
                 {pageContent?.ctaBody ?? 'These movement principles are the physical foundation of every coaching program. If you are ready to embody your leadership presence, explore the full curriculum.'}
               </p>
-              <Link href={pageContent?.ctaButtonHref ?? '/programs'} className="btn btn-primary">
+              <Button as="link" href={pageContent?.ctaButtonHref ?? '/programs'}>
                 {pageContent?.ctaButtonLabel ?? 'Take What You Just Learned Into a Room That Matters'}
-              </Link>
+              </Button>
             </section>
           </SectionContent>
         </SectionWrapper>

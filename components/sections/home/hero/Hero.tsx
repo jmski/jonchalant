@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { HeroCyclingText } from './HeroCyclingText';
+import { Button } from '@/components/ui/Button';
 
 interface HeroProps {
   heroHeadline?: string;
@@ -58,9 +58,9 @@ export function Hero({
               <div className="home-hero-ctas">
                 <div className="home-hero-cta-group">
                   {ctaText && (
-                    <Link href={ctaLink} className="btn btn-primary">
+                    <Button as="link" href={ctaLink}>
                       {ctaText}
-                    </Link>
+                    </Button>
                   )}
                   {auditMicrocopy && (
                     <p className="home-hero-cta-microcopy">{auditMicrocopy}</p>

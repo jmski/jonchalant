@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Button } from '@/components/ui/Button';
 
 interface CTAButton {
   label: string;
@@ -40,13 +41,14 @@ export default function PageHero({
           {ctaButtons.length > 0 && (
             <div className="page-hero-ctas">
               {ctaButtons.map((btn, idx) => (
-                <a
+                <Button
                   key={idx}
+                  as="a"
                   href={btn.href}
-                  className={btn.variant === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary'}
+                  variant={btn.variant === 'secondary' ? 'secondary' : 'primary'}
                 >
                   {btn.label}
-                </a>
+                </Button>
               ))}
             </div>
           )}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/Button';
 
 interface EmailCaptureProps {
   heading?: string;
@@ -68,13 +69,13 @@ export function EmailCapture({
                 aria-label="Email address"
                 disabled={status === 'loading'}
               />
-              <button
+              <Button
                 type="submit"
-                className="btn btn-primary email-capture-submit"
+                className="email-capture-submit"
                 disabled={status === 'loading'}
               >
                 {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
-              </button>
+              </Button>
             </div>
             {status === 'error' && (
               <p className="email-capture-error" role="alert">{errorMsg}</p>

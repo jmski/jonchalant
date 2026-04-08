@@ -108,7 +108,7 @@
   background: var(--bg-light);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--primary-text);
   cursor: pointer;
   transition:
     border-color var(--transition-fast),
@@ -546,13 +546,13 @@
   color: var(--text-secondary);
 }
 
-.blog-content a {
+.blog-content a:not([class*="btn"]) {
   color: var(--accent-primary);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.blog-content a:hover {
+.blog-content a:not([class*="btn"]):hover {
   color: var(--accent-hover);
 }
 

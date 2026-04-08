@@ -1,8 +1,8 @@
-import Link from 'next/link'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
 import { ScrollFade } from '@/components/animations'
+import { Button } from '@/components/ui/Button'
 import EnrollButton from '@/components/foundation/EnrollButton'
 import FAQ from '@/components/shared/faq/FAQ'
 import { getFoundationPageContent } from '@/lib/sanity'
@@ -148,23 +148,37 @@ export default async function FoundationPage() {
       <SectionWrapper variant="primary">
         <SectionContent>
           <section className="foundation-hero">
-            <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? 'Self-Paced Course · 8 Modules'}</p>
-            <h1 className="foundation-hero-headline">{content?.heroHeadline ?? 'The Foundation'}</h1>
-            <p className="foundation-hero-subheadline">
-              {content?.heroSubheadline ?? 'Executive presence for people who think before they speak.'}
-            </p>
-            <p className="foundation-hero-body">
-              {content?.heroBody ?? 'A decade of professional choreography taught me that presence isn\'t about being loud. It\'s about being intentional. The Foundation is where that insight becomes a skill.'}
-            </p>
-            <div className="foundation-hero-actions">
-              <Link href="#pricing" className="btn btn-primary">
-                {content?.heroPrimaryCtaLabel ?? 'Enroll — starting at $197'}
-              </Link>
-              <Link href="#inside" className="btn btn-secondary">
-                {content?.heroSecondaryCtaLabel ?? 'See what\'s inside'}
-              </Link>
+            <div className="foundation-hero-left">
+              <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? 'Self-Paced Course · 8 Modules'}</p>
+              <h1 className="foundation-hero-headline">{content?.heroHeadline ?? 'The Foundation'}</h1>
+              <p className="foundation-hero-subheadline">
+                {content?.heroSubheadline ?? 'Executive presence for people who think before they speak.'}
+              </p>
+              <p className="foundation-hero-body">
+                {content?.heroBody ?? 'A decade of professional choreography taught me that presence isn\'t about being loud. It\'s about being intentional. The Foundation is where that insight becomes a skill.'}
+              </p>
+              <div className="foundation-hero-actions">
+                <Button as="link" href="#pricing">
+                  {content?.heroPrimaryCtaLabel ?? 'Enroll — starting at $197'}
+                </Button>
+                <Button as="link" href="#inside" variant="secondary">
+                  {content?.heroSecondaryCtaLabel ?? 'See what\'s inside'}
+                </Button>
+              </div>
+              <p className="foundation-hero-note">{content?.heroNote ?? 'No pressure. No pitch. Enroll when you\'re ready.'}</p>
             </div>
-            <p className="foundation-hero-note">{content?.heroNote ?? 'No pressure. No pitch. Enroll when you\'re ready.'}</p>
+            <div className="foundation-hero-right">
+              <p className="foundation-section-eyebrow">{content?.whoEyebrow ?? 'Who this is for'}</p>
+              <h2 className="foundation-hero-who-title">{content?.whoTitle ?? 'You already have the substance. This is about the signal.'}</h2>
+              <ul className="foundation-who-list">
+                {whoItems.map((item: string, i: number) => (
+                  <li key={i} className="foundation-who-item">
+                    <span className="foundation-who-marker" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
         </SectionContent>
       </SectionWrapper>
@@ -197,28 +211,6 @@ export default async function FoundationPage() {
                 </li>
               ))}
             </ol>
-          </section>
-          </ScrollFade>
-        </SectionContent>
-      </SectionWrapper>
-
-      {/* ── Who It's For ──────────────────────────────────────────────────────── */}
-      <SectionWrapper variant="primary">
-        <SectionContent>
-          <ScrollFade>
-          <section className="foundation-who">
-            <div className="foundation-section-header">
-              <p className="foundation-section-eyebrow">{content?.whoEyebrow ?? 'Who this is for'}</p>
-              <h2 className="foundation-section-title">{content?.whoTitle ?? 'You already have the substance. This is about the signal.'}</h2>
-            </div>
-            <ul className="foundation-who-list">
-              {whoItems.map((item: string, i: number) => (
-                <li key={i} className="foundation-who-item">
-                  <span className="foundation-who-marker" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
           </section>
           </ScrollFade>
         </SectionContent>
@@ -299,9 +291,9 @@ export default async function FoundationPage() {
             <p className="foundation-cta-body">
               {content?.ctaBody ?? "Seven questions, three minutes. I'll review your answers and tell you exactly where your presence stands — and whether The Foundation is the right next step for you."}
             </p>
-            <Link href="/audit" className="btn btn-primary">
+            <Button as="link" href="/audit">
               {content?.ctaButtonLabel ?? 'Take the Presence Audit'}
-            </Link>
+            </Button>
             <p className="foundation-cta-note">{content?.ctaNote ?? 'Free. No account needed.'}</p>
           </section>
         </SectionContent>

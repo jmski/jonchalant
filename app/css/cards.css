@@ -53,13 +53,13 @@
   line-height: var(--leading-relaxed);
 }
 
-.card a {
+.card a:not([class*="btn"]) {
   color: var(--accent-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
-.card a:hover {
+.card a:not([class*="btn"]):hover {
   color: var(--accent-hover);
 }
 
