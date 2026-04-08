@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Button } from '@/components/ui/Button'
 import type { EmailOptInContent } from '@/lib/types'
 
 const STORAGE_KEY = 'jonchalant_subscribed'
@@ -202,13 +203,13 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
             <p className="blog-optin-error" role="alert">{state.error}</p>
           )}
 
-          <button
+          <Button
             type="submit"
             disabled={state.isSubmitting}
             className="form-submit blog-optin-submit"
           >
             {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
-          </button>
+          </Button>
 
           {optIn?.disclaimer && (
             <p className="blog-optin-disclaimer">{optIn.disclaimer}</p>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { Button } from '@/components/ui/Button'
 import type { ContactPageContent } from '@/lib/types'
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -124,9 +124,9 @@ export default function ContactClient({ content }: ContactClientProps) {
             <p className="contact-audit-body">
               {content?.auditPromptBody ?? "Take the Presence Audit first. Seven questions, three minutes. I'll review your answers and follow up personally with something actually useful — not a generic drip sequence."}
             </p>
-            <Link href="/audit" className="btn btn-primary contact-audit-btn">
+            <Button as="link" href="/audit" className="contact-audit-btn">
               {content?.auditPromptButtonText ?? 'Take the Presence Audit'}
-            </Link>
+            </Button>
             <p className="contact-audit-note">
               {content?.auditPromptNote ?? 'No account needed. Free.'}
             </p>
@@ -180,14 +180,14 @@ export default function ContactClient({ content }: ContactClientProps) {
               </p>
               {content?.coachingCalendlyHref ? (
                 <>
-                  <a
+                  <Button
+                    as="a"
                     href={content.coachingCalendlyHref}
-                    className="btn btn-primary"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {content.coachingCalendlyLabel ?? 'Schedule a Call'}
-                  </a>
+                  </Button>
                   <p className="contact-coaching-note">
                     Not ready to book yet? Use the form below instead.
                   </p>
@@ -237,9 +237,9 @@ export default function ContactClient({ content }: ContactClientProps) {
                 />
               </div>
               {error && <p className="contact-error">{error}</p>}
-              <button type="submit" className="btn btn-primary" disabled={submitting}>
+              <Button type="submit" disabled={submitting}>
                 {submitting ? 'Sending…' : 'Send Message'}
-              </button>
+              </Button>
             </form>
           </div>
         )}
@@ -284,9 +284,9 @@ export default function ContactClient({ content }: ContactClientProps) {
               />
             </div>
             {error && <p className="contact-error">{error}</p>}
-            <button type="submit" className="btn btn-primary" disabled={submitting}>
+            <Button type="submit" disabled={submitting}>
               {submitting ? 'Sending…' : 'Send It'}
-            </button>
+            </Button>
             <p className="contact-form-note">
               I read every message. You&apos;ll hear back within 2–3 business days.
             </p>

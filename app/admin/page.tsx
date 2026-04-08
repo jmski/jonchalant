@@ -2,12 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/utils/supabase/client';
 import { AdminNavbar } from '@/components/navigation';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface Inquiry {
   id: string;
@@ -25,6 +21,7 @@ interface Inquiry {
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const supabase = createClient();
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);

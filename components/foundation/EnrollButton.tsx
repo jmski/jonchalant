@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/Button'
 
 interface EnrollButtonProps {
   tier: 'self_paced' | 'with_checkins'
@@ -51,13 +52,13 @@ export default function EnrollButton({ tier, label, primary = false }: EnrollBut
 
   return (
     <>
-      <button
+      <Button
+        variant={primary ? 'primary' : 'secondary'}
         onClick={handleEnroll}
         disabled={loading}
-        className={primary ? 'btn btn-primary' : 'btn btn-secondary'}
       >
         {loading ? 'Redirecting…' : label}
-      </button>
+      </Button>
       {error && <p className="foundation-enroll-error">{error}</p>}
     </>
   )

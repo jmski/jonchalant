@@ -1,5 +1,6 @@
 'use client';
 import { ScrollFade } from "@/components/animations";
+import { Button } from '@/components/ui/Button';
 
 interface CTAProps {
   title: string;
@@ -19,7 +20,7 @@ export default function CTA({
       <div className="cta-section">
         <div className="cta-section-left">
           <h2 className="cta-section-title">{title}</h2>
-          <a href={buttonLink} className="btn btn-primary">{buttonText}</a>
+          <Button as="link" href={buttonLink}>{buttonText}</Button>
         </div>
         <div className="cta-section-description">
           {description}

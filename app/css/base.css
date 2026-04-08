@@ -88,14 +88,14 @@ ol {
   margin-left: 1.5rem;
 }
 
-/* Link base styles */
-a {
+/* Link base styles — scoped to exclude button-like anchors */
+a:not([class*="btn"]):not([class*="cta"]):not([class*="nav-link"]):not([role="button"]) {
   color: var(--accent-primary);
   text-decoration: none;
   transition: color var(--transition-base);
 }
 
-a:hover {
+a:not([class*="btn"]):not([class*="cta"]):not([class*="nav-link"]):not([role="button"]):hover {
   color: var(--accent-hover);
 }
 

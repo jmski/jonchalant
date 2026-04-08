@@ -18,140 +18,16 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Button Hover Effects */
-button:not(:disabled),
+/* Button Transitions */
 .btn,
 .btn-primary {
-  color: var(--btn-primary-text);   /* locked in highest-priority layer — immune to a { color } */
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
-}
-
-.btn-secondary {
-  color: var(--text-primary);       /* dark text on transparent background */
-}
-
-.btn-tertiary {
-  color: var(--accent-primary);     /* intentionally green — text-link style */
-}
-
-button:hover:not(:disabled),
-.btn:hover,
-.btn-primary:hover {
-  color: var(--btn-primary-text);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-}
-
-.btn-secondary:hover {
-  color: var(--text-primary);
-}
-
-button:active:not(:disabled),
-.btn-primary:active {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-/* Focus States (Accessibility) */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
 }
 
 .site-footer-social-link:hover,
 .site-footer-social-link[data-platform]:hover {
   color: #fff;
-}
-
-a:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
-
-/* ── Navbar login buttons ────────────────────────────────────────────────────
-   Locked in interactive layer so generic a:hover cannot override text color.
-────────────────────────────────────────────────────────────────────────────── */
-.navbar-login-btn,
-.navbar-mobile-login-btn {
-  color: white;
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.navbar-login-btn:hover,
-.navbar-mobile-login-btn:hover {
-  color: white;
-  text-decoration: none;
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
-  box-shadow: 0 4px 16px rgba(107, 142, 99, 0.25);
-}
-
-/* ── Home hero secondary button — burnt indigo fill on hover ───────────── */
-.home-hero-cta-secondary {
-  color: var(--color-burnt-indigo);
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.home-hero-cta-secondary:hover {
-  background-color: var(--color-burnt-indigo);
-  color: white;
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(74, 58, 92, 0.22);
-}
-
-/* ── Program track CTA buttons ──────────────────────────────────────────────
-   Inverted hover: light background + dark-green (muted moss) text.
-────────────────────────────────────────────────────────────────────────────── */
-.program-track-cta {
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.program-track-cta:hover {
-  background-color: var(--bg-primary);
-  border-color: var(--color-muted-moss);
-  color: var(--color-muted-moss);
-  text-decoration: none;
-}
-
-/* ── Programs supplemental CTA arrow animation ──────────────────────────────
-   The arrow span slides right on hover.
-────────────────────────────────────────────────────────────────────────────── */
-.programs-cta-button {
-  color: var(--text-tertiary);
-  text-decoration: none;
-  transition:
-    color var(--transition-fast),
-    gap var(--transition-fast);
-}
-
-.programs-cta-button:hover {
-  color: var(--accent-primary);
-  gap: 0.625rem;
-  text-decoration: none;
-}
-
-.programs-cta-button .programs-cta-arrow {
-  display: inline-block;
-  transition: transform var(--transition-fast);
-}
-
-.programs-cta-button:hover .programs-cta-arrow {
-  transform: translateX(4px);
 }
 
 /* Input Field Focus */
@@ -259,7 +135,6 @@ input[type="radio"],
 select {
   min-height: 44px;
   min-width: 44px;
-  padding: 0.5rem 1rem;
 }
 
 @media (hover: hover) {
@@ -267,12 +142,6 @@ select {
   .gallery-item:hover {
     transform: scale(1.05);
   }
-}
-
-/* Keyboard Navigation Indicator */
-:focus-visible {
-  outline-offset: 2px;
-  outline-width: 2px;
 }
 
 /* Reduced Motion Support */
@@ -297,31 +166,6 @@ select {
   }
 }
 
-/* Screen Reader Only (sr-only) - WCAG 2.1 Bypass Blocks */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-.sr-only:focus,
-.focus\:not-sr-only:focus {
-  position: static;
-  width: auto;
-  height: auto;
-  padding: inherit;
-  margin: inherit;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
-}
-
 /* Pure Light Mode - Dark mode completely removed for Zen Light aesthetic */
 /* ============================================================================
    ANIMATIONS.CSS - Keyframes and Animation Utilities
@@ -329,29 +173,6 @@ select {
    All @keyframes and animation-related utilities for page transitions,
    scroll-triggered animations, and interactive effects.
    ============================================================================ */
-
-/* ============================================================================
-   ACCESSIBILITY: Respect prefers-reduced-motion preference
-   
-   Users who prefer reduced motion (accessibility settings or OS preferences)
-   will have all animations and transitions effectively disabled.
-   
-   Test with:
-   - Chrome DevTools: Rendering → Emulate CSS media feature: prefers-reduced-motion
-   - System Settings: Windows > Ease of Access > Display > Show animations
-   ============================================================================ */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    /* Disable all animations */
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-
-    /* Disable all transitions */
-    transition-duration: 0.01ms !important;
-  }
-}
 
 /* Glitch animation removed - replaced with subtle fade-in for professional aesthetic */
 

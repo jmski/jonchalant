@@ -7,6 +7,12 @@ import Link from 'next/link'
 
 type Mode = 'signin' | 'signup' | 'forgot'
 
+/** Only allow relative paths — block protocol-relative and absolute URLs */
+function sanitizeRedirect(raw: string | null): string {
+  if (!raw || !raw.startsWith('/') || raw.startsWith('//')) return '/portal'
+  return raw
+}
+
 function getContextualCopy(redirectTo: string) {
   if (redirectTo.includes('/foundation')) {
     return {
@@ -26,7 +32,7 @@ function getContextualCopy(redirectTo: string) {
 export default function LoginClient() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get('redirect') || '/portal'
+  const redirectTo = sanitizeRedirect(searchParams.get('redirect'))
   const callbackError = searchParams.get('error')
 
   const { intent, defaultMode } = getContextualCopy(redirectTo)
@@ -45,11 +51,16 @@ export default function LoginClient() {
 
   const supabase = createClient()
 
-  // Already-logged-in guard: bounce to destination immediately
+  // Already-logged-in guard: bounce to MFA or destination
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (user) {
-        router.replace(redirectTo)
+        const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+        if (aal?.currentLevel === 'aal2') {
+          router.replace(redirectTo)
+        } else {
+          router.replace(`/mfa?redirect=${encodeURIComponent(redirectTo)}`)
+        }
       } else {
         setIsCheckingSession(false)
       }
@@ -85,10 +96,10 @@ export default function LoginClient() {
         return
       }
 
-      // Sign in
+      // Sign in — then route through MFA challenge before reaching destination
       const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
       if (signInError) { setError(signInError.message); return }
-      router.push(redirectTo)
+      router.push(`/mfa?redirect=${encodeURIComponent(redirectTo)}`)
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {

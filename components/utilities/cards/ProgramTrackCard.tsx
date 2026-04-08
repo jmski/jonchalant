@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Badge } from "@/components/utilities/badges";
+import { Button } from '@/components/ui/Button';
 
 interface ProgramTrackCardProps {
   title: string;
@@ -55,13 +55,13 @@ export function ProgramTrackCard({
 
       <div className="program-track-card-cta">
         {ctaHref.startsWith('http') ? (
-          <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+          <Button as="a" href={ctaHref} target="_blank" rel="noopener noreferrer">
             {ctaText}
-          </a>
+          </Button>
         ) : (
-          <Link href={ctaHref} className="btn btn-primary">
+          <Button as="link" href={ctaHref}>
             {ctaText}
-          </Link>
+          </Button>
         )}
       </div>
     </article>

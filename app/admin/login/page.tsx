@@ -2,15 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { createClient } from '@/utils/supabase/client';
 
 export default function AdminLogin() {
   const router = useRouter();
+  const supabase = createClient();
   const [email, setEmail] = useState('');
+
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,11 +20,14 @@ export default function AdminLogin() {
   useEffect(() => {
     // Check if user is already logged in
     const checkAuth = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (session) {
-        router.push('/admin');
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+        if (aal?.currentLevel === 'aal2') {
+          router.push('/admin');
+        } else {
+          router.push('/mfa?redirect=%2Fadmin');
+        }
       }
     };
 
@@ -67,8 +68,8 @@ export default function AdminLogin() {
       }
 
       if (data.user) {
-        // Redirect to admin dashboard
-        router.push('/admin');
+        // Route through MFA before reaching admin
+        router.push('/mfa?redirect=%2Fadmin');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

@@ -70,7 +70,16 @@
       "Bash(wc -l /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.ts /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/lib/*.tsx)",
       "Bash(grep \"section-wrapper--dark\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
       "Bash(taskkill /F /IM node.exe)",
-      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/sitemap* /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/robots*)"
+      "Bash(ls -la /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/sitemap* /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/robots*)",
+      "Bash(find \"c:\\\\Users\\\\jonch\\\\OneDrive\\\\Documents\\\\GitHub\\\\jonchalant\" -type f \\\\\\( -name \"*.tsx\" -o -name \"*.jsx\" \\\\\\) ! -path \"*/node_modules/*\" ! -path \"*/sanity/*\" -exec grep -l \"btn\\\\|Button\" {} \\\\;)",
+      "Bash(grep -rn \"className=\\\\\".*btn\\\\|className=\\\\`.*btn\" \"c:\\\\Users\\\\jonch\\\\OneDrive\\\\Documents\\\\GitHub\\\\jonchalant/app\" --include=\"*.tsx\")",
+      "Bash(grep -rn \"className=\\\\\".*btn\\\\|className=\\\\`.*btn\" \"c:\\\\Users\\\\jonch\\\\OneDrive\\\\Documents\\\\GitHub\\\\jonchalant/components\" --include=\"*.tsx\")",
+      "Bash(npx tailwindcss:*)",
+      "Bash(grep -E \"^\\(button|a[{,: ]|a\\\\:\\)\")",
+      "Bash(cat .next/static/chunks/*.css)",
+      "Bash(grep \"\\\\.btn,button{\")",
+      "Bash(node -e ':*)",
+      "Bash(echo \"EXIT: $?\")"
     ]
   }
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Button } from '@/components/ui/Button'
 import { QUESTIONS, getBand, MAX_SCORE } from '@/lib/auditData'
 import type { AuditBand } from '@/lib/auditData'
 import type { AuditPageContent, AuditResultBand } from '@/lib/types'
@@ -220,9 +221,9 @@ export default function AuditClient({ content }: AuditClientProps) {
 
           {submitError && <p className="audit-error">{submitError}</p>}
 
-          <button type="submit" className="btn btn-primary audit-submit" disabled={submitting}>
+          <Button type="submit" className="audit-submit" disabled={submitting}>
             {submitting ? 'Sending…' : 'See My Results'}
-          </button>
+          </Button>
 
           <p className="audit-capture-note">
             {content?.capturePrivacyNote ?? 'No spam. Unsubscribe anytime. I take inbox trust seriously.'}
@@ -278,9 +279,9 @@ export default function AuditClient({ content }: AuditClientProps) {
           <p className="audit-result-cta-text">
             {BAND_CTA[result.band].intro}
           </p>
-          <a href={BAND_CTA[result.band].href} className="btn btn-primary">
+          <Button as="a" href={BAND_CTA[result.band].href}>
             {BAND_CTA[result.band].label}
-          </a>
+          </Button>
         </div>
       </div>
     )

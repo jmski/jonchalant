@@ -2,14 +2,11 @@
 
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { createClient } from '@/utils/supabase/client';
 
 export default function AuthCallbackContent() {
   const router = useRouter();
+  const supabase = createClient();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -70,7 +67,7 @@ export default function AuthCallbackContent() {
           });
 
           if (data?.session) {
-            router.push('/admin');
+            router.push('/mfa?redirect=%2Fadmin');
             return;
           } else if (error) {
             router.push('/admin/login?error=invalid_email_verification');
@@ -87,7 +84,7 @@ export default function AuthCallbackContent() {
           });
 
           if (data?.session) {
-            router.push('/admin');
+            router.push('/mfa?redirect=%2Fadmin');
             return;
           }
         }
@@ -95,7 +92,7 @@ export default function AuthCallbackContent() {
         // Fallback: check if user is already logged in
         const { data: { session } } = await supabase.auth.getSession();
         if (session) {
-          router.push('/admin');
+          router.push('/mfa?redirect=%2Fadmin');
         } else {
           router.push('/admin/login');
         }

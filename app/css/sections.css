@@ -119,18 +119,18 @@
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
-  padding: 4rem 1.25rem 3rem;
+  padding: 4rem 1.25rem 0;
 }
 
 @media (min-width: 768px) {
   .home-hero-grid {
-    padding: 5rem 1.5rem 4rem;
+    padding: 5rem 1.5rem 0;
   }
 }
 
 @media (min-width: 1024px) {
   .home-hero-grid {
-    padding: 6rem 2rem 5rem;
+    padding: 6rem 2rem 0;
   }
 }
 
@@ -210,7 +210,6 @@
   font-family: var(--font-body);
   font-size: clamp(0.9rem, 1.5vw, 1rem);
   color: var(--text-tertiary);
-  max-width: 38ch;
   line-height: 1.75;
   margin: 0;
 }
@@ -1041,8 +1040,8 @@
    ────────────────────────────────────────────────────────────────────────────
 */
 .home-why-works-section {
-  padding-top: 72px;
-  padding-bottom: 72px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .home-why-works-layout {

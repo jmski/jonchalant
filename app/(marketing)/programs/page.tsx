@@ -1,6 +1,7 @@
 import { PageHero } from "@/components/sections";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { ScrollFade } from "@/components/animations";
+import { Button } from '@/components/ui/Button';
 import { ProgramTrackCard } from "@/components/utilities/cards";
 import { getProgramsPageContent, getCaseStudies } from "@/lib/sanity";
 import type { ProgramsPageContent } from "@/lib/types";
@@ -192,9 +193,9 @@ export default async function Programs() {
                     <h2 className="cta-section-title">{page.ctaHeading}</h2>
                   )}
                   {page.ctaButtonText && page.ctaButtonHref && (
-                    <a href={page.ctaButtonHref} className="btn btn-primary">
+                    <Button as="a" href={page.ctaButtonHref}>
                       {page.ctaButtonText}
-                    </a>
+                    </Button>
                   )}
                   {page.ctaMicrocopy && (
                     <p className="programs-cta-microcopy">{page.ctaMicrocopy}</p>

@@ -299,6 +299,7 @@
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   background: var(--bg-secondary);
+  color: var(--text-primary);
   cursor: pointer;
   transition:
     border-color var(--transition-subtle),
