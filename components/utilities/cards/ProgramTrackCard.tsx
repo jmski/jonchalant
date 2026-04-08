@@ -1,5 +1,6 @@
 import { Badge } from "@/components/utilities/badges";
 import { Button } from '@/components/ui/Button';
+import { FeatureList } from '@/components/ui/FeatureList';
 
 interface ProgramTrackCardProps {
   title: string;
@@ -43,14 +44,7 @@ export function ProgramTrackCard({
 
         <p className="program-track-card-description">{description}</p>
 
-        <ul className="program-track-card-includes" aria-label="What's included">
-          {includes.map((item, i) => (
-            <li key={i} className="program-track-card-includes-item">
-              <span className="program-track-card-includes-check" aria-hidden="true">✓</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <FeatureList items={includes} icon="check" className="program-track-card-includes" />
       </div>
 
       <div className="program-track-card-cta">

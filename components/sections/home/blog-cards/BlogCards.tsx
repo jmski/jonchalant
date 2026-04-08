@@ -1,5 +1,6 @@
 import { BlogCard } from '@/components/utilities/cards';
 import { CardGrid } from '@/components/utilities/grids';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface BlogPost {
   _id: string;
@@ -20,11 +21,8 @@ interface BlogCardsProps {
 export function BlogCards({ posts, heading, description, showFeatured }: BlogCardsProps) {
   return (
     <section className="blog-cards-section">
-      {(heading || description) && (
-        <div className="blog-cards-header">
-          {heading && <h2 className="blog-cards-heading">{heading}</h2>}
-          {description && <p className="blog-cards-description">{description}</p>}
-        </div>
+      {heading && (
+        <SectionHeader title={heading} description={description} />
       )}
       <CardGrid columns={3}>
         {posts.map((post) => (

@@ -1,3 +1,5 @@
+import { SectionHeader } from '@/components/ui/SectionHeader';
+
 interface Philosophy {
   title: string;
   description: string;
@@ -12,15 +14,11 @@ const emojis = ['🧠', '💫', '🎯'];
 export function Philosophy({ philosophies = [] }: PhilosophyProps) {
   return (
     <section className="about-philosophy-section">
-      <div className="about-philosophy-header">
-        <p className="about-philosophy-eyebrow">My Methodology</p>
-        <h2 className="about-philosophy-title">
-          This Is How I Actually Work
-        </h2>
-        <p className="about-philosophy-subtitle">
-          No scripts. No performance tricks. Just three principles I come back to in every session — because they're the ones that stick.
-        </p>
-      </div>
+      <SectionHeader
+        eyebrow="My Methodology"
+        title="This Is How I Actually Work"
+        description="No scripts. No performance tricks. Just three principles I come back to in every session — because they're the ones that stick."
+      />
 
       <div className="about-philosophy-grid">
         {philosophies.length > 0 ? (

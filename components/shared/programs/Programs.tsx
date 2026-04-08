@@ -1,7 +1,8 @@
 'use client';
 
 import { ScrollFade, ScrollStagger } from "@/components/animations";
-import { Heading } from "@/components/typography";
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { FeatureList } from '@/components/ui/FeatureList';
 
 interface Program {
   _id: string;
@@ -20,12 +21,11 @@ export default function Programs({ programs }: ProgramsProps) {
   return (
     <section className="program-cards-section">
       <ScrollFade>
-        <div className="program-cards-header">
-          <Heading level={2} className="program-cards-title">All Programs</Heading>
-          <p className="program-cards-subtitle">
-            A program for every stage of your journey. From free assessment to intensive 1-on-1 coaching.
-          </p>
-        </div>
+        <SectionHeader
+          title="All Programs"
+          description="A program for every stage of your journey. From free assessment to intensive 1-on-1 coaching."
+          className="program-cards-header"
+        />
       </ScrollFade>
 
       <ScrollStagger variant="slideInUp" staggerDelay={100}>
@@ -37,7 +37,7 @@ export default function Programs({ programs }: ProgramsProps) {
                 <p className="program-card-category text-badge">
                   {program.category}
                 </p>
-                
+
                 {/* Title */}
                 <h3 className="program-card-title">
                   {program.title}
@@ -49,19 +49,7 @@ export default function Programs({ programs }: ProgramsProps) {
                 </p>
 
                 {/* Features */}
-                <div className="program-card-features">
-                  {program.features.slice(0, 3).map((feature, i) => (
-                    <div key={i} className="program-card-feature">
-                      <span className="program-card-feature-check">✓</span>
-                      <span className="program-card-feature-text">{feature}</span>
-                    </div>
-                  ))}
-                  {program.features.length > 3 && (
-                    <p className="program-card-more-features">
-                      + {program.features.length - 3} more
-                    </p>
-                  )}
-                </div>
+                <FeatureList items={program.features} icon="check" limit={3} className="program-card-features" />
 
                 {/* Investment */}
                 <div className="program-card-investment">

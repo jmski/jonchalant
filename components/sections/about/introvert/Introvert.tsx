@@ -1,4 +1,5 @@
 import { TextLink } from "@/components/typography";
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface IntrovertProps {
   traits?: string[];
@@ -8,10 +9,10 @@ export function Introvert({ traits = [] }: IntrovertProps) {
   return (
     <section className="about-introvert-section">
       <div className="about-introvert-content">
-        <p className="about-introvert-eyebrow">What I Believe</p>
-        <h2 className="about-introvert-title">
-          Introversion Isn't a Problem to Solve
-        </h2>
+        <SectionHeader
+          eyebrow="What I Believe"
+          title="Introversion Isn't a Problem to Solve"
+        />
 
         <p className="about-introvert-paragraph">
           You listen more than you speak. You think before you act. You draw energy from depth, not breadth. The world keeps telling you to fix that. I disagree.

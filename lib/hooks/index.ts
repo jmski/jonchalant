@@ -13,3 +13,7 @@ export type { AnimationVariant } from './useScrollAnimation';
 
 export { useFocusTrap } from './useFocusTrap';
 export { useSwipeGesture } from './useSwipeGesture';
+
+export { useFormSubmission } from './useFormSubmission';
+export { useMultiStep } from './useMultiStep';
+export { useKeyboardNavigation } from './useKeyboardNavigation';

@@ -2,15 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/Button'
+import { FormField } from '@/components/ui/FormField'
+import { FormMessage } from '@/components/ui/FormMessage'
+import { useFormSubmission } from '@/lib/hooks'
 import type { EmailOptInContent } from '@/lib/types'
 
 const STORAGE_KEY = 'jonchalant_subscribed'
-
-interface OptInState {
-  isSubmitting: boolean
-  submitted: boolean
-  error: string | null
-}
 
 interface BlogOptInProps {
   optIn?: EmailOptInContent | null
@@ -21,10 +18,12 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [alreadySubscribed, setAlreadySubscribed] = useState(false)
-  const [state, setState] = useState<OptInState>({
-    isSubmitting: false,
-    submitted: false,
-    error: null,
+
+  const { state, submit } = useFormSubmission({
+    endpoint: '/api/subscribe',
+    onSuccess: () => {
+      localStorage.setItem(STORAGE_KEY, 'true')
+    },
   })
 
   useEffect(() => {
@@ -33,32 +32,9 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
     }
   }, [])
 
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setState({ isSubmitting: true, submitted: false, error: null })
-
-    try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, email }),
-      })
-
-      const result = await response.json()
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to subscribe')
-      }
-
-      localStorage.setItem(STORAGE_KEY, 'true')
-      setState({ isSubmitting: false, submitted: true, error: null })
-    } catch (err) {
-      setState({
-        isSubmitting: false,
-        submitted: false,
-        error: err instanceof Error ? err.message : 'Something went wrong. Please try again.',
-      })
-    }
+    submit({ firstName, email })
   }
 
   if (alreadySubscribed) return null
@@ -165,10 +141,7 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
 
         <form onSubmit={handleSubmit} className="blog-optin-form">
           <div className="blog-optin-fields">
-            <div className="blog-optin-field">
-              <label htmlFor="optin-firstname" className="blog-optin-label">
-                First name
-              </label>
+            <FormField label="First name" id="optin-firstname">
               <input
                 id="optin-firstname"
                 type="text"
@@ -180,11 +153,8 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
                 autoComplete="given-name"
                 className="form-input"
               />
-            </div>
-            <div className="blog-optin-field">
-              <label htmlFor="optin-email" className="blog-optin-label">
-                Email
-              </label>
+            </FormField>
+            <FormField label="Email" id="optin-email">
               <input
                 id="optin-email"
                 type="email"
@@ -196,11 +166,11 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
                 autoComplete="email"
                 className="form-input"
               />
-            </div>
+            </FormField>
           </div>
 
           {state.error && (
-            <p className="blog-optin-error" role="alert">{state.error}</p>
+            <FormMessage variant="error">{state.error}</FormMessage>
           )}
 
           <Button

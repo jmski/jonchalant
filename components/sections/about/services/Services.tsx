@@ -1,3 +1,5 @@
+import { SectionHeader } from '@/components/ui/SectionHeader';
+
 interface Service {
   _id: string;
   title: string;
@@ -11,15 +13,11 @@ interface ServicesProps {
 export function Services({ services = [] }: ServicesProps) {
   return (
     <section className="about-services-section">
-      <div className="about-services-header">
-        <p className="about-services-eyebrow">The Work</p>
-        <h2 className="about-services-title">
-          What We Work On Together
-        </h2>
-        <p className="about-services-subtitle">
-          Not theory, not templates. Real, focused work in the areas that move the needle fastest for quiet leaders.
-        </p>
-      </div>
+      <SectionHeader
+        eyebrow="The Work"
+        title="What We Work On Together"
+        description="Not theory, not templates. Real, focused work in the areas that move the needle fastest for quiet leaders."
+      />
 
       <div className="about-services-grid">
         {services && services.length > 0 ? (

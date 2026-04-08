@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface MeetJonProps {
   heading?: string;
@@ -31,8 +32,7 @@ export function MeetJon({
           )}
         </div>
         <div className="meet-jon-copy-col">
-          <span className="section-eyebrow">About Jon</span>
-          <h2 className="meet-jon-heading">{heading}</h2>
+          <SectionHeader eyebrow="About Jon" title={heading} />
           <p className="meet-jon-body">{body}</p>
           <Link href="/about" className="meet-jon-link">
             {linkText} →

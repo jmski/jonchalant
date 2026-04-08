@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { useFormSubmission } from '@/lib/hooks';
 
 interface EmailCaptureProps {
   heading?: string;
@@ -13,33 +14,15 @@ export function EmailCapture({
   subheading = 'Practical tools for introverts who lead — delivered to your inbox every week.',
 }: EmailCaptureProps) {
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMsg, setErrorMsg] = useState('');
 
-  async function handleSubmit(e: React.FormEvent) {
+  const { state, submit } = useFormSubmission({
+    endpoint: '/api/subscribe',
+    onSuccess: () => setEmail(''),
+  });
+
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus('loading');
-    setErrorMsg('');
-
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
-        setStatus('error');
-      } else {
-        setStatus('success');
-        setEmail('');
-      }
-    } catch {
-      setErrorMsg('Something went wrong. Please try again.');
-      setStatus('error');
-    }
+    submit({ email });
   }
 
   return (
@@ -50,7 +33,7 @@ export function EmailCapture({
           <p className="email-capture-subheading">{subheading}</p>
         </div>
 
-        {status === 'success' ? (
+        {state.submitted ? (
           <div className="email-capture-success">
             <p className="email-capture-success-message">
               You&rsquo;re in. First issue arrives soon.
@@ -67,18 +50,18 @@ export function EmailCapture({
                 onChange={e => setEmail(e.target.value)}
                 required
                 aria-label="Email address"
-                disabled={status === 'loading'}
+                disabled={state.isSubmitting}
               />
               <Button
                 type="submit"
                 className="email-capture-submit"
-                disabled={status === 'loading'}
+                disabled={state.isSubmitting}
               >
-                {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
+                {state.isSubmitting ? 'Subscribing…' : 'Subscribe'}
               </Button>
             </div>
-            {status === 'error' && (
-              <p className="email-capture-error" role="alert">{errorMsg}</p>
+            {state.error && (
+              <p className="email-capture-error" role="alert">{state.error}</p>
             )}
             <p className="email-capture-disclaimer">No spam. Unsubscribe anytime.</p>
           </form>
