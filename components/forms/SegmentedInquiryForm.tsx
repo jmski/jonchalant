@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent } from "react";
+import { useFormSubmission } from "@/lib/hooks";
+import { FormField } from "@/components/ui/FormField";
+import { FormMessage } from "@/components/ui/FormMessage";
 
 type InquiryType = "coaching" | "collaboration" | "media" | "other";
 
@@ -13,12 +16,6 @@ interface FormData {
   company?: string;
   budget?: string;
   timeline?: string;
-}
-
-interface FormState {
-  isSubmitting: boolean;
-  submitted: boolean;
-  error: string | null;
 }
 
 interface InquiryOption {
@@ -50,39 +47,24 @@ const INQUIRY_OPTIONS: InquiryOption[] = [
   },
 ];
 
-/**
- * SegmentedInquiryForm Component
- * ─────────────────────────────────────────────
- * Multi-step inquiry form with conditional fields and status messages.
- * All styling handled through CSS classes in form-inquiry.css
- * 
- * CSS Classes Used:
- * - .inquiry-form: Main form wrapper with flex layout
- * - .form-section: Individual form section
- * - .form-label: Label styling
- * - .form-input, .form-select, .form-textarea: Input field styling
- * - .radio-group, .radio-option: Radio button group styling
- * - .form-submit: Submit button styling
- * - .form-message: Status message container
- * - .form-message-success, .form-message-error: Message variants
- * - .form-helper-text: Helper text styling
- */
-export default function SegmentedInquiryForm() {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    inquiry_type: "coaching",
-    message: "",
-    phone: "",
-    company: "",
-    budget: "",
-    timeline: "",
-  });
+const INITIAL_FORM: FormData = {
+  name: "",
+  email: "",
+  inquiry_type: "coaching",
+  message: "",
+  phone: "",
+  company: "",
+  budget: "",
+  timeline: "",
+};
 
-  const [state, setState] = useState<FormState>({
-    isSubmitting: false,
-    submitted: false,
-    error: null,
+export default function SegmentedInquiryForm() {
+  const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
+
+  const { state, submit } = useFormSubmission<FormData>({
+    endpoint: "/api/inquiries",
+    resetDelay: 5000,
+    onSuccess: () => setFormData(INITIAL_FORM),
   });
 
   const handleChange = (
@@ -92,52 +74,9 @@ export default function SegmentedInquiryForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setState({ isSubmitting: true, submitted: false, error: null });
-
-    try {
-      const response = await fetch("/api/inquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to submit form");
-      }
-
-      setState({
-        isSubmitting: false,
-        submitted: true,
-        error: null,
-      });
-
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        inquiry_type: "coaching",
-        message: "",
-        phone: "",
-        company: "",
-        budget: "",
-        timeline: "",
-      });
-
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        setState((prev) => ({ ...prev, submitted: false }));
-      }, 5000);
-    } catch (err) {
-      setState({
-        isSubmitting: false,
-        submitted: false,
-        error: err instanceof Error ? err.message : "An error occurred",
-      });
-    }
+    submit(formData);
   };
 
   return (
@@ -168,10 +107,7 @@ export default function SegmentedInquiryForm() {
       </div>
 
       {/* Name */}
-      <div className="form-section">
-        <label htmlFor="name" className="form-label">
-          Full Name *
-        </label>
+      <FormField label="Full Name" id="name" required>
         <input
           type="text"
           id="name"
@@ -182,13 +118,10 @@ export default function SegmentedInquiryForm() {
           className="form-input"
           placeholder="Your name"
         />
-      </div>
+      </FormField>
 
       {/* Email */}
-      <div className="form-section">
-        <label htmlFor="email" className="form-label">
-          Email Address *
-        </label>
+      <FormField label="Email Address" id="email" required>
         <input
           type="email"
           id="email"
@@ -199,13 +132,10 @@ export default function SegmentedInquiryForm() {
           className="form-input"
           placeholder="your.email@example.com"
         />
-      </div>
+      </FormField>
 
       {/* Phone */}
-      <div className="form-section">
-        <label htmlFor="phone" className="form-label">
-          Phone Number (Optional)
-        </label>
+      <FormField label="Phone Number (Optional)" id="phone">
         <input
           type="tel"
           id="phone"
@@ -215,16 +145,13 @@ export default function SegmentedInquiryForm() {
           className="form-input"
           placeholder="+1 (555) 000-0000"
         />
-      </div>
+      </FormField>
 
       {/* Conditional Fields */}
       {(formData.inquiry_type === "collaboration" ||
         formData.inquiry_type === "media") && (
         <div className="form-conditional">
-          <div className="form-section">
-            <label htmlFor="company" className="form-label">
-              Company/Organization
-            </label>
+          <FormField label="Company/Organization" id="company">
             <input
               type="text"
               id="company"
@@ -234,14 +161,11 @@ export default function SegmentedInquiryForm() {
               className="form-input"
               placeholder="Your company name"
             />
-          </div>
+          </FormField>
 
           {formData.inquiry_type === "collaboration" && (
             <>
-              <div className="form-section">
-                <label htmlFor="budget" className="form-label">
-                  Budget Range (Approximate)
-                </label>
+              <FormField label="Budget Range (Approximate)" id="budget">
                 <select
                   id="budget"
                   name="budget"
@@ -256,12 +180,9 @@ export default function SegmentedInquiryForm() {
                   <option value="25k-50k">$25k - $50k</option>
                   <option value="50k-plus">$50k+</option>
                 </select>
-              </div>
+              </FormField>
 
-              <div className="form-section">
-                <label htmlFor="timeline" className="form-label">
-                  Desired Timeline
-                </label>
+              <FormField label="Desired Timeline" id="timeline">
                 <select
                   id="timeline"
                   name="timeline"
@@ -274,17 +195,14 @@ export default function SegmentedInquiryForm() {
                   <option value="1-month">Within 1 month</option>
                   <option value="flexible">Flexible</option>
                 </select>
-              </div>
+              </FormField>
             </>
           )}
         </div>
       )}
 
       {/* Message */}
-      <div className="form-section">
-        <label htmlFor="message" className="form-label">
-          Message *
-        </label>
+      <FormField label="Message" id="message" required>
         <textarea
           id="message"
           name="message"
@@ -294,7 +212,7 @@ export default function SegmentedInquiryForm() {
           className="form-textarea"
           placeholder="Tell me more about your inquiry, what you're looking for, and why you think we'd be a great fit..."
         />
-      </div>
+      </FormField>
 
       {/* Submit Button */}
       <div className="form-button-group">
@@ -307,22 +225,17 @@ export default function SegmentedInquiryForm() {
         </button>
       </div>
 
-      {/* Success Message */}
+      {/* Status Messages */}
       {state.submitted && (
-        <div className="form-message form-message-success">
-          <p className="form-message-title">✓ Inquiry submitted successfully!</p>
-          <p className="form-message-text">
-            You'll receive a confirmation email shortly. I'll get back to you within 24 hours.
-          </p>
-        </div>
+        <FormMessage variant="success" title="✓ Inquiry submitted successfully!">
+          You'll receive a confirmation email shortly. I'll get back to you within 24 hours.
+        </FormMessage>
       )}
 
-      {/* Error Message */}
       {state.error && (
-        <div className="form-message form-message-error">
-          <p className="form-message-title">✕ Oops, something went wrong</p>
-          <p className="form-message-text">{state.error}</p>
-        </div>
+        <FormMessage variant="error" title="✕ Oops, something went wrong">
+          {state.error}
+        </FormMessage>
       )}
 
       {/* Helper text */}

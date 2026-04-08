@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
+import { FormField } from '@/components/ui/FormField'
+import { FormMessage } from '@/components/ui/FormMessage'
+import { useFormSubmission } from '@/lib/hooks'
 import type { ContactPageContent } from '@/lib/types'
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -46,15 +49,93 @@ const DEFAULT_SIDEBAR_ITEMS = [
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Component
+// Contact Form (shared between coaching + question paths)
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface ContactFormProps {
+  idPrefix: string
+  form: FormState
+  onField: (field: keyof FormState, value: string) => void
+  onSubmit: (e: React.SyntheticEvent<HTMLFormElement>) => void
+  isSubmitting: boolean
+  error: string | null
+  messagePlaceholder: string
+  submitLabel: string
+  children?: React.ReactNode
+}
+
+function ContactForm({
+  idPrefix,
+  form,
+  onField,
+  onSubmit,
+  isSubmitting,
+  error,
+  messagePlaceholder,
+  submitLabel,
+  children,
+}: ContactFormProps) {
+  return (
+    <form className="contact-form" onSubmit={onSubmit}>
+      <FormField label="Your name" id={`contact-name-${idPrefix}`} required>
+        <input
+          id={`contact-name-${idPrefix}`}
+          type="text"
+          className="contact-input"
+          value={form.name}
+          onChange={(e) => onField('name', e.target.value)}
+          placeholder="First name is fine"
+          required
+        />
+      </FormField>
+      <FormField label="Email address" id={`contact-email-${idPrefix}`} required>
+        <input
+          id={`contact-email-${idPrefix}`}
+          type="email"
+          className="contact-input"
+          value={form.email}
+          onChange={(e) => onField('email', e.target.value)}
+          placeholder="you@example.com"
+          required
+        />
+      </FormField>
+      <FormField label={idPrefix === 'c' ? "What's going on?" : "What's on your mind?"} id={`contact-message-${idPrefix}`} required>
+        <textarea
+          id={`contact-message-${idPrefix}`}
+          className="contact-textarea"
+          rows={5}
+          value={form.message}
+          onChange={(e) => onField('message', e.target.value)}
+          placeholder={messagePlaceholder}
+          required
+        />
+      </FormField>
+      {error && (
+        <FormMessage variant="error">{error}</FormMessage>
+      )}
+      <Button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Sending…' : submitLabel}
+      </Button>
+      {children}
+    </form>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Main Component
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function ContactClient({ content }: ContactClientProps) {
   const [inquiryType, setInquiryType] = useState<InquiryType>(null)
   const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' })
-  const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-  const [error, setError] = useState('')
+
+  const { state, submit } = useFormSubmission({
+    endpoint: '/api/inquiries',
+    transform: (data: FormState) => ({
+      ...data,
+      type: inquiryType === 'coaching' ? '1-on-1-coaching' : 'general',
+    }),
+  })
 
   const auditStats = content?.auditStats?.length ? content.auditStats : DEFAULT_AUDIT_STATS
   const sidebarItems = content?.sidebarItems?.length ? content.sidebarItems : DEFAULT_SIDEBAR_ITEMS
@@ -63,36 +144,14 @@ export default function ContactClient({ content }: ContactClientProps) {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
-  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return
-
-    setSubmitting(true)
-    setError('')
-
-    try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
-          type: inquiryType === 'coaching' ? '1-on-1-coaching' : 'general',
-        }),
-      })
-
-      if (!res.ok) throw new Error('Submit failed')
-      setSubmitted(true)
-    } catch {
-      setError('Something went wrong. Try again or email hello@jonchalant.com directly.')
-    } finally {
-      setSubmitting(false)
-    }
+    submit(form)
   }
 
   // ── Success state ───────────────────────────────────────────────────────────
-  if (submitted) {
+  if (state.submitted) {
     return (
       <div className="contact-success">
         <div className="contact-success-icon">✓</div>
@@ -199,98 +258,35 @@ export default function ContactClient({ content }: ContactClientProps) {
               )}
             </div>
 
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="contact-field">
-                <label htmlFor="contact-name" className="contact-label">Your name</label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  className="contact-input"
-                  value={form.name}
-                  onChange={(e) => handleField('name', e.target.value)}
-                  placeholder="First name is fine"
-                  required
-                />
-              </div>
-              <div className="contact-field">
-                <label htmlFor="contact-email" className="contact-label">Email address</label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  className="contact-input"
-                  value={form.email}
-                  onChange={(e) => handleField('email', e.target.value)}
-                  placeholder="you@example.com"
-                  required
-                />
-              </div>
-              <div className="contact-field">
-                <label htmlFor="contact-message" className="contact-label">What&apos;s going on?</label>
-                <textarea
-                  id="contact-message"
-                  className="contact-textarea"
-                  rows={5}
-                  value={form.message}
-                  onChange={(e) => handleField('message', e.target.value)}
-                  placeholder="What's the situation? Where are you stuck? What made you reach out today?"
-                  required
-                />
-              </div>
-              {error && <p className="contact-error">{error}</p>}
-              <Button type="submit" disabled={submitting}>
-                {submitting ? 'Sending…' : 'Send Message'}
-              </Button>
-            </form>
+            <ContactForm
+              idPrefix="c"
+              form={form}
+              onField={handleField}
+              onSubmit={handleSubmit}
+              isSubmitting={state.isSubmitting}
+              error={state.error}
+              messagePlaceholder="What's the situation? Where are you stuck? What made you reach out today?"
+              submitLabel="Send Message"
+            />
           </div>
         )}
 
         {/* ── General question path ──────────────────────────────────────────── */}
         {inquiryType === 'question' && (
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="contact-field">
-              <label htmlFor="contact-name-q" className="contact-label">Your name</label>
-              <input
-                id="contact-name-q"
-                type="text"
-                className="contact-input"
-                value={form.name}
-                onChange={(e) => handleField('name', e.target.value)}
-                placeholder="First name is fine"
-                required
-              />
-            </div>
-            <div className="contact-field">
-              <label htmlFor="contact-email-q" className="contact-label">Email address</label>
-              <input
-                id="contact-email-q"
-                type="email"
-                className="contact-input"
-                value={form.email}
-                onChange={(e) => handleField('email', e.target.value)}
-                placeholder="you@example.com"
-                required
-              />
-            </div>
-            <div className="contact-field">
-              <label htmlFor="contact-message-q" className="contact-label">What&apos;s on your mind?</label>
-              <textarea
-                id="contact-message-q"
-                className="contact-textarea"
-                rows={5}
-                value={form.message}
-                onChange={(e) => handleField('message', e.target.value)}
-                placeholder="Ask away."
-                required
-              />
-            </div>
-            {error && <p className="contact-error">{error}</p>}
-            <Button type="submit" disabled={submitting}>
-              {submitting ? 'Sending…' : 'Send It'}
-            </Button>
+          <ContactForm
+            idPrefix="q"
+            form={form}
+            onField={handleField}
+            onSubmit={handleSubmit}
+            isSubmitting={state.isSubmitting}
+            error={state.error}
+            messagePlaceholder="Ask away."
+            submitLabel="Send It"
+          >
             <p className="contact-form-note">
               I read every message. You&apos;ll hear back within 2–3 business days.
             </p>
-          </form>
+          </ContactForm>
         )}
       </div>
 

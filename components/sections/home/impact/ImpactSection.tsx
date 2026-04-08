@@ -1,3 +1,5 @@
+import { SectionHeader } from '@/components/ui/SectionHeader';
+
 interface ImpactSectionProps {
   headline?: string;
   featuredMainTitle?: string;
@@ -17,9 +19,7 @@ export function ImpactSection({
   return (
     <section className="impact-section">
       {headline && (
-        <div className="impact-header">
-          <h2 className="impact-heading">{headline}</h2>
-        </div>
+        <SectionHeader title={headline} />
       )}
 
       <div className="impact-grid">

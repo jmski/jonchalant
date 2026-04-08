@@ -1,3 +1,5 @@
+import { SectionHeader } from '@/components/ui/SectionHeader';
+
 interface PortfolioItem {
   title: string;
   description: string;
@@ -46,10 +48,7 @@ export function PortfolioPreview({
 }: PortfolioPreviewProps) {
   return (
     <section className="portfolio-preview-section">
-      <div className="portfolio-preview-header">
-        <h2 className="portfolio-preview-heading">{heading}</h2>
-        <p className="portfolio-preview-description">{description}</p>
-      </div>
+      <SectionHeader title={heading} description={description} />
 
       <div className="portfolio-preview-grid">
         {items.map((item, idx) => (

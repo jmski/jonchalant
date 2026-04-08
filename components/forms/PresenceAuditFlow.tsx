@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { FormField } from '@/components/ui/FormField';
+import { FormMessage } from '@/components/ui/FormMessage';
+import { useMultiStep, useFormSubmission } from '@/lib/hooks';
 
 type ChallengeId =
   | 'freeze'
@@ -30,59 +33,47 @@ interface Fields {
   linkedin: string;
 }
 
-type Step = 1 | 2 | 3;
-
 export function PresenceAuditFlow() {
-  const [step, setStep] = useState<Step>(1);
+  const { currentStep, goTo } = useMultiStep({
+    steps: ['challenge', 'details', 'confirmation'],
+  });
   const [selectedChallenge, setSelectedChallenge] = useState<ChallengeId | null>(null);
   const [fields, setFields] = useState<Fields>({ name: '', email: '', linkedin: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+
+  const { state, submit } = useFormSubmission<Fields>({
+    endpoint: '/api/inquiries',
+    onSuccess: () => goTo('confirmation'),
+    transform: () => {
+      const challenge = CHALLENGES.find(c => c.id === selectedChallenge);
+      const messageParts = [
+        'Presence Audit Request',
+        '',
+        `Biggest challenge: ${challenge?.text ?? selectedChallenge}`,
+      ];
+      if (fields.linkedin.trim()) {
+        messageParts.push(`LinkedIn: ${fields.linkedin.trim()}`);
+      }
+      return {
+        name: fields.name.trim(),
+        email: fields.email.trim(),
+        inquiry_type: 'coaching',
+        message: messageParts.join('\n'),
+        company: fields.linkedin.trim() || undefined,
+      };
+    },
+  });
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fields.name.trim() || !fields.email.trim() || !selectedChallenge) return;
-
-    setIsSubmitting(true);
-    setError(null);
-
-    const challenge = CHALLENGES.find(c => c.id === selectedChallenge);
-    const messageParts = [
-      'Presence Audit Request',
-      '',
-      `Biggest challenge: ${challenge?.text ?? selectedChallenge}`,
-    ];
-    if (fields.linkedin.trim()) {
-      messageParts.push(`LinkedIn: ${fields.linkedin.trim()}`);
-    }
-
-    try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: fields.name.trim(),
-          email: fields.email.trim(),
-          inquiry_type: 'coaching',
-          message: messageParts.join('\n'),
-          company: fields.linkedin.trim() || undefined,
-        }),
-      });
-
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.error || 'Submission failed');
-
-      setStep(3);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    submit(fields);
   };
+
+  const step = currentStep === 'challenge' ? 1 : currentStep === 'details' ? 2 : 3;
 
   return (
     <div className="presence-audit-flow">
@@ -113,7 +104,7 @@ export function PresenceAuditFlow() {
       )}
 
       {/* ── Step 1: Challenge selection ── */}
-      {step === 1 && (
+      {currentStep === 'challenge' && (
         <div className="presence-audit-panel">
           <span className="presence-audit-panel-context">Step 1 of 2 — Honest recognition</span>
           <h2 className="presence-audit-panel-title">
@@ -139,7 +130,7 @@ export function PresenceAuditFlow() {
 
           <button
             type="button"
-            onClick={() => setStep(2)}
+            onClick={() => goTo('details')}
             disabled={!selectedChallenge}
             className="presence-audit-cta"
           >
@@ -149,11 +140,11 @@ export function PresenceAuditFlow() {
       )}
 
       {/* ── Step 2: Contact details ── */}
-      {step === 2 && (
+      {currentStep === 'details' && (
         <div className="presence-audit-panel">
           <button
             type="button"
-            onClick={() => setStep(1)}
+            onClick={() => goTo('challenge')}
             className="presence-audit-back"
           >
             ← Back
@@ -168,10 +159,7 @@ export function PresenceAuditFlow() {
           </p>
 
           <form onSubmit={handleSubmit} className="presence-audit-form" noValidate>
-            <div className="presence-audit-field">
-              <label htmlFor="audit-name" className="form-label">
-                Your name <span className="presence-audit-required">*</span>
-              </label>
+            <FormField label="Your name" id="audit-name" required>
               <input
                 id="audit-name"
                 name="name"
@@ -183,12 +171,9 @@ export function PresenceAuditFlow() {
                 className="form-input"
                 placeholder="First and last name"
               />
-            </div>
+            </FormField>
 
-            <div className="presence-audit-field">
-              <label htmlFor="audit-email" className="form-label">
-                Email address <span className="presence-audit-required">*</span>
-              </label>
+            <FormField label="Email address" id="audit-email" required>
               <input
                 id="audit-email"
                 name="email"
@@ -200,13 +185,13 @@ export function PresenceAuditFlow() {
                 className="form-input"
                 placeholder="you@example.com"
               />
-            </div>
+            </FormField>
 
-            <div className="presence-audit-field">
-              <label htmlFor="audit-linkedin" className="form-label">
-                LinkedIn profile{' '}
-                <span className="presence-audit-optional">(optional)</span>
-              </label>
+            <FormField
+              label="LinkedIn profile"
+              id="audit-linkedin"
+              hint="Helps Jon personalize your audit to your actual context."
+            >
               <input
                 id="audit-linkedin"
                 name="linkedin"
@@ -217,28 +202,25 @@ export function PresenceAuditFlow() {
                 className="form-input"
                 placeholder="https://linkedin.com/in/yourname"
               />
-              <p className="presence-audit-hint">
-                Helps Jon personalize your audit to your actual context.
-              </p>
-            </div>
+            </FormField>
 
-            {error && (
-              <p className="presence-audit-error" role="alert">{error}</p>
+            {state.error && (
+              <FormMessage variant="error">{state.error}</FormMessage>
             )}
 
             <button
               type="submit"
-              disabled={isSubmitting || !fields.name.trim() || !fields.email.trim()}
+              disabled={state.isSubmitting || !fields.name.trim() || !fields.email.trim()}
               className="presence-audit-cta"
             >
-              {isSubmitting ? 'Sending…' : 'Send My Audit Request'}
+              {state.isSubmitting ? 'Sending…' : 'Send My Audit Request'}
             </button>
           </form>
         </div>
       )}
 
       {/* ── Step 3: Confirmation ── */}
-      {step === 3 && (
+      {currentStep === 'confirmation' && (
         <div className="presence-audit-confirmation">
           <div className="presence-audit-confirm-icon" aria-hidden="true">✓</div>
           <h2 className="presence-audit-confirm-title">You're in. Audit incoming.</h2>

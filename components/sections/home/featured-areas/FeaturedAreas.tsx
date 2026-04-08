@@ -1,3 +1,5 @@
+import { SectionHeader } from '@/components/ui/SectionHeader';
+
 interface FeaturedArea {
   title: string;
   description: string;
@@ -17,11 +19,8 @@ interface FeaturedAreaProps {
 export function FeaturedAreas({ heading, description, areas }: FeaturedAreaProps) {
   return (
     <section className="featured-areas-section">
-      {(heading || description) && (
-        <div className="featured-areas-header">
-          {heading && <h2 className="featured-areas-heading">{heading}</h2>}
-          {description && <p className="featured-areas-description">{description}</p>}
-        </div>
+      {heading && (
+        <SectionHeader title={heading} description={description} />
       )}
 
       <div className="featured-areas-grid">

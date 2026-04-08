@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FeatureList } from '@/components/ui/FeatureList';
 
 interface ServiceCardProps {
   _id: string;
@@ -22,14 +23,7 @@ export function ServiceCard({ _id, title, description, icon, features }: Service
 
       {/* Features list */}
       {features && features.length > 0 && (
-        <ul className="service-card-features">
-          {features.map((feature, idx) => (
-            <li key={idx} className="service-card-feature">
-              <span className="service-card-feature-mark" aria-hidden="true">—</span>
-              <span className="service-card-feature-text">{feature}</span>
-            </li>
-          ))}
-        </ul>
+        <FeatureList items={features} icon="dash" className="service-card-features" />
       )}
 
       {/* CTA */}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { urlFor } from '@/lib/sanity';
 import type { SanityImage } from '@/lib/types';
+import { FeatureList } from '@/components/ui/FeatureList';
 
 interface CaseStudyCardProps {
   title: string;
@@ -86,14 +87,7 @@ export function CaseStudyCard({
               <p className="case-study-card-results-label">
                 Key Results
               </p>
-              <ul className="case-study-card-results-list">
-                {results.slice(0, 2).map((result, idx) => (
-                  <li key={idx} className="case-study-card-results-item">
-                    <span className="case-study-card-results-icon">✓</span>
-                    <span>{result}</span>
-                  </li>
-                ))}
-              </ul>
+              <FeatureList items={results} icon="check" limit={2} className="case-study-card-results-list" />
             </div>
           )}
 

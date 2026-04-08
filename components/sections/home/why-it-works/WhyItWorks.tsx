@@ -1,3 +1,5 @@
+import { SectionHeader } from '@/components/ui/SectionHeader';
+
 interface WhyItWorksProps {
   label?: string;
   highlight?: string;
@@ -24,10 +26,13 @@ export function WhyItWorks({ label, highlight, paragraph1, paragraph2, paragraph
   return (
     <section className="home-why-works-section">
       <div className="home-why-works-layout">
-        <div className="home-why-works-header">
-          {label && <span className="home-why-works-label">{label}</span>}
-          {highlight && <h2 className="home-why-works-highlight">{highlight}</h2>}
-        </div>
+        {highlight && (
+          <SectionHeader
+            eyebrow={label}
+            title={highlight}
+            className="home-why-works-header"
+          />
+        )}
         {steps.length > 0 && (
           <div className="home-why-works-timeline">
             {steps.map((body, idx) => (

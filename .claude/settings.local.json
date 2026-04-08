@@ -79,7 +79,11 @@
       "Bash(cat .next/static/chunks/*.css)",
       "Bash(grep \"\\\\.btn,button{\")",
       "Bash(node -e ':*)",
-      "Bash(echo \"EXIT: $?\")"
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(grep -r \"className.*-grid\\\\|className.*flex\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
+      "Bash(xargs ls:*)",
+      "Bash(grep -r \"className.*badge\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
+      "Bash(npx eslint:*)"
     ]
   }
 }

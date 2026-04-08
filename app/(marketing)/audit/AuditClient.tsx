@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
+import { FormField } from '@/components/ui/FormField'
+import { FormMessage } from '@/components/ui/FormMessage'
+import { useMultiStep } from '@/lib/hooks'
 import { QUESTIONS, getBand, MAX_SCORE } from '@/lib/auditData'
 import type { AuditBand } from '@/lib/auditData'
 import type { AuditPageContent, AuditResultBand } from '@/lib/types'
@@ -77,10 +80,8 @@ function getBandContent(
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-type Stage = 'quiz' | 'capture' | 'result'
-
 export default function AuditClient({ content }: AuditClientProps) {
-  const [stage, setStage] = useState<Stage>('quiz')
+  const { currentStep, goTo } = useMultiStep({ steps: ['quiz', 'capture', 'result'] })
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [currentQ, setCurrentQ] = useState(0)
   const [name, setName] = useState('')
@@ -100,7 +101,7 @@ export default function AuditClient({ content }: AuditClientProps) {
     if (currentQ < QUESTIONS.length - 1) {
       setTimeout(() => setCurrentQ((q) => q + 1), 280)
     } else {
-      setTimeout(() => setStage('capture'), 280)
+      setTimeout(() => goTo('capture'), 280)
     }
   }
 
@@ -131,7 +132,7 @@ export default function AuditClient({ content }: AuditClientProps) {
       })
 
       setResult(auditResult)
-      setStage('result')
+      goTo('result')
     } catch {
       setSubmitError('Something went wrong. Try again or email hello@jonchalant.com.')
     } finally {
@@ -140,7 +141,7 @@ export default function AuditClient({ content }: AuditClientProps) {
   }
 
   // ── Quiz stage ──────────────────────────────────────────────────────────────
-  if (stage === 'quiz') {
+  if (currentStep === 'quiz') {
     return (
       <div className="audit-quiz">
         <div className="audit-progress-track">
@@ -177,7 +178,7 @@ export default function AuditClient({ content }: AuditClientProps) {
   }
 
   // ── Capture stage ───────────────────────────────────────────────────────────
-  if (stage === 'capture') {
+  if (currentStep === 'capture') {
     return (
       <div className="audit-capture">
         <div className="audit-capture-header">
@@ -193,8 +194,7 @@ export default function AuditClient({ content }: AuditClientProps) {
         </div>
 
         <form className="audit-capture-form" onSubmit={handleSubmit}>
-          <div className="audit-field">
-            <label htmlFor="audit-name" className="audit-label">Your name</label>
+          <FormField label="Your name" id="audit-name" required>
             <input
               id="audit-name"
               type="text"
@@ -204,10 +204,9 @@ export default function AuditClient({ content }: AuditClientProps) {
               onChange={(e) => setName(e.target.value)}
               required
             />
-          </div>
+          </FormField>
 
-          <div className="audit-field">
-            <label htmlFor="audit-email" className="audit-label">Email address</label>
+          <FormField label="Email address" id="audit-email" required>
             <input
               id="audit-email"
               type="email"
@@ -217,9 +216,11 @@ export default function AuditClient({ content }: AuditClientProps) {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </div>
+          </FormField>
 
-          {submitError && <p className="audit-error">{submitError}</p>}
+          {submitError && (
+            <FormMessage variant="error">{submitError}</FormMessage>
+          )}
 
           <Button type="submit" className="audit-submit" disabled={submitting}>
             {submitting ? 'Sending…' : 'See My Results'}
@@ -234,7 +235,7 @@ export default function AuditClient({ content }: AuditClientProps) {
   }
 
   // ── Result stage ────────────────────────────────────────────────────────────
-  if (stage === 'result' && result) {
+  if (currentStep === 'result' && result) {
     const pct = Math.round((result.score / MAX_SCORE) * 100)
 
     return (

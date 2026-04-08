@@ -1,4 +1,5 @@
 import { TestimonialCard } from '@/components/utilities/cards'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 
 interface Testimonial {
   _id?: string
@@ -21,10 +22,10 @@ export function Testimonials({ testimonials, eyebrow, heading }: TestimonialsPro
 
   return (
     <section className="testimonial-section">
-      <header className="testimonial-section-header">
-        <span className="testimonial-section-eyebrow">{eyebrow ?? 'Client Stories'}</span>
-        <h2 className="testimonial-section-title">{heading ?? 'Real Results. Real People.'}</h2>
-      </header>
+      <SectionHeader
+        eyebrow={eyebrow ?? 'Client Stories'}
+        title={heading ?? 'Real Results. Real People.'}
+      />
 
       <div className="testimonial-grid">
         {testimonials.map((t, idx) => (
