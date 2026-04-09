@@ -58,7 +58,7 @@ export function BlogCard({
               <p className="blog-featured-card-excerpt">{excerpt}</p>
             )}
             <div className="blog-featured-card-cta">
-              Read Article →
+              Read Article <span className="blog-featured-card-cta-arrow" aria-hidden="true">→</span>
             </div>
           </div>
         </TextLink>
@@ -87,7 +87,7 @@ export function BlogCard({
             )}
           </div>
           <div className="blog-list-card-action">
-            Read →
+            Read <span className="blog-list-card-action-arrow" aria-hidden="true">→</span>
           </div>
         </TextLink>
       </article>
@@ -124,7 +124,7 @@ export function BlogCard({
         <p className="blog-card-excerpt">{excerpt}</p>
       )}
       <TextLink href={href} className="blog-card-cta">
-        Read Article →
+        Read Article <span className="blog-card-cta-arrow" aria-hidden="true">→</span>
       </TextLink>
     </article>
   );

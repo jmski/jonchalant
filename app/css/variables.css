@@ -91,19 +91,10 @@
   --glow-moss: 0 0 16px rgba(107, 142, 99, 0.08);
 
   /* Decorative Elements */
-  --decor-enso: rgba(107, 142, 99, 0.08); /* Enso circle - increased opacity */
-  --decor-fluid: rgba(
-    107,
-    142,
-    99,
-    0.06
-  ); /* Fluid shapes - increased opacity */
-  --decor-grid: rgba(
-    107,
-    142,
-    99,
-    0.03
-  ); /* Blueprint grid - increased opacity */
+  --decor-enso: rgba(107, 142, 99, 0.15);
+  --decor-fluid: rgba(107, 142, 99, 0.12);
+  --decor-grid: rgba(107, 142, 99, 0.08);
+
 }
 
 /* ========== WARM AMBER ACCENT ========== */

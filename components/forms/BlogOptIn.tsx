@@ -94,13 +94,12 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
               className="site-footer-optin-input"
               disabled={state.isSubmitting}
             />
-            <button
+            <Button
               type="submit"
-              className="site-footer-optin-btn"
               disabled={state.isSubmitting}
             >
               {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
-            </button>
+            </Button>
           </div>
           {state.error && (
             <p className="site-footer-optin-error" role="alert">{state.error}</p>
@@ -176,7 +175,6 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
           <Button
             type="submit"
             disabled={state.isSubmitting}
-            className="form-submit blog-optin-submit"
           >
             {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
           </Button>

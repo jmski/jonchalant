@@ -108,7 +108,7 @@ export function CourseCard({
         )}
 
         <Link href={`/lessons/${slug}`} className="course-card-cta">
-          {ctaLabel} →
+          {ctaLabel} <span className="course-card-cta-arrow" aria-hidden="true">→</span>
         </Link>
       </div>
     </article>

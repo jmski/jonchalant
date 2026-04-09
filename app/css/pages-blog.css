@@ -6,7 +6,31 @@
   min-height: 100vh;
 }
 
+/* Remove main-content side padding so hero gradient reaches edges.
+   Section-wrappers carry their own horizontal padding, so content stays inset. */
+.main-content:has(.blog-page-main) {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Reset negative-margin compensation — no longer needed without main-content padding */
+.blog-page-main .section-wrapper {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.section-wrapper:has(.blog-page-header) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .blog-page-header {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 3rem 0 2rem;
 }
 
@@ -68,6 +92,13 @@
 
 .blog-search-input::placeholder {
   color: var(--text-tertiary);
+}
+
+/* Hide native search clear button — we render our own */
+.blog-search-input::-webkit-search-cancel-button,
+.blog-search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .blog-search-clear {
@@ -289,6 +320,15 @@
   margin-top: auto;
 }
 
+.blog-featured-card-cta-arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.blog-featured-card-inner:hover .blog-featured-card-cta-arrow {
+  transform: translateX(3px);
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    BLOG POSTS LIST SECTION (BlogPosts / Posts.tsx)
    ───────────────────────────────────────────────────────────────────────────── */
@@ -408,6 +448,15 @@
 
 .blog-list-card-content:hover .blog-list-card-action {
   color: var(--accent-primary);
+}
+
+.blog-list-card-action-arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.blog-list-card-content:hover .blog-list-card-action-arrow {
+  transform: translateX(3px);
 }
 
 @media (min-width: 768px) {
@@ -899,6 +948,15 @@
   color: var(--accent-primary);
 }
 
+.blog-related-card-link-arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.blog-related-card:hover .blog-related-card-link-arrow {
+  transform: translateX(3px);
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    BLOG OPT-IN (Quiet Command Starter Guide)
    ───────────────────────────────────────────────────────────────────────────── */
@@ -984,8 +1042,7 @@
   color: var(--text-secondary);
 }
 
-.blog-optin-submit {
-  /* Inherits .form-submit; stretch to fill */
+.blog-optin-form .btn {
   width: 100%;
   margin-top: 0.25rem;
 }

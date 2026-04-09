@@ -106,25 +106,25 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
                 </button>
               )}
             </div>
-          </div>
 
-          {/* Category Filter — directly under search */}
-          <div
-            className="blog-filter-tabs"
-            role="tablist"
-            aria-label="Filter articles by category"
-          >
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                role="tab"
-                aria-selected={activeCategory === cat}
-                className={`blog-filter-tab${activeCategory === cat ? ' active' : ''}`}
-                onClick={() => setActiveCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
+            {/* Category Filter — directly under search */}
+            <div
+              className="blog-filter-tabs"
+              role="tablist"
+              aria-label="Filter articles by category"
+            >
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  role="tab"
+                  aria-selected={activeCategory === cat}
+                  className={`blog-filter-tab${activeCategory === cat ? ' active' : ''}`}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
         </SectionContent>
       </SectionWrapper>

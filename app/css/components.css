@@ -549,6 +549,7 @@ tbody tr:hover {
   cursor: pointer;
   text-align: left;
   gap: 1rem;
+  white-space: normal;
 }
 
 .faq-item-trigger:hover {

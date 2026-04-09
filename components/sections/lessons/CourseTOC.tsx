@@ -58,9 +58,9 @@ export function CourseTOC({
   const router = useRouter()
   const modules = course.modules ?? []
 
-  // All modules start expanded
+  // All modules start collapsed — keeps TOC compact on first load
   const [expanded, setExpanded] = useState<Record<string, boolean>>(
-    Object.fromEntries(modules.map((m) => [m._id, true]))
+    Object.fromEntries(modules.map((m) => [m._id, false]))
   )
 
   const allLessons = modules.flatMap((m) => m.lessons ?? [])

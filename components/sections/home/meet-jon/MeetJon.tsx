@@ -35,7 +35,7 @@ export function MeetJon({
           <SectionHeader eyebrow="About Jon" title={heading} />
           <p className="meet-jon-body">{body}</p>
           <Link href="/about" className="meet-jon-link">
-            {linkText} →
+            {linkText} <span className="meet-jon-link-arrow" aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

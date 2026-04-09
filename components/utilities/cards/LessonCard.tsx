@@ -31,7 +31,7 @@ export function LessonCard({ _id, title, description, pillar, icon, duration, sl
           <span className="lesson-card-duration">{duration}</span>
           {slug ? (
             <a href={`/portal/${slug}`} className="lesson-card-cta">
-              Read →
+              Read <span className="lesson-card-cta-arrow" aria-hidden="true">→</span>
             </a>
           ) : (
             <span className="lesson-card-cta lesson-card-cta--disabled">

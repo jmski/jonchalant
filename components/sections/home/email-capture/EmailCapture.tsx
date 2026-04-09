@@ -54,7 +54,6 @@ export function EmailCapture({
               />
               <Button
                 type="submit"
-                className="email-capture-submit"
                 disabled={state.isSubmitting}
               >
                 {state.isSubmitting ? 'Subscribing…' : 'Subscribe'}

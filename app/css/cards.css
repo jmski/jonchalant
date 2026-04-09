@@ -546,6 +546,15 @@
   color: var(--accent-primary);
 }
 
+.lesson-card-cta-arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.lesson-card-cta:hover .lesson-card-cta-arrow {
+  transform: translateX(3px);
+}
+
 @media (min-width: 640px) {
   .lesson-card-content {
     padding: 2.25rem;
@@ -643,6 +652,15 @@
 
 .blog-card-cta:hover {
   gap: 0.5rem;
+}
+
+.blog-card-cta-arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.blog-card-cta:hover .blog-card-cta-arrow {
+  transform: translateX(3px);
 }
 
 @media (min-width: 640px) {
@@ -1168,6 +1186,15 @@
 
 .course-card-cta:hover {
   color: var(--accent-hover);
+}
+
+.course-card-cta-arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.course-card-cta:hover .course-card-cta-arrow {
+  transform: translateX(3px);
 }
 
 @media (min-width: 640px) {
