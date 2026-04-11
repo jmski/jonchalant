@@ -695,6 +695,15 @@
   box-shadow: 0 4px 16px rgba(107, 142, 99, 0.1);
 }
 
+.service-card--primary {
+  background: color-mix(in srgb, var(--color-muted-moss) 8%, var(--bg-primary));
+  border-top: 2px solid var(--accent-primary);
+}
+
+.service-card--primary .service-card-number {
+  color: var(--accent-primary);
+}
+
 .service-card-icon {
   display: inline-block;
   font-family: var(--font-headline);

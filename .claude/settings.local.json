@@ -87,7 +87,14 @@
       "Bash(find . -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" -o -name \"*.jsx\" -o -name \"*.js\" \\\\\\) -exec grep -l \"FAQ\\\\|faq\" {} \\\\;)",
       "Bash(grep -n \"portfolio-card\" /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/app/css/*.css)",
       "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant -name \"*.css\" -exec grep -l \"portfolio-card\" {} \\\\;)",
-      "WebFetch(domain:www.shutterstock.com)"
+      "WebFetch(domain:www.shutterstock.com)",
+      "Bash(grep -E \"\\\\.css$\")",
+      "Bash(find /c/Users/jonch/OneDrive/Documents/GitHub/jonchalant/components -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" \\\\\\) -exec wc -l {} +)",
+      "Bash(wc -l app/css/*.css)",
+      "Bash(grep \"!important\" app/css/*.css)",
+      "Bash(grep -E '#[0-9a-f]{3,6}|rgba?|hsla?' app/css/*.css)",
+      "Bash(grep -oE '#[0-9a-fA-F]{3,6}|rgba?\\\\\\([^\\)]*\\\\\\)' app/css/*.css)",
+      "Bash(grep -oE '@media[^{]+' app/css/*.css)"
     ]
   }
 }

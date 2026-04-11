@@ -5,6 +5,7 @@ interface SectionWrapperProps {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'dark';
   className?: string;
   id?: string;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -22,6 +23,7 @@ export default function SectionWrapper({
   variant = 'primary',
   className = '',
   id,
+  style,
 }: SectionWrapperProps) {
   const variantClass = `section-wrapper-${variant}`;
 
@@ -29,6 +31,7 @@ export default function SectionWrapper({
     <div
       id={id}
       className={`section-wrapper ${variantClass} ${className}`}
+      style={style}
     >
       {children}
     </div>

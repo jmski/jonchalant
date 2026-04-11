@@ -1,4 +1,5 @@
 import { ServiceCard } from '@/components/utilities/cards';
+import { ScrollStagger } from '@/components/animations';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface Service {
@@ -7,6 +8,8 @@ interface Service {
   description: string;
   icon?: string;
   features?: string[];
+  isPrimary?: boolean;
+  ctaLabel?: string;
 }
 
 interface ServicesProps {
@@ -26,7 +29,7 @@ export function Services({ services, heading, description, eyebrow }: ServicesPr
           description={description}
         />
       )}
-      <div className="services-grid">
+      <ScrollStagger staggerDelay={120} threshold={0.15} className="services-grid">
         {services.map((service) => (
           <ServiceCard
             key={service._id}
@@ -35,9 +38,11 @@ export function Services({ services, heading, description, eyebrow }: ServicesPr
             description={service.description}
             icon={service.icon}
             features={service.features}
+            isPrimary={service.isPrimary}
+            ctaLabel={service.ctaLabel}
           />
         ))}
-      </div>
+      </ScrollStagger>
     </section>
   );
 }

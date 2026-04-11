@@ -457,6 +457,14 @@ tbody tr:hover {
   margin: 0;
 }
 
+.section-wrapper-dark .section-title {
+  color: var(--text-white);
+}
+
+.section-wrapper-dark .section-description {
+  color: rgba(241, 241, 241, 0.72);
+}
+
 .section-description {
   font-family: var(--font-body);
   font-size: 1.0625rem;

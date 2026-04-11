@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { useFormSubmission } from '@/lib/hooks';
 
@@ -10,10 +10,27 @@ interface EmailCaptureProps {
 }
 
 export function EmailCapture({
-  heading = 'Weekly insights on quiet leadership',
-  subheading = 'Practical tools for introverts who lead — delivered to your inbox every week.',
+  heading = 'One idea every Tuesday. No noise.',
+  subheading = 'Body-led leadership for people who read slowly and think carefully.',
 }: EmailCaptureProps) {
   const [email, setEmail] = useState('');
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('is-visible');
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const { state, submit } = useFormSubmission({
     endpoint: '/api/subscribe',
@@ -26,9 +43,10 @@ export function EmailCapture({
   }
 
   return (
-    <section className="email-capture-section">
-      <div className="email-capture-inner">
+    <section className="email-capture-section" ref={sectionRef}>
+      <div className="email-capture-inner email-capture-content">
         <div className="email-capture-copy">
+          <span className="email-capture-eyebrow">The Weekly</span>
           <h2 className="email-capture-heading">{heading}</h2>
           <p className="email-capture-subheading">{subheading}</p>
         </div>
@@ -56,7 +74,7 @@ export function EmailCapture({
                 type="submit"
                 disabled={state.isSubmitting}
               >
-                {state.isSubmitting ? 'Subscribing…' : 'Subscribe'}
+                {state.isSubmitting ? 'Subscribing…' : "I'm in"}
               </Button>
             </div>
             {state.error && (

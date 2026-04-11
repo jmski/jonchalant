@@ -518,3 +518,34 @@ select {
     animation: blurIn-scroll 0.6s ease-out forwards;
   }
 }
+
+/* ── Hero staggered entrance ────────────────────────────────────────────── */
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate-in {
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-animate-in[data-delay="0"] { animation-delay: 0ms; }
+.hero-animate-in[data-delay="1"] { animation-delay: 120ms; }
+.hero-animate-in[data-delay="2"] { animation-delay: 260ms; }
+.hero-animate-in[data-delay="3"] { animation-delay: 380ms; }
+.hero-animate-in[data-delay="4"] { animation-delay: 520ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate-in {
+    animation: none;
+    opacity: 1;
+  }
+}

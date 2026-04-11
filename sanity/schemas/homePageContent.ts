@@ -12,6 +12,7 @@ export default defineType({
       initialValue: 'Home Page',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({ name: 'heroEyebrow', title: 'Hero — Eyebrow', type: 'string' }),
     defineField({ name: 'heroHeadline', title: 'Hero — Headline', type: 'string' }),
     defineField({
       name: 'heroCyclingOutcomes',
@@ -21,6 +22,7 @@ export default defineType({
       description: 'Each string cycles as the accented outcome line. E.g. "ace that job interview."',
     }),
     defineField({ name: 'heroDescription', title: 'Hero — Description', type: 'text' }),
+    defineField({ name: 'heroSubtext', title: 'Hero — Subtext (under description)', type: 'string' }),
     defineField({ name: 'heroCtaText', title: 'Hero — Primary CTA Text', type: 'string' }),
     defineField({ name: 'heroCtaLink', title: 'Hero — Primary CTA Link', type: 'string' }),
     defineField({ name: 'heroMicrocopy', title: 'Hero — CTA Microcopy', type: 'string' }),

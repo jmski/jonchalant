@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import { ScrollFade } from "@/components/animations";
 import { Button } from '@/components/ui/Button';
 
@@ -15,11 +16,44 @@ export default function CTA({
   buttonText = "Get Started",
   buttonLink = "#"
 }: CTAProps) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('is-visible');
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Split title into two lines at the first sentence boundary
+  const splitIndex = title.indexOf('?');
+  const lines = splitIndex !== -1
+    ? [title.slice(0, splitIndex + 1), title.slice(splitIndex + 1).trim()]
+    : [title];
+
   return (
     <ScrollFade>
-      <div className="cta-section">
+      <div className="cta-section" ref={sectionRef}>
         <div className="cta-section-left">
-          <h2 className="cta-section-title">{title}</h2>
+          <h2 className="cta-section-title">
+            {lines.length === 2 ? (
+              <>
+                <span className="cta-headline-line" data-direction="left">{lines[0]}</span>
+                <span className="cta-headline-line" data-direction="right">{lines[1]}</span>
+              </>
+            ) : (
+              title
+            )}
+          </h2>
           <Button as="link" href={buttonLink}>{buttonText}</Button>
         </div>
         <div className="cta-section-description">

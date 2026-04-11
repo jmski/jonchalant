@@ -7,11 +7,13 @@ interface ServiceCardProps {
   description: string;
   icon?: string;
   features?: string[];
+  isPrimary?: boolean;
+  ctaLabel: string;
 }
 
-export function ServiceCard({ _id, title, description, icon, features }: ServiceCardProps) {
+export function ServiceCard({ _id, title, description, icon, features, isPrimary, ctaLabel }: ServiceCardProps) {
   return (
-    <div className="service-card">
+    <div className={`service-card${isPrimary ? ' service-card--primary' : ''}`}>
       {/* Icon */}
       {icon && <div className="service-card-icon">{icon}</div>}
 
@@ -32,8 +34,8 @@ export function ServiceCard({ _id, title, description, icon, features }: Service
         className="service-card-cta"
         aria-label={`Explore ${title} coaching`}
       >
-        Explore this path
-        <span className="service-card-cta-arrow" aria-hidden="true">→</span>
+        {ctaLabel}
+        <span className="service-card-cta-arrow">→</span>
       </Link>
     </div>
   );

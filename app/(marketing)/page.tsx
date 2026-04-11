@@ -94,9 +94,11 @@ export default async function Home() {
         {/* 1. HERO */}
         <SectionWrapper variant="primary" className="section-wrapper--flush">
           <Hero
+            eyebrow={homeContent?.heroEyebrow}
             heroHeadline={homeContent?.heroHeadline}
             cyclingOutcomes={homeContent?.heroCyclingOutcomes}
             description={homeContent?.heroDescription}
+            subtext={homeContent?.heroSubtext}
             ctaText={homeContent?.heroCtaText}
             ctaLink={homeContent?.heroCtaLink}
             auditMicrocopy={homeContent?.heroMicrocopy}
@@ -116,7 +118,7 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* 4. WHY IT WORKS / PHILOSOPHY (moved up) */}
-        <SectionWrapper variant="secondary">
+        <SectionWrapper variant="dark">
           <SectionContent>
             <ScrollFade>
               <WhyItWorks
@@ -144,7 +146,7 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* 6. MEET JON */}
-        <SectionWrapper variant="tertiary">
+        <SectionWrapper variant="tertiary" style={{ background: 'var(--bg-warm)' }}>
           <SectionContent>
             <ScrollFade>
               <MeetJon image={homeContent?.meetJonImage} />
@@ -188,12 +190,12 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* 10. FINAL CTA */}
-        <SectionWrapper variant="tertiary">
+        <SectionWrapper variant="primary">
           <SectionContent>
             <CTA
               title={homeContent?.ctaTitle ?? "Ready to Transform Your Executive Presence?"}
               description={homeContent?.ctaDescription ?? "Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."}
-              buttonText={homeContent?.ctaButtonText ?? "Schedule Your Free Audit"}
+              buttonText={homeContent?.ctaButtonText ?? "Start with the Free Audit"}
               buttonLink={homeContent?.ctaButtonHref ?? "/contact"}
             />
           </SectionContent>

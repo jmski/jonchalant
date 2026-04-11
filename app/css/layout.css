@@ -518,58 +518,6 @@
   background: var(--gradient-moss-wash);
 }
 
-/* ── Seamless circle ripple pattern ─────────────────────────────────────────
-   Overlapping concentric rings inspired by Japanese seigaiha wave motif.
-   Two ring centers per tile, offset to create dense intersections.
-   Each center has 5 concentric rings with decreasing opacity outward.
-   Gradient mask fades edges so tile boundaries are invisible. */
-
-.section-wrapper-secondary::after,
-.section-wrapper-tertiary::after,
-.section-wrapper--moss::after,
-.section-wrapper-dark::after,
-.section-wrapper:has(.about-hero-section)::after,
-.section-wrapper:has(.page-hero-section)::after,
-.section-wrapper:has(.dance-page-hero)::after,
-.section-wrapper:has(.blog-page-header)::after,
-.section-wrapper:has(.lessons-hero)::after,
-.section-wrapper:has(.foundation-hero)::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-}
-
-/* Moss circles — lighter sections
-   Center A at (0,0), Center B offset at (50%,50%) of tile */
-.section-wrapper-secondary::after,
-.section-wrapper-tertiary::after,
-.section-wrapper--moss::after {
-  background:
-    radial-gradient(circle, transparent 8px, rgba(107,142,99,0.07) 8px, rgba(107,142,99,0.07) 10px, transparent 10px, transparent 18px, rgba(107,142,99,0.06) 18px, rgba(107,142,99,0.06) 20px, transparent 20px, transparent 28px, rgba(107,142,99,0.05) 28px, rgba(107,142,99,0.05) 30px, transparent 30px, transparent 38px, rgba(107,142,99,0.04) 38px, rgba(107,142,99,0.04) 40px, transparent 40px, transparent 48px, rgba(107,142,99,0.03) 48px, rgba(107,142,99,0.03) 50px, transparent 50px),
-    radial-gradient(circle, transparent 8px, rgba(107,142,99,0.07) 8px, rgba(107,142,99,0.07) 10px, transparent 10px, transparent 18px, rgba(107,142,99,0.06) 18px, rgba(107,142,99,0.06) 20px, transparent 20px, transparent 28px, rgba(107,142,99,0.05) 28px, rgba(107,142,99,0.05) 30px, transparent 30px, transparent 38px, rgba(107,142,99,0.04) 38px, rgba(107,142,99,0.04) 40px, transparent 40px, transparent 48px, rgba(107,142,99,0.03) 48px, rgba(107,142,99,0.03) 50px, transparent 50px);
-  background-size: 100px 100px;
-  background-position: 0 0, 50px 50px;
-}
-
-/* Indigo circles — dark & hero sections */
-.section-wrapper-dark::after,
-.section-wrapper:has(.about-hero-section)::after,
-.section-wrapper:has(.page-hero-section)::after,
-.section-wrapper:has(.dance-page-hero)::after,
-.section-wrapper:has(.blog-page-header)::after,
-.section-wrapper:has(.lessons-hero)::after,
-.section-wrapper:has(.foundation-hero)::after {
-  background:
-    radial-gradient(circle, transparent 8px, rgba(74,58,92,0.09) 8px, rgba(74,58,92,0.09) 10px, transparent 10px, transparent 18px, rgba(74,58,92,0.07) 18px, rgba(74,58,92,0.07) 20px, transparent 20px, transparent 28px, rgba(74,58,92,0.06) 28px, rgba(74,58,92,0.06) 30px, transparent 30px, transparent 38px, rgba(74,58,92,0.05) 38px, rgba(74,58,92,0.05) 40px, transparent 40px, transparent 48px, rgba(74,58,92,0.04) 48px, rgba(74,58,92,0.04) 50px, transparent 50px),
-    radial-gradient(circle, transparent 8px, rgba(74,58,92,0.09) 8px, rgba(74,58,92,0.09) 10px, transparent 10px, transparent 18px, rgba(74,58,92,0.07) 18px, rgba(74,58,92,0.07) 20px, transparent 20px, transparent 28px, rgba(74,58,92,0.06) 28px, rgba(74,58,92,0.06) 30px, transparent 30px, transparent 38px, rgba(74,58,92,0.05) 38px, rgba(74,58,92,0.05) 40px, transparent 40px, transparent 48px, rgba(74,58,92,0.04) 48px, rgba(74,58,92,0.04) 50px, transparent 50px);
-  background-size: 100px 100px;
-  background-position: 0 0, 50px 50px;
-}
-
 /* Flush variant: removes SectionWrapper padding — used for hero.
    No negative margins needed: at 1024px+ main-content padding-top is exactly
    70px (navbar height), so hero starts flush without any offset tricks. */
