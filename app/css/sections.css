@@ -705,40 +705,45 @@
               transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.meet-jon-bio {
+.meet-jon-bio,
+.meet-jon-text-col {
   opacity: 0;
   transform: translateX(28px);
   transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
               transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 150ms;
+  transition-delay: 160ms;
 }
 
 .meet-jon-section.is-visible .meet-jon-photos,
-.meet-jon-section.is-visible .meet-jon-bio {
+.meet-jon-section.is-visible .meet-jon-bio,
+.meet-jon-section.is-visible .meet-jon-text-col {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Photo grid rotation treatment */
-.meet-jon-photo-col {
-  transform: rotate(-1deg);
+/* Photo rotation treatment */
+.meet-jon-photo-col img,
+.meet-jon-photo-col .meet-jon-photo {
+  transform: rotate(-1.5deg);
+  transition: transform 400ms ease, box-shadow 400ms ease;
 }
 
-.meet-jon-photo,
-.meet-jon-photo-placeholder {
-  transform: rotate(1deg);
-  transition: transform 300ms ease, box-shadow 300ms ease;
-}
-
-.meet-jon-photo:hover,
-.meet-jon-photo-placeholder:hover {
-  transform: rotate(0deg) scale(1.03);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+.meet-jon-photo-col:hover img,
+.meet-jon-photo-col:hover .meet-jon-photo {
+  transform: rotate(0deg) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .meet-jon-photos, .meet-jon-bio {
+  .meet-jon-photos,
+  .meet-jon-bio,
+  .meet-jon-text-col {
     opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .meet-jon-photo-col img,
+  .meet-jon-photo-col .meet-jon-photo {
     transform: none;
     transition: none;
   }
@@ -841,6 +846,19 @@
   letter-spacing: 0.15em;
   color: var(--accent-primary);
   margin-bottom: 2.5rem;
+}
+
+.testimonials-display-stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.testimonials-display-star {
+  color: var(--color-warning, #b89a5f);
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 .testimonials-display-quote {

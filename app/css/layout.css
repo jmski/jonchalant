@@ -459,6 +459,14 @@
   padding-bottom: 0;
 }
 
+/* Blog preview on homepage — compact vertical padding */
+@media (min-width: 1024px) {
+  .blog-preview-wrapper {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
 .section-wrapper-primary {
   background-color: var(--bg-primary);
 }

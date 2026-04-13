@@ -58,7 +58,7 @@ export function MeetJon({
             <div className="meet-jon-photo-placeholder" />
           )}
         </div>
-        <div className="meet-jon-copy-col meet-jon-bio">
+        <div className="meet-jon-copy-col meet-jon-bio meet-jon-text-col">
           <SectionHeader eyebrow="About Jon" title={heading} />
           <p className="meet-jon-body">{body}</p>
           <Link href="/about" className="meet-jon-link">

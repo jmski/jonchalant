@@ -25,6 +25,11 @@ export function Testimonials({ testimonials, eyebrow, heading }: TestimonialsPro
     return (
       <section className="testimonials-display">
         <span className="testimonials-display-eyebrow">{eyebrow ?? 'CLIENT STORIES'}</span>
+        <div className="testimonials-display-stars" aria-label="5 out of 5 stars">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <span key={star} className="testimonials-display-star" aria-hidden="true">★</span>
+          ))}
+        </div>
         <blockquote className="testimonials-display-quote">
           {t.quote}
         </blockquote>

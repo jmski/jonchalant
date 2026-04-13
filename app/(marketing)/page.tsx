@@ -171,7 +171,7 @@ export default async function Home() {
 
         {/* 8. BLOG PREVIEW */}
         {recentPosts.length > 0 && (
-          <SectionWrapper variant="primary">
+          <SectionWrapper variant="primary" className="blog-preview-wrapper">
             <SectionContent>
               <ScrollFade>
                 <BlogCards

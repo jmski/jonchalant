@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { TextLink } from '@/components/typography';
 
 interface BlogCardProps {
@@ -11,6 +12,7 @@ interface BlogCardProps {
   readingTime?: number;
   coverImage?: { asset?: { url?: string }; alt?: string };
   variant?: 'default' | 'featured' | 'list';
+  showLink?: boolean;
 }
 
 export function BlogCard({
@@ -23,6 +25,7 @@ export function BlogCard({
   readingTime,
   coverImage,
   variant = 'default',
+  showLink = true,
 }: BlogCardProps) {
   const slugValue = typeof slug === 'string' ? slug : slug.current;
   const href = `/blog/${slugValue}`;
@@ -32,7 +35,7 @@ export function BlogCard({
       <article className="blog-featured-card">
         <TextLink href={href}>
           <div className="blog-featured-card-inner">
-            {coverImage?.asset?.url && (
+            {coverImage?.asset?.url ? (
               <div className="blog-featured-card-cover">
                 <Image
                   src={coverImage.asset.url}
@@ -42,6 +45,8 @@ export function BlogCard({
                   className="blog-featured-card-cover-img"
                 />
               </div>
+            ) : (
+              <div className="blog-featured-card-cover blog-featured-card-cover-placeholder" aria-hidden="true" />
             )}
             <div className="blog-featured-card-header">
               {pillar && (
@@ -123,9 +128,12 @@ export function BlogCard({
       {excerpt && (
         <p className="blog-card-excerpt">{excerpt}</p>
       )}
-      <TextLink href={href} className="blog-card-cta">
-        Read Article <span className="blog-card-cta-arrow" aria-hidden="true">→</span>
-      </TextLink>
+      {showLink && (
+        <div className="blog-card-cta" aria-hidden="true">
+          Read Article <span className="blog-card-cta-arrow">→</span>
+        </div>
+      )}
+      <Link href={href} className="blog-card-link" aria-label={`Read article: ${title}`} />
     </article>
   );
 }

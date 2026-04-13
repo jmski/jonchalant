@@ -1,5 +1,4 @@
 import { BlogCard } from '@/components/utilities/cards';
-import { CardGrid } from '@/components/utilities/grids';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface BlogPost {
@@ -24,19 +23,21 @@ export function BlogCards({ posts, heading, description, showFeatured }: BlogCar
       {heading && (
         <SectionHeader title={heading} description={description} />
       )}
-      <CardGrid columns={3}>
-        {posts.map((post) => (
-          <BlogCard
-            key={post._id}
-            _id={post._id}
-            title={post.title}
-            slug={post.slug}
-            excerpt={post.excerpt}
-            publishedAt={post.publishedAt}
-            coverImage={post.coverImage}
-          />
+      <div className="blog-cards-grid">
+        {posts.map((post, index) => (
+          <div key={post._id} className={index === 0 ? 'blog-card-featured' : 'blog-card-secondary'}>
+            <BlogCard
+              _id={post._id}
+              title={post.title}
+              slug={post.slug}
+              excerpt={post.excerpt}
+              publishedAt={post.publishedAt}
+              coverImage={post.coverImage}
+              variant={index === 0 ? 'featured' : 'default'}
+            />
+          </div>
         ))}
-      </CardGrid>
+      </div>
     </section>
   );
 }
