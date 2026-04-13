@@ -56,10 +56,12 @@
   /* Primary Base - Zen Minimalism */
   --bg-primary: #f8f8f5; /* Rice paper/bone background */
   --bg-secondary: #fafaf8; /* Slightly warmer */
-  --bg-tertiary: #f0ede8; /* Warm sand accent */
+  --bg-tertiary: #ebe6de; /* Warm sand accent */
+  --bg-warm: #ede8e0;            /* human/intimate sections e.g. Meet Jon */
   --text-primary: #1a1a1a; /* Sumie ink - deep, commanding */
   --text-secondary: #3d3d3d; /* Secondary ink */
   --text-tertiary: #7a7a7a; /* Muted ink */
+  --text-white: #f1f1f1;
 
   /* Borders - Hairline aesthetic */
   --border-color: #d4cfc7; /* Subtle, warm */
@@ -79,7 +81,7 @@
 
   /* Accent & Interactive */
   --accent-primary: #6b8e63; /* Muted Moss - PRIMARY GREEN */
-  --accent-secondary: #5a8a6a; /* Moss Success variant */
+  --accent-secondary: #b89a5f;   /* warm amber — pull quotes, pricing highlights */
   --accent-tertiary: #6a8aaa; /* Soft indigo - distinct category color */
   --accent-hover: #8aa87a; /* Moss light - hover state */
   --btn-primary-text: #f1f1f1; /* Button text — light on accent background */
@@ -91,19 +93,10 @@
   --glow-moss: 0 0 16px rgba(107, 142, 99, 0.08);
 
   /* Decorative Elements */
-  --decor-enso: rgba(107, 142, 99, 0.08); /* Enso circle - increased opacity */
-  --decor-fluid: rgba(
-    107,
-    142,
-    99,
-    0.06
-  ); /* Fluid shapes - increased opacity */
-  --decor-grid: rgba(
-    107,
-    142,
-    99,
-    0.03
-  ); /* Blueprint grid - increased opacity */
+  --decor-enso: rgba(107, 142, 99, 0.15);
+  --decor-fluid: rgba(107, 142, 99, 0.12);
+  --decor-grid: rgba(107, 142, 99, 0.08);
+
 }
 
 /* ========== WARM AMBER ACCENT ========== */

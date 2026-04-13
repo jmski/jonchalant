@@ -9,6 +9,7 @@ export { ImpactSection } from './home/impact';
 export { PortfolioPreview } from './home/portfolio-preview';
 export { WhyWorkTogether } from './home/why-work-together';
 export { WhyItWorks } from './home/why-it-works';
+export { HomeCTA } from './home/cta';
 
 // ─────────────── ABOUT PAGE SECTIONS ────────────────
 export { Hero as AboutHero } from './about/hero';

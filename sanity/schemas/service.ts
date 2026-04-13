@@ -28,12 +28,6 @@ export default defineType({
       type: 'text',
     }),
     defineField({
-      name: 'fullDescription',
-      title: 'Full Description',
-      type: 'array',
-      of: [{ type: 'block' }],
-    }),
-    defineField({
       name: 'icon',
       title: 'Card Number',
       type: 'string',
@@ -50,6 +44,12 @@ export default defineType({
       title: 'Primary Service (Featured)',
       type: 'boolean',
       initialValue: false,
+    }),
+    defineField({
+      name: 'ctaLabel',
+      title: 'CTA Label',
+      type: 'string',
+      description: 'Card link text — e.g. "See the programs →"',
     }),
     defineField({
       name: 'color',

@@ -80,7 +80,7 @@ export function FeaturedAreas({ heading, description, areas }: FeaturedAreaProps
 
               {/* CTA */}
               <div className="featured-area-cta">
-                Explore →
+                Explore <span className="featured-area-cta-arrow" aria-hidden="true">→</span>
               </div>
             </div>
           </a>

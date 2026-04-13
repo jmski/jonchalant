@@ -22,6 +22,13 @@ export function TestimonialCard({
 
   return (
     <div className="testimonial-card">
+      {/* Stars */}
+      <div className="testimonial-card-stars" aria-label="5 out of 5 stars">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span key={star} className="testimonial-card-star" aria-hidden="true">★</span>
+        ))}
+      </div>
+
       {/* Quote */}
       <p className="testimonial-card-quote">
         &quot;{quote}&quot;

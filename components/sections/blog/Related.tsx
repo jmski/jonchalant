@@ -47,7 +47,7 @@ export function Related({ posts }: RelatedProps) {
                 </span>
               )}
               <span className="blog-related-card-link">
-                Read →
+                Read <span className="blog-related-card-link-arrow" aria-hidden="true">→</span>
               </span>
             </div>
           </Link>

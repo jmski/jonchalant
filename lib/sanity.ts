@@ -64,10 +64,10 @@ const SERVICE_FIELDS = `
     title,
     slug,
     description,
-    fullDescription,
     icon,
     features,
     isPrimary,
+    ctaLabel,
     color,
     order
   `
@@ -306,9 +306,11 @@ export async function getAboutPageContent() {
 
 export async function getHomePageContent() {
   const query = `*[_type == "homePageContent" && title == "Home Page"][0] {
+    heroEyebrow,
     heroHeadline,
     heroCyclingOutcomes,
     heroDescription,
+    heroSubtext,
     heroCtaText,
     heroCtaLink,
     heroMicrocopy,
@@ -327,7 +329,7 @@ export async function getHomePageContent() {
     ctaDescription,
     ctaButtonText,
     ctaButtonHref,
-    meetJonImage { asset->{ url }, alt }
+    meetJonImage { asset->{ _id, url }, alt, crop, hotspot }
   }`
   return await client.fetch(query)
 }
