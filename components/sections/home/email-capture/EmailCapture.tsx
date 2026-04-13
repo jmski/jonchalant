@@ -43,8 +43,8 @@ export function EmailCapture({
   }
 
   return (
-    <section className="email-capture-section" ref={sectionRef}>
-      <div className="email-capture-inner email-capture-content">
+    <section className="email-capture-section email-capture-wipe" ref={sectionRef}>
+      <div className="email-capture-inner">
         <div className="email-capture-copy">
           <span className="email-capture-eyebrow">The Weekly</span>
           <h2 className="email-capture-heading">{heading}</h2>

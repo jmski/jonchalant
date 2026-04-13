@@ -110,8 +110,12 @@ export default function RootLayout({
             <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
           </>
         )}
+      </head>
+      <body suppressHydrationWarning>
+        {children}
 
-        {/* JSON-LD Structured Data — plain <script> is inlined in initial HTML so crawlers see it immediately */}
+        {/* JSON-LD Structured Data — placed at end of body (valid per Google) to avoid
+            hydration mismatches from browser extensions that inject scripts into <head> */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PersonSchema()) }}
@@ -124,9 +128,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(LocalBusinessSchema()) }}
         />
-      </head>
-      <body suppressHydrationWarning>
-        {children}
 
         {/* Google Analytics — afterInteractive defers load until the page is interactive */}
         {process.env.NEXT_PUBLIC_GA_ID && (

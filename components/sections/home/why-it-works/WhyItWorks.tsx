@@ -75,19 +75,21 @@ export function WhyItWorks({ label, highlight, paragraph1, paragraph2, paragraph
     <section className="home-why-works-section" ref={sectionRef}>
       <div className="home-why-works-layout">
         {highlight && (
-          <SectionHeader
-            eyebrow={label}
-            title={highlight}
-            className="home-why-works-header"
-          />
+          <div className="why-it-works-left">
+            <SectionHeader
+              eyebrow={label}
+              title={highlight}
+              className="home-why-works-header"
+            />
+          </div>
         )}
         {steps.length > 0 && (
           <div className="home-why-works-timeline">
-            <div className="timeline-line" ref={lineRef} />
+            <div className="timeline-draw-line" ref={lineRef} aria-hidden="true" />
             {steps.map((body, idx) => (
               <div
                 key={idx}
-                className="home-why-works-step timeline-node"
+                className="home-why-works-step timeline-node-item"
                 data-index={idx + 1}
                 ref={(el) => { nodeRefs.current[idx] = el; }}
               >

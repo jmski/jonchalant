@@ -446,17 +446,17 @@
   padding: 4rem 1.25rem;
 }
 
-.email-capture-content {
+.email-capture-wipe .email-capture-inner {
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: clip-path 850ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.email-capture-section.is-visible .email-capture-content {
+.email-capture-wipe.is-visible .email-capture-inner {
   clip-path: inset(0 0% 0 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .email-capture-content { clip-path: none; }
+  .email-capture-wipe .email-capture-inner { clip-path: none; transition: none; }
 }
 
 @media (min-width: 768px) {
@@ -1009,6 +1009,7 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  overflow: clip;
 }
 
 .services-section-header {
@@ -1272,7 +1273,7 @@
   .home-why-works-layout {
     grid-template-columns: 1fr 1.4fr;
     gap: 4rem;
-    align-items: start;
+    align-items: flex-start;
   }
 }
 
@@ -1280,10 +1281,15 @@
   position: relative;
 }
 
-@media (min-width: 768px) {
-  .home-why-works-header {
-    position: sticky;
-    top: 6rem;
+.why-it-works-left {
+  position: sticky;
+  top: 20vh;
+  align-self: flex-start;
+}
+
+@media (max-width: 768px) {
+  .why-it-works-left {
+    position: static;
   }
 }
 
@@ -1315,40 +1321,48 @@
   position: relative;
 }
 
-.home-why-works-timeline > .timeline-line {
+.timeline-draw-line {
   position: absolute;
   left: 1.25rem;
   top: 0;
   width: 1px;
   height: 0;
-  background: var(--border-color);
+  background: rgba(255, 255, 255, 0.2);
   transition: height 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-50%);
   z-index: 0;
 }
 
-.home-why-works-timeline > .timeline-line.is-drawn {
+.timeline-draw-line.is-drawn {
   height: 100%;
 }
 
-.timeline-node {
+.timeline-node-item {
   opacity: 0;
-  transform: translateX(28px);
-  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(24px);
+  transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.timeline-node.is-active {
+.timeline-node-item[data-index="1"].is-active {
   opacity: 1;
   transform: translateX(0);
+  transition-delay: 0ms;
+}
+.timeline-node-item[data-index="2"].is-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 200ms;
+}
+.timeline-node-item[data-index="3"].is-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 400ms;
 }
 
-.timeline-node[data-index="1"].is-active { transition-delay: 0ms; }
-.timeline-node[data-index="2"].is-active { transition-delay: 180ms; }
-.timeline-node[data-index="3"].is-active { transition-delay: 360ms; }
-
 @media (prefers-reduced-motion: reduce) {
-  .timeline-node { opacity: 1; transform: none; transition: none; }
-  .home-why-works-timeline > .timeline-line { height: 100%; transition: none; }
+  .timeline-node-item { opacity: 1; transform: none; transition: none; }
+  .timeline-draw-line { height: 100%; transition: none; }
 }
 
 .home-why-works-step {
@@ -1452,7 +1466,7 @@
   background: rgba(241, 241, 241, 0.15);
 }
 
-.section-wrapper-dark .home-why-works-timeline > .timeline-line {
+.section-wrapper-dark .timeline-draw-line {
   background: rgba(241, 241, 241, 0.15);
 }
 
@@ -1517,6 +1531,36 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cta-headline-line { opacity: 1; transform: none; transition: none; }
+}
+
+/* Home-only split heading — triggered by IntersectionObserver on HomeCTA */
+.cta-split-heading {
+  overflow: hidden;
+}
+
+.cta-split-line {
+  display: block;
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-split-line[data-dir="left"] {
+  transform: translateX(-36px);
+}
+
+.cta-split-line[data-dir="right"] {
+  transform: translateX(36px);
+  transition-delay: 120ms;
+}
+
+.cta-split-heading.is-visible .cta-split-line {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-split-line { opacity: 1; transform: none; transition: none; }
 }
 
 .cta-section-button {

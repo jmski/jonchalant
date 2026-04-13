@@ -9,7 +9,7 @@ import {
   Testimonials,
   BlogCards,
   EmailCapture,
-  CTA,
+  HomeCTA,
 } from '@/components/sections';
 import { PressStrip } from '@/components/shared/press-strip';
 import type { Metadata } from 'next';
@@ -192,7 +192,7 @@ export default async function Home() {
         {/* 10. FINAL CTA */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <CTA
+            <HomeCTA
               title={homeContent?.ctaTitle ?? "Ready to Transform Your Executive Presence?"}
               description={homeContent?.ctaDescription ?? "Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."}
               buttonText={homeContent?.ctaButtonText ?? "Start with the Free Audit"}

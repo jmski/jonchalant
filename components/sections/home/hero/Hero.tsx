@@ -47,22 +47,22 @@ export function Hero({
           <div className="home-hero-accent-bar hero-animate-in" data-delay="2" aria-hidden="true" />
 
           {cyclingOutcomes && cyclingOutcomes.length > 0 && (
-            <div className="home-hero-outcomes-row hero-animate-in" data-delay="2">
+            <div className="home-hero-outcomes-row hero-animate-in" data-delay="3">
               <span className="home-hero-outcomes-prefix">So you can </span>
               <HeroCyclingText outcomes={cyclingOutcomes} />
             </div>
           )}
 
           {description && (
-            <p className="home-hero-description hero-animate-in" data-delay="3">{description}</p>
+            <p className="home-hero-description hero-animate-in" data-delay="4">{description}</p>
           )}
 
           {subtext && (
-            <span className="home-hero-subtext hero-animate-in" data-delay="3">{subtext}</span>
+            <span className="home-hero-subtext hero-animate-in" data-delay="5">{subtext}</span>
           )}
 
           {(ctaText || auditMicrocopy) && (
-            <div className="home-hero-lower hero-animate-in" data-delay="4">
+            <div className="home-hero-lower hero-animate-in" data-delay="6">
               <div className="home-hero-ctas">
                 <div className="home-hero-cta-group">
                   {ctaText && (
