@@ -1506,6 +1506,12 @@
   gap: 40px;
 }
 
+/* Prevent flex-column stretch from making the button full-width */
+.cta-section-left .btn {
+  width: fit-content;
+  align-self: flex-start;
+}
+
 .cta-section-title {
   font-family: var(--font-headline);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
@@ -2356,5 +2362,101 @@
 @media (max-width: 640px) {
   .press-strip-list {
     gap: 1.5rem 2rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SERIES BANNER
+   Full-bleed band; series-banner-inner constrains content width to match
+   the rest of the page (mirrors .section-content padding at each breakpoint).
+   ────────────────────────────────────────────────────────────────────────────
+*/
+.series-banner {
+  background: color-mix(in srgb, var(--bg-tertiary) 80%, var(--color-burnt-indigo) 4%);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-block: 2.5rem;
+}
+
+.series-banner-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-inline: 1.25rem; /* matches .main-content mobile padding */
+  border-left: 3px solid var(--color-burnt-indigo);
+  padding-left: calc(1.25rem + 1.25rem); /* border offset + page padding */
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+@media (min-width: 640px) {
+  .series-banner-inner {
+    padding-inline: 3rem;
+    padding-left: calc(3rem + 1.25rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .series-banner-inner {
+    padding-inline: 4rem;
+    padding-left: calc(4rem + 1.25rem);
+  }
+}
+
+.series-banner-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.series-banner-title {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.series-banner-description {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.series-banner-phase {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin: 0.25rem 0 0;
+}
+
+.series-banner-cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+  text-decoration: none;
+  margin-top: 0.25rem;
+  transition: text-decoration var(--transition-fast);
+}
+
+.series-banner-cta:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .series-banner {
+    padding-block: 2rem;
+  }
+
+  .series-banner-title {
+    font-size: 1.25rem;
   }
 }

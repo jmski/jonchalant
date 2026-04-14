@@ -17,8 +17,8 @@ export const FOOTER_NAV = [
   {
     heading: 'Learn',
     links: [
-      { label: 'Curriculum', href: '/lessons' },
-      { label: 'Blog', href: '/blog' },
+      { label: 'The Blueprint', href: '/lessons' },
+      { label: 'The Archives', href: '/blog' },
       { label: 'Free Audit', href: '/audit' },
     ],
   },

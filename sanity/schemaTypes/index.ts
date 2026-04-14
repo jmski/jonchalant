@@ -18,6 +18,9 @@ import programsPageContent from '../schemas/programsPageContent'
 import emailOptIn from '../schemas/emailOptIn'
 import foundationPage from '../schemas/foundationPage'
 import dancePageContent from '../schemas/dancePageContent'
+import module from '../schemas/module'
+import pressMention from '../schemas/pressMention'
+import blogConfig from '../schemas/blogConfig'
 
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
@@ -38,6 +41,9 @@ export const types = [
   emailOptIn,
   foundationPage,
   dancePageContent,
+  module,
+  pressMention,
+  blogConfig,
 ] as const
 
 export const schema: { types: SchemaTypeDefinition[] } = {

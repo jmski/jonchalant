@@ -7,13 +7,13 @@ import { getDanceCategories, getInstagramReels, getDancePageContent } from '@/li
 import type { DanceCategory, DanceVideo, InstagramReel } from '@/lib/types'
 
 export const metadata: Metadata = {
-  title: 'Dance Curriculum | Movement as Leadership',
+  title: 'The Breakdown | Jonchalant',
   description:
-    'Explore the physical foundations of executive presence. A curriculum connecting movement principles to leadership, presence, and authority.',
+    'Movement as leadership. A portfolio and curriculum exploring the physical foundations of executive presence — how the body leads before the words do.',
   openGraph: {
-    title: 'Dance Curriculum | Jonchalant',
+    title: 'The Breakdown | Jonchalant',
     description:
-      'A curriculum connecting movement principles to leadership, presence, and authority.',
+      'Movement as leadership. How the body leads before the words do.',
     type: 'website',
     url: 'https://jonchalant.com/dance',
     siteName: 'Jonchalant',
@@ -21,16 +21,16 @@ export const metadata: Metadata = {
       url: 'https://jonchalant.com/social/og-dance-1200x630.png',
       width: 1200,
       height: 630,
-      alt: 'Dance Curriculum',
+      alt: 'The Breakdown — Jonchalant',
       type: 'image/png',
     },
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dance Curriculum | Jonchalant',
+    title: 'The Breakdown | Jonchalant',
     description:
-      'A curriculum connecting movement principles to leadership, presence, and authority.',
+      'Movement as leadership. How the body leads before the words do.',
     images: ['https://jonchalant.com/social/og-dance-1200x630.png'],
     creator: '@jonchalant',
   },

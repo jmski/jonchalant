@@ -17,6 +17,7 @@ import auditPage from './auditPage'
 import contactPage from './contactPage'
 import dancePageContent from './dancePageContent'
 import foundationPage from './foundationPage'
+import blogConfig from './blogConfig'
 
 export const schemaTypes = [
   service,
@@ -38,4 +39,5 @@ export const schemaTypes = [
   contactPage,
   dancePageContent,
   foundationPage,
+  blogConfig,
 ]

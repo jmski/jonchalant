@@ -91,6 +91,7 @@ export interface BlogPost {
   title: string
   slug: SanitySlug
   publishedAt: string
+  pillar?: string
   category?: string
   readTime?: number
   excerpt?: string
@@ -229,6 +230,18 @@ export interface EmailOptInContent {
   disclaimer?: string
   successTitle?: string
   successBody?: string
+}
+
+// ── Blog config ───────────────────────────────────────────────────────────────
+
+export interface BlogConfig {
+  seriesBannerEnabled?: boolean
+  seriesName?: string
+  seriesSlug?: string
+  seriesStatus?: string
+  seriesDescription?: string
+  seriesCurrentPhase?: string
+  seriesCTALabel?: string
 }
 
 // ── Database ──────────────────────────────────────────────────────────────────

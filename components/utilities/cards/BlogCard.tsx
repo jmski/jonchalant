@@ -29,6 +29,7 @@ export function BlogCard({
 }: BlogCardProps) {
   const slugValue = typeof slug === 'string' ? slug : slug.current;
   const href = `/blog/${slugValue}`;
+  const isLab = pillar === 'the-lab';
 
   if (variant === 'featured') {
     return (
@@ -58,6 +59,9 @@ export function BlogCard({
                 </span>
               )}
             </div>
+            {isLab && (
+              <span className="blog-card-series-label">THE LAB</span>
+            )}
             <h3 className="blog-featured-card-title">{title}</h3>
             {excerpt && (
               <p className="blog-featured-card-excerpt">{excerpt}</p>
@@ -86,6 +90,9 @@ export function BlogCard({
                 </span>
               )}
             </div>
+            {isLab && (
+              <span className="blog-card-series-label">THE LAB</span>
+            )}
             <h3 className="blog-list-card-title">{title}</h3>
             {excerpt && (
               <p className="blog-list-card-excerpt">{excerpt}</p>
@@ -114,6 +121,9 @@ export function BlogCard({
         </div>
       )}
       <div className="blog-card-header">
+        {isLab && (
+          <span className="blog-card-series-label">THE LAB</span>
+        )}
         <h3 className="blog-card-title">{title}</h3>
         {publishedAt && (
           <time className="blog-card-date">

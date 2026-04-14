@@ -532,6 +532,23 @@ export async function getFoundationPageContent() {
   return await client.fetch(query)
 }
 
+// ============================================================================
+// BLOG CONFIG
+// ============================================================================
+
+export async function getBlogConfig() {
+  const query = `*[_type == "blogConfig"][0] {
+    seriesBannerEnabled,
+    seriesName,
+    seriesSlug,
+    seriesStatus,
+    seriesDescription,
+    seriesCurrentPhase,
+    seriesCTALabel
+  }`
+  return await client.fetch(query)
+}
+
 export async function getPressMentions() {
   const query = `*[_type == "pressMention"] | order(order asc) {
     _id,

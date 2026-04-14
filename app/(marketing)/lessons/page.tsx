@@ -10,12 +10,12 @@ import { CTA } from '@/components/shared/cta'
 import type { Course } from '@/lib/types'
 
 export const metadata: Metadata = {
-  title: "The Quiet Command Curriculum | Jonchalant",
-  description: "Evidence-based leadership courses for introverts and quiet professionals. Master executive presence, body-aware leadership, and subtle persuasion — at your own pace.",
+  title: "The Blueprint | Jonchalant",
+  description: "The foundational movement curriculum behind Jonchalant. Beginner through advanced.",
   keywords: "leadership courses, quiet command, executive presence, introvert leadership, coaching curriculum, online leadership training",
   openGraph: {
-    title: "The Quiet Command Curriculum | Jonchalant",
-    description: "Evidence-based leadership courses for introverts and quiet professionals.",
+    title: "The Blueprint | Jonchalant",
+    description: "The foundational movement curriculum behind Jonchalant. Beginner through advanced.",
     type: "website",
     url: "https://jonchalant.com/lessons",
     siteName: "Jonchalant",
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
       url: "https://jonchalant.com/social/og-lessons-1200x630.png",
       width: 1200,
       height: 630,
-      alt: "The Quiet Command Curriculum",
+      alt: "The Blueprint — Jonchalant",
       type: "image/png",
     },
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Quiet Command Curriculum | Jonchalant",
-    description: "Evidence-based leadership courses for introverts and quiet professionals.",
+    title: "The Blueprint | Jonchalant",
+    description: "The foundational movement curriculum behind Jonchalant. Beginner through advanced.",
     images: ["https://jonchalant.com/social/og-lessons-1200x630.png"],
     creator: "@jonchalant",
   },
@@ -90,7 +90,7 @@ export default async function LessonsPage() {
           <SectionContent>
             <section className="lessons-hero">
               <p className="lessons-hero-eyebrow">Structured Learning</p>
-              <h1 className="lessons-hero-headline">The Quiet Command Curriculum</h1>
+              <h1 className="lessons-hero-headline">The Blueprint</h1>
               {/* COPYWRITER: Replace this paragraph with final site copy */}
               <p className="lessons-hero-description">
                 A structured path from self-aware professional to quietly commanding leader. Each

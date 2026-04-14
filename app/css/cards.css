@@ -1374,3 +1374,17 @@
   margin-top: 0.1em;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   BLOG CARD — SERIES LABEL
+   ────────────────────────────────────────────────────────────────────────────
+*/
+.blog-card-series-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-burnt-indigo);
+  margin-bottom: 0.35rem;
+}
+
