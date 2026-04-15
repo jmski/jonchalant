@@ -25,6 +25,28 @@ export default defineType({
       type: 'text',
       validation: (Rule: StringRule) => Rule.required(),
     }),
+    // — Images —
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'image',
+      description: 'Displayed in the hero section, right column',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'originImage',
+      title: 'Origin / Moment It Clicked Image',
+      type: 'image',
+      description: 'Displayed in the origin story section, left column',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'philosophyImage',
+      title: 'Philosophy Image',
+      type: 'image',
+      description: 'Displayed in the What I Actually Believe section',
+      options: { hotspot: true },
+    }),
     defineField({
       name: 'originSectionLabel',
       title: 'Origin Section — Eyebrow Label',

@@ -9,6 +9,7 @@ export function WhoFor({ headline, body, highlight }: WhoForProps) {
 
   return (
     <section className="about-who-for-section">
+      <div className="about-section-divider"></div>
       <span className="about-who-for-label">{headline}</span>
       {highlight && <span className="about-highlight">{highlight}</span>}
       <div className="about-who-for-text-block">

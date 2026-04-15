@@ -2205,7 +2205,6 @@
 .about-turning-point-section {
   padding-top: 72px;
   padding-bottom: 72px;
-  max-width: 720px;
 }
 
 .about-turning-point-body {
@@ -2226,7 +2225,6 @@
 .about-methodology-narrative-section {
   padding-top: 72px;
   padding-bottom: 72px;
-  max-width: 720px;
 }
 
 .about-methodology-narrative-body {
@@ -2292,6 +2290,176 @@
   color: var(--text-primary);
   line-height: 1.25;
   margin-bottom: 1.5rem;
+}
+
+/* ── About: New Layout Additions ── */
+
+/* Hero two-column grid */
+.about-hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+}
+
+.about-hero-content {
+  flex: 1 1 auto;
+}
+
+.about-hero-image {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .about-hero-grid {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-2xl);
+  }
+
+  .about-hero-content {
+    flex: 0 0 60%;
+  }
+
+  .about-hero-image {
+    flex: 0 0 38%;
+  }
+
+  .about-hero-grid--no-image .about-hero-content {
+    flex: 0 0 100%;
+    max-width: 720px;
+  }
+}
+
+/* Pull quote — Origin section */
+.about-pull-quote {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Turning Point two-column grid (image left, content right) */
+.about-origin-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+}
+
+.about-origin-image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.about-origin-content {
+  flex: 1 1 auto;
+}
+
+@media (min-width: 768px) {
+  .about-origin-grid {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--spacing-2xl);
+  }
+
+  .about-origin-image {
+    flex: 0 0 43%;
+  }
+
+  .about-origin-content {
+    flex: 0 0 54%;
+  }
+
+  .about-origin-grid--no-image .about-origin-content {
+    flex: 0 0 100%;
+    max-width: 720px;
+  }
+}
+
+/* Belief blocks — What I Actually Believe */
+.about-belief-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+}
+
+@media (min-width: 768px) {
+  .about-belief-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.about-belief-block {
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) 0;
+  border-top: 3px solid var(--color-burnt-indigo);
+}
+
+.about-belief-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-burnt-indigo);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.about-belief-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Philosophy full-width image */
+.about-philosophy-image-wrap {
+  position: relative;
+  width: 100%;
+  max-height: 480px;
+  aspect-ratio: 16 / 7;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: var(--spacing-xl) 0;
+}
+
+/* Callout list — Why This Exists */
+.about-callout-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-callout-item {
+  border-left: 3px solid var(--color-burnt-indigo);
+  padding-left: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Section divider between Why This Exists and Who This Is For */
+.about-section-divider {
+  border-top: 1px solid var(--border-subtle);
+  margin-block: 2.5rem;
 }
 
 /* ── Press Strip ─────────────────────────────────────────────────────────────── */

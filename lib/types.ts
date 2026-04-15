@@ -8,7 +8,24 @@
 // ── Sanity primitives ─────────────────────────────────────────────────────────
 
 export interface SanitySlug { current: string }
-export interface SanityImage { asset: { _ref: string }; alt?: string; hotspot?: boolean }
+
+export interface SanityImageAsset {
+  _id: string
+  url: string
+  metadata?: {
+    dimensions?: {
+      width: number
+      height: number
+    }
+  }
+}
+
+export interface SanityImage {
+  asset: SanityImageAsset
+  hotspot?: { x: number; y: number }
+  crop?: { top: number; bottom: number; left: number; right: number }
+  alt?: string
+}
 
 // ── Learning portal / curriculum ──────────────────────────────────────────────
 
@@ -230,6 +247,35 @@ export interface EmailOptInContent {
   disclaimer?: string
   successTitle?: string
   successBody?: string
+}
+
+// ── About page ────────────────────────────────────────────────────────────────
+
+export interface AboutPage {
+  heroHeadline?: string
+  heroDescription?: string
+  heroImage?: SanityImage
+  originImage?: SanityImage
+  philosophyImage?: SanityImage
+  originSectionLabel?: string
+  originSectionHeadline?: string
+  originSectionDescription?: string
+  originSectionHighlight?: string
+  turningPointHeadline?: string
+  turningPointBody?: string
+  turningPointHighlight?: string
+  methodologyHeadline?: string
+  methodologyBody?: string
+  methodologyHighlight?: string
+  whyExistsHeadline?: string
+  whyExistsBody?: string
+  whyExistsHighlight?: string
+  whoForHeadline?: string
+  whoForBody?: string
+  whoForHighlight?: string
+  closingHeadline?: string
+  closingBody?: string
+  ctaButtonText?: string
 }
 
 // ── Blog config ───────────────────────────────────────────────────────────────

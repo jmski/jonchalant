@@ -277,6 +277,51 @@ export async function getAboutPageContent() {
   const query = `*[_type == "aboutPage" && title == "About"][0] {
     heroHeadline,
     heroDescription,
+    heroImage {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      hotspot,
+      crop,
+      alt
+    },
+    originImage {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      hotspot,
+      crop,
+      alt
+    },
+    philosophyImage {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      hotspot,
+      crop,
+      alt
+    },
     originSectionLabel,
     originSectionHeadline,
     originSectionDescription,
