@@ -1,48 +1,59 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import type { ReactNode } from 'react';
 import { BlogCard } from '@/components/utilities/cards';
 import { BlogOptIn } from '@/components/forms/BlogOptIn';
 import { ScrollStagger, ScrollStaggerItem } from '@/components/animations';
 import { SectionWrapper, SectionContent } from '@/components/layout';
-import type { EmailOptInContent } from '@/lib/types';
+import type { EmailOptInContent, BlogConfig } from '@/lib/types';
 
 interface BlogPost {
   _id: string;
   title: string;
   slug: { current: string };
   excerpt?: string;
-  pillar: string;
+  pillar?: string;
   readingTime?: number;
   publishedAt?: string;
   featured?: boolean;
   coverImage?: { asset?: { url?: string }; alt?: string };
 }
 
+const FILTERS = [
+  { id: 'all', label: 'All' },
+  { id: 'the-lab', label: 'The Lab' },
+  { id: 'movement-body', label: 'Movement & Body' },
+  { id: 'presence-confidence', label: 'Presence & Confidence' },
+  { id: 'leadership-career', label: 'Leadership & Career' },
+] as const;
+
+type FilterId = (typeof FILTERS)[number]['id'];
+
 interface BlogClientProps {
   posts: BlogPost[];
   optIn?: EmailOptInContent | null;
+  siteSettings?: BlogConfig | null;
+  initialPillar?: string | null;
+  seriesBanner?: ReactNode;
 }
 
-export function BlogClient({ posts, optIn }: BlogClientProps) {
-  const categories = useMemo(() => {
-    const pillars = posts.map((p) => p.pillar).filter(Boolean)
-    return ['All', ...Array.from(new Set(pillars))]
-  }, [posts])
-
+export function BlogClient({ posts, optIn, initialPillar, seriesBanner }: BlogClientProps) {
   const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeFilter, setActiveFilter] = useState<FilterId>(() => {
+    if (initialPillar && FILTERS.some((f) => f.id === initialPillar)) {
+      return initialPillar as FilterId;
+    }
+    return 'all';
+  });
 
-  const isFiltering = search.trim() !== '' || activeCategory !== 'All';
-
+  const isFiltering = search.trim() !== '' || activeFilter !== 'all';
 
   const filtered = useMemo(() => {
     let result = posts;
 
-    if (activeCategory !== 'All') {
-      result = result.filter(
-        (p) => p.pillar?.toLowerCase() === activeCategory.toLowerCase(),
-      );
+    if (activeFilter !== 'all') {
+      result = result.filter((p) => p.pillar === activeFilter);
     }
 
     if (search.trim()) {
@@ -56,7 +67,7 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
     }
 
     return result;
-  }, [posts, search, activeCategory]);
+  }, [posts, search, activeFilter]);
 
   const featuredPosts = posts.filter((p) => p.featured);
   const regularPosts = posts.filter((p) => !p.featured);
@@ -67,9 +78,9 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
       <SectionWrapper variant="primary">
         <SectionContent>
           <div className="blog-page-header">
-            <h1 className="blog-page-title">Leadership Blog</h1>
+            <h1 className="blog-page-title">The Archives</h1>
             <p className="blog-page-subtitle">
-              Articles on executive presence, quiet command, confidence coaching, and leadership for introverts.
+              Practical writing on presence, movement, and what it actually takes to stop disappearing in rooms.
             </p>
             <div className="blog-search-bar">
               <svg
@@ -107,21 +118,21 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
               )}
             </div>
 
-            {/* Category Filter — directly under search */}
+            {/* Category Filter */}
             <div
               className="blog-filter-tabs"
               role="tablist"
               aria-label="Filter articles by category"
             >
-              {categories.map((cat) => (
+              {FILTERS.map((f) => (
                 <button
-                  key={cat}
+                  key={f.id}
                   role="tab"
-                  aria-selected={activeCategory === cat}
-                  className={`blog-filter-tab${activeCategory === cat ? ' active' : ''}`}
-                  onClick={() => setActiveCategory(cat)}
+                  aria-selected={activeFilter === f.id}
+                  className={`blog-filter-tab${activeFilter === f.id ? ' active' : ''}`}
+                  onClick={() => setActiveFilter(f.id)}
                 >
-                  {cat}
+                  {f.label}
                 </button>
               ))}
             </div>
@@ -137,7 +148,7 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
               <div className="blog-no-results">
                 <p className="blog-no-results-message">
                   No articles found
-                  {activeCategory !== 'All' ? ` in "${activeCategory}"` : ''}
+                  {activeFilter !== 'all' ? ` in "${FILTERS.find((f) => f.id === activeFilter)?.label}"` : ''}
                   {search ? ` matching "${search}"` : ''}.
                 </p>
                 <button
@@ -145,7 +156,7 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
                   className="blog-no-results-reset"
                   onClick={() => {
                     setSearch('');
-                    setActiveCategory('All');
+                    setActiveFilter('all');
                   }}
                 >
                   Clear filters
@@ -156,7 +167,7 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
                 <div className="blog-posts-section-header">
                   <h2 className="blog-posts-section-title">
                     {filtered.length} {filtered.length === 1 ? 'Article' : 'Articles'}
-                    {activeCategory !== 'All' ? ` — ${activeCategory}` : ''}
+                    {activeFilter !== 'all' ? ` — ${FILTERS.find((f) => f.id === activeFilter)?.label}` : ''}
                   </h2>
                 </div>
                 <ScrollStagger>
@@ -175,7 +186,16 @@ export function BlogClient({ posts, optIn }: BlogClientProps) {
         </SectionWrapper>
       ) : (
         <>
-          {/* Featured articles (default view only) */}
+          {/* Series banner — shown in default (non-filtered) view */}
+          {/* SectionContent intentionally omitted: series-banner is full-bleed, */}
+          {/* series-banner-inner constrains the content width internally */}
+          {seriesBanner && (
+            <SectionWrapper variant="secondary">
+              {seriesBanner}
+            </SectionWrapper>
+          )}
+
+          {/* Featured articles */}
           {featuredPosts.length > 0 && (
             <SectionWrapper variant="secondary">
               <SectionContent>

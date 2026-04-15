@@ -135,30 +135,31 @@
 .blog-filter-tab {
   padding: 0.4rem 1rem;
   border: 1px solid var(--border-color);
-  border-radius: 2rem;
-  background: var(--bg-light);
-  font-size: 0.8125rem;
+  border-radius: 9999px;
+  background: transparent;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--primary-text);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
   cursor: pointer;
   transition:
     border-color var(--transition-fast),
-    color var(--transition-fast),
-    background var(--transition-fast);
+    color var(--transition-fast);
   font-family: var(--font-body);
 }
 
 .blog-filter-tab:hover {
-  border-color: var(--accent-primary);
-  color: var(--btn-primary-text);
-  background: var(--accent-primary);
+  border-color: var(--color-burnt-indigo);
+  color: var(--color-burnt-indigo);
+  background: transparent;
 }
 
 .blog-filter-tab.active,
 .blog-filter-tab[aria-selected="true"] {
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
-  color: var(--btn-primary-text);
+  background: var(--color-burnt-indigo);
+  border-color: var(--color-burnt-indigo);
+  color: #ffffff;
 }
 
 /* ─── Blog No-Results State ─────────────────────────────────────────────────── */
@@ -966,7 +967,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   BLOG OPT-IN (Quiet Command Starter Guide)
+   BLOG OPT-IN (Foundation Starter Guide)
    ───────────────────────────────────────────────────────────────────────────── */
 
 .blog-optin {

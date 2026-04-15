@@ -30,12 +30,10 @@ export default defineType({
       description: 'Primary keyword/pillar this post targets',
       options: {
         list: [
-          { title: 'Executive Presence', value: 'executive-presence' },
-          { title: 'Quiet Command', value: 'quiet-command' },
-          { title: 'Leadership Coaching for Introverts', value: 'leadership-coaching-introverts' },
-          { title: 'Confidence Coaching', value: 'confidence-coaching' },
-          { title: 'Professional Presence', value: 'professional-presence' },
-          { title: 'Body Language Leadership', value: 'body-language-leadership' },
+      { title: 'Movement & Body', value: 'movement-body' },
+      { title: 'Presence & Confidence', value: 'presence-confidence' },
+      { title: 'Leadership & Career', value: 'leadership-career' },
+      { title: 'The Lab', value: 'the-lab' },
         ],
       },
     }),

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { CTA } from "@/components/sections";
 import { Hero as AboutHero, Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
@@ -56,6 +55,7 @@ export default async function About() {
             <AboutHero
               headline={aboutContent?.heroHeadline}
               description={aboutContent?.heroDescription}
+              heroImage={aboutContent?.heroImage}
             />
           </SectionContent>
         </SectionWrapper>
@@ -83,6 +83,7 @@ export default async function About() {
                 headline={aboutContent.turningPointHeadline}
                 body={aboutContent.turningPointBody ?? ''}
                 highlight={aboutContent.turningPointHighlight}
+                originImage={aboutContent.originImage}
               />
               </ScrollFade>
             </SectionContent>
@@ -98,6 +99,7 @@ export default async function About() {
                 headline={aboutContent.methodologyHeadline}
                 body={aboutContent.methodologyBody ?? ''}
                 highlight={aboutContent.methodologyHighlight}
+                philosophyImage={aboutContent.philosophyImage}
               />
               </ScrollFade>
             </SectionContent>

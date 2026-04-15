@@ -1,0 +1,1 @@
+export { SeriesBanner } from './SeriesBanner';
