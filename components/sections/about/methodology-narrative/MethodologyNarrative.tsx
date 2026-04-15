@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { SanityImage } from '@/lib/types';
+import { ScrollReveal } from '@/components/animations';
 
 interface MethodologyNarrativeProps {
   headline: string;
@@ -24,35 +25,49 @@ export function MethodologyNarrative({ headline, body, highlight, philosophyImag
 
   return (
     <section className="about-methodology-narrative-section">
-      <span className="about-methodology-narrative-label">{headline}</span>
-      {highlight && <span className="about-highlight">{highlight}</span>}
+      <ScrollReveal variant="fade-up">
+        <span className="about-methodology-narrative-label">{headline}</span>
+        {highlight && <span className="about-highlight">{highlight}</span>}
+      </ScrollReveal>
 
       <div className="about-belief-grid">
-        {BELIEF_BLOCKS.map((block) => (
-          <div key={block.label} className="about-belief-block">
-            <p className="about-belief-label">{block.label}</p>
-            <p className="about-belief-body">{block.body}</p>
+        {/* Choreographer snaps in — rigid, instant, like a set routine */}
+        <ScrollReveal variant="snap">
+          <div className="about-belief-block">
+            <p className="about-belief-label">{BELIEF_BLOCKS[0].label}</p>
+            <p className="about-belief-body">{BELIEF_BLOCKS[0].body}</p>
           </div>
-        ))}
+        </ScrollReveal>
+        {/* Freestyler eases in — fluid, unhurried, like improvisation */}
+        <ScrollReveal variant="fade" delay={200}>
+          <div className="about-belief-block">
+            <p className="about-belief-label">{BELIEF_BLOCKS[1].label}</p>
+            <p className="about-belief-body">{BELIEF_BLOCKS[1].body}</p>
+          </div>
+        </ScrollReveal>
       </div>
 
       {philosophyImage && (
-        <div className="about-philosophy-image-wrap">
-          <Image
-            src={philosophyImage.asset.url}
-            alt={philosophyImage.alt ?? 'Philosophy'}
-            fill
-            sizes="100vw"
-            style={{ objectFit: 'cover' }}
-          />
-        </div>
+        <ScrollReveal variant="fade" delay={100}>
+          <div className="about-philosophy-image-wrap">
+            <Image
+              src={philosophyImage.asset.url}
+              alt={philosophyImage.alt ?? 'Philosophy'}
+              fill
+              sizes="100vw"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        </ScrollReveal>
       )}
 
-      <div className="about-methodology-narrative-body">
-        {paragraphs.map((para, idx) => (
-          <p key={idx} className="about-methodology-narrative-paragraph">{para}</p>
-        ))}
-      </div>
+      <ScrollReveal variant="fade" delay={150}>
+        <div className="about-methodology-narrative-body">
+          {paragraphs.map((para, idx) => (
+            <p key={idx} className="about-methodology-narrative-paragraph">{para}</p>
+          ))}
+        </div>
+      </ScrollReveal>
     </section>
   );
 }

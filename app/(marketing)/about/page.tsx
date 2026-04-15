@@ -61,7 +61,7 @@ export default async function About() {
         </SectionWrapper>
 
         {/* 2 — ORIGIN STORY: why movement + leadership */}
-        <SectionWrapper variant="secondary">
+        <SectionWrapper variant="tertiary">
           <SectionContent>
             <ScrollFade>
             <Origin
@@ -90,9 +90,9 @@ export default async function About() {
           </SectionWrapper>
         )}
 
-        {/* 4 — METHODOLOGY: freestyle/choreography narrative (secondary bg via SectionWrapper) */}
+        {/* 4 — METHODOLOGY: freestyle/choreography narrative (tertiary bg = intellectual core) */}
         {aboutContent?.methodologyHeadline && (
-          <SectionWrapper variant="secondary">
+          <SectionWrapper variant="tertiary">
             <SectionContent>
               <ScrollFade>
               <MethodologyNarrative
@@ -137,13 +137,14 @@ export default async function About() {
         )}
 
         {/* CTA — driven by Sanity closing* fields with hardcoded fallbacks */}
+        {/* TODO: Trim closingBody in Sanity Studio — keep only up to "That's your foundation." Remove "We start with the body..." onwards */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <CTA
               title={aboutContent?.closingHeadline ?? "Your Presence Matters. Let's Amplify It."}
               description={aboutContent?.closingBody ?? "Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today — and the fastest path to where you want to be."}
               buttonText={aboutContent?.ctaButtonText ?? "Get Your Free Audit Now"}
-              buttonLink="/contact"
+              buttonLink="/audit"
             />
           </SectionContent>
         </SectionWrapper>

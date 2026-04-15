@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { ScrollFade } from "@/components/animations";
+import { ScrollReveal } from "@/components/animations";
 import { Button } from '@/components/ui/Button';
 
 interface CTAProps {
@@ -41,7 +41,7 @@ export default function CTA({
     : [title];
 
   return (
-    <ScrollFade>
+    <ScrollReveal variant="fade-up">
       <div className="cta-section" ref={sectionRef}>
         <div className="cta-section-left">
           <h2 className="cta-section-title">
@@ -60,6 +60,6 @@ export default function CTA({
           {description}
         </div>
       </div>
-    </ScrollFade>
+    </ScrollReveal>
   );
 }

@@ -1,3 +1,5 @@
+import { ScrollReveal } from '@/components/animations';
+
 interface OriginProps {
   label?: string;
   headline?: string;
@@ -14,15 +16,21 @@ export function Origin({ label, headline, description, highlight }: OriginProps)
     <section className="about-origin-section">
       {headline ? (
         <>
-          <span className="about-origin-label">{label ?? 'WHAT CHANGED EVERYTHING'}</span>
-          {firstPara && (
-            <p className="about-origin-description">{firstPara}</p>
-          )}
+          <ScrollReveal variant="fade">
+            <span className="about-origin-label">{label ?? 'WHAT CHANGED EVERYTHING'}</span>
+            {firstPara && (
+              <p className="about-origin-description">{firstPara}</p>
+            )}
+          </ScrollReveal>
           {highlight && (
-            <blockquote className="about-pull-quote">{highlight}</blockquote>
+            <ScrollReveal variant="fade-left" delay={100}>
+              <blockquote className="about-pull-quote">{highlight}</blockquote>
+            </ScrollReveal>
           )}
           {restParas.map((para, idx) => (
-            <p key={idx} className="about-origin-description">{para}</p>
+            <ScrollReveal key={idx} variant="fade" delay={200}>
+              <p className="about-origin-description">{para}</p>
+            </ScrollReveal>
           ))}
         </>
       ) : (

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { SanityImage } from '@/lib/types';
+import { ScrollReveal } from '@/components/animations';
 
 interface AboutHeroProps {
   headline?: string;
@@ -15,25 +16,31 @@ export function Hero({ headline, description, heroImage }: AboutHeroProps) {
     <section className="about-hero-section">
       <div className={`about-hero-grid${heroImage ? '' : ' about-hero-grid--no-image'}`}>
         <div className="about-hero-content">
-          <span className="about-hero-intro">Who I Am</span>
-          <h1 className="about-hero-title">
-            {displayHeadline}
-          </h1>
-          <p className="about-hero-subtitle">
-            {displayDescription}
-          </p>
+          <ScrollReveal variant="fade-up">
+            <span className="about-hero-intro">Who I Am</span>
+            <h1 className="about-hero-title">
+              {displayHeadline}
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal variant="fade-up" delay={150}>
+            <p className="about-hero-subtitle">
+              {displayDescription}
+            </p>
+          </ScrollReveal>
         </div>
         {heroImage && (
-          <div className="about-hero-image">
-            <Image
-              src={heroImage.asset.url}
-              alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
-              fill
-              sizes="(max-width: 768px) 100vw, 40vw"
-              style={{ objectFit: 'cover' }}
-              priority
-            />
-          </div>
+          <ScrollReveal variant="fade-right" delay={250}>
+            <div className="about-hero-image">
+              <Image
+                src={heroImage.asset.url}
+                alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                style={{ objectFit: 'cover' }}
+                priority
+              />
+            </div>
+          </ScrollReveal>
         )}
       </div>
       <div className="about-hero-divider"></div>

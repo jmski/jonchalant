@@ -519,6 +519,59 @@ select {
   }
 }
 
+/* ── ScrollReveal — IntersectionObserver entrance animations ───────────── */
+
+/*
+ * Base state: hidden. All variants set their initial transform/opacity here.
+ * The --visible modifier transitions to the resting state.
+ * Wrapped in prefers-reduced-motion: no-preference so users who prefer
+ * reduced motion see content immediately (no animation).
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal {
+    /* shared initial state */
+    opacity: 0;
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+
+  /* variant: fade */
+  .scroll-reveal--fade {
+    /* opacity only, no transform */
+  }
+
+  /* variant: fade-up */
+  .scroll-reveal--fade-up {
+    transform: translateY(20px);
+  }
+
+  /* variant: fade-left */
+  .scroll-reveal--fade-left {
+    transform: translateX(-15px);
+  }
+
+  /* variant: fade-right */
+  .scroll-reveal--fade-right {
+    transform: translateX(15px);
+  }
+
+  /* variant: scale-fade */
+  .scroll-reveal--scale-fade {
+    transform: scale(1.02);
+  }
+
+  /* variant: snap — intentionally abrupt, no easing */
+  .scroll-reveal--snap {
+    transition: opacity 150ms linear;
+  }
+
+  /* visible state — all variants resolve to full opacity + no transform */
+  .scroll-reveal--visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ── Hero staggered entrance ────────────────────────────────────────────── */
 
 @keyframes heroFadeUp {
