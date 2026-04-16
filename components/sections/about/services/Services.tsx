@@ -21,7 +21,7 @@ export function Services({ services = [] }: ServicesProps) {
 
       <div className="about-services-grid">
         {services && services.length > 0 ? (
-          services.map((service: any) => (
+          services.map((service: Service) => (
             <div key={service._id} className="about-service-card">
               <h3 className="about-service-card-title">
                 {service.title}

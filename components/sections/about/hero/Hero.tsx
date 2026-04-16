@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { SanityImage } from '@/lib/types';
+import { ScrollReveal } from '@/components/animations';
 
 interface AboutHeroProps {
   headline?: string;
@@ -15,24 +16,40 @@ export function Hero({ headline, description, heroImage }: AboutHeroProps) {
     <section className="about-hero-section">
       <div className={`about-hero-grid${heroImage ? '' : ' about-hero-grid--no-image'}`}>
         <div className="about-hero-content">
-          <span className="about-hero-intro">Who I Am</span>
-          <h1 className="about-hero-title">
-            {displayHeadline}
-          </h1>
-          <p className="about-hero-subtitle">
-            {displayDescription}
-          </p>
+          <ScrollReveal variant="fade-up">
+            <span className="about-hero-intro">Who I Am</span>
+            <h1 className="about-hero-title">
+              {displayHeadline}
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal variant="fade-up" delay={150}>
+            <p className="about-hero-subtitle">
+              {displayDescription}
+            </p>
+          </ScrollReveal>
         </div>
         {heroImage && (
-          <div className="about-hero-image">
-            <Image
-              src={heroImage.asset.url}
-              alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
-              fill
-              sizes="(max-width: 768px) 100vw, 40vw"
-              style={{ objectFit: 'cover' }}
-              priority
-            />
+          <div className="about-hero-image-column">
+            <ScrollReveal variant="fade-right" delay={250}>
+              <div className="about-hero-image">
+                <Image
+                  src={heroImage.asset.url}
+                  alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  style={{ objectFit: 'cover' }}
+                  priority
+                />
+              </div>
+            </ScrollReveal>
+            {/* TODO: Pull name/role/location from Sanity (aboutPage.heroIdentity fields) */}
+            <ScrollReveal variant="fade" delay={400}>
+              <div className="about-hero-identity">
+                <span className="about-hero-identity-name">Jon Gelua</span>
+                <span className="about-hero-identity-role">Executive Presence Coach</span>
+                <span className="about-hero-identity-location">Based in Ontario, Canada</span>
+              </div>
+            </ScrollReveal>
           </div>
         )}
       </div>

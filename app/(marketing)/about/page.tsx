@@ -61,7 +61,7 @@ export default async function About() {
         </SectionWrapper>
 
         {/* 2 — ORIGIN STORY: why movement + leadership */}
-        <SectionWrapper variant="secondary">
+        <SectionWrapper variant="tertiary">
           <SectionContent>
             <ScrollFade>
             <Origin
@@ -83,16 +83,15 @@ export default async function About() {
                 headline={aboutContent.turningPointHeadline}
                 body={aboutContent.turningPointBody ?? ''}
                 highlight={aboutContent.turningPointHighlight}
-                originImage={aboutContent.originImage}
               />
               </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
 
-        {/* 4 — METHODOLOGY: freestyle/choreography narrative (secondary bg via SectionWrapper) */}
+        {/* 4 — METHODOLOGY: freestyle/choreography narrative (tertiary bg = intellectual core) */}
         {aboutContent?.methodologyHeadline && (
-          <SectionWrapper variant="secondary">
+          <SectionWrapper variant="tertiary">
             <SectionContent>
               <ScrollFade>
               <MethodologyNarrative
@@ -115,6 +114,7 @@ export default async function About() {
                 headline={aboutContent.whyExistsHeadline}
                 body={aboutContent.whyExistsBody ?? ''}
                 highlight={aboutContent.whyExistsHighlight}
+                kidsImage={aboutContent.originImage}
               />
               </ScrollFade>
             </SectionContent>
@@ -137,13 +137,20 @@ export default async function About() {
         )}
 
         {/* CTA — driven by Sanity closing* fields with hardcoded fallbacks */}
+        {/* TODO: Trim closingBody in Sanity Studio — keep only up to "That's your foundation." Remove "We start with the body..." onwards */}
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <CTA
-              title={aboutContent?.closingHeadline ?? "Your Presence Matters. Let's Amplify It."}
-              description={aboutContent?.closingBody ?? "Coaching works best when you're ready. This free Presence Audit shows exactly where your executive presence stands today — and the fastest path to where you want to be."}
-              buttonText={aboutContent?.ctaButtonText ?? "Get Your Free Audit Now"}
-              buttonLink="/contact"
+              title={aboutContent?.closingHeadline ?? "Your Presence Matters. Let's Build It."}
+              sub={aboutContent?.closingBody ?? "You're not broken. I'm here to show you that the version of yourself you've been holding back — that's not your weakness. That's your foundation."}
+              description={aboutContent?.closingBody ?? "You're not broken. I'm here to show you that the version of yourself you've been holding back — that's not your weakness. That's your foundation."}
+              buttonText={aboutContent?.ctaButtonText ?? "Book Your Free Presence Audit"}
+              buttonLink="/audit"
+              previewItems={[
+                { number: '01', text: 'A 7-question audit you can do in under 5 minutes' },
+                { number: '02', text: 'Your presence score with honest context — no sales pitch' },
+                { number: '03', text: 'A personal follow-up from me if you want to go deeper' },
+              ]}
             />
           </SectionContent>
         </SectionWrapper>

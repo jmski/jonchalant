@@ -19,7 +19,7 @@ export function Introvert({ traits = [] }: IntrovertProps) {
         </p>
 
         <p className="about-introvert-paragraph">
-          Every trait that makes you feel "too quiet" or "not enough" in the room is actually signal — of a leader who thinks clearly, builds trust slowly but deeply, and doesn't perform authority. That's rare. That's valuable. That's what we work with.
+          Every trait that makes you feel &ldquo;too quiet&rdquo; or &ldquo;not enough&rdquo; in the room is actually signal — of a leader who thinks clearly, builds trust slowly but deeply, and doesn&apos;t perform authority. That&apos;s rare. That&apos;s valuable. That&apos;s what we work with.
         </p>
 
         <p className="about-introvert-cta-text">
