@@ -1494,9 +1494,9 @@
 */
 .cta-section {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 80px;
-  align-items: center;
+  align-items: start;
   padding: 96px 0;
 }
 
@@ -1530,6 +1530,67 @@
   max-width: none;
   margin: 0;
   text-align: left;
+}
+
+.cta-sub {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 480px;
+}
+
+.cta-preview {
+  padding-top: 1rem;
+}
+
+.cta-preview-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted-moss);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.cta-preview-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cta-preview-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cta-preview-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.cta-preview-number {
+  font-family: var(--font-headline);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-muted-moss);
+  font-variant-numeric: tabular-nums;
+}
+
+.cta-preview-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
 
 .cta-headline-line {
@@ -1619,6 +1680,10 @@
     grid-template-columns: 1fr;
     gap: 40px;
     padding: 72px 0;
+  }
+
+  .cta-preview {
+    padding-top: 0;
   }
 }
 
@@ -1988,6 +2053,14 @@
 .about-origin-section .about-origin-description,
 .about-origin-section .about-origin-label {
   max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.about-origin-section .about-pull-quote {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── About Philosophy / Methodology ── */
@@ -2268,7 +2341,6 @@
 .about-why-exists-section {
   padding-top: 72px;
   padding-bottom: 72px;
-  max-width: 720px;
 }
 
 .about-why-exists-body {
@@ -2285,23 +2357,73 @@
   max-width: 640px;
 }
 
-.about-why-exists-section .about-highlight {
+.about-why-exists-section .about-why-exists-label,
+.about-why-exists-section .about-highlight,
+.about-why-exists-section .about-why-exists-paragraph,
+.about-why-exists-section .about-callout {
   max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+/* Kids moment — two-column breakout within Why This Exists centered essay */
+.about-why-exists-kids-moment {
+  max-width: 920px;
+  margin: 2.5rem auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.about-why-exists-kids-content p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+  font-style: italic;
+}
+
+.about-why-exists-kids-image {
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .about-why-exists-kids-moment {
+    grid-template-columns: 1fr 320px;
+    gap: 3rem;
+  }
+
+  .about-why-exists-kids-image {
+    max-width: none;
+    margin: 0;
+  }
 }
 
 /* ── About Who For ── */
 .about-who-for-section {
   padding-top: 72px;
   padding-bottom: 72px;
-  max-width: 720px;
 }
 
 .about-who-for-section .about-who-for-text-block {
   max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.about-who-for-section .about-highlight {
+.about-who-for-section .about-who-for-label,
+.about-who-for-section .about-highlight,
+.about-who-for-section .about-who-for-paragraph,
+.about-who-for-section .about-who-for-paragraph--styles {
   max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .about-who-for-text-block {
@@ -2351,12 +2473,46 @@
   flex: 1 1 auto;
 }
 
+.about-hero-image-column {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
 .about-hero-image {
   position: relative;
   aspect-ratio: 3 / 4;
   border-radius: 4px;
   overflow: hidden;
-  flex-shrink: 0;
+}
+
+.about-hero-identity {
+  margin-top: 1.5rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-muted-moss);
+}
+
+.about-hero-identity-name {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.about-hero-identity-role {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.about-hero-identity-location {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
 }
 
 @media (min-width: 768px) {
@@ -2370,9 +2526,13 @@
     flex: 0 0 60%;
   }
 
-  .about-hero-image {
+  .about-hero-image-column {
     flex: 0 0 38%;
     margin-top: 2.5rem;
+  }
+
+  .about-hero-identity {
+    display: flex;
   }
 
   .about-hero-grid--no-image .about-hero-content {
@@ -2397,7 +2557,7 @@
   max-width: 640px;
 }
 
-/* Turning Point two-column grid (image left, content right) */
+/* Turning Point two-column grid (pullquote left, content right) */
 .about-origin-grid {
   display: flex;
   flex-direction: column;
@@ -2405,112 +2565,182 @@
   width: 100%;
 }
 
-.about-origin-image {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border-radius: 4px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
 .about-origin-content {
   flex: 1 1 auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
   .about-origin-grid {
     flex-direction: row;
     align-items: flex-start;
-    gap: var(--spacing-2xl);
+    gap: 4rem;
   }
 
-  .about-origin-image {
-    flex: 0 0 43%;
+  .about-turning-point-feature {
+    flex: 0 0 auto;
+    width: 42%;
+    max-width: 420px;
   }
 
   .about-origin-content {
-    flex: 0 0 54%;
-  }
-
-  .about-origin-grid--no-image .about-origin-content {
-    flex: 0 0 100%;
-    max-width: 720px;
+    flex: 1 1 0;
   }
 }
 
-/* Belief blocks — What I Actually Believe */
-.about-belief-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-  margin: var(--spacing-xl) 0;
+/* Typographic pullquote — Turning Point feature column */
+.about-turning-point-feature {
+  position: relative;
+  padding: 3rem 2rem 2rem;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  align-self: start;
+  margin-top: 2rem;
 }
 
-@media (min-width: 768px) {
-  .about-belief-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+.about-turning-point-feature-mark {
+  position: absolute;
+  top: -0.25rem;
+  left: 1.5rem;
+  font-family: var(--font-headline);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--color-muted-moss);
+  opacity: 0.4;
+  font-style: italic;
 }
 
-.about-belief-block {
-  min-height: 140px;
+.about-turning-point-feature-quote {
+  font-family: var(--font-headline);
+  font-size: 1.375rem;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+
+.about-turning-point-feature-attribution {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+/* Belief blocks — What I Actually Believe (vertical before/after reveal) */
+.about-belief-comparison {
+  max-width: 640px;
+  margin: 3rem auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 0;
 }
 
-.about-belief-label {
-  font-size: 0.875rem;
+/* THE CHOREOGRAPHER — rejected state */
+.about-belief-block--rejected {
+  padding: 2rem 2.5rem;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  position: relative;
+  opacity: 0.55;
+  transition: opacity 0.3s ease-out;
+}
+
+.about-belief-block--rejected:hover {
+  opacity: 0.75;
+}
+
+.about-belief-block--rejected .about-belief-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
   font-weight: 600;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-secondary);
-  margin: 0 0 0.75rem;
+  color: var(--text-tertiary);
+  display: block;
+  margin-bottom: 0.75rem;
 }
 
-.about-belief-body {
-  font-size: 1.0625rem;
-  line-height: 1.6;
+.about-belief-block--rejected .about-belief-body {
+  font-size: 1.125rem;
+  line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
+  text-decoration: line-through;
+  text-decoration-color: var(--text-tertiary);
+  text-decoration-thickness: 1px;
 }
 
-/* THE CHOREOGRAPHER — rigid, mechanical */
-.about-belief-block:first-child {
-  border-top: 3px solid var(--color-burnt-indigo);
-  border-radius: 0;
-  padding: 2rem;
-  background: rgba(74, 58, 92, 0.03);
-  transition: all 0.1s linear;
+/* Transition element */
+.about-belief-transition {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
 }
 
-.about-belief-block:first-child:hover {
-  background: rgba(74, 58, 92, 0.06);
-  border-top-color: var(--color-burnt-indigo-light);
+.about-belief-transition-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
 }
 
-.about-belief-block:first-child .about-belief-label {
-  font-family: var(--font-body);
-  letter-spacing: 0.15em;
+.about-belief-transition-text {
+  font-family: var(--font-headline);
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
 }
 
-/* THE FREESTYLER — organic, fluid */
-.about-belief-block:last-child {
-  border-top: 3px solid var(--color-muted-moss);
+/* THE FREESTYLER — chosen state */
+.about-belief-block--chosen {
+  padding: 2.5rem 2.5rem;
+  background: rgba(107, 142, 99, 0.05);
+  border: 1px solid var(--color-muted-moss);
   border-radius: 12px;
-  padding: 2rem;
-  background: rgba(107, 142, 99, 0.03);
+  position: relative;
   transition: all 0.4s ease-out;
 }
 
-.about-belief-block:last-child:hover {
-  background: rgba(107, 142, 99, 0.06);
-  border-top-color: var(--color-moss-light);
+.about-belief-block--chosen:hover {
+  background: rgba(107, 142, 99, 0.08);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(107, 142, 99, 0.08);
 }
 
-.about-belief-block:last-child .about-belief-body {
-  font-style: italic;
+.about-belief-block--chosen .about-belief-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-muted-moss);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.about-belief-block--chosen .about-belief-body {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin: 0;
+  font-family: var(--font-headline);
+  font-weight: 400;
+}
+
+@media (max-width: 640px) {
+  .about-belief-block--rejected,
+  .about-belief-block--chosen {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .about-belief-block--chosen .about-belief-body {
+    font-size: 1.125rem;
+  }
 }
 
 /* Philosophy full-width image */

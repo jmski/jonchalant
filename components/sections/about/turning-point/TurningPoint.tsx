@@ -1,37 +1,30 @@
-import Image from 'next/image';
-import type { SanityImage } from '@/lib/types';
 import { ScrollReveal } from '@/components/animations';
 
 interface TurningPointProps {
   headline: string;
   body: string;
   highlight?: string;
-  originImage?: SanityImage;
 }
 
-export function TurningPoint({ headline, body, highlight, originImage }: TurningPointProps) {
+// TODO: Move quote text to Sanity (aboutPage.turningPointFeatureQuote)
+const FEATURE_QUOTE = "We weren't just a group of kids who learned some moves. We were the first dance club in our high school's history.";
+
+export function TurningPoint({ headline, body, highlight }: TurningPointProps) {
   const paragraphs = body.split('\n\n').filter(Boolean);
   const firstPara = paragraphs[0];
   const belowGridParas = paragraphs.slice(1);
 
   return (
     <section className="about-turning-point-section">
-      {/* Two-column grid: image left, eyebrow + highlight + first paragraph right */}
-      <div className={`about-origin-grid${originImage ? '' : ' about-origin-grid--no-image'}`}>
-        {originImage && (
-          <ScrollReveal variant="scale-fade">
-            {/* TODO: Swap this image — playground/kids photo belongs in "Why This Exists" section */}
-            <div className="about-origin-image">
-              <Image
-                src={originImage.asset.url}
-                alt={originImage.alt ?? 'The Moment It Clicked'}
-                fill
-                sizes="(max-width: 768px) 100vw, 45vw"
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
-          </ScrollReveal>
-        )}
+      {/* Two-column layout: typographic pullquote left, content right */}
+      <div className="about-origin-grid">
+        <ScrollReveal variant="scale-fade">
+          <div className="about-turning-point-feature">
+            <span className="about-turning-point-feature-mark">&ldquo;</span>
+            <p className="about-turning-point-feature-quote">{FEATURE_QUOTE}</p>
+            <span className="about-turning-point-feature-attribution">The origin of Jonchalant</span>
+          </div>
+        </ScrollReveal>
         <div className="about-origin-content">
           <ScrollReveal variant="fade-up" delay={150}>
             <span className="about-turning-point-label">{headline}</span>

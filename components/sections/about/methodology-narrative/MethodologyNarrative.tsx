@@ -30,18 +30,29 @@ export function MethodologyNarrative({ headline, body, highlight, philosophyImag
         {highlight && <span className="about-highlight">{highlight}</span>}
       </ScrollReveal>
 
-      <div className="about-belief-grid">
-        {/* Choreographer snaps in — rigid, instant, like a set routine */}
-        <ScrollReveal variant="snap">
-          <div className="about-belief-block">
-            <p className="about-belief-label">{BELIEF_BLOCKS[0].label}</p>
+      <div className="about-belief-comparison">
+        {/* Choreographer — faded, struck-through: what we're leaving behind */}
+        <ScrollReveal variant="fade">
+          <div className="about-belief-block about-belief-block--rejected">
+            <span className="about-belief-label">{BELIEF_BLOCKS[0].label}</span>
             <p className="about-belief-body">{BELIEF_BLOCKS[0].body}</p>
           </div>
         </ScrollReveal>
-        {/* Freestyler eases in — fluid, unhurried, like improvisation */}
-        <ScrollReveal variant="fade" delay={200}>
-          <div className="about-belief-block">
-            <p className="about-belief-label">{BELIEF_BLOCKS[1].label}</p>
+
+        {/* Transition — narrative pause between rejected and chosen */}
+        {/* TODO: Move transition copy to Sanity (aboutPage.methodologyTransitionText) */}
+        <ScrollReveal variant="fade" delay={400}>
+          <div className="about-belief-transition" aria-hidden="true">
+            <span className="about-belief-transition-line"></span>
+            <span className="about-belief-transition-text">Not this. This:</span>
+            <span className="about-belief-transition-line"></span>
+          </div>
+        </ScrollReveal>
+
+        {/* Freestyler — full-color, serif, elevated: the destination */}
+        <ScrollReveal variant="fade-up" delay={600}>
+          <div className="about-belief-block about-belief-block--chosen">
+            <span className="about-belief-label">{BELIEF_BLOCKS[1].label}</span>
             <p className="about-belief-body">{BELIEF_BLOCKS[1].body}</p>
           </div>
         </ScrollReveal>

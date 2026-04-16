@@ -1,14 +1,23 @@
+import Image from 'next/image';
+import type { SanityImage } from '@/lib/types';
 import { ScrollReveal } from '@/components/animations';
 
 interface WhyExistsProps {
   headline: string;
   body: string;
   highlight?: string;
+  kidsImage?: SanityImage;
 }
 
 const CALLOUT_PREFIXES = ['The kid ', 'The teenager ', 'The adult '];
+const KIDS_KEYWORDS = ['three kids', '3 kids', 'my kids', 'my children', 'my three'];
 
-export function WhyExists({ headline, body, highlight }: WhyExistsProps) {
+function isKidsParagraph(para: string): boolean {
+  const lower = para.toLowerCase();
+  return KIDS_KEYWORDS.some((kw) => lower.includes(kw));
+}
+
+export function WhyExists({ headline, body, highlight, kidsImage }: WhyExistsProps) {
   const paragraphs = body.split('\n\n').filter(Boolean);
 
   const introParagraphs: string[] = [];
@@ -35,15 +44,35 @@ export function WhyExists({ headline, body, highlight }: WhyExistsProps) {
         {highlight && <span className="about-highlight">{highlight}</span>}
       </ScrollReveal>
 
-      {introParagraphs.length > 0 && (
-        <ScrollReveal variant="fade" delay={100}>
-          <div className="about-why-exists-body">
-            {introParagraphs.map((para, idx) => (
-              <p key={idx} className="about-why-exists-paragraph">{para}</p>
-            ))}
-          </div>
-        </ScrollReveal>
-      )}
+      {introParagraphs.length > 0 && introParagraphs.map((para, idx) => {
+        if (kidsImage && isKidsParagraph(para)) {
+          return (
+            <div key={idx} className="about-why-exists-kids-moment">
+              <ScrollReveal variant="fade">
+                <div className="about-why-exists-kids-content">
+                  <p className="about-why-exists-paragraph">{para}</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal variant="fade-right" delay={200}>
+                <div className="about-why-exists-kids-image">
+                  <Image
+                    src={kidsImage.asset.url}
+                    alt={kidsImage.alt ?? 'Jon with his kids'}
+                    width={320}
+                    height={240}
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </div>
+              </ScrollReveal>
+            </div>
+          );
+        }
+        return (
+          <ScrollReveal key={idx} variant="fade" delay={100}>
+            <p className="about-why-exists-paragraph">{para}</p>
+          </ScrollReveal>
+        );
+      })}
 
       {/* Three callout blocks with staggered entrance — accumulating impact */}
       {calloutItems.map((item, idx) => (

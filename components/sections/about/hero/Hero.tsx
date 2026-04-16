@@ -29,18 +29,28 @@ export function Hero({ headline, description, heroImage }: AboutHeroProps) {
           </ScrollReveal>
         </div>
         {heroImage && (
-          <ScrollReveal variant="fade-right" delay={250}>
-            <div className="about-hero-image">
-              <Image
-                src={heroImage.asset.url}
-                alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                style={{ objectFit: 'cover' }}
-                priority
-              />
-            </div>
-          </ScrollReveal>
+          <div className="about-hero-image-column">
+            <ScrollReveal variant="fade-right" delay={250}>
+              <div className="about-hero-image">
+                <Image
+                  src={heroImage.asset.url}
+                  alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  style={{ objectFit: 'cover' }}
+                  priority
+                />
+              </div>
+            </ScrollReveal>
+            {/* TODO: Pull name/role/location from Sanity (aboutPage.heroIdentity fields) */}
+            <ScrollReveal variant="fade" delay={400}>
+              <div className="about-hero-identity">
+                <span className="about-hero-identity-name">Jon Gelua</span>
+                <span className="about-hero-identity-role">Executive Presence Coach</span>
+                <span className="about-hero-identity-location">Based in Ontario, Canada</span>
+              </div>
+            </ScrollReveal>
+          </div>
         )}
       </div>
       <div className="about-hero-divider"></div>

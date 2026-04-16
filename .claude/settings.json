@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/jonch/Downloads/**)",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npx eslint components/sections/about components/shared/cta app/\\\\\\(marketing\\\\\\)/about)"
+    ]
+  }
+}
