@@ -326,6 +326,26 @@ export async function getAboutPageContent() {
     originSectionHeadline,
     originSectionDescription,
     originSectionHighlight,
+    originSectionAnchorWord,
+    originPhases[] | order(order asc) {
+      _key,
+      order,
+      title,
+      description,
+      pullQuote,
+      image {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        hotspot,
+        crop
+      },
+      imageAlt
+    },
+    introvertImage {
+      asset->{ _id, url, metadata { dimensions { width, height } } },
+      hotspot,
+      crop,
+      alt
+    },
     turningPointHeadline,
     turningPointBody,
     turningPointHighlight,
@@ -374,7 +394,22 @@ export async function getHomePageContent() {
     ctaDescription,
     ctaButtonText,
     ctaButtonHref,
-    meetJonImage { asset->{ _id, url }, alt, crop, hotspot }
+    meetJonImage { asset->{ _id, url }, alt, crop, hotspot },
+    heroHeadlineStatic,
+    heroHeadlineAnchorWord,
+    heroSubhead,
+    heroCycle[] {
+      _key,
+      kind,
+      image {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        hotspot,
+        crop
+      },
+      typographicWord,
+      caption,
+      durationMs
+    }
   }`
   return await client.fetch(query)
 }

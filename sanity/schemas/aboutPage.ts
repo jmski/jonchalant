@@ -152,6 +152,88 @@ export default defineType({
       title: 'CTA Button Label',
       type: 'string',
     }),
+
+    // ── Origin Scrollytelling (Phase 4) ──────────────────────────────────────
+    defineField({
+      name: 'originSectionAnchorWord',
+      title: 'Origin — Anchor Word',
+      type: 'string',
+      description: 'Single word styled italic mocha in the section heading. E.g. "path"',
+    }),
+    defineField({
+      name: 'originPhases',
+      title: 'Origin — 5 Scenes',
+      type: 'array',
+      description: 'Each scene has its own full-bleed image that pins while you scroll. Add all 5 in order.',
+      of: [
+        {
+          type: 'object',
+          name: 'originPhase',
+          title: 'Scene',
+          fields: [
+            defineField({
+              name: 'order',
+              title: 'Scene Number',
+              type: 'number',
+              description: '1–5',
+              validation: (Rule) => Rule.required().min(1).max(5),
+            }),
+            defineField({
+              name: 'title',
+              title: 'Scene Heading',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'description',
+              title: 'Scene Body (1–3 sentences)',
+              type: 'text',
+              rows: 3,
+            }),
+            defineField({
+              name: 'pullQuote',
+              title: 'Pull Quote (optional)',
+              type: 'string',
+              description: 'Single line shown in large typographic treatment alongside the body.',
+            }),
+            defineField({
+              name: 'image',
+              title: 'Scene Image',
+              type: 'image',
+              options: { hotspot: true },
+              description: 'Upload origin-01 through origin-05 here in order.',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'imageAlt',
+              title: 'Image Alt Text',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { order: 'order', title: 'title', media: 'image' },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            prepare: (value: Record<string, any>) => ({
+              title: `Scene ${value.order ?? '?'}: ${value.title ?? 'Untitled'}`,
+              media: value.media,
+            }),
+          },
+        },
+      ],
+    }),
+
+    // ── Introvert Section (Phase 6) ───────────────────────────────────────────
+    defineField({
+      name: 'introvertImage',
+      title: 'Introvert Section — Photo',
+      type: 'image',
+      description: 'Upload introvert-solitude here. You alone, quiet room, not posed.',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+      ],
+    }),
   ],
   preview: {
     select: {

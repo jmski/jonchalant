@@ -251,16 +251,38 @@ export interface EmailOptInContent {
 
 // ── About page ────────────────────────────────────────────────────────────────
 
+export interface OriginPhase {
+  _key: string
+  order: number
+  title: string
+  description?: string
+  pullQuote?: string
+  image: SanityImage
+  imageAlt: string
+}
+
+export interface HeroCycleSlide {
+  _key: string
+  kind: 'three-js-figure' | 'photo' | 'typography' | 'video-loop'
+  image?: SanityImage
+  typographicWord?: string
+  caption?: string
+  durationMs?: number
+}
+
 export interface AboutPage {
   heroHeadline?: string
   heroDescription?: string
   heroImage?: SanityImage
   originImage?: SanityImage
   philosophyImage?: SanityImage
+  introvertImage?: SanityImage
   originSectionLabel?: string
   originSectionHeadline?: string
   originSectionDescription?: string
   originSectionHighlight?: string
+  originSectionAnchorWord?: string
+  originPhases?: OriginPhase[]
   turningPointHeadline?: string
   turningPointBody?: string
   turningPointHighlight?: string

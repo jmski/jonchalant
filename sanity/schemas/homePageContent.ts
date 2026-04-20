@@ -106,6 +106,92 @@ export default defineType({
         defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
       ],
     }),
+
+    // ── Hero Cycle (Phase 2) ──────────────────────────────────────────────────
+    defineField({
+      name: 'heroHeadlineStatic',
+      title: 'Hero — Headline (static part)',
+      type: 'string',
+      description: 'The part of the headline that never moves during the cycle. E.g. "Body-led leadership for the quietly"',
+    }),
+    defineField({
+      name: 'heroHeadlineAnchorWord',
+      title: 'Hero — Anchor Word',
+      type: 'string',
+      description: 'The single italic mocha word at the end of the headline. E.g. "ambitious"',
+    }),
+    defineField({
+      name: 'heroSubhead',
+      title: 'Hero — Subhead',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
+      name: 'heroCycle',
+      title: 'Hero — Cycling Visual Slides',
+      type: 'array',
+      description: 'Each slide cycles in the right column. Add a Three.js slide first, then your photo fragments.',
+      of: [
+        {
+          type: 'object',
+          name: 'heroCycleSlide',
+          title: 'Slide',
+          fields: [
+            defineField({
+              name: 'kind',
+              title: 'Slide Type',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Three.js Figure (no image needed)', value: 'three-js-figure' },
+                  { title: 'Photo', value: 'photo' },
+                  { title: 'Typographic Word', value: 'typography' },
+                  { title: 'Video Loop', value: 'video-loop' },
+                ],
+                layout: 'radio',
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'image',
+              title: 'Photo',
+              type: 'image',
+              options: { hotspot: true },
+              description: 'Upload hero-fragment-01, 02, or 03 here.',
+              hidden: ({ parent }) => parent?.kind !== 'photo',
+            }),
+            defineField({
+              name: 'typographicWord',
+              title: 'Typographic Word',
+              type: 'string',
+              description: 'Single word displayed at massive scale. E.g. "presence"',
+              hidden: ({ parent }) => parent?.kind !== 'typography',
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption / Screen-reader Label',
+              type: 'string',
+              description: 'Used as aria-label on the visual. Required for photo and video slides.',
+            }),
+            defineField({
+              name: 'durationMs',
+              title: 'Duration (ms)',
+              type: 'number',
+              description: 'How long this slide shows before cross-fading. Default: 8000',
+              initialValue: 8000,
+            }),
+          ],
+          preview: {
+            select: { kind: 'kind', caption: 'caption' },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            prepare: (value: Record<string, any>) => ({
+              title: String(value.kind ?? 'Slide'),
+              subtitle: String(value.caption ?? ''),
+            }),
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     select: {
