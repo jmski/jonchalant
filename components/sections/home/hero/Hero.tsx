@@ -1,85 +1,150 @@
-import { HeroCyclingText } from './HeroCyclingText';
+'use client';
+
+import { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
+import type { HomePageContent, HeroCycleSlide } from '@/lib/types';
 
 interface HeroProps {
-  eyebrow?: string;
-  heroHeadline?: string;
-  cyclingOutcomes?: string[];
-  description?: string;
-  subtext?: string;
-  ctaText?: string;
-  ctaLink?: string;
-  auditMicrocopy?: string;
+  content: HomePageContent;
 }
 
-export function Hero({
-  eyebrow,
-  heroHeadline = 'Quiet Command.',
-  cyclingOutcomes,
-  description,
-  subtext,
-  ctaText,
-  ctaLink = '/contact',
-  auditMicrocopy,
-}: HeroProps) {
-  return (
-    <section className="home-hero-section">
-      {/* Gradient wash */}
-      <div className="home-hero-texture" aria-hidden="true" />
+export function Hero({ content }: HeroProps) {
+  const {
+    heroHeadlineStatic,
+    heroHeadlineAnchorWord,
+    heroSubhead,
+    heroCtaText,
+    heroCtaLink,
+  } = content;
+  const ctaLink = heroCtaLink ?? '/contact';
+  const heroCycle = content.heroCycle ?? [];
 
-      {/* Floating ambient orbs */}
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isPausedRef = useRef(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const advance = useCallback(() => {
+    setCurrentIndex(i => (i + 1) % heroCycle.length);
+  }, [heroCycle.length]);
+
+  // Pause cycling when section scrolls out of viewport
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isPausedRef.current = !entry.isIntersecting; },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-advance timer — resets on each slide change
+  useEffect(() => {
+    if (heroCycle.length <= 1) return;
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const duration = heroCycle[currentIndex]?.durationMs ?? 8000;
+    const timer = setTimeout(() => {
+      if (!isPausedRef.current) advance();
+    }, duration);
+    return () => clearTimeout(timer);
+  }, [currentIndex, heroCycle, advance]);
+
+  const hasCycle = heroCycle.length > 0;
+  const activeSlide = heroCycle[currentIndex];
+
+  return (
+    <section
+      ref={sectionRef}
+      className={`home-hero${hasCycle ? ' home-hero--cycling' : ''}`}
+      onMouseEnter={() => { isPausedRef.current = true; }}
+      onMouseLeave={() => { isPausedRef.current = false; }}
+    >
+      {/* Background orbs */}
       <div className="home-hero-orb home-hero-orb--1" aria-hidden="true" />
       <div className="home-hero-orb home-hero-orb--2" aria-hidden="true" />
-      <div className="home-hero-orb home-hero-orb--3" aria-hidden="true" />
 
-      {/* Content */}
-      <div className="home-hero-grid">
-        <div className="home-hero-content">
-
-          {eyebrow && <p className="home-hero-eyebrow hero-animate-in" data-delay="0">{eyebrow}</p>}
-
-          <h1 className="home-hero-headline hero-animate-in" data-delay="1">
-            {heroHeadline && (
-              <span className="home-hero-headline-line">{heroHeadline}</span>
-            )}
-          </h1>
-
-          <div className="home-hero-accent-bar hero-animate-in" data-delay="2" aria-hidden="true" />
-
-          {cyclingOutcomes && cyclingOutcomes.length > 0 && (
-            <div className="home-hero-outcomes-row hero-animate-in" data-delay="3">
-              <span className="home-hero-outcomes-prefix">So you can </span>
-              <HeroCyclingText outcomes={cyclingOutcomes} />
-            </div>
+      {/* Fixed text column */}
+      <div className="home-hero-text">
+        <h1 className="home-hero-headline">
+          {heroHeadlineStatic && (
+            <span className="home-hero-headline-static">{heroHeadlineStatic} </span>
           )}
-
-          {description && (
-            <p className="home-hero-description hero-animate-in" data-delay="4">{description}</p>
+          {heroHeadlineAnchorWord && (
+            <em className="home-hero-anchor-word">{heroHeadlineAnchorWord}</em>
           )}
+        </h1>
 
-          {subtext && (
-            <span className="home-hero-subtext hero-animate-in" data-delay="5">{subtext}</span>
-          )}
+        {heroSubhead && (
+          <p className="home-hero-subhead">{heroSubhead}</p>
+        )}
 
-          {(ctaText || auditMicrocopy) && (
-            <div className="home-hero-lower hero-animate-in" data-delay="6">
-              <div className="home-hero-ctas">
-                <div className="home-hero-cta-group">
-                  {ctaText && (
-                    <Button as="link" href={ctaLink}>
-                      {ctaText}
-                    </Button>
-                  )}
-                  {auditMicrocopy && (
-                    <p className="home-hero-cta-microcopy">{auditMicrocopy}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-        </div>
+        {heroCtaText && (
+          <div className="home-hero-cta">
+            <Button as="link" href={heroCtaLink}>
+              {heroCtaText}
+            </Button>
+          </div>
+        )}
       </div>
+
+      {/* Cycling visual column */}
+      {hasCycle && (
+        <div
+          className="home-hero-visual"
+          role="img"
+          aria-label={activeSlide?.caption ?? 'Coaching visual'}
+        >
+          {heroCycle.map((slide, idx) => (
+            <div
+              key={slide._key}
+              className={[
+                'home-hero-slide',
+                `home-hero-slide--${slide.kind}`,
+                idx === currentIndex ? 'home-hero-slide--active' : '',
+              ].filter(Boolean).join(' ')}
+              aria-hidden={idx !== currentIndex}
+            >
+              <HeroSlideContent slide={slide} />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
+}
+
+function HeroSlideContent({ slide }: { slide: HeroCycleSlide }) {
+  switch (slide.kind) {
+    case 'photo': {
+      if (!slide.image?.asset?.url) return null;
+      return (
+        <div className="home-hero-slide-photo-inner">
+          <Image
+            src={slide.image.asset.url}
+            alt={slide.caption ?? ''}
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+            sizes="(max-width: 1024px) 100vw, 60vw"
+          />
+          <div className="home-hero-slide-grain" aria-hidden="true" />
+        </div>
+      );
+    }
+    case 'typography': {
+      if (!slide.typographicWord) return null;
+      return (
+        <div className="home-hero-slide-type-inner">
+          <span className="home-hero-slide-type-word">{slide.typographicWord}</span>
+        </div>
+      );
+    }
+    case 'three-js-figure':
+    case 'video-loop':
+    default:
+      return null;
+  }
 }

@@ -378,6 +378,166 @@
   }
 }
 
+/* ============================================================
+   HOME HERO — cycling full-bleed hero
+   ============================================================ */
+
+.home-hero {
+  position: relative;
+  width: 100%;
+  background: var(--bg-primary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* On desktop: two-column grid */
+@media (min-width: 1024px) {
+  .home-hero {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    min-height: 100svh;
+    min-height: 640px;
+  }
+}
+
+/* Reuse orb animations from the old hero — they still apply to .home-hero-orb */
+
+/* Fixed text column */
+.home-hero-text {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.75rem;
+  padding: 3.5rem 1.5rem 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .home-hero-text {
+    padding: 4rem 2.5rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-hero-text {
+    padding: 4rem 3rem 4rem 4rem;
+  }
+}
+
+/* Headline */
+.home-hero-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.home-hero-headline-static {
+  /* inherits all headline styles */
+}
+
+/* Anchor word — italic Fraunces in mocha */
+.home-hero-anchor-word {
+  font-style: italic;
+  color: var(--accent-primary);
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+}
+
+/* Subhead */
+.home-hero-subhead {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 34ch;
+}
+
+/* CTA wrapper */
+.home-hero-cta {
+  padding-top: 0.25rem;
+}
+
+/* Cycling visual column */
+.home-hero-visual {
+  position: relative;
+  overflow: hidden;
+  height: 62vw; /* aspect ratio on mobile — tall enough to read */
+  min-height: 260px;
+}
+
+@media (min-width: 1024px) {
+  .home-hero-visual {
+    height: auto; /* grid row fills full height */
+  }
+}
+
+/* Individual slides — all absolutely stacked, cross-fade via opacity */
+.home-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 600ms ease-in-out;
+}
+
+.home-hero-slide--active {
+  opacity: 1;
+}
+
+/* Photo slide */
+.home-hero-slide-photo-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Grain texture overlay on photos */
+.home-hero-slide-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* SVG noise pattern — subtle grain, 3% opacity */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  mix-blend-mode: multiply;
+}
+
+/* Typography slide */
+.home-hero-slide-type-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-secondary);
+}
+
+.home-hero-slide-type-word {
+  font-family: var(--font-headline);
+  font-style: italic;
+  font-size: clamp(6rem, 18vw, 14rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--accent-primary);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  user-select: none;
+}
+
+/* Respect reduced motion: no cycling, no transition */
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-slide {
+    transition: none;
+  }
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    CREDIBILITY STRIP
    ────────────────────────────────────────────────────────────────────────────

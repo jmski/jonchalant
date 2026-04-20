@@ -22,7 +22,7 @@ export interface SanityImageAsset {
 
 export interface SanityImage {
   asset: SanityImageAsset
-  hotspot?: { x: number; y: number }
+  hotspot?: { x: number; y: number; width: number; height: number }
   crop?: { top: number; bottom: number; left: number; right: number }
   alt?: string
 }
@@ -361,4 +361,37 @@ export interface MovementPlan {
   limitations?: string
   plan_data: GeneratedPlan
   created_at: string
+}
+
+// ── Home page ─────────────────────────────────────────────────────────────────
+
+export interface HomePageContent {
+  heroEyebrow?: string
+  heroHeadline?: string
+  heroCyclingOutcomes?: string[]
+  heroDescription?: string
+  heroSubtext?: string
+  heroCtaText?: string
+  heroCtaLink?: string
+  heroMicrocopy?: string
+  heroSecondaryCtaText?: string
+  heroStats?: Array<{ value: string; label: string }>
+  servicesHeadline?: string
+  servicesDescription?: string
+  whyItWorksLabel?: string
+  whyItWorksHighlight?: string
+  whyItWorksParagraph1?: string
+  whyItWorksParagraph2?: string
+  whyItWorksParagraph3?: string
+  testimonialsEyebrow?: string
+  testimonialsHeading?: string
+  ctaTitle?: string
+  ctaDescription?: string
+  ctaButtonText?: string
+  ctaButtonHref?: string
+  meetJonImage?: SanityImage
+  heroHeadlineStatic?: string
+  heroHeadlineAnchorWord?: string
+  heroSubhead?: string
+  heroCycle?: HeroCycleSlide[]
 }
