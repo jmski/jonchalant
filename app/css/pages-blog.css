@@ -68,7 +68,7 @@
 
 .blog-search-bar:focus-within {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(107, 142, 99, 0.12);
+  box-shadow: 0 0 0 3px rgba(164, 120, 100, 0.12);
 }
 
 .blog-search-icon {

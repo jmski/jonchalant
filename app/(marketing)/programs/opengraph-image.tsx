@@ -27,7 +27,7 @@ export default function Image() {
           top: 0,
           bottom: 0,
           width: 8,
-          background: '#4a3a5c',
+          background: '#6B4F3F',
           display: 'flex',
         }}
       />
@@ -35,7 +35,7 @@ export default function Image() {
       {/* Brand label */}
       <div
         style={{
-          color: '#6b8e63',
+          color: '#A47864',
           fontSize: 18,
           fontWeight: 600,
           letterSpacing: 4,
@@ -50,7 +50,7 @@ export default function Image() {
       {/* Main headline */}
       <div
         style={{
-          color: '#4a3a5c',
+          color: '#2A1F1A',
           fontSize: 80,
           fontWeight: 700,
           lineHeight: 1.05,
@@ -86,8 +86,8 @@ export default function Image() {
           <div
             key={label}
             style={{
-              border: '1.5px solid #4a3a5c',
-              color: '#4a3a5c',
+              border: '1.5px solid #6B4F3F',
+              color: '#6B4F3F',
               fontSize: 16,
               fontWeight: 500,
               padding: '8px 18px',
@@ -110,8 +110,8 @@ export default function Image() {
       >
         <div
           style={{
-            background: '#4a3a5c',
-            color: '#f8f8f5',
+            background: '#6B4F3F',
+            color: '#F4EBE0',
             fontSize: 16,
             fontWeight: 600,
             padding: '8px 20px',

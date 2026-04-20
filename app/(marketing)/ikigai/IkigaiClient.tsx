@@ -67,13 +67,13 @@ const QUADRANT_META: Record<
   passion: {
     name: 'Passion',
     description: 'What you love',
-    color: '#4a3a5c',
+    color: '#6B4F3F',
     barClass: 'ikigai-bar-fill--passion',
   },
   mission: {
     name: 'Mission',
     description: 'What the world needs',
-    color: '#6b8e63',
+    color: '#A47864',
     barClass: 'ikigai-bar-fill--mission',
   },
   vocation: {
@@ -85,7 +85,7 @@ const QUADRANT_META: Record<
   profession: {
     name: 'Profession',
     description: "What you're good at",
-    color: '#6a8aaa',
+    color: '#8A9A85',
     barClass: 'ikigai-bar-fill--profession',
   },
 };
@@ -128,10 +128,10 @@ function IkigaiDiagram() {
     ly: number;
     dl: number; // desc y offset
   }> = [
-    { id: 'passion',    cx: 140, cy: 150, r: 100, color: '#4a3a5c', lx: 88,  ly: 100, dl: 115 },
-    { id: 'mission',    cx: 260, cy: 150, r: 100, color: '#6b8e63', lx: 312, ly: 100, dl: 115 },
+    { id: 'passion',    cx: 140, cy: 150, r: 100, color: '#6B4F3F', lx: 88,  ly: 100, dl: 115 },
+    { id: 'mission',    cx: 260, cy: 150, r: 100, color: '#A47864', lx: 312, ly: 100, dl: 115 },
     { id: 'vocation',   cx: 260, cy: 270, r: 100, color: '#b89a5f', lx: 312, ly: 308, dl: 323 },
-    { id: 'profession', cx: 140, cy: 270, r: 100, color: '#6a8aaa', lx: 88,  ly: 308, dl: 323 },
+    { id: 'profession', cx: 140, cy: 270, r: 100, color: '#8A9A85', lx: 88,  ly: 308, dl: 323 },
   ];
 
   return (
@@ -441,7 +441,7 @@ export default function IkigaiClient() {
                     <em>Ikigai</em> (生き甲斐) is a Japanese concept meaning{' '}
                     <strong>reason for being</strong>. It sits at the intersection of
                     four dimensions of a fulfilling life: what you love, what the world
-                    needs, what you can be paid for, and what you're good at. Where all
+                    needs, what you can be paid for, and what you&apos;re good at. Where all
                     four overlap is where extraordinary work — and real presence — emerge.
                   </p>
 
@@ -531,9 +531,9 @@ export default function IkigaiClient() {
                   ) : (
                     <div className="ikigai-quiz-complete">
                       {/* COPYWRITER: This is the "all done" state copy shown before submitting */}
-                      <p className="ikigai-quiz-complete-head">You've completed all 8 questions.</p>
+                      <p className="ikigai-quiz-complete-head">You&apos;ve completed all 8 questions.</p>
                       <p className="ikigai-quiz-complete-body">
-                        Your results will show you where you're strongest across Passion,
+                        Your results will show you where you&apos;re strongest across Passion,
                         Mission, Vocation, and Profession — and what it means for your leadership presence.
                       </p>
                       <button onClick={handleShowResults} className="ikigai-submit-btn btn-primary">

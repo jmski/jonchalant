@@ -1340,7 +1340,7 @@
   border-color: var(--accent-hover);
   color: white;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(107, 142, 99, 0.2);
+  box-shadow: 0 4px 12px rgba(164, 120, 100, 0.2);
 }
 
 @media (max-width: 1023px) {
@@ -1372,7 +1372,7 @@
 .navbar-login-btn:hover {
   background-color: var(--accent-hover);
   border-color: var(--accent-hover);
-  box-shadow: 0 4px 12px rgba(107, 142, 99, 0.15);
+  box-shadow: 0 4px 12px rgba(164, 120, 100, 0.15);
 }
 
 @media (max-width: 1023px) {

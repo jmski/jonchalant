@@ -1,18 +1,18 @@
 /* ============================================================================
    VARIABLES.CSS - THE KINETIC LEADER DESIGN SYSTEM
-   
+
    Japanese Zen-Inspired, Light Mode Only
-   
+
    Design Pillars:
    - Ikigai: Purpose-driven design
    - Kaizen: Continuous refinement through subtlety
    - Ma: The space between (generous whitespace)
    - Wabi-Sabi: Beauty in imperfection and simplicity
-   
-   Palette:
-   - Background: Bone/Rice Paper (#F8F8F5)
-   - Text: Sumie Ink (#1A1A1A)
-   - Accents: Burnt Indigo + Muted Moss
+
+   Palette (Stillness & Motion — v2):
+   - Background: Cream (#F4EBE0)
+   - Text: Espresso (#2A1F1A)
+   - Accent: Mocha Mousse / PANTONE 17-1230 (#A47864)
    ============================================================================ */
 
 /* ========== TYPOGRAPHY SYSTEM ========== */
@@ -53,56 +53,67 @@
 
 /* ========== COLOR PALETTE - LIGHT MODE ONLY ========== */
 :root {
-  /* Primary Base - Zen Minimalism */
-  --bg-primary: #f8f8f5; /* Rice paper/bone background */
-  --bg-secondary: #fafaf8; /* Slightly warmer */
-  --bg-tertiary: #ebe6de; /* Warm sand accent */
-  --bg-warm: #ede8e0;            /* human/intimate sections e.g. Meet Jon */
-  --text-primary: #1a1a1a; /* Sumie ink - deep, commanding */
-  --text-secondary: #3d3d3d; /* Secondary ink */
-  --text-tertiary: #7a7a7a; /* Muted ink */
+  /* Backgrounds — cream, warmer than previous bone */
+  --bg-primary:   #F4EBE0; /* Cream — primary background */
+  --bg-secondary: #EFE4D6; /* Slightly deeper cream */
+  --bg-tertiary:  #E8D9C7; /* Cream-deep — card backgrounds, section contrast */
+  --bg-warm:      #EFE4D6; /* human/intimate sections e.g. Meet Jon */
+
+  /* Text — espresso, richer than pure black */
+  --text-primary:   #2A1F1A; /* Espresso */
+  --text-secondary: #5C4A3F; /* Ink */
+  --text-tertiary:  #8A7668; /* Faded ink */
   --text-white: #f1f1f1;
 
-  /* Borders - Hairline aesthetic */
-  --border-color: #d4cfc7; /* Subtle, warm */
-  --border-subtle: #e8e3db; /* Very faint */
+  /* Borders — warm hairlines */
+  --border-color:  #D4B8A3; /* Mocha-soft used as border */
+  --border-subtle: #E8D9C7; /* Very faint */
 
-  /* Kinetic Accents */
-  --color-burnt-indigo: #4a3a5c; /* Deep, contemplative */
-  --color-burnt-indigo-light: #6b5a7a; /* Hover variant */
-  --color-muted-moss: #6b8e63; /* Natural, growth */
-  --color-moss-light: #8aa87a; /* Softened variant */
+  /* Mocha Mousse system — the anchor */
+  --mocha-mousse: #A47864; /* PANTONE 17-1230, primary brand accent */
+  --mocha-deep:   #6B4F3F; /* Hover/pressed state */
+  --mocha-soft:   #D4B8A3; /* Tints, subtle fills */
 
-  /* Status Colors */
-  --color-success: #5a8a6a; /* Moss-inspired */
-  --color-warning: #b89a5f; /* Warm amber */
-  --color-error: #8a5a5a; /* Muted burgundy */
-  --color-info: #6a8aaa; /* Soft indigo */
+  /* Sage whisper — single cool accent, used sparingly for contrast */
+  --sage-whisper: #8A9A85;
 
-  /* Accent & Interactive */
-  --accent-primary: #6b8e63; /* Muted Moss - PRIMARY GREEN */
-  --accent-secondary: #b89a5f;   /* warm amber — pull quotes, pricing highlights */
-  --accent-tertiary: #6a8aaa; /* Soft indigo - distinct category color */
-  --accent-hover: #8aa87a; /* Moss light - hover state */
-  --btn-primary-text: #f1f1f1; /* Button text — light on accent background */
+  /* Semantic aliases — existing CSS references these; keep them but remap */
+  --accent-primary:   var(--mocha-mousse);
+  --accent-hover:     var(--mocha-deep);
+  --accent-tertiary:  var(--sage-whisper);
+  --accent-secondary: #b89a5f; /* warm amber retained for pricing highlights */
+  --btn-primary-text: #FFFFFF;
+
+  /* Status colours — warm-aligned */
+  --color-success: #7A8A6A; /* sage-adjacent */
+  --color-warning: #B89A5F; /* warm amber retained for alerts only */
+  --color-error:   #8A5A5A; /* muted burgundy */
+  --color-info:    #8A9A85; /* sage-whisper reused */
 
   /* Overlay & Effects */
-  --overlay-dark: rgba(26, 26, 26, 0.08);
-  --overlay-light: rgba(107, 142, 99, 0.05);
-  --glow-subtle: 0 0 20px rgba(107, 142, 99, 0.1);
-  --glow-moss: 0 0 16px rgba(107, 142, 99, 0.08);
+  --overlay-dark: rgba(42, 31, 26, 0.08);
+  --overlay-light: rgba(164, 120, 100, 0.05);
+  --glow-subtle: 0 0 20px rgba(164, 120, 100, 0.1);
+  --glow-moss: 0 0 16px rgba(164, 120, 100, 0.08);
 
   /* Decorative Elements */
-  --decor-enso: rgba(107, 142, 99, 0.15);
-  --decor-fluid: rgba(107, 142, 99, 0.12);
-  --decor-grid: rgba(107, 142, 99, 0.08);
+  --decor-enso: rgba(164, 120, 100, 0.15);
+  --decor-fluid: rgba(164, 120, 100, 0.12);
+  --decor-grid: rgba(164, 120, 100, 0.08);
+
+  /* Legacy aliases — kept temporarily so nothing explodes mid-migration.
+     Remove these in Phase 9 after the full sweep is verified. */
+  --color-burnt-indigo:       var(--mocha-deep);
+  --color-burnt-indigo-light: var(--mocha-mousse);
+  --color-muted-moss:         var(--sage-whisper);
+  --color-moss-light:         var(--mocha-soft);
 
 }
 
-/* ========== WARM AMBER ACCENT ========== */
+/* ========== WARM AMBER ACCENT (retained for pricing highlights) ========== */
 :root {
-  --color-warm-amber: #b89a5f; /* Warm amber — secondary accent for highlights */
-  --color-warm-amber-light: #d4bb82; /* Softened variant for hover/subtle usage */
+  --color-warm-amber: #b89a5f;
+  --color-warm-amber-light: #d4bb82;
 }
 
 /* ========== GRADIENT TOKENS ========== */
@@ -112,28 +123,28 @@
     160deg,
     var(--bg-primary) 0%,
     var(--bg-tertiary) 40%,
-    color-mix(in srgb, var(--color-muted-moss) 4%, var(--bg-primary)) 100%
+    color-mix(in srgb, var(--mocha-mousse) 4%, var(--bg-primary)) 100%
   );
 
-  /* Section accent gradient — very subtle moss tint */
+  /* Section accent gradient — very subtle mocha tint */
   --gradient-moss-wash: linear-gradient(
     180deg,
     var(--bg-primary) 0%,
-    color-mix(in srgb, var(--color-muted-moss) 3%, var(--bg-secondary)) 100%
+    color-mix(in srgb, var(--mocha-mousse) 3%, var(--bg-secondary)) 100%
   );
 
   /* Warm accent gradient — for pricing, featured, testimonial backgrounds */
   --gradient-warm: linear-gradient(
     135deg,
     var(--bg-secondary) 0%,
-    color-mix(in srgb, var(--color-warm-amber) 5%, var(--bg-primary)) 100%
+    color-mix(in srgb, var(--accent-secondary) 5%, var(--bg-primary)) 100%
   );
 
   /* Card depth gradient — subtle top-to-bottom tint */
   --gradient-card: linear-gradient(
     180deg,
     var(--bg-light) 0%,
-    color-mix(in srgb, var(--color-muted-moss) 2%, var(--bg-light)) 100%
+    color-mix(in srgb, var(--mocha-mousse) 2%, var(--bg-light)) 100%
   );
 }
 
