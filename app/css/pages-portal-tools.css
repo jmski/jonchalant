@@ -44,7 +44,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -96,7 +96,7 @@
 
 /* User bubble */
 .presence-coach-bubble--user {
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
   color: #fff;
   border-bottom-right-radius: 0.25rem;
 }
@@ -1355,7 +1355,7 @@
 .ta-summary {
   padding: 1.125rem 1.25rem;
   background: var(--bg-tertiary);
-  border-left: 3px solid var(--color-burnt-indigo);
+  border-left: 3px solid var(--mocha-deep);
   border-radius: 0 0.5rem 0.5rem 0;
   display: flex;
   flex-direction: column;
@@ -1367,7 +1367,7 @@
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
   margin: 0;
 }
 
@@ -1850,17 +1850,17 @@
   padding: 0.625rem 0.875rem;
   background: color-mix(
     in srgb,
-    var(--color-burnt-indigo) 5%,
+    var(--mocha-deep) 5%,
     var(--bg-primary)
   );
-  border-left: 2px solid var(--color-burnt-indigo);
+  border-left: 2px solid var(--mocha-deep);
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .mp-connection-label {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }

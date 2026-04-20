@@ -480,7 +480,7 @@
 }
 
 .section-wrapper-dark {
-  background-color: var(--color-burnt-indigo);
+  background-color: var(--mocha-deep);
 }
 
 .section-wrapper-dark,
@@ -494,20 +494,20 @@
 }
 
 .section-wrapper-dark p {
-  color: rgba(248, 248, 245, 0.72);
+  color: rgba(244, 235, 224, 0.72);
 }
 
 .section-wrapper-dark a:not([class*="btn"]) {
-  color: var(--color-muted-moss);
+  color: var(--mocha-soft);
   transition: color var(--transition-fast);
 }
 
 .section-wrapper-dark a:not([class*="btn"]):hover {
-  color: var(--color-moss-light);
+  color: var(--mocha-mousse);
 }
 
 .section-wrapper--moss {
-  background-color: #e8f2e4;
+  background-color: var(--bg-tertiary);
 }
 
 /* Hero gradient wash — applied to SectionWrapper so gradient fills full width.
@@ -1789,7 +1789,7 @@
 
 /* ── Opt-in strip ── */
 .site-footer-optin {
-  background-color: var(--color-burnt-indigo);
+  background-color: var(--mocha-deep);
   padding: 3rem 1.25rem;
 }
 
@@ -1828,7 +1828,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-muted-moss);
+  color: var(--mocha-mousse);
   margin-bottom: 0.75rem;
 }
 

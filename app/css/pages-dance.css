@@ -349,13 +349,13 @@
 
 .dance-bridge-item {
   padding-left: 1.25rem;
-  border-left: 2px solid var(--color-burnt-indigo);
+  border-left: 2px solid var(--mocha-deep);
 }
 
 .dance-bridge-item-context {
   font-weight: 600;
   font-size: 0.9375rem;
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
   margin: 0 0 0.5rem;
 }
 

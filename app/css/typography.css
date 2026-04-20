@@ -415,7 +415,7 @@ hr {
   font-weight: 300;
   font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-style: italic;
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
   border-left: 3px solid var(--accent-primary);
   padding-left: 1.5rem;
   line-height: 1.4;

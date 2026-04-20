@@ -216,7 +216,7 @@
 }
 
 .portal-login-forgot:hover {
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
 }
 
 /* Error message */
@@ -304,7 +304,7 @@
 }
 
 .portal-login-toggle-button:hover:not(:disabled) {
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
 }
 
 .portal-login-toggle-button:disabled {
@@ -332,7 +332,7 @@
 }
 
 .portal-login-footer-link:hover {
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
 }
 
 /* ── Enrollment welcome banner ─────────────────────────────────────────── */
@@ -386,7 +386,7 @@
   justify-content: space-between;
   padding: 0 var(--spacing-xl);
   height: 4rem;
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -809,9 +809,9 @@
 }
 
 .portal-section--coach {
-  background: color-mix(in srgb, var(--color-burnt-indigo) 4%, var(--bg-secondary));
-  border: 1px solid color-mix(in srgb, var(--color-burnt-indigo) 15%, transparent);
-  border-left: 3px solid var(--color-burnt-indigo);
+  background: color-mix(in srgb, var(--mocha-deep) 4%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--mocha-deep) 15%, transparent);
+  border-left: 3px solid var(--mocha-deep);
   padding: var(--spacing-xl);
 }
 
@@ -897,7 +897,7 @@
 }
 
 .portal-course-card:hover {
-  border-top-color: var(--color-burnt-indigo);
+  border-top-color: var(--mocha-deep);
   box-shadow: 0 6px 20px rgba(107, 79, 63, 0.10);
   transform: translateY(-2px);
 }
@@ -1344,8 +1344,8 @@
 .portal-lesson-social-logic {
   margin-bottom: var(--spacing-2xl);
   padding: var(--spacing-xl);
-  background: color-mix(in srgb, var(--color-burnt-indigo) 4%, var(--bg-secondary));
-  border-left: 3px solid var(--color-burnt-indigo-light);
+  background: color-mix(in srgb, var(--mocha-deep) 4%, var(--bg-secondary));
+  border-left: 3px solid var(--mocha-mousse);
   border-radius: 0 2px 2px 0;
 }
 
@@ -1534,7 +1534,7 @@
 
 .portal-module {
   border: 1px solid var(--border-subtle);
-  border-left: 3px solid var(--color-burnt-indigo-light);
+  border-left: 3px solid var(--mocha-mousse);
   overflow: hidden;
   background: var(--bg-secondary);
 }
@@ -1554,7 +1554,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-burnt-indigo-light);
+  color: var(--mocha-mousse);
   flex-shrink: 0;
 }
 
@@ -1658,8 +1658,8 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-burnt-indigo-light);
-  background: color-mix(in srgb, var(--color-burnt-indigo) 8%, transparent);
+  color: var(--mocha-mousse);
+  background: color-mix(in srgb, var(--mocha-deep) 8%, transparent);
   padding: 0.2rem 0.625rem;
   border-radius: 2px;
 }
@@ -2318,7 +2318,7 @@
 }
 
 .portal-focus-card {
-  border-left: 3px solid var(--color-burnt-indigo);
+  border-left: 3px solid var(--mocha-deep);
 }
 
 .portal-continue-card:hover,
@@ -2341,7 +2341,7 @@
 }
 
 .portal-focus-card .portal-card-eyebrow {
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
 }
 
 .portal-card-title {
@@ -2370,7 +2370,7 @@
 }
 
 .portal-focus-card .portal-card-cta {
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
 }
 
 /* ── AI Tools grid ──────────────────────────────────────────────────────── */
@@ -2498,7 +2498,7 @@
   justify-content: space-between;
   padding: 0.875rem 1rem;
   border-bottom: 1px solid var(--border-subtle);
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
   flex-shrink: 0;
 }
 
@@ -2548,7 +2548,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
   color: white;
   border: none;
   border-radius: 9999px;
@@ -2561,13 +2561,13 @@
 }
 
 .portal-coach-fab:hover {
-  background: color-mix(in srgb, var(--color-burnt-indigo) 85%, black);
+  background: color-mix(in srgb, var(--mocha-deep) 85%, black);
   box-shadow: 0 6px 18px rgba(107, 79, 63, 0.45);
   transform: translateY(-1px);
 }
 
 .portal-coach-fab--active {
-  background: color-mix(in srgb, var(--color-burnt-indigo) 80%, black);
+  background: color-mix(in srgb, var(--mocha-deep) 80%, black);
 }
 
 .portal-coach-fab-label {

@@ -335,7 +335,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
   color: var(--bg-primary);
   font-family: var(--font-headline);
   font-size: 0.875rem;

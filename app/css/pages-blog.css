@@ -150,15 +150,15 @@
 }
 
 .blog-filter-tab:hover {
-  border-color: var(--color-burnt-indigo);
-  color: var(--color-burnt-indigo);
+  border-color: var(--mocha-deep);
+  color: var(--mocha-deep);
   background: transparent;
 }
 
 .blog-filter-tab.active,
 .blog-filter-tab[aria-selected="true"] {
-  background: var(--color-burnt-indigo);
-  border-color: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
+  border-color: var(--mocha-deep);
   color: #ffffff;
 }
 
@@ -272,8 +272,8 @@
 .blog-featured-card-cover-placeholder {
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--color-muted-moss) 12%, var(--bg-tertiary)),
-    color-mix(in srgb, var(--color-burnt-indigo) 8%, var(--bg-tertiary))
+    color-mix(in srgb, var(--mocha-mousse) 12%, var(--bg-tertiary)),
+    color-mix(in srgb, var(--mocha-deep) 8%, var(--bg-tertiary))
   );
 }
 
@@ -648,7 +648,7 @@
 }
 
 .blog-cta-button:hover {
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
 }
 
 .blog-back-section {
