@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import type { CSSProperties, FormEvent, KeyboardEvent } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/Button'
-import { FormField } from '@/components/ui/FormField'
 import { FormMessage } from '@/components/ui/FormMessage'
+import { KineticHeading } from '@/components/typography/KineticHeading'
 import { useMultiStep } from '@/lib/hooks'
 import { QUESTIONS, getBand, MAX_SCORE } from '@/lib/auditData'
 import type { AuditBand } from '@/lib/auditData'
@@ -24,26 +25,13 @@ interface AuditClientProps {
   content: AuditPageContent | null
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Fallback band copy (used when Sanity doc hasn't been created yet)
-// ─────────────────────────────────────────────────────────────────────────────
-
-const BAND_CTA: Record<AuditBand, { intro: string; label: string; href: string }> = {
-  foundation: {
-    intro: 'The Foundation course was built for exactly where you are.',
-    label: 'Enroll — starting at $197',
-    href: '/foundation',
-  },
-  developing: {
-    intro: 'A guided program will accelerate what you\'ve already built.',
-    label: 'Explore Programs',
-    href: '/programs',
-  },
-  refining: {
-    intro: "You're ready for 1-on-1 work.",
-    label: 'Book a Discovery Call',
-    href: '/contact',
-  },
+const BAND_SUMMARY: Record<AuditBand, string> = {
+  foundation:
+    'Your score shows strong self-awareness and a clear starting point. The fastest gains now come from body-led fundamentals you can repeat under pressure.',
+  developing:
+    'Your score reflects real momentum. You are already showing up with intent, and the next step is making your presence consistently reliable in high-stakes moments.',
+  refining:
+    'Your score places you in advanced territory. This stage is less about basics and more about precision, range, and the final details people remember.',
 }
 
 const BAND_FALLBACKS: Record<AuditBand, { headline: string; body: string }> = {
@@ -84,29 +72,75 @@ export default function AuditClient({ content }: AuditClientProps) {
   const { currentStep, goTo } = useMultiStep({ steps: ['quiz', 'capture', 'result'] })
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [currentQ, setCurrentQ] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const [result, setResult] = useState<AuditResult | null>(null)
+  const questionFocusRef = useRef<HTMLDivElement>(null)
 
   const question = QUESTIONS[currentQ]
-  const answeredCount = Object.keys(answers).length
+  const answeredCount = QUESTIONS.filter((item) => answers[item.id] !== undefined).length
   const progress = (answeredCount / QUESTIONS.length) * 100
+  const currentAnswer = answers[question.id]
+  const isLastQuestion = currentQ === QUESTIONS.length - 1
+
+  useEffect(() => {
+    if (currentStep !== 'quiz') return
+
+    const timeoutId = window.setTimeout(() => {
+      questionFocusRef.current?.focus()
+    }, 32)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [currentQ, currentStep])
+
+  function transitionQuestion(action: () => void) {
+    if (isTransitioning) return
+    setIsTransitioning(true)
+
+    window.setTimeout(() => {
+      action()
+      setIsTransitioning(false)
+    }, 200)
+  }
 
   function selectAnswer(value: number) {
-    const updated = { ...answers, [question.id]: value }
-    setAnswers(updated)
+    setAnswers((prev) => ({ ...prev, [question.id]: value }))
+  }
 
-    if (currentQ < QUESTIONS.length - 1) {
-      setTimeout(() => setCurrentQ((q) => q + 1), 280)
+  function handleNextQuestion() {
+    if (currentAnswer === undefined) return
+
+    if (isLastQuestion) {
+      transitionQuestion(() => goTo('capture'))
     } else {
-      setTimeout(() => goTo('capture'), 280)
+      transitionQuestion(() => setCurrentQ((q) => q + 1))
     }
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
+  function handlePreviousQuestion() {
+    if (currentQ === 0) return
+    transitionQuestion(() => setCurrentQ((q) => q - 1))
+  }
+
+  function handleQuizKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault()
+      handleNextQuestion()
+    }
+
+    if (event.key === 'Tab' && event.shiftKey && currentQ > 0) {
+      event.preventDefault()
+      handlePreviousQuestion()
+    }
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
     if (!name.trim() || !email.trim()) return
 
     setSubmitting(true)
@@ -118,7 +152,7 @@ export default function AuditClient({ content }: AuditClientProps) {
     const auditResult: AuditResult = { score, band, headline, body }
 
     try {
-      await fetch('/api/inquiries', {
+      const response = await fetch('/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -130,6 +164,10 @@ export default function AuditClient({ content }: AuditClientProps) {
           auditBand: band,
         }),
       })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit audit inquiry')
+      }
 
       setResult(auditResult)
       goTo('result')
@@ -143,36 +181,68 @@ export default function AuditClient({ content }: AuditClientProps) {
   // ── Quiz stage ──────────────────────────────────────────────────────────────
   if (currentStep === 'quiz') {
     return (
-      <div className="audit-quiz">
-        <div className="audit-progress-track">
+      <div className="audit-quiz" onKeyDown={handleQuizKeyDown}>
+        <div
+          className="audit-progress-track"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={QUESTIONS.length}
+          aria-valuenow={answeredCount}
+          aria-label="Audit progress"
+        >
           <div className="audit-progress-fill" style={{ width: `${progress}%` }} />
         </div>
-        <p className="audit-progress-label">
-          {answeredCount} of {QUESTIONS.length}
-        </p>
 
-        <div className="audit-question-block" key={question.id}>
-          <span className="audit-question-number">0{question.id}</span>
-          <h2 className="audit-question-text">{question.text}</h2>
+        <div className={`audit-question-shell${isTransitioning ? ' is-leaving' : ''}`} key={question.id}>
+          <fieldset className="audit-question-fieldset">
+            <legend className="sr-only">Question {currentQ + 1} of {QUESTIONS.length}</legend>
 
-          <div className="audit-options">
-            {question.options.map((opt) => (
-              <button
-                key={opt.value}
-                className={`audit-option${answers[question.id] === opt.value ? ' selected' : ''}`}
-                onClick={() => selectAnswer(opt.value)}
-              >
-                {opt.label}
-              </button>
-            ))}
+            <span className="audit-question-number">
+              {String(currentQ + 1).padStart(2, '0')}
+            </span>
+
+            <div ref={questionFocusRef} tabIndex={-1} className="audit-question-focus-target">
+              <KineticHeading as="h2" className="audit-question-text" key={`q-${question.id}`}>
+                {question.text}
+              </KineticHeading>
+            </div>
+
+            <div className="audit-options">
+              {question.options.map((opt, optionIndex) => (
+                <button
+                  type="button"
+                  key={opt.value}
+                  className={`audit-option${currentAnswer === opt.value ? ' selected' : ''}`}
+                  onClick={() => selectAnswer(opt.value)}
+                  style={{ '--option-index': optionIndex } as CSSProperties}
+                  disabled={isTransitioning}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <div className="audit-navigation">
+            <button
+              type="button"
+              className="audit-nav-back"
+              onClick={handlePreviousQuestion}
+              disabled={currentQ === 0 || isTransitioning}
+            >
+              Back
+            </button>
+
+            <button
+              type="button"
+              className="audit-nav-next"
+              onClick={handleNextQuestion}
+              disabled={currentAnswer === undefined || isTransitioning}
+            >
+              {isLastQuestion ? 'Continue' : 'Next'}
+            </button>
           </div>
         </div>
-
-        {currentQ > 0 && (
-          <button className="audit-back" onClick={() => setCurrentQ((q) => q - 1)}>
-            ← Back
-          </button>
-        )}
       </div>
     )
   }
@@ -185,46 +255,58 @@ export default function AuditClient({ content }: AuditClientProps) {
           <span className="audit-capture-badge">
             {content?.captureBadge ?? 'Almost there'}
           </span>
-          <h2 className="audit-capture-title">
+          <KineticHeading as="h2" className="audit-capture-title">
             {content?.captureHeadline ?? 'Where should I send your results?'}
-          </h2>
+          </KineticHeading>
           <p className="audit-capture-body">
             {content?.captureBody ?? "I'll review your answers and follow up personally. No automated sequence, no sales funnel — just me reading what you shared and responding like a human."}
           </p>
         </div>
 
         <form className="audit-capture-form" onSubmit={handleSubmit}>
-          <FormField label="Your name" id="audit-name" required>
+          <div className="audit-floating-field">
             <input
               id="audit-name"
               type="text"
               className="audit-input"
-              placeholder="First name is fine"
+              placeholder=" "
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
-          </FormField>
+            <label htmlFor="audit-name">Your name</label>
+          </div>
 
-          <FormField label="Email address" id="audit-email" required>
+          <div className="audit-floating-field">
             <input
               id="audit-email"
               type="email"
               className="audit-input"
-              placeholder="you@example.com"
+              placeholder=" "
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </FormField>
+            <label htmlFor="audit-email">Email address</label>
+          </div>
 
           {submitError && (
             <FormMessage variant="error">{submitError}</FormMessage>
           )}
 
-          <Button type="submit" className="audit-submit" disabled={submitting}>
-            {submitting ? 'Sending…' : 'See My Results'}
-          </Button>
+          <div className="audit-navigation">
+            <button
+              type="button"
+              className="audit-nav-back"
+              onClick={() => goTo('quiz')}
+              disabled={submitting}
+            >
+              Back
+            </button>
+            <Button type="submit" className="audit-nav-next audit-submit" disabled={submitting}>
+              {submitting ? 'Sending...' : 'See My Results'}
+            </Button>
+          </div>
 
           <p className="audit-capture-note">
             {content?.capturePrivacyNote ?? 'No spam. Unsubscribe anytime. I take inbox trust seriously.'}
@@ -237,10 +319,13 @@ export default function AuditClient({ content }: AuditClientProps) {
   // ── Result stage ────────────────────────────────────────────────────────────
   if (currentStep === 'result' && result) {
     const pct = Math.round((result.score / MAX_SCORE) * 100)
+    const ctaText = content?.resultCtaText ?? BAND_SUMMARY[result.band]
+    const ctaLabel = content?.resultCtaButtonLabel ?? 'Book a Discovery Call'
+    const ctaHref = content?.resultCtaHref ?? '/contact'
 
     return (
       <div className="audit-result">
-        <div className="audit-result-score-block">
+        <div className="audit-result-score-block" aria-hidden="true">
           <div className="audit-score-ring">
             <svg viewBox="0 0 120 120" className="audit-score-svg">
               <circle cx="60" cy="60" r="52" className="audit-score-track" />
@@ -261,9 +346,11 @@ export default function AuditClient({ content }: AuditClientProps) {
           </div>
         </div>
 
-        <div className={`audit-result-band audit-band-${result.band}`}>
+        <KineticHeading as="h2" className={`audit-result-band audit-band-${result.band}`}>
           {result.headline}
-        </div>
+        </KineticHeading>
+
+        <p className="audit-result-summary">You scored {result.score}/{MAX_SCORE} ({pct}%).</p>
 
         <p className="audit-result-body">{result.body}</p>
 
@@ -278,10 +365,10 @@ export default function AuditClient({ content }: AuditClientProps) {
 
         <div className="audit-result-cta">
           <p className="audit-result-cta-text">
-            {BAND_CTA[result.band].intro}
+            {ctaText}
           </p>
-          <Button as="a" href={BAND_CTA[result.band].href}>
-            {BAND_CTA[result.band].label}
+          <Button as="a" href={ctaHref}>
+            {ctaLabel}
           </Button>
         </div>
       </div>
