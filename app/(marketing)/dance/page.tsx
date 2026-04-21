@@ -3,8 +3,9 @@ import { PageTransition, SectionWrapper, SectionContent } from '@/components/lay
 import { Button } from '@/components/ui/Button'
 import { VideoEmbed } from '@/components/shared/VideoEmbed'
 import { InstagramEmbed } from '@/components/shared/InstagramEmbed'
+import FeaturedVideo from '@/components/sections/dance/FeaturedVideo'
 import { getDanceCategories, getInstagramReels, getDancePageContent } from '@/lib/sanity'
-import type { DanceCategory, DanceVideo, InstagramReel } from '@/lib/types'
+import type { DanceCategory, DanceVideo, DancePageContent, InstagramReel } from '@/lib/types'
 
 export const metadata: Metadata = {
   title: 'The Breakdown | Jonchalant',
@@ -40,11 +41,20 @@ export default async function Dance() {
   const [categories, reels, pageContent] = await Promise.all([
     getDanceCategories().catch(() => [] as DanceCategory[]),
     getInstagramReels().catch(() => [] as InstagramReel[]),
-    getDancePageContent().catch(() => null),
+    getDancePageContent().catch(() => null) as Promise<DancePageContent | null>,
   ])
 
   return (
     <PageTransition animation="fade">
+
+        {/* ── FEATURED REEL: full-bleed hero video ────────────────────────── */}
+        {pageContent?.featuredVideoUrl && (
+          <FeaturedVideo
+            videoUrl={pageContent.featuredVideoUrl}
+            title={pageContent.featuredVideoTitle}
+            caption={pageContent.featuredVideoCaption}
+          />
+        )}
 
         {/* ── SECTION 1: HERO ─────────────────────────────────────────────── */}
         <SectionWrapper variant="primary">
@@ -142,7 +152,7 @@ export default async function Dance() {
                 <div className="dance-bridge-item">
                   <p className="dance-bridge-item-context">The boardroom presentation.</p>
                   <p className="dance-bridge-item-translation">
-                    Grounding your weight before you begin. Holding the pause before your first point. Letting your stillness signal that you don't need the room's permission to take up space.
+                    Grounding your weight before you begin. Holding the pause before your first point. Letting your stillness signal that you don&apos;t need the room&apos;s permission to take up space.
                   </p>
                 </div>
                 <div className="dance-bridge-item">
@@ -154,7 +164,7 @@ export default async function Dance() {
                 <div className="dance-bridge-item">
                   <p className="dance-bridge-item-context">The performance review.</p>
                   <p className="dance-bridge-item-translation">
-                    Entering a room with intention, not apology. Eye contact that doesn't waver under pressure. The kind of physical authority that makes people assume competence before you've said a word.
+                    Entering a room with intention, not apology. Eye contact that doesn&apos;t waver under pressure. The kind of physical authority that makes people assume competence before you&apos;ve said a word.
                   </p>
                 </div>
               </div>

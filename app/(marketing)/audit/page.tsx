@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { PageTransition } from '@/components/layout'
 import { getAuditPageContent } from '@/lib/sanity'
 import type { AuditPageContent } from '@/lib/types'
@@ -20,36 +21,14 @@ export default async function AuditPage() {
 
   return (
     <PageTransition animation="fade">
-      <main className="audit-page">
-        {/* Header */}
-        <div className="audit-header">
-          <div className="audit-header-inner">
-            <span className="audit-header-badge">
-              {auditContent?.pageHeaderBadge ?? '3 minutes'}
-            </span>
-            <h1 className="audit-header-title">
-              {auditContent?.pageHeaderHeadline ?? 'Find out where your presence actually stands.'}
-            </h1>
-            <p className="audit-header-body">
-              {auditContent?.pageHeaderBody ?? "Seven honest questions. No account needed. I'll review your answers and follow up personally — not with an automated email, with an actual response."}
-            </p>
-          </div>
-        </div>
-
-        {/* Quiz container */}
-        <div className="audit-container">
+      <main className="audit-page audit-page--immersive">
+        <div className="audit-immersive-shell">
           <AuditClient content={auditContent} />
         </div>
 
-        {/* Footer note */}
-        <div className="audit-footer-note">
-          <p>
-            {auditContent?.pageFooterNote ?? 'Already know what you need?'}{' '}
-            <a href="/contact" className="audit-footer-link">
-              Skip this and book a call directly.
-            </a>
-          </p>
-        </div>
+        <Link href="/" className="audit-textmark" aria-label="Back to home">
+          Jonchalant
+        </Link>
       </main>
     </PageTransition>
   )

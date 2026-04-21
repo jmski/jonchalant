@@ -21,6 +21,7 @@ import dancePageContent from '../schemas/dancePageContent'
 import module from '../schemas/module'
 import pressMention from '../schemas/pressMention'
 import blogConfig from '../schemas/blogConfig'
+import curriculumWeek from '../schemas/curriculumWeek'
 
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
@@ -44,6 +45,7 @@ export const types = [
   module,
   pressMention,
   blogConfig,
+  curriculumWeek,
 ] as const
 
 export const schema: { types: SchemaTypeDefinition[] } = {

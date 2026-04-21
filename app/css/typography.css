@@ -149,7 +149,7 @@ i {
 }
 
 mark {
-  background-color: rgba(107, 142, 99, 0.1);
+  background-color: rgba(164, 120, 100, 0.1);
   padding: 0.125rem 0.25rem;
   border-radius: 2px;
   color: var(--text-primary);
@@ -415,7 +415,7 @@ hr {
   font-weight: 300;
   font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-style: italic;
-  color: var(--color-burnt-indigo);
+  color: var(--mocha-deep);
   border-left: 3px solid var(--accent-primary);
   padding-left: 1.5rem;
   line-height: 1.4;
@@ -447,4 +447,98 @@ hr {
   text-transform: uppercase;
   color: var(--text-tertiary);
   margin-top: 0.5rem;
+}
+
+/* ============================================================
+   EXPRESSIVE FRAUNCES — variable axis system
+   ============================================================ */
+
+/* Display: maximum optical size, max softness — for oversized hero/pull moments */
+.type-display {
+  font-family: var(--font-headline);
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+
+/* Softest, warmest — italic Fraunces for About page hero or pull moments */
+.type-display--soft {
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+/* Headline: mid optical size, moderate softness */
+.type-headline {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 72, "SOFT" 50;
+}
+
+/* Eyebrow label: DM Sans uppercase, mocha-deep */
+.type-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mocha-deep);
+}
+
+/* ============================================================
+   ANCHOR WORD — italic mocha signature word
+   ============================================================ */
+
+.anchor-word {
+  font-style: italic;
+  color: var(--accent-primary);
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  font-family: var(--font-headline);
+}
+
+.anchor-word--large {
+  font-size: clamp(2rem, 5vw, 4rem);
+  display: inline-block;
+}
+
+.anchor-word--inline {
+  /* inherits surrounding font-size */
+}
+
+/* ============================================================
+   KINETIC HEADING — scroll-triggered word-by-word reveal
+   ============================================================ */
+
+.kinetic-heading {
+  display: block;
+}
+
+.kinetic-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 700ms ease-out,
+    transform 700ms ease-out;
+  transition-delay: calc(var(--word-index) * 80ms);
+}
+
+.kinetic-heading--revealed .kinetic-word {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kinetic-word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

@@ -480,7 +480,7 @@
 }
 
 .section-wrapper-dark {
-  background-color: var(--color-burnt-indigo);
+  background-color: var(--mocha-deep);
 }
 
 .section-wrapper-dark,
@@ -494,20 +494,20 @@
 }
 
 .section-wrapper-dark p {
-  color: rgba(248, 248, 245, 0.72);
+  color: rgba(244, 235, 224, 0.72);
 }
 
 .section-wrapper-dark a:not([class*="btn"]) {
-  color: var(--color-muted-moss);
+  color: var(--mocha-soft);
   transition: color var(--transition-fast);
 }
 
 .section-wrapper-dark a:not([class*="btn"]):hover {
-  color: var(--color-moss-light);
+  color: var(--mocha-mousse);
 }
 
 .section-wrapper--moss {
-  background-color: #e8f2e4;
+  background-color: var(--bg-tertiary);
 }
 
 /* Hero gradient wash — applied to SectionWrapper so gradient fills full width.
@@ -1133,6 +1133,7 @@
   backdrop-filter: blur(8px);
   background-color: rgba(248, 248, 245, 0.95);
   width: 100%;
+  transition: background-color 250ms ease-out, border-color 250ms ease-out, backdrop-filter 250ms ease-out;
 }
 
 .navbar-container {
@@ -1340,7 +1341,7 @@
   border-color: var(--accent-hover);
   color: white;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(107, 142, 99, 0.2);
+  box-shadow: 0 4px 12px rgba(164, 120, 100, 0.2);
 }
 
 @media (max-width: 1023px) {
@@ -1372,7 +1373,7 @@
 .navbar-login-btn:hover {
   background-color: var(--accent-hover);
   border-color: var(--accent-hover);
-  box-shadow: 0 4px 12px rgba(107, 142, 99, 0.15);
+  box-shadow: 0 4px 12px rgba(164, 120, 100, 0.15);
 }
 
 @media (max-width: 1023px) {
@@ -1617,6 +1618,40 @@
   display: block;
 }
 
+/* Dance page — translucent navbar at scroll top */
+.navbar.navbar--dance-top {
+  background-color: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+}
+
+.navbar.navbar--dance-top .navbar-brand,
+.navbar.navbar--dance-top .navbar-link,
+.navbar.navbar--dance-top .navbar-dropdown-arrow {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.navbar.navbar--dance-top .navbar-link:hover,
+.navbar.navbar--dance-top .navbar-brand:hover {
+  color: #ffffff;
+}
+
+.navbar.navbar--dance-top .navbar-link.active {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar.navbar--dance-top .navbar-mobile-toggle {
+  color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.navbar.navbar--dance-top .navbar-actions {
+  display: none;
+}
+
 /* ════════════════════════════════════════════════════════════════════════════
    ADMIN NAVBAR - Admin Page Navigation
    ════════════════════════════════════════════════════════════════════════════ */
@@ -1789,7 +1824,7 @@
 
 /* ── Opt-in strip ── */
 .site-footer-optin {
-  background-color: var(--color-burnt-indigo);
+  background-color: var(--mocha-deep);
   padding: 3rem 1.25rem;
 }
 
@@ -1828,7 +1863,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-muted-moss);
+  color: var(--mocha-mousse);
   margin-bottom: 0.75rem;
 }
 
@@ -1893,7 +1928,7 @@
 .site-footer-optin-input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.15);
-  border-color: var(--color-moss-light);
+  border-color: var(--mocha-soft);
 }
 
 .site-footer-optin-input:disabled {
@@ -1924,7 +1959,7 @@
 .site-footer-optin-success-icon {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-moss-light);
+  color: var(--mocha-soft);
 }
 
 .site-footer-optin-success-title {
@@ -2125,4 +2160,66 @@
 
 .site-footer-legal-link:hover {
   color: var(--accent-primary);
+}
+
+/* ============================================================
+   BENTO GRID — reusable asymmetric layout
+   ============================================================ */
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(var(--bento-columns, 4), 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  width: 100%;
+}
+
+/* Gap variants */
+.bento--gap-sm { gap: 0.75rem; }
+.bento--gap-md { gap: 1rem; }
+.bento--gap-lg { gap: 1.5rem; }
+
+/* Cell base */
+.bento-cell {
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-subtle);
+  /* Default: 1×1 */
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* ── Desktop spans (≥1024px) ── */
+@media (min-width: 1024px) {
+  .bento-cell--sm   { grid-column: span 1; grid-row: span 1; }
+  .bento-cell--md   { grid-column: span 2; grid-row: span 1; }
+  .bento-cell--lg   { grid-column: span 2; grid-row: span 2; }
+  .bento-cell--tall { grid-column: span 1; grid-row: span 2; }
+  .bento-cell--wide { grid-column: span 3; grid-row: span 1; }
+}
+
+/* ── Tablet (768–1023px): wide/lg become 2-col ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-cell--lg   { grid-column: span 2; grid-row: span 2; }
+  .bento-cell--wide { grid-column: span 2; grid-row: span 1; }
+  .bento-cell--tall { grid-column: span 1; grid-row: span 2; }
+}
+
+/* ── Mobile (<768px): every cell full-width ── */
+@media (max-width: 767px) {
+  .bento {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+  .bento-cell--sm,
+  .bento-cell--md,
+  .bento-cell--lg,
+  .bento-cell--tall,
+  .bento-cell--wide {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
 }

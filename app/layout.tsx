@@ -3,13 +3,15 @@ import Script from "next/script";
 import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
+import MochaCursor from "@/components/utilities/cursor/MochaCursor";
+import MochaSweep from "@/components/layout/MochaSweep";
 
 // next/font self-hosts both typefaces — no external request, no render block
 const fraunces = Fraunces({
   subsets: ["latin"],
   weight: "variable",
   style: ["normal", "italic"],
-  axes: ["opsz"],
+  axes: ["opsz", "SOFT", "WONK"],
   variable: "--font-fraunces",
   display: "swap",
 });
@@ -112,6 +114,8 @@ export default function RootLayout({
         )}
       </head>
       <body suppressHydrationWarning>
+        <MochaCursor />
+        <MochaSweep />
         {children}
 
         {/* JSON-LD Structured Data — placed at end of body (valid per Google) to avoid

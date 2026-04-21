@@ -123,7 +123,7 @@ button:disabled:hover {
 }
 
 .card-outlined:hover {
-  box-shadow: 0 2px 8px rgba(107, 142, 99, 0.08);
+  box-shadow: 0 2px 8px rgba(164, 120, 100, 0.08);
 }
 
 .card-title {

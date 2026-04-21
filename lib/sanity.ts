@@ -326,6 +326,26 @@ export async function getAboutPageContent() {
     originSectionHeadline,
     originSectionDescription,
     originSectionHighlight,
+    originSectionAnchorWord,
+    originPhases[] | order(order asc) {
+      _key,
+      order,
+      title,
+      description,
+      pullQuote,
+      image {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        hotspot,
+        crop
+      },
+      imageAlt
+    },
+    introvertImage {
+      asset->{ _id, url, metadata { dimensions { width, height } } },
+      hotspot,
+      crop,
+      alt
+    },
     turningPointHeadline,
     turningPointBody,
     turningPointHighlight,
@@ -374,7 +394,34 @@ export async function getHomePageContent() {
     ctaDescription,
     ctaButtonText,
     ctaButtonHref,
-    meetJonImage { asset->{ _id, url }, alt, crop, hotspot }
+    meetJonImage { asset->{ _id, url }, alt, crop, hotspot },
+    heroHeadlineStatic,
+    heroHeadlineAnchorWord,
+    heroSubhead,
+    whyItWorksBentoHeadline,
+    whyItWorksCells[] {
+      _key,
+      title,
+      insight,
+      image {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        hotspot,
+        crop
+      },
+      size
+    },
+    heroCycle[] {
+      _key,
+      kind,
+      image {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        hotspot,
+        crop
+      },
+      typographicWord,
+      caption,
+      durationMs
+    }
   }`
   return await client.fetch(query)
 }
@@ -519,6 +566,9 @@ export async function getInstagramReels() {
 
 export async function getDancePageContent() {
   const query = `*[_type == "dancePageContent"][0] {
+    featuredVideoUrl,
+    featuredVideoTitle,
+    featuredVideoCaption,
     heroEyebrow,
     heroHeadline,
     heroSubheadline,
@@ -620,4 +670,21 @@ export async function getRecentBlogPosts(count = 3) {
     coverImage { asset->{ url }, alt }
   }`
   return await client.fetch(query, { count })
+}
+
+// ============================================================================
+// CURRICULUM WEEKS (Phase 5 — Bento)
+// ============================================================================
+
+export async function getCurriculumWeeks() {
+  const query = `*[_type == "curriculumWeek"] | order(order asc) {
+    _id,
+    weekNumber,
+    title,
+    oneLineDescription,
+    illustrationSlug,
+    bentoSize,
+    order
+  }`
+  return await client.fetch(query)
 }

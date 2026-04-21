@@ -22,7 +22,7 @@ export interface SanityImageAsset {
 
 export interface SanityImage {
   asset: SanityImageAsset
-  hotspot?: { x: number; y: number }
+  hotspot?: { x: number; y: number; width: number; height: number }
   crop?: { top: number; bottom: number; left: number; right: number }
   alt?: string
 }
@@ -158,6 +158,25 @@ export interface Testimonial {
   image?: unknown
 }
 
+// ── Dance page ────────────────────────────────────────────────────────────────
+
+export interface DancePageContent {
+  featuredVideoUrl?: string
+  featuredVideoTitle?: string
+  featuredVideoCaption?: string
+  heroEyebrow?: string
+  heroHeadline?: string
+  heroSubheadline?: string
+  instagramHeadline?: string
+  ctaHeadline?: string
+  ctaBody?: string
+  ctaButtonLabel?: string
+  ctaButtonHref?: string
+  bridgeEyebrow?: string
+  bridgeHeadline?: string
+  bridgeClose?: string
+}
+
 // ── Dance curriculum ──────────────────────────────────────────────────────────
 
 export interface DanceCategory {
@@ -251,16 +270,38 @@ export interface EmailOptInContent {
 
 // ── About page ────────────────────────────────────────────────────────────────
 
+export interface OriginPhase {
+  _key: string
+  order: number
+  title: string
+  description?: string
+  pullQuote?: string
+  image: SanityImage
+  imageAlt: string
+}
+
+export interface HeroCycleSlide {
+  _key: string
+  kind: 'three-js-figure' | 'photo' | 'typography' | 'video-loop'
+  image?: SanityImage
+  typographicWord?: string
+  caption?: string
+  durationMs?: number
+}
+
 export interface AboutPage {
   heroHeadline?: string
   heroDescription?: string
   heroImage?: SanityImage
   originImage?: SanityImage
   philosophyImage?: SanityImage
+  introvertImage?: SanityImage
   originSectionLabel?: string
   originSectionHeadline?: string
   originSectionDescription?: string
   originSectionHighlight?: string
+  originSectionAnchorWord?: string
+  originPhases?: OriginPhase[]
   turningPointHeadline?: string
   turningPointBody?: string
   turningPointHighlight?: string
@@ -340,3 +381,57 @@ export interface MovementPlan {
   plan_data: GeneratedPlan
   created_at: string
 }
+
+// ── Home page ─────────────────────────────────────────────────────────────────
+
+export interface WhyItWorksCell {
+  _key: string
+  title: string
+  insight?: string
+  image?: SanityImage
+  size?: 'sm' | 'md' | 'lg' | 'tall' | 'wide'
+}
+
+export interface HomePageContent {
+  heroEyebrow?: string
+  heroHeadline?: string
+  heroCyclingOutcomes?: string[]
+  heroDescription?: string
+  heroSubtext?: string
+  heroCtaText?: string
+  heroCtaLink?: string
+  heroMicrocopy?: string
+  heroSecondaryCtaText?: string
+  heroStats?: Array<{ value: string; label: string }>
+  servicesHeadline?: string
+  servicesDescription?: string
+  whyItWorksLabel?: string
+  whyItWorksHighlight?: string
+  whyItWorksParagraph1?: string
+  whyItWorksParagraph2?: string
+  whyItWorksParagraph3?: string
+  whyItWorksBentoHeadline?: string
+  whyItWorksCells?: WhyItWorksCell[]
+  testimonialsEyebrow?: string
+  testimonialsHeading?: string
+  ctaTitle?: string
+  ctaDescription?: string
+  ctaButtonText?: string
+  ctaButtonHref?: string
+  meetJonImage?: SanityImage
+  heroHeadlineStatic?: string
+  heroHeadlineAnchorWord?: string
+  heroSubhead?: string
+  heroCycle?: HeroCycleSlide[]
+}
+
+export interface CurriculumWeek {
+  _id: string
+  weekNumber: number
+  title: string
+  oneLineDescription?: string
+  illustrationSlug?: string
+  bentoSize?: 'sm' | 'md' | 'lg' | 'tall' | 'wide'
+  order: number
+}
+

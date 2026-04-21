@@ -5,6 +5,26 @@ export default defineType({
   title: 'Dance Page Content',
   type: 'document',
   fields: [
+    // ── Featured video (full-bleed reel) ─────────────────────────────────────
+    defineField({
+      name: 'featuredVideoUrl',
+      title: 'Featured Video — URL',
+      type: 'url',
+      description: 'Direct link to a video file (MP4/WebM from CDN or Sanity). Used as the full-bleed hero reel.',
+    }),
+    defineField({
+      name: 'featuredVideoTitle',
+      title: 'Featured Video — Title',
+      type: 'string',
+      description: 'Caption title displayed bottom-left over the video.',
+    }),
+    defineField({
+      name: 'featuredVideoCaption',
+      title: 'Featured Video — Caption',
+      type: 'string',
+      description: 'Short supporting line displayed beneath the title.',
+    }),
+
     // ── Hero ──────────────────────────────────────────────────────────────────
     defineField({
       name: 'heroEyebrow',

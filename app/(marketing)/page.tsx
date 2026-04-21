@@ -15,6 +15,7 @@ import { PressStrip } from '@/components/shared/press-strip';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { getHomePageContent, getServices, getTestimonials, getPressMentions, getRecentBlogPosts } from "@/lib/sanity";
+import type { HomePageContent } from "@/lib/types";
 import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  let homeContent = null;
+  let homeContent: HomePageContent | null = null;
   let services = [];
   let testimonials = [];
   let recentPosts = [];
@@ -93,16 +94,7 @@ export default async function Home() {
       <PageTransition animation="fade">
         {/* 1. HERO */}
         <SectionWrapper variant="primary" className="section-wrapper--flush">
-          <Hero
-            eyebrow={homeContent?.heroEyebrow}
-            heroHeadline={homeContent?.heroHeadline}
-            cyclingOutcomes={homeContent?.heroCyclingOutcomes}
-            description={homeContent?.heroDescription}
-            subtext={homeContent?.heroSubtext}
-            ctaText={homeContent?.heroCtaText}
-            ctaLink={homeContent?.heroCtaLink}
-            auditMicrocopy={homeContent?.heroMicrocopy}
-          />
+          <Hero content={homeContent ?? {}} />
         </SectionWrapper>
 
         {/* 2. SOCIAL PROOF BAND (Credibility + Press) */}
@@ -127,6 +119,8 @@ export default async function Home() {
                 paragraph1={homeContent?.whyItWorksParagraph1}
                 paragraph2={homeContent?.whyItWorksParagraph2}
                 paragraph3={homeContent?.whyItWorksParagraph3}
+                bentoHeadline={homeContent?.whyItWorksBentoHeadline}
+                cells={homeContent?.whyItWorksCells}
               />
             </ScrollFade>
           </SectionContent>

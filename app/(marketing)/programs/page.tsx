@@ -3,7 +3,9 @@ import { PageTransition, SectionWrapper, SectionContent } from "@/components/lay
 import { ScrollFade } from "@/components/animations";
 import { Button } from '@/components/ui/Button';
 import { ProgramTrackCard } from "@/components/utilities/cards";
-import { getProgramsPageContent, getCaseStudies } from "@/lib/sanity";
+import { getProgramsPageContent, getCaseStudies, getCurriculumWeeks } from "@/lib/sanity";
+import { CurriculumBento } from "@/components/sections/programs/CurriculumBento";
+import type { CurriculumWeek } from "@/lib/types";
 import type { ProgramsPageContent } from "@/lib/types";
 import { CaseStudyCard } from "@/components/utilities/cards";
 import Script from 'next/script';
@@ -59,9 +61,10 @@ const PROGRAMS_FAQS: FAQItem[] = [
 ]
 
 export default async function Programs() {
-  const [page, caseStudies] = await Promise.all([
+  const [page, caseStudies, curriculumWeeks] = await Promise.all([
     getProgramsPageContent() as Promise<ProgramsPageContent | null>,
     getCaseStudies(true).catch(() => []),
+    getCurriculumWeeks().catch(() => [] as CurriculumWeek[]),
   ]);
 
   return (
@@ -99,6 +102,20 @@ export default async function Programs() {
           />
         </SectionContent>
       </SectionWrapper>
+
+      {/* CURRICULUM BENTO */}
+      {curriculumWeeks.length > 0 && (
+        <SectionWrapper variant="tertiary">
+          <SectionContent>
+            <ScrollFade>
+              <CurriculumBento
+                headline="8 weeks. One transformation."
+                weeks={curriculumWeeks}
+              />
+            </ScrollFade>
+          </SectionContent>
+        </SectionWrapper>
+      )}
 
       {/* OFFER CARDS */}
       <SectionWrapper variant="secondary">

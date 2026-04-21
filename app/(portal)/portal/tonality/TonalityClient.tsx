@@ -95,7 +95,7 @@ const TONE_COLOUR: Record<TonalityReport['overallTone'], string> = {
   Tentative: 'var(--color-error)',
   Developing: 'var(--color-warning)',
   Confident: 'var(--accent-primary)',
-  Commanding: 'var(--color-burnt-indigo)',
+  Commanding: 'var(--mocha-deep)',
 }
 
 const SCORE_LABELS: Record<keyof ScoreMap, string> = {

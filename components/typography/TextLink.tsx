@@ -18,7 +18,7 @@ export default function TextLink({
   className = '',
   external = false,
 }: TextLinkProps) {
-  const baseClass = 'text-link';
+  const baseClass = 'text-link link-underline-draw';
 
   if (external) {
     return (

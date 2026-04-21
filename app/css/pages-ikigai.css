@@ -80,16 +80,16 @@
 }
 
 .ikigai-intro-quadrant--passion {
-  border-left: 3px solid #4a3a5c;
+  border-left: 3px solid #6B4F3F;
 }
 .ikigai-intro-quadrant--mission {
-  border-left: 3px solid #6b8e63;
+  border-left: 3px solid #A47864;
 }
 .ikigai-intro-quadrant--vocation {
   border-left: 3px solid #b89a5f;
 }
 .ikigai-intro-quadrant--profession {
-  border-left: 3px solid #6a8aaa;
+  border-left: 3px solid #8A9A85;
 }
 
 .ikigai-intro-quadrant-name {
@@ -263,16 +263,16 @@
 }
 
 .ikigai-quadrant-tag--passion {
-  background: #4a3a5c;
+  background: #6B4F3F;
 }
 .ikigai-quadrant-tag--mission {
-  background: #6b8e63;
+  background: #A47864;
 }
 .ikigai-quadrant-tag--vocation {
   background: #b89a5f;
 }
 .ikigai-quadrant-tag--profession {
-  background: #6a8aaa;
+  background: #8A9A85;
 }
 
 .ikigai-question-text {
@@ -483,16 +483,16 @@
 }
 
 .ikigai-bar-fill--passion {
-  background: #4a3a5c;
+  background: #6B4F3F;
 }
 .ikigai-bar-fill--mission {
-  background: #6b8e63;
+  background: #A47864;
 }
 .ikigai-bar-fill--vocation {
   background: #b89a5f;
 }
 .ikigai-bar-fill--profession {
-  background: #6a8aaa;
+  background: #8A9A85;
 }
 
 .ikigai-bar-fill.is-dominant {
@@ -526,16 +526,16 @@
 }
 
 .ikigai-dominant-callout--passion {
-  border-top-color: #4a3a5c;
+  border-top-color: #6B4F3F;
 }
 .ikigai-dominant-callout--mission {
-  border-top-color: #6b8e63;
+  border-top-color: #A47864;
 }
 .ikigai-dominant-callout--vocation {
   border-top-color: #b89a5f;
 }
 .ikigai-dominant-callout--profession {
-  border-top-color: #6a8aaa;
+  border-top-color: #8A9A85;
 }
 
 .ikigai-dominant-header {
@@ -573,7 +573,7 @@
 .ikigai-results-cta {
   padding: var(--spacing-md);
   border-radius: 1rem;
-  background: var(--color-burnt-indigo);
+  background: var(--mocha-deep);
   color: #fff;
   max-width: 640px;
   display: flex;
@@ -606,7 +606,7 @@
 }
 
 .ikigai-cta-btn {
-  background: var(--color-muted-moss);
+  background: var(--mocha-mousse);
   color: var(--btn-primary-text);
   border: none;
   padding: 0.75rem 1.75rem;
@@ -622,7 +622,7 @@
 }
 
 .ikigai-cta-btn:hover {
-  background: var(--color-moss-light);
+  background: var(--mocha-deep);
   transform: translateY(-1px);
 }
 
