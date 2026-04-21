@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Portable Text components configuration for blog content rendering
  * Used in both blog listing and individual post pages
@@ -76,7 +77,7 @@ export const portableTextComponents = {
       </code>
     ),
     link: ({ value, children }: any) => (
-      <a href={value?.href} className="blog-content a">
+      <a href={value?.href} className="blog-content a link-underline-draw">
         {children}
       </a>
     ),

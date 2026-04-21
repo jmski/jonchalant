@@ -107,6 +107,63 @@ export default defineType({
       ],
     }),
 
+    // ── Why It Works Bento (Phase 5) ─────────────────────────────────────────
+    defineField({
+      name: 'whyItWorksBentoHeadline',
+      title: 'Why It Works — Bento Headline',
+      type: 'string',
+      description: 'Section heading. E.g. "Why it works"',
+    }),
+    defineField({
+      name: 'whyItWorksCells',
+      title: 'Why It Works — Bento Cells (4 items)',
+      type: 'array',
+      description: 'Four insight cells for the bento layout. Recommended order: lg, sm, sm (text-only), tall.',
+      of: [
+        {
+          type: 'object',
+          name: 'whyItWorksCell',
+          title: 'Cell',
+          fields: [
+            defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'insight', title: 'Insight (one sentence)', type: 'text', rows: 2 }),
+            defineField({
+              name: 'image',
+              title: 'Image (optional)',
+              type: 'image',
+              options: { hotspot: true },
+              description: 'Leave empty for text-only cells.',
+            }),
+            defineField({
+              name: 'size',
+              title: 'Bento Size',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Small (1×1)', value: 'sm' },
+                  { title: 'Medium (2×1)', value: 'md' },
+                  { title: 'Large (2×2)', value: 'lg' },
+                  { title: 'Tall (1×2)', value: 'tall' },
+                  { title: 'Wide (3×1)', value: 'wide' },
+                ],
+                layout: 'radio',
+              },
+              initialValue: 'sm',
+            }),
+          ],
+          preview: {
+            select: { title: 'title', size: 'size', media: 'image' },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            prepare: (value: Record<string, any>) => ({
+              title: String(value.title ?? 'Cell'),
+              subtitle: String(value.size ?? 'sm'),
+              media: value.media,
+            }),
+          },
+        },
+      ],
+    }),
+
     // ── Hero Cycle (Phase 2) ──────────────────────────────────────────────────
     defineField({
       name: 'heroHeadlineStatic',

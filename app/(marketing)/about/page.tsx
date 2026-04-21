@@ -60,18 +60,16 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 2 — ORIGIN STORY: why movement + leadership */}
+        {/* 2 — ORIGIN STORY: cinematic scrollytelling (full-bleed, no SectionContent) */}
         <SectionWrapper variant="tertiary">
-          <SectionContent>
-            <ScrollFade>
-            <Origin
-              label={aboutContent?.originSectionLabel}
-              headline={aboutContent?.originSectionHeadline}
-              description={aboutContent?.originSectionDescription}
-              highlight={aboutContent?.originSectionHighlight}
-            />
-            </ScrollFade>
-          </SectionContent>
+          <Origin
+            label={aboutContent?.originSectionLabel}
+            headline={aboutContent?.originSectionHeadline}
+            description={aboutContent?.originSectionDescription}
+            highlight={aboutContent?.originSectionHighlight}
+            phases={aboutContent?.originPhases}
+            anchorWord={aboutContent?.originSectionAnchorWord}
+          />
         </SectionWrapper>
 
         {/* 3 — TURNING POINT: school performance story */}

@@ -67,25 +67,25 @@ const QUADRANT_META: Record<
   passion: {
     name: 'Passion',
     description: 'What you love',
-    color: '#6B4F3F',
+    color: 'var(--mocha-deep)',
     barClass: 'ikigai-bar-fill--passion',
   },
   mission: {
     name: 'Mission',
     description: 'What the world needs',
-    color: '#A47864',
+    color: 'var(--mocha-mousse)',
     barClass: 'ikigai-bar-fill--mission',
   },
   vocation: {
     name: 'Vocation',
     description: 'What you can be paid for',
-    color: '#b89a5f',
+    color: 'var(--color-warning)',
     barClass: 'ikigai-bar-fill--vocation',
   },
   profession: {
     name: 'Profession',
     description: "What you're good at",
-    color: '#8A9A85',
+    color: 'var(--sage-whisper)',
     barClass: 'ikigai-bar-fill--profession',
   },
 };
@@ -128,10 +128,10 @@ function IkigaiDiagram() {
     ly: number;
     dl: number; // desc y offset
   }> = [
-    { id: 'passion',    cx: 140, cy: 150, r: 100, color: '#6B4F3F', lx: 88,  ly: 100, dl: 115 },
-    { id: 'mission',    cx: 260, cy: 150, r: 100, color: '#A47864', lx: 312, ly: 100, dl: 115 },
-    { id: 'vocation',   cx: 260, cy: 270, r: 100, color: '#b89a5f', lx: 312, ly: 308, dl: 323 },
-    { id: 'profession', cx: 140, cy: 270, r: 100, color: '#8A9A85', lx: 88,  ly: 308, dl: 323 },
+    { id: 'passion',    cx: 140, cy: 150, r: 100, color: 'var(--mocha-deep)', lx: 88,  ly: 100, dl: 115 },
+    { id: 'mission',    cx: 260, cy: 150, r: 100, color: 'var(--mocha-mousse)', lx: 312, ly: 100, dl: 115 },
+    { id: 'vocation',   cx: 260, cy: 270, r: 100, color: 'var(--color-warning)', lx: 312, ly: 308, dl: 323 },
+    { id: 'profession', cx: 140, cy: 270, r: 100, color: 'var(--sage-whisper)', lx: 88,  ly: 308, dl: 323 },
   ];
 
   return (

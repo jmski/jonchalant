@@ -101,13 +101,6 @@
   --decor-fluid: rgba(164, 120, 100, 0.12);
   --decor-grid: rgba(164, 120, 100, 0.08);
 
-  /* Legacy aliases — kept temporarily so nothing explodes mid-migration.
-     Remove these in Phase 9 after the full sweep is verified. */
-  --color-burnt-indigo:       var(--mocha-deep);
-  --color-burnt-indigo-light: var(--mocha-mousse);
-  --color-muted-moss:         var(--sage-whisper);
-  --color-moss-light:         var(--mocha-soft);
-
 }
 
 /* ========== WARM AMBER ACCENT (retained for pricing highlights) ========== */

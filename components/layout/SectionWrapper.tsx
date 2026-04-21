@@ -16,7 +16,7 @@ interface SectionWrapperProps {
  * - primary: Uses --bg-primary color
  * - secondary: Uses --bg-secondary color
  * - tertiary: Uses --bg-tertiary color
- * - dark: Uses --color-burnt-indigo with light text (WCAG AA)
+ * - dark: Uses --mocha-deep with light text (WCAG AA)
  */
 export default function SectionWrapper({
   children,

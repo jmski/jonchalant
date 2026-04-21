@@ -158,6 +158,25 @@ export interface Testimonial {
   image?: unknown
 }
 
+// ── Dance page ────────────────────────────────────────────────────────────────
+
+export interface DancePageContent {
+  featuredVideoUrl?: string
+  featuredVideoTitle?: string
+  featuredVideoCaption?: string
+  heroEyebrow?: string
+  heroHeadline?: string
+  heroSubheadline?: string
+  instagramHeadline?: string
+  ctaHeadline?: string
+  ctaBody?: string
+  ctaButtonLabel?: string
+  ctaButtonHref?: string
+  bridgeEyebrow?: string
+  bridgeHeadline?: string
+  bridgeClose?: string
+}
+
 // ── Dance curriculum ──────────────────────────────────────────────────────────
 
 export interface DanceCategory {
@@ -365,6 +384,14 @@ export interface MovementPlan {
 
 // ── Home page ─────────────────────────────────────────────────────────────────
 
+export interface WhyItWorksCell {
+  _key: string
+  title: string
+  insight?: string
+  image?: SanityImage
+  size?: 'sm' | 'md' | 'lg' | 'tall' | 'wide'
+}
+
 export interface HomePageContent {
   heroEyebrow?: string
   heroHeadline?: string
@@ -383,6 +410,8 @@ export interface HomePageContent {
   whyItWorksParagraph1?: string
   whyItWorksParagraph2?: string
   whyItWorksParagraph3?: string
+  whyItWorksBentoHeadline?: string
+  whyItWorksCells?: WhyItWorksCell[]
   testimonialsEyebrow?: string
   testimonialsHeading?: string
   ctaTitle?: string
@@ -395,3 +424,14 @@ export interface HomePageContent {
   heroSubhead?: string
   heroCycle?: HeroCycleSlide[]
 }
+
+export interface CurriculumWeek {
+  _id: string
+  weekNumber: number
+  title: string
+  oneLineDescription?: string
+  illustrationSlug?: string
+  bentoSize?: 'sm' | 'md' | 'lg' | 'tall' | 'wide'
+  order: number
+}
+

@@ -27,7 +27,7 @@ interface HeadingProps {
  *
  * Props:
  *   level: Heading level (h1-h6), defaults to h2
- *   accent: Apply accent color (muted-moss) to heading
+ *   accent: Apply accent color (sage-whisper) to heading
  *   className: Additional CSS classes
  *   as: Override semantic element (h1-h6)
  *   style: Inline styles (minimal usage)
@@ -61,18 +61,25 @@ export default function Heading({
   };
 
   const displayLevel = as || level;
-  const accentStyle = accent ? { color: 'var(--color-muted-moss)' } : undefined;
+  const accentStyle = accent ? { color: 'var(--sage-whisper)' } : undefined;
 
-  // Map heading level to HTML element
-  const tagName = `h${displayLevel}` as const;
-  const HeadingElement = tagName as any;
+  const headingClass = `${sizeMap[level]} ${className}`
+  const headingStyle = { ...accentStyle, ...style }
 
-  return (
-    <HeadingElement 
-      className={`${sizeMap[level]} ${className}`} 
-      style={{ ...accentStyle, ...style }}
-    >
-      {children}
-    </HeadingElement>
-  );
+  switch (displayLevel) {
+    case 1:
+      return <h1 className={headingClass} style={headingStyle}>{children}</h1>
+    case 2:
+      return <h2 className={headingClass} style={headingStyle}>{children}</h2>
+    case 3:
+      return <h3 className={headingClass} style={headingStyle}>{children}</h3>
+    case 4:
+      return <h4 className={headingClass} style={headingStyle}>{children}</h4>
+    case 5:
+      return <h5 className={headingClass} style={headingStyle}>{children}</h5>
+    case 6:
+      return <h6 className={headingClass} style={headingStyle}>{children}</h6>
+    default:
+      return <h2 className={headingClass} style={headingStyle}>{children}</h2>
+  }
 }

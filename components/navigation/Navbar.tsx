@@ -85,9 +85,11 @@ const FLAT_NAV_LINKS = [
 export default function Navbar({ socialLinks = [] }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+  const isDancePage = pathname === '/dance';
 
   // Close dropdown on outside click or Escape key
   useEffect(() => {
@@ -118,6 +120,19 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
     });
   }, [pathname]);
 
+  // Translucent navbar on dance page: track scroll position
+  useEffect(() => {
+    if (!isDancePage) return;
+    const handleScroll = () => setScrolled(window.scrollY >= 80);
+    // Defer initial check so setState is not synchronous in effect body
+    const t = setTimeout(() => handleScroll(), 0);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isDancePage]);
+
   const handleDropdownEnter = (label: string) => {
     if (closeTimer.current) {
       clearTimeout(closeTimer.current);
@@ -140,7 +155,7 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
   };
 
   return (
-    <nav className="navbar" ref={navRef}>
+    <nav className={`navbar${isDancePage && !scrolled ? ' navbar--dance-top' : ''}`} ref={navRef}>
       <div className="navbar-container">
         {/* Logo/Brand */}
         <Link href="/" className="navbar-brand">

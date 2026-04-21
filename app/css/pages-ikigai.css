@@ -622,7 +622,7 @@
 }
 
 .ikigai-cta-btn:hover {
-  background: var(--color-moss-light);
+  background: var(--mocha-deep);
   transform: translateY(-1px);
 }
 

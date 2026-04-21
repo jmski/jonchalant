@@ -27,10 +27,10 @@ const getCategoryColor = (category: string): string => {
   switch(lowerCategory) {
     case 'choreography':
     case 'choreography video':
-      return 'var(--color-burnt-indigo)';
+      return 'var(--mocha-deep)';
     case 'freestyle':
     case 'freestyle video':
-      return 'var(--color-muted-moss)';
+      return 'var(--sage-whisper)';
     case 'performance':
     case 'performances':
     case 'performance video':

@@ -119,6 +119,8 @@ export default async function Home() {
                 paragraph1={homeContent?.whyItWorksParagraph1}
                 paragraph2={homeContent?.whyItWorksParagraph2}
                 paragraph3={homeContent?.whyItWorksParagraph3}
+                bentoHeadline={homeContent?.whyItWorksBentoHeadline}
+                cells={homeContent?.whyItWorksCells}
               />
             </ScrollFade>
           </SectionContent>

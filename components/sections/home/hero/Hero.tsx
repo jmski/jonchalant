@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
+import { AnchorWord } from '@/components/typography/AnchorWord';
+import { withAnchorWords } from '@/lib/typography';
 import type { HomePageContent, HeroCycleSlide } from '@/lib/types';
 
 interface HeroProps {
@@ -19,14 +21,16 @@ export function Hero({ content }: HeroProps) {
   } = content;
   const ctaLink = heroCtaLink ?? '/contact';
   const heroCycle = content.heroCycle ?? [];
+  const heroCycleLength = heroCycle.length;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const isPausedRef = useRef(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const activeDuration = heroCycle[currentIndex]?.durationMs ?? 8000;
 
   const advance = useCallback(() => {
-    setCurrentIndex(i => (i + 1) % heroCycle.length);
-  }, [heroCycle.length]);
+    setCurrentIndex(i => (i + 1) % heroCycleLength);
+  }, [heroCycleLength]);
 
   // Pause cycling when section scrolls out of viewport
   useEffect(() => {
@@ -42,15 +46,14 @@ export function Hero({ content }: HeroProps) {
 
   // Auto-advance timer — resets on each slide change
   useEffect(() => {
-    if (heroCycle.length <= 1) return;
+    if (heroCycleLength <= 1) return;
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const duration = heroCycle[currentIndex]?.durationMs ?? 8000;
     const timer = setTimeout(() => {
       if (!isPausedRef.current) advance();
-    }, duration);
+    }, activeDuration);
     return () => clearTimeout(timer);
-  }, [currentIndex, heroCycle, advance]);
+  }, [currentIndex, heroCycleLength, advance, activeDuration]);
 
   const hasCycle = heroCycle.length > 0;
   const activeSlide = heroCycle[currentIndex];
@@ -70,10 +73,12 @@ export function Hero({ content }: HeroProps) {
       <div className="home-hero-text">
         <h1 className="home-hero-headline">
           {heroHeadlineStatic && (
-            <span className="home-hero-headline-static">{heroHeadlineStatic} </span>
+            <span className="home-hero-headline-static">
+              {withAnchorWords(heroHeadlineStatic, ['presence', 'stillness', 'nonchalant', 'grounded', 'movement'])}{' '}
+            </span>
           )}
           {heroHeadlineAnchorWord && (
-            <em className="home-hero-anchor-word">{heroHeadlineAnchorWord}</em>
+            <AnchorWord>{heroHeadlineAnchorWord}</AnchorWord>
           )}
         </h1>
 
@@ -83,7 +88,7 @@ export function Hero({ content }: HeroProps) {
 
         {heroCtaText && (
           <div className="home-hero-cta">
-            <Button as="link" href={heroCtaLink}>
+            <Button as="link" href={ctaLink}>
               {heroCtaText}
             </Button>
           </div>
@@ -107,7 +112,7 @@ export function Hero({ content }: HeroProps) {
               ].filter(Boolean).join(' ')}
               aria-hidden={idx !== currentIndex}
             >
-              <HeroSlideContent slide={slide} />
+              <HeroSlideContent slide={slide} priority={idx === 0} />
             </div>
           ))}
         </div>
@@ -116,7 +121,7 @@ export function Hero({ content }: HeroProps) {
   );
 }
 
-function HeroSlideContent({ slide }: { slide: HeroCycleSlide }) {
+function HeroSlideContent({ slide, priority = false }: { slide: HeroCycleSlide; priority?: boolean }) {
   switch (slide.kind) {
     case 'photo': {
       if (!slide.image?.asset?.url) return null;
@@ -127,7 +132,7 @@ function HeroSlideContent({ slide }: { slide: HeroCycleSlide }) {
             alt={slide.caption ?? ''}
             fill
             style={{ objectFit: 'cover' }}
-            priority
+            priority={priority}
             sizes="(max-width: 1024px) 100vw, 60vw"
           />
           <div className="home-hero-slide-grain" aria-hidden="true" />

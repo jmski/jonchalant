@@ -398,6 +398,18 @@ export async function getHomePageContent() {
     heroHeadlineStatic,
     heroHeadlineAnchorWord,
     heroSubhead,
+    whyItWorksBentoHeadline,
+    whyItWorksCells[] {
+      _key,
+      title,
+      insight,
+      image {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        hotspot,
+        crop
+      },
+      size
+    },
     heroCycle[] {
       _key,
       kind,
@@ -554,6 +566,9 @@ export async function getInstagramReels() {
 
 export async function getDancePageContent() {
   const query = `*[_type == "dancePageContent"][0] {
+    featuredVideoUrl,
+    featuredVideoTitle,
+    featuredVideoCaption,
     heroEyebrow,
     heroHeadline,
     heroSubheadline,
@@ -655,4 +670,21 @@ export async function getRecentBlogPosts(count = 3) {
     coverImage { asset->{ url }, alt }
   }`
   return await client.fetch(query, { count })
+}
+
+// ============================================================================
+// CURRICULUM WEEKS (Phase 5 — Bento)
+// ============================================================================
+
+export async function getCurriculumWeeks() {
+  const query = `*[_type == "curriculumWeek"] | order(order asc) {
+    _id,
+    weekNumber,
+    title,
+    oneLineDescription,
+    illustrationSlug,
+    bentoSize,
+    order
+  }`
+  return await client.fetch(query)
 }
