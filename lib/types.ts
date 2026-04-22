@@ -27,6 +27,82 @@ export interface SanityImage {
   alt?: string
 }
 
+// ── Ikigai / Four Circles ─────────────────────────────────────────────────────
+
+export type Quadrant = 'passion' | 'mission' | 'vocation' | 'profession'
+
+export type IkigaiPattern =
+  | 'delight-no-wealth'
+  | 'delight-uncertain'
+  | 'comfortable-empty'
+  | 'useful-unexcited'
+
+export type DifficultyTier = 'basic' | 'challenging' | 'hardest'
+
+export type CourseType = 'free-gated' | 'paid'
+
+export interface IkigaiScores {
+  passion: number
+  mission: number
+  vocation: number
+  profession: number
+}
+
+export interface IkigaiResult extends IkigaiScores {
+  id: string
+  userId: string
+  strongestQuadrant: Quadrant
+  pattern: IkigaiPattern | null
+  createdAt: string
+}
+
+export interface CourseLesson {
+  _id: string
+  title: string
+  slug: SanitySlug
+  lessonNumber: number
+  difficultyTier: DifficultyTier
+  ikigaiQuadrants?: Quadrant[]
+  subtitle?: string
+  summary: string
+  content?: any[]
+  reflectionPrompt?: string
+  tryThisWeek?: string
+  estimatedMinutes?: number
+}
+
+export interface IkigaiQuizQuestion {
+  _key?: string
+  questionText: string
+  quadrant: Quadrant
+  order: number
+}
+
+export interface IkigaiAnswerOption {
+  _key?: string
+  label: string
+  value: number
+}
+
+export interface IkigaiResultInterpretation {
+  _key?: string
+  type: 'quadrant-dominant' | 'three-circle-pattern'
+  quadrant?: Quadrant
+  pattern?: IkigaiPattern
+  headline: string
+  body: string
+  recommendedLessonNumber?: number
+}
+
+export interface IkigaiQuiz {
+  _id: string
+  title: string
+  introText?: string
+  questions: IkigaiQuizQuestion[]
+  answerScale: IkigaiAnswerOption[]
+  resultInterpretations?: IkigaiResultInterpretation[]
+}
+
 // ── Learning portal / curriculum ──────────────────────────────────────────────
 
 export interface ContentPillar {
@@ -59,6 +135,19 @@ export interface Course {
   isFeatured: boolean
   modules: Module[]
   order: number
+  // Four Circles / new-course fields (optional — absent on Foundation)
+  courseType?: CourseType
+  subtitle?: string
+  heroImage?: SanityImage
+  ctaText?: string
+  whoThisIsFor?: string[]
+  whatThisIsNot?: string[]
+  pricing?: {
+    amount: number
+    currency: string
+    description?: string
+  }
+  lessons?: CourseLesson[]
 }
 
 export interface Module {
