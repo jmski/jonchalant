@@ -13,6 +13,7 @@ export { HomeCTA } from './home/cta';
 
 // ─────────────── ABOUT PAGE SECTIONS ────────────────
 export { Hero as AboutHero } from './about/hero';
+export { Bento as AboutBento } from './about/bento';
 export { Origin } from './about/origin';
 export { Services as AboutServices } from './about/services';
 export { Philosophy } from './about/philosophy';

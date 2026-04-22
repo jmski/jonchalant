@@ -289,6 +289,35 @@ export interface HeroCycleSlide {
   durationMs?: number
 }
 
+// ── About page bento tiles ────────────────────────────────────────────────────
+
+export type PortraitTile = {
+  _type: 'portraitTile'
+  image: SanityImage & { asset: SanityImageAsset & { metadata?: { dimensions?: { width: number; height: number }; lqip?: string } } }
+  alt: string
+}
+
+export type QuoteTile = {
+  _type: 'quoteTile'
+  quote: string
+  attribution?: string
+}
+
+export type StatTile = {
+  _type: 'statTile'
+  number: string
+  label: string
+}
+
+export type BioTile = {
+  _type: 'bioTile'
+  text: string
+}
+
+export type BentoTile = PortraitTile | QuoteTile | StatTile | BioTile
+
+// ── About page ───────────────────────────────────────────────────────────────
+
 export interface AboutPage {
   heroHeadline?: string
   heroDescription?: string
@@ -317,6 +346,7 @@ export interface AboutPage {
   closingHeadline?: string
   closingBody?: string
   ctaButtonText?: string
+  bentoTiles?: BentoTile[]
 }
 
 // ── Blog config ───────────────────────────────────────────────────────────────

@@ -360,7 +360,32 @@ export async function getAboutPageContent() {
     whoForHighlight,
     closingHeadline,
     closingBody,
-    ctaButtonText
+    ctaButtonText,
+    bentoTiles[] {
+      _type,
+      // portraitTile fields
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions { width, height },
+            lqip
+          }
+        },
+        hotspot,
+        crop
+      },
+      alt,
+      // quoteTile fields
+      quote,
+      attribution,
+      // statTile fields
+      number,
+      label,
+      // bioTile fields
+      text
+    }
   }`
   return await client.fetch(query)
 }

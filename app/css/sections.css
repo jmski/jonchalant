@@ -2075,7 +2075,8 @@
   color: var(--text-on-dark-secondary);
 }
 
-.section-wrapper--why-it-works-dark .home-why-works-highlight {
+/* .home-why-works-highlight is not rendered — SectionHeader emits .section-title inside .home-why-works-header */
+.section-wrapper--why-it-works-dark .home-why-works-header .section-title {
   color: var(--text-on-dark);
 }
 
@@ -3990,4 +3991,147 @@
 
 .dance-reel-sound:hover {
   background: rgba(255, 255, 255, 0.22);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   About bento intro
+   Asymmetric 2-column bento grid: portrait tile (60%) + stacked support tiles (40%).
+   Mobile: tiles stack vertically, portrait crops to 4:5 aspect ratio.
+───────────────────────────────────────────────────────────────────────────── */
+
+.about-bento {
+  width: 100%;
+}
+
+.about-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+/* Portrait tile — mobile: 4:5 crop */
+.about-bento-tile--portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  min-height: 320px;
+}
+
+.about-bento-portrait-image {
+  border-radius: 1rem;
+}
+
+/* Support column: stacks tiles vertically on mobile too */
+.about-bento-support {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Base tile */
+.about-bento-tile {
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  min-height: 320px;
+}
+
+/* Quote tile */
+.about-bento-tile--quote {
+  background: var(--bg-tertiary);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-bento-quote {
+  font-family: var(--font-headline);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.about-bento-quote-attribution {
+  margin-top: 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+}
+
+/* Stat tile */
+.about-bento-tile--stat {
+  background: var(--bg-primary);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.about-bento-stat-number {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.about-bento-stat-label {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.01em;
+}
+
+/* Bio text tile */
+.about-bento-tile--bio {
+  background: var(--bg-primary);
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.about-bento-bio-text {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ── Desktop layout ── */
+@media (min-width: 768px) {
+  .about-bento-grid {
+    grid-template-columns: 60fr 40fr;
+    grid-template-rows: 1fr;
+    align-items: stretch;
+  }
+
+  /* Portrait spans full grid height */
+  .about-bento-tile--portrait {
+    aspect-ratio: unset;
+    min-height: 560px;
+    height: 100%;
+  }
+
+  .about-bento-support {
+    height: 100%;
+  }
+
+  .about-bento-support > .about-bento-tile {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+
+  .about-bento-tile--quote,
+  .about-bento-tile--stat,
+  .about-bento-tile--bio {
+    padding: 2.5rem;
+  }
 }
