@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { urlFor } from '@/lib/sanity';
 import type { SanityImage } from '@/lib/types';
 import { ScrollReveal } from '@/components/animations';
 
@@ -7,6 +8,8 @@ interface AboutHeroProps {
   description?: string;
   heroImage?: SanityImage;
 }
+
+const HERO_BLUR_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23f0ede8'/%3E%3C/svg%3E";
 
 export function Hero({ headline, description, heroImage }: AboutHeroProps) {
   const displayHeadline = headline ?? "I coach people who think before they speak — and want rooms to notice.";
@@ -33,12 +36,15 @@ export function Hero({ headline, description, heroImage }: AboutHeroProps) {
             <ScrollReveal variant="fade-right" delay={250}>
               <div className="about-hero-image">
                 <Image
-                  src={heroImage.asset.url}
+                  src={urlFor(heroImage, 1200).url()}
                   alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
                   fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
+                  sizes="(max-width: 768px) 100vw, 38vw"
                   style={{ objectFit: 'cover' }}
                   priority
+                  quality={65}
+                  placeholder="blur"
+                  blurDataURL={heroImage.asset.metadata?.lqip ?? HERO_BLUR_FALLBACK}
                 />
               </div>
             </ScrollReveal>

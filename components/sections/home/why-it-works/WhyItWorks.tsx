@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Bento, BentoCell } from '@/components/shared/bento';
 import { KineticHeading } from '@/components/typography/KineticHeading';
+import { urlFor } from '@/lib/sanity';
 import type { WhyItWorksCell } from '@/lib/types';
 
 interface WhyItWorksProps {
@@ -71,11 +72,12 @@ function WhyItWorksBento({
             {cell.image?.asset?.url && (
               <div className="why-it-works-cell-image">
                 <Image
-                  src={cell.image.asset.url}
+                  src={urlFor(cell.image, 800).url()}
                   alt={cell.title}
                   fill
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  quality={60}
                 />
               </div>
             )}

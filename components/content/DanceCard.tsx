@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { getOptimizedImageProps } from '@/lib/imageConfig';
 
 interface DanceCardProps {
   title: string;
@@ -51,7 +50,10 @@ export default function DanceCard({
           <Image
             src={image}
             alt={title}
-            {...getOptimizedImageProps('PORTFOLIO_CARD')}
+            width={500}
+            height={400}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            quality={60}
             className="w-full h-full object-cover"
           />
           {/* Overlay */}

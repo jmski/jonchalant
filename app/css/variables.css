@@ -101,6 +101,14 @@
   --decor-fluid: rgba(164, 120, 100, 0.12);
   --decor-grid: rgba(164, 120, 100, 0.08);
 
+  /* Dark section (used on select inset sections) */
+  --bg-dark: #0a0a0a;
+  --text-on-dark: #ffffff;
+  --text-on-dark-secondary: rgba(255, 255, 255, 0.7);
+  --text-on-dark-tertiary: rgba(255, 255, 255, 0.5);
+  --border-on-dark: rgba(255, 255, 255, 0.12);
+  --accent-on-dark: #8aa87a; /* muted moss light — for numbers, symbols, accents */
+
 }
 
 /* ========== WARM AMBER ACCENT (retained for pricing highlights) ========== */

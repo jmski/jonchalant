@@ -110,7 +110,8 @@ export default async function Home() {
         </SectionWrapper>
 
         {/* 4. WHY IT WORKS / PHILOSOPHY (moved up) */}
-        <SectionWrapper variant="dark">
+        {/* Option B: scoped dark treatment on this wrapper only to avoid impacting other dark sections. */}
+        <SectionWrapper variant="dark" className="section-wrapper--why-it-works-dark">
           <SectionContent>
             <ScrollFade>
               <WhyItWorks

@@ -52,6 +52,8 @@ export function TestimonialCard({
             width={40}
             height={40}
             className="testimonial-card-avatar"
+            sizes="40px"
+            quality={60}
           />
         )}
         <div className="testimonial-card-identity">

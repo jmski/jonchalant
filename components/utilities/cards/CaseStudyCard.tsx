@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { urlFor } from '@/lib/sanity';
 import type { SanityImage } from '@/lib/types';
 import { FeatureList } from '@/components/ui/FeatureList';
@@ -30,10 +31,13 @@ export function CaseStudyCard({
         {/* Image Section */}
         {image && (
           <div className="case-study-card-image">
-            <img
-              src={urlFor(image).width(600).height(400).url()}
+            <Image
+              src={urlFor(image, 800).height(533).url()}
               alt={clientName}
+              fill
               className="case-study-card-image-element"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              quality={60}
             />
             <div className="case-study-card-image-overlay" />
           </div>

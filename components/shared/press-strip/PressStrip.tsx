@@ -27,6 +27,8 @@ export function PressStrip({ mentions }: PressStripProps) {
               width={120}
               height={40}
               className="press-strip-logo"
+              sizes="120px"
+              quality={60}
             />
           ) : (
             <span className="press-strip-name">{mention.outlet}</span>

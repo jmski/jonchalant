@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { urlFor } from '@/lib/sanity';
 import type { SanityImage } from '@/lib/types';
 import { ScrollReveal } from '@/components/animations';
 
@@ -62,11 +63,12 @@ export function MethodologyNarrative({ headline, body, highlight, philosophyImag
         <ScrollReveal variant="fade" delay={100}>
           <div className="about-philosophy-image-wrap">
             <Image
-              src={philosophyImage.asset.url}
+              src={urlFor(philosophyImage, 1200).url()}
               alt={philosophyImage.alt ?? 'Philosophy'}
               fill
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, 1200px"
               style={{ objectFit: 'cover' }}
+              quality={60}
             />
           </div>
         </ScrollReveal>
