@@ -4,6 +4,34 @@ Rules and conventions for jonchalant.com. For detailed reference (component tree
 
 ---
 
+## Current positioning (read this first)
+
+Jonchalant helps professionals find the work they were meant for — then learn to inhabit it. Ikigai is the entry point. Embodiment is the practice. Dance is Jon's personal medium, used as the demonstration and the teaching vehicle, but the philosophy is medium-agnostic.
+
+**Funnel:**
+1. Ikigai Assessment (free, ungated) — identifies which of the four circles are strong/missing
+2. The Four Circles (free, gated behind account creation) — 12-lesson course explaining what the results mean
+3. The Foundation (paid, $197 or $497) — embodiment training through dance, transfers to any medium
+4. 1-on-1 coaching ($3,500+) — custom work on specific situations
+
+**Voice and tone:** Casual, direct, unpretentious. Specific over general. No coaching jargon. Jon speaks like someone who's honest about tradeoffs and doesn't need to impress you.
+
+**Key phrases that should stay consistent across the site:**
+- "Find the work you were meant for"
+- "The medium changes. The fundamentals don't."
+- "Dance is my medium. Yours will be different."
+- The four pillars: Grounding, Energy, Flow, Command
+- The four circles: Passion, Mission, Vocation, Profession
+
+**What the site is not:**
+- Not a dance school
+- Not a generic executive coaching program
+- Not a self-help product
+
+See `design-notes/jonchalant-positioning.md` for full copy blocks and page-by-page direction.
+
+---
+
 ## Stack & Build
 
 Next.js 16.1.1 (App Router) | React 19 | TypeScript 5 | Tailwind v4 (utility-only) | Sanity CMS | Supabase Auth | Resend | Stripe
@@ -22,7 +50,22 @@ Config: `reactCompiler: true` (no manual useMemo/useCallback), `turbopack` enabl
 
 ## Project Purpose
 
-Executive Presence Coaching Platform. Coaching programs, blog, lessons, dance portfolio. Target: introverts & corporate clients. Design: Japanese Zen-inspired (burnt indigo + muted moss, editorial typography, generous whitespace). Light mode only.
+Jonchalant is a professional platform helping people find their purpose (using the ikigai framework) and learn to embody it (through a dance-taught, medium-agnostic embodiment practice). Target audience: corporate professionals who are quietly misaligned — usually well-paid, competent, in-demand, and missing one of the four ikigai circles (most often Mission or Passion).
+
+Design philosophy: Japanese Zen-inspired (burnt indigo, muted moss, warm amber palette; editorial typography via Fraunces; generous whitespace). The brand is warm and honest, not polished and aspirational. Light mode only.
+
+---
+
+## Content & copy principles
+
+When editing copy or generating new content:
+
+1. **Ikigai first.** Any new top-of-funnel copy should lead with the purpose/ikigai frame, not with "executive presence" or "coaching."
+2. **Medium-agnostic.** Never assume the reader is a dancer. If a copy block is dance-specific, justify the mention or make it optional.
+3. **No coaching jargon.** Avoid: unlock, transform, journey, empowered, authentic self, limiting beliefs, inner game.
+4. **Specificity wins.** Prefer concrete numbers, named situations, sensory detail over abstract claims.
+5. **Honest about tradeoffs.** When describing a program or course, name what it isn't as clearly as what it is.
+6. **Kinetic typography moments.** One per page maximum. Must carry the page's argument, not decorate it. See `design-notes/jonchalant-positioning.md` for the approved phrase library.
 
 ---
 
@@ -56,6 +99,10 @@ Executive Presence Coaching Platform. Coaching programs, blog, lessons, dance po
   - Client: `import { createClient } from "@/utils/supabase/client"`
 - **Auth-gate logic lives client-side** in the `useAuth` hook (`lib/auth-context.tsx`)
 
+**Positioning & Copy:**
+- **Positioning consistency**: All new copy must align with `design-notes/jonchalant-positioning.md`. If a section of the codebase has copy that contradicts the ikigai-front-door positioning, flag it rather than preserving it.
+- **Ikigai + Four Circles integration**: The ikigai quiz (on `/ikigai`) and the Four Circles course are tightly coupled. Quiz results always save to the user's portal (if authed) and unlock personalized lesson recommendations. Never treat them as separate products in code or copy.
+
 ---
 
 ## Architecture
@@ -72,6 +119,8 @@ app/
 │   ├── layout.tsx
 │   └── portal/
 │       ├── page.tsx (dashboard)
+│       ├── four-circles/page.tsx (Four Circles course — free, gated behind account creation)
+│       ├── four-circles/[lessonSlug]/page.tsx
 │       ├── [courseSlug]/page.tsx
 │       ├── [courseSlug]/[lessonSlug]/page.tsx
 │       └── movement-plan/, presence-score/, tonality/
@@ -151,12 +200,20 @@ New card → `cards.css` | New section → `sections.css` | Page-specific → `p
 | `components/portal/PortalShell.tsx` | Portal sidebar + course tree layout |
 | `components/portal/PresenceCoachWidget.tsx` | Floating AI coach (all portal pages) |
 | `middleware.ts` | Supabase session refresh only |
+| `lib/ikigai-results.ts` | Ikigai result calculation + Supabase helpers |
+
+### Database (Supabase)
+
+- `lesson_progress` — RLS-protected, tracks lesson completion per user
+- `ikigai_results` — RLS-protected, stores quiz results (scores per quadrant, timestamp, pattern classification, retake history)
+- Progress helpers in `lib/portal-progress.ts` — `markLessonComplete`, `getLessonProgress`, `getCourseProgress`
+- Ikigai helpers in `lib/ikigai-results.ts` — `saveIkigaiResult`, `getLatestIkigaiResult`, `getIkigaiResultHistory`
 
 ---
 
 ## Sanity CMS
 
-19 schema types in `sanity/schemas/`. Key ones: `blogPost`, `service`, `course`, `module`, `lesson`, `testimonial`, `caseStudy`, `homePageContent`, `aboutPage`, `contactPage`, `foundationPage`, `programsPageContent`.
+23 schema types in `sanity/schemas/`. Key ones: `blogPost`, `service`, `course`, `courseLesson`, `module`, `lesson`, `testimonial`, `caseStudy`, `homePageContent`, `aboutPage`, `contactPage`, `foundationPage`, `programsPageContent`, `ikigaiQuiz`.
 
 All data fetching lives in `lib/sanity.ts` — functions follow pattern `get{ContentType}()`.
 
