@@ -57,7 +57,7 @@ export function WhyExists({ headline, body, highlight, kidsImage }: WhyExistsPro
               <ScrollReveal variant="fade-right" delay={200}>
                 <div className="about-why-exists-kids-image">
                   <Image
-                    src={urlFor(kidsImage, 400).url()}
+                    src={urlFor(kidsImage).width(400).url()}
                     alt={kidsImage.alt ?? 'Jon with his kids'}
                     width={320}
                     height={240}

@@ -128,7 +128,7 @@ function HeroSlideContent({ slide, priority = false }: { slide: HeroCycleSlide; 
   switch (slide.kind) {
     case 'photo': {
       if (!slide.image?.asset?.url) return null;
-      const imageSrc = urlFor(slide.image, 1200).url();
+      const imageSrc = urlFor(slide.image).width(1200).url();
       const blurDataURL = slide.image.asset.metadata?.lqip ?? HERO_BLUR_FALLBACK;
 
       return (

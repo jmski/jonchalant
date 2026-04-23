@@ -32,7 +32,7 @@ export function CaseStudyCard({
         {image && (
           <div className="case-study-card-image">
             <Image
-              src={urlFor(image, 800).height(533).url()}
+              src={urlFor(image).width(800).height(533).url()}
               alt={clientName}
               fill
               className="case-study-card-image-element"

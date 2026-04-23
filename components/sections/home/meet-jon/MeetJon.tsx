@@ -48,7 +48,7 @@ export function MeetJon({
         <div className="meet-jon-photo-col meet-jon-photos" aria-hidden="true">
           {image?.asset ? (
             <Image
-              src={urlFor(image, 800).height(1066).fit('crop').url()}
+              src={urlFor(image).width(800).height(1066).fit('crop').url()}
               alt={image.alt ?? 'Jon — executive presence coach'}
               width={400}
               height={533}

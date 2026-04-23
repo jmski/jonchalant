@@ -72,7 +72,7 @@ function WhyItWorksBento({
             {cell.image?.asset?.url && (
               <div className="why-it-works-cell-image">
                 <Image
-                  src={urlFor(cell.image, 800).url()}
+                  src={urlFor(cell.image).width(800).url()}
                   alt={cell.title}
                   fill
                   style={{ objectFit: 'cover' }}
