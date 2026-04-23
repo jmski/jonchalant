@@ -36,7 +36,7 @@ export function Hero({ headline, description, heroImage }: AboutHeroProps) {
             <ScrollReveal variant="fade-right" delay={250}>
               <div className="about-hero-image">
                 <Image
-                  src={urlFor(heroImage, 1200).url()}
+                  src={urlFor(heroImage).width(1200).url()}
                   alt={heroImage.alt ?? 'Jon — Leadership Coach & Choreographer'}
                   fill
                   sizes="(max-width: 768px) 100vw, 38vw"
