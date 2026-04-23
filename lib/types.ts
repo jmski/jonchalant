@@ -515,13 +515,11 @@ export interface WhyItWorksCell {
 export interface HomePageContent {
   heroEyebrow?: string
   heroHeadline?: string
-  heroCyclingOutcomes?: string[]
-  heroDescription?: string
-  heroSubtext?: string
-  heroCtaText?: string
-  heroCtaLink?: string
-  heroMicrocopy?: string
-  heroSecondaryCtaText?: string
+  heroSubhead?: string
+  heroPrimaryCtaLabel?: string
+  heroPrimaryCtaHref?: string
+  heroSecondaryCtaLabel?: string
+  heroSecondaryCtaHref?: string
   heroStats?: Array<{ value: string; label: string }>
   servicesHeadline?: string
   servicesDescription?: string
@@ -539,10 +537,6 @@ export interface HomePageContent {
   ctaButtonText?: string
   ctaButtonHref?: string
   meetJonImage?: SanityImage
-  heroHeadlineStatic?: string
-  heroHeadlineAnchorWord?: string
-  heroSubhead?: string
-  heroCycle?: HeroCycleSlide[]
 }
 
 export interface CurriculumWeek {

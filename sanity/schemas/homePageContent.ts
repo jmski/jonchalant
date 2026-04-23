@@ -1,3 +1,8 @@
+// TODO: After running scripts/migrate-hero-fields.ts against prod,
+// remove the heroCtaText, heroCtaLink, heroSecondaryCtaText fields.
+// They are currently hidden and deprecated but still in the schema
+// to preserve data until migration runs.
+
 import { defineType, defineField } from 'sanity';
 
 export default defineType({
@@ -23,10 +28,77 @@ export default defineType({
     }),
     defineField({ name: 'heroDescription', title: 'Hero — Description', type: 'text' }),
     defineField({ name: 'heroSubtext', title: 'Hero — Subtext (under description)', type: 'string' }),
-    defineField({ name: 'heroCtaText', title: 'Hero — Primary CTA Text', type: 'string' }),
-    defineField({ name: 'heroCtaLink', title: 'Hero — Primary CTA Link', type: 'string' }),
-    defineField({ name: 'heroMicrocopy', title: 'Hero — CTA Microcopy', type: 'string' }),
-    defineField({ name: 'heroSecondaryCtaText', title: 'Hero — Secondary CTA Text', type: 'string' }),
+    // ── New hero fields (aligned with shared GenericHero props) ──────────────
+    defineField({
+      name: 'heroSubhead',
+      title: 'Hero subhead',
+      type: 'text',
+      rows: 3,
+      description: 'One to two sentences. Shown below the headline.',
+    }),
+    defineField({
+      name: 'heroPrimaryCtaLabel',
+      title: 'Hero primary CTA — label',
+      type: 'string',
+      description: 'Button text. Name what happens next — e.g. "Discover Your Ikigai", not "Learn more".',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'heroPrimaryCtaHref',
+      title: 'Hero primary CTA — link',
+      type: 'string',
+      description: 'Path or URL. Top-of-funnel CTAs go to /ikigai.',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'heroSecondaryCtaLabel',
+      title: 'Hero secondary CTA — label',
+      type: 'string',
+      description: 'Optional. Leave blank to hide the secondary button.',
+    }),
+    defineField({
+      name: 'heroSecondaryCtaHref',
+      title: 'Hero secondary CTA — link',
+      type: 'string',
+      description: 'Required if secondary label is set.',
+    }),
+    // ── Legacy fields (deprecated — hidden from Studio, data preserved) ────────
+    defineField({
+      name: 'heroCtaText',
+      title: '⚠️ DEPRECATED — use heroPrimaryCtaLabel',
+      type: 'string',
+      hidden: true,
+      deprecated: {
+        reason: 'Renamed to heroPrimaryCtaLabel. Will be removed after migration.',
+      },
+    }),
+    defineField({
+      name: 'heroCtaLink',
+      title: '⚠️ DEPRECATED — use heroPrimaryCtaHref',
+      type: 'string',
+      hidden: true,
+      deprecated: {
+        reason: 'Renamed to heroPrimaryCtaHref. Will be removed after migration.',
+      },
+    }),
+    defineField({
+      name: 'heroMicrocopy',
+      title: '⚠️ DEPRECATED — Hero CTA Microcopy',
+      type: 'string',
+      hidden: true,
+      deprecated: {
+        reason: 'No longer used in the new hero design.',
+      },
+    }),
+    defineField({
+      name: 'heroSecondaryCtaText',
+      title: '⚠️ DEPRECATED — use heroSecondaryCtaLabel',
+      type: 'string',
+      hidden: true,
+      deprecated: {
+        reason: 'Renamed to heroSecondaryCtaLabel. Will be removed after migration.',
+      },
+    }),
     defineField({
       name: 'heroStats',
       title: 'Hero — Stats Strip',
@@ -176,12 +248,6 @@ export default defineType({
       title: 'Hero — Anchor Word',
       type: 'string',
       description: 'The single italic mocha word at the end of the headline. E.g. "ambitious"',
-    }),
-    defineField({
-      name: 'heroSubhead',
-      title: 'Hero — Subhead',
-      type: 'text',
-      rows: 2,
     }),
     defineField({
       name: 'heroCycle',

@@ -19,6 +19,7 @@ import emailOptIn from '../schemas/emailOptIn'
 import foundationPage from '../schemas/foundationPage'
 import dancePageContent from '../schemas/dancePageContent'
 import module from '../schemas/module'
+import courseLesson from '../schemas/courseLesson'
 import pressMention from '../schemas/pressMention'
 import blogConfig from '../schemas/blogConfig'
 import curriculumWeek from '../schemas/curriculumWeek'
@@ -43,6 +44,7 @@ export const types = [
   foundationPage,
   dancePageContent,
   module,
+  courseLesson,
   pressMention,
   blogConfig,
   curriculumWeek,
