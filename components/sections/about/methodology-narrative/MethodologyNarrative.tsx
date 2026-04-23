@@ -63,7 +63,7 @@ export function MethodologyNarrative({ headline, body, highlight, philosophyImag
         <ScrollReveal variant="fade" delay={100}>
           <div className="about-philosophy-image-wrap">
             <Image
-              src={urlFor(philosophyImage, 1200).url()}
+              src={urlFor(philosophyImage).width(1200).url()}
               alt={philosophyImage.alt ?? 'Philosophy'}
               fill
               sizes="(max-width: 768px) 100vw, 1200px"
