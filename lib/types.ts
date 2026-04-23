@@ -17,6 +17,7 @@ export interface SanityImageAsset {
       width: number
       height: number
     }
+    lqip?: string
   }
 }
 
