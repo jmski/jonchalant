@@ -32,6 +32,21 @@ npm run lint     # ESLint validation (Next.js + TypeScript strict rules)
 - **TypeScript** strict mode enforced
 - **ESLint** flat config extending Next.js best practices
 
+## Current Positioning (context for all code + copy decisions)
+
+This site has undergone a repositioning. The old frame — "executive presence coaching for introverts, taught through dance" — has been replaced by a new frame: **help professionals find the work they were meant for (ikigai) and learn to embody it (through dance, transferable to any medium)**.
+
+When generating code, components, or copy:
+
+- **Assume ikigai is the top-of-funnel entry point**, not the Foundation. Home page primary CTA goes to `/ikigai`.
+- **Assume the user's medium might not be dance.** Never hardcode dance-specific language into shared components (hero copy, CTAs, descriptions). Dance-specific language is allowed only on the dance page itself and on the Foundation page in the justification context.
+- **The four pillars (Grounding, Energy, Flow, Command) are medium-agnostic.** Any component rendering them should support application examples across multiple mediums, not just dance.
+- **The Four Circles course is the new top-of-funnel course.** If code references "Baby Steps," it has been renamed. Check for and update stale references.
+
+Full positioning reference: `design-notes/jonchalant-positioning.md`.
+
+---
+
 ## Component Architecture
 
 **Directory Structure** (`components/` folder):
@@ -58,8 +73,9 @@ components/
 │   │   ├── philosophy/              # Philosophy.tsx (dormant — not rendered on About page)
 │   │   └── introvert/               # Introvert.tsx (dormant — not rendered on About page)
 │   ├── blog/                    # Blog page sections (Featured, Posts, Related)
-│   ├── dance/                   # Dance page sections
+│   ├── dance/                   # Dance page sections (folder + slug unchanged; page copy reframed to medium-agnostic)
 │   │   └── featured-video/    # FeaturedVideo.tsx
+│   ├── four-circles/            # [PLANNED] Four Circles course landing + lesson rendering
 │   ├── lesson-section/          # Lesson category section
 │   └── index.ts                 # Central export hub
 ├── shared/                      # Reusable section components (used across pages)
@@ -863,5 +879,16 @@ All sections are exported from `components/sections/index.ts`. Key aliases:
 - Blog: `BlogFeatured`, `BlogPosts`, `BlogRelated`
 - Dance: `FeaturedVideo`, `DanceApproach`, `DancePortfolio`
 - Shared: `CTA`, `FAQ`, `PageHero`, `GenericHero`, `Collaboration`, `Carousel`, `Testimonials`, `Services`
-- Utilities: `Badge`, `TestimonialCard`, `CaseStudyCard`, `LessonCard`, `BlogCard`, `ServiceCard`, `StatsGrid`, `CardGrid`</content>
+- Utilities: `Badge`, `TestimonialCard`, `CaseStudyCard`, `LessonCard`, `BlogCard`, `ServiceCard`, `StatsGrid`, `CardGrid`
+
+---
+
+## Copy-editing conventions
+
+When editing or generating text content (blog posts, section copy, CTAs, email copy):
+
+1. **Pull from Sanity by default.** No hardcoded marketing copy in components. If a piece of copy isn't in Sanity, it's a bug.
+2. **Link language is specific.** CTAs say what happens next, not what you're doing. "Discover Your Ikigai" not "Learn More." "Start the Foundation" not "Get Started."
+3. **Headlines are claims, not labels.** "Most people are in the right industry. Wrong role." is a claim. "About the Foundation" is a label. Headlines earn attention; labels orient.
+4. **Voice check:** if a sentence sounds like it could be in a LinkedIn thought-leadership post, rewrite it.</content>
   <parameter name="filePath">/Users/gyalua/Documents/GitHub/jonchalant/.github/copilot-instructions.md
