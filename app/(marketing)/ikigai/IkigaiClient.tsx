@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout';
+import { useAuth } from '@/lib/auth-context';
+import { saveIkigaiResult } from '@/lib/ikigai-results';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -298,6 +300,7 @@ function ResultsBars({
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function IkigaiClient() {
+  const { user } = useAuth();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(Array(8).fill(null));
   const [quizComplete, setQuizComplete] = useState(false);
@@ -373,8 +376,11 @@ export default function IkigaiClient() {
     }, 280);
   };
 
-  const handleShowResults = () => {
+  const handleShowResults = async () => {
     setShowResults(true);
+    if (user) {
+      await saveIkigaiResult(scores);
+    }
   };
 
   const handleRetake = () => {
@@ -440,16 +446,14 @@ export default function IkigaiClient() {
                   <p className="ikigai-intro-body">
                     <em>Ikigai</em> (生き甲斐) is a Japanese concept meaning{' '}
                     <strong>reason for being</strong>. It sits at the intersection of
-                    four dimensions of a fulfilling life: what you love, what the world
-                    needs, what you can be paid for, and what you&apos;re good at. Where all
-                    four overlap is where extraordinary work — and real presence — emerge.
+                    four things: what you love, what the world needs, what you can be
+                    paid for, and what you&apos;re good at. Where all four overlap is
+                    where work stops feeling like performance.
                   </p>
 
-                  {/* COPYWRITER: Secondary body paragraph — expand on why this
-                      matters for executives and introverts specifically */}
                   <p className="ikigai-intro-body">
                     Most professionals are strong in one or two quadrants. The eight
-                    questions below will show you where you are — and what to build next.
+                    questions below will show you where you are — and where the gap is.
                   </p>
 
                   <div className="ikigai-intro-quadrants">
@@ -530,11 +534,10 @@ export default function IkigaiClient() {
                     </>
                   ) : (
                     <div className="ikigai-quiz-complete">
-                      {/* COPYWRITER: This is the "all done" state copy shown before submitting */}
                       <p className="ikigai-quiz-complete-head">You&apos;ve completed all 8 questions.</p>
                       <p className="ikigai-quiz-complete-body">
                         Your results will show you where you&apos;re strongest across Passion,
-                        Mission, Vocation, and Profession — and what it means for your leadership presence.
+                        Mission, Vocation, and Profession — and where the gap is.
                       </p>
                       <button onClick={handleShowResults} className="ikigai-submit-btn btn-primary">
                         See My Ikigai
@@ -642,18 +645,43 @@ export default function IkigaiClient() {
                   </div>
                 )}
 
-                {/* CTA */}
+                {/* Four Circles course CTA */}
+                <div className="ikigai-four-circles-cta">
+                  <span className="ikigai-four-circles-eyebrow">Free Course</span>
+                  <h3 className="ikigai-four-circles-title">Want to go deeper?</h3>
+                  <p className="ikigai-four-circles-body">
+                    The Four Circles is a free twelve-lesson course built around this
+                    framework. It walks you through what each quadrant means, what happens
+                    when you&apos;re strong in three and missing one, and what specifically
+                    to do about it.
+                    {!user && (
+                      <> You&apos;ll need an account so I can save your quiz results and
+                      unlock lessons as you go.</>
+                    )}
+                  </p>
+                  <Link
+                    href={user ? '/portal/four-circles' : '/login?next=/portal/four-circles'}
+                    className="ikigai-four-circles-btn"
+                  >
+                    {user ? 'Start the Four Circles' : 'Create your free account'}
+                  </Link>
+                </div>
+
+                {/* Foundation CTA */}
                 <div className="ikigai-results-cta">
-                  {/* COPYWRITER: Confirm CTA headline and button label */}
                   <h3 className="ikigai-results-cta-headline">
-                    Ready to build on your Ikigai?
+                    You&apos;ve found your starting point.
                   </h3>
                   <p className="ikigai-results-cta-body">
-                    {/* COPYWRITER: Expand this into a compelling 1–2 sentence hook */}
-                    Knowing your dominant quadrant is the first step. Jon can help you close the gaps and build a coaching plan that aligns all four.
+                    The Foundation is eight weeks of embodied practice that teaches you
+                    how to show up for the work you&apos;ve just identified — taught through
+                    dance, applied to whatever medium is yours.
                   </p>
                   <div className="ikigai-results-cta-actions">
-                    <Link href="/contact" className="btn-primary ikigai-cta-btn">
+                    <Link href="/foundation" className="btn-primary ikigai-cta-btn">
+                      Explore the Foundation
+                    </Link>
+                    <Link href="/contact" className="ikigai-cta-btn ikigai-cta-btn--secondary">
                       Work with Jon
                     </Link>
                     <button onClick={handleRetake} className="ikigai-retake-btn">

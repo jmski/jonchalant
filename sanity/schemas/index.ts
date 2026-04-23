@@ -3,6 +3,8 @@ import testimonial from './testimonial'
 import caseStudy from './caseStudy'
 import lesson from './lesson'
 import course from './course'
+import courseLesson from './courseLesson'
+import ikigaiQuiz from './ikigaiQuiz'
 import contactInfo from './contactInfo'
 import aboutPage from './aboutPage'
 import homePageContent from './homePageContent'
@@ -25,6 +27,8 @@ export const schemaTypes = [
   caseStudy,
   lesson,
   course,
+  courseLesson,
+  ikigaiQuiz,
   contactInfo,
   aboutPage,
   homePageContent,

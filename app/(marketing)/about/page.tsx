@@ -1,5 +1,5 @@
-import { CTA } from "@/components/sections";
-import { Hero as AboutHero, Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
+import { CTA, AboutBento } from "@/components/sections";
+import { Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { ScrollFade } from "@/components/animations";
 import type { Metadata } from 'next';
@@ -52,11 +52,7 @@ export default async function About() {
         {/* 1 — PERSONAL INTRO */}
         <SectionWrapper variant="primary">
           <SectionContent>
-            <AboutHero
-              headline={aboutContent?.heroHeadline}
-              description={aboutContent?.heroDescription}
-              heroImage={aboutContent?.heroImage}
-            />
+            <AboutBento tiles={aboutContent?.bentoTiles} />
           </SectionContent>
         </SectionWrapper>
 

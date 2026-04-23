@@ -11,10 +11,9 @@ import {
   EmailCapture,
   HomeCTA,
 } from '@/components/sections';
-import { PressStrip } from '@/components/shared/press-strip';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { getHomePageContent, getServices, getTestimonials, getPressMentions, getRecentBlogPosts } from "@/lib/sanity";
+import { getHomePageContent, getServices, getTestimonials, getRecentBlogPosts } from "@/lib/sanity";
 import type { HomePageContent } from "@/lib/types";
 import { AggregateRatingSchema } from "@/lib/schema";
 
@@ -54,24 +53,21 @@ export default async function Home() {
   let services = [];
   let testimonials = [];
   let recentPosts = [];
-  let pressMentions = [];
 
   try {
-    const [sanityHome, sanityServices, sanityTestimonials, sanityPosts, sanityPress] = await Promise.all([
+    const [sanityHome, sanityServices, sanityTestimonials, sanityPosts] = await Promise.all([
       getHomePageContent(),
       getServices(),
       getTestimonials(),
       getRecentBlogPosts(),
-      getPressMentions(),
     ]);
 
     if (sanityHome) homeContent = sanityHome;
     if (sanityServices?.length > 0) services = sanityServices;
     if (sanityTestimonials?.length > 0) testimonials = sanityTestimonials;
     if (sanityPosts?.length > 0) recentPosts = sanityPosts;
-    if (sanityPress?.length > 0) pressMentions = sanityPress;
   } catch (error) {
-    console.warn('Failed to fetch home content from Sanity, using fallback data:', error);
+    console.warn('Failed to fetch home content from Sanity:', error);
   }
 
   return (
@@ -97,17 +93,12 @@ export default async function Home() {
           <Hero content={homeContent ?? {}} />
         </SectionWrapper>
 
-        {/* 2. SOCIAL PROOF BAND (Credibility + Press) */}
-        <SectionWrapper variant="primary" className="section-wrapper--compact">
-          {homeContent?.heroStats?.length > 0 && (
+        {/* 2. CREDIBILITY STRIP */}
+        {homeContent?.heroStats?.length > 0 && (
+          <SectionWrapper variant="primary" className="section-wrapper--compact">
             <CredibilityStrip stats={homeContent.heroStats} />
-          )}
-          {pressMentions.length > 0 && (
-            <SectionContent>
-              <PressStrip mentions={pressMentions} />
-            </SectionContent>
-          )}
-        </SectionWrapper>
+          </SectionWrapper>
+        )}
 
         {/* 4. WHY IT WORKS / PHILOSOPHY (moved up) */}
         <SectionWrapper variant="dark">
@@ -150,7 +141,7 @@ export default async function Home() {
 
         {/* 7. TESTIMONIALS */}
         {testimonials.length > 0 && (
-          <SectionWrapper variant="secondary" className="section-wrapper--moss">
+          <SectionWrapper variant="dark" className="section-wrapper--testimonials-dark">
             <SectionContent>
               <ScrollFade>
                 <Testimonials
@@ -171,7 +162,7 @@ export default async function Home() {
                 <BlogCards
                   posts={recentPosts}
                   heading="From the Blog"
-                  description="Insights on quiet leadership, executive presence, and authentic communication."
+                  description="Insights on purpose, presence, and the work you were meant for."
                 />
               </ScrollFade>
             </SectionContent>
@@ -187,10 +178,10 @@ export default async function Home() {
         <SectionWrapper variant="primary">
           <SectionContent>
             <HomeCTA
-              title={homeContent?.ctaTitle ?? "Ready to Transform Your Executive Presence?"}
-              description={homeContent?.ctaDescription ?? "Whether you're looking to command more authority, speak up confidently, or lead from a place of authenticity—coaching is the path forward. Let's start with your Presence Audit."}
-              buttonText={homeContent?.ctaButtonText ?? "Start with the Free Audit"}
-              buttonLink={homeContent?.ctaButtonHref ?? "/contact"}
+              title={homeContent?.ctaTitle ?? "Find the work you were meant for."}
+              description={homeContent?.ctaDescription ?? "Start with the assessment. It's free. It takes ten minutes. If it tells you something useful, keep going."}
+              buttonText={homeContent?.ctaButtonText ?? "Discover Your Ikigai"}
+              buttonLink={homeContent?.ctaButtonHref ?? "/ikigai"}
             />
           </SectionContent>
         </SectionWrapper>

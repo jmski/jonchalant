@@ -360,7 +360,32 @@ export async function getAboutPageContent() {
     whoForHighlight,
     closingHeadline,
     closingBody,
-    ctaButtonText
+    ctaButtonText,
+    bentoTiles[] {
+      _type,
+      // portraitTile fields
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions { width, height },
+            lqip
+          }
+        },
+        hotspot,
+        crop
+      },
+      alt,
+      // quoteTile fields
+      quote,
+      attribution,
+      // statTile fields
+      number,
+      label,
+      // bioTile fields
+      text
+    }
   }`
   return await client.fetch(query)
 }
@@ -687,4 +712,114 @@ export async function getCurriculumWeeks() {
     order
   }`
   return await client.fetch(query)
+}
+
+// ============================================================================
+// FOUR CIRCLES / COURSE LESSON
+// ============================================================================
+
+import type { Course, CourseLesson, CourseType, IkigaiQuiz } from './types'
+
+const COURSE_LESSON_FIELDS = `
+    _id,
+    title,
+    slug,
+    lessonNumber,
+    difficultyTier,
+    ikigaiQuadrants,
+    subtitle,
+    summary,
+    content,
+    reflectionPrompt,
+    tryThisWeek,
+    estimatedMinutes
+  `
+
+const FOUR_CIRCLES_COURSE_FIELDS = `
+    _id,
+    title,
+    slug,
+    subtitle,
+    description,
+    courseType,
+    pricing,
+    estimatedDuration,
+    heroImage { asset->{ _id, url, metadata { dimensions { width, height } } }, hotspot, crop, alt },
+    ctaText,
+    whoThisIsFor,
+    whatThisIsNot,
+    order,
+    lessons[]-> { ${COURSE_LESSON_FIELDS} }
+  `
+
+/** Fetch any course by slug — returns the four-circles-aware projection. */
+export async function getFourCirclesCourseBySlug(slug: string): Promise<Course | null> {
+  try {
+    return await fetchOne('course', FOUR_CIRCLES_COURSE_FIELDS, `slug.current == "${slug}"`)
+  } catch {
+    return null
+  }
+}
+
+/** Convenience: fetch the Four Circles course. */
+export async function getFourCirclesCourse(): Promise<Course | null> {
+  return getFourCirclesCourseBySlug('four-circles')
+}
+
+/** Fetch all courses, optionally filtered by courseType. */
+export async function getCoursesFiltered(courseType?: CourseType): Promise<Course[]> {
+  try {
+    return await fetchList(
+      'course',
+      FOUR_CIRCLES_COURSE_FIELDS,
+      courseType ? `courseType == "${courseType}"` : undefined
+    )
+  } catch {
+    return []
+  }
+}
+
+/** Fetch a single courseLesson by slug. */
+export async function getFourCirclesLesson(lessonSlug: string): Promise<CourseLesson | null> {
+  try {
+    return await fetchOne('courseLesson', COURSE_LESSON_FIELDS, `slug.current == "${lessonSlug}"`)
+  } catch {
+    return null
+  }
+}
+
+const IKIGAI_QUIZ_FIELDS = `
+    _id,
+    title,
+    introText,
+    questions[] | order(order asc) {
+      _key,
+      questionText,
+      quadrant,
+      order
+    },
+    answerScale[] {
+      _key,
+      label,
+      value
+    },
+    resultInterpretations[] {
+      _key,
+      type,
+      quadrant,
+      pattern,
+      headline,
+      body,
+      recommendedLessonNumber
+    }
+  `
+
+/** Fetch the Ikigai quiz document. Returns null if the quiz is not yet in Sanity. */
+export async function getIkigaiQuiz(): Promise<IkigaiQuiz | null> {
+  try {
+    const query = `*[_type == "ikigaiQuiz"][0] { ${IKIGAI_QUIZ_FIELDS} }`
+    return await client.fetch(query)
+  } catch {
+    return null
+  }
 }

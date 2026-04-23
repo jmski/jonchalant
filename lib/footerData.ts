@@ -12,6 +12,7 @@ export const FOOTER_NAV = [
     links: [
       { label: 'Programs', href: '/programs' },
       { label: 'The Foundation', href: '/foundation' },
+      { label: 'Ikigai', href: '/ikigai' },
     ],
   },
   {
@@ -19,7 +20,14 @@ export const FOOTER_NAV = [
     links: [
       { label: 'The Blueprint', href: '/lessons' },
       { label: 'The Archives', href: '/blog' },
-      { label: 'Free Audit', href: '/audit' },
+      { label: 'The Breakdown', href: '/dance' },
+      { label: 'Presence Audit', href: '/audit' },
+    ],
+  },
+  {
+    heading: 'Account',
+    links: [
+      { label: 'Sign In', href: '/login' },
     ],
   },
 ];

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { urlFor } from '@/lib/sanity';
 import type { SanityImage } from '@/lib/types';
 import { ScrollReveal } from '@/components/animations';
 
@@ -56,11 +57,13 @@ export function WhyExists({ headline, body, highlight, kidsImage }: WhyExistsPro
               <ScrollReveal variant="fade-right" delay={200}>
                 <div className="about-why-exists-kids-image">
                   <Image
-                    src={kidsImage.asset.url}
+                    src={urlFor(kidsImage).width(400).url()}
                     alt={kidsImage.alt ?? 'Jon with his kids'}
                     width={320}
                     height={240}
                     style={{ width: '100%', height: 'auto' }}
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    quality={60}
                   />
                 </div>
               </ScrollReveal>

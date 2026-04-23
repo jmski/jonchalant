@@ -158,17 +158,96 @@ export default defineType({
       type: 'number',
       description: 'Lower numbers appear first',
     }),
+    // ── Four Circles / new-course fields ─────────────────────────────────────
+    defineField({
+      name: 'courseType',
+      title: 'Course Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Free (account-gated)', value: 'free-gated' },
+          { title: 'Paid', value: 'paid' },
+        ],
+        layout: 'radio',
+      },
+      description: 'free-gated = free but requires account creation; paid = Stripe checkout required',
+    }),
+    defineField({
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'string',
+      description: 'Short tagline shown below the title on landing pages',
+    }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+      ],
+    }),
+    defineField({
+      name: 'ctaText',
+      title: 'CTA Button Text',
+      type: 'string',
+      description: 'Override for the primary call-to-action on the landing page',
+    }),
+    defineField({
+      name: 'whoThisIsFor',
+      title: 'Who This Is For',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Bullet points for the landing page — who this course is for',
+    }),
+    defineField({
+      name: 'whatThisIsNot',
+      title: 'What This Is Not',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Bullet points for managing expectations on the landing page',
+    }),
+    defineField({
+      name: 'pricing',
+      title: 'Pricing',
+      type: 'object',
+      hidden: ({ document }: any) => document?.courseType !== 'paid',
+      fields: [
+        defineField({ name: 'amount', title: 'Amount', type: 'number' }),
+        defineField({
+          name: 'currency',
+          title: 'Currency',
+          type: 'string',
+          initialValue: 'USD',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Pricing Description',
+          type: 'string',
+          description: 'e.g. "Self-paced" or "With weekly check-ins"',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'lessons',
+      title: 'Lessons (direct)',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'courseLesson' }] }],
+      description: 'Ordered lesson list for flat courses (e.g. Four Circles). Use modules[] for module-based courses.',
+    }),
   ],
   preview: {
     select: {
       title: 'title',
+      courseType: 'courseType',
       difficulty: 'difficulty',
       media: 'thumbnail',
     },
     prepare(selection: any) {
+      const label = selection.courseType ?? selection.difficulty ?? 'No type set'
       return {
         title: selection.title,
-        subtitle: selection.difficulty ?? 'No difficulty set',
+        subtitle: label,
         media: selection.media,
       }
     },

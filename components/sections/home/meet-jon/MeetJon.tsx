@@ -53,6 +53,8 @@ export function MeetJon({
               width={400}
               height={533}
               className="meet-jon-photo"
+              sizes="(max-width: 768px) 100vw, 400px"
+              quality={60}
             />
           ) : (
             <div className="meet-jon-photo-placeholder" />

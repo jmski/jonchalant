@@ -5,11 +5,14 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { AnchorWord } from '@/components/typography/AnchorWord';
 import { withAnchorWords } from '@/lib/typography';
+import { urlFor } from '@/lib/sanity';
 import type { HomePageContent, HeroCycleSlide } from '@/lib/types';
 
 interface HeroProps {
   content: HomePageContent;
 }
+
+const HERO_BLUR_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23f0ede8'/%3E%3C/svg%3E";
 
 export function Hero({ content }: HeroProps) {
   const {
@@ -19,7 +22,7 @@ export function Hero({ content }: HeroProps) {
     heroCtaText,
     heroCtaLink,
   } = content;
-  const ctaLink = heroCtaLink ?? '/contact';
+  const ctaLink = heroCtaLink ?? '/ikigai';
   const heroCycle = content.heroCycle ?? [];
   const heroCycleLength = heroCycle.length;
 
@@ -112,7 +115,7 @@ export function Hero({ content }: HeroProps) {
               ].filter(Boolean).join(' ')}
               aria-hidden={idx !== currentIndex}
             >
-              <HeroSlideContent slide={slide} priority={idx === 0} />
+              <HeroSlideContent slide={slide} priority />
             </div>
           ))}
         </div>
@@ -125,15 +128,21 @@ function HeroSlideContent({ slide, priority = false }: { slide: HeroCycleSlide; 
   switch (slide.kind) {
     case 'photo': {
       if (!slide.image?.asset?.url) return null;
+      const imageSrc = urlFor(slide.image).width(1200).url();
+      const blurDataURL = slide.image.asset.metadata?.lqip ?? HERO_BLUR_FALLBACK;
+
       return (
         <div className="home-hero-slide-photo-inner">
           <Image
-            src={slide.image.asset.url}
+            src={imageSrc}
             alt={slide.caption ?? ''}
             fill
             style={{ objectFit: 'cover' }}
             priority={priority}
-            sizes="(max-width: 1024px) 100vw, 60vw"
+            sizes="(max-width: 768px) 100vw, 33vw"
+            quality={65}
+            placeholder="blur"
+            blurDataURL={blurDataURL}
           />
           <div className="home-hero-slide-grain" aria-hidden="true" />
         </div>

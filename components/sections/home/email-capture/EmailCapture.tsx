@@ -11,7 +11,7 @@ interface EmailCaptureProps {
 
 export function EmailCapture({
   heading = 'One idea every Tuesday. No noise.',
-  subheading = 'Body-led leadership for people who read slowly and think carefully.',
+  subheading = 'Purpose, presence, and the work you were meant for — one short read, every Tuesday.',
 }: EmailCaptureProps) {
   const [email, setEmail] = useState('');
   const sectionRef = useRef<HTMLElement>(null);

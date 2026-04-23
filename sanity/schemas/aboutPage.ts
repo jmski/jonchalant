@@ -223,6 +223,103 @@ export default defineType({
       ],
     }),
 
+    // ── Bento Intro Grid ─────────────────────────────────────────────────────
+    defineField({
+      name: 'bentoTiles',
+      title: 'Bento Intro Tiles',
+      description: 'Tiles that make up the about page intro bento grid. First tile should typically be a portrait. 2–3 tiles total recommended.',
+      type: 'array',
+      validation: Rule => Rule.min(2).max(3),
+      of: [
+        {
+          type: 'object',
+          name: 'portraitTile',
+          title: 'Portrait Tile',
+          fields: [
+            defineField({
+              name: 'image',
+              type: 'image',
+              validation: Rule => Rule.required(),
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'alt',
+              type: 'string',
+              description: 'Alt text for accessibility',
+              validation: Rule => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { media: 'image' },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            prepare: (value: Record<string, any>) => ({ title: 'Portrait Tile', media: value.media }),
+          },
+        },
+        {
+          type: 'object',
+          name: 'quoteTile',
+          title: 'Quote Tile',
+          fields: [
+            defineField({
+              name: 'quote',
+              type: 'text',
+              rows: 3,
+              validation: Rule => Rule.required().max(200),
+            }),
+            defineField({
+              name: 'attribution',
+              type: 'string',
+              description: 'Optional — e.g. "On what dance taught me"',
+            }),
+          ],
+          preview: {
+            select: { title: 'quote' },
+            prepare: ({ title }: { title?: string }) => ({ title: `Quote: ${title?.slice(0, 40) ?? ''}…` }),
+          },
+        },
+        {
+          type: 'object',
+          name: 'statTile',
+          title: 'Stat Tile',
+          fields: [
+            defineField({
+              name: 'number',
+              type: 'string',
+              description: 'e.g. "10+" or "8 weeks"',
+              validation: Rule => Rule.required(),
+            }),
+            defineField({
+              name: 'label',
+              type: 'string',
+              description: 'e.g. "Years coaching" or "Core program"',
+              validation: Rule => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: 'number', subtitle: 'label' },
+            prepare: ({ title, subtitle }: { title?: string; subtitle?: string }) => ({ title: `${title ?? ''} — ${subtitle ?? ''}` }),
+          },
+        },
+        {
+          type: 'object',
+          name: 'bioTile',
+          title: 'Bio Text Tile',
+          fields: [
+            defineField({
+              name: 'text',
+              type: 'text',
+              rows: 4,
+              validation: Rule => Rule.required().max(400),
+            }),
+          ],
+          preview: {
+            select: { title: 'text' },
+            prepare: ({ title }: { title?: string }) => ({ title: `Bio: ${title?.slice(0, 40) ?? ''}…` }),
+          },
+        },
+      ],
+    }),
+
     // ── Introvert Section (Phase 6) ───────────────────────────────────────────
     defineField({
       name: 'introvertImage',
