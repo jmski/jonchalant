@@ -4,14 +4,14 @@
 
 **Tech Stack**: Next.js 16.1.1 (App Router) + React 19 + TypeScript + CSS-First Styling (Tailwind v4 for utilities only)
 
-This is a **Professional Executive Presence Coaching Platform** for Jon—transforming confidence and leadership presence in busy professionals and introverts. The site features coaching programs, blog content, case studies, testimonials, and a comprehensive media kit. **Design philosophy**: Japanese Zen-inspired aesthetic with editorial typography, generous whitespace, and a muted palette (burnt indigo & muted moss accents) that appeals to corporate clients and coaching prospects.
+Jonchalant helps professionals find the work they were meant for and learn to embody it — using ikigai as the map and embodiment as the practice. The site's primary entry point is the Ikigai Assessment (`/ikigai`), which feeds into the Four Circles free course, then the Foundation paid program, then 1-on-1 coaching. **Design philosophy**: Japanese Zen-inspired aesthetic with editorial typography, generous whitespace, and a muted palette (burnt indigo & muted moss accents).
 
 **Core Architecture**:
 
 - **Component-First Design**: Build reusable components first, compose into pages second. All child components should be props-driven and not depend on context or external state.
 - **Next.js App Router**: Server components by default (smaller bundle, faster initial load)
 - **React 19 Compiler**: Automatic memoization without manual `useMemo`/`useCallback`
-- **CSS-First Styling**: 10 consolidated CSS files organized by architectural purpose, CSS variables for theming, BEM naming convention
+- **CSS-First Styling**: 19 CSS files (9 system + 10 page-scoped), organized by architectural purpose, CSS variables for theming, BEM naming convention
 - **Sanity CMS Integration**: Server components fetch content (case studies, testimonials, blog posts, services)
 - **Minimal Client State**: Interactive components (`'use client'`) only for carousel logic, forms, modals
 - **TypeScript Strict Mode**: Enforced at build time; failing types block production
@@ -254,43 +254,52 @@ Not currently rendered but kept as files — do not delete, may be repurposed: `
 
 ### CSS File Organization
 
-CSS is organized into **10 consolidated files** by **architectural purpose**, not individual components:
+CSS is organized into **19 files** (9 system + 10 page-scoped) by **architectural purpose**, not individual components:
 
 ```
 app/css/
-├── variables.css         # Design tokens (colors, spacing, fonts, transitions)
-├── base.css              # HTML resets and default element styling
-├── components.css        # Reusable UI patterns (buttons, badges, patterns)
-├── typography.css        # Text hierarchy system (headings, body, sizes)
-├── interactions.css      # Hover states, transitions, animations
-├── layout.css            # Grid systems, flexbox, responsive layouts
-├── cards.css             # All card types (testimonial, case-study, blog, lesson, service, etc.)
-├── sections.css          # Full-width section components (hero, carousel, CTA, etc.)
-├── pages.css             # Form and page-specific styles (contact, blog, dance, etc.)
-└── utilities.css         # Spacing, color utilities, responsive breakpoints, patterns
+# System files (9)
+├── variables.css           # Design tokens (colors, spacing, fonts, transitions)
+├── base.css                # HTML resets and default element styling
+├── components.css          # Reusable UI patterns (buttons, badges, patterns)
+├── typography.css          # Text hierarchy system (headings, body, sizes)
+├── interactions.css        # Hover states, transitions, animations
+├── layout.css              # Grid systems, flexbox, responsive layouts
+├── cards.css               # All card types (testimonial, case-study, blog, lesson, service, etc.)
+├── sections.css            # Full-width section components (hero, carousel, CTA, etc.)
+└── utilities.css           # Spacing, color utilities, responsive breakpoints, patterns
+# Page-scoped files (10)
+├── pages-forms.css         # Form layouts (contact, login, etc.)
+├── pages-portal.css        # Portal dashboard + lesson pages
+├── pages-blog.css          # Blog index and post pages
+├── pages-audit.css         # Presence Audit quiz page
+├── pages-ikigai.css        # Ikigai assessment + results page
+├── pages-lessons.css       # Public lessons index
+├── pages-dance.css         # Dance portfolio page
+├── pages-portal-tools.css  # Portal AI tool pages (movement-plan, tonality, etc.)
+├── pages-contact.css       # Contact page
+└── pages-foundation.css    # Foundation program page
 ```
 
-Import structure in `app/globals.css`:
+Import structure in `app/globals.css` (actual layer order):
 
 ```css
-@layer components {
-  @import url("./css/components.css");
-  @import url("./css/typography.css");
-  @import url("./css/layout.css");
-  @import url("./css/cards.css");
-  @import url("./css/sections.css");
-  @import url("./css/pages.css");
-}
-@layer utilities {
-  @import url("./css/utilities.css");
-}
-@layer base {
-  @import url("./css/variables.css");
-  @import url("./css/base.css");
-}
-@layer interactive {
-  @import url("./css/interactions.css");
-}
+@layer reset, variables, base, components, utilities, interactive;
+
+@import "./css/variables.css" layer(variables);
+@import "./css/base.css" layer(base);
+/* System components */
+@import "./css/components.css" layer(components);
+@import "./css/typography.css" layer(components);
+@import "./css/layout.css" layer(components);
+@import "./css/cards.css" layer(components);
+@import "./css/sections.css" layer(components);
+/* Page-scoped */
+@import "./css/pages-forms.css" layer(components);
+@import "./css/pages-portal.css" layer(components);
+/* …remaining page files… */
+@import "./css/utilities.css" layer(utilities);
+@import "./css/interactions.css" layer(interactive);
 ```
 
 **Architectural Layers** (cascade order):
@@ -298,9 +307,10 @@ Import structure in `app/globals.css`:
 1. `variables.css` — Design foundation
 2. `base.css` — HTML resets
 3. `components.css`, `typography.css` — Core patterns
-4. `layout.css`, `cards.css`, `sections.css`, `pages.css` — Structural layers
-5. `utilities.css` — Responsive helpers
-6. `interactions.css` — Hover/animation overrides
+4. `layout.css`, `cards.css`, `sections.css` — Structural layers
+5. `pages-*.css` — Page-scoped overrides (10 files)
+6. `utilities.css` — Responsive helpers
+7. `interactions.css` — Hover/animation overrides
 
 ### CSS Naming Convention (BEM-Inspired)
 
@@ -736,36 +746,45 @@ Complex styling? Use a CSS class in the appropriate consolidated file (cards.css
 
 ```
 app/
-├── page.tsx              → Home page
-├── about/page.tsx        → About Jon
-├── blog/
-│   ├── page.tsx          → Blog index
-│   └── [slug]/           → Blog post (dynamic)
-├── audit/
-│   ├── page.tsx          → Presence Audit (server wrapper)
-│   └── AuditClient.tsx   → Client component (multi-step quiz)
-├── programs/page.tsx     → Coaching programs
-├── dance/page.tsx        → Choreography portfolio
-├── lessons/
-│   ├── page.tsx          → Lessons by level
-│   └── [courseSlug]/
-│       ├── page.tsx      → Course detail with sticky TOC
-│       └── [lessonSlug]/page.tsx → Lesson page with video + progress
-├── media-kit/page.tsx    → Media kit & collaboration
-├── contact/
-│   ├── page.tsx          → Server wrapper
-│   └── ContactClient.tsx → Client component
-├── login/page.tsx        → Auth page (email + Google OAuth)
-├── portal/
-│   ├── page.tsx          → Protected dashboard (Supabase auth)
-│   └── [slug]/page.tsx   → Portal lesson page (gated)
-├── ikigai/page.tsx       → Interactive Ikigai quiz
-├── privacy/page.tsx      → Privacy policy (static)
-├── auth/callback/        → OAuth callback (Supabase SSR)
-├── admin/                → Admin panel + auth
-├── api/inquiries/        → Inquiry form API
-├── api/subscribe/        → Email subscribe API (Kit/ConvertKit)
-└── css/                  → 19 consolidated CSS files
+├── (marketing)/          ← Navbar + Footer layout (public pages)
+│   ├── layout.tsx
+│   ├── page.tsx                        → Home (primary CTA → /ikigai)
+│   ├── ikigai/page.tsx                 → Ikigai Assessment (top-of-funnel entry point)
+│   ├── about/page.tsx
+│   ├── blog/
+│   │   ├── page.tsx
+│   │   └── [slug]/page.tsx
+│   ├── audit/
+│   │   ├── page.tsx
+│   │   └── AuditClient.tsx
+│   ├── programs/page.tsx
+│   ├── foundation/page.tsx
+│   ├── dance/page.tsx
+│   ├── lessons/
+│   │   ├── page.tsx
+│   │   └── [courseSlug]/
+│   │       ├── page.tsx
+│   │       └── [lessonSlug]/page.tsx
+│   ├── contact/
+│   │   ├── page.tsx
+│   │   └── ContactClient.tsx
+│   ├── login/page.tsx
+│   ├── mfa/page.tsx
+│   └── privacy/page.tsx
+├── (portal)/             ← PortalShell + sidebar layout (auth-gated, noindexed)
+│   ├── layout.tsx
+│   └── portal/
+│       ├── page.tsx                    → Dashboard
+│       ├── four-circles/page.tsx       → Four Circles course (free, gated)
+│       ├── four-circles/[lessonSlug]/page.tsx
+│       ├── [courseSlug]/page.tsx
+│       ├── [courseSlug]/[lessonSlug]/page.tsx
+│       └── movement-plan/, presence-score/, tonality/
+├── admin/                ← Admin dashboard (separate auth)
+├── api/                  ← API routes: admin/enroll, checkout, inquiries,
+│                            movement-plan, presence-coach, presence-score,
+│                            subscribe, tonality-analysis, webhooks/stripe
+└── auth/callback/        ← Supabase OAuth callback
 ```
 
 ## Reference: Page Section Breakdown
