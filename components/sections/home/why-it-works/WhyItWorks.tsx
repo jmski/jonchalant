@@ -20,7 +20,7 @@ interface WhyItWorksProps {
   cells?: WhyItWorksCell[];
 }
 
-const STEP_TITLES = ['Awareness', 'Practice', 'Integration'];
+const STEP_TITLES = ['Discover', 'Understand', 'Embody'];
 const STEP_ICONS = ['◯', '△', '◇'];
 
 export function WhyItWorks({

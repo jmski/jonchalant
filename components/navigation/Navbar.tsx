@@ -26,13 +26,20 @@ interface NavSection {
   }>;
 }
 
-const LEFT_LINKS = [
+interface NavLink {
+  label: string;
+  href: string;
+  isPrimary?: boolean;
+}
+
+const LEFT_LINKS: NavLink[] = [
   { label: 'Blog', href: '/blog' },
   { label: 'Lessons', href: '/lessons' },
   { label: 'Dance', href: '/dance' },
 ];
 
-const RIGHT_LINKS = [
+const RIGHT_LINKS: NavLink[] = [
+  { label: 'Start Here', href: '/ikigai', isPrimary: true },
   { label: 'Programs', href: '/programs' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
@@ -43,6 +50,7 @@ const NAV_SECTIONS: NavSection[] = [
     title: 'Essentials',
     links: [
       { label: 'Home', href: '/' },
+      { label: 'Start Here', href: '/ikigai' },
       { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
     ],
@@ -140,7 +148,11 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`navbar-pill-link${isActive(link.href) ? ' active' : ''}`}
+                  className={[
+                    'navbar-pill-link',
+                    link.isPrimary ? 'navbar-pill-link--cta' : '',
+                    isActive(link.href) ? 'active' : '',
+                  ].filter(Boolean).join(' ')}
                 >
                   {link.label}
                 </Link>
@@ -217,11 +229,11 @@ export default function Navbar({ socialLinks = [] }: NavbarProps) {
 
           <div className="navbar-mobile-footer">
             <Link
-              href="/audit"
+              href="/ikigai"
               className="navbar-mobile-cta-btn"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Free Audit
+              Start Here
             </Link>
             <Link
               href="/login"

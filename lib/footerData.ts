@@ -21,7 +21,7 @@ export const FOOTER_NAV = [
       { label: 'The Blueprint', href: '/lessons' },
       { label: 'The Archives', href: '/blog' },
       { label: 'The Breakdown', href: '/dance' },
-      { label: 'Free Audit', href: '/audit' },
+      { label: 'Presence Audit', href: '/audit' },
     ],
   },
   {

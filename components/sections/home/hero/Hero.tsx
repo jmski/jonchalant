@@ -22,7 +22,7 @@ export function Hero({ content }: HeroProps) {
     heroCtaText,
     heroCtaLink,
   } = content;
-  const ctaLink = heroCtaLink ?? '/contact';
+  const ctaLink = heroCtaLink ?? '/ikigai';
   const heroCycle = content.heroCycle ?? [];
   const heroCycleLength = heroCycle.length;
 

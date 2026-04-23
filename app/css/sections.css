@@ -112,6 +112,11 @@
   color: var(--text-primary);
 }
 
+.navbar-pill-link--cta {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
 .navbar-pill.is-scrolled .navbar-pill-link {
   font-size: 0.788rem;
   padding: 0.25rem 0.5rem;
@@ -2044,8 +2049,69 @@
   margin: 0;
 }
 
-/* Dark variant overrides (when inside burnt-indigo SectionWrapper) */
-.section-wrapper--why-it-works-dark {
+/* On-dark overrides for why-it-works (legacy timeline + bento) */
+.section-wrapper-dark .home-why-works-step-title {
+  color: var(--text-on-dark);
+}
+
+.section-wrapper-dark .home-why-works-step-body {
+  color: var(--text-on-dark-secondary);
+}
+
+.section-wrapper-dark .home-why-works-step-number {
+  color: var(--text-on-dark-tertiary);
+}
+
+.section-wrapper-dark .home-why-works-step-icon {
+  border-color: var(--border-on-dark);
+  background: transparent;
+  color: var(--text-on-dark);
+}
+
+.section-wrapper-dark .home-why-works-step:hover .home-why-works-step-icon {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--text-on-dark);
+}
+
+.section-wrapper-dark .home-why-works-step-line {
+  background: var(--border-on-dark);
+}
+
+.section-wrapper-dark .timeline-draw-line {
+  background: var(--border-on-dark);
+}
+
+.section-wrapper-dark .home-why-works-header .section-eyebrow {
+  color: var(--text-on-dark-secondary);
+}
+
+.section-wrapper-dark .why-it-works-heading h2 {
+  color: var(--text-on-dark);
+}
+
+.section-wrapper-dark .why-it-works-cell {
+  border-color: var(--border-on-dark);
+}
+
+.section-wrapper-dark .why-it-works-cell:hover {
+  border-color: var(--accent-on-dark);
+}
+
+.section-wrapper-dark .why-it-works-cell-body {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.section-wrapper-dark .why-it-works-cell-title {
+  color: var(--text-on-dark);
+}
+
+.section-wrapper-dark .why-it-works-cell-insight {
+  color: var(--text-on-dark-secondary);
+}
+
+/* Dark scoped override for testimonials — pure black bg + on-dark card treatment */
+.section-wrapper--testimonials-dark {
   background: var(--bg-dark);
   box-shadow: none;
   border: 0;
@@ -2054,85 +2120,64 @@
 }
 
 @media (min-width: 640px) {
-  .section-wrapper--why-it-works-dark {
+  .section-wrapper--testimonials-dark {
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .section-wrapper--why-it-works-dark {
+  .section-wrapper--testimonials-dark {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
 }
 
-.section-wrapper--why-it-works-dark .home-why-works-section {
-  background: var(--bg-dark);
-}
-
-.section-wrapper--why-it-works-dark .home-why-works-header .section-eyebrow {
-  color: var(--text-on-dark-secondary);
-}
-
-/* .home-why-works-highlight is not rendered — SectionHeader emits .section-title inside .home-why-works-header */
-.section-wrapper--why-it-works-dark .home-why-works-header .section-title {
-  color: var(--text-on-dark);
-}
-
-.section-wrapper--why-it-works-dark .home-why-works-step-icon {
-  border-color: var(--border-on-dark);
-  background: transparent;
+.section-wrapper--testimonials-dark .section-eyebrow {
   color: var(--accent-on-dark);
 }
 
-.section-wrapper--why-it-works-dark .home-why-works-step:hover .home-why-works-step-icon {
-  background: transparent;
-  color: var(--accent-on-dark);
-}
-
-.section-wrapper--why-it-works-dark .home-why-works-step-number {
-  color: var(--text-on-dark-tertiary);
-}
-
-.section-wrapper--why-it-works-dark .home-why-works-step-title {
-  color: var(--text-on-dark);
-}
-
-.section-wrapper--why-it-works-dark .home-why-works-step-body {
-  color: var(--text-on-dark-secondary);
-}
-
-.section-wrapper--why-it-works-dark .home-why-works-step-line {
-  background: var(--border-on-dark);
-}
-
-.section-wrapper--why-it-works-dark .timeline-draw-line {
-  background: var(--border-on-dark);
-}
-
-.section-wrapper--why-it-works-dark .why-it-works-heading h2 {
-  color: var(--text-on-dark);
-}
-
-.section-wrapper--why-it-works-dark .why-it-works-cell {
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card {
+  background: rgba(255, 255, 255, 0.05);
   border-color: var(--border-on-dark);
 }
 
-.section-wrapper--why-it-works-dark .why-it-works-cell:hover {
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card::before {
+  color: rgba(255, 255, 255, 0.07);
+}
+
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card:hover {
   border-color: var(--accent-on-dark);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.section-wrapper--why-it-works-dark .why-it-works-cell-body {
-  background: var(--bg-dark);
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card-quote {
+  color: var(--text-on-dark-secondary);
 }
 
-.section-wrapper--why-it-works-dark .why-it-works-cell-title {
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card-footer {
+  border-top-color: var(--border-on-dark);
+}
+
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card-client-name {
   color: var(--text-on-dark);
 }
 
-.section-wrapper--why-it-works-dark .why-it-works-cell-insight {
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card-role {
   color: var(--text-on-dark-secondary);
+}
+
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card-company {
+  color: var(--accent-on-dark);
+}
+
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card-result {
+  background: rgba(138, 168, 122, 0.12);
+  border-color: rgba(138, 168, 122, 0.3);
+}
+
+.section-wrapper--testimonials-dark .testimonial-section .testimonial-card-result-text {
+  color: var(--accent-on-dark);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
