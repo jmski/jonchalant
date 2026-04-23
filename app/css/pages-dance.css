@@ -257,7 +257,7 @@
 }
 
 .privacy-title {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-headline);
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 600;
   color: var(--text-primary);
@@ -275,7 +275,7 @@
 }
 
 .privacy-container h2 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-headline);
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
