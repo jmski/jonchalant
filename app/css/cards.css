@@ -2,7 +2,8 @@
    CARDS - All Card Component Styles
    
    Consolidated card components: testimonial, case-study, lesson, blog, service,
-   dance/enhanced cards, generic card, and badge components
+   enhanced cards, generic card, badge components, and Phase 0 primitives
+   (.jc-card, .jc-program, .jc-pillar)
    ════════════════════════════════════════════════════════════════════════════
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -706,7 +707,7 @@
   align-self: start; /* sizes to own content, drives row heights */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .blog-cards-grid {
     grid-template-columns: 1fr;
   }
@@ -846,9 +847,11 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   DANCE CARD / ENHANCED CARD
+   ENHANCED CARD
    ────────────────────────────────────────────────────────────────────────────
-   Interactive card component for dance portfolio items with hover effects
+   Shared interactive card (image + overlay + hover arrow). Used by
+   BlogCard, CaseStudyCard, LessonCard, DanceCard, and admin page. Not
+   dance-specific despite the legacy naming.
 */
 
 .card-enhanced {
@@ -1388,3 +1391,320 @@
   margin-bottom: 0.35rem;
 }
 
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PHASE 0 CARD PRIMITIVES — .jc-card / .jc-program / .jc-pillar
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ---------- Base card ---------- */
+.jc-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.75rem;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+  position: relative;
+}
+
+.jc-card--wide { padding: 2rem; }
+
+.jc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.jc-card--accent-top { border-top: 2px solid transparent; }
+.jc-card--accent-top:hover { border-top-color: var(--mocha-mousse); }
+
+.jc-card-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mocha-deep);
+  margin: 0 0 0.75rem;
+}
+
+.jc-card-title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.jc-card-body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---------- Program card (Foundation offer) ---------- */
+.jc-program {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 560px;
+}
+
+.jc-program:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-program-hover);
+}
+
+.jc-program-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.jc-program-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mocha-deep);
+  margin: 0;
+}
+
+.jc-program-title {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: 1.85rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+}
+
+.jc-program-title em {
+  font-style: italic;
+  color: var(--mocha-mousse);
+  font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+}
+
+.jc-program-desc {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.jc-program-list {
+  list-style: none;
+  margin: 0;
+  padding: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.jc-program-list li {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 0.7rem;
+  align-items: baseline;
+}
+
+.jc-program-list-mark {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mocha-mousse);
+  margin-top: 0.55rem;
+}
+
+.jc-program-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.jc-program-price {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: 2rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+}
+
+.jc-program-price-unit {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.jc-program-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+/* Upgrade module (inline, not a second pricing tier) */
+.jc-program-upgrade {
+  margin-top: 0.25rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.1rem 1.25rem;
+  background: color-mix(in srgb, var(--mocha-mousse) 3%, var(--bg-light));
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.jc-program-upgrade-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  margin: 0 0 0.25rem;
+}
+
+.jc-program-upgrade-body {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.jc-program-upgrade-body strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.jc-program-upgrade-price {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .jc-program { padding: 1.5rem; }
+  .jc-program-title { font-size: 1.5rem; }
+  .jc-program-upgrade {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* ---------- Pillar card (medium-agnostic) ---------- */
+.jc-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1023px) {
+  .jc-pillar-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 639px) {
+  .jc-pillar-grid { grid-template-columns: 1fr; }
+}
+
+.jc-pillar {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-top: 2px solid transparent;
+  border-radius: 0.5rem;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: all var(--transition-base);
+  min-height: 340px;
+}
+
+.jc-pillar:hover {
+  transform: translateY(-2px);
+  border-top-color: var(--mocha-mousse);
+  box-shadow: var(--shadow-soft);
+}
+
+.jc-pillar-label {
+  font-family: var(--font-headline);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.jc-pillar-name {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+}
+
+.jc-pillar-def {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.jc-pillar-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0.25rem 0 0;
+}
+
+.jc-pillar-apps {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.jc-pillar-apps li {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.jc-pillar-apps-who {
+  font-family: var(--font-headline);
+  font-style: italic;
+  color: var(--mocha-mousse);
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  font-weight: 400;
+}

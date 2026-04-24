@@ -25,11 +25,6 @@
   position: relative;
 }
 
-.site-footer-social-link:hover,
-.site-footer-social-link[data-platform]:hover {
-  color: #fff;
-}
-
 /* Input Field Focus */
 input:focus,
 textarea:focus,

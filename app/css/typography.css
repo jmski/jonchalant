@@ -600,3 +600,57 @@ hr {
     transition: none;
   }
 }
+
+/* ============================================================
+   JC-KINETIC — Phase 0 kinetic typography primitive
+
+   One dramatic-moment-per-page treatment. Fraunces at opsz 144,
+   italic anchor in --mocha-mousse, WONK axis on the italic run.
+   Usage: <p class="jc-kinetic">The medium <em>changes</em>. The fundamentals <em>don't</em>.</p>
+   ============================================================ */
+
+.jc-kinetic {
+  font-family: var(--font-headline);
+  font-weight: 400;
+  font-style: normal;
+  font-size: var(--kinetic-size);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin: 0;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.jc-kinetic em {
+  font-style: italic;
+  color: var(--mocha-mousse);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.jc-section--dark .jc-kinetic {
+  color: var(--text-white);
+}
+
+.jc-section--dark .jc-kinetic em {
+  color: #E8C8B0;
+}
+
+.jc-kinetic-frame {
+  padding: var(--spacing-2xl) 2rem;
+}
+
+.jc-kinetic-frame .jc-section-inner {
+  max-width: 1040px;
+}
+
+@media (max-width: 767px) {
+  .jc-kinetic {
+    font-size: var(--kinetic-size-mobile);
+  }
+
+  .jc-kinetic-frame {
+    padding: 4rem 1.25rem;
+  }
+}

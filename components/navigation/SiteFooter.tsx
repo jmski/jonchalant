@@ -32,7 +32,6 @@ interface SiteFooterProps {
 }
 
 export function SiteFooter({ socialLinks = [], optIn }: SiteFooterProps) {
-  // Resolve social links: prefer Sanity data, fall back to hardcoded
   const linkedIn =
     socialLinks.find((s) => s.label.toLowerCase().includes('linkedin')) ??
     FALLBACK_SOCIAL.linkedin;
@@ -42,64 +41,55 @@ export function SiteFooter({ socialLinks = [], optIn }: SiteFooterProps) {
   const displaySocial = [linkedIn, instagram];
 
   return (
-    <footer className="site-footer">
-      {/* ── Opt-in strip ── */}
-      <div className="site-footer-optin">
+    <footer className="jc-footer">
+      <div className="jc-footer-optin">
         <BlogOptIn optIn={optIn} variant="footer" />
       </div>
 
-      {/* ── Main body: brand + nav columns ── */}
-      <div className="site-footer-body">
-        <div className="site-footer-brand">
-          <Link href="/" className="site-footer-brand-name">
-            JONCHALANT
-          </Link>
-          <p className="site-footer-tagline">
-            Executive Presence Coaching for Introverts
-          </p>
-          <div className="site-footer-social">
-            {displaySocial.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="site-footer-social-link"
-                data-platform={link.label.toLowerCase()}
-                aria-label={link.label}
-              >
-                {SOCIAL_ICONS[link.label.toLowerCase()] ?? link.icon}
-              </a>
-            ))}
+      <div className="jc-footer-inner">
+        <div className="jc-footer-grid">
+          <div className="jc-footer-brand">
+            <Link href="/" className="jc-footer-brand-name">
+              <em>Jon</em>chalant
+            </Link>
+            <p className="jc-footer-blurb">
+              Find the work you were meant for — then learn to inhabit it.
+            </p>
+            <div className="jc-footer-social">
+              {displaySocial.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="jc-footer-social-link"
+                  data-platform={link.label.toLowerCase()}
+                  aria-label={link.label}
+                >
+                  {SOCIAL_ICONS[link.label.toLowerCase()] ?? link.icon}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <nav className="site-footer-nav" aria-label="Footer navigation">
           {FOOTER_NAV.map((section) => (
-            <div key={section.heading} className="site-footer-nav-col">
-              <p className="site-footer-nav-heading">{section.heading}</p>
-              <ul className="site-footer-nav-list">
+            <div key={section.heading} className="jc-footer-col">
+              <p className="jc-footer-col-heading">{section.heading}</p>
+              <ul className="jc-footer-list">
                 {section.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="site-footer-nav-link">
-                      {link.label}
-                    </Link>
+                    <Link href={link.href}>{link.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
-        </nav>
-      </div>
+        </div>
 
-      {/* ── Bottom bar ── */}
-      <div className="site-footer-bottom">
-        <p className="site-footer-copyright">
-          &copy; {new Date().getFullYear()} Jonchalant. All rights reserved.
-        </p>
-        <Link href="/privacy" className="site-footer-legal-link">
-          Privacy Policy
-        </Link>
+        <div className="jc-footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Jonchalant. All rights reserved.</p>
+          <Link href="/privacy">Privacy Policy</Link>
+        </div>
       </div>
     </footer>
   );

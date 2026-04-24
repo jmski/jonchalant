@@ -149,7 +149,7 @@ export default async function Home() {
 
         {/* 7. TESTIMONIALS */}
         {testimonials.length > 0 && (
-          <SectionWrapper variant="dark" className="section-wrapper--testimonials-dark">
+          <SectionWrapper variant="dark" className="jc-section jc-section--dark">
             <SectionContent>
               <ScrollFade>
                 <Testimonials

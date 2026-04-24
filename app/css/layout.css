@@ -378,7 +378,7 @@
 
 /* ========== MOBILE RESPONSIVE BREAKPOINTS ========== */
 /* Tablet: 768px and up */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .two-column-offset {
     grid-template-columns: 1fr;
     gap: var(--element-gap);
@@ -403,7 +403,7 @@
 }
 
 /* Mobile: 640px and down */
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .three-column {
     grid-template-columns: 1fr;
   }
@@ -1279,33 +1279,29 @@
 
 
 /* ════════════════════════════════════════════════════════════════════════════
-   SITE FOOTER
+   FOOTER OPT-IN STRIP
+   The rest of the footer primitive lives in components.css as .jc-footer.
+   This block styles the inner opt-in strip emitted by BlogOptIn (footer variant).
    ════════════════════════════════════════════════════════════════════════════ */
 
-.site-footer {
-  border-top: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
-}
-
-/* ── Opt-in strip ── */
-.site-footer-optin {
+.jc-footer-optin {
   background-color: var(--mocha-deep);
   padding: 3rem 1.25rem;
 }
 
 @media (min-width: 640px) {
-  .site-footer-optin {
+  .jc-footer-optin {
     padding: 3.5rem 3rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .site-footer-optin {
+  .jc-footer-optin {
     padding: 4rem 4rem;
   }
 }
 
-.site-footer-optin-inner {
+.jc-footer-optin-inner {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
@@ -1315,14 +1311,14 @@
 }
 
 @media (min-width: 768px) {
-  .site-footer-optin-inner {
+  .jc-footer-optin-inner {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
   }
 }
 
-.site-footer-optin-eyebrow {
+.jc-footer-optin-eyebrow {
   display: inline-block;
   font-size: 0.7rem;
   font-weight: 700;
@@ -1332,7 +1328,7 @@
   margin-bottom: 0.75rem;
 }
 
-.site-footer-optin-title {
+.jc-footer-optin-title {
   font-family: var(--font-headline);
   font-size: clamp(1.375rem, 2.5vw, 1.875rem);
   font-weight: 700;
@@ -1341,38 +1337,38 @@
   margin: 0 0 0.75rem;
 }
 
-.site-footer-optin-description {
+.jc-footer-optin-description {
   font-size: 0.9375rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.72);
   margin: 0;
 }
 
-.site-footer-optin-form {
+.jc-footer-optin-form {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 }
 
-.site-footer-optin-fields {
+.jc-footer-optin-fields {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 }
 
-@media (min-width: 480px) {
-  .site-footer-optin-fields {
+@media (min-width: 640px) {
+  .jc-footer-optin-fields {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.625rem;
   }
 
-  .site-footer-optin-btn {
+  .jc-footer-optin-btn {
     grid-column: 1 / -1;
   }
 }
 
-.site-footer-optin-input {
+.jc-footer-optin-input {
   width: 100%;
   padding: 0.75rem 1rem;
   background: rgba(255, 255, 255, 0.1);
@@ -1386,32 +1382,32 @@
     background var(--transition-fast);
 }
 
-.site-footer-optin-input::placeholder {
+.jc-footer-optin-input::placeholder {
   color: rgba(255, 255, 255, 0.45);
 }
 
-.site-footer-optin-input:focus {
+.jc-footer-optin-input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.15);
   border-color: var(--mocha-soft);
 }
 
-.site-footer-optin-input:disabled {
+.jc-footer-optin-input:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.site-footer-optin-fields .btn {
+.jc-footer-optin-fields .btn {
   width: 100%;
 }
 
-.site-footer-optin-error {
+.jc-footer-optin-error {
   font-size: 0.8rem;
   color: #fca5a5;
   margin: 0;
 }
 
-.site-footer-optin-success {
+.jc-footer-optin-success {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -1421,211 +1417,25 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
-.site-footer-optin-success-icon {
+.jc-footer-optin-success-icon {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--mocha-soft);
 }
 
-.site-footer-optin-success-title {
+.jc-footer-optin-success-title {
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
   margin: 0;
 }
 
-.site-footer-optin-success-body {
+.jc-footer-optin-success-body {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.72);
   margin: 0;
 }
 
-/* ── Main body: brand + nav ── */
-.site-footer-body {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 1.25rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-}
-
-@media (min-width: 640px) {
-  .site-footer-body {
-    padding: 3.5rem 3rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .site-footer-body {
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .site-footer-body {
-    padding: 4rem 4rem;
-  }
-}
-
-.site-footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-}
-
-.site-footer-brand-name {
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-primary);
-  text-decoration: none;
-  font-family: var(--font-body);
-  transition: color var(--transition-fast);
-}
-
-.site-footer-brand-name:hover {
-  color: var(--accent-primary);
-}
-
-.site-footer-tagline {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  line-height: 1.5;
-  margin: 0;
-  max-width: 22ch;
-}
-
-.site-footer-social {
-  display: flex;
-  gap: 0.625rem;
-  margin-top: 0.375rem;
-}
-
-.site-footer-social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--bg-primary);
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: lowercase;
-  transition: all var(--transition-fast);
-}
-
-.site-footer-social-link:hover {
-  color: #fff;
-}
-
-.site-footer-social-link[data-platform="linkedin"]:hover {
-  background-color: #0a66c2;
-  border-color: #0a66c2;
-  color: #fff;
-}
-
-.site-footer-social-link[data-platform="instagram"]:hover {
-  background-color: #e4405f;
-  border-color: #e4405f;
-  color: #fff;
-}
-
-.site-footer-nav {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-@media (max-width: 479px) {
-  .site-footer-nav {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.site-footer-nav-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.site-footer-nav-heading {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin: 0 0 0.875rem;
-}
-
-.site-footer-nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.site-footer-nav-link {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.site-footer-nav-link:hover {
-  color: var(--accent-primary);
-}
-
-/* ── Bottom bar ── */
-.site-footer-bottom {
-  border-top: 1px solid var(--border-color);
-  padding: 1.25rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  align-items: flex-start;
-}
-
-@media (min-width: 640px) {
-  .site-footer-bottom {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .site-footer-bottom {
-    padding: 1.25rem 4rem;
-  }
-}
-
-.site-footer-copyright {
-  font-size: 0.8125rem;
-  color: var(--text-tertiary);
-  margin: 0;
-}
-
-.site-footer-legal-link {
-  font-size: 0.8125rem;
-  color: var(--text-tertiary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.site-footer-legal-link:hover {
-  color: var(--accent-primary);
-}
 
 /* ============================================================
    BENTO GRID — reusable asymmetric layout
