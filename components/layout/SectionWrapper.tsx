@@ -26,11 +26,12 @@ export default function SectionWrapper({
   style,
 }: SectionWrapperProps) {
   const variantClass = `section-wrapper-${variant}`;
+  const darkClass = variant === 'dark' ? ' jc-section--dark' : '';
 
   return (
     <div
       id={id}
-      className={`section-wrapper ${variantClass} ${className}`}
+      className={`section-wrapper ${variantClass}${darkClass} ${className}`}
       style={style}
     >
       {children}
