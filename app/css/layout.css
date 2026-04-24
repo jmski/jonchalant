@@ -419,6 +419,16 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SECTION WRAPPER - Reusable Full-Width Section Component
+
+   Three-way primitive split (all three are emitted by SectionWrapper in TSX):
+   · .section-wrapper        — base layout: full-bleed mechanics (negative
+                               margin + calc width), padding, overflow hidden
+   · .section-wrapper-dark   — background color modifier only (--mocha-deep)
+   · .jc-section--dark       — content styling: text colors, heading colors,
+                               link colors, child element overrides, typography
+                               tweaks; lives in sections.css and typography.css
+
+   New dark-section rules → put them on .jc-section--dark, not .section-wrapper-dark
    ────────────────────────────────────────────────────────────────────────────
 */
 
@@ -481,29 +491,6 @@
 
 .section-wrapper-dark {
   background-color: var(--mocha-deep);
-}
-
-.section-wrapper-dark,
-.section-wrapper-dark h1,
-.section-wrapper-dark h2,
-.section-wrapper-dark h3,
-.section-wrapper-dark h4,
-.section-wrapper-dark h5,
-.section-wrapper-dark h6 {
-  color: var(--bg-primary);
-}
-
-.section-wrapper-dark p {
-  color: rgba(244, 235, 224, 0.72);
-}
-
-.section-wrapper-dark a:not([class*="btn"]) {
-  color: var(--mocha-soft);
-  transition: color var(--transition-fast);
-}
-
-.section-wrapper-dark a:not([class*="btn"]):hover {
-  color: var(--mocha-mousse);
 }
 
 .section-wrapper--moss {

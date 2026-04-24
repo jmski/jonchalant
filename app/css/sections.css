@@ -1122,8 +1122,9 @@
   font-weight: 300;
   font-style: italic;
   line-height: 1.5;
-  color: var(--text-on-dark);
-  margin: 0 0 2.5rem 0;
+  color: var(--text-white);
+  margin: 0 auto 2.5rem;
+  max-width: 52ch;
 }
 
 .testimonials-display-attribution {
@@ -1138,13 +1139,13 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-on-dark);
+  color: var(--text-white);
 }
 
 .testimonials-display-role {
   font-family: var(--font-body);
   font-size: 0.8rem;
-  color: var(--text-on-dark);
+  color: var(--text-white);
   opacity: 0.65;
 }
 
@@ -1520,67 +1521,67 @@
 }
 
 /* On-dark overrides for why-it-works (legacy timeline + bento) */
-.section-wrapper-dark .home-why-works-step-title {
-  color: var(--text-on-dark);
+.jc-section--dark .home-why-works-step-title {
+  color: var(--text-white);
 }
 
-.section-wrapper-dark .home-why-works-step-body {
-  color: var(--text-on-dark-secondary);
+.jc-section--dark .home-why-works-step-body {
+  color: rgba(241, 241, 241, 0.72);
 }
 
-.section-wrapper-dark .home-why-works-step-number {
-  color: var(--text-on-dark-tertiary);
+.jc-section--dark .home-why-works-step-number {
+  color: rgba(241, 241, 241, 0.4);
 }
 
-.section-wrapper-dark .home-why-works-step-icon {
-  border-color: var(--border-on-dark);
+.jc-section--dark .home-why-works-step-icon {
+  border-color: rgba(255, 255, 255, 0.2);
   background: transparent;
-  color: var(--text-on-dark);
+  color: var(--text-white);
 }
 
-.section-wrapper-dark .home-why-works-step:hover .home-why-works-step-icon {
+.jc-section--dark .home-why-works-step:hover .home-why-works-step-icon {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.4);
-  color: var(--text-on-dark);
+  color: var(--text-white);
 }
 
-.section-wrapper-dark .home-why-works-step-line {
-  background: var(--border-on-dark);
+.jc-section--dark .home-why-works-step-line {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.section-wrapper-dark .timeline-draw-line {
-  background: var(--border-on-dark);
+.jc-section--dark .timeline-draw-line {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.section-wrapper-dark .home-why-works-header .section-eyebrow {
-  color: var(--text-on-dark-secondary);
+.jc-section--dark .home-why-works-header .section-eyebrow {
+  color: rgba(241, 241, 241, 0.72);
 }
 
-.section-wrapper-dark .why-it-works-heading h2 {
-  color: var(--text-on-dark);
+.jc-section--dark .why-it-works-heading h2 {
+  color: var(--text-white);
 }
 
-.section-wrapper-dark .why-it-works-cell {
-  border-color: var(--border-on-dark);
+.jc-section--dark .why-it-works-cell {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.section-wrapper-dark .why-it-works-cell:hover {
-  border-color: var(--accent-on-dark);
+.jc-section--dark .why-it-works-cell:hover {
+  border-color: var(--mocha-soft);
 }
 
-.section-wrapper-dark .why-it-works-cell-body {
+.jc-section--dark .why-it-works-cell-body {
   background: rgba(255, 255, 255, 0.04);
 }
 
-.section-wrapper-dark .why-it-works-cell-title {
-  color: var(--text-on-dark);
+.jc-section--dark .why-it-works-cell-title {
+  color: var(--text-white);
 }
 
-.section-wrapper-dark .why-it-works-cell-insight {
-  color: var(--text-on-dark-secondary);
+.jc-section--dark .why-it-works-cell-insight {
+  color: rgba(241, 241, 241, 0.72);
 }
 
-/* Testimonial card overrides inside .jc-section--dark (mocha-deep background) */
+/* Testimonial card overrides inside dark sections */
 .jc-section--dark .section-eyebrow {
   color: var(--mocha-soft);
 }
@@ -3410,9 +3411,27 @@
 .jc-section--secondary { background: var(--bg-secondary); }
 .jc-section--tertiary  { background: var(--bg-light); }
 
-.jc-section--dark {
-  background: var(--mocha-deep);
+.jc-section--dark,
+.jc-section--dark h1,
+.jc-section--dark h2,
+.jc-section--dark h3,
+.jc-section--dark h4,
+.jc-section--dark h5,
+.jc-section--dark h6 {
   color: var(--text-white);
+}
+
+.jc-section--dark p {
+  color: rgba(244, 235, 224, 0.72);
+}
+
+.jc-section--dark a:not([class*="btn"]) {
+  color: var(--mocha-soft);
+  transition: color var(--transition-fast);
+}
+
+.jc-section--dark a:not([class*="btn"]):hover {
+  color: var(--mocha-mousse);
 }
 
 .jc-section--dark .jc-section-hint { color: rgba(241, 241, 241, 0.6); }
@@ -3539,12 +3558,17 @@
 
 /* Hero inside dark sections */
 .jc-section--dark .jc-hero-eyebrow { color: var(--mocha-soft); }
+
 .jc-section--dark .jc-hero-headline { color: var(--text-white); }
+
 .jc-section--dark .jc-hero-headline em { color: #E8C8B0; }
+
 .jc-section--dark .jc-hero-sub { color: rgba(241, 241, 241, 0.78); }
+
 .jc-section--dark .jc-hero-orb--one {
   background: radial-gradient(circle, rgba(212, 184, 163, 0.18) 0%, transparent 60%);
 }
+
 .jc-section--dark .jc-hero-orb--two {
   background: radial-gradient(circle, rgba(232, 200, 176, 0.12) 0%, transparent 60%);
 }
