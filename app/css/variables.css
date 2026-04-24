@@ -17,11 +17,9 @@
 
 /* ========== TYPOGRAPHY SYSTEM ========== */
 :root {
-  /* Premium Editorial Typography — CSS variables injected by next/font/google */
-  --font-headline: var(--font-fraunces), "Palatino Linotype", Georgia, serif;
-  --font-body:
-    var(--font-dm-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  /* Type stacks */
+  --font-headline: "Fraunces", "Palatino Linotype", Georgia, serif;
+  --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "Monaco", "Courier New", monospace;
 
   /* Spacing System - Generous breathing room (Ma principle) */
@@ -33,15 +31,10 @@
   --spacing-2xl: 7.5rem;
   --spacing-3xl: 11rem;
 
-  /* Section padding - Condensed & Editorial (Kaizen refinement) */
-  --section-padding-mobile: 4rem 1.5rem;
-  --section-padding-tablet: 5rem 2rem;
-  --section-padding-desktop: 8rem 3rem;
-
   /* Transitions - Kaizen pacing */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-subtle: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Line Heights - Editorial */
@@ -53,26 +46,27 @@
 
 /* ========== COLOR PALETTE - LIGHT MODE ONLY ========== */
 :root {
-  /* Backgrounds — cream, warmer than previous bone */
-  --bg-primary:   #F4EBE0; /* Cream — primary background */
-  --bg-secondary: #EFE4D6; /* Slightly deeper cream */
-  --bg-tertiary:  #E8D9C7; /* Cream-deep — card backgrounds, section contrast */
-  --bg-warm:      #EFE4D6; /* human/intimate sections e.g. Meet Jon */
+  /* Backgrounds — Cream family */
+  --bg-primary:   #F4EBE0;
+  --bg-secondary: #EFE4D6;
+  --bg-tertiary:  #E8D9C7;
+  --bg-warm:      #EFE4D6;
+  --bg-light:     #FFFFFF;
 
-  /* Text — espresso, richer than pure black */
-  --text-primary:   #2A1F1A; /* Espresso */
-  --text-secondary: #5C4A3F; /* Ink */
-  --text-tertiary:  #8A7668; /* Faded ink */
-  --text-white: #f1f1f1;
+  /* Text — Espresso family */
+  --text-primary:   #2A1F1A;
+  --text-secondary: #5C4A3F;
+  --text-tertiary:  #8A7668;
+  --text-white:     #F1F1F1;
 
   /* Borders — warm hairlines */
-  --border-color:  #D4B8A3; /* Mocha-soft used as border */
-  --border-subtle: #E8D9C7; /* Very faint */
+  --border-color:  #D4B8A3;
+  --border-subtle: #E8D9C7;
 
   /* Mocha Mousse system — the anchor */
-  --mocha-mousse: #A47864; /* PANTONE 17-1230, primary brand accent */
-  --mocha-deep:   #6B4F3F; /* Hover/pressed state */
-  --mocha-soft:   #D4B8A3; /* Tints, subtle fills */
+  --mocha-mousse: #A47864;
+  --mocha-deep:   #6B4F3F;
+  --mocha-soft:   #D4B8A3;
 
   /* Sage whisper — single cool accent, used sparingly for contrast */
   --sage-whisper: #8A9A85;
@@ -81,40 +75,30 @@
   --accent-primary:   var(--mocha-mousse);
   --accent-hover:     var(--mocha-deep);
   --accent-tertiary:  var(--sage-whisper);
-  --accent-secondary: #b89a5f; /* warm amber retained for pricing highlights */
+  --accent-secondary: #B89A5F;
   --btn-primary-text: #FFFFFF;
 
   /* Status colours — warm-aligned */
-  --color-success: #7A8A6A; /* sage-adjacent */
-  --color-warning: #B89A5F; /* warm amber retained for alerts only */
-  --color-error:   #8A5A5A; /* muted burgundy */
-  --color-info:    #8A9A85; /* sage-whisper reused */
+  --color-success: #7A8A6A;
+  --color-warning: #B89A5F;
+  --color-error:   #8A5A5A;
+  --color-info:    #8A9A85;
 
-  /* Overlay & Effects */
-  --overlay-dark: rgba(42, 31, 26, 0.08);
-  --overlay-light: rgba(164, 120, 100, 0.05);
-  --glow-subtle: 0 0 20px rgba(164, 120, 100, 0.1);
-  --glow-moss: 0 0 16px rgba(164, 120, 100, 0.08);
-
-  /* Decorative Elements */
-  --decor-enso: rgba(164, 120, 100, 0.15);
-  --decor-fluid: rgba(164, 120, 100, 0.12);
-  --decor-grid: rgba(164, 120, 100, 0.08);
+  /* Shadow & overlay */
+  --shadow-md:       0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg:       0 8px 24px rgba(0, 0, 0, 0.08);
+  --overlay-dark:    rgba(42, 31, 26, 0.08);
+  --overlay-light:   rgba(164, 120, 100, 0.05);
+  --glow-subtle:     0 0 20px rgba(164, 120, 100, 0.10);
+  --tracking-widest: 0.15em;
 
   /* Dark section (used on select inset sections) */
-  --bg-dark: #0a0a0a;
-  --text-on-dark: #ffffff;
+  --bg-dark:                #0a0a0a;
+  --text-on-dark:           #ffffff;
   --text-on-dark-secondary: rgba(255, 255, 255, 0.7);
-  --text-on-dark-tertiary: rgba(255, 255, 255, 0.5);
-  --border-on-dark: rgba(255, 255, 255, 0.12);
-  --accent-on-dark: #8aa87a; /* muted moss light — for numbers, symbols, accents */
-
-}
-
-/* ========== WARM AMBER ACCENT (retained for pricing highlights) ========== */
-:root {
-  --color-warm-amber: #b89a5f;
-  --color-warm-amber-light: #d4bb82;
+  --text-on-dark-tertiary:  rgba(255, 255, 255, 0.5);
+  --border-on-dark:         rgba(255, 255, 255, 0.12);
+  --accent-on-dark:         #8aa87a;
 }
 
 /* ========== GRADIENT TOKENS ========== */
@@ -149,12 +133,8 @@
   );
 }
 
-/* ========== ADDITIONAL TOKENS ========== */
+/* ========== LAYOUT TOKENS ========== */
 :root {
-  --bg-light: #ffffff; /* Card surfaces — lifts off the rice-paper bg */
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --tracking-widest: 0.15em;
-  --column-gap: 1.5rem;
+  --column-gap:  1.5rem;
   --element-gap: 1rem;
 }

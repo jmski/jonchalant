@@ -1,21 +1,13 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Fraunces, DM_Sans } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
 import MochaCursor from "@/components/utilities/cursor/MochaCursor";
 import MochaSweep from "@/components/layout/MochaSweep";
 
-// next/font self-hosts both typefaces — no external request, no render block
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["opsz", "SOFT", "WONK"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
+// Fraunces loads via Google Fonts @import in globals.css (next/font strips WONK silently).
+// DM Sans stays on next/font — no exotic axes, no penalty.
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
@@ -100,10 +92,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="default" suppressHydrationWarning className={`${fraunces.variable} ${dmSans.variable}`}>
+    <html lang="en" data-theme="default" suppressHydrationWarning className={dmSans.variable}>
       <head>
         {/* Light-only site — tells browser not to apply forced dark-mode styles */}
         <meta name="color-scheme" content="light" />
+
+        {/* Warm Google Fonts connection — Fraunces @import in globals.css */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
 
         {/* Warm the connection before GA scripts load (no data sent) */}
         {process.env.NEXT_PUBLIC_GA_ID && (

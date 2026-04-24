@@ -434,6 +434,96 @@
   display: block;
 }
 
+/* ==========================================================
+   Hero — shared primitive
+   Marketing hero recipe per SKILL.md + design-system.html §10
+   Used by GenericHero (shared) and composed by home/Hero.
+   NOTE: rgba literals in .hero-orb--* are intentional — CSS tokens
+   don't cover transparent gradient stops cleanly without verbose
+   color-mix chains. Not a slip; flagged per spec.
+   ========================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-2xl);
+  background: var(--bg-primary);
+}
+
+.hero--center .hero-inner {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-sub {
+  font-size: 1.0625rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 56ch;
+  margin: 0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-orb--1 {
+  width: 640px;
+  height: 640px;
+  top: -28%;
+  right: -16%;
+  background: radial-gradient(
+    circle,
+    rgba(164, 120, 100, 0.30) 0%,
+    rgba(164, 120, 100, 0.08) 40%,
+    transparent 65%
+  );
+}
+
+.hero-orb--2 {
+  width: 480px;
+  height: 480px;
+  bottom: -32%;
+  left: -10%;
+  background: radial-gradient(
+    circle,
+    rgba(107, 79, 63, 0.24) 0%,
+    rgba(107, 79, 63, 0.06) 40%,
+    transparent 65%
+  );
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--spacing-2xl) var(--spacing-sm) var(--spacing-xl);
+  }
+  .hero-orb--1 { width: 420px; height: 420px; }
+  .hero-orb--2 { width: 320px; height: 320px; }
+}
+
+@media (max-width: 640px) {
+  .hero-orb { opacity: 0.7; }
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    2. HOME HERO SECTION
    ────────────────────────────────────────────────────────────────────────────

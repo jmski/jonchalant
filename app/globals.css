@@ -1,4 +1,7 @@
-/* Fonts are loaded via next/font/google in app/layout.tsx — no @import needed */
+/* Fraunces loaded via Google Fonts @import to preserve all variable axes (opsz, SOFT, WONK).
+   next/font silently strips WONK from the downloaded font bytes — @import is required.
+   DM Sans remains on next/font (no exotic axes, no penalty). */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&display=swap');
 @import "tailwindcss";
 
 /* ============================================================================

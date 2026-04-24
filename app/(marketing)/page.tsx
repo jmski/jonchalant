@@ -90,7 +90,15 @@ export default async function Home() {
       <PageTransition animation="fade">
         {/* 1. HERO */}
         <SectionWrapper variant="primary" className="section-wrapper--flush">
-          <Hero content={homeContent ?? {}} />
+          <Hero
+            eyebrow={homeContent?.heroEyebrow}
+            headline={homeContent?.heroHeadline}
+            subhead={homeContent?.heroSubhead}
+            primaryCtaLabel={homeContent?.heroPrimaryCtaLabel}
+            primaryCtaHref={homeContent?.heroPrimaryCtaHref}
+            secondaryCtaLabel={homeContent?.heroSecondaryCtaLabel}
+            secondaryCtaHref={homeContent?.heroSecondaryCtaHref}
+          />
         </SectionWrapper>
 
         {/* 2. CREDIBILITY STRIP */}

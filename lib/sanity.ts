@@ -398,13 +398,11 @@ export async function getHomePageContent() {
   const query = `*[_type == "homePageContent" && title == "Home Page"][0] {
     heroEyebrow,
     heroHeadline,
-    heroCyclingOutcomes,
-    heroDescription,
-    heroSubtext,
-    heroCtaText,
-    heroCtaLink,
-    heroMicrocopy,
-    heroSecondaryCtaText,
+    heroSubhead,
+    heroPrimaryCtaLabel,
+    heroPrimaryCtaHref,
+    heroSecondaryCtaLabel,
+    heroSecondaryCtaHref,
     heroStats,
     servicesHeadline,
     servicesDescription,
@@ -420,9 +418,6 @@ export async function getHomePageContent() {
     ctaButtonText,
     ctaButtonHref,
     meetJonImage { asset->{ _id, url }, alt, crop, hotspot },
-    heroHeadlineStatic,
-    heroHeadlineAnchorWord,
-    heroSubhead,
     whyItWorksBentoHeadline,
     whyItWorksCells[] {
       _key,
@@ -434,18 +429,6 @@ export async function getHomePageContent() {
         crop
       },
       size
-    },
-    heroCycle[] {
-      _key,
-      kind,
-      image {
-        asset->{ _id, url, metadata { dimensions { width, height } } },
-        hotspot,
-        crop
-      },
-      typographicWord,
-      caption,
-      durationMs
     }
   }`
   return await client.fetch(query)
