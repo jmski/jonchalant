@@ -82,15 +82,23 @@
   --color-success: #7A8A6A;
   --color-warning: #B89A5F;
   --color-error:   #8A5A5A;
-  --color-info:    #8A9A85;
 
   /* Shadow & overlay */
   --shadow-md:       0 4px 12px rgba(0, 0, 0, 0.06);
   --shadow-lg:       0 8px 24px rgba(0, 0, 0, 0.08);
-  --overlay-dark:    rgba(42, 31, 26, 0.08);
+  --shadow-hover:    0 4px 16px rgba(164, 120, 100, 0.25);
+  --shadow-soft:     0 4px 16px rgba(164, 120, 100, 0.10);
+  --shadow-program-hover: 0 8px 28px rgba(164, 120, 100, 0.12);
+  --focus-ring:      0 0 0 3px rgba(164, 120, 100, 0.24);
+  --focus-ring-soft: 0 0 0 3px rgba(164, 120, 100, 0.12);
   --overlay-light:   rgba(164, 120, 100, 0.05);
-  --glow-subtle:     0 0 20px rgba(164, 120, 100, 0.10);
   --tracking-widest: 0.15em;
+
+  /* Kinetic + editorial headline sizing (Fraunces opsz 144) */
+  --kinetic-size:        clamp(2.6rem, 6.2vw, 5.25rem);
+  --kinetic-size-mobile: clamp(1.8rem, 7vw, 2.4rem);
+  --hero-headline-size:  clamp(2.4rem, 6.2vw, 5rem);
+  --hero-headline-long:  clamp(2rem, 4.5vw, 3.6rem);
 
   /* Dark section (used on select inset sections) */
   --bg-dark:                #0a0a0a;
@@ -116,13 +124,6 @@
     180deg,
     var(--bg-primary) 0%,
     color-mix(in srgb, var(--mocha-mousse) 3%, var(--bg-secondary)) 100%
-  );
-
-  /* Warm accent gradient — for pricing, featured, testimonial backgrounds */
-  --gradient-warm: linear-gradient(
-    135deg,
-    var(--bg-secondary) 0%,
-    color-mix(in srgb, var(--accent-secondary) 5%, var(--bg-primary)) 100%
   );
 
   /* Card depth gradient — subtle top-to-bottom tint */

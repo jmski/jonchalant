@@ -42,14 +42,14 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
   if (variant === 'footer') {
     if (state.submitted) {
       return (
-        <div className="site-footer-optin-inner">
-          <div className="site-footer-optin-success">
-            <span className="site-footer-optin-success-icon">✓</span>
+        <div className="jc-footer-optin-inner">
+          <div className="jc-footer-optin-success">
+            <span className="jc-footer-optin-success-icon">✓</span>
             {optIn?.successTitle && (
-              <p className="site-footer-optin-success-title">{optIn.successTitle}</p>
+              <p className="jc-footer-optin-success-title">{optIn.successTitle}</p>
             )}
             {optIn?.successBody && (
-              <p className="site-footer-optin-success-body">{optIn.successBody}</p>
+              <p className="jc-footer-optin-success-body">{optIn.successBody}</p>
             )}
           </div>
         </div>
@@ -57,21 +57,21 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
     }
 
     return (
-      <div className="site-footer-optin-inner">
-        <div className="site-footer-optin-copy">
+      <div className="jc-footer-optin-inner">
+        <div className="jc-footer-optin-copy">
           {optIn?.eyebrow && (
-            <span className="site-footer-optin-eyebrow">{optIn.eyebrow}</span>
+            <span className="jc-footer-optin-eyebrow">{optIn.eyebrow}</span>
           )}
           {optIn?.heading && (
-            <h3 className="site-footer-optin-title">{optIn.heading}</h3>
+            <h3 className="jc-footer-optin-title">{optIn.heading}</h3>
           )}
           {optIn?.description && (
-            <p className="site-footer-optin-description">{optIn.description}</p>
+            <p className="jc-footer-optin-description">{optIn.description}</p>
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="site-footer-optin-form" noValidate>
-          <div className="site-footer-optin-fields">
+        <form onSubmit={handleSubmit} className="jc-footer-optin-form" noValidate>
+          <div className="jc-footer-optin-fields">
             <input
               type="text"
               name="firstName"
@@ -80,7 +80,7 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
               placeholder="First name"
               required
               autoComplete="given-name"
-              className="site-footer-optin-input"
+              className="jc-footer-optin-input"
               disabled={state.isSubmitting}
             />
             <input
@@ -91,7 +91,7 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
               placeholder="your@email.com"
               required
               autoComplete="email"
-              className="site-footer-optin-input"
+              className="jc-footer-optin-input"
               disabled={state.isSubmitting}
             />
             <Button
@@ -102,7 +102,7 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
             </Button>
           </div>
           {state.error && (
-            <p className="site-footer-optin-error" role="alert">{state.error}</p>
+            <p className="jc-footer-optin-error" role="alert">{state.error}</p>
           )}
         </form>
       </div>

@@ -36,7 +36,7 @@ export default async function MarketingLayout({
 
   return (
     <>
-      <Navbar socialLinks={socialLinks} />
+      <Navbar />
       <main className="main-content" id="main-content">
         {children}
       </main>

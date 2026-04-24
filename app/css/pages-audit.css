@@ -880,8 +880,8 @@
    AUDIT — immersive reduced experience
    ============================================================ */
 
-body.audit-immersive-mode .navbar,
-body.audit-immersive-mode .site-footer {
+body.audit-immersive-mode .jc-nav,
+body.audit-immersive-mode .jc-footer {
   display: none;
 }
 
