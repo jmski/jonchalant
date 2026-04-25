@@ -45,6 +45,13 @@ When generating code, components, or copy:
 
 Full positioning reference: `design-notes/jonchalant-positioning.md`.
 
+**Design reference assets** (`design-notes/` folder):
+- `design-system.html` / `design-system.png` — rendered design system (tokens, typography, components)
+- `baseline/desktop/` — pre-refactor 1280px screenshots for 9 marketing pages
+- `baseline/mobile/` — pre-refactor 375px screenshots for 9 marketing pages
+- `phase-1-change-list.md` — Phase 1 planned UI changes
+- `tokens.css` / `fonts.css` — design token and font stack reference
+
 ---
 
 ## Component Architecture
