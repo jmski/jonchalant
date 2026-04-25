@@ -12,7 +12,7 @@ import type { Course } from '@/lib/types'
 export const metadata: Metadata = {
   title: "The Blueprint | Jonchalant",
   description: "The foundational movement curriculum behind Jonchalant. Beginner through advanced.",
-  keywords: "leadership courses, quiet command, executive presence, introvert leadership, coaching curriculum, online leadership training",
+  keywords: "ikigai courses, embodiment practice, four pillars, purpose-led work, coaching curriculum, online leadership training",
   openGraph: {
     title: "The Blueprint | Jonchalant",
     description: "The foundational movement curriculum behind Jonchalant. Beginner through advanced.",

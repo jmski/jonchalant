@@ -9,6 +9,7 @@ export { ImpactSection } from './home/impact';
 export { PortfolioPreview } from './home/portfolio-preview';
 export { WhyWorkTogether } from './home/why-work-together';
 export { WhyItWorks } from './home/why-it-works';
+export { FourPillars } from './home/four-pillars';
 export { HomeCTA } from './home/cta';
 
 // ─────────────── ABOUT PAGE SECTIONS ────────────────

@@ -8,10 +8,16 @@
  *
  * This script is idempotent: it uses deterministic _id values so re-running
  * will upsert (createOrReplace) rather than duplicate.
+ *
+ * Canonical content (description, philosophy, targetAudience) is read from
+ * design/canonical-content.json. To update positioning copy, edit that file —
+ * do NOT hardcode strings here.
  */
 
 import { createClient } from '@sanity/client'
 import * as dotenv from 'dotenv'
+import canonicalContent from '../design/canonical-content.json' with { type: 'json' }
+import { diffAndConfirm } from './lib/sanity-diff.js'
 
 dotenv.config({ path: '.env.local' })
 
@@ -60,12 +66,9 @@ const course = {
   _type: 'course' as const,
   title: 'The Foundation',
   slug: { _type: 'slug', current: 'the-foundation' },
-  description:
-    'A self-paced video course teaching executive presence through the lens of dance. 8 modules, 200+ hours of content. Built for introverts, busy professionals, and emerging leaders who want to command a room without performing.',
-  philosophy:
-    "Soft skills aren't soft — they're the hardest skills to teach because they live in the body, not in a textbook. Dance is the most direct way to develop presence, body control, active listening, improvisation, reciprocation, and tonality because dance is all of those things in motion. The Foundation doesn't teach you to dance. It uses dance as the vehicle to rewire how you show up — in meetings, on stage, in conversations, in life.",
-  targetAudience:
-    'Introverts, busy professionals, emerging leaders who want to command a room without performing.',
+  description: canonicalContent.foundationCourse.description,
+  philosophy: canonicalContent.foundationCourse.philosophy,
+  targetAudience: canonicalContent.foundationCourse.targetAudience,
   totalEstimatedHours: 213,
   difficulty: 'Beginner',
   estimatedDuration: '200+ hours',
@@ -448,6 +451,21 @@ const modules: ModuleDef[] = [
 
 async function seed() {
   console.log('🌱 Seeding The Foundation curriculum...\n')
+
+  // ── Pre-run diff: course-level canonical fields ───────────────────────────
+  const courseFields = ['description', 'philosophy', 'targetAudience']
+  const courseIntended = {
+    description: canonicalContent.foundationCourse.description,
+    philosophy: canonicalContent.foundationCourse.philosophy,
+    targetAudience: canonicalContent.foundationCourse.targetAudience,
+  }
+  console.log(`Checking course-level fields on ${COURSE_ID}:`)
+  const confirmed = await diffAndConfirm(client, COURSE_ID, courseFields, courseIntended)
+  if (!confirmed) {
+    console.log('Aborted.')
+    return
+  }
+  console.log()
 
   // ── Step 1: Create all documents WITHOUT cross-references ──────────────
   // Sanity validates references on write, so every referenced doc must exist

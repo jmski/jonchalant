@@ -504,15 +504,23 @@ export interface MovementPlan {
 
 // ── Home page ─────────────────────────────────────────────────────────────────
 
-export interface WhyItWorksCell {
-  _key: string
-  title: string
-  insight?: string
-  image?: SanityImage
-  size?: 'sm' | 'md' | 'lg' | 'tall' | 'wide'
+export interface HomePillarApplication {
+  _key?: string
+  who: string
+  body: string
+}
+
+export interface HomePillar {
+  _key?: string
+  number: string
+  name: string
+  definition: string
+  applications: HomePillarApplication[]
 }
 
 export interface HomePageContent {
+  pillarsHeadline?: string
+  pillars?: HomePillar[]
   heroEyebrow?: string
   heroHeadline?: string
   heroSubhead?: string
@@ -528,14 +536,14 @@ export interface HomePageContent {
   whyItWorksParagraph1?: string
   whyItWorksParagraph2?: string
   whyItWorksParagraph3?: string
-  whyItWorksBentoHeadline?: string
-  whyItWorksCells?: WhyItWorksCell[]
   testimonialsEyebrow?: string
   testimonialsHeading?: string
   ctaTitle?: string
   ctaDescription?: string
   ctaButtonText?: string
   ctaButtonHref?: string
+  meetJonHeading?: string
+  meetJonBody?: string
   meetJonImage?: SanityImage
 }
 

@@ -5,6 +5,7 @@ import { ScrollFade } from '@/components/animations'
 import { Button } from '@/components/ui/Button'
 import EnrollButton from '@/components/foundation/EnrollButton'
 import FAQ from '@/components/shared/faq/FAQ'
+import { EmailCapture } from '@/components/sections'
 import { getFoundationPageContent } from '@/lib/sanity'
 import { CourseSchema } from '@/lib/schema'
 import type { FAQItem } from '@/components/shared/faq/FAQ'
@@ -281,6 +282,14 @@ export default async function FoundationPage() {
             <FAQ items={FOUNDATION_FAQS} />
           </section>
         </SectionContent>
+      </SectionWrapper>
+
+      {/* ── Foundation Starter Guide opt-in ──────────────────────────────────── */}
+      <SectionWrapper variant="dark" className="section-wrapper--flush">
+        <EmailCapture
+          heading="Not ready to enroll? Get the starter guide."
+          subheading="One weekly essay on embodiment, presence, and the work you were meant for. No pitch. Unsubscribe anytime."
+        />
       </SectionWrapper>
 
       {/* ── Final CTA ─────────────────────────────────────────────────────────── */}

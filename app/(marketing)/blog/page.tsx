@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'The Archives | Jonchalant',
   description: 'Practical writing on presence, movement, and what it actually takes to stop disappearing in rooms. Articles on executive presence coaching for introverts and corporate leaders.',
-  keywords: 'executive presence, leadership coaching, quiet command, confidence, professional presence, introvert leadership, body language, nonverbal communication',
+  keywords: 'ikigai, purpose-led work, embodiment, presence, four circles, professional alignment, leadership, body language',
   openGraph: {
     title: 'The Archives | Jonchalant',
     description: 'Practical writing on presence, movement, and what it actually takes to stop disappearing in rooms.',

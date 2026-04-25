@@ -13,7 +13,13 @@
     "seed:dance-categories": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-dance-categories.ts",
     "seed:instagram-reels": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-instagram-reels.ts",
     "seed:placeholder": "npx ts-node --esm --project tsconfig.scripts.json scripts/seed-placeholder-content.ts",
-    "migrate:hero-fields": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-hero-fields.ts"
+    "migrate:hero-fields": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-hero-fields.ts",
+    "migrate:phase1-hero": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-phase1-hero.ts",
+    "migrate:phase1-pillars": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-phase1-pillars.ts",
+    "migrate:phase1-meet-jon": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-phase1-meet-jon.ts",
+    "migrate:remove-bento-fields": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-remove-bento-fields.ts",
+    "migrate:fix-cta-description": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-fix-cta-description.ts",
+    "build:design-system": "npx ts-node --esm --project tsconfig.scripts.json scripts/build-design-system.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.17.0",

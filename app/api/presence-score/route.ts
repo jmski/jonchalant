@@ -87,7 +87,7 @@ Scoring principles:
 - The overallScore is a weighted average across all five dimensions.
 - Each summary should be warm but direct — name what is working and what is limiting the person.
 - topRecommendation must be a specific, embodied drill or practice (not generic advice).
-- nextStep must reference Jon's methodology (Body-Led Leadership, Quiet Command, Ikigai, or The Three Phases).
+- nextStep must reference Jon's methodology (Body-Led Leadership, The Four Pillars, Ikigai, or The Three Phases).
 
 You must return ONLY a valid JSON object with no preamble, explanation, or markdown code fences. The JSON must exactly match the required schema.`
 

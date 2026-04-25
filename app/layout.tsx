@@ -24,20 +24,20 @@ export const metadata: Metadata = {
   // Individual pages should omit the "| Jonchalant" suffix from their own title strings.
   // title.default is used by pages with no metadata export (e.g. portal, login).
   title: {
-    default: "Jonchalant | Executive Presence Coaching for Introverts",
+    default: "Jonchalant | Find the Work You Were Meant For",
     template: "%s | Jonchalant",
   },
 
   description:
-    "Build executive presence and quiet command through body-aware leadership coaching. Transform your confidence with dance-based techniques designed for introverts and shy professionals.",
+    "Ikigai assessment and embodiment practice for professionals who are competent, in-demand, and quietly misaligned. Find the work you were meant for — then learn to inhabit it.",
   keywords: [
-    "leadership coaching for introverts",
-    "executive presence coaching",
-    "quiet command",
-    "confidence coaching",
-    "introvert leadership development",
-    "body-aware leadership",
-    "movement coaching",
+    "ikigai assessment",
+    "find your purpose",
+    "embodiment practice",
+    "corporate professionals",
+    "ikigai framework",
+    "four circles ikigai",
+    "purpose-driven work",
   ],
   authors: [{ name: "Jon", url: "https://jonchalant.com/about" }],
   creator: "Jon",
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Jonchalant",
     locale: "en_US",
-    title: "Jonchalant | Executive Presence Coaching for Introverts",
+    title: "Jonchalant | Find the Work You Were Meant For",
     description:
-      "Build executive presence and quiet command through body-aware coaching for introverts and shy professionals.",
+      "Ikigai assessment and embodiment practice for professionals who are competent, in-demand, and quietly misaligned.",
     url: "https://jonchalant.com",
     images: {
       url: "/social/og-home-1200x630.png",
@@ -79,9 +79,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@jonchalant",
     creator: "@jonchalant",
-    title: "Jonchalant | Executive Presence Coaching for Introverts",
+    title: "Jonchalant | Find the Work You Were Meant For",
     description:
-      "Build executive presence and quiet command through body-aware coaching for introverts.",
+      "Ikigai assessment and embodiment practice. Find the work you were meant for — then learn to inhabit it.",
     images: ["/social/og-home-1200x630.png"],
   },
 };

@@ -53,6 +53,9 @@ whether the headline and subhead are CMS-driven or hardcoded in
 `app/(marketing)/page.tsx`. If CMS-driven, this is a Studio edit, no
 code changes. If hardcoded, scoped Claude Code prompt.
 
+**Notes:**
+hero shipped correctly after an initial mis-ship caused by stale seed script. Worth documenting both the original mis-ship and the corrective fix, so the artifact reflects what actually happened.
+
 **Verification:**
 - 1280px and 375px screenshots, before/after
 - Confirm the italic [em]work[/em] anchor renders in `--mocha-mousse` (cream
@@ -187,8 +190,7 @@ every Tuesday") is the correct cold-lead opt-in.
 
 ## P2 — Resolve audit/assessment naming
 
-**Change:** Pick one canonical name for the entry-funnel asset and use
-it consistently across the site.
+**Change:** Two distinct products with overlapping naming, cleaned up.
 
 **Current state:** Live home page uses `START WITH YOUR FREE AUDIT` in
 the closing CTA. Other pages may use "assessment," "ikigai assessment,"
@@ -357,3 +359,7 @@ Phase 1 is complete when:
 When closeout criteria are met, capture full-page 1280px and 375px
 screenshots and update this document with a "Phase 1 complete" section
 summarizing what landed and what was deferred.
+
+## Phase 1 surfaced findings
+
+Section listing: seed script refactor (now done) stale-positioning sweep (10_ files), canonical-content.json introduced, scripts grep clean. 

@@ -7,7 +7,7 @@ import { getAboutPageContent } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "About Jon | Leadership Coach & Choreographer",
-  description: "Learn how Jon combines professional dance choreography with leadership development to help introverts build Quiet Command — executive presence without performance.",
+  description: "Jon spent a decade as a professional choreographer before realising the same skills that make a dancer command a stage transfer to every high-stakes professional moment.",
   keywords: "leadership coach introverts, choreographer, body-aware leadership, executive presence coach, introvert strengths, movement-based coaching",
   alternates: {
     canonical: 'https://jonchalant.com/about',
@@ -135,15 +135,15 @@ export default async function About() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <CTA
-              title={aboutContent?.closingHeadline ?? "Your Presence Matters. Let's Build It."}
-              sub={aboutContent?.closingBody ?? "You're not broken. I'm here to show you that the version of yourself you've been holding back — that's not your weakness. That's your foundation."}
-              description={aboutContent?.closingBody ?? "You're not broken. I'm here to show you that the version of yourself you've been holding back — that's not your weakness. That's your foundation."}
-              buttonText={aboutContent?.ctaButtonText ?? "Book Your Free Presence Audit"}
-              buttonLink="/audit"
+              title={aboutContent?.closingHeadline ?? "Find the work you were meant for."}
+              sub={aboutContent?.closingBody ?? "Start with eight questions. They take ten minutes. If the results tell you something useful, keep going."}
+              description={aboutContent?.closingBody ?? "Start with eight questions. They take ten minutes. If the results tell you something useful, keep going."}
+              buttonText={aboutContent?.ctaButtonText ?? "Discover Your Ikigai"}
+              buttonLink="/ikigai"
               previewItems={[
-                { number: '01', text: 'A 7-question audit you can do in under 5 minutes' },
-                { number: '02', text: 'Your presence score with honest context — no sales pitch' },
-                { number: '03', text: 'A personal follow-up from me if you want to go deeper' },
+                { number: '01', text: 'Eight questions, ten minutes — ungated and free' },
+                { number: '02', text: 'Results identify which of the four ikigai circles are strong or missing' },
+                { number: '03', text: 'Saves to your portal if you have an account' },
               ]}
             />
           </SectionContent>

@@ -8,10 +8,16 @@
  *
  * Idempotent: uses deterministic _id values so re-running will upsert
  * (createOrReplace) without creating duplicates.
+ *
+ * Canonical content (course description, subtitle, lesson summaries) is read
+ * from design/canonical-content.json. To update positioning copy, edit that
+ * file — do NOT hardcode strings here.
  */
 
 import { createClient } from '@sanity/client'
 import * as dotenv from 'dotenv'
+import canonicalContent from '../design/canonical-content.json' with { type: 'json' }
+import { diffAndConfirm } from './lib/sanity-diff.js'
 
 dotenv.config({ path: '.env.local' })
 
@@ -29,6 +35,11 @@ const client = createClient({
   useCdn: false,
   token,
 })
+
+// ── Canonical summaries indexed by lesson number ─────────────────────────────
+const lessonSummaries: Record<number, string> = Object.fromEntries(
+  canonicalContent.fourCirclesCourse.lessons.map((l) => [l.number, l.summary])
+)
 
 // ── Curriculum data ───────────────────────────────────────────────────────────
 
@@ -52,7 +63,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'why-purpose-matters',
     difficultyTier: 'basic',
     ikigaiQuadrants: ['passion', 'mission', 'vocation', 'profession'],
-    summary: 'An introduction to the ikigai framework and why most people only inhabit one or two circles — and what that costs them.',
+    summary: lessonSummaries[1],
   },
   {
     number: 2,
@@ -60,7 +71,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'passion-alone',
     difficultyTier: 'basic',
     ikigaiQuadrants: ['passion'],
-    summary: 'What happens when you love what you do but the world doesn\'t need it or pay for it — the anatomy of delight without direction.',
+    summary: lessonSummaries[2],
   },
   {
     number: 3,
@@ -68,7 +79,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'mission-alone',
     difficultyTier: 'basic',
     ikigaiQuadrants: ['mission'],
-    summary: 'The trap of doing good work for the world while ignoring whether it energises you or sustains you financially.',
+    summary: lessonSummaries[3],
   },
   {
     number: 4,
@@ -76,7 +87,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'vocation-alone',
     difficultyTier: 'basic',
     ikigaiQuadrants: ['vocation'],
-    summary: 'When you\'re skilled and paid but disconnected from meaning — the quiet hollowness of competence without purpose.',
+    summary: lessonSummaries[4],
   },
   // Challenging (5–8)
   {
@@ -85,7 +96,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'profession-alone',
     difficultyTier: 'challenging',
     ikigaiQuadrants: ['profession'],
-    summary: 'How a career built purely around what the world pays for becomes a gilded cage — and how to recognise the signs early.',
+    summary: lessonSummaries[5],
   },
   {
     number: 6,
@@ -93,7 +104,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'the-six-pairings',
     difficultyTier: 'challenging',
     ikigaiQuadrants: ['passion', 'mission', 'vocation', 'profession'],
-    summary: 'A systematic look at every two-circle overlap and the specific tension each pairing creates in real careers.',
+    summary: lessonSummaries[6],
   },
   {
     number: 7,
@@ -101,7 +112,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'delight-but-no-wealth',
     difficultyTier: 'challenging',
     ikigaiQuadrants: ['passion', 'mission', 'vocation'],
-    summary: 'The three-circle pattern where passion, mission, and vocation converge but profession is missing — what it feels like and how to close the gap.',
+    summary: lessonSummaries[7],
   },
   {
     number: 8,
@@ -109,7 +120,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'delight-but-uncertain',
     difficultyTier: 'challenging',
     ikigaiQuadrants: ['passion', 'mission', 'profession'],
-    summary: 'When you love the work, the world needs it, and you\'re paid for it — but you\'re not sure you\'re actually good at it.',
+    summary: lessonSummaries[8],
   },
   // Hardest (9–12)
   {
@@ -118,7 +129,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'comfortable-but-empty',
     difficultyTier: 'hardest',
     ikigaiQuadrants: ['passion', 'vocation', 'profession'],
-    summary: 'The pattern most difficult to leave: you\'re good, paid, and somewhat interested — but you\'ve lost the sense of contributing to something larger.',
+    summary: lessonSummaries[9],
   },
   {
     number: 10,
@@ -126,7 +137,7 @@ const LESSONS: LessonSpec[] = [
     slug: 'useful-but-unexcited',
     difficultyTier: 'hardest',
     ikigaiQuadrants: ['mission', 'vocation', 'profession'],
-    summary: 'Doing important, well-compensated work you\'re skilled at — but with zero spark. The pattern that looks fine from the outside and feels hollow from within.',
+    summary: lessonSummaries[10],
   },
   {
     number: 11,
@@ -134,15 +145,15 @@ const LESSONS: LessonSpec[] = [
     slug: 'ikigai-when-it-happens',
     difficultyTier: 'hardest',
     ikigaiQuadrants: ['passion', 'mission', 'vocation', 'profession'],
-    summary: 'What all four circles overlapping actually feels like — and why it\'s less a destination than a practice of continuous realignment.',
+    summary: lessonSummaries[11],
   },
   {
     number: 12,
-    title: 'Why Knowing Isn\'t Enough',
+    title: "Why Knowing Isn't Enough",
     slug: 'why-knowing-isnt-enough',
     difficultyTier: 'hardest',
     ikigaiQuadrants: ['passion', 'mission', 'vocation', 'profession'],
-    summary: 'The transition lesson: insight without embodiment changes nothing. How executive presence training turns ikigai awareness into visible leadership.',
+    summary: lessonSummaries[12],
   },
 ]
 
@@ -177,14 +188,13 @@ function buildCourseDoc(lessonRefs: { _key: string; _type: 'reference'; _ref: st
     _type: 'course',
     title: 'The Four Circles',
     slug: { _type: 'slug', current: 'four-circles' },
-    subtitle: 'A free, self-paced course on the ikigai framework',
+    subtitle: canonicalContent.fourCirclesCourse.subtitle,
     courseType: 'free-gated',
     estimatedDuration: '12 weeks',
     isFeatured: false,
     // difficulty required by existing schema — use Beginner as neutral placeholder
     difficulty: 'Beginner',
-    description:
-      'Twelve lessons walking through the ikigai framework — passion, mission, vocation, and profession — and what it means for how you show up as a leader.',
+    description: canonicalContent.fourCirclesCourse.description,
     order: 10,
     lessons: lessonRefs,
   }
@@ -194,6 +204,20 @@ function buildCourseDoc(lessonRefs: { _key: string; _type: 'reference'; _ref: st
 
 async function seed() {
   console.log('Seeding Four Circles course into Sanity…')
+
+  // ── Pre-run diff: course-level canonical fields ───────────────────────────
+  const courseFields = ['description', 'subtitle']
+  const courseIntended = {
+    description: canonicalContent.fourCirclesCourse.description,
+    subtitle: canonicalContent.fourCirclesCourse.subtitle,
+  }
+  console.log(`\nChecking course-level fields on ${COURSE_ID}:`)
+  const confirmed = await diffAndConfirm(client, COURSE_ID, courseFields, courseIntended)
+  if (!confirmed) {
+    console.log('Aborted.')
+    return
+  }
+  console.log()
 
   const transaction = client.transaction()
 

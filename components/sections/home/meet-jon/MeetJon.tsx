@@ -19,8 +19,8 @@ interface MeetJonProps {
 }
 
 export function MeetJon({
-  heading = 'Meet Jon',
-  body = 'Jon is an executive presence coach who spent years studying movement, embodiment, and communication to develop a body-aware approach to leadership. He works with introverts and quiet professionals who want to lead authentically — without performing confidence they don\'t feel.',
+  heading = 'I learned to lead because the lesson plan required it.',
+  body = 'A decade of professional choreography taught me that presence isn\'t about being loud — it\'s about being intentional. That insight transfers. Not just to dance. To the meeting you\'re dreading, the pitch you\'ve over-rehearsed, the role that fits your skills but not your life.',
   linkText = 'Read the full story',
   image,
 }: MeetJonProps) {

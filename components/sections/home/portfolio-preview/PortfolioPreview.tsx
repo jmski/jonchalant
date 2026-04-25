@@ -34,7 +34,7 @@ export function PortfolioPreview({
     },
     {
       title: 'Social Skill Lessons',
-      description: 'Structured frameworks for building Quiet Command and professional presence',
+      description: 'Structured frameworks for the four pillars — Grounding, Energy, Flow, Command',
       href: '/lessons',
       count: 'Master Classes',
       metrics: [

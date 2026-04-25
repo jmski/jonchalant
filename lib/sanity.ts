@@ -417,18 +417,16 @@ export async function getHomePageContent() {
     ctaDescription,
     ctaButtonText,
     ctaButtonHref,
+    meetJonHeading,
+    meetJonBody,
     meetJonImage { asset->{ _id, url }, alt, crop, hotspot },
-    whyItWorksBentoHeadline,
-    whyItWorksCells[] {
+    pillarsHeadline,
+    pillars[] {
       _key,
-      title,
-      insight,
-      image {
-        asset->{ _id, url, metadata { dimensions { width, height } } },
-        hotspot,
-        crop
-      },
-      size
+      number,
+      name,
+      definition,
+      applications[] { _key, who, body }
     }
   }`
   return await client.fetch(query)

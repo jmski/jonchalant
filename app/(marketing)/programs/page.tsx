@@ -16,7 +16,7 @@ import type { FAQItem } from "@/components/shared/faq/FAQ";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Coaching Programs | Executive Presence & Quiet Command",
+  title: "Coaching Programs | Jonchalant",
   description: "Three ways to build executive presence with Jon. Self-paced course, guided program, or 1-on-1 coaching — all rooted in physical presence and body-aware leadership.",
   alternates: {
     canonical: 'https://jonchalant.com/programs',
@@ -74,7 +74,7 @@ export default async function Programs() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(CourseSchema({
-            name: page?.heroHeadline ?? 'Quiet Command Coaching Programs',
+            name: page?.heroHeadline ?? 'Jonchalant Coaching Programs',
             description: page?.heroSubheading ?? 'Executive presence coaching for introverts — self-paced course, guided program, and 1-on-1 coaching rooted in body-aware leadership.',
           })),
         }}

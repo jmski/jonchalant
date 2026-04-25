@@ -1,0 +1,125 @@
+{
+  "_comment": "Canonical content strings. Single source of truth for any code or script that needs to write content to Sanity. To update content, edit this file, then run the relevant seed or migrate script. Do NOT hardcode canonical strings in seed scripts — read from this file.",
+
+  "metadata": {
+    "siteTitle": "Find the Work You Were Meant For | Jonchalant",
+    "siteDescription": "Ikigai assessment and embodiment practice for professionals who are competent, in-demand, and quietly misaligned. Find the work you were meant for — then learn to inhabit it."
+  },
+
+  "homePage": {
+    "hero": {
+      "eyebrow": "Ikigai · the map before the practice",
+      "headline": "Most people are in the right industry. {{Wrong}} role.",
+      "subhead": "I help professionals find the work they were meant for, and learn to inhabit it. It starts with eight honest questions.",
+      "primaryCtaLabel": "Discover Your Ikigai",
+      "primaryCtaHref": "/ikigai"
+    },
+    "meetJon": {
+      "heading": "I learned to lead because the lesson plan required it.",
+      "body": "A decade of professional choreography taught me that presence isn't about being loud — it's about being intentional. That insight transfers. Not just to dance. To the meeting you're dreading, the pitch you've over-rehearsed, the role that fits your skills but not your life."
+    },
+    "pillars": {
+      "headline": "The fundamentals are the same. The medium is yours to choose.",
+      "items": [
+        {
+          "number": "Pillar 01",
+          "name": "Grounding",
+          "definition": "The capacity to find your centre before you move.",
+          "applications": [
+            { "who": "A dancer", "body": "finds it before the first step. Without it, every movement after is compensating." },
+            { "who": "A leader", "body": "finds it before they speak. Without it, the room reads the uncertainty before the words land." },
+            { "who": "A writer", "body": "finds it before the first sentence. Without it, the page fights back." }
+          ]
+        },
+        {
+          "number": "Pillar 02",
+          "name": "Energy",
+          "definition": "Calibrating your presence to the room.",
+          "applications": [
+            { "who": "A performer", "body": "reads the audience and adjusts — not performing harder, performing precisely." },
+            { "who": "A salesperson", "body": "reads the client and adjusts — not louder, more matched." },
+            { "who": "Anyone", "body": "managing their own output learns to spend energy where it moves the work, not where it feels busy." }
+          ]
+        },
+        {
+          "number": "Pillar 03",
+          "name": "Flow",
+          "definition": "Moving between rigid structure and live response.",
+          "applications": [
+            { "who": "Dancers", "body": "drill choreography until they can forget it. Then they can actually dance it." },
+            { "who": "Leaders", "body": "prepare the message until they can leave it. Then they can actually have the conversation." },
+            { "who": "Professionals", "body": "learn when to follow the plan and when to abandon it — in real time, without panicking." }
+          ]
+        },
+        {
+          "number": "Pillar 04",
+          "name": "Command",
+          "definition": "Presence that carries authority without force.",
+          "applications": [
+            { "who": "Quiet command on stage.", "body": "The dancer who doesn't have to chase attention." },
+            { "who": "Quiet command in a meeting.", "body": "The person who speaks less and shifts the room more." },
+            { "who": "Quiet command in your own life.", "body": "Deciding what you're here for, and behaving like someone who knows." }
+          ]
+        }
+      ]
+    },
+    "closingCta": {
+      "title": "Find the work you were meant for.",
+      "description": "Start with the assessment. It's free. It takes ten minutes. If it tells you something useful, keep going.",
+      "buttonText": "Discover Your Ikigai",
+      "buttonHref": "/ikigai"
+    }
+  },
+
+  "caseStudies": [
+    {
+      "title": "From Overlooked to Promoted",
+      "clientName": "Marcus T.",
+      "industry": "Tech / Product Management",
+      "challenge": "Led high-impact projects but was consistently passed over for promotion. Senior leadership registered his output but not his presence — he blended into the background in rooms full of louder voices.",
+      "solution": "Eight weeks of presence work: entry posture, vocal pacing, and physical grounding before high-stakes meetings. We rebuilt how he occupied space before he said a word.",
+      "results": [
+        "Promoted to Senior PM within 10 weeks of completing the program",
+        "Now facilitates quarterly leadership offsites for his division",
+        "Describes the shift as \"people finally hear me when I speak\""
+      ]
+    },
+    {
+      "title": "Speaking Up in the Room",
+      "clientName": "Diana K.",
+      "industry": "Finance / Director",
+      "challenge": "Technically strong and consistently high-rated on performance reviews, but physically disappeared in rooms full of louder personalities. Avoided speaking in group settings unless directly asked.",
+      "solution": "Focus on spatial ownership and deliberate stillness. Practicing expansive posture before board meetings and learning to hold eye contact without shrinking.",
+      "results": [
+        "Now opens quarterly finance reviews for her department",
+        "Invited to represent her team at two external industry panels",
+        "Reports \"I stopped apologising for taking up space\""
+      ]
+    }
+  ],
+
+  "foundationCourse": {
+    "description": "A self-paced course teaching embodiment through the lens of dance. 8 modules, 200+ hours of content. For professionals who have found their ikigai and are ready to learn to inhabit it.",
+    "philosophy": "Soft skills aren't soft — they're the hardest skills to teach because they live in the body, not in a textbook. Dance is the most direct way to develop Grounding, Energy, Flow, and Command because dance is all of those things in motion. The Foundation doesn't teach you to dance. It uses dance as the vehicle to rewire how you show up — in meetings, on stage, in conversations, in life.",
+    "targetAudience": "Professionals who are competent, in-demand, and quietly misaligned — ready to embody the work they were meant for."
+  },
+
+  "fourCirclesCourse": {
+    "description": "Twelve lessons walking through the ikigai framework — passion, mission, vocation, and profession — and what it means for how you show up as a leader.",
+    "subtitle": "A free, self-paced course on the ikigai framework",
+    "lessons": [
+      { "number": 1,  "summary": "An introduction to the ikigai framework and why most people only inhabit one or two circles — and what that costs them." },
+      { "number": 2,  "summary": "What happens when you love what you do but the world doesn't need it or pay for it — the anatomy of delight without direction." },
+      { "number": 3,  "summary": "The trap of doing good work for the world while ignoring whether it energises you or sustains you financially." },
+      { "number": 4,  "summary": "When you're skilled and paid but disconnected from meaning — the quiet hollowness of competence without purpose." },
+      { "number": 5,  "summary": "How a career built purely around what the world pays for becomes a gilded cage — and how to recognise the signs early." },
+      { "number": 6,  "summary": "A systematic look at every two-circle overlap and the specific tension each pairing creates in real careers." },
+      { "number": 7,  "summary": "The three-circle pattern where passion, mission, and vocation converge but profession is missing — what it feels like and how to close the gap." },
+      { "number": 8,  "summary": "When you love the work, the world needs it, and you're paid for it — but you're not sure you're actually good at it." },
+      { "number": 9,  "summary": "The pattern most difficult to leave: you're good, paid, and somewhat interested — but you've lost the sense of contributing to something larger." },
+      { "number": 10, "summary": "Doing important, well-compensated work you're skilled at — but with zero spark. The pattern that looks fine from the outside and feels hollow from within." },
+      { "number": 11, "summary": "What all four circles overlapping actually feels like — and why it's less a destination than a practice of continuous realignment." },
+      { "number": 12, "summary": "The transition lesson: insight without embodiment changes nothing. How executive presence training turns ikigai awareness into visible leadership." }
+    ]
+  }
+}
