@@ -185,6 +185,26 @@ New card → `cards.css` | New section → `sections.css` | Page-specific → `p
 
 ---
 
+## Design Notes (`design-notes/`)
+
+A folder of design reference assets. Do not delete or move these — they are used for visual regression checks and design system reference during Phase 1 refactoring.
+
+| File / Folder | Purpose |
+|---|---|
+| `design-system.html` | Live HTML render of the full design system (tokens, typography, components) |
+| `design-system.png` | Static screenshot of the design system render |
+| `baseline/desktop/` | Pre-Phase-1 desktop screenshots (1280px) for 9 marketing pages |
+| `baseline/mobile/` | Pre-Phase-1 mobile screenshots (375px) for 9 marketing pages |
+| `phase-1-change-list.md` | Planned Phase 1 UI changes |
+| `tokens.css` | Design token reference (mirrors `variables.css`) |
+| `fonts.css` | Font stack reference |
+| `SKILL.md` | Design-system skill file for Copilot |
+| `README.md` | Design notes overview |
+
+Baseline screenshots cover: `home`, `about`, `blog`, `contact`, `dance`, `foundation`, `ikigai`, `lessons`, `programs` — at both 1280px and 375px.
+
+---
+
 ## Key Files
 
 | File | Purpose |
