@@ -78,6 +78,13 @@
   margin-bottom: 0.5rem;
 }
 
+/* Kinetic anchor word — matches .jc-kinetic em rule (--mocha-mousse + WONK 1) */
+.foundation-hero-headline em {
+  font-style: italic;
+  color: var(--mocha-mousse);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
 .foundation-hero-subheadline {
   font-family: var(--font-headline);
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);

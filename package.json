@@ -19,6 +19,7 @@
     "migrate:phase1-meet-jon": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-phase1-meet-jon.ts",
     "migrate:remove-bento-fields": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-remove-bento-fields.ts",
     "migrate:fix-cta-description": "npx ts-node --esm --project tsconfig.scripts.json scripts/migrate-fix-cta-description.ts",
+    "migrate:phase3-foundation-hero": "npx tsx scripts/migrate-phase3-foundation-hero.ts",
     "build:design-system": "npx ts-node --esm --project tsconfig.scripts.json scripts/build-design-system.ts"
   },
   "dependencies": {

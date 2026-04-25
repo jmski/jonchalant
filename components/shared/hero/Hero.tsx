@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { renderHeadline } from '@/lib/render-headline';
 
 type HeroCTA = {
   label: string;
@@ -31,27 +32,7 @@ export default function Hero({
 }: HeroProps) {
   // Parse {{anchor}} — only the first match becomes an italic anchor word.
   // Additional {{...}} markers are rendered as plain text (stripped of braces).
-  const renderHeadline = () => {
-    const anchorPattern = /\{\{(.+?)\}\}/;
-    const firstMatch = anchorPattern.exec(headline);
-
-    if (!firstMatch) {
-      return headline;
-    }
-
-    const [fullMatch, anchorWord] = firstMatch;
-    const splitIndex = headline.indexOf(fullMatch);
-    const before = headline.slice(0, splitIndex);
-    const after = headline.slice(splitIndex + fullMatch.length).replace(/\{\{(.+?)\}\}/g, '$1');
-
-    return (
-      <>
-        {before}
-        <em>{anchorWord}</em>
-        {after}
-      </>
-    );
-  };
+  const renderedHeadline = renderHeadline(headline);
 
   return (
     <section className={`hero hero--${align}`} data-orbs={showOrbs}>
@@ -63,7 +44,7 @@ export default function Hero({
       )}
       <div className="hero-inner">
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-        <h1 className="headline-display">{renderHeadline()}</h1>
+        <h1 className="headline-display">{renderedHeadline}</h1>
         {subhead && <p className="hero-sub">{subhead}</p>}
         <div className="hero-actions">
           <Link href={primaryCta.href} className="btn btn-primary">

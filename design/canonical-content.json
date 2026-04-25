@@ -104,6 +104,27 @@
     "targetAudience": "Professionals who are competent, in-demand, and quietly misaligned — ready to embody the work they were meant for."
   },
 
+  "foundationPage": {
+    "hero": {
+      "eyebrow": "THE FOUNDATION · 8 WEEKS · MEDIUM-AGNOSTIC EMBODIMENT",
+      "headline": "Knowing the work isn't the same as {{inhabiting}} it.",
+      "subhead": "Eight weeks of body-first practice in Grounding, Energy, Flow, and Command. Your medium. Your role.",
+      "body": "A decade of choreography taught me this: insight lives in the mind. Presence lives in the body. If you've named the work you were meant for, Foundation is where you build the practice that lets you inhabit it.",
+      "primaryCtaLabel": "ENROLL — STARTING AT $197",
+      "secondaryCtaLabel": "SEE WHAT'S INSIDE"
+    },
+    "qualifier": {
+      "eyebrow": "Who this is for",
+      "headline": "If you've named it but haven't yet inhabited it",
+      "items": [
+        "You've identified the work, but inhabiting it feels like a stretch.",
+        "You can articulate who you want to become, but you haven't built the body for it yet.",
+        "You've outgrown your old role faster than you've grown into the new one.",
+        "You know what to say. You need to learn how to be when you're saying it."
+      ]
+    }
+  },
+
   "fourCirclesCourse": {
     "description": "Twelve lessons walking through the ikigai framework — passion, mission, vocation, and profession — and what it means for how you show up as a leader.",
     "subtitle": "A free, self-paced course on the ikigai framework",

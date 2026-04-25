@@ -8,17 +8,18 @@ import FAQ from '@/components/shared/faq/FAQ'
 import { EmailCapture } from '@/components/sections'
 import { getFoundationPageContent } from '@/lib/sanity'
 import { CourseSchema } from '@/lib/schema'
+import { renderHeadline } from '@/lib/render-headline'
 import type { FAQItem } from '@/components/shared/faq/FAQ'
 
 export const metadata: Metadata = {
   title: 'The Foundation | Jonchalant',
-  description: 'A self-paced video course teaching executive presence through dance. 8 modules, 200+ hours. Built for introverts who want to command a room without performing.',
+  description: 'An 8-week embodiment course built through dance, transferable to any medium. For professionals who have named the work they were meant for and are ready to inhabit it.',
   alternates: {
     canonical: 'https://jonchalant.com/foundation',
   },
   openGraph: {
     title: 'The Foundation | Jonchalant',
-    description: 'A self-paced video course teaching executive presence through dance. 8 modules, 200+ hours. Built for introverts.',
+    description: 'An 8-week embodiment course built through dance. Grounding, Energy, Flow, Command — medium-agnostic.',
     type: 'website',
     url: 'https://jonchalant.com/foundation',
     siteName: 'Jonchalant',
@@ -37,11 +38,10 @@ const FALLBACK_MODULES = [
 ]
 
 const FALLBACK_WHO_FOR = [
-  'You know your material but lose it when the room is watching.',
-  'You\'re seen as "quiet" or "reserved" — not leadership material.',
-  'You speak clearly in 1:1s but freeze in groups or big meetings.',
-  'You overprepare and still feel shaky when it counts.',
-  'You want to project confidence without becoming someone else.',
+  "You've identified the work, but inhabiting it feels like a stretch.",
+  "You can articulate who you want to become, but you haven't built the body for it yet.",
+  "You've outgrown your old role faster than you've grown into the new one.",
+  "You know what to say. You need to learn how to be when you're saying it.",
 ]
 
 const FALLBACK_HOW_IT_WORKS = [
@@ -150,13 +150,13 @@ export default async function FoundationPage() {
         <SectionContent>
           <section className="foundation-hero">
             <div className="foundation-hero-left">
-              <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? 'Self-Paced Course · 8 Modules'}</p>
-              <h1 className="foundation-hero-headline">{content?.heroHeadline ?? 'The Foundation'}</h1>
+              <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? 'THE FOUNDATION · 8 WEEKS · MEDIUM-AGNOSTIC EMBODIMENT'}</p>
+              <h1 className="foundation-hero-headline">{renderHeadline(content?.heroHeadline ?? "Knowing the work isn't the same as {{inhabiting}} it.")}</h1>
               <p className="foundation-hero-subheadline">
-                {content?.heroSubheadline ?? 'Executive presence for people who think before they speak.'}
+                {content?.heroSubheadline ?? 'Eight weeks of body-first practice in Grounding, Energy, Flow, and Command. Your medium. Your role.'}
               </p>
               <p className="foundation-hero-body">
-                {content?.heroBody ?? 'A decade of professional choreography taught me that presence isn\'t about being loud. It\'s about being intentional. The Foundation is where that insight becomes a skill.'}
+                {content?.heroBody ?? "A decade of choreography taught me this: insight lives in the mind. Presence lives in the body. If you've named the work you were meant for, Foundation is where you build the practice that lets you inhabit it."}
               </p>
               <div className="foundation-hero-actions">
                 <Button as="link" href="#pricing">
@@ -170,7 +170,7 @@ export default async function FoundationPage() {
             </div>
             <div className="foundation-hero-right">
               <p className="foundation-section-eyebrow">{content?.whoEyebrow ?? 'Who this is for'}</p>
-              <h2 className="foundation-hero-who-title">{content?.whoTitle ?? 'You already have the substance. This is about the signal.'}</h2>
+              <h2 className="foundation-hero-who-title">{content?.whoTitle ?? "If you've named it but haven't yet inhabited it"}</h2>
               <ul className="foundation-who-list">
                 {whoItems.map((item: string, i: number) => (
                   <li key={i} className="foundation-who-item">
