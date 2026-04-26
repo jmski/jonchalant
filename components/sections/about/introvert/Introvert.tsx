@@ -1,4 +1,3 @@
-import { TextLink } from "@/components/typography";
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface IntrovertProps {
@@ -20,14 +19,6 @@ export function Introvert({ traits = [] }: IntrovertProps) {
 
         <p className="about-introvert-paragraph">
           Every trait that makes you feel &ldquo;too quiet&rdquo; or &ldquo;not enough&rdquo; in the room is actually signal — of a leader who thinks clearly, builds trust slowly but deeply, and doesn&apos;t perform authority. That&apos;s rare. That&apos;s valuable. That&apos;s what we work with.
-        </p>
-
-        <p className="about-introvert-cta-text">
-          See how these principles show up in movement in my{' '}
-          <TextLink href="/dance">
-            choreography portfolio
-          </TextLink>
-          .
         </p>
       </div>
 

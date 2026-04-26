@@ -850,8 +850,7 @@
    ENHANCED CARD
    ────────────────────────────────────────────────────────────────────────────
    Shared interactive card (image + overlay + hover arrow). Used by
-   BlogCard, CaseStudyCard, LessonCard, DanceCard, and admin page. Not
-   dance-specific despite the legacy naming.
+   BlogCard, CaseStudyCard, LessonCard, and admin page.
 */
 
 .card-enhanced {
@@ -1118,14 +1117,30 @@
   object-fit: cover;
 }
 
+/* LessonCard — image fallback */
+/* Renders a styled gradient placeholder with a decorative symbol when no
+   thumbnail is available. Only affects cards where thumbnail is null/undefined. */
 .course-card-thumbnail-placeholder {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(
     135deg,
-    var(--bg-tertiary) 0%,
-    var(--bg-secondary) 100%
+    var(--bg-secondary) 0%,
+    color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary)) 100%
   );
+}
+
+.course-card-thumbnail-placeholder-symbol {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  color: var(--border-color);
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  opacity: 0.6;
+  line-height: 1;
+  user-select: none;
 }
 
 .course-card-body {

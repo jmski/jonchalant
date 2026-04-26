@@ -22,7 +22,6 @@ const MOBILE_LINKS: Array<{ label: string; href: string; emphasis?: boolean }> =
   { label: 'The Foundation', href: '/foundation' },
   { label: 'Lessons', href: '/lessons' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Dance', href: '/dance' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];

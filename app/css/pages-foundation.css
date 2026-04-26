@@ -115,6 +115,18 @@
   color: var(--text-tertiary);
 }
 
+.foundation-onramp {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding-bottom: 2rem;
+}
+
+.foundation-onramp a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ── Module list ── */
 .foundation-inside {
   padding: 2rem 0 0;
@@ -170,10 +182,11 @@
 }
 
 .foundation-module-meta {
-  font-size: 0.8125rem;
+  font-size: 0.6875rem;
   color: var(--text-tertiary, #888);
   margin: 0.375rem 0 0;
   letter-spacing: 0.01em;
+  opacity: 0.75;
 }
 
 /* ── Who it's for ── */
@@ -282,7 +295,9 @@
 
 .foundation-pricing-card--primary {
   border-color: var(--accent-primary);
+  border-top: 3px solid var(--mocha-mousse);
   background: color-mix(in srgb, var(--accent-primary) 4%, var(--bg-primary));
+  box-shadow: 0 4px 24px rgba(164, 120, 100, 0.15);
 }
 
 .foundation-pricing-badge {

@@ -135,7 +135,7 @@ export default async function Home() {
         )}
 
         {/* 7. MEET JON */}
-        <SectionWrapper variant="tertiary" style={{ background: 'var(--bg-warm)' }}>
+        <SectionWrapper variant="secondary">
           <SectionContent>
             <ScrollFade>
               <MeetJon

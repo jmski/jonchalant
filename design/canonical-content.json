@@ -100,7 +100,7 @@
 
   "foundationCourse": {
     "description": "A self-paced course teaching embodiment through the lens of dance. 8 modules, 200+ hours of content. For professionals who have found their ikigai and are ready to learn to inhabit it.",
-    "philosophy": "Soft skills aren't soft — they're the hardest skills to teach because they live in the body, not in a textbook. Dance is the most direct way to develop Grounding, Energy, Flow, and Command because dance is all of those things in motion. The Foundation doesn't teach you to dance. It uses dance as the vehicle to rewire how you show up — in meetings, on stage, in conversations, in life.",
+    "philosophy": "Insight lives in the mind. Presence lives in the body. Most training stops at the first one. The Foundation starts at the second — using professional dance training to develop Grounding, Energy, Flow, and Command for the work that's actually in front of you. It doesn't teach you to dance. It uses dance as the shortest route to the thing that can't be read about or listened to.",
     "targetAudience": "Professionals who are competent, in-demand, and quietly misaligned — ready to embody the work they were meant for."
   },
 
@@ -121,6 +121,77 @@
         "You can articulate who you want to become, but you haven't built the body for it yet.",
         "You've outgrown your old role faster than you've grown into the new one.",
         "You know what to say. You need to learn how to be when you're saying it."
+      ]
+    },
+
+    "pricing": {
+      "eyebrow": "Enrollment",
+      "title": "Two ways in.",
+      "note": "14-day refund policy for both tiers — complete the first two weeks and reach out if it's not right. Check-in spots are limited per cohort.",
+      "tiers": [
+        {
+          "tier": "Self-Paced",
+          "tierKey": "self_paced",
+          "price": "$197",
+          "description": "Full course access. All 8 weeks and lessons, at your own pace.",
+          "features": [
+            "8 weeks of video lessons",
+            "Embodiment frameworks for any role",
+            "Lifetime access",
+            "Written response from Jon after each module"
+          ],
+          "cta": "Enroll — $197",
+          "primary": false
+        },
+        {
+          "tier": "With Weekly Check-ins",
+          "tierKey": "with_checkins",
+          "price": "$497",
+          "description": "Weekly 15-minute calls with Jon for the full 8 weeks — most useful if you're navigating a specific role, situation, or transition in real time.",
+          "features": [
+            "Everything in Self-Paced",
+            "Weekly 15-minute call with Jon (8 total)",
+            "Real-time feedback on your specific situation",
+            "Priority scheduling"
+          ],
+          "cta": "Enroll — $497",
+          "primary": true
+        }
+      ]
+    },
+
+    "methodology": {
+      "eyebrow": "How it works",
+      "title": "Not a lecture series. A movement practice.",
+      "cards": [
+        {
+          "label": "Sequenced for the body, not the syllabus",
+          "body": "The 8 weeks run in a deliberate order. Physical grounding before vocal command. Fundamentals before high-stakes application. Each week builds on the last."
+        },
+        {
+          "label": "Movement-grounded principles",
+          "body": "Each week takes a principle from dance — precision, weight, responsiveness, stillness — and shows you what it looks like when you're not dancing. The translation is the practice."
+        },
+        {
+          "label": "Personal follow-up from Jon",
+          "body": "This isn't automated. Jon reads your notes and responds personally — not with a drip sequence."
+        }
+      ]
+    },
+
+    "curriculum": {
+      "eyebrow": "The curriculum",
+      "title": "8 weeks. One week at a time.",
+      "body": "Each module builds on the last. You can go faster — but the material is sequenced deliberately. Physical groundedness before vocal command. Fundamentals before high-stakes application.",
+      "modules": [
+        { "moduleNumber": 1, "title": "Why Practice Outlasts Performance", "description": "The argument for embodiment — why physical practice develops what training and coaching can't, and why dance is the most direct route to it.", "estimatedHours": "15–20 hours", "lessonCount": 12 },
+        { "moduleNumber": 2, "title": "The Body as Instrument", "description": "Body control — posture, gesture, spatial awareness, and physical intentionality.", "estimatedHours": "25–30 hours", "lessonCount": 17 },
+        { "moduleNumber": 3, "title": "Active Listening & Attunement", "description": "Listening with the whole body — reading rooms, mirroring, presence in conversation.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 4, "title": "Improvisation & Adaptability", "description": "Thinking on your feet — responding to what's actually happening instead of what you planned for. The improviser's skill, applied.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 5, "title": "Reading the Exchange", "description": "The embodied exchange — how to read the room in real time, match and diverge deliberately, and hold your ground without forcing the conversation.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 6, "title": "Tonality & Vocal Presence", "description": "Voice modulation, pacing, emotion in speech, commanding attention through sound.", "estimatedHours": "25–30 hours", "lessonCount": 19 },
+        { "moduleNumber": 7, "title": "Presence in Practice", "description": "Integrating all concepts — high-stakes scenarios, presentations, performance under pressure.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 8, "title": "The Work, Embodied", "description": "Bringing all four pillars into the situations that matter — your role, your room, your medium. How to keep the practice alive when the course is done.", "estimatedHours": "20–25 hours", "lessonCount": 14 }
       ]
     }
   },

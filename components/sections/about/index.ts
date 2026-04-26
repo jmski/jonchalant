@@ -7,3 +7,4 @@ export { TurningPoint } from './turning-point';
 export { MethodologyNarrative } from './methodology-narrative';
 export { WhyExists } from './why-exists';
 export { WhoFor } from './who-for';
+export { StoryScroll } from './story-scroll';

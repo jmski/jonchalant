@@ -248,51 +248,6 @@ export interface Testimonial {
   image?: unknown
 }
 
-// ── Dance page ────────────────────────────────────────────────────────────────
-
-export interface DancePageContent {
-  featuredVideoUrl?: string
-  featuredVideoTitle?: string
-  featuredVideoCaption?: string
-  heroEyebrow?: string
-  heroHeadline?: string
-  heroSubheadline?: string
-  instagramHeadline?: string
-  ctaHeadline?: string
-  ctaBody?: string
-  ctaButtonLabel?: string
-  ctaButtonHref?: string
-  bridgeEyebrow?: string
-  bridgeHeadline?: string
-  bridgeClose?: string
-}
-
-// ── Dance curriculum ──────────────────────────────────────────────────────────
-
-export interface DanceCategory {
-  _id: string
-  title: string
-  slug: SanitySlug
-  leadershipPrinciple: string
-  description: string
-  icon?: string
-  order: number
-  videos: DanceVideo[]
-}
-
-export interface DanceVideo {
-  title: string
-  videoUrl: string
-  duration?: number
-  caption?: string
-}
-
-export interface InstagramReel {
-  _id: string
-  reelUrl: string
-  order: number
-}
-
 // ── Audit page ────────────────────────────────────────────────────────────────
 
 export interface AuditResultBand {

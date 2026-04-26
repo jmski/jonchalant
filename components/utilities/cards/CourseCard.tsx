@@ -30,6 +30,12 @@ function formatDuration(minutes: number): string | null {
   return `${m}m`
 }
 
+function getPlaceholderSymbol(slug: string): string {
+  if (slug.includes('four-circles') || slug.includes('four_circles')) return '⊙'
+  if (slug.includes('foundation')) return '◈'
+  return '○'
+}
+
 export function CourseCard({
   title,
   slug,
@@ -59,7 +65,11 @@ export function CourseCard({
             className="course-card-image"
           />
         ) : (
-          <div className="course-card-thumbnail-placeholder" />
+          <div className="course-card-thumbnail-placeholder">
+            <span className="course-card-thumbnail-placeholder-symbol" aria-hidden="true">
+              {getPlaceholderSymbol(slug)}
+            </span>
+          </div>
         )}
       </div>
 

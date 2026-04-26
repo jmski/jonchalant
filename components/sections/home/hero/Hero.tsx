@@ -11,13 +11,13 @@ type HomeHeroProps = {
 };
 
 const DEFAULTS = {
-  eyebrow: 'Find your purpose',
-  headline: 'Most people are in the right industry. {{Wrong}} role.',
-  subhead: 'Ikigai names the gap. The eight-question assessment shows you where you are — and what to build next.',
+  eyebrow: 'Ikigai · The entry point',
+  headline: 'Find the work you were {{meant}} for.',
+  subhead: 'Dance is my medium. Yours will be different. Eight honest questions to read what actually fits — then a practice to learn to inhabit it.',
   primaryCtaLabel: 'Discover Your Ikigai',
   primaryCtaHref: '/ikigai',
-  secondaryCtaLabel: 'How it works',
-  secondaryCtaHref: '/lessons/four-circles',
+  secondaryCtaLabel: 'Read the essay',
+  secondaryCtaHref: '/about',
 };
 
 export function Hero(props: HomeHeroProps) {

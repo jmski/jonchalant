@@ -8,14 +8,15 @@
   padding-bottom: 0;
 }
 
+/* Lessons — hero top padding override */
+/* Removed min-height: 100vh + justify-content: center to eliminate the large
+   empty band above the headline. Section wrapper padding is already zeroed via
+   .section-wrapper:has(.lessons-hero) above. */
 .lessons-hero {
   max-width: 52rem;
-  min-height: 100vh;
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 3rem 0 2rem;
+  padding: 4rem 0 3rem;
 }
 
 .lessons-hero-eyebrow {

@@ -1,5 +1,5 @@
-import { CTA, AboutBento } from "@/components/sections";
-import { Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
+import { CTA, AboutBento, AboutStoryScroll } from "@/components/sections";
+import { WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { ScrollFade } from "@/components/animations";
 import type { Metadata } from 'next';
@@ -56,64 +56,24 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 2 — ORIGIN STORY: cinematic scrollytelling (full-bleed, no SectionContent) */}
+        {/* 2–5 — NARRATIVE ARC: scrollytelling (full-bleed, no SectionContent) */}
+        {/* Fields used: originImage → Beat 1, introvertImage → Beat 2, philosophyImage → Beat 3 */}
+        {/* Headline fields: originSectionHeadline, turningPointHeadline, methodologyHeadline */}
+        {/* Body fields: originSectionDescription, turningPointBody, methodologyBody */}
         <SectionWrapper variant="tertiary">
-          <Origin
-            label={aboutContent?.originSectionLabel}
-            headline={aboutContent?.originSectionHeadline}
-            description={aboutContent?.originSectionDescription}
-            highlight={aboutContent?.originSectionHighlight}
-            phases={aboutContent?.originPhases}
-            anchorWord={aboutContent?.originSectionAnchorWord}
+          <AboutStoryScroll
+            originImage={aboutContent?.originImage}
+            originHeadline={aboutContent?.originSectionHeadline}
+            originBody={aboutContent?.originSectionDescription}
+            originAnchorWord={aboutContent?.originSectionAnchorWord}
+            turningPointImage={aboutContent?.introvertImage}
+            turningPointHeadline={aboutContent?.turningPointHeadline}
+            turningPointBody={aboutContent?.turningPointBody}
+            transferImage={aboutContent?.philosophyImage}
+            transferHeadline={aboutContent?.methodologyHeadline}
+            transferBody={aboutContent?.methodologyBody}
           />
         </SectionWrapper>
-
-        {/* 3 — TURNING POINT: school performance story */}
-        {aboutContent?.turningPointHeadline && (
-          <SectionWrapper variant="primary">
-            <SectionContent>
-              <ScrollFade>
-              <TurningPoint
-                headline={aboutContent.turningPointHeadline}
-                body={aboutContent.turningPointBody ?? ''}
-                highlight={aboutContent.turningPointHighlight}
-              />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
-
-        {/* 4 — METHODOLOGY: freestyle/choreography narrative (tertiary bg = intellectual core) */}
-        {aboutContent?.methodologyHeadline && (
-          <SectionWrapper variant="tertiary">
-            <SectionContent>
-              <ScrollFade>
-              <MethodologyNarrative
-                headline={aboutContent.methodologyHeadline}
-                body={aboutContent.methodologyBody ?? ''}
-                highlight={aboutContent.methodologyHighlight}
-                philosophyImage={aboutContent.philosophyImage}
-              />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
-
-        {/* 5 — WHY THIS EXISTS */}
-        {aboutContent?.whyExistsHeadline && (
-          <SectionWrapper variant="primary">
-            <SectionContent>
-              <ScrollFade>
-              <WhyExists
-                headline={aboutContent.whyExistsHeadline}
-                body={aboutContent.whyExistsBody ?? ''}
-                highlight={aboutContent.whyExistsHighlight}
-                kidsImage={aboutContent.originImage}
-              />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
 
         {/* 6 — WHO THIS IS FOR */}
         {aboutContent?.whoForHeadline && (

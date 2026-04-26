@@ -11,13 +11,10 @@ import homePageContent from './homePageContent'
 import blogPost from './blogPost'
 import module from './module'
 import programsPageContent from './programsPageContent'
-import danceCategory from './danceCategory'
-import instagramReel from './instagramReel'
 import emailOptIn from './emailOptIn'
 import pressMention from './pressMention'
 import auditPage from './auditPage'
 import contactPage from './contactPage'
-import dancePageContent from './dancePageContent'
 import foundationPage from './foundationPage'
 import blogConfig from './blogConfig'
 
@@ -35,13 +32,10 @@ export const schemaTypes = [
   blogPost,
   module,
   programsPageContent,
-  danceCategory,
-  instagramReel,
   emailOptIn,
   pressMention,
   auditPage,
   contactPage,
-  dancePageContent,
   foundationPage,
   blogConfig,
 ]

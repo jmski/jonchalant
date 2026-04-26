@@ -17,8 +17,18 @@ export default defineType({
       initialValue: 'Home Page',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({ name: 'heroEyebrow', title: 'Hero — Eyebrow', type: 'string' }),
-    defineField({ name: 'heroHeadline', title: 'Hero — Headline', type: 'string' }),
+    defineField({
+      name: 'heroEyebrow',
+      title: 'Hero — Eyebrow',
+      type: 'string',
+      description: 'Short framing line above the headline. Canonical: "Ikigai · The entry point".',
+    }),
+    defineField({
+      name: 'heroHeadline',
+      title: 'Hero — Headline',
+      type: 'string',
+      description: 'A claim, not a label. Wrap one anchor word in {{double braces}} to render it in Fraunces italic. Canonical: "Find the work you were {{meant}} for."',
+    }),
     defineField({
       name: 'heroCyclingOutcomes',
       title: 'Hero — Cycling Outcomes',
@@ -34,7 +44,7 @@ export default defineType({
       title: 'Hero subhead',
       type: 'text',
       rows: 3,
-      description: 'One to two sentences. Shown below the headline.',
+      description: 'One to two sentences. Names what\'s offered. Canonical: "Dance is my medium. Yours will be different. Eight honest questions to read what actually fits — then a practice to learn to inhabit it."',
     }),
     defineField({
       name: 'heroPrimaryCtaLabel',
@@ -54,13 +64,13 @@ export default defineType({
       name: 'heroSecondaryCtaLabel',
       title: 'Hero secondary CTA — label',
       type: 'string',
-      description: 'Optional. Leave blank to hide the secondary button.',
+      description: 'Optional. Leave blank to hide the secondary button. Canonical: "Read the essay".',
     }),
     defineField({
       name: 'heroSecondaryCtaHref',
       title: 'Hero secondary CTA — link',
       type: 'string',
-      description: 'Required if secondary label is set.',
+      description: 'Required if secondary label is set. Canonical: "/about".',
     }),
     // ── Legacy fields (deprecated — hidden from Studio, data preserved) ────────
     defineField({
@@ -173,14 +183,14 @@ export default defineType({
       name: 'meetJonHeading',
       title: 'Meet Jon — Headline',
       type: 'string',
-      description: 'A claim, not a label. E.g. "I learned to lead because the lesson plan required it."',
+      description: 'A claim, not a label. The first occurrence of "lesson" (case-insensitive) renders in italic. E.g. "Twenty years in dance. The lesson wasn\'t the choreography."',
     }),
     defineField({
       name: 'meetJonBody',
       title: 'Meet Jon — Body',
       type: 'text',
-      rows: 3,
-      description: 'Two to three sentences. Resolves the headline claim.',
+      rows: 6,
+      description: 'Two short paragraphs separated by a blank line. Specific (named professions, durations), no transformation/unlock language.',
     }),
     defineField({
       name: 'meetJonImage',
