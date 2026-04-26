@@ -617,6 +617,30 @@
   transform: scale(1.04);
 }
 
+/* BlogCard — image fallback */
+/* Renders a styled gradient placeholder with a pillar-aware symbol when no
+   cover image is available. Only affects cards where coverImage is missing. */
+.blog-card-cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--bg-secondary) 0%,
+    color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary)) 100%
+  );
+}
+
+.blog-card-cover-placeholder-symbol {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  color: var(--border-color);
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  opacity: 0.6;
+  line-height: 1;
+  user-select: none;
+}
+
 @media (min-width: 640px) {
   .blog-card-cover {
     margin: -1.125rem -1.125rem 1rem;
@@ -850,7 +874,8 @@
    ENHANCED CARD
    ────────────────────────────────────────────────────────────────────────────
    Shared interactive card (image + overlay + hover arrow). Used by
-   BlogCard, CaseStudyCard, LessonCard, and admin page.
+   BlogCard, CaseStudyCard, LessonCard, DanceCard, and admin page. Not
+   dance-specific despite the legacy naming.
 */
 
 .card-enhanced {

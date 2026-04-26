@@ -15,6 +15,19 @@ interface BlogCardProps {
   showLink?: boolean;
 }
 
+function getBlogPlaceholderSymbol(pillar?: string): string {
+  switch (pillar) {
+    case 'movement-body':
+      return '◇';
+    case 'presence-confidence':
+      return '○';
+    case 'leadership-career':
+      return '◈';
+    default:
+      return '⊙';
+  }
+}
+
 export function BlogCard({
   _id,
   title,
@@ -109,7 +122,7 @@ export function BlogCard({
   // Default variant
   return (
     <article className="blog-card">
-      {coverImage?.asset?.url && (
+      {coverImage?.asset?.url ? (
         <div className="blog-card-cover">
           <Image
             src={coverImage.asset.url}
@@ -118,6 +131,12 @@ export function BlogCard({
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="blog-card-cover-img"
           />
+        </div>
+      ) : (
+        <div className="blog-card-cover blog-card-cover-placeholder" aria-hidden="true">
+          <span className="blog-card-cover-placeholder-symbol">
+            {getBlogPlaceholderSymbol(pillar)}
+          </span>
         </div>
       )}
       <div className="blog-card-header">

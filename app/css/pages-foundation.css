@@ -430,3 +430,34 @@
 .foundation-faq {
   max-width: 640px;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Foundation — vertical rhythm overrides (desktop only)
+
+   The base .section-wrapper applies 8rem top/bottom padding at ≥1024px. Stacked
+   back-to-back, that produces ~16rem of dead space between sections that read
+   as a missing block. The overrides below tighten three transitions on the
+   Foundation page only. Mobile spacing is intentionally untouched.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1024px) {
+  /* Foundation — curriculum-to-pricing gap
+     Tightens the seam between "Not a lecture series" (.foundation-how) and
+     "Two ways in" (.foundation-pricing). Target ≈4rem between sections. */
+  .section-wrapper:has(.foundation-how) {
+    padding-bottom: 2rem;
+  }
+  .section-wrapper:has(.foundation-pricing) {
+    padding-top: 2rem;
+  }
+
+  /* Foundation — pricing-to-faq gap
+     Tightens the seam between pricing (.foundation-pricing) and the FAQ
+     (.foundation-faq). Target ≈4rem between sections. */
+  .section-wrapper:has(.foundation-pricing) {
+    padding-bottom: 2rem;
+  }
+  .section-wrapper:has(.foundation-faq) {
+    padding-top: 2rem;
+  }
+}

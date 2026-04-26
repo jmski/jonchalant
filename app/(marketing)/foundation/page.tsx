@@ -277,7 +277,7 @@ export default async function FoundationPage() {
       </SectionWrapper>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────────── */}
-      <SectionWrapper variant="secondary">
+      <SectionWrapper variant="primary">
         <SectionContent>
           <section className="foundation-faq">
             <div className="foundation-section-header">
@@ -290,7 +290,7 @@ export default async function FoundationPage() {
       </SectionWrapper>
 
       {/* ── Final CTA ─────────────────────────────────────────────────────────── */}
-      <SectionWrapper variant="primary">
+      <SectionWrapper variant="secondary">
         <SectionContent>
           <section className="foundation-cta">
             <h2 className="foundation-cta-title">{content?.ctaTitle ?? 'Not sure yet? Start with the free audit.'}</h2>
