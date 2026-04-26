@@ -1,0 +1,217 @@
+{
+  "_comment": "Canonical content strings. Single source of truth for any code or script that needs to write content to Sanity. To update content, edit this file, then run the relevant seed or migrate script. Do NOT hardcode canonical strings in seed scripts — read from this file.",
+
+  "metadata": {
+    "siteTitle": "Find the Work You Were Meant For | Jonchalant",
+    "siteDescription": "Ikigai assessment and embodiment practice for professionals who are competent, in-demand, and quietly misaligned. Find the work you were meant for — then learn to inhabit it."
+  },
+
+  "homePage": {
+    "hero": {
+      "eyebrow": "Ikigai · the map before the practice",
+      "headline": "Most people are in the right industry. {{Wrong}} role.",
+      "subhead": "I help professionals find the work they were meant for, and learn to inhabit it. It starts with eight honest questions.",
+      "primaryCtaLabel": "Discover Your Ikigai",
+      "primaryCtaHref": "/ikigai"
+    },
+    "meetJon": {
+      "heading": "I learned to lead because the lesson plan required it.",
+      "body": "A decade of professional choreography taught me that presence isn't about being loud — it's about being intentional. That insight transfers. Not just to dance. To the meeting you're dreading, the pitch you've over-rehearsed, the role that fits your skills but not your life."
+    },
+    "pillars": {
+      "headline": "The fundamentals are the same. The medium is yours to choose.",
+      "items": [
+        {
+          "number": "Pillar 01",
+          "name": "Grounding",
+          "definition": "The capacity to find your centre before you move.",
+          "applications": [
+            { "who": "A dancer", "body": "finds it before the first step. Without it, every movement after is compensating." },
+            { "who": "A leader", "body": "finds it before they speak. Without it, the room reads the uncertainty before the words land." },
+            { "who": "A writer", "body": "finds it before the first sentence. Without it, the page fights back." }
+          ]
+        },
+        {
+          "number": "Pillar 02",
+          "name": "Energy",
+          "definition": "Calibrating your presence to the room.",
+          "applications": [
+            { "who": "A performer", "body": "reads the audience and adjusts — not performing harder, performing precisely." },
+            { "who": "A salesperson", "body": "reads the client and adjusts — not louder, more matched." },
+            { "who": "Anyone", "body": "managing their own output learns to spend energy where it moves the work, not where it feels busy." }
+          ]
+        },
+        {
+          "number": "Pillar 03",
+          "name": "Flow",
+          "definition": "Moving between rigid structure and live response.",
+          "applications": [
+            { "who": "Dancers", "body": "drill choreography until they can forget it. Then they can actually dance it." },
+            { "who": "Leaders", "body": "prepare the message until they can leave it. Then they can actually have the conversation." },
+            { "who": "Professionals", "body": "learn when to follow the plan and when to abandon it — in real time, without panicking." }
+          ]
+        },
+        {
+          "number": "Pillar 04",
+          "name": "Command",
+          "definition": "Presence that carries authority without force.",
+          "applications": [
+            { "who": "Quiet command on stage.", "body": "The dancer who doesn't have to chase attention." },
+            { "who": "Quiet command in a meeting.", "body": "The person who speaks less and shifts the room more." },
+            { "who": "Quiet command in your own life.", "body": "Deciding what you're here for, and behaving like someone who knows." }
+          ]
+        }
+      ]
+    },
+    "closingCta": {
+      "title": "Find the work you were meant for.",
+      "description": "Start with the assessment. It's free. It takes ten minutes. If it tells you something useful, keep going.",
+      "buttonText": "Discover Your Ikigai",
+      "buttonHref": "/ikigai"
+    }
+  },
+
+  "caseStudies": [
+    {
+      "title": "From Overlooked to Promoted",
+      "clientName": "Marcus T.",
+      "industry": "Tech / Product Management",
+      "challenge": "Led high-impact projects but was consistently passed over for promotion. Senior leadership registered his output but not his presence — he blended into the background in rooms full of louder voices.",
+      "solution": "Eight weeks of presence work: entry posture, vocal pacing, and physical grounding before high-stakes meetings. We rebuilt how he occupied space before he said a word.",
+      "results": [
+        "Promoted to Senior PM within 10 weeks of completing the program",
+        "Now facilitates quarterly leadership offsites for his division",
+        "Describes the shift as \"people finally hear me when I speak\""
+      ]
+    },
+    {
+      "title": "Speaking Up in the Room",
+      "clientName": "Diana K.",
+      "industry": "Finance / Director",
+      "challenge": "Technically strong and consistently high-rated on performance reviews, but physically disappeared in rooms full of louder personalities. Avoided speaking in group settings unless directly asked.",
+      "solution": "Focus on spatial ownership and deliberate stillness. Practicing expansive posture before board meetings and learning to hold eye contact without shrinking.",
+      "results": [
+        "Now opens quarterly finance reviews for her department",
+        "Invited to represent her team at two external industry panels",
+        "Reports \"I stopped apologising for taking up space\""
+      ]
+    }
+  ],
+
+  "foundationCourse": {
+    "description": "A self-paced course teaching embodiment through the lens of dance. 8 modules, 200+ hours of content. For professionals who have found their ikigai and are ready to learn to inhabit it.",
+    "philosophy": "Insight lives in the mind. Presence lives in the body. Most training stops at the first one. The Foundation starts at the second — using professional dance training to develop Grounding, Energy, Flow, and Command for the work that's actually in front of you. It doesn't teach you to dance. It uses dance as the shortest route to the thing that can't be read about or listened to.",
+    "targetAudience": "Professionals who are competent, in-demand, and quietly misaligned — ready to embody the work they were meant for."
+  },
+
+  "foundationPage": {
+    "hero": {
+      "eyebrow": "THE FOUNDATION · 8 WEEKS · MEDIUM-AGNOSTIC EMBODIMENT",
+      "headline": "Knowing the work isn't the same as {{inhabiting}} it.",
+      "subhead": "Eight weeks of body-first practice in Grounding, Energy, Flow, and Command. Your medium. Your role.",
+      "body": "A decade of choreography taught me this: insight lives in the mind. Presence lives in the body. If you've named the work you were meant for, Foundation is where you build the practice that lets you inhabit it.",
+      "primaryCtaLabel": "ENROLL — STARTING AT $197",
+      "secondaryCtaLabel": "SEE WHAT'S INSIDE"
+    },
+    "qualifier": {
+      "eyebrow": "Who this is for",
+      "headline": "If you've named it but haven't yet inhabited it",
+      "items": [
+        "You've identified the work, but inhabiting it feels like a stretch.",
+        "You can articulate who you want to become, but you haven't built the body for it yet.",
+        "You've outgrown your old role faster than you've grown into the new one.",
+        "You know what to say. You need to learn how to be when you're saying it."
+      ]
+    },
+
+    "pricing": {
+      "eyebrow": "Enrollment",
+      "title": "Two ways in.",
+      "note": "14-day refund policy for both tiers — complete the first two weeks and reach out if it's not right. Check-in spots are limited per cohort.",
+      "tiers": [
+        {
+          "tier": "Self-Paced",
+          "tierKey": "self_paced",
+          "price": "$197",
+          "description": "Full course access. All 8 weeks and lessons, at your own pace.",
+          "features": [
+            "8 weeks of video lessons",
+            "Embodiment frameworks for any role",
+            "Lifetime access",
+            "Written response from Jon after each module"
+          ],
+          "cta": "Enroll — $197",
+          "primary": false
+        },
+        {
+          "tier": "With Weekly Check-ins",
+          "tierKey": "with_checkins",
+          "price": "$497",
+          "description": "Weekly 15-minute calls with Jon for the full 8 weeks — most useful if you're navigating a specific role, situation, or transition in real time.",
+          "features": [
+            "Everything in Self-Paced",
+            "Weekly 15-minute call with Jon (8 total)",
+            "Real-time feedback on your specific situation",
+            "Priority scheduling"
+          ],
+          "cta": "Enroll — $497",
+          "primary": true
+        }
+      ]
+    },
+
+    "methodology": {
+      "eyebrow": "How it works",
+      "title": "Not a lecture series. A movement practice.",
+      "cards": [
+        {
+          "label": "Sequenced for the body, not the syllabus",
+          "body": "The 8 weeks run in a deliberate order. Physical grounding before vocal command. Fundamentals before high-stakes application. Each week builds on the last."
+        },
+        {
+          "label": "Movement-grounded principles",
+          "body": "Each week takes a principle from dance — precision, weight, responsiveness, stillness — and shows you what it looks like when you're not dancing. The translation is the practice."
+        },
+        {
+          "label": "Personal follow-up from Jon",
+          "body": "This isn't automated. Jon reads your notes and responds personally — not with a drip sequence."
+        }
+      ]
+    },
+
+    "curriculum": {
+      "eyebrow": "The curriculum",
+      "title": "8 weeks. One week at a time.",
+      "body": "Each module builds on the last. You can go faster — but the material is sequenced deliberately. Physical groundedness before vocal command. Fundamentals before high-stakes application.",
+      "modules": [
+        { "moduleNumber": 1, "title": "Why Practice Outlasts Performance", "description": "The argument for embodiment — why physical practice develops what training and coaching can't, and why dance is the most direct route to it.", "estimatedHours": "15–20 hours", "lessonCount": 12 },
+        { "moduleNumber": 2, "title": "The Body as Instrument", "description": "Body control — posture, gesture, spatial awareness, and physical intentionality.", "estimatedHours": "25–30 hours", "lessonCount": 17 },
+        { "moduleNumber": 3, "title": "Active Listening & Attunement", "description": "Listening with the whole body — reading rooms, mirroring, presence in conversation.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 4, "title": "Improvisation & Adaptability", "description": "Thinking on your feet — responding to what's actually happening instead of what you planned for. The improviser's skill, applied.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 5, "title": "Reading the Exchange", "description": "The embodied exchange — how to read the room in real time, match and diverge deliberately, and hold your ground without forcing the conversation.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 6, "title": "Tonality & Vocal Presence", "description": "Voice modulation, pacing, emotion in speech, commanding attention through sound.", "estimatedHours": "25–30 hours", "lessonCount": 19 },
+        { "moduleNumber": 7, "title": "Presence in Practice", "description": "Integrating all concepts — high-stakes scenarios, presentations, performance under pressure.", "estimatedHours": "25–30 hours", "lessonCount": 18 },
+        { "moduleNumber": 8, "title": "The Work, Embodied", "description": "Bringing all four pillars into the situations that matter — your role, your room, your medium. How to keep the practice alive when the course is done.", "estimatedHours": "20–25 hours", "lessonCount": 14 }
+      ]
+    }
+  },
+
+  "fourCirclesCourse": {
+    "description": "Twelve lessons walking through the ikigai framework — passion, mission, vocation, and profession — and what it means for how you show up as a leader.",
+    "subtitle": "A free, self-paced course on the ikigai framework",
+    "lessons": [
+      { "number": 1,  "summary": "An introduction to the ikigai framework and why most people only inhabit one or two circles — and what that costs them." },
+      { "number": 2,  "summary": "What happens when you love what you do but the world doesn't need it or pay for it — the anatomy of delight without direction." },
+      { "number": 3,  "summary": "The trap of doing good work for the world while ignoring whether it energises you or sustains you financially." },
+      { "number": 4,  "summary": "When you're skilled and paid but disconnected from meaning — the quiet hollowness of competence without purpose." },
+      { "number": 5,  "summary": "How a career built purely around what the world pays for becomes a gilded cage — and how to recognise the signs early." },
+      { "number": 6,  "summary": "A systematic look at every two-circle overlap and the specific tension each pairing creates in real careers." },
+      { "number": 7,  "summary": "The three-circle pattern where passion, mission, and vocation converge but profession is missing — what it feels like and how to close the gap." },
+      { "number": 8,  "summary": "When you love the work, the world needs it, and you're paid for it — but you're not sure you're actually good at it." },
+      { "number": 9,  "summary": "The pattern most difficult to leave: you're good, paid, and somewhat interested — but you've lost the sense of contributing to something larger." },
+      { "number": 10, "summary": "Doing important, well-compensated work you're skilled at — but with zero spark. The pattern that looks fine from the outside and feels hollow from within." },
+      { "number": 11, "summary": "What all four circles overlapping actually feels like — and why it's less a destination than a practice of continuous realignment." },
+      { "number": 12, "summary": "The transition lesson: insight without embodiment changes nothing. How executive presence training turns ikigai awareness into visible leadership." }
+    ]
+  }
+}

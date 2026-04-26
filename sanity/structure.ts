@@ -14,7 +14,6 @@ export const structure: StructureResolver = (S) =>
             S.documentTypeListItem('contactPage').title('Contact Page'),
             S.documentTypeListItem('auditPage').title('Audit Page'),
             S.documentTypeListItem('foundationPage').title('Foundation Page'),
-            S.documentTypeListItem('dancePageContent').title('Dance Page'),
             S.documentTypeListItem('programsPageContent').title('Programs Page'),
           ])
         ),
@@ -54,18 +53,6 @@ export const structure: StructureResolver = (S) =>
             S.documentTypeListItem('caseStudy').title('Case Studies'),
             S.documentTypeListItem('testimonial').title('Client Testimonials'),
             S.documentTypeListItem('pressMention').title('Press Mentions'),
-          ])
-        ),
-
-      S.divider(),
-
-      // Dance & Media
-      S.listItem()
-        .title('Dance & Media')
-        .child(
-          S.list().title('Dance & Media').items([
-            S.documentTypeListItem('danceCategory').title('Dance Categories'),
-            S.documentTypeListItem('instagramReel').title('Instagram Reels'),
           ])
         ),
 

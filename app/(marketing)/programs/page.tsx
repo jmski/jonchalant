@@ -16,7 +16,7 @@ import type { FAQItem } from "@/components/shared/faq/FAQ";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Coaching Programs | Executive Presence & Quiet Command",
+  title: "Coaching Programs | Jonchalant",
   description: "Three ways to build executive presence with Jon. Self-paced course, guided program, or 1-on-1 coaching — all rooted in physical presence and body-aware leadership.",
   alternates: {
     canonical: 'https://jonchalant.com/programs',
@@ -74,7 +74,7 @@ export default async function Programs() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(CourseSchema({
-            name: page?.heroHeadline ?? 'Quiet Command Coaching Programs',
+            name: page?.heroHeadline ?? 'Jonchalant Coaching Programs',
             description: page?.heroSubheading ?? 'Executive presence coaching for introverts — self-paced course, guided program, and 1-on-1 coaching rooted in body-aware leadership.',
           })),
         }}
@@ -93,15 +93,51 @@ export default async function Programs() {
                   {page.whoForHeading && (
                     <h2 className="programs-hero-aside-heading">{page.whoForHeading}</h2>
                   )}
-                  {page.whoForBody?.map((paragraph, i) => (
-                    <p key={i} className="programs-hero-aside-body">{paragraph}</p>
-                  ))}
+                  {page.whoForBody && page.whoForBody.length > 0 && (
+                    <ul className="programs-hero-aside-list">
+                      {page.whoForBody.map((item, i) => (
+                        <li key={i} className="programs-hero-aside-list-item">{item}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ) : undefined
             }
           />
         </SectionContent>
       </SectionWrapper>
+
+      {/* CASE STUDIES */}
+      {caseStudies.length > 0 && (
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <section className="programs-case-studies">
+              <div className="programs-case-studies-header">
+                <p className="programs-offers-eyebrow">Before &amp; After</p>
+                <h2 className="programs-case-studies-title">Real shifts. Actual situations.</h2>
+                <p className="programs-case-studies-body">
+                  The names and some details have been changed. The challenges and outcomes are accurate.
+                </p>
+              </div>
+              <div className="programs-case-studies-grid">
+                {caseStudies.map((cs: any) => (
+                  <CaseStudyCard
+                    key={cs._id}
+                    title={cs.title}
+                    clientName={cs.clientName}
+                    industry={cs.industry}
+                    challenge={cs.challenge}
+                    solution={cs.solution}
+                    results={cs.results}
+                    image={cs.image}
+                    slug={cs.slug}
+                  />
+                ))}
+              </div>
+            </section>
+          </SectionContent>
+        </SectionWrapper>
+      )}
 
       {/* CURRICULUM BENTO */}
       {curriculumWeeks.length > 0 && (
@@ -153,38 +189,6 @@ export default async function Programs() {
           </div>
         </SectionContent>
       </SectionWrapper>
-
-      {/* CASE STUDIES */}
-      {caseStudies.length > 0 && (
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <section className="programs-case-studies">
-              <div className="programs-case-studies-header">
-                <p className="programs-faq-eyebrow">Client Results</p>
-                <h2 className="programs-case-studies-title">Before &amp; after</h2>
-                <p className="programs-case-studies-body">
-                  These are real clients. Real situations. The names and some details have been changed, but the challenges and outcomes are accurate.
-                </p>
-              </div>
-              <div className="programs-case-studies-grid">
-                {caseStudies.map((cs: any) => (
-                  <CaseStudyCard
-                    key={cs._id}
-                    title={cs.title}
-                    clientName={cs.clientName}
-                    industry={cs.industry}
-                    challenge={cs.challenge}
-                    solution={cs.solution}
-                    results={cs.results}
-                    image={cs.image}
-                    slug={cs.slug}
-                  />
-                ))}
-              </div>
-            </section>
-          </SectionContent>
-        </SectionWrapper>
-      )}
 
       {/* FAQ */}
       <SectionWrapper variant="primary">

@@ -1,8 +1,31 @@
 
 /* ── Section 1: Intro ───────────────────────────────────────────────────────── */
 
+/* Fix 1: Scope the section-wrapper padding on the hero/intro so the headline
+   sits close to the nav — matching the vertical rhythm of other page heroes.
+   The base .section-wrapper at 1024px+ has 8rem padding-top which is too deep
+   for a hero that has no full-bleed visual below the nav. */
+.section-wrapper:has(.ikigai-intro) {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-wrapper:has(.ikigai-intro) {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-wrapper:has(.ikigai-intro) {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
 .ikigai-intro {
-  padding: var(--spacing-xl) 0 var(--spacing-lg);
+  padding: 0 0 var(--spacing-sm);
 }
 
 .ikigai-intro-content {
@@ -69,39 +92,52 @@
   margin-top: var(--spacing-xs);
 }
 
+/* Fix 2: Give the four-circle cards more presence — more padding, stronger
+   label typography, CSS-token border accents, and a hover lift. */
 .ikigai-intro-quadrant {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 0.75rem 1rem;
+  gap: 4px;
+  padding: 1rem 1.25rem;
   border-radius: 0.5rem;
   border: 1px solid var(--border-subtle);
   background: var(--bg-secondary);
+  transition:
+    transform var(--transition-subtle),
+    box-shadow var(--transition-subtle);
+}
+
+.ikigai-intro-quadrant:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .ikigai-intro-quadrant--passion {
-  border-left: 3px solid #6B4F3F;
+  border-left: 3px solid var(--mocha-deep);
 }
 .ikigai-intro-quadrant--mission {
-  border-left: 3px solid #A47864;
+  border-left: 3px solid var(--mocha-mousse);
 }
 .ikigai-intro-quadrant--vocation {
-  border-left: 3px solid #b89a5f;
+  border-left: 3px solid var(--accent-secondary);
 }
 .ikigai-intro-quadrant--profession {
-  border-left: 3px solid #8A9A85;
+  border-left: 3px solid color-mix(in srgb, var(--mocha-deep) 60%, var(--bg-primary));
 }
 
 .ikigai-intro-quadrant-name {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 600;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  letter-spacing: 0.04em;
   color: var(--text-primary);
 }
 
 .ikigai-intro-quadrant-desc {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
 .ikigai-intro-cta {
@@ -121,6 +157,35 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* ── Fix 3: Quiz bridge — a breath between hero explanation and quiz ──────────── */
+
+.ikigai-quiz-bridge {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.ikigai-quiz-bridge-rule {
+  display: block;
+  width: 3rem;
+  height: 1px;
+  border: none;
+  background: var(--border-subtle);
+  margin: 0;
+}
+
+.ikigai-quiz-bridge-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  margin: 0;
+  line-height: var(--leading-normal);
 }
 
 /* ── Section 2: Quiz ─────────────────────────────────────────────────────────── */

@@ -5,19 +5,21 @@ import { ScrollFade } from '@/components/animations'
 import { Button } from '@/components/ui/Button'
 import EnrollButton from '@/components/foundation/EnrollButton'
 import FAQ from '@/components/shared/faq/FAQ'
+import { EmailCapture } from '@/components/sections'
 import { getFoundationPageContent } from '@/lib/sanity'
 import { CourseSchema } from '@/lib/schema'
+import { renderHeadline } from '@/lib/render-headline'
 import type { FAQItem } from '@/components/shared/faq/FAQ'
 
 export const metadata: Metadata = {
   title: 'The Foundation | Jonchalant',
-  description: 'A self-paced video course teaching executive presence through dance. 8 modules, 200+ hours. Built for introverts who want to command a room without performing.',
+  description: 'An 8-week embodiment course built through dance, transferable to any medium. For professionals who have named the work they were meant for and are ready to inhabit it.',
   alternates: {
     canonical: 'https://jonchalant.com/foundation',
   },
   openGraph: {
     title: 'The Foundation | Jonchalant',
-    description: 'A self-paced video course teaching executive presence through dance. 8 modules, 200+ hours. Built for introverts.',
+    description: 'An 8-week embodiment course built through dance. Grounding, Energy, Flow, Command — medium-agnostic.',
     type: 'website',
     url: 'https://jonchalant.com/foundation',
     siteName: 'Jonchalant',
@@ -25,28 +27,27 @@ export const metadata: Metadata = {
 }
 
 const FALLBACK_MODULES = [
-  { moduleNumber: 1, title: 'Why Soft Skills Matter', description: 'Problem framing — why traditional leadership training fails and what dance reveals about real human connection.', estimatedHours: '15–20 hours', lessonCount: 12 },
+  { moduleNumber: 1, title: 'Why Practice Outlasts Performance', description: "The argument for embodiment — why physical practice develops what training and coaching can't, and why dance is the most direct route to it.", estimatedHours: '15–20 hours', lessonCount: 12 },
   { moduleNumber: 2, title: 'The Body as Instrument', description: 'Body control — posture, gesture, spatial awareness, and physical intentionality.', estimatedHours: '25–30 hours', lessonCount: 17 },
   { moduleNumber: 3, title: 'Active Listening & Attunement', description: 'Listening with the whole body — reading rooms, mirroring, presence in conversation.', estimatedHours: '25–30 hours', lessonCount: 18 },
-  { moduleNumber: 4, title: 'Improvisation & Adaptability', description: 'Thinking on your feet — managing uncertainty, creative problem-solving, spontaneous expression.', estimatedHours: '25–30 hours', lessonCount: 18 },
-  { moduleNumber: 5, title: 'Reciprocation & Influence', description: 'Give-and-take dynamics — building rapport, reciprocal communication, authentic influence.', estimatedHours: '25–30 hours', lessonCount: 18 },
+  { moduleNumber: 4, title: 'Improvisation & Adaptability', description: "Thinking on your feet — responding to what's actually happening instead of what you planned for. The improviser's skill, applied.", estimatedHours: '25–30 hours', lessonCount: 18 },
+  { moduleNumber: 5, title: 'Reading the Exchange', description: "The embodied exchange — how to read the room in real time, match and diverge deliberately, and hold your ground without forcing the conversation.", estimatedHours: '25–30 hours', lessonCount: 18 },
   { moduleNumber: 6, title: 'Tonality & Vocal Presence', description: 'Voice modulation, pacing, emotion in speech, commanding attention through sound.', estimatedHours: '25–30 hours', lessonCount: 19 },
   { moduleNumber: 7, title: 'Presence in Practice', description: 'Integrating all concepts — high-stakes scenarios, presentations, performance under pressure.', estimatedHours: '25–30 hours', lessonCount: 18 },
-  { moduleNumber: 8, title: 'The Integrated Leader', description: 'Personal brand, sustaining growth, building a presence practice that lasts.', estimatedHours: '20–25 hours', lessonCount: 14 },
+  { moduleNumber: 8, title: 'The Work, Embodied', description: 'Bringing all four pillars into the situations that matter — your role, your room, your medium. How to keep the practice alive when the course is done.', estimatedHours: '20–25 hours', lessonCount: 14 },
 ]
 
 const FALLBACK_WHO_FOR = [
-  'You know your material but lose it when the room is watching.',
-  'You\'re seen as "quiet" or "reserved" — not leadership material.',
-  'You speak clearly in 1:1s but freeze in groups or big meetings.',
-  'You overprepare and still feel shaky when it counts.',
-  'You want to project confidence without becoming someone else.',
+  "You've identified the work, but inhabiting it feels like a stretch.",
+  "You can articulate who you want to become, but you haven't built the body for it yet.",
+  "You've outgrown your old role faster than you've grown into the new one.",
+  "You know what to say. You need to learn how to be when you're saying it.",
 ]
 
 const FALLBACK_HOW_IT_WORKS = [
-  { label: 'Self-paced video lessons', body: 'Watch at your own pace. Every lesson is a direct concept — no fluff, no filler.' },
-  { label: 'Movement-grounded principles', body: 'Each week draws from professional dance training and translates it into leadership behaviour you can practise immediately.' },
-  { label: 'Personal follow-up from Jon', body: 'This isn\'t automated. Jon reads your notes and responds personally — not with a drip sequence.' },
+  { label: 'Sequenced for the body, not the syllabus', body: 'The 8 weeks run in a deliberate order. Physical grounding before vocal command. Fundamentals before high-stakes application. Each week builds on the last.' },
+  { label: 'Movement-grounded principles', body: "Each week takes a principle from dance — precision, weight, responsiveness, stillness — and shows you what it looks like when you're not dancing. The translation is the practice." },
+  { label: 'Personal follow-up from Jon', body: "This isn't automated. Jon reads your notes and responds personally — not with a drip sequence." },
 ]
 
 const FOUNDATION_FAQS: FAQItem[] = [
@@ -72,7 +73,7 @@ const FOUNDATION_FAQS: FAQItem[] = [
   },
   {
     question: 'What\'s the difference between the Self-Paced and With Check-ins tiers?',
-    answer: 'Both include full access to all 8 weeks of lessons and materials. The With Check-ins tier adds a weekly 1:1 call with Jon to work through what\'s coming up for you in real time — especially useful for people in high-pressure roles or navigating a specific situation (a promotion, a difficult team, a speaking engagement).',
+    answer: 'Both tiers include full access to all 8 weeks of lessons. The With Check-ins tier adds a weekly 15-minute call with Jon — most useful if you\'re navigating a specific role, situation, or transition in real time (a promotion, a difficult team, a speaking engagement). Eight calls over the 8 weeks.',
   },
 ]
 
@@ -81,12 +82,12 @@ const FALLBACK_PRICING = [
     tier: 'Self-Paced',
     tierKey: 'self_paced' as const,
     price: '$197',
-    description: 'Full course access. All 8 weeks, all lessons, at your own pace.',
+    description: 'Full course access. All 8 weeks and lessons, at your own pace.',
     features: [
       '8 weeks of video lessons',
-      'Movement-to-leadership frameworks',
+      'Embodiment frameworks for any role',
       'Lifetime access',
-      'Personal follow-up from Jon',
+      'Written response from Jon after each module',
     ],
     cta: 'Enroll — $197',
     primary: false,
@@ -95,12 +96,12 @@ const FALLBACK_PRICING = [
     tier: 'With Weekly Check-ins',
     tierKey: 'with_checkins' as const,
     price: '$497',
-    description: 'Everything in self-paced, plus a weekly 1:1 call with Jon to work through what\'s coming up for you.',
+    description: 'Weekly 15-minute calls with Jon for the full 8 weeks — most useful if you\'re navigating a specific role, situation, or transition in real time.',
     features: [
       'Everything in Self-Paced',
-      '8 weekly 1:1 calls with Jon',
-      'Real-time feedback on your specific situations',
-      'Prioritised scheduling',
+      'Weekly 15-minute call with Jon (8 total)',
+      'Real-time feedback on your specific situation',
+      'Priority scheduling',
     ],
     cta: 'Enroll — $497',
     primary: true,
@@ -149,13 +150,13 @@ export default async function FoundationPage() {
         <SectionContent>
           <section className="foundation-hero">
             <div className="foundation-hero-left">
-              <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? 'Self-Paced Course · 8 Modules'}</p>
-              <h1 className="foundation-hero-headline">{content?.heroHeadline ?? 'The Foundation'}</h1>
+              <p className="foundation-hero-eyebrow">{content?.heroEyebrow ?? 'THE FOUNDATION · 8 WEEKS · MEDIUM-AGNOSTIC EMBODIMENT'}</p>
+              <h1 className="foundation-hero-headline">{renderHeadline(content?.heroHeadline ?? "Knowing the work isn't the same as {{inhabiting}} it.")}</h1>
               <p className="foundation-hero-subheadline">
-                {content?.heroSubheadline ?? 'Executive presence for people who think before they speak.'}
+                {content?.heroSubheadline ?? 'Eight weeks of body-first practice in Grounding, Energy, Flow, and Command. Your medium. Your role.'}
               </p>
               <p className="foundation-hero-body">
-                {content?.heroBody ?? 'A decade of professional choreography taught me that presence isn\'t about being loud. It\'s about being intentional. The Foundation is where that insight becomes a skill.'}
+                {content?.heroBody ?? "A decade of choreography taught me this: insight lives in the mind. Presence lives in the body. If you've named the work you were meant for, Foundation is where you build the practice that lets you inhabit it."}
               </p>
               <div className="foundation-hero-actions">
                 <Button as="link" href="#pricing">
@@ -169,7 +170,7 @@ export default async function FoundationPage() {
             </div>
             <div className="foundation-hero-right">
               <p className="foundation-section-eyebrow">{content?.whoEyebrow ?? 'Who this is for'}</p>
-              <h2 className="foundation-hero-who-title">{content?.whoTitle ?? 'You already have the substance. This is about the signal.'}</h2>
+              <h2 className="foundation-hero-who-title">{content?.whoTitle ?? "If you've named it but haven't yet inhabited it"}</h2>
               <ul className="foundation-who-list">
                 {whoItems.map((item: string, i: number) => (
                   <li key={i} className="foundation-who-item">
@@ -180,6 +181,11 @@ export default async function FoundationPage() {
               </ul>
             </div>
           </section>
+          <p className="foundation-onramp">
+            Haven&apos;t named the work yet?{' '}
+            <a href="/ikigai">Start with the ikigai assessment.</a>
+            {' →'}
+          </p>
         </SectionContent>
       </SectionWrapper>
 
@@ -250,7 +256,7 @@ export default async function FoundationPage() {
             <div className="foundation-pricing-grid">
               {pricingTiers.map(({ tier, tierKey, price, description, features, cta, primary }: { tier: string; tierKey: 'self_paced' | 'with_checkins'; price: string; description: string; features: string[]; cta: string; primary: boolean }) => (
                 <div key={tier} className={`foundation-pricing-card${primary ? ' foundation-pricing-card--primary' : ''}`}>
-                  {primary && <span className="foundation-pricing-badge">Most popular</span>}
+                  {primary && <span className="foundation-pricing-badge">Recommended for transitions</span>}
                   <p className="foundation-pricing-tier">{tier}</p>
                   <p className="foundation-pricing-price">{price}</p>
                   <p className="foundation-pricing-description">{description}</p>
@@ -264,14 +270,14 @@ export default async function FoundationPage() {
               ))}
             </div>
             <p className="foundation-pricing-note">
-              {content?.pricingNote ?? "Spots for the With Check-ins tier are limited. If you're on the fence, sooner is better."}
+              {content?.pricingNote ?? "14-day refund policy for both tiers — complete the first two weeks and reach out if it's not right. Check-in spots are limited per cohort."}
             </p>
           </section>
         </SectionContent>
       </SectionWrapper>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────────── */}
-      <SectionWrapper variant="secondary">
+      <SectionWrapper variant="primary">
         <SectionContent>
           <section className="foundation-faq">
             <div className="foundation-section-header">
@@ -284,7 +290,7 @@ export default async function FoundationPage() {
       </SectionWrapper>
 
       {/* ── Final CTA ─────────────────────────────────────────────────────────── */}
-      <SectionWrapper variant="primary">
+      <SectionWrapper variant="secondary">
         <SectionContent>
           <section className="foundation-cta">
             <h2 className="foundation-cta-title">{content?.ctaTitle ?? 'Not sure yet? Start with the free audit.'}</h2>
@@ -297,6 +303,14 @@ export default async function FoundationPage() {
             <p className="foundation-cta-note">{content?.ctaNote ?? 'Free. No account needed.'}</p>
           </section>
         </SectionContent>
+      </SectionWrapper>
+
+      {/* ── Foundation Starter Guide opt-in ──────────────────────────────────── */}
+      <SectionWrapper variant="secondary" className="section-wrapper--flush">
+        <EmailCapture
+          heading="Not ready to enroll? Get the starter guide."
+          subheading="One weekly essay on embodiment, presence, and the work you were meant for. No pitch. Unsubscribe anytime."
+        />
       </SectionWrapper>
 
     </PageTransition>

@@ -20,7 +20,6 @@ export const FOOTER_NAV = [
     links: [
       { label: 'The Blueprint', href: '/lessons' },
       { label: 'The Archives', href: '/blog' },
-      { label: 'The Breakdown', href: '/dance' },
       { label: 'Presence Audit', href: '/audit' },
     ],
   },

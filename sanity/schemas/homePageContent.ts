@@ -17,8 +17,18 @@ export default defineType({
       initialValue: 'Home Page',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({ name: 'heroEyebrow', title: 'Hero — Eyebrow', type: 'string' }),
-    defineField({ name: 'heroHeadline', title: 'Hero — Headline', type: 'string' }),
+    defineField({
+      name: 'heroEyebrow',
+      title: 'Hero — Eyebrow',
+      type: 'string',
+      description: 'Short framing line above the headline. Canonical: "Ikigai · The entry point".',
+    }),
+    defineField({
+      name: 'heroHeadline',
+      title: 'Hero — Headline',
+      type: 'string',
+      description: 'A claim, not a label. Wrap one anchor word in {{double braces}} to render it in Fraunces italic. Canonical: "Find the work you were {{meant}} for."',
+    }),
     defineField({
       name: 'heroCyclingOutcomes',
       title: 'Hero — Cycling Outcomes',
@@ -34,7 +44,7 @@ export default defineType({
       title: 'Hero subhead',
       type: 'text',
       rows: 3,
-      description: 'One to two sentences. Shown below the headline.',
+      description: 'One to two sentences. Names what\'s offered. Canonical: "Dance is my medium. Yours will be different. Eight honest questions to read what actually fits — then a practice to learn to inhabit it."',
     }),
     defineField({
       name: 'heroPrimaryCtaLabel',
@@ -54,13 +64,13 @@ export default defineType({
       name: 'heroSecondaryCtaLabel',
       title: 'Hero secondary CTA — label',
       type: 'string',
-      description: 'Optional. Leave blank to hide the secondary button.',
+      description: 'Optional. Leave blank to hide the secondary button. Canonical: "Read the essay".',
     }),
     defineField({
       name: 'heroSecondaryCtaHref',
       title: 'Hero secondary CTA — link',
       type: 'string',
-      description: 'Required if secondary label is set.',
+      description: 'Required if secondary label is set. Canonical: "/about".',
     }),
     // ── Legacy fields (deprecated — hidden from Studio, data preserved) ────────
     defineField({
@@ -170,6 +180,19 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'meetJonHeading',
+      title: 'Meet Jon — Headline',
+      type: 'string',
+      description: 'A claim, not a label. The first occurrence of "lesson" (case-insensitive) renders in italic. E.g. "Twenty years in dance. The lesson wasn\'t the choreography."',
+    }),
+    defineField({
+      name: 'meetJonBody',
+      title: 'Meet Jon — Body',
+      type: 'text',
+      rows: 6,
+      description: 'Two short paragraphs separated by a blank line. Specific (named professions, durations), no transformation/unlock language.',
+    }),
+    defineField({
       name: 'meetJonImage',
       title: 'Meet Jon — Photo',
       type: 'image',
@@ -179,17 +202,33 @@ export default defineType({
       ],
     }),
 
-    // ── Why It Works Bento (Phase 5) ─────────────────────────────────────────
+    // ── Why It Works Bento — ORPHANED (Phase 1 cleanup) ─────────────────────
+    // These fields are no longer fetched by getHomePageContent() or rendered
+    // by WhyItWorks. The bento variant was superseded by the FourPillars
+    // component. Retain for data preservation; remove in a separate migration.
+    //
+    // DEPRECATED: bento variant replaced by FourPillars component (Phase 1).
+    // Do NOT un-hide these fields without first removing the 'pillars' field —
+    // re-enabling bento data while pillars renders will produce a duplicate
+    // four-pillars section on the home page. Remove in a migration after
+    // confirming Sanity data is no longer needed.
     defineField({
       name: 'whyItWorksBentoHeadline',
-      title: 'Why It Works — Bento Headline',
+      title: '⚠️ ORPHANED — Why It Works Bento Headline',
       type: 'string',
-      description: 'Section heading. E.g. "Why it works"',
+      hidden: true,
+      deprecated: {
+        reason: 'Bento variant removed. FourPillars renders the four pillars instead.',
+      },
     }),
     defineField({
       name: 'whyItWorksCells',
-      title: 'Why It Works — Bento Cells (4 items)',
+      title: '⚠️ ORPHANED — Why It Works Bento Cells',
       type: 'array',
+      hidden: true,
+      deprecated: {
+        reason: 'Bento variant removed. FourPillars renders the four pillars instead.',
+      },
       description: 'Four insight cells for the bento layout. Recommended order: lg, sm, sm (text-only), tall.',
       of: [
         {
@@ -234,6 +273,74 @@ export default defineType({
           },
         },
       ],
+    }),
+
+    // ── Four Pillars (Phase 1) ────────────────────────────────────────────────
+    defineField({
+      name: 'pillarsHeadline',
+      title: 'Four Pillars — Section Headline',
+      type: 'string',
+      description: 'E.g. "The fundamentals are the same. The medium is yours to choose."',
+    }),
+    defineField({
+      name: 'pillars',
+      title: 'Four Pillars',
+      type: 'array',
+      description: 'Exactly 4 items. Each pillar must have 3 mini-applications across different mediums.',
+      of: [
+        {
+          type: 'object',
+          name: 'pillar',
+          title: 'Pillar',
+          fields: [
+            defineField({
+              name: 'number',
+              title: 'Pillar Number',
+              type: 'string',
+              description: 'E.g. "Pillar 01"',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+              description: 'E.g. "Grounding"',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'definition',
+              title: 'One-sentence definition',
+              type: 'string',
+              description: 'Italic. E.g. "The capacity to find your centre before you move."',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'applications',
+              title: 'Mini-applications (3 items)',
+              type: 'array',
+              description: 'One per medium — dancer / leader / writer / performer etc. Each one line.',
+              of: [
+                {
+                  type: 'object',
+                  name: 'pillarApp',
+                  fields: [
+                    defineField({ name: 'who', title: 'Who (role label)', type: 'string', validation: (Rule) => Rule.required() }),
+                    defineField({ name: 'body', title: 'Application (one line)', type: 'string', validation: (Rule) => Rule.required() }),
+                  ],
+                  preview: {
+                    select: { title: 'who', subtitle: 'body' },
+                  },
+                },
+              ],
+              validation: (Rule) => Rule.length(3),
+            }),
+          ],
+          preview: {
+            select: { title: 'name', subtitle: 'definition' },
+          },
+        },
+      ],
+      validation: (Rule) => Rule.length(4),
     }),
 
     // ── Hero Cycle (Phase 2) ──────────────────────────────────────────────────

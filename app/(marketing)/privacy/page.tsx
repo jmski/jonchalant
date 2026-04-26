@@ -29,9 +29,8 @@ export default function PrivacyPage() {
         <h2>1. Information We Collect</h2>
 
         <p>
-          <strong>Email opt-in (Quiet Command Starter Guide).</strong> When you request the Quiet
-          Command Starter Guide, we collect your first name and email address. You are providing
-          this information voluntarily and consenting to receive coaching-related emails from Jon at
+          <strong>Email opt-in (Jonchalant newsletter).</strong> When you subscribe to the newsletter, we collect your email address. You are providing
+          this information voluntarily and consenting to receive weekly emails from Jon at
           the time of submission.
         </p>
 
@@ -61,7 +60,7 @@ export default function PrivacyPage() {
         </p>
 
         <p>
-          To deliver the Quiet Command Starter Guide to your inbox after you opt in. To create and
+          To deliver the Jonchalant newsletter to your inbox after you opt in. To create and
           manage your coaching portal account and save your lesson progress. To send
           coaching-related emails — including the welcome sequence, lesson updates, and relevant
           coaching resources — to subscribers who have opted in. We will not send marketing

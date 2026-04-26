@@ -113,7 +113,7 @@ app/
 ├── (marketing)/    ← Navbar + Footer layout (public pages)
 │   ├── layout.tsx
 │   ├── page.tsx (home), about/, blog/, contact/, foundation/,
-│   │   programs/, dance/, lessons/, audit/, ikigai/, login/, mfa/, privacy/
+│   │   programs/, lessons/, audit/, ikigai/, login/, mfa/, privacy/
 │   └── opengraph-image.tsx
 ├── (portal)/       ← PortalShell + sidebar layout (auth-gated, noindexed)
 │   ├── layout.tsx
@@ -152,7 +152,7 @@ Defined in `globals.css`:
 | `interactions.css` | Hover states, transitions, animations |
 
 ### 10 Page-Scoped CSS Files
-`pages-forms.css` | `pages-portal.css` | `pages-blog.css` | `pages-audit.css` | `pages-ikigai.css` | `pages-lessons.css` | `pages-dance.css` | `pages-portal-tools.css` | `pages-contact.css` | `pages-foundation.css`
+`pages-forms.css` | `pages-portal.css` | `pages-blog.css` | `pages-audit.css` | `pages-ikigai.css` | `pages-lessons.css` | `pages-portal-tools.css` | `pages-contact.css` | `pages-foundation.css`
 
 ### Key Colors
 - `--accent-primary: #6b8e63` (Muted Moss — primary CTA)

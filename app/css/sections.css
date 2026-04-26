@@ -6,7 +6,6 @@
 
    Nav primitive now lives in components.css as .jc-nav.
    Pillar card primitive now lives in cards.css as .jc-pillar.
-   Dance-specific sections (reel, filter, grid) moved to pages-dance.css.
    ════════════════════════════════════════════════════════════════════════════ */
 
 
@@ -847,7 +846,9 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   MEET JON SECTION
+   MEET JON SECTION — section rework
+   Trust anchor on the home page. Editorial weight, hairline image treatment,
+   tertiary link pair. Headline carries the page's claim about Jon.
    ────────────────────────────────────────────────────────────────────────────
 */
 .meet-jon-section {
@@ -885,16 +886,18 @@
   width: 100%;
   aspect-ratio: 3 / 4;
   background: var(--border-subtle);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
-  max-width: 20rem;
+  max-width: 26rem;
 }
 
 .meet-jon-photo {
   width: 100%;
   height: auto;
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   object-fit: cover;
-  max-width: 20rem;
+  max-width: 26rem;
 }
 
 @media (min-width: 768px) {
@@ -910,25 +913,70 @@
   gap: 1.25rem;
 }
 
+.meet-jon-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.meet-jon-eyebrow-rule {
+  display: inline-block;
+  width: 1px;
+  height: 2.5rem;
+  background-color: var(--mocha-mousse);
+  flex-shrink: 0;
+}
+
+.meet-jon-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
 .meet-jon-heading {
   font-family: var(--font-headline);
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
   font-weight: 400;
   letter-spacing: -0.02em;
   color: var(--text-primary);
   line-height: 1.15;
+  margin: 0;
+}
+
+.meet-jon-heading em {
+  font-style: italic;
 }
 
 .meet-jon-body {
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   max-width: 36rem;
+}
+
+.meet-jon-body p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.meet-jon-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.25rem;
 }
 
 .meet-jon-link {
   display: inline-flex;
   align-items: center;
+  gap: 0.375rem;
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 600;
@@ -936,11 +984,13 @@
   text-transform: uppercase;
   color: var(--accent-primary);
   text-decoration: none;
-  transition: opacity 0.15s ease;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.125rem;
+  transition: border-color var(--transition-fast), opacity var(--transition-fast);
 }
 
 .meet-jon-link:hover {
-  opacity: 0.75;
+  border-bottom-color: var(--accent-primary);
 }
 
 .meet-jon-link-arrow {
@@ -950,6 +1000,24 @@
 
 .meet-jon-link:hover .meet-jon-link-arrow {
   transform: translateX(3px);
+}
+
+.meet-jon-link-separator {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  user-select: none;
+}
+
+@media (max-width: 639px) {
+  .meet-jon-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+  }
+
+  .meet-jon-link-separator {
+    display: none;
+  }
 }
 
 /* Bilateral entrance animation */
@@ -1554,30 +1622,6 @@
 }
 
 .jc-section--dark .home-why-works-header .section-eyebrow {
-  color: rgba(241, 241, 241, 0.72);
-}
-
-.jc-section--dark .why-it-works-heading h2 {
-  color: var(--text-white);
-}
-
-.jc-section--dark .why-it-works-cell {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.jc-section--dark .why-it-works-cell:hover {
-  border-color: var(--mocha-soft);
-}
-
-.jc-section--dark .why-it-works-cell-body {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.jc-section--dark .why-it-works-cell-title {
-  color: var(--text-white);
-}
-
-.jc-section--dark .why-it-works-cell-insight {
   color: rgba(241, 241, 241, 0.72);
 }
 
@@ -3094,76 +3138,6 @@
 }
 
 /* ============================================================
-   HOME — Why It Works bento
-   ============================================================ */
-
-.why-it-works {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.why-it-works-heading {
-  max-width: 40ch;
-}
-
-.why-it-works-heading h2 {
-  font-family: var(--font-headline);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-/* Individual bento cell overrides */
-.why-it-works-cell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: border-color 300ms ease;
-}
-
-.why-it-works-cell:hover {
-  border-color: var(--accent-primary);
-}
-
-.why-it-works-cell-image {
-  position: relative;
-  width: 100%;
-  flex: 1;
-  min-height: 180px;
-}
-
-.why-it-works-cell-body {
-  padding: 1.25rem 1.5rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background: var(--bg-secondary);
-}
-
-.why-it-works-cell-title {
-  font-family: var(--font-headline);
-  font-size: clamp(1rem, 1.8vw, 1.375rem);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.why-it-works-cell-insight {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-/* ============================================================
    PROGRAMS — Curriculum Bento
    ============================================================ */
 
@@ -3577,4 +3551,471 @@
   .jc-section { padding: 3rem 1.25rem; }
   .jc-hero { padding: 3.5rem 1.25rem; }
   .jc-hero-headline { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   FOUR PILLARS — home page § medium-agnostic proof
+   Option A: 2×2 grid, each card shows pillar + 3 mini-applications per medium.
+   Source of truth: design-notes/design-system.html §05
+───────────────────────────────────────────────────────────────────────────── */
+
+.four-pillars-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.four-pillars-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 56ch;
+}
+
+.four-pillars-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mocha-deep);
+  margin: 0;
+}
+
+.four-pillars-headline {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.four-pillars-subhead {
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.four-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.four-pillars-card {
+  padding: 2rem 1.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-top: 2px solid transparent;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-top-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.four-pillars-card:hover {
+  border-top-color: var(--accent-primary);
+  box-shadow: 0 4px 16px rgba(164, 120, 100, 0.1);
+  transform: translateY(-2px);
+}
+
+.four-pillars-card-label {
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin: 0;
+}
+
+.four-pillars-card-name {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.four-pillars-card-def {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
+}
+
+.four-pillars-card-apps {
+  list-style: none;
+  padding: 1rem 0 0;
+  margin: auto 0 0;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.four-pillars-card-apps li {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.four-pillars-card-who {
+  font-family: var(--font-headline);
+  font-style: italic;
+  color: var(--mocha-deep);
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+}
+
+@media (max-width: 767px) {
+  .four-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── CAROUSEL (testimonial slider) ──────────────────────────────────────── */
+
+.carousel {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.carousel-track-outer {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-slide {
+  width: 100%;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.carousel-card {
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background-color: var(--bg-primary);
+  padding: 1.5rem;
+  height: 100%;
+  transition: box-shadow 300ms, border-color 300ms;
+}
+
+.carousel-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-primary);
+}
+
+@media (min-width: 640px) {
+  .carousel-card {
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel-card {
+    padding: 2rem 2.5rem;
+  }
+}
+
+.carousel-card-quote {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .carousel-card-quote {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.carousel-card-result {
+  background-color: var(--overlay-light);
+  border: 1px solid var(--accent-primary);
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .carousel-card-result {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.carousel-card-result-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+@media (min-width: 640px) {
+  .carousel-card-result-text {
+    font-size: 0.875rem;
+  }
+}
+
+.carousel-card-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+@media (min-width: 640px) {
+  .carousel-card-footer {
+    padding-top: 1rem;
+  }
+}
+
+.carousel-card-name {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+  .carousel-card-name {
+    font-size: 1rem;
+  }
+}
+
+.carousel-card-role {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.carousel-card-company {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .carousel-dots {
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--border-color);
+  flex-shrink: 0;
+  transition: background-color 300ms, width 300ms;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.carousel-dot--active {
+  width: 28px;
+  background-color: var(--accent-primary);
+}
+
+.carousel-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+}
+
+
+/* ============================================================
+   StoryScroll — About page scrollytelling
+   Three-beat sticky-image / scrolling-text layout.
+   Desktop: 50/50 grid — sticky image left, text panels right.
+   Mobile: stacked image-above-text for each beat.
+   ============================================================ */
+
+/* ── Outer grid ── */
+.story-scroll {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .story-scroll {
+    grid-template-columns: 50% 50%;
+    align-items: start;
+  }
+}
+
+/* ── Sticky image column (desktop only) ── */
+.story-scroll-sticky {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .story-scroll-sticky {
+    display: block;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+/* Each beat's image — absolutely stacked, cross-fade via opacity */
+.story-scroll-image {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.story-scroll-image.is-active {
+  opacity: 1;
+}
+
+/* Right-edge gradient — bleeds image softly into the text column */
+.story-scroll-edge-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 85%, var(--bg-primary) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Scrolling text column ── */
+.story-scroll-text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Each beat panel ── */
+.story-scroll-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .story-scroll-panel {
+    min-height: 100vh;
+    justify-content: center;
+    border-left: 1px solid var(--border-subtle);
+    opacity: 0.4;
+    transition: opacity 400ms ease;
+  }
+
+  .story-scroll-panel.is-active {
+    opacity: 1;
+  }
+}
+
+/* ── Mobile-only image block (above each text panel) ── */
+.story-scroll-panel-image {
+  position: relative;
+  width: 100%;
+  height: 60vw;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .story-scroll-panel-image {
+    display: none;
+  }
+}
+
+/* ── Panel content ── */
+.story-scroll-panel-content {
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .story-scroll-panel-content {
+    padding: 5rem 3rem 5rem 4rem;
+  }
+}
+
+/* ── Headline ── */
+.story-scroll-headline {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05em;
+}
+
+/* Italic axis: Fraunces Variable uses font-variation-settings */
+.story-scroll-headline em {
+  font-style: italic;
+}
+
+/* Two-line kinetic headline — each \n becomes a block span */
+.story-scroll-headline-line {
+  display: block;
+}
+
+/* Beat 3 kinetic variant — largest type on the page */
+.story-scroll-headline--kinetic {
+  font-size: clamp(2.8rem, 5vw, 5rem);
+}
+
+@media (max-width: 1023px) {
+  .story-scroll-headline--kinetic {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+}
+
+/* ── Body text ── */
+.story-scroll-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.story-scroll-paragraph {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 52ch;
+  margin: 0;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .story-scroll-image,
+  .story-scroll-panel {
+    transition: none;
+  }
 }

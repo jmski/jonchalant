@@ -417,18 +417,16 @@ export async function getHomePageContent() {
     ctaDescription,
     ctaButtonText,
     ctaButtonHref,
+    meetJonHeading,
+    meetJonBody,
     meetJonImage { asset->{ _id, url }, alt, crop, hotspot },
-    whyItWorksBentoHeadline,
-    whyItWorksCells[] {
+    pillarsHeadline,
+    pillars[] {
       _key,
-      title,
-      insight,
-      image {
-        asset->{ _id, url, metadata { dimensions { width, height } } },
-        hotspot,
-        crop
-      },
-      size
+      number,
+      name,
+      definition,
+      applications[] { _key, who, body }
     }
   }`
   return await client.fetch(query)
@@ -536,57 +534,6 @@ export async function getLesson(courseSlug: string, lessonSlug: string) {
 
 export async function getModulesByCourse(courseSlug: string) {
   return fetchList('module', MODULE_FIELDS, `course->slug.current == "${courseSlug}"`)
-}
-
-// ============================================================================
-// DANCE
-// ============================================================================
-
-const DANCE_CATEGORY_FIELDS = `
-    _id,
-    title,
-    slug,
-    leadershipPrinciple,
-    description,
-    icon,
-    order,
-    videos[] {
-      title,
-      videoUrl,
-      duration,
-      caption
-    }
-  `
-
-const INSTAGRAM_REEL_FIELDS = `
-    _id,
-    reelUrl,
-    order
-  `
-
-export async function getDanceCategories() {
-  return fetchList('danceCategory', DANCE_CATEGORY_FIELDS)
-}
-
-export async function getInstagramReels() {
-  return fetchList('instagramReel', INSTAGRAM_REEL_FIELDS)
-}
-
-export async function getDancePageContent() {
-  const query = `*[_type == "dancePageContent"][0] {
-    featuredVideoUrl,
-    featuredVideoTitle,
-    featuredVideoCaption,
-    heroEyebrow,
-    heroHeadline,
-    heroSubheadline,
-    instagramHeadline,
-    ctaHeadline,
-    ctaBody,
-    ctaButtonLabel,
-    ctaButtonHref
-  }`
-  return await client.fetch(query)
 }
 
 // ============================================================================

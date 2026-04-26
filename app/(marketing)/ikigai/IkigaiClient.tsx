@@ -482,6 +482,16 @@ export default function IkigaiClient() {
         </SectionWrapper>
 
         {/* ══════════════════════════════════════════════════════════════════
+            BRIDGE — breath between hero and quiz
+        ══════════════════════════════════════════════════════════════════ */}
+        <div className="ikigai-quiz-bridge">
+          <hr className="ikigai-quiz-bridge-rule" />
+          <p className="ikigai-quiz-bridge-text">
+            Eight honest questions. No right or wrong answers — only clarity.
+          </p>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════════
             SECTION 2 — QUIZ (dynamic, animated)
         ══════════════════════════════════════════════════════════════════ */}
         <SectionWrapper variant="secondary">
@@ -493,9 +503,6 @@ export default function IkigaiClient() {
                   {/* COPYWRITER: Confirm section label and lead-in copy */}
                   <span className="ikigai-quiz-eyebrow">Free Quiz</span>
                   <h2 className="ikigai-quiz-title">The Ikigai Assessment</h2>
-                  <p className="ikigai-quiz-subtitle">
-                    Eight honest questions. No right or wrong answers — only clarity.
-                  </p>
                 </div>
 
                 {/* Progress */}

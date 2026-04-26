@@ -21,20 +21,8 @@ export function PortfolioPreview({
   description = 'Each area represents years of expertise, refined methodology, and proven results. Discover what makes each unique.',
   items = [
     {
-      title: 'Dance Portfolio',
-      description: 'Professional choreography, freestyle sessions, and performance videos',
-      href: '/dance',
-      count: '30+ Videos',
-      metrics: [
-        { label: 'Choreography Pieces', value: '12' },
-        { label: 'Performance Hours', value: '100+' }
-      ],
-      tags: ['Choreography', 'Freestyle', 'Performance'],
-      bgColor: 'from-slate-700 to-slate-800'
-    },
-    {
       title: 'Social Skill Lessons',
-      description: 'Structured frameworks for building Quiet Command and professional presence',
+      description: 'Structured frameworks for the four pillars — Grounding, Energy, Flow, Command',
       href: '/lessons',
       count: 'Master Classes',
       metrics: [

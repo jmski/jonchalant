@@ -1,5 +1,5 @@
-import { CTA, AboutBento } from "@/components/sections";
-import { Origin, TurningPoint, MethodologyNarrative, WhyExists, WhoFor } from "@/components/sections/about";
+import { CTA, AboutBento, AboutStoryScroll } from "@/components/sections";
+import { WhoFor } from "@/components/sections/about";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { ScrollFade } from "@/components/animations";
 import type { Metadata } from 'next';
@@ -7,7 +7,7 @@ import { getAboutPageContent } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "About Jon | Leadership Coach & Choreographer",
-  description: "Learn how Jon combines professional dance choreography with leadership development to help introverts build Quiet Command — executive presence without performance.",
+  description: "Jon spent a decade as a professional choreographer before realising the same skills that make a dancer command a stage transfer to every high-stakes professional moment.",
   keywords: "leadership coach introverts, choreographer, body-aware leadership, executive presence coach, introvert strengths, movement-based coaching",
   alternates: {
     canonical: 'https://jonchalant.com/about',
@@ -56,64 +56,24 @@ export default async function About() {
           </SectionContent>
         </SectionWrapper>
 
-        {/* 2 — ORIGIN STORY: cinematic scrollytelling (full-bleed, no SectionContent) */}
+        {/* 2–5 — NARRATIVE ARC: scrollytelling (full-bleed, no SectionContent) */}
+        {/* Fields used: originImage → Beat 1, introvertImage → Beat 2, philosophyImage → Beat 3 */}
+        {/* Headline fields: originSectionHeadline, turningPointHeadline, methodologyHeadline */}
+        {/* Body fields: originSectionDescription, turningPointBody, methodologyBody */}
         <SectionWrapper variant="tertiary">
-          <Origin
-            label={aboutContent?.originSectionLabel}
-            headline={aboutContent?.originSectionHeadline}
-            description={aboutContent?.originSectionDescription}
-            highlight={aboutContent?.originSectionHighlight}
-            phases={aboutContent?.originPhases}
-            anchorWord={aboutContent?.originSectionAnchorWord}
+          <AboutStoryScroll
+            originImage={aboutContent?.originImage}
+            originHeadline={aboutContent?.originSectionHeadline}
+            originBody={aboutContent?.originSectionDescription}
+            originAnchorWord={aboutContent?.originSectionAnchorWord}
+            turningPointImage={aboutContent?.introvertImage}
+            turningPointHeadline={aboutContent?.turningPointHeadline}
+            turningPointBody={aboutContent?.turningPointBody}
+            transferImage={aboutContent?.philosophyImage}
+            transferHeadline={aboutContent?.methodologyHeadline}
+            transferBody={aboutContent?.methodologyBody}
           />
         </SectionWrapper>
-
-        {/* 3 — TURNING POINT: school performance story */}
-        {aboutContent?.turningPointHeadline && (
-          <SectionWrapper variant="primary">
-            <SectionContent>
-              <ScrollFade>
-              <TurningPoint
-                headline={aboutContent.turningPointHeadline}
-                body={aboutContent.turningPointBody ?? ''}
-                highlight={aboutContent.turningPointHighlight}
-              />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
-
-        {/* 4 — METHODOLOGY: freestyle/choreography narrative (tertiary bg = intellectual core) */}
-        {aboutContent?.methodologyHeadline && (
-          <SectionWrapper variant="tertiary">
-            <SectionContent>
-              <ScrollFade>
-              <MethodologyNarrative
-                headline={aboutContent.methodologyHeadline}
-                body={aboutContent.methodologyBody ?? ''}
-                highlight={aboutContent.methodologyHighlight}
-                philosophyImage={aboutContent.philosophyImage}
-              />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
-
-        {/* 5 — WHY THIS EXISTS */}
-        {aboutContent?.whyExistsHeadline && (
-          <SectionWrapper variant="primary">
-            <SectionContent>
-              <ScrollFade>
-              <WhyExists
-                headline={aboutContent.whyExistsHeadline}
-                body={aboutContent.whyExistsBody ?? ''}
-                highlight={aboutContent.whyExistsHighlight}
-                kidsImage={aboutContent.originImage}
-              />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
 
         {/* 6 — WHO THIS IS FOR */}
         {aboutContent?.whoForHeadline && (
@@ -135,15 +95,15 @@ export default async function About() {
         <SectionWrapper variant="tertiary">
           <SectionContent>
             <CTA
-              title={aboutContent?.closingHeadline ?? "Your Presence Matters. Let's Build It."}
-              sub={aboutContent?.closingBody ?? "You're not broken. I'm here to show you that the version of yourself you've been holding back — that's not your weakness. That's your foundation."}
-              description={aboutContent?.closingBody ?? "You're not broken. I'm here to show you that the version of yourself you've been holding back — that's not your weakness. That's your foundation."}
-              buttonText={aboutContent?.ctaButtonText ?? "Book Your Free Presence Audit"}
-              buttonLink="/audit"
+              title={aboutContent?.closingHeadline ?? "Find the work you were meant for."}
+              sub={aboutContent?.closingBody ?? "Start with eight questions. They take ten minutes. If the results tell you something useful, keep going."}
+              description={aboutContent?.closingBody ?? "Start with eight questions. They take ten minutes. If the results tell you something useful, keep going."}
+              buttonText={aboutContent?.ctaButtonText ?? "Discover Your Ikigai"}
+              buttonLink="/ikigai"
               previewItems={[
-                { number: '01', text: 'A 7-question audit you can do in under 5 minutes' },
-                { number: '02', text: 'Your presence score with honest context — no sales pitch' },
-                { number: '03', text: 'A personal follow-up from me if you want to go deeper' },
+                { number: '01', text: 'Eight questions, ten minutes — ungated and free' },
+                { number: '02', text: 'Results identify which of the four ikigai circles are strong or missing' },
+                { number: '03', text: 'Saves to your portal if you have an account' },
               ]}
             />
           </SectionContent>

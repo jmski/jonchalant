@@ -1,3 +1,7 @@
+// Canonical content lives in design/canonical-content.json.
+// Edit content there, then run this script to push to Sanity.
+// Do NOT hardcode canonical strings in this file.
+
 /**
  * Seed placeholder press mentions and case studies into Sanity.
  *
@@ -9,6 +13,7 @@
 
 import { createClient } from '@sanity/client'
 import * as dotenv from 'dotenv'
+import canonicalContent from '../design/canonical-content.json' with { type: 'json' }
 
 dotenv.config({ path: '.env.local' })
 
@@ -43,40 +48,11 @@ const pressMentions = [
 // Case Studies
 // ---------------------------------------------------------------------------
 
-const caseStudies = [
-  {
-    title: 'From Overlooked to Promoted',
-    clientName: 'Marcus T.',
-    industry: 'Tech / Product Management',
-    challenge:
-      'Led high-impact projects but was consistently passed over for promotion. Senior leadership registered his output but not his presence — he blended into the background in rooms full of louder voices.',
-    solution:
-      'Eight weeks of presence work: entry posture, vocal pacing, and physical grounding before high-stakes meetings. We rebuilt how he occupied space before he said a word.',
-    results: [
-      'Promoted to Senior PM within 10 weeks of completing the program',
-      'Now facilitates quarterly leadership offsites for his division',
-      'Describes the shift as "people finally hear me when I speak"',
-    ],
-    featured: true,
-    order: 1,
-  },
-  {
-    title: 'Speaking Up in the Room',
-    clientName: 'Diana K.',
-    industry: 'Finance / Director',
-    challenge:
-      'Technically strong and consistently high-rated on performance reviews, but physically disappeared in rooms full of louder personalities. Avoided speaking in group settings unless directly asked.',
-    solution:
-      'Focus on spatial ownership and deliberate stillness. Practicing expansive posture before board meetings and learning to hold eye contact without shrinking.',
-    results: [
-      'Now opens quarterly finance reviews for her department',
-      'Invited to represent her team at two external industry panels',
-      'Reports "I stopped apologising for taking up space"',
-    ],
-    featured: true,
-    order: 2,
-  },
-]
+const caseStudies = canonicalContent.caseStudies.map((cs, idx) => ({
+  ...cs,
+  featured: true,
+  order: idx + 1,
+}))
 
 // ---------------------------------------------------------------------------
 // Seed functions
@@ -85,7 +61,6 @@ const caseStudies = [
 async function seedPressMentions() {
   console.log('Seeding press mentions...')
 
-  // Check for existing press mention documents
   const existing = await client.fetch<string[]>(
     `*[_type == "pressMention"].outlet`
   )

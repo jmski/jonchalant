@@ -1,0 +1,262 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "JONCHALANT" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - generic [ref=e4]:
+      - link "Start Here" [ref=e5] [cursor=pointer]:
+        - /url: /ikigai
+      - link "Programs" [ref=e6] [cursor=pointer]:
+        - /url: /programs
+      - link "Lessons" [ref=e7] [cursor=pointer]:
+        - /url: /lessons
+      - link "About" [ref=e8] [cursor=pointer]:
+        - /url: /about
+    - generic [ref=e9]:
+      - link "Sign In" [ref=e10] [cursor=pointer]:
+        - /url: /login
+      - button "Toggle navigation menu" [ref=e11]
+    - generic [ref=e12]:
+      - link "Start Here" [ref=e13] [cursor=pointer]:
+        - /url: /ikigai
+        - emphasis [ref=e14]: Start Here
+      - link "Programs" [ref=e15] [cursor=pointer]:
+        - /url: /programs
+      - link "The Foundation" [ref=e16] [cursor=pointer]:
+        - /url: /foundation
+      - link "Lessons" [ref=e17] [cursor=pointer]:
+        - /url: /lessons
+      - link "Blog" [ref=e18] [cursor=pointer]:
+        - /url: /blog
+      - link "Dance" [ref=e19] [cursor=pointer]:
+        - /url: /dance
+      - link "About" [ref=e20] [cursor=pointer]:
+        - /url: /about
+      - link "Contact" [ref=e21] [cursor=pointer]:
+        - /url: /contact
+      - link "Sign In" [ref=e23] [cursor=pointer]:
+        - /url: /login
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: THE FOUNDATION · 8 WEEKS · MEDIUM-AGNOSTIC EMBODIMENT
+          - heading "Knowing the work isn't the same as inhabiting it." [level=1] [ref=e31]:
+            - text: Knowing the work isn't the same as
+            - emphasis [ref=e32]: inhabiting
+            - text: it.
+          - paragraph [ref=e33]: Eight weeks of body-first practice in Grounding, Energy, Flow, and Command. Your medium. Your role.
+          - paragraph [ref=e34]: "A decade of choreography taught me this: insight lives in the mind. Presence lives in the body. If you've named the work you were meant for, Foundation is where you build the practice that lets you inhabit it."
+          - generic [ref=e35]:
+            - link "ENROLL — STARTING AT $197" [ref=e36] [cursor=pointer]:
+              - /url: "#pricing"
+            - link "SEE WHAT'S INSIDE" [ref=e37] [cursor=pointer]:
+              - /url: "#inside"
+          - paragraph [ref=e38]: No pressure. No pitch. Enroll when you're ready.
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: Who this is for
+          - heading "If you've named it but haven't yet inhabited it" [level=2] [ref=e41]
+          - list [ref=e42]:
+            - listitem [ref=e43]: You've identified the work, but inhabiting it feels like a stretch.
+            - listitem [ref=e44]: You can articulate who you want to become, but you haven't built the body for it yet.
+            - listitem [ref=e45]: You've outgrown your old role faster than you've grown into the new one.
+            - listitem [ref=e46]: You know what to say. You need to learn how to be when you're saying it.
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - paragraph [ref=e52]: The curriculum
+          - heading "8 weeks. One week at a time." [level=2] [ref=e53]
+          - paragraph [ref=e54]: Each module builds on the last. You can go faster — but the material is sequenced deliberately. Physical groundedness before vocal command. Fundamentals before high-stakes application.
+        - list [ref=e55]:
+          - listitem [ref=e56]:
+            - generic [ref=e57]: Module 1
+            - generic [ref=e58]:
+              - heading "Why Soft Skills Matter" [level=3] [ref=e59]
+              - paragraph [ref=e60]: Problem framing — why traditional leadership training fails and what dance reveals about real human connection.
+              - paragraph [ref=e61]: 12 lessons · 15–20 hours
+          - listitem [ref=e62]:
+            - generic [ref=e63]: Module 2
+            - generic [ref=e64]:
+              - heading "The Body as Instrument" [level=3] [ref=e65]
+              - paragraph [ref=e66]: Body control — posture, gesture, spatial awareness, and physical intentionality.
+              - paragraph [ref=e67]: 17 lessons · 25–30 hours
+          - listitem [ref=e68]:
+            - generic [ref=e69]: Module 3
+            - generic [ref=e70]:
+              - heading "Active Listening & Attunement" [level=3] [ref=e71]
+              - paragraph [ref=e72]: Listening with the whole body — reading rooms, mirroring, presence in conversation.
+              - paragraph [ref=e73]: 18 lessons · 25–30 hours
+          - listitem [ref=e74]:
+            - generic [ref=e75]: Module 4
+            - generic [ref=e76]:
+              - heading "Improvisation & Adaptability" [level=3] [ref=e77]
+              - paragraph [ref=e78]: Thinking on your feet — managing uncertainty, creative problem-solving, spontaneous expression.
+              - paragraph [ref=e79]: 18 lessons · 25–30 hours
+          - listitem [ref=e80]:
+            - generic [ref=e81]: Module 5
+            - generic [ref=e82]:
+              - heading "Reciprocation & Influence" [level=3] [ref=e83]
+              - paragraph [ref=e84]: Give-and-take dynamics — building rapport, reciprocal communication, authentic influence.
+              - paragraph [ref=e85]: 18 lessons · 25–30 hours
+          - listitem [ref=e86]:
+            - generic [ref=e87]: Module 6
+            - generic [ref=e88]:
+              - heading "Tonality & Vocal Presence" [level=3] [ref=e89]
+              - paragraph [ref=e90]: Voice modulation, pacing, emotion in speech, commanding attention through sound.
+              - paragraph [ref=e91]: 19 lessons · 25–30 hours
+          - listitem [ref=e92]:
+            - generic [ref=e93]: Module 7
+            - generic [ref=e94]:
+              - heading "Presence in Practice" [level=3] [ref=e95]
+              - paragraph [ref=e96]: Integrating all concepts — high-stakes scenarios, presentations, performance under pressure.
+              - paragraph [ref=e97]: 18 lessons · 25–30 hours
+          - listitem [ref=e98]:
+            - generic [ref=e99]: Module 8
+            - generic [ref=e100]:
+              - heading "The Integrated Leader" [level=3] [ref=e101]
+              - paragraph [ref=e102]: Personal brand, sustaining growth, building a presence practice that lasts.
+              - paragraph [ref=e103]: 14 lessons · 20–25 hours
+      - generic [ref=e107]:
+        - generic [ref=e108]:
+          - paragraph [ref=e109]: How it works
+          - heading "Not a lecture series. A movement practice." [level=2] [ref=e110]
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - text: "01"
+            - heading "Self-paced video lessons" [level=3] [ref=e113]
+            - paragraph [ref=e114]: Watch at your own pace. Every lesson is a direct concept — no fluff, no filler.
+          - generic [ref=e115]:
+            - text: "02"
+            - heading "Movement-grounded principles" [level=3] [ref=e116]
+            - paragraph [ref=e117]: Each week draws from professional dance training and translates it into leadership behaviour you can practise immediately.
+          - generic [ref=e118]:
+            - text: "03"
+            - heading "Personal follow-up from Jon" [level=3] [ref=e119]
+            - paragraph [ref=e120]: This isn't automated. Jon reads your notes and responds personally — not with a drip sequence.
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - paragraph [ref=e125]: Enrollment
+          - heading "Two ways in." [level=2] [ref=e126]
+        - generic [ref=e127]:
+          - generic [ref=e128]:
+            - paragraph [ref=e129]: Self-Paced
+            - paragraph [ref=e130]: $197
+            - paragraph [ref=e131]: Full course access. All 8 weeks, all lessons, at your own pace.
+            - list [ref=e132]:
+              - listitem [ref=e133]: 8 weeks of video lessons
+              - listitem [ref=e134]: Movement-to-leadership frameworks
+              - listitem [ref=e135]: Lifetime access
+              - listitem [ref=e136]: Personal follow-up from Jon
+            - button "Enroll — $197" [ref=e137]
+          - generic [ref=e138]:
+            - text: Most popular
+            - paragraph [ref=e139]: With Weekly Check-ins
+            - paragraph [ref=e140]: $497
+            - paragraph [ref=e141]: Everything in self-paced, plus a weekly 1:1 call with Jon to work through what's coming up for you.
+            - list [ref=e142]:
+              - listitem [ref=e143]: Everything in Self-Paced
+              - listitem [ref=e144]: 8 weekly 1:1 calls with Jon
+              - listitem [ref=e145]: Real-time feedback on your specific situations
+              - listitem [ref=e146]: Prioritised scheduling
+            - button "Enroll — $497" [ref=e147]
+        - paragraph [ref=e148]: Spots for the With Check-ins tier are limited. If you're on the fence, sooner is better.
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - paragraph [ref=e153]: Questions
+          - heading "Common questions" [level=2] [ref=e154]
+        - generic [ref=e155]:
+          - button "Is this course right for me if I'm not a dancer?" [ref=e157]: Is this course right for me if I'm not a dancer?+
+          - button "How much time does each week require?" [ref=e159]: How much time does each week require?+
+          - button "What makes this different from other confidence or leadership courses?" [ref=e161]: What makes this different from other confidence or leadership courses?+
+          - button "What does \"personal follow-up from Jon\" mean in practice?" [ref=e163]: What does "personal follow-up from Jon" mean in practice?+
+          - button "Is there a refund policy?" [ref=e165]: Is there a refund policy?+
+          - button "What's the difference between the Self-Paced and With Check-ins tiers?" [ref=e167]: What's the difference between the Self-Paced and With Check-ins tiers?+
+      - generic [ref=e170]:
+        - generic [ref=e171]:
+          - text: The Weekly
+          - heading "Not ready to enroll? Get the starter guide." [level=2] [ref=e172]
+          - paragraph [ref=e173]: One weekly essay on embodiment, presence, and the work you were meant for. No pitch. Unsubscribe anytime.
+        - generic [ref=e174]:
+          - generic [ref=e175]:
+            - textbox "Email address" [ref=e176]:
+              - /placeholder: your@email.com
+            - button "I'm in" [ref=e177]
+          - paragraph [ref=e178]: No spam. Unsubscribe anytime.
+      - generic [ref=e181]:
+        - heading "Not sure yet? Start with the free audit." [level=2] [ref=e182]
+        - paragraph [ref=e183]: Seven questions, three minutes. I'll review your answers and tell you exactly where your presence stands — and whether The Foundation is the right next step for you.
+        - link "Take the Presence Audit" [ref=e184] [cursor=pointer]:
+          - /url: /audit
+        - paragraph [ref=e185]: Free. No account needed.
+  - contentinfo [ref=e186]:
+    - generic [ref=e188]:
+      - generic [ref=e189]:
+        - text: Free Guide
+        - heading "Get the Foundation Starter Guide" [level=3] [ref=e190]
+        - paragraph [ref=e191]: The 5 body-aware habits that help introverts build executive presence — without performing or pretending.
+      - generic [ref=e193]:
+        - textbox "First name" [ref=e194]
+        - textbox "your@email.com" [ref=e195]
+        - button "Send Me the Guide" [ref=e196]
+    - generic [ref=e197]:
+      - generic [ref=e198]:
+        - generic [ref=e199]:
+          - link "Jonchalant" [ref=e200] [cursor=pointer]:
+            - /url: /
+            - emphasis [ref=e201]: Jon
+            - text: chalant
+          - paragraph [ref=e202]: Find the work you were meant for — then learn to inhabit it.
+          - generic [ref=e203]:
+            - link "LinkedIn" [ref=e204] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/jonchalant
+              - img [ref=e205]
+            - link "Instagram" [ref=e209] [cursor=pointer]:
+              - /url: https://instagram.com/sojonchalant
+              - img [ref=e210]
+        - generic [ref=e213]:
+          - paragraph [ref=e214]: Essentials
+          - list [ref=e215]:
+            - listitem [ref=e216]:
+              - link "Home" [ref=e217] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e218]:
+              - link "About" [ref=e219] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e220]:
+              - link "Contact" [ref=e221] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e222]:
+          - paragraph [ref=e223]: Coaching
+          - list [ref=e224]:
+            - listitem [ref=e225]:
+              - link "Programs" [ref=e226] [cursor=pointer]:
+                - /url: /programs
+            - listitem [ref=e227]:
+              - link "The Foundation" [ref=e228] [cursor=pointer]:
+                - /url: /foundation
+            - listitem [ref=e229]:
+              - link "Ikigai" [ref=e230] [cursor=pointer]:
+                - /url: /ikigai
+        - generic [ref=e231]:
+          - paragraph [ref=e232]: Learn
+          - list [ref=e233]:
+            - listitem [ref=e234]:
+              - link "The Blueprint" [ref=e235] [cursor=pointer]:
+                - /url: /lessons
+            - listitem [ref=e236]:
+              - link "The Archives" [ref=e237] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e238]:
+              - link "The Breakdown" [ref=e239] [cursor=pointer]:
+                - /url: /dance
+            - listitem [ref=e240]:
+              - link "Presence Audit" [ref=e241] [cursor=pointer]:
+                - /url: /audit
+        - generic [ref=e242]:
+          - paragraph [ref=e243]: Account
+          - list [ref=e244]:
+            - listitem [ref=e245]:
+              - link "Sign In" [ref=e246] [cursor=pointer]:
+                - /url: /login
+      - generic [ref=e247]:
+        - paragraph [ref=e248]: © 2026 Jonchalant. All rights reserved.
+        - link "Privacy Policy" [ref=e249] [cursor=pointer]:
+          - /url: /privacy

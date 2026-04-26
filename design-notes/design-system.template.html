@@ -1,0 +1,1247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jonchalant Design System</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: var(--leading-relaxed);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-primary); text-decoration: none; }
+  a:hover { color: var(--accent-hover); }
+
+  /* ---------- Layout ---------- */
+  .ds-shell { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+  .ds-masthead {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 3rem;
+    margin-bottom: 4rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: flex-end;
+  }
+  .ds-brand {
+    font-family: var(--font-headline);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+  }
+  .ds-title {
+    font-family: var(--font-headline);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 7vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0.75rem 0 0;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+  .ds-title em {
+    font-style: italic;
+    color: var(--accent-primary);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .ds-masthead-meta {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  .ds-section { margin: 0 0 6rem; scroll-margin-top: 2rem; }
+  .ds-section-head {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  .ds-section-num {
+    font-family: var(--font-headline);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    padding-top: 0.6rem;
+  }
+  .ds-section-copy h2 {
+    font-family: var(--font-headline);
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+  }
+  .ds-section-copy h2 em {
+    font-style: italic;
+    color: var(--accent-primary);
+    font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  }
+  .ds-section-copy p {
+    font-size: 1rem;
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .ds-sub {
+    font-family: var(--font-headline);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mocha-deep);
+    margin: 3rem 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  /* ---------- TOC ---------- */
+  .ds-toc {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 6rem;
+  }
+  .ds-toc a {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1rem;
+    color: var(--text-primary);
+    border-right: 1px solid var(--border-subtle);
+    transition: background var(--transition-base);
+  }
+  .ds-toc a:last-child { border-right: none; }
+  .ds-toc a:hover { background: var(--bg-secondary); color: var(--mocha-deep); }
+  .ds-toc-num {
+    font-family: var(--font-headline);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+  }
+  .ds-toc-label {
+    font-family: var(--font-headline);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-top: 0.35rem;
+  }
+
+  /* ---------- Positioning banner ---------- */
+  .pos-banner {
+    background: var(--mocha-deep);
+    color: var(--text-white);
+    border-radius: 0.5rem;
+    padding: 2.75rem 2.5rem;
+    margin-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .pos-banner-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mocha-soft);
+    margin: 0 0 0.9rem;
+  }
+  .pos-banner-head {
+    font-family: var(--font-headline);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    line-height: 1.2;
+    color: var(--text-white);
+    margin: 0;
+    font-variation-settings: "opsz" 72, "SOFT" 100;
+  }
+  .pos-banner-head em {
+    font-style: italic;
+    color: #E8C8B0;
+    font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  }
+  .pos-banner-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .pos-banner-list li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(241, 241, 241, 0.85);
+  }
+  .pos-banner-list .step-num {
+    font-family: var(--font-headline);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: #E8C8B0;
+    padding-top: 0.2rem;
+  }
+  .pos-banner-list strong {
+    color: var(--text-white);
+    font-weight: 600;
+    font-family: var(--font-headline);
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* ---------- Color ---------- */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1.25rem;
+  }
+  .swatch {
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: var(--bg-light);
+  }
+  .swatch-chip {
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    position: relative;
+  }
+  .swatch-chip .role {
+    font-family: var(--font-headline);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .swatch-body { padding: 0.9rem 1rem 1rem; }
+  .swatch-name {
+    font-family: var(--font-headline);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+    margin-top: 0.15rem;
+  }
+  .swatch-token {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--mocha-deep);
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  /* ---------- Type specimens ---------- */
+  .type-stack { display: flex; flex-direction: column; gap: 2.25rem; }
+  .type-row {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 2.5rem;
+    align-items: baseline;
+    border-top: 1px dashed var(--border-subtle);
+    padding-top: 1.75rem;
+  }
+  .type-row:first-child { border-top: none; padding-top: 0; }
+  .type-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    line-height: 1.7;
+  }
+  .type-meta strong {
+    display: block;
+    font-family: var(--font-headline);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 0.35rem;
+  }
+  .type-display {
+    font-family: var(--font-headline);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    margin: 0;
+  }
+  .type-display em {
+    font-style: italic;
+    color: var(--accent-primary);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .type-h1 { font-family: var(--font-headline); font-weight: 400; font-size: clamp(2.25rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.01em; margin: 0; color: var(--text-primary);}
+  .type-h1 em { font-style: italic; color: var(--accent-primary); font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;}
+  .type-h2 { font-family: var(--font-headline); font-weight: 500; font-size: clamp(1.75rem, 4.5vw, 2.75rem); line-height: 1.1; margin: 0; color: var(--text-primary);}
+  .type-h3 { font-family: var(--font-headline); font-weight: 600; font-size: clamp(1.25rem, 2.8vw, 2rem); line-height: 1.2; margin: 0; color: var(--text-primary);}
+  .type-intro { font-family: var(--font-body); font-size: 1.2rem; font-weight: 500; line-height: 1.7; color: var(--text-primary); margin: 0; max-width: 44ch;}
+  .type-body { font-family: var(--font-body); font-weight: 400; font-size: 1.0625rem; line-height: var(--leading-relaxed); color: var(--text-primary); margin: 0; max-width: 56ch;}
+  .type-eyebrow { font-family: var(--font-body); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mocha-deep); margin: 0; }
+  .type-anchor { font-family: var(--font-headline); font-style: italic; color: var(--accent-primary); font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1; font-size: clamp(1.75rem, 4.5vw, 3rem); margin: 0;}
+  .type-kinetic {
+    font-family: var(--font-headline);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--mocha-deep);
+    max-width: 22ch;
+    margin: 0;
+    font-variation-settings: "opsz" 72, "SOFT" 100;
+  }
+
+  /* ---------- Spacing scale ---------- */
+  .spacing-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+  .spacing-row { display: grid; grid-template-columns: 140px 110px 1fr; gap: 1.25rem; align-items: center; }
+  .spacing-row-name { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-primary); }
+  .spacing-row-val { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary); }
+  .spacing-row-bar {
+    height: 14px;
+    background: linear-gradient(90deg, var(--mocha-soft), var(--mocha-mousse));
+    border-radius: 2px;
+  }
+
+  /* ---------- Shadow + radius ---------- */
+  .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
+  .mini-card {
+    background: var(--bg-light);
+    border-radius: 0.5rem;
+    padding: 2rem 1.25rem 1rem;
+  }
+  .mini-card h4 { margin: 0; font-family: var(--font-headline); font-weight: 500; font-size: 0.95rem; color: var(--text-primary);}
+  .mini-card code { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-tertiary); display:block; margin-top: 0.25rem;}
+
+  /* ---------- Button specimens ---------- */
+  .btn-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+  .btn-row { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--border-subtle);}
+  .btn-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .btn-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary); }
+  .btn-sample { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+
+  .btn {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid var(--accent-primary);
+    background: var(--accent-primary);
+    color: var(--btn-primary-text);
+    line-height: 1;
+  }
+  .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; box-shadow: 0 4px 12px rgba(164,120,100,0.2); }
+  .btn-secondary { background: transparent; color: var(--text-primary); border-color: var(--border-color); }
+  .btn-secondary:hover { background: color-mix(in srgb, var(--accent-primary) 8%, transparent); border-color: var(--accent-primary); color: var(--text-primary); box-shadow: none; }
+  .btn-tertiary { background: transparent; color: var(--accent-primary); border: none; border-bottom: 2px solid transparent; padding: 0.5rem 0; border-radius: 0; text-transform: none; letter-spacing: 0; font-size: 0.95rem;}
+  .btn-tertiary:hover { border-bottom-color: var(--accent-primary); box-shadow: none; background: transparent; }
+  .btn-sm { padding: 0.6rem 1rem; font-size: 0.78rem; }
+  .btn-lg { padding: 1.05rem 2rem; font-size: 1rem; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.375rem;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--accent-primary);
+    color: #fff;
+  }
+  .badge-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); }
+  .badge-warm { background: var(--color-warning); color: #fff; }
+  .badge-success { background: var(--color-success); color: #fff; }
+  .badge-outline { background: transparent; color: var(--mocha-deep); border: 1px solid var(--mocha-deep);}
+  .badge-free { background: var(--sage-whisper); color: #fff;}
+
+  /* ---------- Form ---------- */
+  .form-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    max-width: 640px;
+  }
+  label { font-family: var(--font-body); font-size: 0.78rem; font-weight: 600; color: var(--text-primary); display: block; margin-bottom: 0.4rem; letter-spacing: 0.02em;}
+  input, textarea, select {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.8rem 0.95rem;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-radius: 0.375rem;
+    width: 100%;
+    transition: all var(--transition-fast);
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: var(--bg-light);
+    box-shadow: 0 0 0 3px rgba(164, 120, 100, 0.12);
+  }
+  .form-row-full { grid-column: 1 / -1; }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    background: color-mix(in srgb, var(--accent-primary) 4%, var(--bg-secondary));
+    border: 1px solid color-mix(in srgb, var(--accent-primary) 18%, var(--border-subtle));
+    border-radius: 0.5rem;
+    padding: 1.5rem 1.75rem;
+    max-width: 680px;
+  }
+  .callout h4 { font-family: var(--font-headline); font-weight: 600; font-size: 1.05rem; margin: 0 0 0.4rem; color: var(--text-primary);}
+  .callout p { font-size: 0.95rem; line-height: var(--leading-relaxed); color: var(--text-secondary); margin: 0;}
+
+  /* ---------- Pillar card (medium-agnostic) ---------- */
+  .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .pillar-card {
+    padding: 2rem 1.75rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-top: 2px solid transparent;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all var(--transition-base);
+  }
+  .pillar-card:hover { border-top-color: var(--accent-primary); box-shadow: 0 4px 16px rgba(164, 120, 100, 0.1); transform: translateY(-2px); }
+  .pillar-label { font-family: var(--font-headline); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-primary);}
+  .pillar-name { font-family: var(--font-headline); font-size: 1.35rem; font-weight: 600; color: var(--text-primary); margin: 0;}
+  .pillar-def { font-size: 0.95rem; line-height: 1.55; color: var(--text-secondary); margin: 0; font-style: italic;}
+  .pillar-apps { list-style: none; padding: 1rem 0 0; margin: auto 0 0; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 0.7rem;}
+  .pillar-apps li { font-size: 0.88rem; line-height: 1.5; color: var(--text-secondary);}
+  .pillar-apps .who {
+    font-family: var(--font-headline);
+    font-style: italic;
+    color: var(--mocha-deep);
+    font-variation-settings: "opsz" 72, "SOFT" 100;
+  }
+
+  /* ---------- Four circles diagram ---------- */
+  .circles-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .circles-svg-wrap { display: flex; justify-content: center; }
+  .circles-legend { display: flex; flex-direction: column; gap: 0.85rem; }
+  .circles-legend-row { display: grid; grid-template-columns: 18px 1fr; gap: 0.75rem; align-items: baseline; font-size: 0.9rem;}
+  .circles-legend-dot { width: 14px; height: 14px; border-radius: 50%; margin-top: 0.2rem;}
+  .circles-legend-name { font-family: var(--font-headline); font-weight: 600; color: var(--text-primary); }
+  .circles-legend-desc { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; display: block; }
+
+  /* ---------- Lesson row (Four Circles) ---------- */
+  .lesson-list { display: flex; flex-direction: column; border-top: 1px solid var(--border-color); }
+  .lesson-row {
+    display: grid;
+    grid-template-columns: 52px 1fr auto;
+    gap: 1.5rem;
+    padding: 1.25rem 0.5rem 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border-subtle);
+    align-items: baseline;
+    border-left: 2px solid transparent;
+    transition: background var(--transition-base), border-color var(--transition-base);
+  }
+  .lesson-row:hover { background: color-mix(in srgb, var(--mocha-mousse) 3%, transparent); }
+  .lesson-row--p1 { border-left-color: var(--mocha-soft); }
+  .lesson-row--p2 { border-left-color: var(--mocha-mousse); }
+  .lesson-row--p3 { border-left-color: var(--mocha-deep); }
+  .lesson-group-title { display: grid; grid-template-columns: 52px 1fr; gap: 1.5rem; align-items: baseline; padding: 2rem 0.75rem 0.9rem;}
+  .lesson-group-num { font-family: var(--font-headline); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-primary);}
+  .lesson-group-label { font-family: var(--font-headline); font-weight: 500; font-size: 1.1rem; color: var(--text-primary); margin: 0;}
+  .lesson-group-label em { font-style: italic; color: var(--mocha-deep); font-variation-settings: "opsz" 72, "SOFT" 100;}
+  .lesson-num { font-family: var(--font-headline); font-size: 0.75rem; letter-spacing: 0.14em; color: var(--accent-primary); padding-top: 0.1rem;}
+  .lesson-title { font-family: var(--font-body); font-size: 0.98rem; font-weight: 600; color: var(--text-primary); margin: 0 0 0.25rem;}
+  .lesson-sub { font-size: 0.87rem; line-height: 1.55; color: var(--text-secondary); margin: 0; }
+  .lesson-meta { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-tertiary); white-space: nowrap; padding-top: 0.2rem;}
+
+  /* ---------- Ikigai / funnel card ---------- */
+  .funnel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .funnel-card {
+    padding: 1.75rem;
+    background: var(--gradient-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    position: relative;
+  }
+  .funnel-card-step {
+    font-family: var(--font-headline);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+  }
+  .funnel-card-title { font-family: var(--font-headline); font-weight: 600; font-size: 1.15rem; color: var(--text-primary); margin: 0;}
+  .funnel-card-price { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-tertiary); }
+  .funnel-card-desc { font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary); margin: 0; flex: 1;}
+  .funnel-card-cta { font-size: 0.82rem; font-weight: 600; color: var(--accent-primary); display: inline-flex; gap: 0.3rem; margin-top: 0.25rem;}
+  .funnel-card-cta::after { content: "→"; transition: transform var(--transition-base); }
+  .funnel-card:hover .funnel-card-cta::after { transform: translateX(3px); }
+
+  /* ---------- Navbar specimen ---------- */
+  .navbar-demo {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.75rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    gap: 2rem;
+  }
+  .navbar-brand { font-family: var(--font-body); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.22em; color: var(--text-primary);}
+  .navbar-menu { display: flex; gap: 1.75rem; }
+  .navbar-link { font-size: 0.82rem; font-weight: 500; color: var(--text-primary); border-bottom: 2px solid transparent; padding-bottom: 0.25rem; transition: all var(--transition-base);}
+  .navbar-link:hover, .navbar-link.active { border-bottom-color: var(--accent-primary); color: var(--accent-primary);}
+  .navbar-actions { display: flex; gap: 0.75rem; }
+  .navbar-cta-btn { font-size: 0.78rem; font-weight: 600; padding: 0.55rem 1rem; border-radius: 0.375rem; background: var(--accent-primary); color: #fff; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--accent-primary);}
+  .navbar-login-btn { font-size: 0.78rem; font-weight: 600; padding: 0.55rem 1rem; border-radius: 0.375rem; background: transparent; color: var(--text-primary); letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--border-color);}
+
+  /* ---------- Hero specimen ---------- */
+  .hero-demo {
+    position: relative;
+    min-height: 400px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    padding: 3.5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-demo-orb { position: absolute; border-radius: 50%; pointer-events: none; }
+  .hero-demo-orb-1 {
+    width: 460px; height: 460px; top: -22%; right: -14%;
+    background: radial-gradient(circle, rgba(164,120,100,0.30) 0%, rgba(164,120,100,0.08) 40%, transparent 65%);
+  }
+  .hero-demo-orb-2 {
+    width: 340px; height: 340px; bottom: -28%; left: -9%;
+    background: radial-gradient(circle, rgba(107,79,63,0.24) 0%, rgba(107,79,63,0.06) 40%, transparent 65%);
+  }
+  .hero-demo-inner { position: relative; z-index: 2; max-width: 620px; display: flex; flex-direction: column; gap: 1.25rem;}
+  .hero-demo-eyebrow { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-primary);}
+  .hero-demo-headline { font-family: var(--font-headline); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; color: var(--text-primary); margin: 0; font-variation-settings: "opsz" 144, "SOFT" 100;}
+  .hero-demo-headline em { font-style: italic; color: var(--accent-primary); font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;}
+  .hero-demo-sub { font-size: 0.98rem; line-height: 1.7; color: var(--text-secondary); max-width: 38ch; margin: 0;}
+  .hero-demo-secondary { font-size: 0.88rem; color: var(--text-tertiary); margin: 0.25rem 0 0;}
+  .hero-demo-secondary a { color: var(--mocha-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(107, 79, 63, 0.4);}
+
+  /* ---------- Dark section ---------- */
+  .dark-section {
+    background: var(--mocha-deep);
+    border-radius: 0.5rem;
+    padding: 3rem 2.5rem;
+    color: var(--text-white);
+  }
+  .dark-section h3 { font-family: var(--font-headline); font-weight: 400; font-size: 1.75rem; color: var(--text-white); margin: 0 0 0.75rem; }
+  .dark-section h3 em { font-style: italic; color: #E8C8B0; font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;}
+  .dark-section p { color: rgba(241, 241, 241, 0.72); margin: 0; max-width: 48ch;}
+  .dark-section .btn { margin-top: 1.5rem; }
+
+  /* ---------- Logos ---------- */
+  .logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
+  .logo-tile {
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    background: var(--bg-light);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 140px;
+  }
+  .logo-tile.dark { background: var(--mocha-deep); }
+  .logo-tile.mocha { background: var(--mocha-mousse); }
+  .logo-wordmark {
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+  .logo-tile.dark .logo-wordmark, .logo-tile.mocha .logo-wordmark { color: #fff;}
+  .logo-mark-stack { display: flex; flex-direction: column; align-items: center; gap: 0.4rem;}
+  .logo-mark-symbol {
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 1.5px solid currentColor;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-headline); font-weight: 400; font-style: italic;
+    font-size: 1.5rem;
+    font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  }
+
+  /* ---------- Icons ---------- */
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.75rem; }
+  .icon-tile { padding: 1rem; border: 1px solid var(--border-subtle); border-radius: 0.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.55rem; background: var(--bg-light);}
+  .icon-tile svg { color: var(--mocha-deep); }
+  .icon-tile span { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-tertiary);}
+
+  /* ---------- Phrase library ---------- */
+  .phrase-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+  .phrase-list li {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px dashed var(--border-subtle);
+  }
+  .phrase-list li:last-child { border-bottom: none; }
+  .phrase-list .page {
+    font-family: var(--font-headline);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+  }
+  .phrase-list .phrase {
+    font-family: var(--font-headline);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: var(--mocha-deep);
+    font-variation-settings: "opsz" 72, "SOFT" 100;
+  }
+
+  /* ---------- Voice do/don't ---------- */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .voice-card {
+    padding: 1.5rem 1.75rem;
+    border-radius: 0.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+  }
+  .voice-card.do { border-left: 3px solid var(--sage-whisper); }
+  .voice-card.dont { border-left: 3px solid var(--color-error); }
+  .voice-card h4 { font-family: var(--font-headline); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 0.9rem;}
+  .voice-card.do h4 { color: var(--color-success); }
+  .voice-card.dont h4 { color: var(--color-error); }
+  .voice-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;}
+  .voice-card li { font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary);}
+
+  /* ---------- Footer ---------- */
+  .ds-foot {
+    margin-top: 6rem; padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 2rem;
+    font-size: 0.78rem; color: var(--text-tertiary); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  @media (max-width: 960px) {
+    .pos-banner { grid-template-columns: 1fr; }
+    .circles-card { grid-template-columns: 1fr; }
+    .voice-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .ds-shell { padding: 3rem 1.5rem; }
+    .ds-masthead, .ds-section-head { grid-template-columns: 1fr; gap: 1.25rem; }
+    .ds-section-head { padding-top: 1.75rem; }
+    .ds-toc { grid-template-columns: repeat(2, 1fr); }
+    .ds-toc a { border-bottom: 1px solid var(--border-subtle); }
+    .type-row, .spacing-row { grid-template-columns: 1fr; gap: 0.75rem; }
+    .btn-row { grid-template-columns: 1fr; }
+    .form-demo { grid-template-columns: 1fr; }
+    .lesson-row { grid-template-columns: 40px 1fr; }
+    .lesson-meta { grid-column: 2; padding-top: 0.3rem;}
+  }
+</style>
+</head>
+<body>
+  <div class="ds-shell">
+
+    <!-- ═════════════ MASTHEAD ═════════════ -->
+    <header class="ds-masthead">
+      <div>
+        <div class="ds-brand">Jonchalant · Design System</div>
+        <h1 class="ds-title">Find the <em>work</em> you were meant for.</h1>
+      </div>
+      <div class="ds-masthead-meta">
+        v2 · Palette 17-1230<br>
+        Ikigai-first · Medium-agnostic<br>
+        Source: jmski/jonchalant
+      </div>
+    </header>
+
+    <!-- ═════════════ POSITIONING BANNER ═════════════ -->
+    <section class="pos-banner">
+      <div>
+        <p class="pos-banner-eyebrow">Positioning · read this first</p>
+        <h2 class="pos-banner-head">Jonchalant helps professionals find the work they were meant for — then learn to <em>inhabit</em> it.</h2>
+        <p style="color: rgba(241,241,241,0.72); max-width: 42ch; margin: 1rem 0 0; font-size: 0.95rem; line-height: 1.7;">
+          Ikigai is the entry point. Embodiment is the practice. Dance is Jon's medium — the demonstration and the teaching vehicle. The philosophy is medium-agnostic.
+        </p>
+      </div>
+      <ul class="pos-banner-list">
+        <li><span class="step-num">01</span><span><strong>Ikigai Assessment</strong>Free, ungated. Eight questions, ten minutes. Identifies which of the four circles are strong — and which are missing.</span></li>
+        <li><span class="step-num">02</span><span><strong>The Four Circles</strong>Free, account-gated. A 12-lesson course that names the pattern you're living.</span></li>
+        <li><span class="step-num">03</span><span><strong>The Foundation</strong>Paid ($197 / $497). Embodiment training through dance. Transfers to any medium.</span></li>
+        <li><span class="step-num">04</span><span><strong>1-on-1 Coaching</strong>$3,500+. Custom work on a specific, current situation.</span></li>
+      </ul>
+    </section>
+
+    <!-- ═════════════ TOC ═════════════ -->
+    <nav class="ds-toc">
+      <a href="#principles"><span class="ds-toc-num">01</span><span class="ds-toc-label">Principles</span></a>
+      <a href="#voice"><span class="ds-toc-num">02</span><span class="ds-toc-label">Voice</span></a>
+      <a href="#color"><span class="ds-toc-num">03</span><span class="ds-toc-label">Color</span></a>
+      <a href="#type"><span class="ds-toc-num">04</span><span class="ds-toc-label">Typography</span></a>
+      <a href="#pillars"><span class="ds-toc-num">05</span><span class="ds-toc-label">Four Pillars</span></a>
+      <a href="#circles"><span class="ds-toc-num">06</span><span class="ds-toc-label">Four Circles</span></a>
+      <a href="#space"><span class="ds-toc-num">07</span><span class="ds-toc-label">Space &amp; Shape</span></a>
+      <a href="#brand"><span class="ds-toc-num">08</span><span class="ds-toc-label">Brand</span></a>
+      <a href="#components"><span class="ds-toc-num">09</span><span class="ds-toc-label">Components</span></a>
+      <a href="#patterns"><span class="ds-toc-num">10</span><span class="ds-toc-label">Patterns</span></a>
+    </nav>
+
+    <!-- ═════════════ 01 PRINCIPLES ═════════════ -->
+    <section class="ds-section" id="principles">
+      <div class="ds-section-head">
+        <div class="ds-section-num">01 / Foundation</div>
+        <div class="ds-section-copy">
+          <h2>Four principles, in quiet <em>counterpoint.</em></h2>
+          <p>The system is editorial, muted, unhurried. Warm and honest — not polished and aspirational. Every decision is filtered through four Japanese aesthetic pillars.</p>
+        </div>
+      </div>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-label">Ikigai</div>
+          <h3 class="pillar-name">Purpose-driven</h3>
+          <p class="pillar-def">Every element earns its place. No filler. If you can't name what it's for, remove it.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Kaizen</div>
+          <h3 class="pillar-name">Continuous refinement</h3>
+          <p class="pillar-def">Subtlety over spectacle. Hairline borders, small typographic shifts. Polish reads on second look.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Ma</div>
+          <h3 class="pillar-name">Generous whitespace</h3>
+          <p class="pillar-def">The space between is the design. Sections breathe with a 4.5rem–11rem rhythm. Content columns stay narrow.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Wabi-sabi</div>
+          <h3 class="pillar-name">Beauty in imperfection</h3>
+          <p class="pillar-def">Fraunces's WONK axis, cream not bone, an italic anchor word. Warm, never slick.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 02 VOICE ═════════════ -->
+    <section class="ds-section" id="voice">
+      <div class="ds-section-head">
+        <div class="ds-section-num">02 / Voice</div>
+        <div class="ds-section-copy">
+          <h2>Casual, direct, unpretentious. Specific over general.</h2>
+          <p>Jon speaks like someone who's honest about tradeoffs and doesn't need to impress you. If a sentence could live in a LinkedIn thought-leadership post, rewrite it.</p>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Do / Don't</h3>
+      <div class="voice-grid">
+        <div class="voice-card do">
+          <h4>Say this</h4>
+          <ul>
+            <li>"Most people are in the right industry. Wrong role."</li>
+            <li>"It's free. It takes ten minutes. If it tells you something useful, keep going."</li>
+            <li>"The medium changes. The fundamentals don't."</li>
+            <li>Headlines that make a <strong>claim</strong>, not a label.</li>
+            <li>CTAs that name what happens next: <em>Discover Your Ikigai</em>, <em>Start the Course</em>.</li>
+          </ul>
+        </div>
+        <div class="voice-card dont">
+          <h4>Avoid</h4>
+          <ul>
+            <li>Coaching jargon: <em>unlock, transform, journey, empowered, authentic self, limiting beliefs, inner game</em>.</li>
+            <li>Vague CTAs: <em>Learn More</em>, <em>Get Started</em>.</li>
+            <li>Stacked adjectives. Hype verbs. Exclamation marks.</li>
+            <li>Assuming the reader is a dancer.</li>
+            <li>Hiding the tradeoff. Name what it isn't.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Kinetic typography moments · phrase library</h3>
+      <p style="color: var(--text-secondary); max-width: 62ch; margin: 0 0 1.5rem; line-height: 1.7;">One per page, max. These are argument lines — they carry the page's claim, not decoration. Skip on functional pages (Blog, Lessons index, Contact, Portal).</p>
+      <ul class="phrase-list">
+        <li><span class="page">Home</span><span class="phrase">Are you in the right room, playing the wrong role?</span></li>
+        <li><span class="page">About</span><span class="phrase">I learned to lead because the lesson plan required it.</span></li>
+        <li><span class="page">Programs</span><span class="phrase">Find the format that fits where you are.</span></li>
+        <li><span class="page">Foundation</span><span class="phrase">Eight weeks. One week at a time.</span></li>
+        <li><span class="page">Ikigai</span><span class="phrase">The medium changes. The fundamentals don't.</span></li>
+        <li><span class="page">Four Circles</span><span class="phrase">Most professionals aren't lost. They're close.</span></li>
+        <li><span class="page">Dance</span><span class="phrase">This isn't a portfolio. It's a practice.</span></li>
+      </ul>
+    </section>
+
+    <!-- ═════════════ 03 COLOR ═════════════ -->
+    <section class="ds-section" id="color">
+      <div class="ds-section-head">
+        <div class="ds-section-num">03 / Color</div>
+        <div class="ds-section-copy">
+          <h2>One warm family. One cool whisper.</h2>
+          <p>Backgrounds sit in cream (#F4EBE0), text anchors in espresso (#2A1F1A), and every accent pulls from the Mocha Mousse system (PANTONE 17-1230). Sage is the only cool color, used sparingly. Warm amber is reserved for pricing and status.</p>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Backgrounds</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-chip" style="background:#F4EBE0; border-bottom: 1px solid var(--border-subtle);"><span class="role" style="color:var(--mocha-deep)">Primary</span></div><div class="swatch-body"><p class="swatch-name">Cream</p><div class="swatch-hex">#F4EBE0</div><code class="swatch-token">--bg-primary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#EFE4D6; border-bottom: 1px solid var(--border-subtle);"><span class="role" style="color:var(--mocha-deep)">Warm</span></div><div class="swatch-body"><p class="swatch-name">Cream Deep</p><div class="swatch-hex">#EFE4D6</div><code class="swatch-token">--bg-secondary / --bg-warm</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#E8D9C7;"><span class="role" style="color:var(--mocha-deep)">Contrast</span></div><div class="swatch-body"><p class="swatch-name">Sand</p><div class="swatch-hex">#E8D9C7</div><code class="swatch-token">--bg-tertiary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#FFFFFF; border: 1px solid var(--border-subtle);"><span class="role" style="color:var(--mocha-deep)">Card</span></div><div class="swatch-body"><p class="swatch-name">Pure White</p><div class="swatch-hex">#FFFFFF</div><code class="swatch-token">--bg-light</code></div></div>
+      </div>
+
+      <h3 class="ds-sub">Text · Espresso Ink</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-chip" style="background:#2A1F1A;"><span class="role" style="color:#F4EBE0">Primary</span></div><div class="swatch-body"><p class="swatch-name">Espresso</p><div class="swatch-hex">#2A1F1A</div><code class="swatch-token">--text-primary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#5C4A3F;"><span class="role" style="color:#F4EBE0">Secondary</span></div><div class="swatch-body"><p class="swatch-name">Ink</p><div class="swatch-hex">#5C4A3F</div><code class="swatch-token">--text-secondary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#8A7668;"><span class="role" style="color:#F4EBE0">Tertiary</span></div><div class="swatch-body"><p class="swatch-name">Faded Ink</p><div class="swatch-hex">#8A7668</div><code class="swatch-token">--text-tertiary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#F1F1F1; border: 1px solid var(--border-subtle);"><span class="role" style="color:var(--mocha-deep)">On dark</span></div><div class="swatch-body"><p class="swatch-name">Soft White</p><div class="swatch-hex">#F1F1F1</div><code class="swatch-token">--text-white</code></div></div>
+      </div>
+
+      <h3 class="ds-sub">Accent · Mocha Mousse</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-chip" style="background:#A47864;"><span class="role" style="color:#fff">Primary accent</span></div><div class="swatch-body"><p class="swatch-name">Mocha Mousse <span style="color:var(--text-tertiary); font-size:0.7rem; letter-spacing:0.05em">17-1230</span></p><div class="swatch-hex">#A47864</div><code class="swatch-token">--mocha-mousse / --accent-primary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#6B4F3F;"><span class="role" style="color:#fff">Hover · dark</span></div><div class="swatch-body"><p class="swatch-name">Mocha Deep</p><div class="swatch-hex">#6B4F3F</div><code class="swatch-token">--mocha-deep / --accent-hover</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#D4B8A3;"><span class="role" style="color:var(--mocha-deep)">Tint</span></div><div class="swatch-body"><p class="swatch-name">Mocha Soft</p><div class="swatch-hex">#D4B8A3</div><code class="swatch-token">--mocha-soft / --border-color</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#E8D9C7; border:1px solid var(--border-subtle);"><span class="role" style="color:var(--mocha-deep)">Hairline</span></div><div class="swatch-body"><p class="swatch-name">Border Subtle</p><div class="swatch-hex">#E8D9C7</div><code class="swatch-token">--border-subtle</code></div></div>
+      </div>
+
+      <h3 class="ds-sub">Semantic · Status &amp; Whisper</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-chip" style="background:#8A9A85;"><span class="role" style="color:#fff">Cool accent</span></div><div class="swatch-body"><p class="swatch-name">Sage Whisper</p><div class="swatch-hex">#8A9A85</div><code class="swatch-token">--sage-whisper / --accent-tertiary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#B89A5F;"><span class="role" style="color:#fff">Pricing</span></div><div class="swatch-body"><p class="swatch-name">Warm Amber</p><div class="swatch-hex">#B89A5F</div><code class="swatch-token">--color-warning / --accent-secondary</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#7A8A6A;"><span class="role" style="color:#fff">Success</span></div><div class="swatch-body"><p class="swatch-name">Moss</p><div class="swatch-hex">#7A8A6A</div><code class="swatch-token">--color-success</code></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#8A5A5A;"><span class="role" style="color:#fff">Error</span></div><div class="swatch-body"><p class="swatch-name">Burgundy</p><div class="swatch-hex">#8A5A5A</div><code class="swatch-token">--color-error</code></div></div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 04 TYPOGRAPHY ═════════════ -->
+    <section class="ds-section" id="type">
+      <div class="ds-section-head">
+        <div class="ds-section-num">04 / Typography</div>
+        <div class="ds-section-copy">
+          <h2>Fraunces for the <em>voice.</em> DM Sans for the rest.</h2>
+          <p>Fraunces's variable opsz, SOFT and WONK axes do the expressive work — titles bloom, anchor words turn italic. DM Sans keeps body copy clean and fast. Never pair with Inter, Roboto, or system sans.</p>
+        </div>
+      </div>
+
+      <div class="type-stack">
+        <div class="type-row">
+          <div class="type-meta"><strong>Display</strong>Fraunces · 400<br>opsz 144 · SOFT 100<br>anchor word: WONK 1</div>
+          <p class="type-display">Find the <em>work</em> you were meant for.</p>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>H1</strong>Fraunces · 400<br>clamp(2.25rem, 6vw, 4rem)</div>
+          <h1 class="type-h1">Most people are in the right industry. <em>Wrong role.</em></h1>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>H2</strong>Fraunces · 500<br>clamp(1.75rem, 4.5vw, 2.75rem)</div>
+          <h2 class="type-h2">Four fundamentals. Any medium.</h2>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>H3</strong>Fraunces · 600<br>clamp(1.25rem, 2.8vw, 2rem)</div>
+          <h3 class="type-h3">Why dance teaches this better than anything else.</h3>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>Kinetic</strong>Fraunces italic · 300<br>opsz 72 · SOFT 100<br>color: mocha-deep</div>
+          <p class="type-kinetic">Are you in the right room, playing the wrong role?</p>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>Intro</strong>DM Sans · 500<br>1.2rem · line 1.7</div>
+          <p class="type-intro">I help professionals find the work they were meant for, and learn to inhabit it. It starts with eight honest questions.</p>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>Body</strong>DM Sans · 400<br>1.0625rem · line 1.8</div>
+          <p class="type-body">Most professionals aren't lost. They're close. Three of the four circles are in place — they're paid well, they're good at what they do, they're in demand — and one circle is missing, usually quietly, usually for years.</p>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>Eyebrow</strong>DM Sans · 500<br>0.78rem · 0.12em<br>uppercase · mocha-deep</div>
+          <p class="type-eyebrow">Free course · 12 lessons · No schedule</p>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><strong>Anchor word</strong>Fraunces italic · 400<br>opsz 72 · SOFT 100 · WONK 1<br>color: mocha-mousse</div>
+          <p class="type-anchor">find your&nbsp;<em>medium.</em></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 05 FOUR PILLARS ═════════════ -->
+    <section class="ds-section" id="pillars">
+      <div class="ds-section-head">
+        <div class="ds-section-num">05 / Four Pillars</div>
+        <div class="ds-section-copy">
+          <h2>The fundamentals are the same. The <em>medium</em> is yours to choose.</h2>
+          <p>Grounding, Energy, Flow, Command. Any component rendering the pillars must carry at least three mini-applications across different mediums — this is the single strongest piece of proof that embodiment transfers.</p>
+        </div>
+      </div>
+
+      <!-- INJECT:pillars-grid -->
+    </section>
+
+    <!-- ═════════════ 06 FOUR CIRCLES ═════════════ -->
+    <section class="ds-section" id="circles">
+      <div class="ds-section-head">
+        <div class="ds-section-num">06 / Four Circles</div>
+        <div class="ds-section-copy">
+          <h2>Passion. Mission. Vocation. Profession.</h2>
+          <p>Ikigai sits at the overlap of four things: what you love, what the world needs, what you can be paid for, and what you're good at. The quiz, the course, and the portal dashboard all present the circles in this order — always.</p>
+        </div>
+      </div>
+
+      <div class="circles-card">
+        <div class="circles-svg-wrap">
+          <svg width="260" height="260" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .c { mix-blend-mode: multiply; stroke-width: 1.5; fill-opacity: 0.55; }
+              </style>
+            </defs>
+            <!-- Passion (top) -->
+            <circle class="c" cx="130" cy="100" r="70" fill="#A47864" stroke="#6B4F3F"/>
+            <!-- Mission (right) -->
+            <circle class="c" cx="160" cy="150" r="70" fill="#D4B8A3" stroke="#6B4F3F"/>
+            <!-- Vocation (left) -->
+            <circle class="c" cx="100" cy="150" r="70" fill="#8A9A85" stroke="#4a5245"/>
+            <!-- Profession (bottom) -->
+            <circle class="c" cx="130" cy="185" r="70" fill="#B89A5F" stroke="#6B4F3F"/>
+
+            <text x="130" y="45" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#2A1F1A">Passion</text>
+            <text x="232" y="155" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#2A1F1A">Mission</text>
+            <text x="28" y="155" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#2A1F1A">Vocation</text>
+            <text x="130" y="248" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#2A1F1A">Profession</text>
+
+            <text x="130" y="148" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="11" fill="#2A1F1A" font-weight="600">ikigai</text>
+          </svg>
+        </div>
+        <div class="circles-legend">
+          <div class="circles-legend-row">
+            <span class="circles-legend-dot" style="background:#A47864;"></span>
+            <span><span class="circles-legend-name">Passion</span><span class="circles-legend-desc">What you love.</span></span>
+          </div>
+          <div class="circles-legend-row">
+            <span class="circles-legend-dot" style="background:#D4B8A3;"></span>
+            <span><span class="circles-legend-name">Mission</span><span class="circles-legend-desc">What the world needs.</span></span>
+          </div>
+          <div class="circles-legend-row">
+            <span class="circles-legend-dot" style="background:#8A9A85;"></span>
+            <span><span class="circles-legend-name">Vocation</span><span class="circles-legend-desc">What you're good at.</span></span>
+          </div>
+          <div class="circles-legend-row">
+            <span class="circles-legend-dot" style="background:#B89A5F;"></span>
+            <span><span class="circles-legend-name">Profession</span><span class="circles-legend-desc">What you can be paid for.</span></span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">The Four Circles · 12-lesson curriculum</h3>
+      <p style="color: var(--text-secondary); max-width: 62ch; margin: 0 0 1.5rem; line-height: 1.7;">Lessons 01–04 are foundational. 05–08 get more challenging. 09–12 are the hardest and the most important — this is where the Foundation picks up. The course is designed so you can <em>feel</em> the difficulty increase.</p>
+
+      <div class="lesson-list">
+        <div class="lesson-group-title"><span class="lesson-group-num">Part 1</span><p class="lesson-group-label">Foundations — <em>naming the frame.</em></p></div>
+        <div class="lesson-row lesson-row--p1"><span class="lesson-num">01</span><div><p class="lesson-title">Why purpose matters</p><p class="lesson-sub">The ikigai framework, how it came to the west, why it's useful, how to use this course.</p></div><span class="lesson-meta">~15 min</span></div>
+        <div class="lesson-row lesson-row--p1"><span class="lesson-num">02</span><div><p class="lesson-title">Passion alone</p><p class="lesson-sub">What it feels like to love something you can't turn into work. Why that's still valuable information.</p></div><span class="lesson-meta">~15 min</span></div>
+        <div class="lesson-row lesson-row--p1"><span class="lesson-num">03</span><div><p class="lesson-title">Mission alone</p><p class="lesson-sub">Caring about a problem you're not yet equipped to solve. The gap between heart and hands.</p></div><span class="lesson-meta">~15 min</span></div>
+        <div class="lesson-row lesson-row--p1"><span class="lesson-num">04</span><div><p class="lesson-title">Vocation alone</p><p class="lesson-sub">Being skilled at something you don't enjoy. How this happens, why it's harder to escape than it looks.</p></div><span class="lesson-meta">~15 min</span></div>
+
+        <div class="lesson-group-title"><span class="lesson-group-num">Part 2</span><p class="lesson-group-label">The drift — <em>harder than it looks.</em></p></div>
+        <div class="lesson-row lesson-row--p2"><span class="lesson-num">05</span><div><p class="lesson-title">Profession alone</p><p class="lesson-sub">Getting paid for something without meaning. The most common form of drift.</p></div><span class="lesson-meta">~15 min</span></div>
+        <div class="lesson-row lesson-row--p2"><span class="lesson-num">06</span><div><p class="lesson-title">The six pairings</p><p class="lesson-sub">What happens when two circles overlap. Covers all six combinations.</p></div><span class="lesson-meta">~20 min</span></div>
+        <div class="lesson-row lesson-row--p2"><span class="lesson-num">07</span><div><p class="lesson-title">Delight but no wealth</p><p class="lesson-sub">Passion + Mission + Vocation, missing Profession. Fulfilled but unpaid.</p></div><span class="lesson-meta">~15 min</span></div>
+        <div class="lesson-row lesson-row--p2"><span class="lesson-num">08</span><div><p class="lesson-title">Delight but uncertain</p><p class="lesson-sub">Passion + Mission + Profession, missing Vocation. Meaningful work the world doesn't yet pay for well.</p></div><span class="lesson-meta">~15 min</span></div>
+
+        <div class="lesson-group-title"><span class="lesson-group-num">Part 3</span><p class="lesson-group-label">The hard ones — <em>where the work begins.</em></p></div>
+        <div class="lesson-row lesson-row--p3"><span class="lesson-num">09</span><div><p class="lesson-title">Comfortable but empty</p><p class="lesson-sub">Passion + Vocation + Profession, missing Mission. The well-paid expert who suspects the work doesn't matter. This lesson is longer — it's where most of my students live.</p></div><span class="lesson-meta">~25 min</span></div>
+        <div class="lesson-row lesson-row--p3"><span class="lesson-num">10</span><div><p class="lesson-title">Useful but unexcited</p><p class="lesson-sub">Mission + Vocation + Profession, missing Passion. Doing good, skilled, necessary work that doesn't light you up.</p></div><span class="lesson-meta">~20 min</span></div>
+        <div class="lesson-row lesson-row--p3"><span class="lesson-num">11</span><div><p class="lesson-title">Ikigai, when it happens</p><p class="lesson-sub">What the four-circle overlap actually feels like. Why it shifts. Why the pursuit, not the arrival, is the point.</p></div><span class="lesson-meta">~20 min</span></div>
+        <div class="lesson-row lesson-row--p3"><span class="lesson-num">12</span><div><p class="lesson-title">What to do next</p><p class="lesson-sub">The bridge from naming the gap to closing it. Where embodiment comes in, and why the Foundation picks up here.</p></div><span class="lesson-meta">~20 min</span></div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 07 SPACE &amp; SHAPE ═════════════ -->
+    <section class="ds-section" id="space">
+      <div class="ds-section-head">
+        <div class="ds-section-num">07 / Space &amp; Shape</div>
+        <div class="ds-section-copy">
+          <h2>Generous rhythm. Hairline edges. Soft radii.</h2>
+          <p>The spacing scale ramps from 0.75rem to 11rem — sections should use the upper half. Radii stay small. Shadows stay quieter than a whisper.</p>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Spacing scale</h3>
+      <div class="spacing-grid">
+        <div class="spacing-row"><span class="spacing-row-name">--spacing-xs</span><span class="spacing-row-val">0.75rem / 12px</span><div class="spacing-row-bar" style="width: 12px"></div></div>
+        <div class="spacing-row"><span class="spacing-row-name">--spacing-sm</span><span class="spacing-row-val">1.25rem / 20px</span><div class="spacing-row-bar" style="width: 20px"></div></div>
+        <div class="spacing-row"><span class="spacing-row-name">--spacing-md</span><span class="spacing-row-val">2rem / 32px</span><div class="spacing-row-bar" style="width: 32px"></div></div>
+        <div class="spacing-row"><span class="spacing-row-name">--spacing-lg</span><span class="spacing-row-val">3rem / 48px</span><div class="spacing-row-bar" style="width: 48px"></div></div>
+        <div class="spacing-row"><span class="spacing-row-name">--spacing-xl</span><span class="spacing-row-val">4.5rem / 72px</span><div class="spacing-row-bar" style="width: 72px"></div></div>
+        <div class="spacing-row"><span class="spacing-row-name">--spacing-2xl</span><span class="spacing-row-val">7.5rem / 120px</span><div class="spacing-row-bar" style="width: 120px"></div></div>
+        <div class="spacing-row"><span class="spacing-row-name">--spacing-3xl</span><span class="spacing-row-val">11rem / 176px</span><div class="spacing-row-bar" style="width: 176px"></div></div>
+      </div>
+
+      <h3 class="ds-sub">Corner radii</h3>
+      <div class="mini-grid">
+        <div class="mini-card" style="border: 1px solid var(--border-color); border-radius: 0.375rem;"><h4>Small · 0.375rem</h4><code>buttons, inputs, pills</code></div>
+        <div class="mini-card" style="border: 1px solid var(--border-color); border-radius: 0.5rem;"><h4>Medium · 0.5rem</h4><code>cards, panels, callouts</code></div>
+        <div class="mini-card" style="border: 1px solid var(--border-color); border-radius: 0.75rem;"><h4>Large · 0.75rem</h4><code>program / pricing cards</code></div>
+        <div class="mini-card" style="border: 1px solid var(--border-color); border-radius: 3rem;"><h4>Pill · 3rem</h4><code>badges only</code></div>
+      </div>
+
+      <h3 class="ds-sub">Shadows &amp; motion</h3>
+      <div class="mini-grid">
+        <div class="mini-card" style="box-shadow: var(--shadow-md);"><h4>Shadow MD</h4><code>--shadow-md · 0 4px 12px rgba(0,0,0,.06)</code></div>
+        <div class="mini-card" style="box-shadow: var(--shadow-lg);"><h4>Shadow LG</h4><code>--shadow-lg · 0 8px 24px rgba(0,0,0,.08)</code></div>
+        <div class="mini-card" style="box-shadow: 0 4px 16px rgba(164,120,100,.1);"><h4>Mocha hover</h4><code>card hover · 0 4px 16px rgba(164,120,100,.1)</code></div>
+        <div class="mini-card"><h4>Motion curve</h4><code>cubic-bezier(0.4, 0, 0.2, 1)<br>150 / 200 / 300 / 500 ms</code></div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 08 BRAND ═════════════ -->
+    <section class="ds-section" id="brand">
+      <div class="ds-section-head">
+        <div class="ds-section-num">08 / Brand</div>
+        <div class="ds-section-copy">
+          <h2>A wordmark in wide tracking. An italic <em>j</em> in a ring.</h2>
+          <p>The primary expression is the wordmark: <em>JONCHALANT</em> in DM Sans 700, tracked 0.22em. The secondary mark is a lowercase italic <em>j</em> from Fraunces inside a hairline circle — echoing the Enso-like motif used in hero backgrounds.</p>
+        </div>
+      </div>
+
+      <div class="logo-grid">
+        <div class="logo-tile"><div class="logo-wordmark">JONCHALANT</div></div>
+        <div class="logo-tile dark"><div class="logo-wordmark">JONCHALANT</div></div>
+        <div class="logo-tile mocha"><div class="logo-wordmark">JONCHALANT</div></div>
+        <div class="logo-tile">
+          <div class="logo-mark-stack" style="color:var(--mocha-deep)">
+            <div class="logo-mark-symbol"><em>j</em></div>
+            <div class="logo-wordmark" style="font-size: 0.7rem; letter-spacing: 0.18em;">JONCHALANT</div>
+          </div>
+        </div>
+        <div class="logo-tile dark">
+          <div class="logo-mark-stack" style="color:var(--text-white)">
+            <div class="logo-mark-symbol"><em>j</em></div>
+            <div class="logo-wordmark" style="font-size: 0.7rem; letter-spacing: 0.18em;">JONCHALANT</div>
+          </div>
+        </div>
+        <div class="logo-tile">
+          <div class="logo-mark-symbol" style="color:var(--mocha-mousse)"><em>j</em></div>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Iconography</h3>
+      <p style="color: var(--text-secondary); max-width: 62ch; margin: 0 0 1.25rem; line-height: 1.7;">Lucide-style linework. 24×24 viewBox, 1.5px strokes, round caps, round joins, <code>currentColor</code>. Default <code>--mocha-deep</code> on cream. Never emoji. Never filled glyphs.</p>
+
+      <div class="icon-grid">
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span>check</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>arrow</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>clock</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>menu</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5"/><circle cx="16" cy="8" r="5"/><circle cx="8" cy="16" r="5"/><circle cx="16" cy="16" r="5"/></svg><span>circles</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9 6 9-6M3 7v10h18V7M3 7l9-4 9 4"/></svg><span>mail</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>user</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg><span>plus</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>search</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 12h16M12 4v16"/></svg><span>grid</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c4-4 8-4 12 0s8 4 6-2"/><circle cx="12" cy="12" r="1.5"/></svg><span>flow</span></div>
+        <div class="icon-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg><span>chevron</span></div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 09 COMPONENTS ═════════════ -->
+    <section class="ds-section" id="components">
+      <div class="ds-section-head">
+        <div class="ds-section-num">09 / Components</div>
+        <div class="ds-section-copy">
+          <h2>Cards, buttons, forms — muted, hairline, quiet.</h2>
+          <p>Hover lifts are subtle (2px, soft mocha shadow). Focus rings are a 3px mocha halo at 12% opacity. Nothing pulses, bounces, or scales more than 1.04×.</p>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Buttons</h3>
+      <div class="btn-grid">
+        <div class="btn-row"><span class="btn-label">Primary</span><div class="btn-sample"><button class="btn">Discover Your Ikigai</button><button class="btn btn-sm">Continue</button><button class="btn btn-lg">Start the Course</button></div></div>
+        <div class="btn-row"><span class="btn-label">Secondary</span><div class="btn-sample"><button class="btn btn-secondary">See programs</button><button class="btn btn-secondary btn-sm">Cancel</button></div></div>
+        <div class="btn-row"><span class="btn-label">Tertiary</span><div class="btn-sample"><button class="btn btn-tertiary">Or take the Presence Audit first →</button></div></div>
+        <div class="btn-row"><span class="btn-label">Disabled</span><div class="btn-sample"><button class="btn" disabled style="opacity:0.5; cursor:not-allowed;">Submitting…</button></div></div>
+      </div>
+
+      <h3 class="ds-sub">Badges</h3>
+      <div class="btn-sample" style="gap: 0.6rem;">
+        <span class="badge">Accent</span>
+        <span class="badge badge-secondary">Secondary</span>
+        <span class="badge badge-outline">Outline</span>
+        <span class="badge badge-free">Free</span>
+        <span class="badge badge-warm">Most Popular</span>
+        <span class="badge badge-success">Complete</span>
+      </div>
+
+      <h3 class="ds-sub">Form fields</h3>
+      <div class="form-demo">
+        <div>
+          <label for="ds-name">First name</label>
+          <input id="ds-name" placeholder="Ava" />
+        </div>
+        <div>
+          <label for="ds-email">Email</label>
+          <input id="ds-email" type="email" placeholder="ava@company.com" />
+        </div>
+        <div class="form-row-full">
+          <label for="ds-msg">What's the situation you're working through?</label>
+          <textarea id="ds-msg" rows="3" placeholder="A few sentences is enough. Be specific."></textarea>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Callout</h3>
+      <div class="callout">
+        <h4>You don't have to commit to anything.</h4>
+        <p>Start with the assessment. It's free. It takes ten minutes. If it tells you something useful, keep going. If it doesn't, at least you'll know.</p>
+      </div>
+
+      <h3 class="ds-sub">Funnel step cards</h3>
+      <div class="funnel-grid">
+        <div class="funnel-card">
+          <span class="funnel-card-step">Step 01 · Free</span>
+          <h3 class="funnel-card-title">Ikigai Assessment</h3>
+          <p class="funnel-card-price">Free · 8 questions · ~10 min</p>
+          <p class="funnel-card-desc">Identifies which of the four circles are strong — and which are missing. No account needed to take it.</p>
+          <a class="funnel-card-cta" href="#">Discover your ikigai </a>
+        </div>
+        <div class="funnel-card">
+          <span class="funnel-card-step">Step 02 · Free</span>
+          <h3 class="funnel-card-title">The Four Circles</h3>
+          <p class="funnel-card-price">Free · 12 lessons · Account required</p>
+          <p class="funnel-card-desc">A free 12-lesson course that walks you through what each pattern means, including the four almost-there configurations.</p>
+          <a class="funnel-card-cta" href="#">Start the course </a>
+        </div>
+        <div class="funnel-card" style="border-color: var(--accent-primary); border-width: 2px;">
+          <span class="funnel-card-step">Step 03 · Most chosen</span>
+          <h3 class="funnel-card-title">The Foundation</h3>
+          <p class="funnel-card-price">$197 self-paced · $497 with check-ins</p>
+          <p class="funnel-card-desc">Embodiment training through dance. Eight weeks of physical practice that transfers to whatever medium is yours.</p>
+          <a class="funnel-card-cta" href="#">See the Foundation </a>
+        </div>
+        <div class="funnel-card">
+          <span class="funnel-card-step">Step 04 · Custom</span>
+          <h3 class="funnel-card-title">1-on-1 with Jon</h3>
+          <p class="funnel-card-price">$3,500+ · by application</p>
+          <p class="funnel-card-desc">For a specific, current situation. A board presentation, a difficult conversation, a threshold you're about to cross.</p>
+          <a class="funnel-card-cta" href="#">Enquire </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 10 PATTERNS ═════════════ -->
+    <section class="ds-section" id="patterns">
+      <div class="ds-section-head">
+        <div class="ds-section-num">10 / Patterns</div>
+        <div class="ds-section-copy">
+          <h2>Eyebrow → claim headline → short subhead → one clear CTA.</h2>
+          <p>Every marketing page stacks the same primitives. Dark sections use Mocha Deep, never black. Sections separate with breathing room, not dividers.</p>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Navbar</h3>
+      <nav class="navbar-demo">
+        <a class="navbar-brand" href="#">JONCHALANT</a>
+        <div class="navbar-menu">
+          <a class="navbar-link active" href="#">Home</a>
+          <a class="navbar-link" href="#">Ikigai</a>
+          <a class="navbar-link" href="#">Programs</a>
+          <a class="navbar-link" href="#">Dance</a>
+          <a class="navbar-link" href="#">About</a>
+        </div>
+        <div class="navbar-actions">
+          <a class="navbar-cta-btn" href="#">Discover Your Ikigai</a>
+          <a class="navbar-login-btn" href="#">Portal</a>
+        </div>
+      </nav>
+
+      <h3 class="ds-sub">Home hero · the claim</h3>
+      <div class="hero-demo">
+        <div class="hero-demo-orb hero-demo-orb-1"></div>
+        <div class="hero-demo-orb hero-demo-orb-2"></div>
+        <div class="hero-demo-inner">
+          <!-- INJECT:hero-demo-content -->
+          <p class="hero-demo-secondary">Or <a href="#">take the Presence Audit first</a>.</p>
+        </div>
+      </div>
+
+      <h3 class="ds-sub">Dark CTA · closing the funnel</h3>
+      <div class="dark-section">
+        <p class="type-eyebrow" style="color:var(--mocha-soft); margin-bottom:0.75rem;">Ready when you are</p>
+        <h3>You don't have to commit to <em>anything.</em></h3>
+        <p>Start with the assessment. It's free. It takes ten minutes. If it tells you something useful, keep going. If it doesn't, at least you'll know.</p>
+        <a class="btn" href="#">Take the Ikigai Assessment</a>
+      </div>
+
+      <h3 class="ds-sub">Section rhythm (home page)</h3>
+      <div class="callout">
+        <h4>Marketing stack — home / about / programs</h4>
+        <p style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.9; color: var(--text-secondary);">
+          Hero (cream, radial orbs) → Kinetic line (cream) → <br>
+          How this works — <strong>Discover · Understand · Embody</strong> (cream) →<br>
+          Four Pillars grid (cream secondary) →<br>
+          Meet Jon (<strong style="color:var(--mocha-deep)">cream warm</strong>) →<br>
+          Testimonials (cream tertiary) →<br>
+          Closing CTA (<strong style="color:var(--mocha-deep)">dark mocha</strong>)
+        </p>
+      </div>
+    </section>
+
+    <footer class="ds-foot">
+      <div>Jonchalant · v2 · Ikigai-first</div>
+      <div>github.com/jmski/jonchalant · CSS-first · Light-mode-only</div>
+    </footer>
+  </div>
+</body>
+</html>

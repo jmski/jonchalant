@@ -248,51 +248,6 @@ export interface Testimonial {
   image?: unknown
 }
 
-// ── Dance page ────────────────────────────────────────────────────────────────
-
-export interface DancePageContent {
-  featuredVideoUrl?: string
-  featuredVideoTitle?: string
-  featuredVideoCaption?: string
-  heroEyebrow?: string
-  heroHeadline?: string
-  heroSubheadline?: string
-  instagramHeadline?: string
-  ctaHeadline?: string
-  ctaBody?: string
-  ctaButtonLabel?: string
-  ctaButtonHref?: string
-  bridgeEyebrow?: string
-  bridgeHeadline?: string
-  bridgeClose?: string
-}
-
-// ── Dance curriculum ──────────────────────────────────────────────────────────
-
-export interface DanceCategory {
-  _id: string
-  title: string
-  slug: SanitySlug
-  leadershipPrinciple: string
-  description: string
-  icon?: string
-  order: number
-  videos: DanceVideo[]
-}
-
-export interface DanceVideo {
-  title: string
-  videoUrl: string
-  duration?: number
-  caption?: string
-}
-
-export interface InstagramReel {
-  _id: string
-  reelUrl: string
-  order: number
-}
-
 // ── Audit page ────────────────────────────────────────────────────────────────
 
 export interface AuditResultBand {
@@ -504,15 +459,23 @@ export interface MovementPlan {
 
 // ── Home page ─────────────────────────────────────────────────────────────────
 
-export interface WhyItWorksCell {
-  _key: string
-  title: string
-  insight?: string
-  image?: SanityImage
-  size?: 'sm' | 'md' | 'lg' | 'tall' | 'wide'
+export interface HomePillarApplication {
+  _key?: string
+  who: string
+  body: string
+}
+
+export interface HomePillar {
+  _key?: string
+  number: string
+  name: string
+  definition: string
+  applications: HomePillarApplication[]
 }
 
 export interface HomePageContent {
+  pillarsHeadline?: string
+  pillars?: HomePillar[]
   heroEyebrow?: string
   heroHeadline?: string
   heroSubhead?: string
@@ -528,14 +491,14 @@ export interface HomePageContent {
   whyItWorksParagraph1?: string
   whyItWorksParagraph2?: string
   whyItWorksParagraph3?: string
-  whyItWorksBentoHeadline?: string
-  whyItWorksCells?: WhyItWorksCell[]
   testimonialsEyebrow?: string
   testimonialsHeading?: string
   ctaTitle?: string
   ctaDescription?: string
   ctaButtonText?: string
   ctaButtonHref?: string
+  meetJonHeading?: string
+  meetJonBody?: string
   meetJonImage?: SanityImage
 }
 

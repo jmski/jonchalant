@@ -4,7 +4,7 @@ import {
   Hero,
   CredibilityStrip,
   WhyItWorks,
-  Services,
+  FourPillars,
   MeetJon,
   Testimonials,
   BlogCards,
@@ -13,20 +13,20 @@ import {
 } from '@/components/sections';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { getHomePageContent, getServices, getTestimonials, getRecentBlogPosts } from "@/lib/sanity";
+import { getHomePageContent, getTestimonials, getRecentBlogPosts } from "@/lib/sanity";
 import type { HomePageContent } from "@/lib/types";
 import { AggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Quiet Command | Executive Presence Coaching for Introverts",
-  description: "Quiet Command — executive presence coaching for introverts. Build commanding leadership presence in 8-12 weeks using evidence-based, body-aware techniques.",
-  keywords: "executive presence coaching, leadership coaching for introverts, quiet command, confidence coaching, introvert leadership, professional presence",
+  title: "Find the Work You Were Meant For | Jonchalant",
+  description: "Ikigai assessment + embodiment practice for professionals who are competent, in-demand, and quietly misaligned. Find the work you were meant for — then learn to inhabit it.",
+  keywords: "ikigai assessment, purpose finding, embodiment practice, corporate professionals, find your purpose, four circles, ikigai",
   alternates: {
     canonical: 'https://jonchalant.com',
   },
   openGraph: {
-    title: "Executive Presence Coaching for Introverts | Jonchalant",
-    description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for shy professionals and introverts.",
+    title: "Find the Work You Were Meant For | Jonchalant",
+    description: "Most people are in the right industry. Wrong role. The ikigai assessment takes ten minutes and names the gap.",
     type: "website",
     url: "https://jonchalant.com",
     siteName: "Jonchalant",
@@ -34,15 +34,15 @@ export const metadata: Metadata = {
       url: "https://jonchalant.com/social/og-home-1200x630.png",
       width: 1200,
       height: 630,
-      alt: "Executive Presence Coaching for Introverts",
+      alt: "Find the Work You Were Meant For — Jonchalant",
       type: "image/png",
     },
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Executive Presence Coaching for Introverts | Jonchalant",
-    description: "Transform your professional presence in 8-12 weeks. Body-aware leadership for introverts.",
+    title: "Find the Work You Were Meant For | Jonchalant",
+    description: "Most people are in the right industry. Wrong role. The ikigai assessment takes ten minutes and names the gap.",
     images: ["https://jonchalant.com/social/og-home-1200x630.png"],
     creator: "@jonchalant",
   },
@@ -50,20 +50,17 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   let homeContent: HomePageContent | null = null;
-  let services = [];
   let testimonials = [];
   let recentPosts = [];
 
   try {
-    const [sanityHome, sanityServices, sanityTestimonials, sanityPosts] = await Promise.all([
+    const [sanityHome, sanityTestimonials, sanityPosts] = await Promise.all([
       getHomePageContent(),
-      getServices(),
       getTestimonials(),
       getRecentBlogPosts(),
     ]);
 
     if (sanityHome) homeContent = sanityHome;
-    if (sanityServices?.length > 0) services = sanityServices;
     if (sanityTestimonials?.length > 0) testimonials = sanityTestimonials;
     if (sanityPosts?.length > 0) recentPosts = sanityPosts;
   } catch (error) {
@@ -118,36 +115,39 @@ export default async function Home() {
                 paragraph1={homeContent?.whyItWorksParagraph1}
                 paragraph2={homeContent?.whyItWorksParagraph2}
                 paragraph3={homeContent?.whyItWorksParagraph3}
-                bentoHeadline={homeContent?.whyItWorksBentoHeadline}
-                cells={homeContent?.whyItWorksCells}
               />
             </ScrollFade>
           </SectionContent>
         </SectionWrapper>
 
-        {/* 5. SERVICES */}
-        <SectionWrapper variant="primary">
+        {/* 5. FOUR PILLARS */}
+        {homeContent?.pillars && homeContent.pillars.length > 0 && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <ScrollFade>
+                <FourPillars
+                  headline={homeContent.pillarsHeadline}
+                  pillars={homeContent.pillars}
+                />
+              </ScrollFade>
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 7. MEET JON */}
+        <SectionWrapper variant="secondary">
           <SectionContent>
             <ScrollFade>
-              <Services
-                services={services}
-                heading={homeContent?.servicesHeadline}
-                description={homeContent?.servicesDescription}
+              <MeetJon
+                heading={homeContent?.meetJonHeading}
+                body={homeContent?.meetJonBody}
+                image={homeContent?.meetJonImage}
               />
             </ScrollFade>
           </SectionContent>
         </SectionWrapper>
 
-        {/* 6. MEET JON */}
-        <SectionWrapper variant="tertiary" style={{ background: 'var(--bg-warm)' }}>
-          <SectionContent>
-            <ScrollFade>
-              <MeetJon image={homeContent?.meetJonImage} />
-            </ScrollFade>
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* 7. TESTIMONIALS */}
+        {/* 8. TESTIMONIALS */}
         {testimonials.length > 0 && (
           <SectionWrapper variant="dark">
             <SectionContent>
@@ -162,14 +162,14 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* 8. BLOG PREVIEW */}
+        {/* 9. BLOG PREVIEW */}
         {recentPosts.length > 0 && (
           <SectionWrapper variant="primary" className="blog-preview-wrapper">
             <SectionContent>
               <ScrollFade>
                 <BlogCards
                   posts={recentPosts}
-                  heading="From the Blog"
+                  heading={recentPosts.length <= 2 ? "Recent writing" : "From the Blog"}
                   description="Insights on purpose, presence, and the work you were meant for."
                 />
               </ScrollFade>
@@ -177,12 +177,12 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* 9. EMAIL CAPTURE */}
+        {/* 10. EMAIL CAPTURE */}
         <SectionWrapper variant="dark" className="section-wrapper--flush">
           <EmailCapture />
         </SectionWrapper>
 
-        {/* 10. FINAL CTA */}
+        {/* 11. FINAL CTA */}
         <SectionWrapper variant="primary">
           <SectionContent>
             <HomeCTA

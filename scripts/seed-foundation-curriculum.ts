@@ -1,3 +1,6 @@
+// Canonical content lives in design/canonical-content.json.
+// Edit module titles and descriptions there — do NOT hardcode them here.
+
 /**
  * Seed The Foundation curriculum into Sanity — 1 course, 8 modules, ~135 lessons.
  *
@@ -8,10 +11,17 @@
  *
  * This script is idempotent: it uses deterministic _id values so re-running
  * will upsert (createOrReplace) rather than duplicate.
+ *
+ * Canonical content is read from design/canonical-content.json:
+ *   - foundationCourse.description / philosophy / targetAudience → course document
+ *   - foundationPage.curriculum.modules[].title + description → module documents
+ * To update any of these, edit canonical-content.json and re-run this script.
  */
 
 import { createClient } from '@sanity/client'
 import * as dotenv from 'dotenv'
+import canonicalContent from '../design/canonical-content.json' with { type: 'json' }
+import { diffAndConfirm } from './lib/sanity-diff.js'
 
 dotenv.config({ path: '.env.local' })
 
@@ -29,6 +39,12 @@ const client = createClient({
   useCdn: false,
   token,
 })
+
+// Canonical module copy (title + description) keyed by moduleNumber.
+// Source of truth: design/canonical-content.json foundationPage.curriculum.modules
+const canonicalModuleMap = Object.fromEntries(
+  canonicalContent.foundationPage.curriculum.modules.map((m) => [m.moduleNumber, m])
+) as Record<number, { title: string; description: string }>
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -60,12 +76,9 @@ const course = {
   _type: 'course' as const,
   title: 'The Foundation',
   slug: { _type: 'slug', current: 'the-foundation' },
-  description:
-    'A self-paced video course teaching executive presence through the lens of dance. 8 modules, 200+ hours of content. Built for introverts, busy professionals, and emerging leaders who want to command a room without performing.',
-  philosophy:
-    "Soft skills aren't soft — they're the hardest skills to teach because they live in the body, not in a textbook. Dance is the most direct way to develop presence, body control, active listening, improvisation, reciprocation, and tonality because dance is all of those things in motion. The Foundation doesn't teach you to dance. It uses dance as the vehicle to rewire how you show up — in meetings, on stage, in conversations, in life.",
-  targetAudience:
-    'Introverts, busy professionals, emerging leaders who want to command a room without performing.',
+  description: canonicalContent.foundationCourse.description,
+  philosophy: canonicalContent.foundationCourse.philosophy,
+  targetAudience: canonicalContent.foundationCourse.targetAudience,
   totalEstimatedHours: 213,
   difficulty: 'Beginner',
   estimatedDuration: '200+ hours',
@@ -173,15 +186,13 @@ interface ModuleDef {
 
 const modules: ModuleDef[] = [
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 1: Why Soft Skills Matter
+  // MODULE 1: Why Practice Outlasts Performance
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 1,
-    title: 'Why Soft Skills Matter',
-    description:
-      'Problem framing — why traditional leadership training fails and what dance reveals about real human connection.',
-    theme:
-      'Problem framing — why traditional leadership training fails and what dance reveals about real human connection.',
+    title: canonicalModuleMap[1].title,
+    description: canonicalModuleMap[1].description,
+    theme: canonicalModuleMap[1].description,
     danceIntegration: 'Introduction to dance as metaphor — communication without words.',
     estimatedHours: '15–20 hours',
     lessons: [
@@ -205,11 +216,9 @@ const modules: ModuleDef[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 2,
-    title: 'The Body as Instrument',
-    description:
-      'Body control — posture, gesture, spatial awareness, and physical intentionality.',
-    theme:
-      'Body control — posture, gesture, spatial awareness, and physical intentionality.',
+    title: canonicalModuleMap[2].title,
+    description: canonicalModuleMap[2].description,
+    theme: canonicalModuleMap[2].description,
     danceIntegration:
       'Fundamentals — isolation, alignment, weight shifts, grounding.',
     estimatedHours: '25–30 hours',
@@ -239,11 +248,9 @@ const modules: ModuleDef[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 3,
-    title: 'Active Listening & Attunement',
-    description:
-      'Listening with the whole body — reading rooms, mirroring, presence in conversation.',
-    theme:
-      'Listening with the whole body — reading rooms, mirroring, presence in conversation.',
+    title: canonicalModuleMap[3].title,
+    description: canonicalModuleMap[3].description,
+    theme: canonicalModuleMap[3].description,
     danceIntegration:
       'Partner dance — following, connection, musicality, lead/follow dynamics.',
     estimatedHours: '25–30 hours',
@@ -274,11 +281,9 @@ const modules: ModuleDef[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 4,
-    title: 'Improvisation & Adaptability',
-    description:
-      'Thinking on your feet — managing uncertainty, creative problem-solving, spontaneous expression.',
-    theme:
-      'Thinking on your feet — managing uncertainty, creative problem-solving, spontaneous expression.',
+    title: canonicalModuleMap[4].title,
+    description: canonicalModuleMap[4].description,
+    theme: canonicalModuleMap[4].description,
     danceIntegration:
       'Freestyle — improv exercises, movement prompts, finding structure in freedom.',
     estimatedHours: '25–30 hours',
@@ -305,15 +310,13 @@ const modules: ModuleDef[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 5: Reciprocation & Influence
+  // MODULE 5: Reading the Exchange
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 5,
-    title: 'Reciprocation & Influence',
-    description:
-      'Give-and-take dynamics — building rapport, reciprocal communication, authentic influence.',
-    theme:
-      'Give-and-take dynamics — building rapport, reciprocal communication, authentic influence.',
+    title: canonicalModuleMap[5].title,
+    description: canonicalModuleMap[5].description,
+    theme: canonicalModuleMap[5].description,
     danceIntegration:
       'Social dance — conversation through movement, call-and-response patterns.',
     estimatedHours: '25–30 hours',
@@ -344,11 +347,9 @@ const modules: ModuleDef[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 6,
-    title: 'Tonality & Vocal Presence',
-    description:
-      'Voice modulation, pacing, emotion in speech, commanding attention through sound.',
-    theme:
-      'Voice modulation, pacing, emotion in speech, commanding attention through sound.',
+    title: canonicalModuleMap[6].title,
+    description: canonicalModuleMap[6].description,
+    theme: canonicalModuleMap[6].description,
     danceIntegration:
       'Musicality — rhythm, dynamics, accents, musical interpretation.',
     estimatedHours: '25–30 hours',
@@ -380,11 +381,9 @@ const modules: ModuleDef[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 7,
-    title: 'Presence in Practice',
-    description:
-      'Integrating all concepts — high-stakes scenarios, presentations, performance under pressure.',
-    theme:
-      'Integrating all concepts — high-stakes scenarios, presentations, performance under pressure.',
+    title: canonicalModuleMap[7].title,
+    description: canonicalModuleMap[7].description,
+    theme: canonicalModuleMap[7].description,
     danceIntegration:
       'Performance — choreography, stage presence, audience engagement, battle prep.',
     estimatedHours: '25–30 hours',
@@ -411,15 +410,13 @@ const modules: ModuleDef[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 8: The Integrated Leader
+  // MODULE 8: The Work, Embodied
   // ═══════════════════════════════════════════════════════════════════════════
   {
     moduleNumber: 8,
-    title: 'The Integrated Leader',
-    description:
-      'Personal brand, sustaining growth, building a presence practice that lasts.',
-    theme:
-      'Personal brand, sustaining growth, building a presence practice that lasts.',
+    title: canonicalModuleMap[8].title,
+    description: canonicalModuleMap[8].description,
+    theme: canonicalModuleMap[8].description,
     danceIntegration:
       'Capstone — creating your own movement practice, personal style, reflection.',
     estimatedHours: '20–25 hours',
@@ -448,6 +445,21 @@ const modules: ModuleDef[] = [
 
 async function seed() {
   console.log('🌱 Seeding The Foundation curriculum...\n')
+
+  // ── Pre-run diff: course-level canonical fields ───────────────────────────
+  const courseFields = ['description', 'philosophy', 'targetAudience']
+  const courseIntended = {
+    description: canonicalContent.foundationCourse.description,
+    philosophy: canonicalContent.foundationCourse.philosophy,
+    targetAudience: canonicalContent.foundationCourse.targetAudience,
+  }
+  console.log(`Checking course-level fields on ${COURSE_ID}:`)
+  const confirmed = await diffAndConfirm(client, COURSE_ID, courseFields, courseIntended)
+  if (!confirmed) {
+    console.log('Aborted.')
+    return
+  }
+  console.log()
 
   // ── Step 1: Create all documents WITHOUT cross-references ──────────────
   // Sanity validates references on write, so every referenced doc must exist

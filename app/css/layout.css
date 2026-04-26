@@ -501,7 +501,6 @@
    Uses :has() to target wrappers that contain hero elements. */
 .section-wrapper:has(.about-hero-section),
 .section-wrapper:has(.page-hero-section),
-.section-wrapper:has(.dance-page-hero),
 .section-wrapper:has(.blog-page-header),
 .section-wrapper:has(.lessons-hero),
 .section-wrapper:has(.foundation-hero) {

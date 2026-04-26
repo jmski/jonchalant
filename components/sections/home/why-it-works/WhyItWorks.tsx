@@ -1,23 +1,14 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { Bento, BentoCell } from '@/components/shared/bento';
-import { KineticHeading } from '@/components/typography/KineticHeading';
-import { urlFor } from '@/lib/sanity';
-import type { WhyItWorksCell } from '@/lib/types';
 
 interface WhyItWorksProps {
-  // Legacy flat props
   label?: string;
   highlight?: string;
   paragraph1?: string;
   paragraph2?: string;
   paragraph3?: string;
-  // Bento props (Phase 5)
-  bentoHeadline?: string;
-  cells?: WhyItWorksCell[];
 }
 
 const STEP_TITLES = ['Discover', 'Understand', 'Embody'];
@@ -29,80 +20,7 @@ export function WhyItWorks({
   paragraph1,
   paragraph2,
   paragraph3,
-  bentoHeadline,
-  cells,
 }: WhyItWorksProps) {
-  if (cells && cells.length > 0) {
-    return (
-      <WhyItWorksBento headline={bentoHeadline ?? label} cells={cells} />
-    );
-  }
-  return (
-    <WhyItWorksLegacy
-      label={label}
-      highlight={highlight}
-      paragraph1={paragraph1}
-      paragraph2={paragraph2}
-      paragraph3={paragraph3}
-    />
-  );
-}
-
-// ─── Bento layout (Phase 5) ──────────────────────────────────────────────────
-
-function WhyItWorksBento({
-  headline,
-  cells,
-}: {
-  headline?: string;
-  cells: WhyItWorksCell[];
-}) {
-  return (
-    <section className="why-it-works">
-      {headline && (
-        <div className="why-it-works-heading">
-          <KineticHeading as="h2" anchorWords={['works', 'presence', 'stillness', 'grounded']}>
-            {headline}
-          </KineticHeading>
-        </div>
-      )}
-      <Bento columns={4} gap="md">
-        {cells.map((cell) => (
-          <BentoCell key={cell._key} size={cell.size ?? 'sm'} className="why-it-works-cell">
-            {cell.image?.asset?.url && (
-              <div className="why-it-works-cell-image">
-                <Image
-                  src={urlFor(cell.image).width(800).url()}
-                  alt={cell.title}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  quality={60}
-                />
-              </div>
-            )}
-            <div className="why-it-works-cell-body">
-              <h3 className="why-it-works-cell-title">{cell.title}</h3>
-              {cell.insight && (
-                <p className="why-it-works-cell-insight">{cell.insight}</p>
-              )}
-            </div>
-          </BentoCell>
-        ))}
-      </Bento>
-    </section>
-  );
-}
-
-// ─── Legacy timeline layout ───────────────────────────────────────────────────
-
-function WhyItWorksLegacy({
-  label,
-  highlight,
-  paragraph1,
-  paragraph2,
-  paragraph3,
-}: Omit<WhyItWorksProps, 'bentoHeadline' | 'cells'>) {
   const steps = [paragraph1, paragraph2, paragraph3].filter(Boolean);
   const sectionRef = useRef<HTMLElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);

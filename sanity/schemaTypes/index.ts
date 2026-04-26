@@ -12,12 +12,9 @@ import lesson from '../schemas/lesson'
 import course from '../schemas/course'
 import service from '../schemas/service'
 import testimonial from '../schemas/testimonial'
-import danceCategory from '../schemas/danceCategory'
-import instagramReel from '../schemas/instagramReel'
 import programsPageContent from '../schemas/programsPageContent'
 import emailOptIn from '../schemas/emailOptIn'
 import foundationPage from '../schemas/foundationPage'
-import dancePageContent from '../schemas/dancePageContent'
 import module from '../schemas/module'
 import courseLesson from '../schemas/courseLesson'
 import pressMention from '../schemas/pressMention'
@@ -38,11 +35,8 @@ export const types = [
   programsPageContent,
   service,
   testimonial,
-  danceCategory,
-  instagramReel,
   emailOptIn,
   foundationPage,
-  dancePageContent,
   module,
   courseLesson,
   pressMention,

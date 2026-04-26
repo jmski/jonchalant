@@ -80,8 +80,6 @@ components/
 │   │   ├── philosophy/              # Philosophy.tsx (dormant — not rendered on About page)
 │   │   └── introvert/               # Introvert.tsx (dormant — not rendered on About page)
 │   ├── blog/                    # Blog page sections (Featured, Posts, Related)
-│   ├── dance/                   # Dance page sections (folder + slug unchanged; page copy reframed to medium-agnostic)
-│   │   └── featured-video/    # FeaturedVideo.tsx
 │   ├── four-circles/            # [PLANNED] Four Circles course landing + lesson rendering
 │   ├── lesson-section/          # Lesson category section
 │   └── index.ts                 # Central export hub
@@ -225,7 +223,7 @@ Not currently rendered but kept as files — do not delete, may be repurposed: `
 
 **Separation of Concerns** (Critical):
 
-- ✅ **Page-specific sections** in `components/sections/{page}/` (e.g., `components/sections/about/`, `components/sections/dance/`)
+- ✅ **Page-specific sections** in `components/sections/{page}/` (e.g., `components/sections/about/`, `components/sections/home/`)
 - ✅ **Feature-scoped sections** in `components/sections/{feature}/` (e.g., `components/sections/blog/` for blog pages)
 - ✅ **Truly reusable sections** in `components/shared/` (e.g., `components/shared/testimonials/`, `components/shared/cta/`)
 - ✅ **Utility components** (cards, badges, grids) in `components/utilities/`
@@ -275,14 +273,13 @@ app/css/
 ├── cards.css               # All card types (testimonial, case-study, blog, lesson, service, etc.)
 ├── sections.css            # Full-width section components (hero, carousel, CTA, etc.)
 └── utilities.css           # Spacing, color utilities, responsive breakpoints, patterns
-# Page-scoped files (10)
+# Page-scoped files (9)
 ├── pages-forms.css         # Form layouts (contact, login, etc.)
 ├── pages-portal.css        # Portal dashboard + lesson pages
 ├── pages-blog.css          # Blog index and post pages
 ├── pages-audit.css         # Presence Audit quiz page
 ├── pages-ikigai.css        # Ikigai assessment + results page
 ├── pages-lessons.css       # Public lessons index
-├── pages-dance.css         # Dance portfolio page
 ├── pages-portal-tools.css  # Portal AI tool pages (movement-plan, tonality, etc.)
 ├── pages-contact.css       # Contact page
 └── pages-foundation.css    # Foundation program page
@@ -766,7 +763,6 @@ app/
 │   │   └── AuditClient.tsx
 │   ├── programs/page.tsx
 │   ├── foundation/page.tsx
-│   ├── dance/page.tsx
 │   ├── lessons/
 │   │   ├── page.tsx
 │   │   └── [courseSlug]/
@@ -812,10 +808,6 @@ Sections: Header → BlogFeatured → BlogPosts → CTA
 Fetches: `getPrograms()`, `getProgramsFocusItems()`
 Sections: PageHero (with FocusAreas) → ProgramsSection → SupplementalLearning → CTA
 
-### Dance (app/dance/page.tsx)
-Fetches: `getPortfolioItems()`, `getFeaturedPortfolioItem()`
-Sections: FeaturedVideo → DancePortfolio → DanceApproach → CTA
-
 ### Lessons (app/lessons/page.tsx)
 Fetches: `getLessons()`
 Sections: GenericHero → LessonCategory (Beginner/Intermediate/Advanced) → CTA
@@ -842,12 +834,10 @@ Fetches: `getContactPageContent()`. Delegates to ContactClient.
 | `collaboration` | Portfolio collaborations (category, price, deliverables, timeline) |
 | `collaborationPackage` | Media kit collaboration packages |
 | `contactInfo` | Contact methods (label, value, href, description) |
-| `danceCategoryFilter` | Dance filter categories |
 | `homePageContent` | Home page dynamic content (stats, headlines) |
 | `lesson` | Lessons (category, pillar, duration, icon) |
 | `mediaKitData` | Metrics, platforms, content categories, audience |
 | `pageMetadata` | Page-level SEO/CTA metadata |
-| `portfolio` | Dance portfolio items (videoUrl, thumbnail, category, duration) |
 | `program` | Coaching programs (category, investment, features) |
 | `programFocus` | Program focus area items |
 | `programsPageContent` | Programs page dynamic content |
@@ -858,7 +848,6 @@ Fetches: `getContactPageContent()`. Delegates to ContactClient.
 
 ## Reference: All Sanity Data Fetching Functions (lib/sanity.ts)
 
-- `getPortfolioItems()`, `getPortfolioByCategory(cat)`, `getPortfolioItem(slug)`, `getFeaturedPortfolioItem()`
 - `getServices()`, `getPrimaryService()`, `getService(slug)`
 - `getCollaborations()`, `getCollaborationsByCategory(cat)`
 - `getMediaKitData()`
@@ -867,7 +856,7 @@ Fetches: `getContactPageContent()`. Delegates to ContactClient.
 - `getPrograms()`, `getProgramBySlug(slug)`, `getProgramsByCategory(cat)`, `getProgramsFocusItems()`
 - `getPageMetadata(page)`, `getContactInfo()`
 - `getAboutPageContent()`, `getHomePageContent()`
-- `getDanceCategoryFilter()`, `getServiceCategories()`, `getCollaborationPackages()`
+- `getServiceCategories()`, `getCollaborationPackages()`
 - `getAuditPageContent()`, `getContactPageContent()`
 
 ## Reference: lib/ Files
@@ -903,7 +892,6 @@ All sections are exported from `components/sections/index.ts`. Key aliases:
 - Home: `Hero`, `FeaturedAreas`, `BlogCards`, `ImpactSection`, `PortfolioPreview`, `WhyWorkTogether`, `WhyItWorks`
 - About: `AboutHero`, `Origin`, `TurningPoint`, `MethodologyNarrative`, `WhyExists`, `WhoFor`
 - Blog: `BlogFeatured`, `BlogPosts`, `BlogRelated`
-- Dance: `FeaturedVideo`, `DanceApproach`, `DancePortfolio`
 - Shared: `CTA`, `FAQ`, `PageHero`, `GenericHero`, `Collaboration`, `Carousel`, `Testimonials`, `Services`
 - Utilities: `Badge`, `TestimonialCard`, `CaseStudyCard`, `LessonCard`, `BlogCard`, `ServiceCard`, `StatsGrid`, `CardGrid`
 
