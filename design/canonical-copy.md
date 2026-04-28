@@ -4,7 +4,7 @@
 
 This document is the input for Sanity schema design and content population. Every page section here corresponds to a Sanity field group. When this doc and Sanity Studio disagree, **Sanity is updated to match this doc** — never the reverse.
 
-Last updated: Phase 5, workstream 1 — home page locked, remaining pages drafted page-by-page.
+Last updated: Phase 5, workstream 1 — home + about pages locked, remaining pages drafted page-by-page.
 
 ---
 
@@ -229,23 +229,23 @@ Testimonials themselves are real client quotes, not rewritten here. Source: `tes
 
 # About page
 
-**Status:** 🟡 Drafted (StoryScroll content from phase 4 — needs final pass)
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
 **Sections in render order:** AboutHero → StoryScroll (4 beats: Origin → Turning Point → Transfer → Brand claim) → WhoFor → CTA
 
-The StoryScroll structure was built in phase 4 with placeholder Sanity field mappings. The copy below should populate those fields once schemas are reorganized.
+The StoryScroll structure was built in phase 4 with placeholder Sanity field mappings. The copy below populates those fields once schemas are reorganized.
 
 ---
 
 ## §1 — About hero
 
-**Status:** stub — needs drafting in phase 5
+**Eyebrow:** `THE STORY`
 
-**Section structure:**
-- Eyebrow
-- Headline (claim, not "About Jon")
-- Subhead
-- *(no CTA — about page is a story, not a conversion)*
+**Headline:** *I learned this in a {{room}} that wasn't a boardroom.*
+
+**Subhead:** Twenty years of dance taught me what presence is actually made of. None of my students dance. All of them learn the same fundamentals — because the room doesn't care what your medium is. It only knows whether you're actually there.
+
+*(No CTA — the about page is a story, not a conversion.)*
 
 ---
 
@@ -255,9 +255,7 @@ The StoryScroll structure was built in phase 4 with placeholder Sanity field map
 
 **Headline:** *We weren't just a group of {{kids}}.*
 
-**Body:** The first dance club at our high school. Nobody knew what they were doing. Neither did I. But something happened when we performed together that I'd never felt in a classroom — and I started chasing it.
-
-*Register A claim, Register B body. Final body line needs a pass — may be too tight or too loose depending on rhythm of the page.*
+**Body:** The first dance club at our high school. Nobody knew what they were doing. Neither did I. But on stage, the room did something the classroom never had — and I've been trying to understand it ever since.
 
 ---
 
@@ -267,7 +265,7 @@ The StoryScroll structure was built in phase 4 with placeholder Sanity field map
 
 **Headline:** *I hadn't just learned to dance. I had learned to {{lead}}.*
 
-**Body:** The moment I really clicked was a school performance. The fear. The planning. The whole thing — it was off. And then: the room. I stopped managing and started listening. That was the first time I understood what presence actually meant.
+**Body:** A school performance. The fear. The planning. It was wrong all the way through. Then it wasn't. I stopped managing and started listening. That was the first thing I'd ever done that felt like leading.
 
 ---
 
@@ -280,17 +278,17 @@ The StoryScroll structure was built in phase 4 with placeholder Sanity field map
 
 (Two-line treatment, italic anchor on second line per phase 4 build.)
 
-**Body (paragraph 1):** I spent years figuring out what had actually happened that night. Not the choreography. Not the performance. The fundamentals — how to find your centre before you move, how to calibrate to a room, how to hold authority without force.
+**Body (paragraph 1):** I spent the next decade reverse-engineering what happened. Not the choreography. Not the performance. The fundamentals.
 
-**Body (paragraph 2):** I started noticing the same skills in the best leaders, writers, and speakers I admired. None of them danced. All of them had it.
+**Body (paragraph 2):** Then I started seeing them in the leaders, writers, and speakers who actually held a room. None of them danced. All of them had it.
 
-**Payoff line (slightly larger body text):** How to listen. How to feel. How to respond.
+**Payoff line (slightly larger body text):** *How to find your centre. How to read a room. How to move with what's happening. How to hold authority without force.*
 
 ---
 
 ## §5 — WhoFor (exit beat)
 
-**Status:** drafted in phase 4 — preserve
+**Status:** ✅ Locked (preserved from phase 4)
 
 **Image:** the warm/personal one
 
@@ -302,9 +300,15 @@ The StoryScroll structure was built in phase 4 with placeholder Sanity field map
 
 ## §6 — About page CTA
 
-**Status:** stub
+**Eyebrow:** *(none)*
 
-Likely points to /ikigai with a transition line that closes Jon's story and opens the reader's. Draft TBD.
+**Headline:** *That's the {{story}}. Here's the offer.*
+
+**Body:** If any of this landed — if any of this sounded like you — the next step is the assessment. Eight questions. Three minutes. It tells you which of the four circles you're already in, and which one is missing. Free. No account.
+
+**CTA:** *Discover Your Ikigai* → `/ikigai`
+
+*(CTA wording matches home page primary CTA exactly — button consistency reduces decision friction.)*
 
 ---
 
@@ -623,8 +627,8 @@ These get resolved in workstream 2 (schema redesign).
 
 | Workstream | Status |
 |---|---|
-| 1. Canonical copy doc | 🟡 In progress — Home locked, all other pages stubbed |
+| 1. Canonical copy doc | 🟡 In progress — Home + About locked, remaining pages stubbed |
 | 2. Schema redesign | ⚪ Not started |
 | 3. Content population + code reconciliation | ⚪ Not started |
 
-Next session: pick up workstream 1 with the About page voice pass, then proceed in order: Ikigai → Foundation → Programs → Lessons → Blog → Contact → Audit → Globals.
+Next session: pick up workstream 1 with the Ikigai page voice pass, then proceed in order: Foundation → Programs → Lessons → Blog → Contact → Audit → Globals.
