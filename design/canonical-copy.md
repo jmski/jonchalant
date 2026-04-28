@@ -4,7 +4,7 @@
 
 This document is the input for Sanity schema design and content population. Every page section here corresponds to a Sanity field group. When this doc and Sanity Studio disagree, **Sanity is updated to match this doc** — never the reverse.
 
-Last updated: Phase 5, workstream 1 — home + about pages locked, remaining pages drafted page-by-page.
+Last updated: Phase 5, workstream 1 — home, about, and ikigai pages locked, remaining pages drafted page-by-page.
 
 ---
 
@@ -314,40 +314,57 @@ The StoryScroll structure was built in phase 4 with placeholder Sanity field map
 
 # Ikigai page
 
-**Status:** ⚪ Stub — full draft needed
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
 **Sections in render order:** Hero → Four Circles preview → Quiz bridge → Quiz → Foundation Starter Guide capture → CTA
 
-Phase 4 set up the visual structure (hero gap fixed, four-circle cards strengthened, quiz bridge added). Copy needs voice pass.
+Phase 4 set up the visual structure (hero gap fixed, four-circle cards strengthened, quiz bridge added). Copy below populates those fields.
 
 ---
 
 ## §1 — Ikigai hero
 
-**Status:** stub
+**Eyebrow:** `THE ASSESSMENT`
 
-Headline likely echoes home hero (*"Find the work you were meant for"*) but with ikigai-specific framing. Subhead introduces ikigai concept in plain language. The reader is now closer to converting than they were on home.
+**Headline:** *Most people are missing {{one}} circle. They've been calling it something else for years.*
+
+**Subhead:** Passion, Mission, Vocation, Profession — most people are already in three. The work you were meant for sits where all four overlap. Eight honest questions, three minutes, and you'll know which one isn't there yet.
+
+**Primary CTA:** *Start the Assessment* → (anchor to quiz section)
+
+*(The phrase "eight honest questions" appears here and again in the §3 quiz bridge. Deliberate brand-marker repetition; preserved across both instances.)*
 
 ---
 
 ## §2 — Four Circles preview cards
 
-**Status:** stub
+Each card has two lines: a plain-text **definition** and an italicised **missing-line**. Italics only on the missing-line — the definition reads as quieter scaffolding underneath. Card titles use the canonical ikigai labels.
 
-Each circle (Passion, Mission, Vocation, Profession) gets a one-line definition and a one-line "what it feels like when this is missing." Definitions phase 4 placeholder:
+### Passion
+**Definition:** What you love doing.
+**Missing:** *You're competent and quietly bored. The work is fine. You are not.*
 
-- Passion: What you love
-- Mission: What the world needs
-- Vocation: What you can be paid for
-- Profession: What you're good at
+### Mission
+**Definition:** What the world actually needs from you.
+**Missing:** *You're useful and you can't feel why it matters. The output ships. The meaning doesn't.*
 
-These work but are too dictionary-flavored. Voice pass needed — likely Register A definitions.
+### Vocation
+**Definition:** What you can be paid to do.
+**Missing:** *You love the work and the world hasn't figured out how to pay you for it yet.*
+
+### Profession
+**Definition:** What you're trained for and good at.
+**Missing:** *You're passionate and you keep getting outmatched by people who actually know how.*
+
+*(Definitions stay close to canonical ikigai labels — Jon doesn't redefine ikigai. The missing-lines do the recognition work. Profession's missing-line runs hotter than the others by design — Profession-missing is the gap people most resist admitting, and a uniformly-tempered set of cards would feel managed.)*
+
+*(Schema implication: per workstream-2 note #5, these definitions should live in a single Sanity document referenced from both this page and home page §3, not duplicated.)*
 
 ---
 
 ## §3 — Quiz bridge
 
-**Status:** drafted in phase 4 — preserve
+**Status:** ✅ Locked (preserved from phase 4)
 
 Single line: *Eight honest questions. No right or wrong answers — only clarity.*
 
@@ -367,7 +384,15 @@ Same as home page §10. Reuse Sanity content via shared field reference, not dup
 
 ## §6 — Ikigai CTA
 
-**Status:** stub
+**Eyebrow:** `ENOUGH READING`
+
+**Headline:** *You don't need more {{information}}. You need to actually try.*
+
+**Body:** You've read the page. You know what the assessment does. The only thing left is to take it. Eight questions. Three minutes. No account.
+
+**CTA:** *Take the Assessment* → (anchor to quiz section)
+
+*(Uses the voice rules' bullshit-clause example as the headline — fired here at the closing CTA where the brand has earned the right to call the question. This is the page's one bullshit-clause use; voice rules permit one per page.)*
 
 ---
 
@@ -627,8 +652,8 @@ These get resolved in workstream 2 (schema redesign).
 
 | Workstream | Status |
 |---|---|
-| 1. Canonical copy doc | 🟡 In progress — Home + About locked, remaining pages stubbed |
+| 1. Canonical copy doc | 🟡 In progress — Home + About + Ikigai locked, remaining pages stubbed |
 | 2. Schema redesign | ⚪ Not started |
 | 3. Content population + code reconciliation | ⚪ Not started |
 
-Next session: pick up workstream 1 with the Ikigai page voice pass, then proceed in order: Foundation → Programs → Lessons → Blog → Contact → Audit → Globals.
+Next session: pick up workstream 1 with the Foundation page voice pass, then proceed in order: Programs → Lessons → Blog → Contact → Audit → Globals.
