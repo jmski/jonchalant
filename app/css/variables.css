@@ -104,6 +104,35 @@
   --bg-dark:                #0a0a0a;
 }
 
+/* ========== IKIGAI QUADRANT TOKENS ========== */
+:root {
+  --quadrant-passion:    var(--mocha-deep);      /* #6B4F3F */
+  --quadrant-mission:    var(--mocha-mousse);    /* #A47864 */
+  --quadrant-vocation:   var(--accent-secondary); /* #B89A5F */
+  --quadrant-profession: var(--sage-whisper);    /* #8A9A85 */
+}
+
+/* ========== FOUR CIRCLES TIER BADGE TOKENS ========== */
+:root {
+  --fc-tier-basic-bg:        #E8F5E2;
+  --fc-tier-basic-text:      #3D6B3A;
+  --fc-tier-challenging-bg:  #F5EDDE;
+  --fc-tier-challenging-text:#7A5B20;
+  --fc-tier-hardest-bg:      #EDE8F5;
+  --fc-tier-hardest-text:    var(--mocha-deep);
+}
+
+/* ========== ADMIN DASHBOARD STATUS TOKENS ========== */
+:root {
+  --admin-status-new:        #3B82F6; /* blue */
+  --admin-status-contacted:  #F59E0B; /* amber */
+  --admin-status-interested: #10B981; /* emerald */
+  --admin-status-closed:     #8B5CF6; /* violet */
+  --admin-status-response:   #06B6D4; /* cyan */
+  --admin-danger:            #DC2626;
+  --admin-danger-border:     #FECACA;
+}
+
 /* ========== GRADIENT TOKENS ========== */
 :root {
   /* Hero gradient — subtle directional wash */

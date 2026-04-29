@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type MfaStep = 'loading' | 'enroll' | 'verify' | 'error'
 
@@ -179,13 +180,19 @@ export default function MfaClient() {
               </div>
 
               {qrCode && (
-                <div style={{ display: 'flex', justifyContent: 'center', margin: '1.5rem 0' }}>
-                  <img src={qrCode} alt="Scan this QR code with your authenticator app" width={200} height={200} />
+                <div className="mfa-qr-container">
+                  <Image
+                    src={qrCode}
+                    alt="Scan this QR code with your authenticator app"
+                    width={200}
+                    height={200}
+                    unoptimized
+                  />
                 </div>
               )}
 
               {secret && (
-                <p className="portal-login-form-meta" style={{ textAlign: 'center', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all' }}>
+                <p className="portal-login-form-meta mfa-manual-key">
                   Manual key: {secret}
                 </p>
               )}

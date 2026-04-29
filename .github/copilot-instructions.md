@@ -11,7 +11,7 @@ Jonchalant helps professionals find the work they were meant for and learn to em
 - **Component-First Design**: Build reusable components first, compose into pages second. All child components should be props-driven and not depend on context or external state.
 - **Next.js App Router**: Server components by default (smaller bundle, faster initial load)
 - **React 19 Compiler**: Automatic memoization without manual `useMemo`/`useCallback`
-- **CSS-First Styling**: 19 CSS files (9 system + 10 page-scoped), organized by architectural purpose, CSS variables for theming, BEM naming convention
+- **CSS-First Styling**: 18 CSS files (9 system + 9 page-scoped), organized by architectural purpose, CSS variables for theming, BEM naming convention
 - **Sanity CMS Integration**: Server components fetch content (case studies, testimonials, blog posts, services)
 - **Minimal Client State**: Interactive components (`'use client'`) only for carousel logic, forms, modals
 - **TypeScript Strict Mode**: Enforced at build time; failing types block production
@@ -259,7 +259,7 @@ Not currently rendered but kept as files — do not delete, may be repurposed: `
 
 ### CSS File Organization
 
-CSS is organized into **19 files** (9 system + 10 page-scoped) by **architectural purpose**, not individual components:
+CSS is organized into **18 files** (9 system + 9 page-scoped) by **architectural purpose**, not individual components:
 
 ```
 app/css/
@@ -312,7 +312,7 @@ Import structure in `app/globals.css` (actual layer order):
 2. `base.css` — HTML resets
 3. `components.css`, `typography.css` — Core patterns
 4. `layout.css`, `cards.css`, `sections.css` — Structural layers
-5. `pages-*.css` — Page-scoped overrides (10 files)
+5. `pages-*.css` — Page-scoped overrides (9 files)
 6. `utilities.css` — Responsive helpers
 7. `interactions.css` — Hover/animation overrides
 
@@ -554,7 +554,9 @@ export default function Gallery({ images, category }) {
 
 ### Styling Approach: CSS-First
 
-**Current Standard**: All component styling uses consolidated CSS files (10 files total) with BEM-inspired naming. No inline styles except truly dynamic values. Minimal Tailwind utilities—only for text sizing/weight and responsive breakpoints.
+**Current Standard**: All component styling uses consolidated CSS files (18 files total: 9 system + 9 page-scoped) with BEM-inspired naming. No inline styles except truly dynamic values. Minimal Tailwind utilities—only for text sizing/weight and responsive breakpoints.
+
+**Exception — OpenGraph image files**: Files matching `app/**/opengraph-image.tsx` are server-rendered to PNG via `next/og` and never reach the browser DOM. Inline styles with hardcoded hex values are acceptable in those files only. Everywhere else, use CSS classes + `var(--token)` references.
 
 **Never use `!important`** — if you need to override a style, the issue is CSS specificity or cascade layers. Revisit the CSS layer structure. `!important` breaks cascade predictability and makes debugging exponentially harder.
 
@@ -737,7 +739,7 @@ Complex styling? Use a CSS class in the appropriate consolidated file (cards.css
 - **Test build**: `npm run build` validates TypeScript and CSS compilation (required before committing)
 - **Debug CSS**: Inspect classes in `.css` files in `app/css/` using browser DevTools
 - **Imports**: Use `@/components/sections`, `@/components/shared`, `@/components/utilities` with consistent paths
-- **Do NOT create new .css files** — use the consolidated structure (10 files only)
+- **Do NOT create new .css files** — use the consolidated structure (18 files only: 9 system + 9 page-scoped)
 - **Auth (Supabase SSR)**: Server components use `utils/supabase/server.ts`; client components (`'use client'`) use `utils/supabase/client.ts`. Never import `lib/supabase.ts` (deleted). All auth-gate logic lives client-side in the `useAuth` hook (`lib/auth-context.tsx`).
 - **Shared TypeScript types**: All Sanity + portal interfaces live in `lib/types.ts`. Import from there; do not re-declare inline.
 - **No hardcoded page copy**: All marketing text on pages/components must come from Sanity (via a fetch function) or a lib data file. Fallback strings (`?? 'fallback'`) are acceptable but all primary copy is CMS-driven.

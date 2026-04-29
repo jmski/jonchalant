@@ -270,7 +270,7 @@
 }
 
 /* Responsive — narrower screens */
-@media (max-width: 480px) {
+@media (max-width: 639px) {
   .presence-coach-bubble-col {
     max-width: 85%;
   }
@@ -530,7 +530,7 @@
   letter-spacing: 0.02em;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 639px) {
   .ps-scale-label {
     display: none;
   }
@@ -907,7 +907,7 @@
   background: var(--bg-secondary);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1023px) {
   .ta-layout {
     grid-template-columns: 1fr;
   }
@@ -1341,7 +1341,7 @@
   font-style: italic;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 639px) {
   .ta-suggestion-row {
     grid-template-columns: 1fr;
   }
