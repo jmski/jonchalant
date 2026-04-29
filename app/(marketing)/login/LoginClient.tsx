@@ -83,7 +83,7 @@ export default function LoginClient() {
           },
         })
         if (signUpError) { setError(signUpError.message); return }
-        setSuccessMessage('Check your email to confirm your account.')
+        router.push(`/auth/check-email?email=${encodeURIComponent(email)}`)
         return
       }
 

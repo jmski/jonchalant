@@ -224,6 +224,16 @@ export default function PortalShell({ courses, children, userId, firstName }: Po
               <NavItem href="/contact" label="Book a Session" active={false} />
             </div>
 
+            {/* ── ACCOUNT ── */}
+            <div className="portal-sidebar-section">
+              <p className="portal-sidebar-section-title">Account</p>
+              <NavItem
+                href="/portal/settings"
+                label="Settings"
+                active={pathname === '/portal/settings'}
+              />
+            </div>
+
             {/* ── SIGN OUT ── */}
             <div className="portal-sidebar-section portal-sidebar-section--footer">
               <SignOutButton className="portal-sidebar-signout" />
