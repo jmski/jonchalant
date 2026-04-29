@@ -1,5 +1,3 @@
-'use client';
-
 import { ScrollFade, ScrollStagger } from "@/components/animations";
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { FeatureList } from '@/components/ui/FeatureList';

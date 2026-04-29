@@ -3335,3 +3335,67 @@
     transition: none;
   }
 }
+
+/* =========================================================================
+   Error states — used by app/**/error.tsx and not-found.tsx
+   ========================================================================= */
+
+.error-state {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.error-state-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 1rem;
+}
+
+.error-state-title {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+}
+
+.error-state-body {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 2rem;
+  max-width: 48ch;
+}
+
+.error-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.error-state-detail {
+  margin-top: 2.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--border-color);
+  border-radius: 0.25rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  text-align: left;
+  max-width: 100%;
+  word-break: break-word;
+}
+

@@ -1052,7 +1052,7 @@
 }
 
 /* Success state */
-.blog-optin-success {
+.blog-optin--success {
   margin: 3rem 0;
   padding: 2rem;
   background: var(--bg-tertiary);
