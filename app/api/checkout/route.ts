@@ -30,12 +30,27 @@ export async function POST(req: NextRequest) {
 
   const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://jonchalant.com'
 
+  // Reuse existing Stripe customer if we've recorded one for this user. This
+  // lets repeat purchasers see all their invoices in the Customer Portal.
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('stripe_customer_id')
+    .eq('id', user.id)
+    .maybeSingle()
+
+  const customerFields: Pick<
+    Stripe.Checkout.SessionCreateParams,
+    'customer' | 'customer_email' | 'customer_creation'
+  > = profile?.stripe_customer_id
+    ? { customer: profile.stripe_customer_id }
+    : { customer_email: user.email, customer_creation: 'always' }
+
   let session
   try {
     session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: [{ price: priceId, quantity: 1 }],
-      customer_email: user.email,
+      ...customerFields,
       metadata: {
         user_id: user.id,
         course_slug: COURSE_SLUG,

@@ -110,6 +110,24 @@ async function handleCheckoutCompleted(
     throw new Error('Missing required metadata on checkout session')
   }
 
+  // Persist the Stripe customer id on the user's profile so the Customer
+  // Portal can be opened for them later. Best-effort: don't block enrollment
+  // if this fails.
+  const customerId =
+    typeof session.customer === 'string' ? session.customer : session.customer?.id ?? null
+  if (customerId) {
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .update({ stripe_customer_id: customerId })
+      .eq('id', user_id)
+    if (profileError) {
+      console.error(
+        '[stripe-webhook] failed to store stripe_customer_id on profile:',
+        profileError.message,
+      )
+    }
+  }
+
   const { error } = await supabase.from('enrollments').insert({
     user_id,
     course_slug,
