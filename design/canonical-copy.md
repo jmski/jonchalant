@@ -4,7 +4,7 @@
 
 This document is the input for Sanity schema design and content population. Every page section here corresponds to a Sanity field group. When this doc and Sanity Studio disagree, **Sanity is updated to match this doc** — never the reverse.
 
-Last updated: Phase 5, workstream 1 — home, about, and ikigai pages locked, remaining pages drafted page-by-page.
+Last updated: Phase 5, workstream 1 — Home, About, Ikigai, and Foundation locked. Programs through Globals still drafted/stubbed.
 
 ---
 
@@ -398,63 +398,224 @@ Same as home page §10. Reuse Sanity content via shared field reference, not dup
 
 # Foundation page
 
-**Status:** ⚪ Stub — voice pass needed
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
-**Sections in render order:** Hero → Curriculum (8 weeks) → "Not a lecture series" → Pricing (Two ways in) → FAQ → Audit CTA → Foundation Starter Guide
+**Sections in render order:** Hero → Who this is for → Why dance → Curriculum → How it works → Enrollment → FAQ → Soft CTA (audit fallback) → Foundation Starter Guide
 
-Foundation is the highest-stakes paid conversion page on the site. Copy is mostly in place but needs voice tightening. Phase 4 fixed vertical rhythm; phase 5 should focus on:
-- Hero claim sharpening
-- Pricing card differentiation copy
-- FAQ tone consistency
-- "Not a lecture series" positioning line
+Phase 4 fixed vertical rhythm. Phase 5 fully drafted the page in voice, killed the standalone kinetic moment (folded into curriculum), and inserted a "Why dance" section between hero and curriculum to preempt the medium objection on the page rather than in the FAQ.
 
 ---
 
-## §1 — Foundation hero
+## §1 — Hero
 
-**Current placeholder:** *Executive presence for people who think before they speak.*
+**Eyebrow:** `THE FOUNDATION · 8-WEEK COURSE`
 
-This is close. Voice pass needed — feels slightly more corporate than the home page hero. Possible direction: lean harder on what The Foundation actually is (eight weeks, body first, transferable) and less on the audience descriptor.
+**Headline:** *Learn to inhabit the {{work}}.*
 
----
+**Subhead:** An eight-week embodiment practice taught through dance — because the body learns what the head can't argue with. The pillars transfer to whatever your medium actually is: a meeting, a stage, a page, a room.
 
-## §2 — Curriculum
+**Primary CTA:** *Enroll — Starting at $197*
 
-Eight modules, one per week. Each module needs:
-- Module number + title
-- Duration
-- One-line description in voice
+**Secondary CTA:** *See What's Inside*
 
-Module titles from current page (paraphrased in voice rather than rewritten wholesale) — TBD.
+**Microcopy under CTAs:** *No prerequisites. Self-paced unlocks weekly.*
 
 ---
 
-## §3 — "Not a lecture series. A movement practice."
+## §2 — Who this is for (hero right column)
 
-This headline already works. Three-column body needs voice pass.
+**Header:** *Who this is for*
 
----
+**Lede:** You already have the substance. This is about the signal.
 
-## §4 — Pricing
-
-Two cards: $197 self-paced and $497 with weekly check-ins. Each card needs:
-- Eyebrow
-- Title
-- Inclusions list (in voice — no generic "lifetime access" boilerplate)
-- Price
-- CTA
+**Bullet list:**
+- You know your material but lose it when the room is watching.
+- You've been called "quiet" or "reserved." Both were code for "not leadership material."
+- You're sharp in a 1:1. Something different happens when the room gets bigger.
+- You over-prepare. You still feel shaky when it counts.
+- You want to walk in as yourself and have it be enough.
 
 ---
 
-## §5 — FAQ
+## §3 — Why dance
 
-Common questions list. Each Q+A pair needs voice pass.
+**Eyebrow:** `WHY DANCE`
+
+**Headline:** *Dance can't be {{faked}}.*
+
+**Body (paragraph 1):** I get the question constantly: why dance, if your students are leaders and writers and engineers? The honest answer is that dance is the most precise medium I know for training what every other medium needs. You can't bluff your way through a phrase. You can't talk faster to cover the gap. The body is either there or it isn't, and the room can see which one.
+
+**Body (paragraph 2):** That's the whole reason it transfers. The pillars — Grounding, Energy, Flow, Command — exist in any room where you have to show up. A meeting, a stage, a page, a hard conversation with someone who matters. Dance is just where they're hardest to fake, and therefore easiest to actually learn.
+
+**Body (paragraph 3 — the lock):** You won't be doing pirouettes. You'll be learning to find your weight before you speak. To calibrate to a room without performing. To hold a position without bracing. The medium is dance. The work is presence.
+
+**Render note:** Prose, single-column, full text width. No image accompaniment in v1. This section is an argument, not a feature list — the layout should make the reader read it.
 
 ---
 
-## §6 — Audit CTA + Foundation Starter Guide
+## §4 — Curriculum
 
-Reuse home page §9 and §10.
+**Eyebrow:** `THE CURRICULUM`
+
+**Header:** *Sequential on purpose.*
+
+**Lede:** Each module builds on the last — grounding before energy, energy before flow, flow before command. You can go faster. Most people shouldn't.
+
+### Module 1 — Why Practice Outlasts Performance
+
+**Duration:** 12 lessons · 15–20 hours
+
+**Blurb:** The argument for the whole approach. Why frameworks and pep talks don't survive the moment that matters, and why physical practice does. By the end of this module you'll know exactly what you're training and why it can't be done from the neck up.
+
+### Module 2 — The Body as Instrument
+
+**Duration:** 17 lessons · 25–30 hours
+
+**Blurb:** Grounding. The first pillar. How you stand, how you take up space, what you do with your hands when you're not doing anything with your hands. Most professionals have never been taught this. They've been told to "have presence." This is where presence is actually built.
+
+### Module 3 — Active Listening & Attunement
+
+**Duration:** 18 lessons · 25–30 hours
+
+**Blurb:** Energy. Reading the room with your whole body, not just your ears. How dancers track each other without looking. How leaders walk into a meeting and know within thirty seconds what kind of room they're in. The practice that turns "good intuition" into something you can train.
+
+### Module 4 — Improvisation & Adaptability
+
+**Duration:** 18 lessons · 25–30 hours
+
+**Blurb:** Flow. The skill of having a plan and being willing to abandon it. Improvisers don't make things up — they respond. By the end of this module you'll be able to do the same thing in any room: hold the structure loose enough for what's actually happening to shape it.
+
+### Module 5 — Reading the Exchange
+
+**Duration:** 18 lessons · 25–30 hours
+
+**Blurb:** The bridge module. Where listening and improvisation become one thing — a real-time conversation between you and the room. You'll learn to match and diverge on purpose. To hold your ground without bracing. To stop performing connection and start actually doing it.
+
+### Module 6 — Tonality & Vocal Presence
+
+**Duration:** 19 lessons · 25–30 hours
+
+**Blurb:** Command, in sound. What your voice does when you're confident. What it does when you're managing. How to tell the difference, in yourself, in real time. Pacing, weight, the strategic use of silence. Most leadership voices fail not because they're too quiet, but because they fill every gap.
+
+### Module 7 — Presence in Practice
+
+**Duration:** 18 lessons · 25–30 hours
+
+**Blurb:** All four pillars, under pressure. High-stakes simulations — the presentation, the difficult conversation, the moment when the room turns. You'll do them, you'll watch yourself do them, you'll do them again. This is the module where the work goes from "I understand it" to "I can do it when it counts."
+
+### Module 8 — The Work, Embodied
+
+**Duration:** 14 lessons · 20–25 hours
+
+**Blurb:** What happens after eight weeks. How to keep practicing when nobody's watching, when there's no module to complete, when the only feedback is the room. You'll leave with a personal practice — not a routine, not a checklist. A way of moving through your work that doesn't dissolve the moment the course ends.
+
+---
+
+## §5 — How it works
+
+**Eyebrow:** `HOW IT WORKS`
+
+**Header:** *Not a lecture series. A movement practice.*
+
+### Column 1 — Self-paced video lessons
+
+Watch at your own pace. Every lesson is a short concept — no fluff, no filler. Lifetime access.
+
+### Column 2 — Movement-grounded principles
+
+Each week draws from professional dance training and translates it into leadership behaviour you can practice immediately.
+
+### Column 3 — Personal follow-up from Jon
+
+Jon reads what you write and writes back. Sometimes a paragraph, sometimes a short video. Always within 48 hours.
+
+---
+
+## §6 — Enrollment
+
+**Eyebrow:** `ENROLLMENT`
+
+**Header:** *Two ways in.*
+
+### Card A — Self-paced
+
+**Price line:** *$197 · once · lifetime access*
+
+**Description:** For people who'll show up to the work without a calendar holding them to it.
+
+**Inclusions:**
+- 8 weeks of lessons, 134 lessons total
+- Movement-to-leadership frameworks
+- Lifetime access
+- Personal follow-up from Jon
+
+**CTA:** *Enroll — $197*
+
+### Card B — With weekly check-ins
+
+**Badge:** `MOST CHOSEN`
+
+**Price line:** *$497 · once · lifetime access*
+
+**Description:** Everything in self-paced. Plus eight thirty-minute calls with me, one a week, for whatever the work is bringing up.
+
+**Inclusions:**
+- Everything in Self-Paced
+- 8 weekly 30-minute calls with Jon
+- Real-time feedback on your specific situations
+- Prioritized scheduling
+
+**CTA:** *Enroll — $497*
+
+**Footnote under cards:** I keep the with-check-ins tier small on purpose. If you're considering it, the audit will tell you whether it's right.
+
+---
+
+## §7 — FAQ
+
+**Header:** *Common questions.*
+
+### Is this right for me if I'm not a dancer?
+
+Yes. Most people who take this aren't. Dance is the medium I teach in because it can't be faked — but the pillars transfer to any room where you have to show up as yourself in front of people.
+
+### How much time does each week require?
+
+About 90 minutes of lesson time, plus 15–20 minutes a day of practice. Less than a gym habit. More than a podcast.
+
+### What makes this different from other confidence or leadership courses?
+
+Most of them work from the neck up — frameworks, scripts, mindset. The gap between "I know what to do" and "I can do it when it counts" doesn't close from there.
+
+### What does "personal follow-up from Jon" mean in practice?
+
+You write a few sentences after each module about what's landing and what isn't. Jon reads it and writes back — usually within 48 hours, sometimes with a short video. It's not a coaching call. It's a check-in that keeps you honest.
+
+### Is there a refund policy?
+
+Yes. If the first two modules don't deliver, full refund within 14 days. No questions, no exit interview.
+
+### What's the difference between the self-paced and with-check-ins tiers?
+
+Self-paced is the curriculum. With-check-ins is the curriculum plus a weekly 30-minute call with Jon for the eight weeks. Same content. The check-ins are for people who know they'll move faster with someone in the room.
+
+---
+
+## §8 — Soft CTA (audit fallback)
+
+**Header:** *Not sure yet? Start with the audit.*
+
+**Body:** Seven questions, three minutes. I'll review your answers and tell you exactly where your presence stands — and whether the Foundation is the right next step for you.
+
+**CTA:** *Take the Presence Audit*
+
+**Microcopy:** *Free. No email required.*
+
+---
+
+## §9 — Foundation Starter Guide footer
+
+**Reuses Home §10 — referenced singleton.** See Home for canonical content. Schema decision: this section is one Sanity document referenced by Home, Ikigai, and Foundation pages — not three duplicated copies.
 
 ---
 
@@ -652,8 +813,10 @@ These get resolved in workstream 2 (schema redesign).
 
 | Workstream | Status |
 |---|---|
-| 1. Canonical copy doc | 🟡 In progress — Home + About + Ikigai locked, remaining pages stubbed |
+| 1. Canonical copy doc | 🟡 In progress — Home, About, Ikigai, Foundation locked. Programs / Lessons / Blog / Contact / Audit / Globals still drafted/stubbed |
 | 2. Schema redesign | ⚪ Not started |
 | 3. Content population + code reconciliation | ⚪ Not started |
 
-Next session: pick up workstream 1 with the Foundation page voice pass, then proceed in order: Programs → Lessons → Blog → Contact → Audit → Globals.
+Next session: pick up workstream 1 with Programs (currently partially refreshed from phase 4) and continue: Programs → Lessons → Blog → Contact → Audit → Globals.
+
+The four highest-stakes pages on the site — front door (Home), narrative anchor (About), funnel entry (Ikigai), and primary offer (Foundation) — are now fully drafted in voice. The remaining pages are lower-stakes and should move faster, since the voice is set and the schema implications are increasingly clear.
