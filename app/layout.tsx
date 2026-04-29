@@ -5,6 +5,9 @@ import "./globals.css";
 import { PersonSchema, OrganizationSchema, LocalBusinessSchema } from "@/lib/schema";
 import MochaCursor from "@/components/utilities/cursor/MochaCursor";
 import MochaSweep from "@/components/layout/MochaSweep";
+import CookieConsent from "@/components/layout/CookieConsent";
+// Validate env at boot — throws on missing required vars.
+import "@/lib/env";
 
 // Fraunces loads via Google Fonts @import in globals.css (next/font strips WONK silently).
 // DM Sans stays on next/font — no exotic axes, no penalty.
@@ -129,9 +132,28 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(LocalBusinessSchema()) }}
         />
 
-        {/* Google Analytics — afterInteractive defers load until the page is interactive */}
+        {/* Google Analytics — afterInteractive defers load until the page is interactive.
+            Consent Mode v2: defaults to denied; CookieConsent banner updates on user choice. */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
+            <Script
+              id="google-consent-default"
+              strategy="beforeInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  window.gtag = gtag;
+                  gtag('consent', 'default', {
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'analytics_storage': 'denied',
+                    'wait_for_update': 500
+                  });
+                `,
+              }}
+            />
             <Script
               strategy="afterInteractive"
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
@@ -141,13 +163,12 @@ export default function RootLayout({
               strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { anonymize_ip: true });
                 `,
               }}
             />
+            <CookieConsent />
           </>
         )}
       </body>

@@ -3337,7 +3337,7 @@
 }
 
 /* =========================================================================
-   Error states — used by app/**/error.tsx and not-found.tsx
+   Error states — used by app error.tsx and not-found.tsx pages
    ========================================================================= */
 
 .error-state {
