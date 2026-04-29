@@ -5,6 +5,8 @@
 // and utility functions. Matches the Sanity schema shapes defined in sanity/schemas/.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import type { PortableTextBlock } from '@portabletext/types'
+
 // ── Sanity primitives ─────────────────────────────────────────────────────────
 
 export interface SanitySlug { current: string }
@@ -66,10 +68,10 @@ export interface CourseLesson {
   ikigaiQuadrants?: Quadrant[]
   subtitle?: string
   summary: string
-  content?: any[]
   reflectionPrompt?: string
   tryThisWeek?: string
   estimatedMinutes?: number
+  content?: PortableTextBlock[]
 }
 
 export interface IkigaiQuizQuestion {
@@ -182,7 +184,7 @@ export interface Lesson {
   format?: string
   emphasis?: LessonEmphasis
   videoId?: string
-  body?: any[]
+  body?: PortableTextBlock[]
   socialLogic?: string
   technicalNotes?: TechnicalNote[]
   duration?: number
@@ -246,6 +248,19 @@ export interface Testimonial {
   company?: string
   result?: string
   image?: unknown
+}
+
+export interface CaseStudy {
+  _id: string
+  title: string
+  clientName: string
+  industry?: string
+  challenge?: string
+  solution?: string
+  results?: string[]
+  image?: SanityImage
+  slug: SanitySlug
+  featured?: boolean
 }
 
 // ── Audit page ────────────────────────────────────────────────────────────────

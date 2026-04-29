@@ -1039,18 +1039,6 @@
   }
 }
 
-.blog-optin-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.blog-optin-label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
 .blog-optin-form .btn {
   width: 100%;
   margin-top: 0.25rem;
@@ -1060,12 +1048,6 @@
   font-size: 0.75rem;
   color: var(--text-tertiary);
   text-align: center;
-  margin: 0;
-}
-
-.blog-optin-error {
-  font-size: 0.85rem;
-  color: var(--color-error);
   margin: 0;
 }
 

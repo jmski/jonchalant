@@ -5,96 +5,6 @@
    ────────────────────────────────────────────────────────────────────────────
 */
 
-/* ── Page wrapper ── */
-.presence-audit-page {
-  max-width: 38rem;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 5rem;
-}
-
-@media (min-width: 640px) {
-  .presence-audit-page {
-    padding: 4rem 0 6rem;
-  }
-}
-
-/* ── Decorative opening mark above the eyebrow ── */
-.presence-audit-opening-mark {
-  width: 2.5rem;
-  height: 2px;
-  background: var(--accent-primary);
-  margin-bottom: 1.5rem;
-}
-
-/* ── Page header ── */
-.presence-audit-page-header {
-  margin-bottom: 3rem;
-}
-
-.presence-audit-eyebrow {
-  display: block;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-primary);
-  margin-bottom: 1rem;
-}
-
-/* Editorial serif title */
-.presence-audit-page-title {
-  font-family: var(--font-headline);
-  font-size: 2.125rem;
-  font-weight: 300;
-  color: var(--text-primary);
-  line-height: 1.15;
-  margin-bottom: 1.125rem;
-  letter-spacing: -0.025em;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-
-@media (min-width: 640px) {
-  .presence-audit-page-title {
-    font-size: 2.875rem;
-  }
-}
-
-.presence-audit-page-subtitle {
-  font-size: 1.0625rem;
-  color: var(--text-secondary);
-  line-height: 1.75;
-  margin: 0 0 2rem;
-}
-
-/* Jon's contextual note — sets the tone before the flow begins */
-.presence-audit-jon-note {
-  margin: 0;
-  padding: 1.25rem 1.25rem 1.25rem 1.375rem;
-  border-left: 2px solid var(--mocha-deep);
-  background: rgba(107, 79, 63, 0.03);
-  border-radius: 0 0.375rem 0.375rem 0;
-}
-
-.presence-audit-jon-note p {
-  font-family: var(--font-headline);
-  font-style: italic;
-  font-size: 0.9375rem;
-  font-weight: 300;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  margin: 0 0 0.625rem;
-}
-
-.presence-audit-jon-note cite {
-  font-style: normal;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--mocha-deep);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
 /* ── Step indicator with connector ── */
 .presence-audit-steps {
   display: flex;
@@ -339,38 +249,6 @@
   gap: 1.5rem;
 }
 
-.presence-audit-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
-}
-
-.presence-audit-required {
-  color: var(--color-error);
-}
-
-.presence-audit-optional {
-  font-weight: 400;
-  color: var(--text-tertiary);
-  font-size: 0.8125rem;
-}
-
-.presence-audit-hint {
-  font-size: 0.8125rem;
-  color: var(--text-tertiary);
-  line-height: 1.55;
-  margin: 0;
-}
-
-.presence-audit-error {
-  font-size: 0.875rem;
-  color: var(--color-error);
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(138, 90, 90, 0.2);
-  border-radius: 0.375rem;
-  background: rgba(138, 90, 90, 0.04);
-}
-
 /* ── Step 3: Confirmation ── */
 .presence-audit-confirmation {
   background: var(--bg-secondary);
@@ -488,57 +366,6 @@
   padding-bottom: 6rem;
 }
 
-/* Header */
-.audit-header {
-  padding: 5rem 1.5rem 3rem;
-  border-bottom: 1px solid var(--border-subtle);
-  text-align: center;
-  background: var(--gradient-hero);
-}
-
-.audit-header-inner {
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.audit-header-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-primary);
-  background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent);
-  padding: 0.3rem 0.85rem;
-  border-radius: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.audit-header-title {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.audit-header-body {
-  font-size: 1.0625rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 520px;
-  margin: 0 auto;
-}
-
-/* Container */
-.audit-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-}
-
 /* Progress */
 .audit-progress-track {
   height: 3px;
@@ -555,17 +382,7 @@
   transition: width 0.4s ease;
 }
 
-.audit-progress-label {
-  font-size: 0.8125rem;
-  color: var(--text-tertiary);
-  margin-bottom: 3rem;
-}
-
 /* Question block */
-.audit-question-block {
-  animation: auditFadeUp 0.3s ease both;
-}
-
 @keyframes auditFadeUp {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -622,23 +439,6 @@
   font-weight: 500;
 }
 
-/* Back button */
-.audit-back {
-  display: inline-block;
-  margin-top: 2rem;
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.15s ease;
-}
-
-.audit-back:hover {
-  color: var(--text-secondary);
-}
-
 /* Capture stage */
 .audit-capture {
   animation: auditFadeUp 0.35s ease both;
@@ -683,18 +483,6 @@
   gap: 1.25rem;
 }
 
-.audit-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.audit-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
 .audit-input {
   padding: 0.85rem 1rem;
   border: 1px solid var(--border-color);
@@ -720,11 +508,6 @@
   font-size: 0.8125rem;
   color: var(--text-tertiary);
   text-align: center;
-}
-
-.audit-error {
-  font-size: 0.875rem;
-  color: var(--color-error);
 }
 
 /* Result stage */
@@ -860,20 +643,6 @@
 .audit-result-cta-text {
   font-size: 0.9375rem;
   color: var(--text-tertiary);
-}
-
-/* Footer note */
-.audit-footer-note {
-  text-align: center;
-  padding: 1rem 1.5rem 3rem;
-  font-size: 0.9rem;
-  color: var(--text-tertiary);
-}
-
-.audit-footer-link {
-  color: var(--accent-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 /* ============================================================

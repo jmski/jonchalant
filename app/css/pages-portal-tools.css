@@ -2020,13 +2020,6 @@
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.programs-hero-aside-body {
-  font-size: 0.9375rem;
-  line-height: 1.75;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
 .programs-hero-aside-list {
   list-style: none;
   padding: 0;

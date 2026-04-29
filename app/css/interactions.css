@@ -39,31 +39,6 @@ select:focus:not(.no-ring) {
   outline-offset: 2px;
 }
 
-/* Gallery Item Hover */
-.gallery-item {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.gallery-item:hover {
-  transform: scale(1.05);
-}
-
-.gallery-item:hover::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease;
-}
-
-.gallery-item:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
-
 /* Badge Hover */
 .badge {
   transition: all 0.2s ease;
@@ -72,30 +47,6 @@ select:focus:not(.no-ring) {
 
 .badge:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Enhanced Button with Glow Effect */
-.btn-glow {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-glow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 255, 255, 0.3) 0%,
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.btn-glow:hover::before {
-  opacity: 1;
 }
 
 /* Loading State */
@@ -130,13 +81,6 @@ input[type="radio"],
 select {
   min-height: 44px;
   min-width: 44px;
-}
-
-@media (hover: hover) {
-  /* Only apply hover effects on devices that support hover */
-  .gallery-item:hover {
-    transform: scale(1.05);
-  }
 }
 
 /* Reduced Motion Support */
@@ -455,28 +399,7 @@ select {
     }
   }
 
-  @keyframes shimmer {
-    0% {
-      background-position: -1000px 0;
-    }
-    100% {
-      background-position: 1000px 0;
-    }
-  }
-
   /* Animation Utility Classes */
-  .animate-shimmer {
-    animation: shimmer 2s infinite;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.2) 20%,
-      rgba(255, 255, 255, 0.5) 60%,
-      rgba(255, 255, 255, 0)
-    );
-    background-size: 1000px 100%;
-  }
-
   .animate-fadeIn {
     animation: fadeIn-scroll 0.5s ease-out forwards;
   }
@@ -567,39 +490,6 @@ select {
   }
 }
 
-/* ── Hero staggered entrance ────────────────────────────────────────────── */
-
-@keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-animate-in {
-  opacity: 0;
-  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.hero-animate-in[data-delay="0"] { animation-delay: 0ms; }
-.hero-animate-in[data-delay="1"] { animation-delay: 100ms; }
-.hero-animate-in[data-delay="2"] { animation-delay: 200ms; }
-.hero-animate-in[data-delay="3"] { animation-delay: 280ms; }
-.hero-animate-in[data-delay="4"] { animation-delay: 380ms; }
-.hero-animate-in[data-delay="5"] { animation-delay: 440ms; }
-.hero-animate-in[data-delay="6"] { animation-delay: 540ms; }
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-animate-in {
-    animation: none;
-    opacity: 1;
-  }
-}
-
 /* ============================================================
    MOCHA CURSOR — eased follow
    ============================================================ */
@@ -649,7 +539,7 @@ select {
 }
 
 /* ============================================================
-   BUTTON + FORM FIELD POLISH
+   BUTTON POLISH
    ============================================================ */
 
 .btn-primary:hover {
@@ -659,51 +549,6 @@ select {
 
 .btn-primary:active {
   transform: scale(0.98);
-}
-
-/* Floating label — opt-in wrapper; requires label after input in DOM */
-.field-floating {
-  position: relative;
-}
-
-.field-floating input,
-.field-floating textarea {
-  border: 1px solid var(--border-subtle);
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  transition:
-    border-color 200ms ease,
-    box-shadow 200ms ease;
-}
-
-.field-floating input:focus,
-.field-floating textarea:focus {
-  border-color: var(--mocha-mousse);
-  box-shadow: 0 0 0 3px rgba(164, 120, 100, 0.12);
-  outline: none;
-}
-
-.field-floating label {
-  position: absolute;
-  left: 0.75rem;
-  top: 1rem;
-  font-size: 1rem;
-  color: var(--text-tertiary);
-  pointer-events: none;
-  line-height: 1;
-  transition:
-    top 200ms ease,
-    font-size 200ms ease,
-    color 200ms ease;
-}
-
-.field-floating input:focus ~ label,
-.field-floating input:not(:placeholder-shown) ~ label,
-.field-floating textarea:focus ~ label,
-.field-floating textarea:not(:placeholder-shown) ~ label {
-  top: 0.35rem;
-  font-size: 0.78rem;
-  color: var(--mocha-deep);
 }
 
 /* ============================================================

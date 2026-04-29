@@ -216,18 +216,6 @@
   animation: auditFadeUp 0.25s ease both;
 }
 
-.contact-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.contact-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
 .contact-input,
 .contact-textarea {
   padding: 0.85rem 1rem;
@@ -250,11 +238,6 @@
 .contact-textarea {
   resize: vertical;
   min-height: 130px;
-}
-
-.contact-error {
-  font-size: 0.875rem;
-  color: var(--color-error);
 }
 
 .contact-form-note {

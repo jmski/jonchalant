@@ -1,12 +1,11 @@
 /* ============================================================================
-   TYPOGRAPHY.CSS - Font Families, Scales, and Text Styles
-   
-   Modern Zen system: Cormorant Garamond (headlines), Inter (body), Monaco (mono)
+   TYPOGRAPHY.CSS - Font families, scales, and text styles
+   Headlines: Fraunces (variable). Body: DM Sans. Mono: system mono stack.
    Uses clamp() for fluid typography scaling across all breakpoints.
    ============================================================================ */
 
 /* ============================================================================
-   HEADLINES - Cormorant Garamond with fluid scaling via clamp()
+   HEADLINES
    ============================================================================ */
 
 h1 {
@@ -73,7 +72,7 @@ h6 {
 }
 
 /* ============================================================================
-   BODY TEXT - Inter with proper spacing and hierarchy
+   BODY TEXT
    ============================================================================ */
 
 p {
@@ -86,7 +85,6 @@ p {
   color: var(--text-primary);
 }
 
-/* Intro paragraph - larger, slightly bolder */
 p.intro {
   font-size: 1.25rem;
   font-weight: 500;
@@ -94,7 +92,6 @@ p.intro {
   color: var(--text-primary);
 }
 
-/* Lead paragraph for article introductions */
 p.lead {
   font-size: 1.1875rem;
   font-weight: 400;
@@ -106,18 +103,6 @@ p.lead {
 /* ============================================================================
    TEXT SIZE UTILITIES
    ============================================================================ */
-
-.text-lg {
-  font-size: 1.25rem;
-  line-height: var(--leading-relaxed);
-  color: var(--text-primary);
-}
-
-.text-base {
-  font-size: 1rem;
-  line-height: var(--leading-relaxed);
-  color: var(--text-primary);
-}
 
 .text-sm {
   font-size: 0.9375rem;
@@ -270,197 +255,26 @@ hr {
 }
 
 /* ============================================================================
-   TEXT UTILITIES
-   ============================================================================ */
-
-.text-muted {
-  color: var(--text-tertiary);
-}
-
-.text-accent {
-  color: var(--accent-primary);
-}
-
-.text-accent-secondary {
-  color: var(--accent-secondary);
-}
-
-.text-mono {
-  font-family: var(--font-mono);
-  letter-spacing: 0px;
-}
-
-/* ============================================================================
    FONT WEIGHT UTILITIES
    ============================================================================ */
 
-.font-thin {
-  font-weight: 100;
-}
-
-.font-light {
-  font-weight: 300;
-}
-
-.font-normal {
-  font-weight: 400;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-extrabold {
-  font-weight: 800;
-}
-
-.font-black {
-  font-weight: 900;
-}
+.font-medium   { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold     { font-weight: 700; }
 
 /* ============================================================================
-   TEXT TRANSFORMATION UTILITIES
+   TEXT TRANSFORMATION & ALIGNMENT
    ============================================================================ */
 
-.uppercase {
-  text-transform: uppercase;
-}
-
-.lowercase {
-  text-transform: lowercase;
-}
-
-.capitalize {
-  text-transform: capitalize;
-}
-
-.normal-case {
-  text-transform: none;
-}
+.uppercase   { text-transform: uppercase; }
+.text-center { text-align: center; }
 
 /* ============================================================================
-   LETTER SPACING UTILITIES
-   ============================================================================ */
-
-.tracking-tight {
-  letter-spacing: -0.015em;
-}
-
-.tracking-normal {
-  letter-spacing: 0em;
-}
-
-.tracking-wide {
-  letter-spacing: 0.025em;
-}
-
-.tracking-widest {
-  letter-spacing: 0.1em;
-}
-
-/* ============================================================================
-   LINE HEIGHT UTILITIES
-   ============================================================================ */
-
-.leading-tight {
-  line-height: 1.1;
-}
-
-.leading-normal {
-  line-height: 1.5;
-}
-
-.leading-relaxed {
-  line-height: 1.75;
-}
-
-.leading-loose {
-  line-height: 2;
-}
-
-/* ============================================================================
-   TEXT ALIGNMENT
-   ============================================================================ */
-
-.text-left {
-  text-align: left;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-justify {
-  text-align: justify;
-}
-
-/* ============================================================================
-   PULL QUOTES
-   ============================================================================ */
-
-.pull-quote {
-  font-family: var(--font-headline);
-  font-weight: 300;
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  font-style: italic;
-  color: var(--mocha-deep);
-  border-left: 3px solid var(--accent-primary);
-  padding-left: 1.5rem;
-  line-height: 1.4;
-  margin: 2.5rem 0;
-}
-
-.pull-quote--warm {
-  border-left-color: var(--color-warm-amber);
-}
-
-/* ============================================================================
-   STAT NUMBERS — Editorial oversized metrics
-   ============================================================================ */
-
-.stat-number {
-  font-family: var(--font-headline);
-  font-weight: 300;
-  font-size: clamp(3rem, 6vw, 5rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-}
-
-.stat-label {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin-top: 0.5rem;
-}
-
-/* ==========================================================
    Editorial headline system
-
-   Three primitives for the design system's claim-style headlines:
-   - .headline-display  → hero claims (opsz 144)
-   - .headline-section  → section claims (opsz 72)
-   - .eyebrow           → small uppercase label above either
-
+   .headline-display → hero claims (opsz 144)
+   .eyebrow          → small uppercase label above either
    Italic anchor words: wrap in <em> or <span class="anchor">.
-   Anchor words get WONK axis for wabi-sabi italic character.
-   One italic anchor per headline, max (per SKILL.md).
-   ========================================================== */
+   ============================================================================ */
 
 .headline-display {
   font-family: var(--font-headline);
@@ -480,23 +294,6 @@ hr {
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
 }
 
-.headline-section {
-  font-family: var(--font-headline);
-  font-weight: 500;
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.headline-section em,
-.headline-section .anchor {
-  font-style: italic;
-  color: var(--accent-primary);
-  font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
-}
-
 .eyebrow {
   font-family: var(--font-headline);
   font-size: 0.75rem;
@@ -507,51 +304,10 @@ hr {
   margin: 0 0 0.75rem;
 }
 
-/* ============================================================
-   EXPRESSIVE FRAUNCES — variable axis system
-   ============================================================ */
-
-/* Display: maximum optical size, max softness — for oversized hero/pull moments */
-.type-display {
-  font-family: var(--font-headline);
-  font-weight: 400;
-  font-style: normal;
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  font-variation-settings: "opsz" 144, "SOFT" 100;
-}
-
-/* Softest, warmest — italic Fraunces for About page hero or pull moments */
-.type-display--soft {
-  font-style: italic;
-  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-}
-
-/* Headline: mid optical size, moderate softness */
-.type-headline {
-  font-family: var(--font-headline);
-  font-weight: 500;
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  font-variation-settings: "opsz" 72, "SOFT" 50;
-}
-
-/* Eyebrow label: DM Sans uppercase, mocha-deep */
-.type-eyebrow {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.78rem;
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--mocha-deep);
-}
-
-/* ============================================================
-   ANCHOR WORD — italic mocha signature word
-   ============================================================ */
+/* ============================================================================
+   ANCHOR WORD — italic mocha signature word (used by AnchorWord component)
+   Variants composed dynamically: anchor-word--${variant}
+   ============================================================================ */
 
 .anchor-word {
   font-style: italic;
@@ -570,9 +326,13 @@ hr {
   /* inherits surrounding font-size */
 }
 
-/* ============================================================
+.anchor-word--no-italic {
+  font-style: normal;
+}
+
+/* ============================================================================
    KINETIC HEADING — scroll-triggered word-by-word reveal
-   ============================================================ */
+   ============================================================================ */
 
 .kinetic-heading {
   display: block;
@@ -601,13 +361,11 @@ hr {
   }
 }
 
-/* ============================================================
-   JC-KINETIC — Phase 0 kinetic typography primitive
-
+/* ============================================================================
+   JC-KINETIC — kinetic typography primitive
    One dramatic-moment-per-page treatment. Fraunces at opsz 144,
    italic anchor in --mocha-mousse, WONK axis on the italic run.
-   Usage: <p class="jc-kinetic">The medium <em>changes</em>. The fundamentals <em>don't</em>.</p>
-   ============================================================ */
+   ============================================================================ */
 
 .jc-kinetic {
   font-family: var(--font-headline);
@@ -639,10 +397,6 @@ hr {
 
 .jc-kinetic-frame {
   padding: var(--spacing-2xl) 2rem;
-}
-
-.jc-kinetic-frame .jc-section-inner {
-  max-width: 1040px;
 }
 
 @media (max-width: 767px) {

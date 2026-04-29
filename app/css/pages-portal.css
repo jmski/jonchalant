@@ -700,10 +700,6 @@
   transition: background 0.2s ease;
 }
 
-.portal-sidebar-close {
-  display: none;
-}
-
 @media (max-width: 1023px) {
   .portal-topbar-menu {
     display: flex;
@@ -806,19 +802,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-}
-
-.portal-section--coach {
-  background: color-mix(in srgb, var(--mocha-deep) 4%, var(--bg-secondary));
-  border: 1px solid color-mix(in srgb, var(--mocha-deep) 15%, transparent);
-  border-left: 3px solid var(--mocha-deep);
-  padding: var(--spacing-xl);
-}
-
-.portal-coach-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 /* ── Section labels ──────────────────────────────────────────────────────── */
@@ -960,110 +943,6 @@
   color: var(--accent-primary);
 }
 
-/* ── Sidebar quick links ─────────────────────────────────────────────────── */
-.portal-sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.portal-sidebar-label {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin: 0 0 0.625rem;
-  padding-bottom: 0.625rem;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.portal-sidebar-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.625rem 0.875rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  border-radius: 2px;
-  transition:
-    border-color 0.18s ease,
-    color 0.18s ease,
-    background 0.18s ease;
-}
-
-.portal-sidebar-link:hover {
-  border-color: var(--accent-primary);
-  color: var(--text-primary);
-  background: color-mix(in srgb, var(--accent-primary) 5%, var(--bg-secondary));
-}
-
-.portal-sidebar-link-arrow {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  flex-shrink: 0;
-  transition: transform 0.18s ease, color 0.18s ease;
-}
-
-.portal-sidebar-link:hover .portal-sidebar-link-arrow {
-  color: var(--accent-primary);
-  transform: translateX(3px);
-}
-
-/* Legacy quicklinks (kept for fallback) */
-.portal-quicklinks-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-sm);
-}
-
-@media (min-width: 640px) {
-  .portal-quicklinks-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.portal-quicklink-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  text-decoration: none;
-  color: inherit;
-  border-radius: 2px;
-  transition: border-color 0.2s ease;
-}
-
-.portal-quicklink-card:hover {
-  border-color: var(--accent-primary);
-}
-
-.portal-quicklink-title {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.portal-quicklink-arrow {
-  font-size: 1rem;
-  color: var(--text-tertiary);
-  flex-shrink: 0;
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.portal-quicklink-card:hover .portal-quicklink-arrow {
-  color: var(--accent-primary);
-  transform: translateX(3px);
-}
-
 /* ─────────────────────────────────────────────────────────────────────────────
    PORTAL LESSON PAGE — Two-column layout: main content + lesson outline sidebar
    ────────────────────────────────────────────────────────────────────────────
@@ -1200,10 +1079,7 @@
   font-weight: 700;
 }
 
-/* Main content area (lesson container legacy alias) */
-.portal-lesson-container {
-  max-width: 52rem;
-}
+/* Main content area */
 
 /* Video Section */
 .portal-lesson-video-section {
@@ -1375,12 +1251,6 @@
   }
 }
 
-.portal-lesson-notes-column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
 .portal-lesson-note-card {
   padding: var(--spacing-lg);
   background: var(--bg-secondary);
@@ -1405,38 +1275,6 @@
   margin: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
-}
-
-/* Footer (legacy — unused in new layout) */
-.portal-lesson-footer {
-  border-top: 1px solid var(--border-subtle);
-  padding: var(--spacing-xl);
-  background: var(--bg-secondary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.portal-lesson-footer-link {
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-}
-
-.portal-lesson-footer-link:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
-}
-
-.portal-lesson-footer-text {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  margin: 0;
 }
 
 /* ── Breadcrumb ─────────────────────────────────────────────────────────── */
