@@ -5,7 +5,6 @@ export { EmailCapture } from './home/email-capture';
 export { MeetJon } from './home/meet-jon';
 export { FeaturedAreas } from './home/featured-areas';
 export { BlogCards } from './home/blog-cards';
-export { ImpactSection } from './home/impact';
 export { PortfolioPreview } from './home/portfolio-preview';
 export { WhyWorkTogether } from './home/why-work-together';
 export { WhyItWorks } from './home/why-it-works';

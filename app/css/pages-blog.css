@@ -1033,22 +1033,10 @@
   gap: 0.75rem;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 640px) {
   .blog-optin-fields {
     grid-template-columns: 1fr 1fr;
   }
-}
-
-.blog-optin-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.blog-optin-label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-secondary);
 }
 
 .blog-optin-form .btn {
@@ -1063,14 +1051,8 @@
   margin: 0;
 }
 
-.blog-optin-error {
-  font-size: 0.85rem;
-  color: var(--color-error);
-  margin: 0;
-}
-
 /* Success state */
-.blog-optin-success {
+.blog-optin--success {
   margin: 3rem 0;
   padding: 2rem;
   background: var(--bg-tertiary);

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity'
+import type { SanityImage } from '@/lib/types'
 
 export interface CourseProgress {
   completed: number
@@ -12,7 +13,7 @@ interface CourseCardProps {
   title: string
   slug: string
   description: string
-  thumbnail?: any
+  thumbnail?: SanityImage
   difficulty?: string | null
   moduleCount: number
   lessonCount: number

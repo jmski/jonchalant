@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { ProgramTrackCard } from "@/components/utilities/cards";
 import { getProgramsPageContent, getCaseStudies, getCurriculumWeeks } from "@/lib/sanity";
 import { CurriculumBento } from "@/components/sections/programs/CurriculumBento";
-import type { CurriculumWeek } from "@/lib/types";
+import type { CurriculumWeek, CaseStudy } from "@/lib/types";
 import type { ProgramsPageContent } from "@/lib/types";
 import { CaseStudyCard } from "@/components/utilities/cards";
 import Script from 'next/script';
@@ -120,7 +120,7 @@ export default async function Programs() {
                 </p>
               </div>
               <div className="programs-case-studies-grid">
-                {caseStudies.map((cs: any) => (
+                {caseStudies.map((cs: CaseStudy) => (
                   <CaseStudyCard
                     key={cs._id}
                     title={cs.title}

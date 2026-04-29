@@ -245,3 +245,17 @@
   gap: var(--spacing-lg);
 }
 
+
+/* MFA setup */
+.mfa-qr-container {
+  display: flex;
+  justify-content: center;
+  margin: var(--spacing-md) 0;
+}
+
+.mfa-manual-key {
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  word-break: break-all;
+}

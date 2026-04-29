@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
+import type { PortableTextBlock } from '@portabletext/types'
 import { markLessonComplete } from '@/lib/portal-progress'
 import { VideoEmbed } from '@/components/shared/VideoEmbed'
 
@@ -18,7 +19,7 @@ export interface LessonContentProps {
     _id: string
     title: string
     description?: string
-    body?: any[]
+    body?: PortableTextBlock[]
     videoUrl?: string
     access: 'free' | 'enrolled'
     estimatedDuration?: number

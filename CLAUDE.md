@@ -72,18 +72,20 @@ When editing copy or generating new content:
 ## Strict Rules
 
 **CSS:**
-- **No `!important`** — fix specificity/cascade instead
-- **No new CSS files** — 19 files exist (9 system + 10 page-scoped). Add styles to the relevant one
-- **No inline styles** except truly dynamic values
+- **No `!important`** — fix specificity/cascade instead. Only exception: `@media (prefers-reduced-motion: reduce)` overrides in `interactions.css`
+- **No new CSS files** — 18 files exist (9 system + 9 page-scoped). Add styles to the relevant one
+- **No inline styles** except truly dynamic values (progress widths, transform offsets, CSS custom properties set per render)
 - **No Tailwind in component JSX** — only `text-*`, `font-*`, `leading-*`, responsive breakpoint prefixes
 - **BEM-inspired kebab-case naming**: `.section-name`, `.section-name-header`, `.section-name-title`
 - **Light mode only** — no dark mode
 - **Always use CSS variables for colors** — never hardcode hex in page-scoped CSS files
 - **Standard breakpoints only**: 640px (sm), 768px (md), 1024px (lg) — no 480px, 560px, 960px
+- **OpenGraph image exception**: `app/**/opengraph-image.tsx` files render server-side to PNG via `next/og` and may use inline styles + hardcoded hex. Nowhere else.
 
 **Components:**
 - **No "Section" suffix** on component names (`Hero` not `HeroSection`)
-- **Server components by default** — only `'use client'` for interactive state
+- **Server components by default** — only `'use client'` for interactive state (`useState`, `useEffect`, event handlers, refs to interactive APIs)
+- **Animation-only components must stay server components**. Wrap in `<ScrollFade>` / `<ScrollReveal>` / `<ScrollStagger>` (which are already client) instead of marking the section itself `'use client'` and running an internal `IntersectionObserver`
 - **Import alias `@/` always** — never relative paths from deep files
 - **All sections exported from `components/sections/index.ts`** with descriptive aliases
 
@@ -151,7 +153,7 @@ Defined in `globals.css`:
 | `utilities.css` | Spacing, responsive breakpoints |
 | `interactions.css` | Hover states, transitions, animations |
 
-### 10 Page-Scoped CSS Files
+### 9 Page-Scoped CSS Files
 `pages-forms.css` | `pages-portal.css` | `pages-blog.css` | `pages-audit.css` | `pages-ikigai.css` | `pages-lessons.css` | `pages-portal-tools.css` | `pages-contact.css` | `pages-foundation.css`
 
 ### Key Colors

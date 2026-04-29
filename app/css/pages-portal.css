@@ -75,7 +75,7 @@
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   padding: 2rem;
-  background: #ffffff;
+  background: var(--bg-light);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
@@ -155,7 +155,7 @@
   gap: 0.625rem;
   width: 100%;
   padding: 0.75rem 1rem;
-  background: #ffffff;
+  background: var(--bg-light);
   color: var(--text-primary);
   font-weight: 500;
   font-size: 0.875rem;
@@ -247,7 +247,7 @@
   padding: 0.875rem 1.5rem;
   margin-top: 1.5rem;
   background: var(--accent-primary);
-  color: #ffffff;
+  color: var(--btn-primary-text);
   font-weight: 600;
   font-size: 0.875rem;
   font-family: var(--font-body);
@@ -700,11 +700,7 @@
   transition: background 0.2s ease;
 }
 
-.portal-sidebar-close {
-  display: none;
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1023px) {
   .portal-topbar-menu {
     display: flex;
   }
@@ -808,19 +804,6 @@
   gap: var(--spacing-lg);
 }
 
-.portal-section--coach {
-  background: color-mix(in srgb, var(--mocha-deep) 4%, var(--bg-secondary));
-  border: 1px solid color-mix(in srgb, var(--mocha-deep) 15%, transparent);
-  border-left: 3px solid var(--mocha-deep);
-  padding: var(--spacing-xl);
-}
-
-.portal-coach-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 /* ── Section labels ──────────────────────────────────────────────────────── */
 .portal-section-label {
   font-size: 0.6875rem;
@@ -872,7 +855,7 @@
   gap: var(--spacing-md);
 }
 
-@media (min-width: 560px) {
+@media (min-width: 640px) {
   .portal-courses-grid {
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
   }
@@ -958,110 +941,6 @@
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--accent-primary);
-}
-
-/* ── Sidebar quick links ─────────────────────────────────────────────────── */
-.portal-sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.portal-sidebar-label {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin: 0 0 0.625rem;
-  padding-bottom: 0.625rem;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.portal-sidebar-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.625rem 0.875rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  border-radius: 2px;
-  transition:
-    border-color 0.18s ease,
-    color 0.18s ease,
-    background 0.18s ease;
-}
-
-.portal-sidebar-link:hover {
-  border-color: var(--accent-primary);
-  color: var(--text-primary);
-  background: color-mix(in srgb, var(--accent-primary) 5%, var(--bg-secondary));
-}
-
-.portal-sidebar-link-arrow {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  flex-shrink: 0;
-  transition: transform 0.18s ease, color 0.18s ease;
-}
-
-.portal-sidebar-link:hover .portal-sidebar-link-arrow {
-  color: var(--accent-primary);
-  transform: translateX(3px);
-}
-
-/* Legacy quicklinks (kept for fallback) */
-.portal-quicklinks-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-sm);
-}
-
-@media (min-width: 480px) {
-  .portal-quicklinks-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.portal-quicklink-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  text-decoration: none;
-  color: inherit;
-  border-radius: 2px;
-  transition: border-color 0.2s ease;
-}
-
-.portal-quicklink-card:hover {
-  border-color: var(--accent-primary);
-}
-
-.portal-quicklink-title {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.portal-quicklink-arrow {
-  font-size: 1rem;
-  color: var(--text-tertiary);
-  flex-shrink: 0;
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.portal-quicklink-card:hover .portal-quicklink-arrow {
-  color: var(--accent-primary);
-  transform: translateX(3px);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -1200,15 +1079,12 @@
   font-weight: 700;
 }
 
-/* Main content area (lesson container legacy alias) */
-.portal-lesson-container {
-  max-width: 52rem;
-}
+/* Main content area */
 
 /* Video Section */
 .portal-lesson-video-section {
   margin-bottom: var(--spacing-2xl);
-  background: #000;
+  background: var(--bg-dark);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -1375,12 +1251,6 @@
   }
 }
 
-.portal-lesson-notes-column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
 .portal-lesson-note-card {
   padding: var(--spacing-lg);
   background: var(--bg-secondary);
@@ -1405,38 +1275,6 @@
   margin: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
-}
-
-/* Footer (legacy — unused in new layout) */
-.portal-lesson-footer {
-  border-top: 1px solid var(--border-subtle);
-  padding: var(--spacing-xl);
-  background: var(--bg-secondary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.portal-lesson-footer-link {
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-}
-
-.portal-lesson-footer-link:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
-}
-
-.portal-lesson-footer-text {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  margin: 0;
 }
 
 /* ── Breadcrumb ─────────────────────────────────────────────────────────── */
@@ -1715,7 +1553,7 @@
   color: var(--text-primary);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 639px) {
   .portal-lesson-pagination {
     grid-template-columns: 1fr;
   }
@@ -1783,18 +1621,18 @@
 }
 
 .portal-fc-tier-badge--basic {
-  background: #e8f5e2;
-  color: #3d6b3a;
+  background: var(--fc-tier-basic-bg);
+  color: var(--fc-tier-basic-text);
 }
 
 .portal-fc-tier-badge--challenging {
-  background: #f5edde;
-  color: #7a5b20;
+  background: var(--fc-tier-challenging-bg);
+  color: var(--fc-tier-challenging-text);
 }
 
 .portal-fc-tier-badge--hardest {
-  background: #ede8f5;
-  color: var(--color-burnt-indigo);
+  background: var(--fc-tier-hardest-bg);
+  color: var(--fc-tier-hardest-text);
 }
 
 /* Quadrant tags */
@@ -1812,13 +1650,13 @@
   text-transform: uppercase;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
-  color: #fff;
+  color: var(--btn-primary-text);
 }
 
-.portal-fc-quadrant-tag--passion    { background: #6B4F3F; }
-.portal-fc-quadrant-tag--mission    { background: #A47864; }
-.portal-fc-quadrant-tag--vocation   { background: #b89a5f; }
-.portal-fc-quadrant-tag--profession { background: #8A9A85; }
+.portal-fc-quadrant-tag--passion    { background: var(--quadrant-passion); }
+.portal-fc-quadrant-tag--mission    { background: var(--quadrant-mission); }
+.portal-fc-quadrant-tag--vocation   { background: var(--quadrant-vocation); }
+.portal-fc-quadrant-tag--profession { background: var(--quadrant-profession); }
 
 /* Lesson summary */
 .portal-fc-lesson-summary {
@@ -1844,7 +1682,7 @@
 }
 
 .portal-fc-lesson-block--try-this {
-  border-left-color: var(--color-burnt-indigo);
+  border-left-color: var(--mocha-deep);
 }
 
 .portal-fc-lesson-block-label {
@@ -1983,28 +1821,28 @@
 
 /* Metric card variants */
 .admin-metric-card--new:hover {
-  border-color: #3b82f6;
-  background-color: rgba(59, 130, 246, 0.02);
+  border-color: var(--admin-status-new);
+  background-color: color-mix(in srgb, var(--admin-status-new) 2%, transparent);
 }
 
 .admin-metric-card--contacted:hover {
-  border-color: #f59e0b;
-  background-color: rgba(245, 158, 11, 0.02);
+  border-color: var(--admin-status-contacted);
+  background-color: color-mix(in srgb, var(--admin-status-contacted) 2%, transparent);
 }
 
 .admin-metric-card--interested:hover {
-  border-color: #10b981;
-  background-color: rgba(16, 185, 129, 0.02);
+  border-color: var(--admin-status-interested);
+  background-color: color-mix(in srgb, var(--admin-status-interested) 2%, transparent);
 }
 
 .admin-metric-card--conversion:hover {
-  border-color: #8b5cf6;
-  background-color: rgba(139, 92, 246, 0.02);
+  border-color: var(--admin-status-closed);
+  background-color: color-mix(in srgb, var(--admin-status-closed) 2%, transparent);
 }
 
 .admin-metric-card--response:hover {
-  border-color: #06b6d4;
-  background-color: rgba(6, 182, 212, 0.02);
+  border-color: var(--admin-status-response);
+  background-color: color-mix(in srgb, var(--admin-status-response) 2%, transparent);
 }
 
 /* Grid 2 Col Layout */
@@ -2156,19 +1994,19 @@
 }
 
 .admin-status-dot--new {
-  background-color: #3b82f6;
+  background-color: var(--admin-status-new);
 }
 
 .admin-status-dot--contacted {
-  background-color: #f59e0b;
+  background-color: var(--admin-status-contacted);
 }
 
 .admin-status-dot--interested {
-  background-color: #10b981;
+  background-color: var(--admin-status-interested);
 }
 
 .admin-status-dot--closed {
-  background-color: #8b5cf6;
+  background-color: var(--admin-status-closed);
 }
 
 .admin-status-percentage {
@@ -2316,15 +2154,15 @@
 }
 
 .admin-btn-delete {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #dc2626;
-  border-color: #fecaca;
+  background-color: color-mix(in srgb, var(--admin-danger) 10%, transparent);
+  color: var(--admin-danger);
+  border-color: var(--admin-danger-border);
 }
 
 .admin-btn-delete:hover {
-  background-color: #dc2626;
-  color: white;
-  border-color: #dc2626;
+  background-color: var(--admin-danger);
+  color: var(--btn-primary-text);
+  border-color: var(--admin-danger);
 }
 
 /* Modal */

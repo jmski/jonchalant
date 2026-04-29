@@ -560,26 +560,6 @@
   color: var(--text-tertiary);
 }
 
-/* ─── VIDEO EMBED ───────────────────────────────────────────────────────── */
-
-.lesson-video-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  margin-bottom: 2.5rem;
-}
-
-.lesson-video-iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
 /* ─── LESSON BODY (portable text) ───────────────────────────────────────── */
 
 .lesson-body {

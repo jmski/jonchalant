@@ -9,6 +9,8 @@ export interface Enrollment {
   stripe_session_id: string
   enrolled_at: string
   tier: 'self_paced' | 'with_checkins'
+  revoked_at: string | null
+  revoked_reason: string | null
 }
 
 /**
@@ -22,6 +24,7 @@ export async function isEnrolled(userId: string, courseSlug: string): Promise<bo
     .select('id')
     .eq('user_id', userId)
     .eq('course_slug', courseSlug)
+    .is('revoked_at', null)
     .maybeSingle()
 
   if (error) {
@@ -76,6 +79,7 @@ export async function getEnrollmentDate(
     .select('enrolled_at')
     .eq('user_id', userId)
     .eq('course_slug', courseSlug)
+    .is('revoked_at', null)
     .maybeSingle()
 
   if (error || !data) return null

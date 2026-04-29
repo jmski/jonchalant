@@ -35,7 +35,7 @@
   align-items: center;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
   .ikigai-intro-content {
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-2xl);
@@ -229,13 +229,6 @@
   line-height: var(--leading-tight);
 }
 
-.ikigai-quiz-subtitle {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: var(--leading-relaxed);
-  margin: 0;
-}
-
 /* Progress bar */
 .ikigai-progress {
   display: flex;
@@ -272,43 +265,6 @@
   height: 100%;
   background: var(--accent-primary);
   border-radius: 999px;
-}
-
-/* Question card — animated container */
-.ikigai-question-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
-  padding: var(--spacing-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  opacity: 1;
-  transform: translateX(0);
-  transition:
-    opacity 0.28s ease,
-    transform 0.28s ease;
-}
-
-.ikigai-question-card.is-exiting {
-  opacity: 0;
-  transform: translateX(-22px);
-}
-
-@keyframes ikigai-question-enter {
-  from {
-    opacity: 0;
-    transform: translateX(22px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.ikigai-question-card.is-entering {
-  animation: ikigai-question-enter 0.32s ease forwards;
-  transition: none;
 }
 
 /* Quadrant tag above question */
@@ -501,7 +457,7 @@
   gap: 1rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 639px) {
   .ikigai-bar-row {
     grid-template-columns: 140px 1fr 40px;
     gap: 0.6rem;
