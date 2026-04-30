@@ -239,15 +239,17 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      courseType: 'courseType',
       difficulty: 'difficulty',
+      courseType: 'courseType',
+      slug: 'slug.current',
       media: 'thumbnail',
     },
-    prepare(selection: any) {
-      const label = selection.courseType ?? selection.difficulty ?? 'No type set'
+    prepare(selection: { title?: string; difficulty?: string; courseType?: string; slug?: string; media?: unknown }) {
+      const subtitle =
+        selection.difficulty ?? selection.courseType ?? 'No level set'
       return {
-        title: selection.title,
-        subtitle: label,
+        title: selection.title || selection.slug || 'Untitled',
+        subtitle,
         media: selection.media,
       }
     },

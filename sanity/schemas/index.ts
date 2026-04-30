@@ -18,7 +18,21 @@ import contactPage from './contactPage'
 import foundationPage from './foundationPage'
 import blogConfig from './blogConfig'
 
+import { objectTypes } from './objects'
+import { sharedDocumentTypes } from './documents/shared'
+import { pageDocumentTypes } from './documents/pages'
+
 export const schemaTypes = [
+  // Object types (used inline by documents)
+  ...objectTypes,
+
+  // Shared singleton documents
+  ...sharedDocumentTypes,
+
+  // New page singleton documents
+  ...pageDocumentTypes,
+
+  // Existing document types
   service,
   testimonial,
   caseStudy,

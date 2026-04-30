@@ -2,7 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {structure} from './structure'
-import {types} from './schemaTypes'
+import {schemaTypes} from './schemas'
 
 export default defineConfig({
   name: 'default',
@@ -14,6 +14,6 @@ export default defineConfig({
     visionTool(),
   ],
   schema: {
-    types: types as any,
+    types: schemaTypes as any,
   } as any,
 } as any)

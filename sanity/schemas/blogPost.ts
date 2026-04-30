@@ -130,4 +130,30 @@ export default defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      slug: 'slug.current',
+      publishedAt: 'publishedAt',
+      media: 'coverImage',
+    },
+    prepare({ title, slug, publishedAt, media }) {
+      let subtitle = 'Unpublished'
+      if (publishedAt) {
+        const d = new Date(publishedAt)
+        if (!isNaN(d.getTime())) {
+          subtitle = d.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+          })
+        }
+      }
+      return {
+        title: title || slug || 'Untitled',
+        subtitle,
+        media,
+      }
+    },
+  },
 })
