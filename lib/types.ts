@@ -2,7 +2,8 @@
 // lib/types.ts — Central type definitions for the jonchalant codebase
 //
 // Single source of truth for all shared interfaces across pages, components,
-// and utility functions. Matches the Sanity schema shapes defined in sanity/schemas/.
+// and utility functions. Page/singleton types match the GROQ projections in
+// lib/sanity.ts.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { PortableTextBlock } from '@portabletext/types'
@@ -28,6 +29,385 @@ export interface SanityImage {
   hotspot?: { x: number; y: number; width: number; height: number }
   crop?: { top: number; bottom: number; left: number; right: number }
   alt?: string
+}
+
+// ── Shared object types (sanity/schemas/objects/*) ────────────────────────────
+
+export interface Cta {
+  label: string
+  href: string
+  ariaLabel?: string
+}
+
+export interface Link {
+  label: string
+  href: string
+}
+
+export interface Hero {
+  eyebrow?: string
+  headline: string
+  subhead?: string
+  primaryCta?: Cta
+  secondaryCta?: Cta
+  microcopy?: string
+}
+
+export interface SectionHeader {
+  eyebrow?: string
+  headline: string
+  subhead?: string
+  body?: string
+}
+
+export interface CtaBlock {
+  eyebrow?: string
+  headline: string
+  body?: string
+  primaryCta?: Cta
+  secondaryCta?: Cta
+  microcopy?: string
+}
+
+export interface PillarCard {
+  title: string
+  body: string
+}
+
+export interface ProgramCard {
+  eyebrow?: string
+  title: string
+  priceLine: string
+  description: string
+  inclusions: string[]
+  primaryCta: Cta
+  badge?: string
+}
+
+export interface CourseCard {
+  eyebrow?: string
+  title: string
+  tagline?: string
+  description: string
+  metadata?: string[]
+  primaryCta: Cta
+}
+
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
+// ── Shared singletons ─────────────────────────────────────────────────────────
+
+export interface NewsletterCapture {
+  eyebrow?: string
+  headline: string
+  subhead: string
+  emailLabel: string
+  emailPlaceholder: string
+  submitLabel: string
+  microcopy: string
+}
+
+export interface AuditCta {
+  eyebrow: string
+  headline: string
+  body: string
+  primaryCta: Cta
+  microcopy: string
+}
+
+export interface StarterGuideCapture {
+  eyebrow?: string
+  headline: string
+  body: string
+  firstNamePlaceholder: string
+  emailPlaceholder: string
+  submitLabel: string
+}
+
+export interface PillarSet {
+  pillars: PillarCard[]
+}
+
+export interface FourCirclesCircle {
+  title: string
+  definition: string
+  missingLine: string
+}
+
+export interface FourCirclesSet {
+  circles: FourCirclesCircle[]
+}
+
+export interface SocialLink {
+  platform:
+    | 'instagram'
+    | 'linkedin'
+    | 'youtube'
+    | 'tiktok'
+    | 'twitter'
+    | 'threads'
+    | 'bluesky'
+    | 'substack'
+    | 'medium'
+    | 'other'
+  url: string
+  label?: string
+}
+
+export interface FooterColumn {
+  header: string
+  links: Link[]
+}
+
+export interface AccountSection {
+  header?: string
+  links?: Link[]
+}
+
+export interface SuccessState {
+  key: 'general' | 'newsletter' | 'starterGuide' | 'contact'
+  message: string
+}
+
+export interface ValidationMicrocopy {
+  required: string
+  invalidEmail: string
+  tooShort: string
+  tooLong: string
+}
+
+export interface SignInContent {
+  headline: string
+  subhead: string
+  primaryLabel: string
+  magicLinkLabel: string
+  forgotPasswordLabel: string
+}
+
+export interface SignUpContent {
+  headline: string
+  subhead: string
+  submitLabel: string
+}
+
+export interface SiteConfig {
+  contactEmail: string
+  // nav
+  wordmark: string
+  desktopLinks: Link[]
+  rightSideLinks?: Link[]
+  mobileLinks: Link[]
+  mobilePersistentCta: Cta
+  // footer
+  brandLine: string
+  columns: FooterColumn[]
+  accountSection?: AccountSection
+  copyright: string
+  privacyLink: Cta
+  // socials
+  socialLinks?: SocialLink[]
+  // formMicrocopy
+  successStates: SuccessState[]
+  submitError: string
+  validation: ValidationMicrocopy
+  loadingLabel: string
+  // notFoundPage
+  notFoundHeadline: string
+  notFoundBody: string
+  notFoundLinks: Link[]
+  notFoundMicrocopy: string
+  // authPages
+  signIn: SignInContent
+  signUp: SignUpContent
+}
+
+// ── Page singletons ───────────────────────────────────────────────────────────
+
+export interface MethodStep {
+  title: string
+  body: string
+}
+
+export interface PageHome {
+  hero: Hero
+  methodHeader: SectionHeader
+  methodSteps: MethodStep[]
+  pillarsHeader: SectionHeader
+  pillarSet: PillarSet
+  meetJonHeader: SectionHeader
+  meetJonImage?: SanityImage
+  meetJonBodyParagraphs: string[]
+  meetJonPrimaryLink?: Cta
+  meetJonSecondaryLink?: Cta
+  testimonialsHeader: SectionHeader
+  blogPreviewHeader: SectionHeader
+  blogPreviewPerCardCtaLabel: string
+  blogPreviewSectionCta?: Cta
+  newsletter: NewsletterCapture
+  auditCta: AuditCta
+  starterGuide: StarterGuideCapture
+}
+
+export interface StoryBeat {
+  image?: SanityImage
+  headline: string
+  body: string
+  bodyParagraph2?: string
+  payoffLine?: string
+}
+
+export interface AboutWhoFor {
+  image?: SanityImage
+  headline: string
+  body: string
+}
+
+export interface PageAbout {
+  hero: Hero
+  storyBeats: StoryBeat[]
+  whoFor: AboutWhoFor
+  cta: CtaBlock
+}
+
+export interface InquiryCard {
+  eyebrow: string
+  body: string
+  inquiryType: 'oneOnOne' | 'general'
+}
+
+export interface WhatHappensNextStep {
+  title: string
+  body: string
+}
+
+export interface ThingsWorthKnowingItem {
+  title: string
+  body: string
+}
+
+export interface PageContact {
+  hero: Hero
+  inquiryCards: InquiryCard[]
+  whatHappensNextHeader: string
+  whatHappensNextSteps: WhatHappensNextStep[]
+  thingsWorthKnowingHeader: string
+  thingsWorthKnowingItems: ThingsWorthKnowingItem[]
+  emailFallback: { bodyLine: string }
+}
+
+export interface AuditBand {
+  headline: string
+  body: string
+  primaryCta: Cta
+  secondaryCta?: Cta
+}
+
+export interface PageAudit {
+  hero: Hero
+  heroMicrocopy: string
+  midQuizEncouragement: { line: string }
+  resultBands: {
+    low: AuditBand
+    mid: AuditBand
+    high: AuditBand
+  }
+  starterGuide: StarterGuideCapture
+}
+
+export interface CurriculumModule {
+  number: number
+  title: string
+  duration: string
+  blurb: string
+}
+
+export interface HowItWorksColumn {
+  title: string
+  body: string
+}
+
+export interface PageFoundation {
+  hero: Hero
+  heroMicrocopyUnderCtas?: string
+  whoForHeader: string
+  whoForLede: string
+  whoForBullets: string[]
+  whyDanceHeader: SectionHeader
+  whyDanceBodyParagraphs: string[]
+  curriculumHeader: SectionHeader
+  curriculumModules: CurriculumModule[]
+  howItWorksHeader: SectionHeader
+  howItWorksColumns: HowItWorksColumn[]
+  enrollmentHeader: SectionHeader
+  enrollmentCards: ProgramCard[]
+  enrollmentFootnote?: string
+  faqHeader: string
+  faqItems: FaqItem[]
+  softCta: CtaBlock
+  starterGuide: StarterGuideCapture
+}
+
+export interface HeroWhoForColumn {
+  header: string
+  bullets: string[]
+}
+
+export interface PagePrograms {
+  hero: Hero
+  heroWhoForColumn: HeroWhoForColumn
+  caseStudiesHeader: SectionHeader
+  programCardsHeader?: SectionHeader
+  programCards: ProgramCard[]
+  faqHeader: string
+  faqItems: FaqItem[]
+  closingCta: CtaBlock
+  starterGuide: StarterGuideCapture
+}
+
+export interface FeaturedSeries {
+  seriesBannerEnabled?: boolean
+  seriesName?: string
+  seriesSlug?: string
+  seriesStatus?: string
+  seriesDescription?: string
+  seriesCurrentPhase?: string
+  seriesCtaLabel?: string
+}
+
+export interface PageBlog {
+  hero: Hero
+  featuredSeries?: FeaturedSeries
+  newsletter: NewsletterCapture
+  auditCta: AuditCta
+  emptyState: { headline: string; body: string }
+}
+
+export interface PageLessonsCourse {
+  _id: string
+  title: string
+  slug: SanitySlug
+  description?: string
+  difficulty?: string
+  estimatedDuration?: string
+}
+
+export interface PageLessons {
+  hero: Hero
+  courses: PageLessonsCourse[]
+  closingCta?: CtaBlock
+  starterGuide: StarterGuideCapture
+}
+
+export interface PageIkigai {
+  hero: Hero
+  fourCirclesHeader: SectionHeader
+  fourCirclesSet: FourCirclesSet
+  quizBridge: { line: string }
+  starterGuide: StarterGuideCapture
+  cta: CtaBlock
 }
 
 // ── Ikigai / Four Circles ─────────────────────────────────────────────────────
@@ -72,38 +452,6 @@ export interface CourseLesson {
   tryThisWeek?: string
   estimatedMinutes?: number
   content?: PortableTextBlock[]
-}
-
-export interface IkigaiQuizQuestion {
-  _key?: string
-  questionText: string
-  quadrant: Quadrant
-  order: number
-}
-
-export interface IkigaiAnswerOption {
-  _key?: string
-  label: string
-  value: number
-}
-
-export interface IkigaiResultInterpretation {
-  _key?: string
-  type: 'quadrant-dominant' | 'three-circle-pattern'
-  quadrant?: Quadrant
-  pattern?: IkigaiPattern
-  headline: string
-  body: string
-  recommendedLessonNumber?: number
-}
-
-export interface IkigaiQuiz {
-  _id: string
-  title: string
-  introText?: string
-  questions: IkigaiQuizQuestion[]
-  answerScale: IkigaiAnswerOption[]
-  resultInterpretations?: IkigaiResultInterpretation[]
 }
 
 // ── Learning portal / curriculum ──────────────────────────────────────────────
@@ -207,38 +555,7 @@ export interface BlogPost {
   coverImage?: SanityImage
 }
 
-// ── Programs & services ───────────────────────────────────────────────────────
-
-export interface ProgramsPageContent {
-  heroEyebrow?: string
-  heroHeadline?: string
-  heroSubheading?: string
-  offersEyebrow?: string
-  offersHeading?: string
-  offersSubtext?: string
-  offerCards?: ProgramTrackItem[]
-  whoForHeading?: string
-  whoForBody?: string[]
-  ctaHeading?: string
-  ctaDescription?: string
-  ctaButtonText?: string
-  ctaButtonHref?: string
-  ctaMicrocopy?: string
-}
-
-export interface ProgramTrackItem {
-  _id: string
-  title: string
-  eyebrow?: string
-  trackType: 'course' | 'program' | 'coaching'
-  description: string
-  price: string
-  includes: string[]
-  ctaText: string
-  ctaHref: string
-  isFeatured: boolean
-  order: number
-}
+// ── Testimonials & case studies ───────────────────────────────────────────────
 
 export interface Testimonial {
   _id: string
@@ -263,165 +580,7 @@ export interface CaseStudy {
   featured?: boolean
 }
 
-// ── Audit page ────────────────────────────────────────────────────────────────
-
-export interface AuditResultBand {
-  band: 'foundation' | 'developing' | 'refining'
-  headline: string
-  body: string
-}
-
-export interface AuditPageContent {
-  pageHeaderBadge?: string
-  pageHeaderHeadline?: string
-  pageHeaderBody?: string
-  pageFooterNote?: string
-  captureBadge?: string
-  captureHeadline?: string
-  captureBody?: string
-  capturePrivacyNote?: string
-  resultBands?: AuditResultBand[]
-  resultNextHeading?: string
-  resultNextBody?: string
-  resultCtaText?: string
-  resultCtaButtonLabel?: string
-  resultCtaHref?: string
-}
-
-// ── Contact page ──────────────────────────────────────────────────────────────
-
-export interface ContactAuditStat {
-  number: string
-  label: string
-}
-
-export interface ContactSidebarItem {
-  title: string
-  body: string
-}
-
-export interface ContactPageContent {
-  auditPromptBadge?: string
-  auditPromptHeadline?: string
-  auditPromptBody?: string
-  auditPromptButtonText?: string
-  auditPromptNote?: string
-  auditStats?: ContactAuditStat[]
-  coachingPathHeading?: string
-  coachingPathBody?: string
-  coachingCalendlyHref?: string
-  coachingCalendlyLabel?: string
-  sidebarHeading?: string
-  sidebarItems?: ContactSidebarItem[]
-  sidebarEmailText?: string
-}
-
-// ── Email opt-in ──────────────────────────────────────────────────────────────
-
-export interface EmailOptInContent {
-  eyebrow?: string
-  heading?: string
-  description?: string
-  submitButtonText?: string
-  disclaimer?: string
-  successTitle?: string
-  successBody?: string
-}
-
-// ── About page ────────────────────────────────────────────────────────────────
-
-export interface OriginPhase {
-  _key: string
-  order: number
-  title: string
-  description?: string
-  pullQuote?: string
-  image: SanityImage
-  imageAlt: string
-}
-
-export interface HeroCycleSlide {
-  _key: string
-  kind: 'three-js-figure' | 'photo' | 'typography' | 'video-loop'
-  image?: SanityImage
-  typographicWord?: string
-  caption?: string
-  durationMs?: number
-}
-
-// ── About page bento tiles ────────────────────────────────────────────────────
-
-export type PortraitTile = {
-  _type: 'portraitTile'
-  image: SanityImage & { asset: SanityImageAsset & { metadata?: { dimensions?: { width: number; height: number }; lqip?: string } } }
-  alt: string
-}
-
-export type QuoteTile = {
-  _type: 'quoteTile'
-  quote: string
-  attribution?: string
-}
-
-export type StatTile = {
-  _type: 'statTile'
-  number: string
-  label: string
-}
-
-export type BioTile = {
-  _type: 'bioTile'
-  text: string
-}
-
-export type BentoTile = PortraitTile | QuoteTile | StatTile | BioTile
-
-// ── About page ───────────────────────────────────────────────────────────────
-
-export interface AboutPage {
-  heroHeadline?: string
-  heroDescription?: string
-  heroImage?: SanityImage
-  originImage?: SanityImage
-  philosophyImage?: SanityImage
-  introvertImage?: SanityImage
-  originSectionLabel?: string
-  originSectionHeadline?: string
-  originSectionDescription?: string
-  originSectionHighlight?: string
-  originSectionAnchorWord?: string
-  originPhases?: OriginPhase[]
-  turningPointHeadline?: string
-  turningPointBody?: string
-  turningPointHighlight?: string
-  methodologyHeadline?: string
-  methodologyBody?: string
-  methodologyHighlight?: string
-  whyExistsHeadline?: string
-  whyExistsBody?: string
-  whyExistsHighlight?: string
-  whoForHeadline?: string
-  whoForBody?: string
-  whoForHighlight?: string
-  closingHeadline?: string
-  closingBody?: string
-  ctaButtonText?: string
-  bentoTiles?: BentoTile[]
-}
-
-// ── Blog config ───────────────────────────────────────────────────────────────
-
-export interface BlogConfig {
-  seriesBannerEnabled?: boolean
-  seriesName?: string
-  seriesSlug?: string
-  seriesStatus?: string
-  seriesDescription?: string
-  seriesCurrentPhase?: string
-  seriesCTALabel?: string
-}
-
-// ── Database ──────────────────────────────────────────────────────────────────
+// ── Database / portal ─────────────────────────────────────────────────────────
 
 export interface LessonProgress {
   id: string
@@ -472,50 +631,7 @@ export interface MovementPlan {
   created_at: string
 }
 
-// ── Home page ─────────────────────────────────────────────────────────────────
-
-export interface HomePillarApplication {
-  _key?: string
-  who: string
-  body: string
-}
-
-export interface HomePillar {
-  _key?: string
-  number: string
-  name: string
-  definition: string
-  applications: HomePillarApplication[]
-}
-
-export interface HomePageContent {
-  pillarsHeadline?: string
-  pillars?: HomePillar[]
-  heroEyebrow?: string
-  heroHeadline?: string
-  heroSubhead?: string
-  heroPrimaryCtaLabel?: string
-  heroPrimaryCtaHref?: string
-  heroSecondaryCtaLabel?: string
-  heroSecondaryCtaHref?: string
-  heroStats?: Array<{ value: string; label: string }>
-  servicesHeadline?: string
-  servicesDescription?: string
-  whyItWorksLabel?: string
-  whyItWorksHighlight?: string
-  whyItWorksParagraph1?: string
-  whyItWorksParagraph2?: string
-  whyItWorksParagraph3?: string
-  testimonialsEyebrow?: string
-  testimonialsHeading?: string
-  ctaTitle?: string
-  ctaDescription?: string
-  ctaButtonText?: string
-  ctaButtonHref?: string
-  meetJonHeading?: string
-  meetJonBody?: string
-  meetJonImage?: SanityImage
-}
+// ── Curriculum bento (Phase 5) ───────────────────────────────────────────────
 
 export interface CurriculumWeek {
   _id: string
@@ -526,4 +642,3 @@ export interface CurriculumWeek {
   bentoSize?: 'sm' | 'md' | 'lg' | 'tall' | 'wide'
   order: number
 }
-

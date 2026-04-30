@@ -5,16 +5,17 @@ import { Button } from '@/components/ui/Button'
 import { FormField } from '@/components/ui/FormField'
 import { FormMessage } from '@/components/ui/FormMessage'
 import { useFormSubmission } from '@/lib/hooks'
-import type { EmailOptInContent } from '@/lib/types'
+import type { NewsletterCapture } from '@/lib/types'
 
 const STORAGE_KEY = 'jonchalant_subscribed'
 
 interface BlogOptInProps {
-  optIn?: EmailOptInContent | null
+  newsletter?: NewsletterCapture | null
+  successMessage?: string
   variant?: 'blog' | 'footer'
 }
 
-export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
+export function BlogOptIn({ newsletter, successMessage, variant = 'blog' }: BlogOptInProps) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [alreadySubscribed, setAlreadySubscribed] = useState(false)
@@ -39,18 +40,16 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
 
   if (alreadySubscribed) return null
 
+  const submitLabel = newsletter?.submitLabel ?? 'Subscribe'
+  const successCopy = successMessage ?? "You're in. Watch your inbox."
+
   if (variant === 'footer') {
     if (state.submitted) {
       return (
         <div className="jc-footer-optin-inner">
           <div className="jc-footer-optin-success">
             <span className="jc-footer-optin-success-icon">✓</span>
-            {optIn?.successTitle && (
-              <p className="jc-footer-optin-success-title">{optIn.successTitle}</p>
-            )}
-            {optIn?.successBody && (
-              <p className="jc-footer-optin-success-body">{optIn.successBody}</p>
-            )}
+            <p className="jc-footer-optin-success-body">{successCopy}</p>
           </div>
         </div>
       )
@@ -59,14 +58,14 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
     return (
       <div className="jc-footer-optin-inner">
         <div className="jc-footer-optin-copy">
-          {optIn?.eyebrow && (
-            <span className="jc-footer-optin-eyebrow">{optIn.eyebrow}</span>
+          {newsletter?.eyebrow && (
+            <span className="jc-footer-optin-eyebrow">{newsletter.eyebrow}</span>
           )}
-          {optIn?.heading && (
-            <h3 className="jc-footer-optin-title">{optIn.heading}</h3>
+          {newsletter?.headline && (
+            <h3 className="jc-footer-optin-title">{newsletter.headline}</h3>
           )}
-          {optIn?.description && (
-            <p className="jc-footer-optin-description">{optIn.description}</p>
+          {newsletter?.subhead && (
+            <p className="jc-footer-optin-description">{newsletter.subhead}</p>
           )}
         </div>
 
@@ -88,17 +87,14 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder={newsletter?.emailPlaceholder ?? 'your@email.com'}
               required
               autoComplete="email"
               className="jc-footer-optin-input"
               disabled={state.isSubmitting}
             />
-            <Button
-              type="submit"
-              disabled={state.isSubmitting}
-            >
-              {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
+            <Button type="submit" disabled={state.isSubmitting}>
+              {state.isSubmitting ? 'Sending…' : submitLabel}
             </Button>
           </div>
           {state.error && (
@@ -113,12 +109,7 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
   if (state.submitted) {
     return (
       <div className="blog-optin blog-optin--success">
-        {optIn?.successTitle && (
-          <p className="blog-optin-success-title">{optIn.successTitle}</p>
-        )}
-        {optIn?.successBody && (
-          <p className="blog-optin-success-body">{optIn.successBody}</p>
-        )}
+        <p className="blog-optin-success-body">{successCopy}</p>
       </div>
     )
   }
@@ -127,20 +118,20 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
     <div className="blog-optin">
       <div className="blog-optin-inner">
         <div className="blog-optin-copy">
-          {optIn?.eyebrow && (
-            <p className="blog-optin-eyebrow">{optIn.eyebrow}</p>
+          {newsletter?.eyebrow && (
+            <p className="blog-optin-eyebrow">{newsletter.eyebrow}</p>
           )}
-          {optIn?.heading && (
-            <h3 className="blog-optin-title">{optIn.heading}</h3>
+          {newsletter?.headline && (
+            <h3 className="blog-optin-title">{newsletter.headline}</h3>
           )}
-          {optIn?.description && (
-            <p className="blog-optin-description">{optIn.description}</p>
+          {newsletter?.subhead && (
+            <p className="blog-optin-description">{newsletter.subhead}</p>
           )}
         </div>
 
         <form onSubmit={handleSubmit} className="blog-optin-form">
           <div className="blog-optin-fields">
-            <FormField label="First name" id="optin-firstname">
+            <FormField label={newsletter?.emailLabel ?? 'First name'} id="optin-firstname">
               <input
                 id="optin-firstname"
                 type="text"
@@ -160,7 +151,7 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
+                placeholder={newsletter?.emailPlaceholder ?? 'you@company.com'}
                 required
                 autoComplete="email"
                 className="form-input"
@@ -172,15 +163,12 @@ export function BlogOptIn({ optIn, variant = 'blog' }: BlogOptInProps) {
             <FormMessage variant="error">{state.error}</FormMessage>
           )}
 
-          <Button
-            type="submit"
-            disabled={state.isSubmitting}
-          >
-            {state.isSubmitting ? 'Sending…' : (optIn?.submitButtonText ?? 'Subscribe')}
+          <Button type="submit" disabled={state.isSubmitting}>
+            {state.isSubmitting ? 'Sending…' : submitLabel}
           </Button>
 
-          {optIn?.disclaimer && (
-            <p className="blog-optin-disclaimer">{optIn.disclaimer}</p>
+          {newsletter?.microcopy && (
+            <p className="blog-optin-disclaimer">{newsletter.microcopy}</p>
           )}
         </form>
       </div>

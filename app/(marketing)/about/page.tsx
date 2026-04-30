@@ -1,9 +1,11 @@
-import { CTA, AboutBento, AboutStoryScroll } from "@/components/sections";
+import { AboutStoryScroll } from "@/components/sections";
 import { WhoFor } from "@/components/sections/about";
+import CTA from "@/components/shared/cta/CTA";
 import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
 import { ScrollFade } from "@/components/animations";
 import type { Metadata } from 'next';
-import { getAboutPageContent } from "@/lib/sanity";
+import { getPageAbout } from "@/lib/sanity";
+import type { PageAbout } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "About Jon | Leadership Coach & Choreographer",
@@ -37,10 +39,10 @@ export const metadata: Metadata = {
 };
 
 export default async function About() {
-  let aboutContent = null;
+  let pageAbout: PageAbout | null = null;
 
   try {
-    aboutContent = await getAboutPageContent();
+    pageAbout = await getPageAbout();
   } catch (error) {
     console.warn('Failed to fetch about content from Sanity, using fallback data:', error);
   }
@@ -49,65 +51,40 @@ export default async function About() {
     <div className="about-main">
       <PageTransition animation="fade">
 
-        {/* 1 — PERSONAL INTRO */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <AboutBento tiles={aboutContent?.bentoTiles} />
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* 2–5 — NARRATIVE ARC: scrollytelling (full-bleed, no SectionContent) */}
-        {/* Fields used: originImage → Beat 1, introvertImage → Beat 2, philosophyImage → Beat 3 */}
-        {/* Headline fields: originSectionHeadline, turningPointHeadline, methodologyHeadline */}
-        {/* Body fields: originSectionDescription, turningPointBody, methodologyBody */}
+        {/* 1 — STORY SCROLL */}
         <SectionWrapper variant="tertiary">
-          <AboutStoryScroll
-            originImage={aboutContent?.originImage}
-            originHeadline={aboutContent?.originSectionHeadline}
-            originBody={aboutContent?.originSectionDescription}
-            originAnchorWord={aboutContent?.originSectionAnchorWord}
-            turningPointImage={aboutContent?.introvertImage}
-            turningPointHeadline={aboutContent?.turningPointHeadline}
-            turningPointBody={aboutContent?.turningPointBody}
-            transferImage={aboutContent?.philosophyImage}
-            transferHeadline={aboutContent?.methodologyHeadline}
-            transferBody={aboutContent?.methodologyBody}
-          />
+          <AboutStoryScroll beats={pageAbout?.storyBeats} />
         </SectionWrapper>
 
-        {/* 6 — WHO THIS IS FOR */}
-        {aboutContent?.whoForHeadline && (
+        {/* 2 — WHO THIS IS FOR */}
+        {pageAbout?.whoFor?.headline && (
           <SectionWrapper variant="secondary">
             <SectionContent>
               <ScrollFade>
-              <WhoFor
-                headline={aboutContent.whoForHeadline}
-                body={aboutContent.whoForBody ?? ''}
-                highlight={aboutContent.whoForHighlight}
-              />
+                <WhoFor
+                  image={pageAbout.whoFor.image}
+                  headline={pageAbout.whoFor.headline}
+                  body={pageAbout.whoFor.body ?? ''}
+                />
               </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
 
-        {/* CTA — driven by Sanity closing* fields with hardcoded fallbacks */}
-        {/* TODO: Trim closingBody in Sanity Studio — keep only up to "That's your foundation." Remove "We start with the body..." onwards */}
-        <SectionWrapper variant="tertiary">
-          <SectionContent>
-            <CTA
-              title={aboutContent?.closingHeadline ?? "Find the work you were meant for."}
-              sub={aboutContent?.closingBody ?? "Start with eight questions. They take ten minutes. If the results tell you something useful, keep going."}
-              description={aboutContent?.closingBody ?? "Start with eight questions. They take ten minutes. If the results tell you something useful, keep going."}
-              buttonText={aboutContent?.ctaButtonText ?? "Discover Your Ikigai"}
-              buttonLink="/ikigai"
-              previewItems={[
-                { number: '01', text: 'Eight questions, ten minutes — ungated and free' },
-                { number: '02', text: 'Results identify which of the four ikigai circles are strong or missing' },
-                { number: '03', text: 'Saves to your portal if you have an account' },
-              ]}
-            />
-          </SectionContent>
-        </SectionWrapper>
+        {/* 3 — CTA */}
+        {pageAbout?.cta?.headline && (
+          <SectionWrapper variant="tertiary">
+            <SectionContent>
+              <CTA
+                title={pageAbout.cta.headline}
+                description={pageAbout.cta.body ?? ''}
+                sub={pageAbout.cta.microcopy}
+                buttonText={pageAbout.cta.primaryCta?.label ?? 'Discover Your Ikigai'}
+                buttonLink={pageAbout.cta.primaryCta?.href ?? '/ikigai'}
+              />
+            </SectionContent>
+          </SectionWrapper>
+        )}
 
       </PageTransition>
     </div>

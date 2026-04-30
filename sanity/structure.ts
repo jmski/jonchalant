@@ -71,33 +71,26 @@ export const structure: StructureResolver = (S) =>
             .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }]),
         ),
       S.documentTypeListItem('course').title('Courses'),
+
+      // ── Curriculum content (supports course detail pages) ──────────────────
+      S.listItem()
+        .title('Curriculum content')
+        .child(
+          S.list()
+            .title('Curriculum content')
+            .items([
+              S.documentTypeListItem('module').title('Modules'),
+              S.documentTypeListItem('courseLesson').title('Course lessons'),
+              S.documentTypeListItem('lesson').title('Lessons (legacy listing)'),
+            ]),
+        ),
+
       S.documentTypeListItem('caseStudy').title('Case studies'),
       S.documentTypeListItem('testimonial').title('Testimonials'),
 
       S.divider(),
 
-      // ── Other content (utility/listed types not yet categorized) ───────────
-      S.listItem()
-        .title('Other content')
-        .child(
-          S.list()
-            .title('Other content')
-            .items([
-              S.documentTypeListItem('service').title('Services'),
-              S.documentTypeListItem('module').title('Modules'),
-              S.documentTypeListItem('lesson').title('Lessons (legacy listing)'),
-              S.documentTypeListItem('courseLesson').title('Course lessons'),
-              S.documentTypeListItem('ikigaiQuiz').title('Ikigai quiz (data)'),
-              S.documentTypeListItem('pressMention').title('Press mentions'),
-              S.documentTypeListItem('emailOptIn').title('Email opt-in widget'),
-              S.documentTypeListItem('contactInfo').title('Contact info'),
-              singleton(S, 'blogConfig', 'Blog config'),
-            ]),
-        ),
-
-      S.divider(),
-
-      // ── Legacy (to be removed in Prompt E) ─────────────────────────────────
+      // ── Legacy (to be removed) ─────────────────────────────────────────────
       S.listItem()
         .title('Legacy (to be removed)')
         .child(
@@ -110,6 +103,12 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem('auditPage').title('Audit Page (legacy)'),
               S.documentTypeListItem('foundationPage').title('Foundation Page (legacy)'),
               S.documentTypeListItem('programsPageContent').title('Programs Page (legacy)'),
+              S.documentTypeListItem('service').title('Services (legacy)'),
+              S.documentTypeListItem('ikigaiQuiz').title('Ikigai quiz (legacy data)'),
+              S.documentTypeListItem('pressMention').title('Press mentions (legacy)'),
+              S.documentTypeListItem('emailOptIn').title('Email opt-in widget (legacy)'),
+              S.documentTypeListItem('contactInfo').title('Contact info (legacy)'),
+              S.documentTypeListItem('blogConfig').title('Blog config (legacy)'),
             ]),
         ),
     ])

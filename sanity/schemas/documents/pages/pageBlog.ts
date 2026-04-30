@@ -1,5 +1,5 @@
 import { defineType, defineField } from 'sanity'
-import { BODY_DESCRIPTION } from '../../lib/fieldDescriptions'
+import { BODY_DESCRIPTION, HEADLINE_DESCRIPTION } from '../../lib/fieldDescriptions'
 
 const SHARED_REF_DESC = (name: string) =>
   `References the singleton ${name}. Edit content there, not here.`
@@ -10,6 +10,9 @@ const FILTER_PILLS_NOTE =
 const POSTS_LIST_NOTE =
   'Blog posts come from the post document type. To add or edit posts, use the Posts section in the sidebar.'
 
+const FEATURED_SERIES_DESC =
+  'Optional featured series banner shown above the post list on the blog index. Leave fields empty to hide the banner.'
+
 export default defineType({
   name: 'pageBlog',
   title: 'Blog page',
@@ -17,6 +20,12 @@ export default defineType({
   __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
+    {
+      name: 'featuredSeries',
+      title: 'Featured series banner',
+      description: FEATURED_SERIES_DESC,
+      options: { collapsible: true, collapsed: false },
+    },
     {
       name: 'filterPillsNote',
       title: 'Filter pills (managed via tags)',
@@ -35,6 +44,59 @@ export default defineType({
   ],
   fields: [
     defineField({ name: 'hero', title: 'Hero', type: 'hero', fieldset: 'hero' }),
+
+    // Featured series banner (optional — mirrors legacy blogConfig.series* fields).
+    // Consumer should check `name` (the series title) and skip rendering if empty.
+    defineField({
+      name: 'seriesBannerEnabled',
+      title: 'Show series banner',
+      type: 'boolean',
+      fieldset: 'featuredSeries',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'seriesName',
+      title: 'Series name',
+      type: 'string',
+      fieldset: 'featuredSeries',
+      description: HEADLINE_DESCRIPTION,
+    }),
+    defineField({
+      name: 'seriesSlug',
+      title: 'Series slug',
+      type: 'string',
+      fieldset: 'featuredSeries',
+      description: 'e.g. going-first — must match the series field value on blog posts.',
+    }),
+    defineField({
+      name: 'seriesStatus',
+      title: 'Status label (eyebrow)',
+      type: 'string',
+      fieldset: 'featuredSeries',
+      description: 'e.g. SERIES · ONGOING',
+    }),
+    defineField({
+      name: 'seriesDescription',
+      title: 'Series description',
+      type: 'text',
+      rows: 3,
+      fieldset: 'featuredSeries',
+      description: BODY_DESCRIPTION,
+    }),
+    defineField({
+      name: 'seriesCurrentPhase',
+      title: 'Current phase',
+      type: 'string',
+      fieldset: 'featuredSeries',
+      description: 'e.g. Phase 2 — Posture & Grounding',
+    }),
+    defineField({
+      name: 'seriesCtaLabel',
+      title: 'CTA label',
+      type: 'string',
+      fieldset: 'featuredSeries',
+      description: 'e.g. Follow the Series →',
+    }),
 
     defineField({
       name: 'filterPillsNote',

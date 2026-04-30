@@ -57,6 +57,14 @@ export default defineType({
 
     // programCards
     defineField({
+      name: 'programCardsHeader',
+      title: 'Program cards header',
+      type: 'sectionHeader',
+      fieldset: 'programCards',
+      description:
+        'Optional eyebrow + headline + subhead above the program cards. Leave empty to render cards without a wrapper section header.',
+    }),
+    defineField({
       name: 'programCards',
       title: 'Program cards',
       type: 'array',

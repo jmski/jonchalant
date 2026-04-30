@@ -2,20 +2,30 @@ import { PageTransition, SectionWrapper, SectionContent } from "@/components/lay
 import { ScrollFade } from "@/components/animations";
 import {
   Hero,
-  CredibilityStrip,
-  WhyItWorks,
+  Method,
   FourPillars,
   MeetJon,
   Testimonials,
   BlogCards,
   EmailCapture,
-  HomeCTA,
 } from '@/components/sections';
+import CTA from '@/components/shared/cta/CTA';
+import { StarterGuideForm } from '@/components/forms/StarterGuideForm';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { getHomePageContent, getTestimonials, getRecentBlogPosts } from "@/lib/sanity";
-import type { HomePageContent } from "@/lib/types";
+import {
+  getPageHome,
+  getRecentBlogPosts,
+  getSiteConfig,
+  getTestimonials,
+} from "@/lib/sanity";
+import type { PageHome, SiteConfig } from "@/lib/types";
 import { AggregateRatingSchema } from "@/lib/schema";
+
+// Force dynamic rendering — Phase 2 schema migration: Sanity content not fully
+// populated yet, and a transitive dependency throws during static prerender.
+// Re-evaluate after E-2 dataset migration.
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Find the Work You Were Meant For | Jonchalant",
@@ -49,23 +59,29 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  let homeContent: HomePageContent | null = null;
+  let pageHome: PageHome | null = null;
+  let siteConfig: SiteConfig | null = null;
   let testimonials = [];
   let recentPosts = [];
 
   try {
-    const [sanityHome, sanityTestimonials, sanityPosts] = await Promise.all([
-      getHomePageContent(),
+    const [home, config, sanityTestimonials, sanityPosts] = await Promise.all([
+      getPageHome(),
+      getSiteConfig(),
       getTestimonials(),
       getRecentBlogPosts(),
     ]);
 
-    if (sanityHome) homeContent = sanityHome;
+    pageHome = home ?? null;
+    siteConfig = config ?? null;
     if (sanityTestimonials?.length > 0) testimonials = sanityTestimonials;
     if (sanityPosts?.length > 0) recentPosts = sanityPosts;
   } catch (error) {
     console.warn('Failed to fetch home content from Sanity:', error);
   }
+
+  const newsletterSuccess = siteConfig?.successStates?.find((s) => s.key === 'newsletter')?.message;
+  const starterGuideSuccess = siteConfig?.successStates?.find((s) => s.key === 'starterGuide')?.message;
 
   return (
     <div className="bg-white">
@@ -88,110 +104,122 @@ export default async function Home() {
         {/* 1. HERO */}
         <SectionWrapper variant="primary" className="section-wrapper--flush">
           <Hero
-            eyebrow={homeContent?.heroEyebrow}
-            headline={homeContent?.heroHeadline}
-            subhead={homeContent?.heroSubhead}
-            primaryCtaLabel={homeContent?.heroPrimaryCtaLabel}
-            primaryCtaHref={homeContent?.heroPrimaryCtaHref}
-            secondaryCtaLabel={homeContent?.heroSecondaryCtaLabel}
-            secondaryCtaHref={homeContent?.heroSecondaryCtaHref}
+            eyebrow={pageHome?.hero?.eyebrow}
+            headline={pageHome?.hero?.headline}
+            subhead={pageHome?.hero?.subhead}
+            primaryCtaLabel={pageHome?.hero?.primaryCta?.label}
+            primaryCtaHref={pageHome?.hero?.primaryCta?.href}
+            secondaryCtaLabel={pageHome?.hero?.secondaryCta?.label}
+            secondaryCtaHref={pageHome?.hero?.secondaryCta?.href}
           />
         </SectionWrapper>
 
-        {/* 2. CREDIBILITY STRIP */}
-        {homeContent?.heroStats?.length > 0 && (
-          <SectionWrapper variant="primary" className="section-wrapper--compact">
-            <CredibilityStrip stats={homeContent.heroStats} />
-          </SectionWrapper>
-        )}
-
-        {/* 4. WHY IT WORKS / PHILOSOPHY (moved up) */}
-        <SectionWrapper variant="dark">
-          <SectionContent>
-            <ScrollFade>
-              <WhyItWorks
-                label={homeContent?.whyItWorksLabel}
-                highlight={homeContent?.whyItWorksHighlight}
-                paragraph1={homeContent?.whyItWorksParagraph1}
-                paragraph2={homeContent?.whyItWorksParagraph2}
-                paragraph3={homeContent?.whyItWorksParagraph3}
-              />
-            </ScrollFade>
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* 5. FOUR PILLARS */}
-        {homeContent?.pillars && homeContent.pillars.length > 0 && (
-          <SectionWrapper variant="primary">
+        {/* 2. METHOD */}
+        {pageHome?.methodSteps?.length > 0 && (
+          <SectionWrapper variant="dark">
             <SectionContent>
               <ScrollFade>
-                <FourPillars
-                  headline={homeContent.pillarsHeadline}
-                  pillars={homeContent.pillars}
+                <Method
+                  header={pageHome.methodHeader}
+                  steps={pageHome.methodSteps}
                 />
               </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
 
-        {/* 7. MEET JON */}
+        {/* 3. FOUR PILLARS */}
+        {pageHome?.pillarSet?.pillars?.length > 0 && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <ScrollFade>
+                <FourPillars
+                  header={pageHome.pillarsHeader}
+                  pillars={pageHome.pillarSet.pillars}
+                />
+              </ScrollFade>
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 4. AUDIT CTA */}
+        {pageHome?.auditCta && (
+          <SectionWrapper variant="secondary">
+            <SectionContent>
+              <ScrollFade>
+                <CTA
+                  title={pageHome.auditCta.headline}
+                  description={pageHome.auditCta.body}
+                  buttonText={pageHome.auditCta.primaryCta?.label}
+                  buttonLink={pageHome.auditCta.primaryCta?.href}
+                  sub={pageHome.auditCta.microcopy}
+                />
+              </ScrollFade>
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 5. MEET JON */}
         <SectionWrapper variant="secondary">
           <SectionContent>
             <ScrollFade>
               <MeetJon
-                heading={homeContent?.meetJonHeading}
-                body={homeContent?.meetJonBody}
-                image={homeContent?.meetJonImage}
+                header={pageHome?.meetJonHeader}
+                image={pageHome?.meetJonImage}
+                bodyParagraphs={pageHome?.meetJonBodyParagraphs}
+                primaryLink={pageHome?.meetJonPrimaryLink}
+                secondaryLink={pageHome?.meetJonSecondaryLink}
               />
             </ScrollFade>
           </SectionContent>
         </SectionWrapper>
 
-        {/* 8. TESTIMONIALS */}
+        {/* 6. TESTIMONIALS */}
         {testimonials.length > 0 && (
           <SectionWrapper variant="dark">
             <SectionContent>
               <ScrollFade>
                 <Testimonials
                   testimonials={testimonials}
-                  eyebrow={homeContent?.testimonialsEyebrow}
-                  heading={homeContent?.testimonialsHeading}
+                  eyebrow={pageHome?.testimonialsHeader?.eyebrow}
+                  heading={pageHome?.testimonialsHeader?.headline}
                 />
               </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
 
-        {/* 9. BLOG PREVIEW */}
+        {/* 7. BLOG PREVIEW */}
         {recentPosts.length > 0 && (
           <SectionWrapper variant="primary" className="blog-preview-wrapper">
             <SectionContent>
               <ScrollFade>
                 <BlogCards
                   posts={recentPosts}
-                  heading={recentPosts.length <= 2 ? "Recent writing" : "From the Blog"}
-                  description="Insights on purpose, presence, and the work you were meant for."
+                  heading={pageHome?.blogPreviewHeader?.headline}
+                  description={pageHome?.blogPreviewHeader?.subhead}
                 />
               </ScrollFade>
             </SectionContent>
           </SectionWrapper>
         )}
 
-        {/* 10. EMAIL CAPTURE */}
-        <SectionWrapper variant="dark" className="section-wrapper--flush">
-          <EmailCapture />
-        </SectionWrapper>
-
-        {/* 11. FINAL CTA */}
-        <SectionWrapper variant="primary">
-          <SectionContent>
-            <HomeCTA
-              title={homeContent?.ctaTitle ?? "Find the work you were meant for."}
-              description={homeContent?.ctaDescription ?? "Start with the assessment. It's free. It takes ten minutes. If it tells you something useful, keep going."}
-              buttonText={homeContent?.ctaButtonText ?? "Discover Your Ikigai"}
-              buttonLink={homeContent?.ctaButtonHref ?? "/ikigai"}
+        {/* 8. STARTER GUIDE */}
+        {pageHome?.starterGuide && (
+          <SectionWrapper variant="secondary" className="section-wrapper--flush">
+            <StarterGuideForm
+              guide={pageHome.starterGuide}
+              successMessage={starterGuideSuccess}
             />
-          </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 9. NEWSLETTER */}
+        <SectionWrapper variant="dark" className="section-wrapper--flush">
+          <EmailCapture
+            newsletter={pageHome?.newsletter}
+            successMessage={newsletterSuccess}
+          />
         </SectionWrapper>
       </PageTransition>
     </div>

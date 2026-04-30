@@ -1,19 +1,16 @@
 // ─────────────── HOME PAGE SECTIONS ────────────────
 export { Hero } from './home/hero';
-export { CredibilityStrip } from './home/credibility-strip';
 export { EmailCapture } from './home/email-capture';
 export { MeetJon } from './home/meet-jon';
 export { FeaturedAreas } from './home/featured-areas';
 export { BlogCards } from './home/blog-cards';
 export { PortfolioPreview } from './home/portfolio-preview';
 export { WhyWorkTogether } from './home/why-work-together';
-export { WhyItWorks } from './home/why-it-works';
+export { Method } from './home/method';
 export { FourPillars } from './home/four-pillars';
-export { HomeCTA } from './home/cta';
 
 // ─────────────── ABOUT PAGE SECTIONS ────────────────
 export { Hero as AboutHero } from './about/hero';
-export { Bento as AboutBento } from './about/bento';
 export { Origin } from './about/origin';
 export { Services as AboutServices } from './about/services';
 export { Philosophy } from './about/philosophy';

@@ -1,5 +1,39 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// lib/sanity.ts — Sanity client + all GROQ fetchers for the jonchalant site.
+//
+// Page singleton fetchers (getPageHome, getPageAbout, etc.) project the new
+// page document types from sanity/schemas/documents/pages/. Shared singletons
+// referenced by pages (newsletter, auditCta, starterGuide, pillarSet,
+// fourCirclesSet) are pulled inline via reference resolution (->).
+// ─────────────────────────────────────────────────────────────────────────────
+
 import { createClient } from '@sanity/client'
 import { createImageUrlBuilder } from '@sanity/image-url'
+
+import type {
+  AuditCta,
+  Course,
+  CourseLesson,
+  CourseType,
+  NewsletterCapture,
+  PageAbout,
+  PageAudit,
+  PageBlog,
+  PageContact,
+  PageFoundation,
+  PageHome,
+  PageIkigai,
+  PageLessons,
+  PagePrograms,
+  PillarSet,
+  FourCirclesSet,
+  SiteConfig,
+  StarterGuideCapture,
+} from './types'
+
+// ============================================================================
+// CLIENT
+// ============================================================================
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -24,23 +58,6 @@ export function urlFor(source: any) {
 }
 
 // ============================================================================
-// TYPE DEFINITIONS
-// ============================================================================
-
-export interface ContactMethod {
-  label: string
-  value: string
-  href: string
-  description?: string
-  order?: number
-}
-
-export interface ContactInfo {
-  title?: string
-  contactMethods: ContactMethod[]
-}
-
-// ============================================================================
 // GENERIC QUERY HELPERS
 // ============================================================================
 
@@ -56,21 +73,96 @@ async function fetchOne(type: string, fields: string, filter: string) {
 }
 
 // ============================================================================
-// FIELD PROJECTIONS (shared field selections per content type)
+// GROQ FRAGMENTS — shared object projections
 // ============================================================================
 
-const SERVICE_FIELDS = `
+const CTA_FIELDS = `label, href, ariaLabel`
+
+const LINK_FIELDS = `label, href`
+
+const HERO_FIELDS = `
+  eyebrow,
+  headline,
+  subhead,
+  primaryCta { ${CTA_FIELDS} },
+  secondaryCta { ${CTA_FIELDS} },
+  microcopy
+`
+
+const SECTION_HEADER_FIELDS = `eyebrow, headline, subhead, body`
+
+const CTA_BLOCK_FIELDS = `
+  eyebrow,
+  headline,
+  body,
+  primaryCta { ${CTA_FIELDS} },
+  secondaryCta { ${CTA_FIELDS} },
+  microcopy
+`
+
+const PROGRAM_CARD_FIELDS = `
+  eyebrow,
+  title,
+  priceLine,
+  description,
+  inclusions,
+  primaryCta { ${CTA_FIELDS} },
+  badge
+`
+
+const FAQ_ITEM_FIELDS = `question, answer`
+
+const IMAGE_FIELDS = `
+  asset->{
     _id,
-    title,
-    slug,
-    description,
-    icon,
-    features,
-    isPrimary,
-    ctaLabel,
-    color,
-    order
-  `
+    url,
+    metadata { dimensions { width, height }, lqip }
+  },
+  hotspot,
+  crop,
+  alt
+`
+
+// ── Shared singleton inline projections ──────────────────────────────────────
+
+const NEWSLETTER_CAPTURE_FIELDS = `
+  eyebrow,
+  headline,
+  subhead,
+  emailLabel,
+  emailPlaceholder,
+  submitLabel,
+  microcopy
+`
+
+const AUDIT_CTA_FIELDS = `
+  eyebrow,
+  headline,
+  body,
+  primaryCta { ${CTA_FIELDS} },
+  microcopy
+`
+
+const STARTER_GUIDE_FIELDS = `
+  eyebrow,
+  headline,
+  body,
+  firstNamePlaceholder,
+  emailPlaceholder,
+  submitLabel
+`
+
+const PILLAR_SET_FIELDS = `
+  pillars[] { title, body }
+`
+
+const FOUR_CIRCLES_SET_FIELDS = `
+  circles[] { title, definition, missingLine }
+`
+
+// ============================================================================
+// LIST CONTENT — testimonials, case studies, blog posts, courses, lessons
+// ============================================================================
 
 const TESTIMONIAL_FIELDS = `
     _id,
@@ -109,7 +201,6 @@ const LESSON_FIELDS = `
     duration,
     order
   `
-
 
 const COURSE_FIELDS = `
     _id,
@@ -167,33 +258,9 @@ const LESSON_FIELDS_FULL = `
     module-> { _id, title, "slug": slug.current }
   `
 
-// ============================================================================
-// SERVICES
-// ============================================================================
-
-export async function getServices() {
-  return fetchList('service', SERVICE_FIELDS)
-}
-
-export async function getPrimaryService() {
-  return fetchOne('service', SERVICE_FIELDS, 'isPrimary == true')
-}
-
-export async function getService(slug: string) {
-  return fetchOne('service', SERVICE_FIELDS, `slug.current == "${slug}"`)
-}
-
-// ============================================================================
-// TESTIMONIALS
-// ============================================================================
-
 export async function getTestimonials(featured?: boolean) {
   return fetchList('testimonial', TESTIMONIAL_FIELDS, featured ? 'featured == true' : undefined)
 }
-
-// ============================================================================
-// CASE STUDIES
-// ============================================================================
 
 export async function getCaseStudies(featured?: boolean) {
   return fetchList('caseStudy', CASE_STUDY_FIELDS, featured ? 'featured == true' : undefined)
@@ -203,10 +270,6 @@ export async function getCaseStudy(slug: string) {
   return fetchOne('caseStudy', CASE_STUDY_FIELDS, `slug.current == "${slug}"`)
 }
 
-// ============================================================================
-// LESSONS
-// ============================================================================
-
 export async function getLessons() {
   return fetchList('lesson', LESSON_FIELDS)
 }
@@ -214,303 +277,6 @@ export async function getLessons() {
 export async function getFreeLessons() {
   return fetchList('lesson', LESSON_FIELDS, `access == "free"`)
 }
-
-// ============================================================================
-// PROGRAM TRACKS
-// ============================================================================
-
-export type { ProgramTrackItem, ProgramsPageContent } from './types';
-
-export async function getProgramsPageContent() {
-  const query = `*[_type == "programsPageContent"][0] {
-    heroEyebrow,
-    heroHeadline,
-    heroSubheading,
-    offersEyebrow,
-    offersHeading,
-    offersSubtext,
-    offerCards[] {
-      title,
-      eyebrow,
-      trackType,
-      price,
-      isFeatured,
-      description,
-      includes,
-      ctaText,
-      ctaHref
-    },
-    whoForHeading,
-    whoForBody,
-    ctaHeading,
-    ctaDescription,
-    ctaButtonText,
-    ctaButtonHref,
-    ctaMicrocopy
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// CONTACT INFORMATION
-// ============================================================================
-
-export async function getContactInfo(): Promise<ContactInfo | null> {
-  const query = `*[_type == "contactInfo"][0] {
-    title,
-    contactMethods | order(order asc) {
-      label,
-      value,
-      href,
-      description,
-      order
-    }
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// ABOUT PAGE CONTENT
-// ============================================================================
-
-export async function getAboutPageContent() {
-  const query = `*[_type == "aboutPage" && title == "About"][0] {
-    heroHeadline,
-    heroDescription,
-    heroImage {
-      asset->{
-        _id,
-        url,
-        metadata {
-          dimensions {
-            width,
-            height
-          }
-        }
-      },
-      hotspot,
-      crop,
-      alt
-    },
-    originImage {
-      asset->{
-        _id,
-        url,
-        metadata {
-          dimensions {
-            width,
-            height
-          }
-        }
-      },
-      hotspot,
-      crop,
-      alt
-    },
-    philosophyImage {
-      asset->{
-        _id,
-        url,
-        metadata {
-          dimensions {
-            width,
-            height
-          }
-        }
-      },
-      hotspot,
-      crop,
-      alt
-    },
-    originSectionLabel,
-    originSectionHeadline,
-    originSectionDescription,
-    originSectionHighlight,
-    originSectionAnchorWord,
-    originPhases[] | order(order asc) {
-      _key,
-      order,
-      title,
-      description,
-      pullQuote,
-      image {
-        asset->{ _id, url, metadata { dimensions { width, height } } },
-        hotspot,
-        crop
-      },
-      imageAlt
-    },
-    introvertImage {
-      asset->{ _id, url, metadata { dimensions { width, height } } },
-      hotspot,
-      crop,
-      alt
-    },
-    turningPointHeadline,
-    turningPointBody,
-    turningPointHighlight,
-    methodologyHeadline,
-    methodologyBody,
-    methodologyHighlight,
-    whyExistsHeadline,
-    whyExistsBody,
-    whyExistsHighlight,
-    whoForHeadline,
-    whoForBody,
-    whoForHighlight,
-    closingHeadline,
-    closingBody,
-    ctaButtonText,
-    bentoTiles[] {
-      _type,
-      // portraitTile fields
-      image {
-        asset->{
-          _id,
-          url,
-          metadata {
-            dimensions { width, height },
-            lqip
-          }
-        },
-        hotspot,
-        crop
-      },
-      alt,
-      // quoteTile fields
-      quote,
-      attribution,
-      // statTile fields
-      number,
-      label,
-      // bioTile fields
-      text
-    }
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// HOME PAGE CONTENT
-// ============================================================================
-
-export async function getHomePageContent() {
-  const query = `*[_type == "homePageContent" && title == "Home Page"][0] {
-    heroEyebrow,
-    heroHeadline,
-    heroSubhead,
-    heroPrimaryCtaLabel,
-    heroPrimaryCtaHref,
-    heroSecondaryCtaLabel,
-    heroSecondaryCtaHref,
-    heroStats,
-    servicesHeadline,
-    servicesDescription,
-    whyItWorksLabel,
-    whyItWorksHighlight,
-    whyItWorksParagraph1,
-    whyItWorksParagraph2,
-    whyItWorksParagraph3,
-    testimonialsEyebrow,
-    testimonialsHeading,
-    ctaTitle,
-    ctaDescription,
-    ctaButtonText,
-    ctaButtonHref,
-    meetJonHeading,
-    meetJonBody,
-    meetJonImage { asset->{ _id, url }, alt, crop, hotspot },
-    pillarsHeadline,
-    pillars[] {
-      _key,
-      number,
-      name,
-      definition,
-      applications[] { _key, who, body }
-    }
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// AUDIT PAGE CONTENT
-// ============================================================================
-
-export async function getAuditPageContent() {
-  const query = `*[_type == "auditPage"][0] {
-    pageHeaderBadge,
-    pageHeaderHeadline,
-    pageHeaderBody,
-    pageFooterNote,
-    captureBadge,
-    captureHeadline,
-    captureBody,
-    capturePrivacyNote,
-    resultBands[] {
-      band,
-      headline,
-      body
-    },
-    resultNextHeading,
-    resultNextBody,
-    resultCtaText,
-    resultCtaButtonLabel,
-    resultCtaHref
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// CONTACT PAGE CONTENT
-// ============================================================================
-
-export async function getContactPageContent() {
-  const query = `*[_type == "contactPage"][0] {
-    auditPromptBadge,
-    auditPromptHeadline,
-    auditPromptBody,
-    auditPromptButtonText,
-    auditPromptNote,
-    auditStats[] {
-      number,
-      label
-    },
-    coachingPathHeading,
-    coachingPathBody,
-    coachingCalendlyHref,
-    coachingCalendlyLabel,
-    sidebarHeading,
-    sidebarItems[] {
-      title,
-      body
-    },
-    sidebarEmailText
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// EMAIL OPT-IN
-// ============================================================================
-
-export type { EmailOptInContent } from './types'
-
-export async function getEmailOptIn() {
-  const query = `*[_type == "emailOptIn"][0] {
-    eyebrow,
-    heading,
-    description,
-    submitButtonText,
-    disclaimer,
-    successTitle,
-    successBody
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// COURSES
-// ============================================================================
 
 export async function getCourses() {
   return fetchList('course', COURSE_FIELDS)
@@ -536,85 +302,6 @@ export async function getModulesByCourse(courseSlug: string) {
   return fetchList('module', MODULE_FIELDS, `course->slug.current == "${courseSlug}"`)
 }
 
-// ============================================================================
-// FOUNDATION PAGE
-// ============================================================================
-
-export async function getFoundationPageContent() {
-  const query = `*[_type == "foundationPage"][0] {
-    heroEyebrow,
-    heroHeadline,
-    heroSubheadline,
-    heroBody,
-    heroPrimaryCtaLabel,
-    heroSecondaryCtaLabel,
-    heroNote,
-    insideEyebrow,
-    insideTitle,
-    insideBody,
-    modules[]-> {
-      _id,
-      moduleNumber,
-      title,
-      slug,
-      description,
-      theme,
-      danceIntegration,
-      estimatedHours,
-      order,
-      "lessonCount": count(lessons)
-    },
-    whoEyebrow,
-    whoTitle,
-    whoItems,
-    howEyebrow,
-    howTitle,
-    howCards[] { label, body },
-    pricingEyebrow,
-    pricingTitle,
-    pricingNote,
-    pricingTiers[] { tier, tierKey, price, description, features, cta, primary },
-    ctaTitle,
-    ctaBody,
-    ctaButtonLabel,
-    ctaNote
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// BLOG CONFIG
-// ============================================================================
-
-export async function getBlogConfig() {
-  const query = `*[_type == "blogConfig"][0] {
-    seriesBannerEnabled,
-    seriesName,
-    seriesSlug,
-    seriesStatus,
-    seriesDescription,
-    seriesCurrentPhase,
-    seriesCTALabel
-  }`
-  return await client.fetch(query)
-}
-
-export async function getPressMentions() {
-  const query = `*[_type == "pressMention"] | order(order asc) {
-    _id,
-    outlet,
-    type,
-    url,
-    logo { asset->{ url } },
-    order
-  }`
-  return await client.fetch(query)
-}
-
-// ============================================================================
-// BLOG POSTS
-// ============================================================================
-
 export async function getRecentBlogPosts(count = 3) {
   const query = `*[_type == "blogPost"] | order(publishedAt desc) [0...$count] {
     _id,
@@ -626,10 +313,6 @@ export async function getRecentBlogPosts(count = 3) {
   }`
   return await client.fetch(query, { count })
 }
-
-// ============================================================================
-// CURRICULUM WEEKS (Phase 5 — Bento)
-// ============================================================================
 
 export async function getCurriculumWeeks() {
   const query = `*[_type == "curriculumWeek"] | order(order asc) {
@@ -645,10 +328,8 @@ export async function getCurriculumWeeks() {
 }
 
 // ============================================================================
-// FOUR CIRCLES / COURSE LESSON
+// FOUR CIRCLES — courseLesson + course detail
 // ============================================================================
-
-import type { Course, CourseLesson, CourseType, IkigaiQuiz } from './types'
 
 const COURSE_LESSON_FIELDS = `
     _id,
@@ -674,7 +355,7 @@ const FOUR_CIRCLES_COURSE_FIELDS = `
     courseType,
     pricing,
     estimatedDuration,
-    heroImage { asset->{ _id, url, metadata { dimensions { width, height } } }, hotspot, crop, alt },
+    heroImage { ${IMAGE_FIELDS} },
     ctaText,
     whoThisIsFor,
     whatThisIsNot,
@@ -682,7 +363,6 @@ const FOUR_CIRCLES_COURSE_FIELDS = `
     lessons[]-> { ${COURSE_LESSON_FIELDS} }
   `
 
-/** Fetch any course by slug — returns the four-circles-aware projection. */
 export async function getFourCirclesCourseBySlug(slug: string): Promise<Course | null> {
   try {
     return await fetchOne('course', FOUR_CIRCLES_COURSE_FIELDS, `slug.current == "${slug}"`)
@@ -691,12 +371,10 @@ export async function getFourCirclesCourseBySlug(slug: string): Promise<Course |
   }
 }
 
-/** Convenience: fetch the Four Circles course. */
 export async function getFourCirclesCourse(): Promise<Course | null> {
   return getFourCirclesCourseBySlug('four-circles')
 }
 
-/** Fetch all courses, optionally filtered by courseType. */
 export async function getCoursesFiltered(courseType?: CourseType): Promise<Course[]> {
   try {
     return await fetchList(
@@ -709,7 +387,6 @@ export async function getCoursesFiltered(courseType?: CourseType): Promise<Cours
   }
 }
 
-/** Fetch a single courseLesson by slug. */
 export async function getFourCirclesLesson(lessonSlug: string): Promise<CourseLesson | null> {
   try {
     return await fetchOne('courseLesson', COURSE_LESSON_FIELDS, `slug.current == "${lessonSlug}"`)
@@ -718,38 +395,233 @@ export async function getFourCirclesLesson(lessonSlug: string): Promise<CourseLe
   }
 }
 
-const IKIGAI_QUIZ_FIELDS = `
-    _id,
-    title,
-    introText,
-    questions[] | order(order asc) {
-      _key,
-      questionText,
-      quadrant,
-      order
+// ============================================================================
+// SHARED SINGLETONS
+// ============================================================================
+
+export async function getNewsletterCapture(): Promise<NewsletterCapture | null> {
+  const query = `*[_type == "newsletterCapture"][0] { ${NEWSLETTER_CAPTURE_FIELDS} }`
+  return await client.fetch(query)
+}
+
+export async function getAuditCta(): Promise<AuditCta | null> {
+  const query = `*[_type == "auditCta"][0] { ${AUDIT_CTA_FIELDS} }`
+  return await client.fetch(query)
+}
+
+export async function getStarterGuideCapture(): Promise<StarterGuideCapture | null> {
+  const query = `*[_type == "starterGuideCapture"][0] { ${STARTER_GUIDE_FIELDS} }`
+  return await client.fetch(query)
+}
+
+export async function getPillarSet(): Promise<PillarSet | null> {
+  const query = `*[_type == "pillarSet"][0] { ${PILLAR_SET_FIELDS} }`
+  return await client.fetch(query)
+}
+
+export async function getFourCirclesSet(): Promise<FourCirclesSet | null> {
+  const query = `*[_type == "fourCirclesSet"][0] { ${FOUR_CIRCLES_SET_FIELDS} }`
+  return await client.fetch(query)
+}
+
+export async function getSiteConfig(): Promise<SiteConfig | null> {
+  const query = `*[_type == "siteConfig"][0] {
+    contactEmail,
+    wordmark,
+    desktopLinks[] { ${LINK_FIELDS} },
+    rightSideLinks[] { ${LINK_FIELDS} },
+    mobileLinks[] { ${LINK_FIELDS} },
+    mobilePersistentCta { ${CTA_FIELDS} },
+    brandLine,
+    columns[] {
+      header,
+      links[] { ${LINK_FIELDS} }
     },
-    answerScale[] {
-      _key,
-      label,
-      value
+    accountSection {
+      header,
+      links[] { ${LINK_FIELDS} }
     },
-    resultInterpretations[] {
-      _key,
-      type,
-      quadrant,
-      pattern,
+    copyright,
+    privacyLink { ${CTA_FIELDS} },
+    socialLinks[] { platform, url, label },
+    successStates[] { key, message },
+    submitError,
+    validation { required, invalidEmail, tooShort, tooLong },
+    loadingLabel,
+    notFoundHeadline,
+    notFoundBody,
+    notFoundLinks[] { ${LINK_FIELDS} },
+    notFoundMicrocopy,
+    signIn { headline, subhead, primaryLabel, magicLinkLabel, forgotPasswordLabel },
+    signUp { headline, subhead, submitLabel }
+  }`
+  return await client.fetch(query)
+}
+
+// ============================================================================
+// PAGE SINGLETONS
+// ============================================================================
+
+export async function getPageHome(): Promise<PageHome | null> {
+  const query = `*[_type == "pageHome"][0] {
+    hero { ${HERO_FIELDS} },
+    methodHeader { ${SECTION_HEADER_FIELDS} },
+    methodSteps[] { title, body },
+    pillarsHeader { ${SECTION_HEADER_FIELDS} },
+    pillarSet-> { ${PILLAR_SET_FIELDS} },
+    meetJonHeader { ${SECTION_HEADER_FIELDS} },
+    meetJonImage { ${IMAGE_FIELDS} },
+    meetJonBodyParagraphs,
+    meetJonPrimaryLink { ${CTA_FIELDS} },
+    meetJonSecondaryLink { ${CTA_FIELDS} },
+    testimonialsHeader { ${SECTION_HEADER_FIELDS} },
+    blogPreviewHeader { ${SECTION_HEADER_FIELDS} },
+    blogPreviewPerCardCtaLabel,
+    blogPreviewSectionCta { ${CTA_FIELDS} },
+    newsletter-> { ${NEWSLETTER_CAPTURE_FIELDS} },
+    auditCta-> { ${AUDIT_CTA_FIELDS} },
+    starterGuide-> { ${STARTER_GUIDE_FIELDS} }
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPageAbout(): Promise<PageAbout | null> {
+  const query = `*[_type == "pageAbout"][0] {
+    hero { ${HERO_FIELDS} },
+    storyBeats[] {
+      image { ${IMAGE_FIELDS} },
       headline,
       body,
-      recommendedLessonNumber
-    }
-  `
+      bodyParagraph2,
+      payoffLine
+    },
+    whoFor {
+      image { ${IMAGE_FIELDS} },
+      headline,
+      body
+    },
+    cta { ${CTA_BLOCK_FIELDS} }
+  }`
+  return await client.fetch(query)
+}
 
-/** Fetch the Ikigai quiz document. Returns null if the quiz is not yet in Sanity. */
-export async function getIkigaiQuiz(): Promise<IkigaiQuiz | null> {
-  try {
-    const query = `*[_type == "ikigaiQuiz"][0] { ${IKIGAI_QUIZ_FIELDS} }`
-    return await client.fetch(query)
-  } catch {
-    return null
-  }
+export async function getPageContact(): Promise<PageContact | null> {
+  const query = `*[_type == "pageContact"][0] {
+    hero { ${HERO_FIELDS} },
+    inquiryCards[] { eyebrow, body, inquiryType },
+    whatHappensNextHeader,
+    whatHappensNextSteps[] { title, body },
+    thingsWorthKnowingHeader,
+    thingsWorthKnowingItems[] { title, body },
+    emailFallback { bodyLine }
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPageAudit(): Promise<PageAudit | null> {
+  const bandFields = `
+    headline,
+    body,
+    primaryCta { ${CTA_FIELDS} },
+    secondaryCta { ${CTA_FIELDS} }
+  `
+  const query = `*[_type == "pageAudit"][0] {
+    hero { ${HERO_FIELDS} },
+    heroMicrocopy,
+    midQuizEncouragement { line },
+    resultBands {
+      low { ${bandFields} },
+      mid { ${bandFields} },
+      high { ${bandFields} }
+    },
+    starterGuide-> { ${STARTER_GUIDE_FIELDS} }
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPageFoundation(): Promise<PageFoundation | null> {
+  const query = `*[_type == "pageFoundation"][0] {
+    hero { ${HERO_FIELDS} },
+    heroMicrocopyUnderCtas,
+    whoForHeader,
+    whoForLede,
+    whoForBullets,
+    whyDanceHeader { ${SECTION_HEADER_FIELDS} },
+    whyDanceBodyParagraphs,
+    curriculumHeader { ${SECTION_HEADER_FIELDS} },
+    curriculumModules[] { number, title, duration, blurb },
+    howItWorksHeader { ${SECTION_HEADER_FIELDS} },
+    howItWorksColumns[] { title, body },
+    enrollmentHeader { ${SECTION_HEADER_FIELDS} },
+    enrollmentCards[] { ${PROGRAM_CARD_FIELDS} },
+    enrollmentFootnote,
+    faqHeader,
+    faqItems[] { ${FAQ_ITEM_FIELDS} },
+    softCta { ${CTA_BLOCK_FIELDS} },
+    starterGuide-> { ${STARTER_GUIDE_FIELDS} }
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPagePrograms(): Promise<PagePrograms | null> {
+  const query = `*[_type == "pagePrograms"][0] {
+    hero { ${HERO_FIELDS} },
+    heroWhoForColumn { header, bullets },
+    caseStudiesHeader { ${SECTION_HEADER_FIELDS} },
+    programCardsHeader { ${SECTION_HEADER_FIELDS} },
+    programCards[] { ${PROGRAM_CARD_FIELDS} },
+    faqHeader,
+    faqItems[] { ${FAQ_ITEM_FIELDS} },
+    closingCta { ${CTA_BLOCK_FIELDS} },
+    starterGuide-> { ${STARTER_GUIDE_FIELDS} }
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPageBlog(): Promise<PageBlog | null> {
+  const query = `*[_type == "pageBlog"][0] {
+    hero { ${HERO_FIELDS} },
+    "featuredSeries": {
+      "seriesBannerEnabled": seriesBannerEnabled,
+      "seriesName": seriesName,
+      "seriesSlug": seriesSlug,
+      "seriesStatus": seriesStatus,
+      "seriesDescription": seriesDescription,
+      "seriesCurrentPhase": seriesCurrentPhase,
+      "seriesCtaLabel": seriesCtaLabel
+    },
+    newsletter-> { ${NEWSLETTER_CAPTURE_FIELDS} },
+    auditCta-> { ${AUDIT_CTA_FIELDS} },
+    emptyState { headline, body }
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPageLessons(): Promise<PageLessons | null> {
+  const query = `*[_type == "pageLessons"][0] {
+    hero { ${HERO_FIELDS} },
+    courses[]-> {
+      _id,
+      title,
+      slug,
+      description,
+      difficulty,
+      estimatedDuration
+    },
+    closingCta { ${CTA_BLOCK_FIELDS} },
+    starterGuide-> { ${STARTER_GUIDE_FIELDS} }
+  }`
+  return await client.fetch(query)
+}
+
+export async function getPageIkigai(): Promise<PageIkigai | null> {
+  const query = `*[_type == "pageIkigai"][0] {
+    hero { ${HERO_FIELDS} },
+    fourCirclesHeader { ${SECTION_HEADER_FIELDS} },
+    fourCirclesSet-> { ${FOUR_CIRCLES_SET_FIELDS} },
+    quizBridge { line },
+    starterGuide-> { ${STARTER_GUIDE_FIELDS} },
+    cta { ${CTA_BLOCK_FIELDS} }
+  }`
+  return await client.fetch(query)
 }

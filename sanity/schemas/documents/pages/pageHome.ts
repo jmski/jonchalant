@@ -87,6 +87,15 @@ export default defineType({
       fieldset: 'meetJon',
     }),
     defineField({
+      name: 'meetJonImage',
+      title: 'Image',
+      type: 'image',
+      fieldset: 'meetJon',
+      options: { hotspot: true },
+      description:
+        'Portrait or photo of Jon to anchor the section visually. Hotspot recommended for responsive cropping.',
+    }),
+    defineField({
       name: 'meetJonBodyParagraphs',
       title: 'Body paragraphs',
       type: 'array',

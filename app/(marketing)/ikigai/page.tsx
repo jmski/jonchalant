@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import IkigaiClient from './IkigaiClient';
+import { StarterGuideForm } from '@/components/forms/StarterGuideForm';
+import { SectionWrapper } from '@/components/layout';
+import { getPageIkigai, getSiteConfig } from '@/lib/sanity';
 
 export const metadata: Metadata = {
   title: 'Discover Your Ikigai | Purpose-Led Leadership | Jonchalant',
@@ -24,6 +27,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function IkigaiPage() {
-  return <IkigaiClient />;
+export default async function IkigaiPage() {
+  const [pageIkigai, siteConfig] = await Promise.all([
+    getPageIkigai().catch(() => null),
+    getSiteConfig().catch(() => null),
+  ]);
+
+  const starterGuideSuccess = siteConfig?.successStates?.find(
+    (s) => s.key === 'starterGuide',
+  )?.message;
+
+  return (
+    <>
+      <IkigaiClient />
+      {pageIkigai?.starterGuide && (
+        <SectionWrapper variant="secondary" className="section-wrapper--flush">
+          <StarterGuideForm
+            guide={pageIkigai.starterGuide}
+            successMessage={starterGuideSuccess}
+          />
+        </SectionWrapper>
+      )}
+    </>
+  );
 }
