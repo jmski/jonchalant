@@ -22,11 +22,6 @@ import {
 import type { PageHome, SiteConfig } from "@/lib/types";
 import { AggregateRatingSchema } from "@/lib/schema";
 
-// Force dynamic rendering — Phase 2 schema migration: Sanity content not fully
-// populated yet, and a transitive dependency throws during static prerender.
-// Re-evaluate after E-2 dataset migration.
-export const dynamic = 'force-dynamic';
-
 export const metadata: Metadata = {
   title: "Find the Work You Were Meant For | Jonchalant",
   description: "Ikigai assessment + embodiment practice for professionals who are competent, in-demand, and quietly misaligned. Find the work you were meant for — then learn to inhabit it.",

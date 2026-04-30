@@ -15,7 +15,7 @@ This phase moved the codebase from "intentionally broken" (post-schema-deploy) b
 
 ### Layout + page consumers (Steps 2–4)
 - **`app/(marketing)/layout.tsx`** — fetches `getSiteConfig` + `getNewsletterCapture`, propagates to `<SiteFooter>`.
-- **`app/(marketing)/page.tsx` (Home)** — uses `getPageHome` + `getSiteConfig` + `getTestimonials` + `getRecentBlogPosts`. Sections: Hero → Method → FourPillars → AuditCTA → MeetJon → Testimonials → BlogCards → StarterGuideForm → EmailCapture (newsletter). `force-dynamic` set (see Known issues).
+- **`app/(marketing)/page.tsx` (Home)** — uses `getPageHome` + `getSiteConfig` + `getTestimonials` + `getRecentBlogPosts`. Sections: Hero → Method → FourPillars → AuditCTA → MeetJon → Testimonials → BlogCards → StarterGuideForm → EmailCapture (newsletter).
 - **`app/(marketing)/about/page.tsx`** — `getPageAbout`. Sections: StoryScroll(beats[]) → WhoFor → CTA. AboutBento + AboutHero usage removed.
 - **`app/(marketing)/contact/{page,ContactClient}.tsx`** — `getPageContact`. Inquiry cards drive type selector; `whatHappensNext`, `thingsWorthKnowing`, `emailFallback` come from CMS. Calendly + audit-prompt + coachingPath blocks deleted (see Known gaps).
 - **`app/(marketing)/audit/{page,AuditClient}.tsx`** — `getPageAudit` + `getSiteConfig`. `'capture'` step deleted; quiz → result direct. `scoreToKey()` maps legacy `getBand()` (`foundation`/`developing`/`refining`) → new band keys (`low`/`mid`/`high`). Result band CTAs come from `band.primaryCta` / `band.secondaryCta`. Mid-quiz encouragement renders at midpoint. `<StarterGuideForm>` rendered on result.
@@ -94,7 +94,7 @@ Barrel updates: `components/sections/index.ts` (added `Method`, removed `Credibi
 ## Known issues / follow-up work
 
 ### Build
-- **`/` (Home) is `force-dynamic`.** During static prerender, an ignore-listed (Sentry-hidden) frame throws `TypeError: Cannot destructure property 'auth' of 'a' as it is undefined`. The error has no source-level stack frame and no source-level `.auth` access on the home tree was found. Marking the home page `force-dynamic` unblocks the build. Remove this directive once the underlying transitive cause is identified — likely surfaces again or self-resolves once the dataset is populated post-E-2.
+- **Home Hero spread bug fixed.** `components/sections/home/hero/Hero.tsx` previously merged props with `{ ...DEFAULTS, ...props }` — when Sanity returned `undefined` for unset hero fields, the spread overwrote defaults, producing `<Link href={undefined}>` and a `formatUrl` crash during static prerender (`Cannot destructure property 'auth' of 'a' as it is undefined`). Now uses per-field `??` fallback. Other components that take optional CTA props directly should be audited the same way during polish.
 
 ### Backend gaps (out of scope per directive)
 - **No `/api/starter-guide` endpoint.** `StarterGuideForm.handleSubmit` is a `console.log` placeholder. Wire to `useFormSubmission` once the endpoint lands.
@@ -129,7 +129,7 @@ New BEM classes are used without backing styles in the system CSS files. They re
 | Gate                              | Result                                       |
 |------------------------------------|----------------------------------------------|
 | `npx tsc --noEmit` (consumers)     | ✅ clean (sanity/* excluded, pre-existing)   |
-| `npm run build`                    | ✅ passes (home is `force-dynamic`)          |
+| `npm run build`                    | ✅ passes (home is static)                   |
 | `npm run dev`                      | ✅ ready in ~5s, no startup errors           |
 | `npm test`                         | ⏭️ no script defined                         |
 
