@@ -52,3 +52,6 @@ next-env.d.ts
 # Migration artifacts (E-2)
 /.migration/
 /production.tar.gz
+
+# Local Netlify folder
+.netlify
