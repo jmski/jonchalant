@@ -63,7 +63,7 @@ function pickBand(content: PageAudit | null, key: BandKey): AuditBand {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function AuditClient({ content, starterGuideSuccess }: AuditClientProps) {
-  const { currentStep, goTo } = useMultiStep({ steps: ['quiz', 'result'] })
+  const { currentStep, goTo } = useMultiStep({ steps: ['hero', 'quiz', 'result'] })
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [currentQ, setCurrentQ] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
@@ -128,6 +128,31 @@ export default function AuditClient({ content, starterGuideSuccess }: AuditClien
       event.preventDefault()
       handlePreviousQuestion()
     }
+  }
+
+  // ── Hero / pre-quiz intro ──────────────────────────────────────────
+  if (currentStep === 'hero') {
+    return (
+      <div className="audit-hero">
+        {content?.hero?.eyebrow && (
+          <p className="audit-hero-eyebrow">{content.hero.eyebrow}</p>
+        )}
+        <KineticHeading as="h1" className="audit-hero-headline">
+          {content?.hero?.headline ?? 'Seven questions. Three minutes. One honest read.'}
+        </KineticHeading>
+        {content?.hero?.subhead && (
+          <p className="audit-hero-subhead">{content.hero.subhead}</p>
+        )}
+        <div className="audit-hero-actions">
+          <Button variant="primary" onClick={() => goTo('quiz')}>
+            {content?.hero?.primaryCta?.label ?? 'Start the Audit'}
+          </Button>
+        </div>
+        {content?.heroMicrocopy && (
+          <p className="audit-hero-microcopy">{content.heroMicrocopy}</p>
+        )}
+      </div>
+    )
   }
 
   // ── Quiz stage ──────────────────────────────────────────────────────────────
