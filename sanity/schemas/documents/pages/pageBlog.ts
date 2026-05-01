@@ -17,7 +17,6 @@ export default defineType({
   name: 'pageBlog',
   title: 'Blog page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     {

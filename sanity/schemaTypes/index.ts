@@ -1,46 +1,24 @@
 import { type SchemaTypeDefinition } from 'sanity'
 
 // Import all schema types from the schemas directory
-import aboutPage from '../schemas/aboutPage'
-import auditPage from '../schemas/auditPage'
-import contactPage from '../schemas/contactPage'
 import blogPost from '../schemas/blogPost'
 import caseStudy from '../schemas/caseStudy'
-import contactInfo from '../schemas/contactInfo'
-import homePageContent from '../schemas/homePageContent'
 import lesson from '../schemas/lesson'
 import course from '../schemas/course'
-import service from '../schemas/service'
 import testimonial from '../schemas/testimonial'
-import programsPageContent from '../schemas/programsPageContent'
-import emailOptIn from '../schemas/emailOptIn'
-import foundationPage from '../schemas/foundationPage'
 import module from '../schemas/module'
 import courseLesson from '../schemas/courseLesson'
-import pressMention from '../schemas/pressMention'
-import blogConfig from '../schemas/blogConfig'
 import curriculumWeek from '../schemas/curriculumWeek'
 
 // Export types array without explicit type annotation to avoid module resolution issues
 export const types = [
-  aboutPage,
-  auditPage,
-  contactPage,
   blogPost,
   caseStudy,
-  contactInfo,
-  homePageContent,
   lesson,
   course,
-  programsPageContent,
-  service,
   testimonial,
-  emailOptIn,
-  foundationPage,
   module,
   courseLesson,
-  pressMention,
-  blogConfig,
   curriculumWeek,
 ] as const
 

@@ -7,7 +7,6 @@ export default defineType({
   title: 'Foundation Starter Guide capture',
   type: 'document',
   // Singleton: editors can update and publish, but not create new or delete.
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
     defineField({

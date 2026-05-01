@@ -6,7 +6,6 @@ export default defineType({
   name: 'siteConfig',
   title: 'Site configuration',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'nav', title: 'Navigation', options: { collapsible: true, collapsed: true } },
     { name: 'footer', title: 'Footer', options: { collapsible: true, collapsed: true } },

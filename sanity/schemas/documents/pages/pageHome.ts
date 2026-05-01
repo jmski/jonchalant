@@ -8,7 +8,6 @@ export default defineType({
   name: 'pageHome',
   title: 'Home page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     { name: 'method', title: 'Method — Three steps', options: { collapsible: true, collapsed: true } },

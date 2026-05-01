@@ -6,7 +6,6 @@ export default defineType({
   name: 'auditCta',
   title: 'Audit CTA block',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'eyebrow',

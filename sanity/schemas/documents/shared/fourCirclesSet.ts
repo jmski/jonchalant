@@ -5,7 +5,6 @@ export default defineType({
   name: 'fourCirclesSet',
   title: 'Four Circles definitions',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'circles',

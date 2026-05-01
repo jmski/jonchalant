@@ -8,7 +8,6 @@ export default defineType({
   name: 'pageFoundation',
   title: 'Foundation page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     { name: 'whoFor', title: 'Who this is for', options: { collapsible: true, collapsed: true } },

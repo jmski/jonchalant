@@ -38,7 +38,6 @@ export default defineType({
   name: 'pageAudit',
   title: 'Audit page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     { name: 'midQuizEncouragement', title: 'Mid-quiz encouragement', options: { collapsible: true, collapsed: false } },

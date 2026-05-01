@@ -87,28 +87,4 @@ export const structure: StructureResolver = (S) =>
 
       S.documentTypeListItem('caseStudy').title('Case studies'),
       S.documentTypeListItem('testimonial').title('Testimonials'),
-
-      S.divider(),
-
-      // ── Legacy (to be removed) ─────────────────────────────────────────────
-      S.listItem()
-        .title('Legacy (to be removed)')
-        .child(
-          S.list()
-            .title('Legacy (to be removed)')
-            .items([
-              S.documentTypeListItem('homePageContent').title('Home Page (legacy)'),
-              S.documentTypeListItem('aboutPage').title('About Page (legacy)'),
-              S.documentTypeListItem('contactPage').title('Contact Page (legacy)'),
-              S.documentTypeListItem('auditPage').title('Audit Page (legacy)'),
-              S.documentTypeListItem('foundationPage').title('Foundation Page (legacy)'),
-              S.documentTypeListItem('programsPageContent').title('Programs Page (legacy)'),
-              S.documentTypeListItem('service').title('Services (legacy)'),
-              S.documentTypeListItem('ikigaiQuiz').title('Ikigai quiz (legacy data)'),
-              S.documentTypeListItem('pressMention').title('Press mentions (legacy)'),
-              S.documentTypeListItem('emailOptIn').title('Email opt-in widget (legacy)'),
-              S.documentTypeListItem('contactInfo').title('Contact info (legacy)'),
-              S.documentTypeListItem('blogConfig').title('Blog config (legacy)'),
-            ]),
-        ),
     ])

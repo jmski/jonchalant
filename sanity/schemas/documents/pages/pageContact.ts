@@ -5,7 +5,6 @@ export default defineType({
   name: 'pageContact',
   title: 'Contact page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     { name: 'inquiryCards', title: 'Inquiry cards', options: { collapsible: true, collapsed: false } },

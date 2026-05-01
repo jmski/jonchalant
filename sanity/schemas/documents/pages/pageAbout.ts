@@ -6,7 +6,6 @@ export default defineType({
   name: 'pageAbout',
   title: 'About page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     { name: 'storyScroll', title: 'Story scroll (beats)', options: { collapsible: true, collapsed: false } },

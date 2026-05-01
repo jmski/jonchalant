@@ -4,7 +4,6 @@ export default defineType({
   name: 'pillarSet',
   title: 'Pillar definitions',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'pillars',

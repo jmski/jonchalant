@@ -7,7 +7,6 @@ export default defineType({
   name: 'pagePrograms',
   title: 'Programs page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     {

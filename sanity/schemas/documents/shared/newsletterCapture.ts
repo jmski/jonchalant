@@ -6,7 +6,6 @@ export default defineType({
   name: 'newsletterCapture',
   title: 'Newsletter capture (Tuesdays)',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
     defineField({

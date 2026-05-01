@@ -10,7 +10,6 @@ export default defineType({
   name: 'pageIkigai',
   title: 'Ikigai page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fieldsets: [
     { name: 'hero', title: 'Hero', options: { collapsible: true, collapsed: false } },
     { name: 'fourCircles', title: 'Four Circles', options: { collapsible: true, collapsed: false } },
