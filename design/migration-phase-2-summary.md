@@ -94,15 +94,32 @@ Barrel updates: `components/sections/index.ts` (added `Method`, removed `Credibi
 ## Known issues / follow-up work
 
 ### Build
-- **Home Hero spread bug fixed.** `components/sections/home/hero/Hero.tsx` previously merged props with `{ ...DEFAULTS, ...props }` — when Sanity returned `undefined` for unset hero fields, the spread overwrote defaults, producing `<Link href={undefined}>` and a `formatUrl` crash during static prerender (`Cannot destructure property 'auth' of 'a' as it is undefined`). Now uses per-field `??` fallback. Other components that take optional CTA props directly should be audited the same way during polish.
+- **Home Hero spread bug fixed.** `components/sections/home/hero/Hero.tsx` previously merged props with `{ ...DEFAULTS, ...props }` — when Sanity returned `undefined` for unset hero fields, the spread overwrote defaults, producing `<Link href={undefined}>` and a `formatUrl` crash during static prerender (`Cannot destructure property 'auth' of 'a' as it is undefined`). Now uses per-field `??` fallback. Audited codebase for `{ ...DEFAULTS, ...props }` spread pattern with Sanity data; `Hero.tsx` was the only instance.
 
 ### Backend gaps (out of scope per directive)
 - **No `/api/starter-guide` endpoint.** `StarterGuideForm.handleSubmit` is a `console.log` placeholder. Wire to `useFormSubmission` once the endpoint lands.
 - **`/api/subscribe` (newsletter)** exists and accepts `{ firstName, email }` — compatible with current callers.
 
 ### Content gaps vs canonical-copy.md
-- **Contact page divider line "*or reach out directly*"** (canonical §2) is not currently rendered — was removed alongside the Calendly block. Consider re-adding when the contact page is polished.
-- **Calendly** is not referenced in canonical-copy.md anywhere; deletion is justified by canon.
+
+Audited four pages against `design/canonical-copy.md`:
+
+**Home (canonical §1–§10)**
+- Section order mismatch. Canonical: Hero → Method → Pillars → Meet Jon → Testimonials → Blog → **Newsletter → Audit CTA → Starter Guide**. Actual: Hero → Method → Pillars → **Audit CTA** → Meet Jon → Testimonials → Blog → **Starter Guide → Newsletter**. The Audit CTA should be near the bottom (§9), not between Pillars and Meet Jon. Newsletter (§8) precedes Audit CTA + Starter Guide in canon, not vice versa.
+- Meet Jon secondary link is canonically `null` (was "Watch Jon dance", deleted in phase 4). Schema field is still wired — must be left empty in CMS.
+
+**Contact (canonical §1–§5)**
+- **§1 audit-first hero card not rendered.** Canonical specifies a hero *card* with eyebrow `START HERE`, headline "*Not sure where to start?*", body, stats grid (7 questions / 3 minutes / 1 honest reply), primary CTA `Take the Presence Audit` → `/audit`, microcopy "*No account needed. Free.*". Current page renders a plain `<header className="contact-hero">` with eyebrow/headline/subhead only — no card layout, no stats grid, no CTA, no microcopy. Likely missing schema fields on `pageContact.hero` (CTA + microcopy + stats).
+- **§2 divider line "*or reach out directly*" not rendered.** Was deleted alongside the Calendly block.
+- **§2 section header "*What's on your mind?*"** is currently hardcoded in JSX, not driven by Sanity. Acceptable for now but should move to schema.
+
+**Audit (canonical §1–§3)**
+- **§1 hero / pre-quiz intro stage not rendered.** Canonical specifies a pre-quiz hero with `THE PRESENCE AUDIT` eyebrow, headline "*Seven questions. Three minutes. One honest read.*", subhead, microcopy "*Free. No account. No email required to see your result.*", and primary CTA `Start the Audit`. Current `useMultiStep` is `['quiz', 'result']` — quiz starts immediately on mount with no intro. Add a `'hero'` step before `'quiz'` and gate quiz entry on a CTA click.
+- §2 mid-quiz encouragement and §3 result bands match canon.
+
+**Foundation (canonical §1–§9)**
+- ✅ Section order matches: Hero (with WhoFor right column) → Why Dance → Curriculum → How It Works → Enrollment → FAQ → Soft CTA → Starter Guide.
+- §3 Why Dance third paragraph is the "lock paragraph" — verify in CMS that `whyDanceBodyParagraphs[]` has all three paragraphs populated.
 
 ### CSS polish (deferred)
 New BEM classes are used without backing styles in the system CSS files. They render as semantic markup with no styling and need entries added during the polish pass:
