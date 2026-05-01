@@ -17,6 +17,26 @@ export default defineType({
     defineField({ name: 'hero', title: 'Hero', type: 'hero', fieldset: 'hero' }),
 
     defineField({
+      name: 'heroStats',
+      title: 'Hero stats',
+      description: 'Optional stats grid for the audit-first hero card (e.g., 7 questions / 3 minutes / 1 honest reply).',
+      type: 'array',
+      fieldset: 'hero',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'heroStat',
+          fields: [
+            defineField({ name: 'value', title: 'Value', type: 'string', validation: (R) => R.required() }),
+            defineField({ name: 'label', title: 'Label', type: 'string', validation: (R) => R.required() }),
+          ],
+          preview: { select: { title: 'value', subtitle: 'label' } },
+        }),
+      ],
+      validation: (R) => R.max(4),
+    }),
+
+    defineField({
       name: 'inquiryCards',
       title: 'Inquiry cards',
       type: 'array',

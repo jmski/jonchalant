@@ -177,14 +177,43 @@ export default function ContactClient({ content }: ContactClientProps) {
   return (
     <div className="contact-client">
 
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      {/* ── Audit-first hero card ─────────────────────────────────────────── */}
       {content?.hero && (
-        <header className="contact-hero">
-          {content.hero.eyebrow && <p className="contact-hero-eyebrow">{content.hero.eyebrow}</p>}
-          <h1 className="contact-hero-headline">{content.hero.headline}</h1>
-          {content.hero.subhead && <p className="contact-hero-subhead">{content.hero.subhead}</p>}
-        </header>
+        <section className="contact-audit-prompt">
+          <div className="contact-audit-prompt-inner">
+            <div className="contact-audit-prompt-text">
+              {content.hero.eyebrow && <span className="contact-audit-badge">{content.hero.eyebrow}</span>}
+              <h1 className="contact-audit-title">{content.hero.headline}</h1>
+              {content.hero.subhead && <p className="contact-audit-body">{content.hero.subhead}</p>}
+              {content.hero.primaryCta?.href && content.hero.primaryCta?.label && (
+                <div className="contact-audit-btn">
+                  <Button as="link" href={content.hero.primaryCta.href}>
+                    {content.hero.primaryCta.label}
+                  </Button>
+                </div>
+              )}
+              {content.hero.microcopy && (
+                <p className="contact-audit-note">{content.hero.microcopy}</p>
+              )}
+            </div>
+            {content.heroStats && content.heroStats.length > 0 && (
+              <ul className="contact-audit-prompt-aside">
+                {content.heroStats.map((stat, i) => (
+                  <li key={i} className="contact-audit-stat">
+                    <span className="contact-audit-stat-number">{stat.value}</span>
+                    <span className="contact-audit-stat-label">{stat.label}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
       )}
+
+      {/* ── Direct contact split ──────────────────────────────────────────── */}
+      <div className="contact-divider">
+        <span className="contact-divider-text">or reach out directly</span>
+      </div>
 
       {/* ── Inquiry type selector ─────────────────────────────────────────── */}
       <div className="contact-form-section">

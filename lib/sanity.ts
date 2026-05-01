@@ -508,6 +508,7 @@ export async function getPageAbout(): Promise<PageAbout | null> {
 export async function getPageContact(): Promise<PageContact | null> {
   const query = `*[_type == "pageContact"][0] {
     hero { ${HERO_FIELDS} },
+    heroStats[] { value, label },
     inquiryCards[] { eyebrow, body, inquiryType },
     whatHappensNextHeader,
     whatHappensNextSteps[] { title, body },

@@ -290,6 +290,7 @@ export interface ThingsWorthKnowingItem {
 
 export interface PageContact {
   hero: Hero
+  heroStats?: { value: string; label: string }[]
   inquiryCards: InquiryCard[]
   whatHappensNextHeader: string
   whatHappensNextSteps: WhatHappensNextStep[]
