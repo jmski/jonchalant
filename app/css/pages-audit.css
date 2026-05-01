@@ -676,8 +676,49 @@ body.audit-immersive-mode .main-content {
 
 .audit-quiz,
 .audit-capture,
-.audit-result {
+.audit-result,
+.audit-hero {
   width: 100%;
+}
+
+.audit-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+.audit-hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin: 0;
+}
+
+.audit-hero-headline {
+  max-width: 640px;
+  margin: 0;
+}
+
+.audit-hero-subhead {
+  max-width: 560px;
+  font-size: 1.125rem;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.audit-hero-actions {
+  margin-top: 1rem;
+}
+
+.audit-hero-microcopy {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin: 0;
 }
 
 .audit-progress-track {

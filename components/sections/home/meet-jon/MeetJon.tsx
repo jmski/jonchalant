@@ -4,32 +4,19 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { urlFor } from '@/lib/sanity';
+import type { Cta, SanityImage, SectionHeader as SectionHeaderType } from '@/lib/types';
 
 interface MeetJonProps {
-  heading?: string;
-  body?: string;
-  image?: {
-    asset?: { _id?: string; url?: string };
-    alt?: string;
-    crop?: { top: number; bottom: number; left: number; right: number };
-    hotspot?: { x: number; y: number; width: number; height: number };
-  };
+  header?: SectionHeaderType;
+  image?: SanityImage;
+  bodyParagraphs?: string[];
+  primaryLink?: Cta;
+  secondaryLink?: Cta;
 }
 
-const DEFAULT_HEADING = "Twenty years in dance. The lesson wasn't the choreography.";
-const DEFAULT_BODY = `Jon Young teaches embodied presence to professionals whose medium isn't dance. His students lead engineering teams, run product orgs, write for a living, and stand in front of rooms — none of them are dancers, all of them learn to inhabit their work the same way a dancer learns to inhabit a phrase.
-
-The Foundation distills twenty years of performing, teaching, and choreographing into eight weeks of practice that transfer to whatever room you actually have to walk into.`;
-
-/**
- * Render a heading string with the first occurrence of "lesson" wrapped in <em>.
- * The italic anchor word carries the Fraunces italic treatment.
- */
 function renderHeadingWithEmphasis(heading: string) {
   const match = heading.match(/lesson/i);
-  if (!match || match.index === undefined) {
-    return heading;
-  }
+  if (!match || match.index === undefined) return heading;
   const before = heading.slice(0, match.index);
   const word = heading.slice(match.index, match.index + match[0].length);
   const after = heading.slice(match.index + match[0].length);
@@ -43,9 +30,11 @@ function renderHeadingWithEmphasis(heading: string) {
 }
 
 export function MeetJon({
-  heading = DEFAULT_HEADING,
-  body = DEFAULT_BODY,
+  header,
   image,
+  bodyParagraphs,
+  primaryLink,
+  secondaryLink,
 }: MeetJonProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -65,7 +54,7 @@ export function MeetJon({
     return () => observer.disconnect();
   }, []);
 
-  const paragraphs = body.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+  const paragraphs = (bodyParagraphs ?? []).filter(Boolean);
 
   return (
     <section className="meet-jon-section" ref={sectionRef}>
@@ -86,24 +75,38 @@ export function MeetJon({
           )}
         </div>
         <div className="meet-jon-copy-col meet-jon-bio meet-jon-text-col">
-          <div className="meet-jon-eyebrow-row">
-            <span className="meet-jon-eyebrow-rule" aria-hidden="true" />
-            <span className="meet-jon-eyebrow">Who you&apos;re working with</span>
-          </div>
-          <h2 className="meet-jon-heading">{renderHeadingWithEmphasis(heading)}</h2>
-          <div className="meet-jon-body">
-            {paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-          <div className="meet-jon-links">
-            <Link href="/about" className="meet-jon-link">
-              Read Jon&apos;s story <span className="meet-jon-link-arrow" aria-hidden="true">→</span>
-            </Link>
-          </div>
+          {header?.eyebrow && (
+            <div className="meet-jon-eyebrow-row">
+              <span className="meet-jon-eyebrow-rule" aria-hidden="true" />
+              <span className="meet-jon-eyebrow">{header.eyebrow}</span>
+            </div>
+          )}
+          {header?.headline && (
+            <h2 className="meet-jon-heading">{renderHeadingWithEmphasis(header.headline)}</h2>
+          )}
+          {paragraphs.length > 0 && (
+            <div className="meet-jon-body">
+              {paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          )}
+          {(primaryLink || secondaryLink) && (
+            <div className="meet-jon-links">
+              {primaryLink && (
+                <Link href={primaryLink.href} className="meet-jon-link">
+                  {primaryLink.label} <span className="meet-jon-link-arrow" aria-hidden="true">→</span>
+                </Link>
+              )}
+              {secondaryLink && (
+                <Link href={secondaryLink.href} className="meet-jon-link meet-jon-link--secondary">
+                  {secondaryLink.label}
+                </Link>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
   );
 }
-

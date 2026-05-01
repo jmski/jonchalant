@@ -76,15 +76,35 @@ export default defineType({
   ],
   preview: {
     select: {
+      clientName: 'clientName',
       title: 'title',
-      subtitle: 'clientName',
+      challenge: 'challenge',
+      industry: 'industry',
       media: 'image',
     },
-    prepare(selection: any) {
+    prepare({
+      clientName,
+      title,
+      challenge,
+      industry,
+      media,
+    }: {
+      clientName?: string
+      title?: string
+      challenge?: string
+      industry?: string
+      media?: unknown
+    }) {
+      const summary = (challenge ?? industry ?? '').trim()
+      const subtitle = summary
+        ? summary.length > 60
+          ? `${summary.slice(0, 60)}…`
+          : summary
+        : 'No summary'
       return {
-        title: selection.title,
-        subtitle: selection.subtitle,
-        media: selection.media,
+        title: clientName || title || 'Untitled',
+        subtitle,
+        media,
       }
     },
   },

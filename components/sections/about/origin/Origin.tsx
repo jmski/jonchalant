@@ -3,7 +3,18 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { KineticHeading } from '@/components/typography/KineticHeading';
-import type { OriginPhase } from '@/lib/types';
+
+// Local shape — `OriginPhase` was removed from lib/types.ts during the
+// schema migration. Component is currently orphaned (no consumers) but
+// retained for potential reuse.
+interface OriginPhase {
+  _key: string;
+  title: string;
+  description?: string;
+  pullQuote?: string;
+  image?: { asset?: { url?: string } };
+  imageAlt?: string;
+}
 
 const ANCHOR_WORDS = ['presence', 'stillness', 'nonchalant', 'grounded', 'movement', 'path'];
 

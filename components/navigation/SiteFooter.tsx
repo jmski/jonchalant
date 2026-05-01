@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { BlogOptIn } from '@/components/forms/BlogOptIn';
 import { FOOTER_NAV, FALLBACK_SOCIAL } from '@/lib/footerData';
-import type { EmailOptInContent } from '@/lib/types';
+import type { NewsletterCapture, SiteConfig, SocialLink } from '@/lib/types';
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   linkedin: (
@@ -20,30 +20,35 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-interface SocialLink {
-  label: string;
-  href: string;
-  icon: string;
-}
-
 interface SiteFooterProps {
-  socialLinks?: SocialLink[];
-  optIn?: EmailOptInContent | null;
+  siteConfig?: SiteConfig | null;
+  newsletter?: NewsletterCapture | null;
 }
 
-export function SiteFooter({ socialLinks = [], optIn }: SiteFooterProps) {
-  const linkedIn =
-    socialLinks.find((s) => s.label.toLowerCase().includes('linkedin')) ??
-    FALLBACK_SOCIAL.linkedin;
-  const instagram =
-    socialLinks.find((s) => s.label.toLowerCase().includes('instagram')) ??
-    FALLBACK_SOCIAL.instagram;
+function pickSocial(socialLinks: SocialLink[] | undefined, platform: SocialLink['platform']) {
+  return socialLinks?.find((s) => s.platform === platform);
+}
+
+export function SiteFooter({ siteConfig, newsletter }: SiteFooterProps) {
+  const linkedInResolved = pickSocial(siteConfig?.socialLinks, 'linkedin');
+  const instagramResolved = pickSocial(siteConfig?.socialLinks, 'instagram');
+
+  const linkedIn = linkedInResolved
+    ? { label: linkedInResolved.label ?? 'LinkedIn', href: linkedInResolved.url, platform: 'linkedin' }
+    : { label: FALLBACK_SOCIAL.linkedin.label, href: FALLBACK_SOCIAL.linkedin.href, platform: 'linkedin' };
+
+  const instagram = instagramResolved
+    ? { label: instagramResolved.label ?? 'Instagram', href: instagramResolved.url, platform: 'instagram' }
+    : { label: FALLBACK_SOCIAL.instagram.label, href: FALLBACK_SOCIAL.instagram.href, platform: 'instagram' };
+
   const displaySocial = [linkedIn, instagram];
+
+  const newsletterSuccess = siteConfig?.successStates?.find((s) => s.key === 'newsletter')?.message;
 
   return (
     <footer className="jc-footer">
       <div className="jc-footer-optin">
-        <BlogOptIn optIn={optIn} variant="footer" />
+        <BlogOptIn newsletter={newsletter} successMessage={newsletterSuccess} variant="footer" />
       </div>
 
       <div className="jc-footer-inner">
@@ -53,23 +58,28 @@ export function SiteFooter({ socialLinks = [], optIn }: SiteFooterProps) {
               <em>Jon</em>chalant
             </Link>
             <p className="jc-footer-blurb">
-              Find the work you were meant for — then learn to inhabit it.
+              {siteConfig?.brandLine ?? 'Find the work you were meant for — then learn to inhabit it.'}
             </p>
             <div className="jc-footer-social">
               {displaySocial.map((link) => (
                 <a
-                  key={link.label}
+                  key={link.platform}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="jc-footer-social-link"
-                  data-platform={link.label.toLowerCase()}
+                  data-platform={link.platform}
                   aria-label={link.label}
                 >
-                  {SOCIAL_ICONS[link.label.toLowerCase()] ?? link.icon}
+                  {SOCIAL_ICONS[link.platform] ?? link.label}
                 </a>
               ))}
             </div>
+            {siteConfig?.contactEmail && (
+              <p className="jc-footer-contact">
+                <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+              </p>
+            )}
           </div>
 
           {FOOTER_NAV.map((section) => (
@@ -87,8 +97,10 @@ export function SiteFooter({ socialLinks = [], optIn }: SiteFooterProps) {
         </div>
 
         <div className="jc-footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Jonchalant. All rights reserved.</p>
-          <Link href="/privacy">Privacy Policy</Link>
+          <p>{siteConfig?.copyright ?? `© ${new Date().getFullYear()} Jonchalant. All rights reserved.`}</p>
+          <Link href={siteConfig?.privacyLink?.href ?? '/privacy'}>
+            {siteConfig?.privacyLink?.label ?? 'Privacy Policy'}
+          </Link>
         </div>
       </div>
     </footer>

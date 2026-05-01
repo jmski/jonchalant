@@ -1,37 +1,23 @@
 import { Navbar, SiteFooter } from '@/components/navigation';
-import { getContactInfo, getEmailOptIn } from '@/lib/sanity';
-import type { EmailOptInContent } from '@/lib/types';
+import { getNewsletterCapture, getSiteConfig } from '@/lib/sanity';
+import type { NewsletterCapture, SiteConfig } from '@/lib/types';
 
 export default async function MarketingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  let socialLinks: { label: string; href: string; icon: string }[] = [];
-  let optIn: EmailOptInContent | null = null;
+  let siteConfig: SiteConfig | null = null;
+  let newsletter: NewsletterCapture | null = null;
   try {
-    const [contactInfo, emailOptIn] = await Promise.all([
-      getContactInfo(),
-      getEmailOptIn(),
+    const [config, optIn] = await Promise.all([
+      getSiteConfig(),
+      getNewsletterCapture(),
     ]);
-    if (contactInfo?.contactMethods) {
-      socialLinks = contactInfo.contactMethods
-        .filter((m) => ['LinkedIn', 'Instagram', 'TikTok', 'YouTube'].includes(m.label))
-        .map((m) => ({
-          label: m.label,
-          href: m.href,
-          icon: m.label.toLowerCase().includes('linkedin')
-            ? 'in'
-            : m.label.toLowerCase().includes('instagram')
-            ? 'ig'
-            : m.label.toLowerCase().includes('youtube')
-            ? 'yt'
-            : 'tk',
-        }));
-    }
-    optIn = emailOptIn ?? null;
+    siteConfig = config ?? null;
+    newsletter = optIn ?? null;
   } catch {
-    // Non-critical — Navbar and Footer extras are optional
+    // Non-critical — Footer extras are optional
   }
 
   return (
@@ -40,7 +26,7 @@ export default async function MarketingLayout({
       <main className="main-content" id="main-content">
         {children}
       </main>
-      <SiteFooter socialLinks={socialLinks} optIn={optIn} />
+      <SiteFooter siteConfig={siteConfig} newsletter={newsletter} />
     </>
   );
 }

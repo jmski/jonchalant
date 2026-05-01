@@ -68,14 +68,32 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'clientName',
-      subtitle: 'company',
-      featured: 'featured',
+      clientName: 'clientName',
+      quote: 'quote',
+      company: 'company',
+      media: 'image',
     },
-    prepare(selection: any) {
+    prepare({
+      clientName,
+      quote,
+      company,
+      media,
+    }: {
+      clientName?: string
+      quote?: string
+      company?: string
+      media?: unknown
+    }) {
+      const source = (quote ?? company ?? '').trim()
+      const subtitle = source
+        ? source.length > 60
+          ? `${source.slice(0, 60)}…`
+          : source
+        : 'No quote'
       return {
-        title: selection.title,
-        subtitle: selection.subtitle,
+        title: clientName || 'Untitled',
+        subtitle,
+        media,
       }
     },
   },

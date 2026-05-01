@@ -1,41 +1,35 @@
-import type { HomePillar } from '@/lib/types';
+import SectionHeader from '@/components/ui/SectionHeader/SectionHeader';
+import type { PillarCard, SectionHeader as SectionHeaderType } from '@/lib/types';
 
 interface FourPillarsProps {
-  headline?: string;
-  pillars?: HomePillar[];
+  header?: SectionHeaderType;
+  pillars?: PillarCard[];
 }
 
-const FALLBACK_HEADLINE = 'The fundamentals are the same. The medium is yours to choose.';
-
-export function FourPillars({ headline, pillars }: FourPillarsProps) {
+export function FourPillars({ header, pillars }: FourPillarsProps) {
   if (!pillars || pillars.length === 0) return null;
 
   return (
     <section className="four-pillars-section">
       <div className="four-pillars-header">
-        <p className="four-pillars-eyebrow">The Four Pillars</p>
-        <h2 className="four-pillars-headline">{headline ?? FALLBACK_HEADLINE}</h2>
-        <p className="four-pillars-subhead">
-          Grounding, Energy, Flow, Command — the embodiment archetypes that transfer across every medium.
-        </p>
+        {header?.eyebrow && <p className="four-pillars-eyebrow">{header.eyebrow}</p>}
+        {header?.headline && (
+          <h2 className="four-pillars-headline">{header.headline}</h2>
+        )}
+        {header?.subhead && (
+          <p className="four-pillars-subhead">{header.subhead}</p>
+        )}
+        {!header && (
+          <SectionHeader title="The Four Pillars" />
+        )}
       </div>
 
       <div className="four-pillars-grid">
-        {pillars.map((pillar) => (
-          <div key={pillar._key ?? pillar.name} className="four-pillars-card">
-            <p className="four-pillars-card-label">{pillar.number}</p>
-            <h3 className="four-pillars-card-name">{pillar.name}</h3>
-            <p className="four-pillars-card-def">{pillar.definition}</p>
-            {pillar.applications?.length > 0 && (
-              <ul className="four-pillars-card-apps">
-                {pillar.applications.map((app) => (
-                  <li key={app._key ?? app.who}>
-                    <span className="four-pillars-card-who">{app.who}</span>
-                    {' '}{app.body}
-                  </li>
-                ))}
-              </ul>
-            )}
+        {pillars.map((pillar, idx) => (
+          <div key={pillar.title ?? idx} className="four-pillars-card">
+            <p className="four-pillars-card-label">{String(idx + 1).padStart(2, '0')}</p>
+            <h3 className="four-pillars-card-name">{pillar.title}</h3>
+            <p className="four-pillars-card-def">{pillar.body}</p>
           </div>
         ))}
       </div>

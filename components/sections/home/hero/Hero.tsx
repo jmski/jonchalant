@@ -21,7 +21,18 @@ const DEFAULTS = {
 };
 
 export function Hero(props: HomeHeroProps) {
-  const copy = { ...DEFAULTS, ...props };
+  // Use ?? per-field — spreading `props` would let `undefined` values from
+  // Sanity (unset fields) overwrite the defaults, which then crashes
+  // <Link href={undefined}> during render.
+  const copy = {
+    eyebrow: props.eyebrow ?? DEFAULTS.eyebrow,
+    headline: props.headline ?? DEFAULTS.headline,
+    subhead: props.subhead ?? DEFAULTS.subhead,
+    primaryCtaLabel: props.primaryCtaLabel ?? DEFAULTS.primaryCtaLabel,
+    primaryCtaHref: props.primaryCtaHref ?? DEFAULTS.primaryCtaHref,
+    secondaryCtaLabel: props.secondaryCtaLabel ?? DEFAULTS.secondaryCtaLabel,
+    secondaryCtaHref: props.secondaryCtaHref ?? DEFAULTS.secondaryCtaHref,
+  };
   return (
     <GenericHero
       eyebrow={copy.eyebrow}

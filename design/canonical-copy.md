@@ -4,7 +4,7 @@
 
 This document is the input for Sanity schema design and content population. Every page section here corresponds to a Sanity field group. When this doc and Sanity Studio disagree, **Sanity is updated to match this doc** — never the reverse.
 
-Last updated: Phase 5, workstream 1 — Home, About, Ikigai, and Foundation locked. Programs through Globals still drafted/stubbed.
+Last updated: Phase 5, workstream 1 — **COMPLETE.** All ten content surfaces locked in voice. Ready for workstream 2 (schema redesign).
 
 ---
 
@@ -621,21 +621,26 @@ Self-paced is the curriculum. With-check-ins is the curriculum plus a weekly 30-
 
 # Programs page
 
-**Status:** 🟡 Partially refreshed (phase 4) — needs gap-filling
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
-**Sections in render order:** Hero (with FocusAreas) → Case studies (moved up in phase 4) → Program cards → Supplemental learning → FAQ → Closing CTA → Foundation Starter Guide
+**Sections in render order:** Hero (with "Who this is built for" right column) → Case studies → Three program cards → FAQ → Closing CTA → Foundation Starter Guide
+
+Phase 4 locked the "Who this is built for" bullets and the case studies header, and moved case studies above the program cards. Phase 5 drafted hero subhead, three program cards, FAQ, and closing CTA in voice.
 
 ---
 
 ## §1 — Programs hero
 
+**Eyebrow:** `THE WORK`
+
 **Headline:** *This is where it gets {{physical}}.*
 
-**Subhead:** Executive presence isn't a mindset shift. It's a physical one. These programs teach you to occupy space, hold stillness, and project authority — in a way that matches how good you already are.
+**Subhead:** Knowing what to do isn't the problem. Doing it when it counts is. These programs train the body to hold what the head already understands — through dance, because dance can't be faked, and into whatever room you actually have to walk into.
 
-(Slight voice pass needed — "physical one" lands but the "executive presence" framing leans corporate. Consider revising.)
+**"Who this is built for" — right column bullet list (locked phase 4):**
 
-**"Who this is built for" — bullet list (locked in phase 4):**
+**Header:** *Who this is built for*
+
 - You're good at your job. The room just doesn't feel it yet.
 - You've been told you're "too quiet" — or too much. Neither felt accurate.
 - You want to stop managing how you come across and start actually showing up.
@@ -643,145 +648,662 @@ Self-paced is the curriculum. With-check-ins is the curriculum plus a weekly 30-
 
 ---
 
-## §2 — Case studies header (locked in phase 4)
+## §2 — Case studies header (locked phase 4)
 
 **Eyebrow:** `BEFORE & AFTER`
+
 **Headline:** *Real shifts. Actual situations.*
+
 **Subhead:** The names and some details have been changed. The challenges and outcomes are accurate.
+
+**Schema note:** Case study card copy (Marcus / Michael / Diana etc.) lives on the `caseStudy` schema in Sanity. Voice pass on those happens at the schema level in workstream 2, not here.
 
 ---
 
 ## §3 — Three program cards
 
-Self-paced ($197) · Foundation + Weekly Check-ins ($497) · 1:1 Coaching ($3,500+)
+### Card 1 — The Foundation (Self-Paced)
 
-Each card needs voice pass. Current copy is functional but generic.
+**Eyebrow:** `SELF-PACED COURSE`
+
+**Title:** *The Foundation*
+
+**Price line:** *$197 · once · lifetime access*
+
+**Description:** Eight weeks of practice, on your schedule. Same curriculum as the cohort tier — the videos, the modules, the movement-to-leadership frameworks. No calls, no live check-ins, just the work itself. For people who'll show up to the practice without a calendar holding them to it.
+
+**Inclusions:**
+- 8 modules · 134 lessons total
+- Lifetime access — go at your pace
+- Movement-to-leadership frameworks
+- Personal follow-up from Jon (async)
+- Foundation Starter Guide included
+
+**CTA:** *Get Started — $197*
 
 ---
 
-## §4 — Supplemental + FAQ + Closing
+### Card 2 — The Foundation + Weekly Check-Ins
 
-Standard sections, voice pass needed.
+**Eyebrow:** `MOST CHOSEN`
+
+**Title:** *The Foundation + Weekly Check-ins*
+
+**Price line:** *$497 · once · lifetime access*
+
+**Description:** Same curriculum as self-paced. Plus eight thirty-minute calls with me, one a week, for whatever the work is bringing up. The check-ins are why most people choose this tier — not because they need permission, but because they know they'll move faster with someone in the room.
+
+**Inclusions:**
+- Everything in self-paced
+- 8 weekly 30-minute calls with Jon
+- Real-time feedback on your specific situations
+- Prioritized scheduling
+
+**CTA:** *Book a Discovery Call*
+
+---
+
+### Card 3 — Work With Jon Directly
+
+**Eyebrow:** `1:1 COACHING`
+
+**Title:** *Work With Jon Directly*
+
+**Price line:** *Custom · starting at $3,500*
+
+**Description:** For people whose situation is specific enough that a course can't quite reach it. A board presence problem. A creative session that keeps stalling. A role you're about to step into. We build it around what you're actually walking into — not a curriculum, a custom plan.
+
+**Inclusions:**
+- Intake assessment — full presence audit
+- Custom coaching plan
+- Flexible session frequency (typically biweekly)
+- Direct access between sessions
+
+**CTA:** *Book a Discovery Call*
+
+---
+
+## §4 — Common questions (FAQ)
+
+**Header:** *Common questions.*
+
+### How is this different from a typical leadership course?
+
+Most leadership courses work from the neck up — frameworks, scripts, case studies. The gap between "I know what to do" and "I can do it when it counts" doesn't close from there. These programs start in the body, because the body is where the gap actually lives.
+
+### Is this coaching for me if I'm not a dancer?
+
+Yes. Most people who work with me aren't. Dance is the medium I teach in because it can't be faked. The pillars — Grounding, Energy, Flow, Command — transfer to any room where you have to show up as yourself in front of people.
+
+### What results should I expect, and by when?
+
+Different for everyone. Most people notice a shift in week two — usually in how they hold themselves before they speak. By week six, the change is visible to others before it's visible to them. By week eight, the practice is yours.
+
+### Can I do this remotely?
+
+Yes — both the self-paced course and the weekly check-ins are remote-first. 1:1 coaching can be remote or in-person depending on where you are and what you're working on.
+
+### What if I need to pause or reschedule?
+
+For self-paced: you can pause anytime, lifetime access. For check-ins: I keep two flex weeks in every cohort for life happening. For 1:1: rescheduling is built into the rhythm, no penalty.
+
+### Is there a refund policy?
+
+Yes. For self-paced and check-ins: full refund within 14 days if the first two modules don't deliver. For 1:1: a no-fault exit after the first session if it isn't the right fit — full refund minus the intake.
+
+---
+
+## §5 — Closing CTA
+
+**Eyebrow:** `STILL DECIDING`
+
+**Headline:** *Not sure which one is {{right}}?*
+
+**Body:** We'll talk through where you are, what you're working toward, and which format actually makes sense for you. If none of them do, I'll tell you that too.
+
+**Primary CTA:** *Book a Free Call*
+
+**Microcopy:** *No pressure, no pitch, no commitment.*
+
+---
+
+## §6 — Foundation Starter Guide footer
+
+**Reuses Home §10 — referenced singleton.** See Home for canonical content.
 
 ---
 
 # Lessons page
 
-**Status:** ⚪ Stub — light copy load
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
-**Sections:** Hero → Course cards → Closing CTA
+**Sections in render order:** Hero → Two course cards → Closing CTA → Foundation Starter Guide
 
-The hero ("The Blueprint") works. Subhead needs review. Course cards are pulled from Sanity — those need voice pass at the course level (Four Circles description, Foundation description).
+The Lessons page is the lightest copy load on the site, but the two course cards do the most conversion work — they're the only place on the site where someone can scan both courses side-by-side and decide where to start.
 
 ---
 
 ## §1 — Lessons hero
 
 **Eyebrow:** `STRUCTURED LEARNING`
-**Headline:** *The Blueprint*
-**Subhead:** A structured path from self-aware professional to quietly commanding leader. Each course builds on the last — choose your starting point and go at your own pace.
 
-(Voice pass: "self-aware professional to quietly commanding leader" is fine but slightly aspirational-paint. Consider tightening.)
+**Headline:** *The {{Blueprint}}.*
+
+**Subhead:** Two courses, in order. The free one tells you what's missing. The paid one builds it back. Both are self-paced, both are honest about what they can and can't do.
 
 ---
 
 ## §2 — Course cards
 
-Pulled from Sanity. Each course needs:
-- Title
-- One-paragraph description
-- Difficulty/duration metadata
+Course descriptions live on the `course` schema in Sanity, not on a `lessonsPage` schema. Same content reused on the individual course detail pages.
 
-The Four Circles description was flagged in phase 4 for review. Foundation description also needs alignment with the Foundation page's own positioning.
+### Card 1 — The Four Circles
+
+**Eyebrow:** `BEGINNER`
+
+**Title:** *The Four Circles*
+
+**Tagline:** *Free. Twelve lessons. Whatever you scored on the assessment, here's what it means.*
+
+**Description:** A free 12-lesson course that walks you through what your ikigai assessment results actually mean. Each lesson takes about fifteen minutes. Passion, Mission, Vocation, Profession — one circle at a time, what each one looks like when it's working, what it looks like when it isn't, and how to tell the difference in your own work. By the end you'll know which one is missing from your current situation, and you'll have language for what to do about it.
+
+**Metadata:**
+- 1 module · 12 lessons
+- ~3 hours total
+- Free · gated by free account
+
+**CTA:** *Start the Course*
+
+---
+
+### Card 2 — The Foundation
+
+**Eyebrow:** `INTERMEDIATE`
+
+**Title:** *The Foundation*
+
+**Tagline:** *Eight weeks. The body work that makes the other work stick.*
+
+**Description:** A self-paced video course teaching embodied presence through the lens of dance. Eight modules, 134 lessons, 200+ hours of content. Built for professionals whose medium isn't dance — the pillars (Grounding, Energy, Flow, Command) transfer to any room where you have to show up as yourself in front of people. Same content as the cohort tier on the Programs page, no live calls.
+
+**Metadata:**
+- 8 modules · 134 lessons
+- 200+ hours of content
+- $197 · lifetime access
+
+**CTA:** *See the Course*
+
+---
+
+## §3 — Closing CTA
+
+**Eyebrow:** `WANT MORE?`
+
+**Headline:** *Courses teach the {{frameworks}}. Coaching applies them.*
+
+**Body:** These courses are the curriculum. They give you the language and the practice. If you want someone in the room with you while you do the work — feedback in real time, accountability, a shape to your week — that's what coaching is for.
+
+**Primary CTA:** *Explore Coaching Programs* → `/programs`
+
+---
+
+## §4 — Foundation Starter Guide footer
+
+**Reuses Home §10 — referenced singleton.**
+
+---
+
+## Schema notes
+
+If the course detail page (e.g. `/lessons/four-circles`) needs a longer description than the card on the Lessons index page, the schema should have both `cardDescription` and `fullDescription` as separate fields rather than truncating one for the other.
+
+The course descriptions on this page should match the descriptions used wherever else the courses appear (Foundation page hero, Programs page card 1) — this is a candidate for a single Sanity reference, not duplicated copy.
 
 ---
 
 # Blog index page
 
-**Status:** ⚪ Stub — mostly chrome
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
-**Sections:** Hero → Filter pills → "The Lab" featured strip → Featured grid → All articles list → Newsletter capture → Audit CTA → Foundation Starter Guide
+**Sections in render order:** Hero → Filter pills → The Lab featured strip → Featured grid → All articles list → Newsletter capture → Audit CTA → Foundation Starter Guide
+
+Most of the work on this page is chrome — individual blog post content lives on each post. The phase 4 deferred filter pill renames are locked here.
 
 ---
 
 ## §1 — Blog hero
 
-**Headline:** *The Archives*
-**Subhead:** Practical writing on presence, movement, and what it actually takes to stop disappearing in rooms.
+**Eyebrow:** `THE ARCHIVES`
 
-Voice is close. Subhead may want one more line. TBD.
+**Headline:** *Practical writing on what it actually takes to {{stop}} disappearing in rooms.*
+
+**Subhead:** Essays on presence, movement, and the gap between what you know and what you can do when it counts. New ones as I figure things out. Some of them will probably be wrong.
 
 ---
 
 ## §2 — Filter pills
 
-Renames from phase 4 (deferred to phase 5):
-- MOVEMENT & BODY → The Body
-- PRESENCE & CONFIDENCE → Presence
-- LEADERSHIP & CAREER → The Work
-- THE LAB → The Lab (no change)
+Locked rename list (deferred from phase 4):
+
+| Current label | New label |
+|---|---|
+| MOVEMENT & BODY | The Body |
+| PRESENCE & CONFIDENCE | Presence |
+| LEADERSHIP & CAREER | The Work |
+| THE LAB | The Lab *(unchanged)* |
+
+**Schema implication:** Pillar labels likely live on the `pillar` schema or as a string enum on `blogPost`. Renaming display labels is safe; renaming slugs is not. Workstream 2 will resolve the schema-level path. For now: display label rename only.
 
 ---
 
-## §3 — The Lab strip
+## §3 — The Lab featured strip
 
-Existing copy:
-> The Lab — I'm putting myself through the foundation program and documenting my journey — what's working, what's hard, what's actually changing. Updated as I go.
+**Series eyebrow:** `THE LAB · ONGOING`
 
-"Documenting my journey" — banned word. Rewrite needed.
+**Series title:** *The Lab*
 
-Suggested direction (Register A): *I'm running myself through the foundation. Honest notes on what's working, what isn't, and what I keep getting wrong. Updated as I go.*
+**Series description:** I'm running myself through the Foundation curriculum, week by week, and writing what's actually happening. What's working. What isn't. What I keep getting wrong. Updated as I go — no schedule, no script, no neat conclusions.
+
+**CTA:** *Follow The Lab*
+
+---
+
+## §4 — Featured grid
+
+No section subhead. Card content is per-post.
+
+**Section header (if rendered):** `FEATURED`
+
+---
+
+## §5 — All articles list
+
+**Section header (if rendered):** `ALL ARTICLES`
+
+**Search placeholder:** *Search essays...*
+
+**No-results state:** *No essays match. Try a different filter, or browse The Lab.*
+
+---
+
+## §6 — Newsletter capture
+
+**Reuses Home §8 — referenced singleton.**
+
+The Tuesday newsletter capture appears on Home, Blog index, and likely Audit results. Same Sanity document, multiple render contexts.
+
+---
+
+## §7 — Audit CTA
+
+**Reuses Home §9 — referenced singleton.**
+
+---
+
+## §8 — Foundation Starter Guide
+
+**Reuses Home §10 — referenced singleton.**
 
 ---
 
 # Contact page
 
-**Status:** 🟢 Already in good shape — polish pass only
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
-The contact page is the cleanest page on the site already. Hero, "What's on your mind" coaching/general split, "What happens next" steps, and "A few things worth knowing" are all on-voice. Polish pass should:
-- Verify every line passes the voice rules
-- Tighten any line that drifts (none flagged on first read)
+**Sections in render order:** Audit-first hero card → Direct contact split → What happens next → A few things worth knowing → Email fallback
+
+The Contact page barely needed voice work — most existing copy was already on-voice. Phase 5 captured what was already shipping into the canonical doc and tightened a few lines.
+
+---
+
+## §1 — Audit-first hero card
+
+**Eyebrow:** `START HERE`
+
+**Headline:** *Not sure where to start?*
+
+**Body:** Take the Presence Audit first. Seven questions, three minutes. I'll review your answers and follow up personally with something actually useful — not a generic drip sequence.
+
+**Stats grid (right of card):**
+- **7** questions
+- **3** minutes
+- **1** honest reply from Jon
+
+**Primary CTA:** *Take the Presence Audit*
+
+**Microcopy:** *No account needed. Free.*
+
+---
+
+## §2 — Direct contact split
+
+**Divider line:** *or reach out directly*
+
+**Section header:** *What's on your mind?*
+
+### Card A — 1-on-1 Coaching
+
+**Eyebrow:** `1-ON-1 COACHING`
+
+**Body:** *I want to work with Jon directly.*
+
+**Behavior:** Opens contact form with this preselected as inquiry type.
+
+### Card B — General Question
+
+**Eyebrow:** `GENERAL QUESTION`
+
+**Body:** *I have something else on my mind.*
+
+**Behavior:** Opens contact form with this preselected as inquiry type.
+
+---
+
+## §3 — What happens next
+
+**Eyebrow:** `WHAT HAPPENS NEXT`
+
+### Step 1
+
+**Title:** *Submit your inquiry*
+
+**Body:** Takes 2 minutes. No prep needed.
+
+### Step 2
+
+**Title:** *We schedule a 15-min call*
+
+**Body:** I'll reach out within 2–3 business days to find a time.
+
+### Step 3
+
+**Title:** *We build your custom plan*
+
+**Body:** Together we map out the right path forward for you.
+
+---
+
+## §4 — A few things worth knowing
+
+**Eyebrow:** `A FEW THINGS WORTH KNOWING`
+
+### Item 1
+
+**Title:** *I don't do pressure.*
+
+**Body:** If you reach out, I'm not going to chase you down. Take your time.
+
+### Item 2
+
+**Title:** *I work with individuals, not committees.*
+
+**Body:** If you're the one who wants to change, this is for you — not your boss who thinks you need coaching.
+
+### Item 3
+
+**Title:** *Spots are limited.*
+
+**Body:** I keep my 1-on-1 client load intentionally small. If you're on the fence, sooner is better.
+
+---
+
+## §5 — Email fallback
+
+**Body line:** Prefer email? hello@jonchalant.com — I check it daily, minus weekends when I'm wrangling three kids and pretending to relax.
 
 ---
 
 # Audit page
 
-**Status:** ⚪ Stub — minimal marketing copy
+**Status:** ✅ Locked (Phase 5, workstream 1)
 
-Quiz question text lives in `lib/auditData.ts`. Out of scope unless migrated to Sanity in phase 5 schema redesign.
+**Sections in render order:** Hero / pre-quiz intro → Quiz (7 questions, in code) → Result band copy (one of three) → Foundation Starter Guide
 
-Marketing copy:
-- Pre-quiz intro line
-- Result band copy (low / mid / high) — needs voice pass, currently slightly coachy
-- Post-result CTA
+The Audit page wraps the Presence Audit — distinct from the Ikigai Assessment. Quiz logic and question text remain in `lib/auditData.ts` per workstream-2 decision. Result band copy lives in Sanity since it's marketing copy, not quiz logic.
+
+---
+
+## §1 — Audit hero / pre-quiz intro
+
+**Eyebrow:** `THE PRESENCE AUDIT`
+
+**Headline:** *Seven questions. {{Three}} minutes. One honest read.*
+
+**Subhead:** This is the quick one. Where the Ikigai Assessment tells you which circle is missing, the Presence Audit tells you where you are with what you already have. Built for people who already know their work but want to know where the gap actually is.
+
+**Microcopy:** *Free. No account. No email required to see your result.*
+
+**Primary CTA:** *Start the Audit*
+
+---
+
+## §2 — Mid-quiz progress chrome
+
+**Question counter format:** *Question 3 of 7 — 43%*
+
+**Mid-quiz encouragement (single instance, at midpoint only):** *Halfway. Keep going.*
+
+---
+
+## §3 — Result bands
+
+The audit produces a numerical score mapping to one of three bands. Each band has its own headline, body, and CTAs. Bands are honest, not flattering — the warmth move is meeting the person where they actually are, not telling everyone they did great.
+
+### Band A — Low (score in lower third)
+
+**Result headline:** *You've got the substance. The {{signal}} isn't there yet.*
+
+**Body:** Most of your answers point to a real gap between what you know and how the room reads you. That's not bad news — it's the most fixable kind of presence problem there is, because the work isn't to become someone else. It's to learn what you already know how to do, in your body. Most people who score in this band see a noticeable shift in week two of the Foundation.
+
+**Primary CTA:** *See the Foundation*
+
+**Secondary CTA:** *Tuesday newsletter — one idea a week to start*
+
+---
+
+### Band B — Mid (score in middle third)
+
+**Result headline:** *You show up well. Sometimes. The pattern isn't reliable yet.*
+
+**Body:** Your answers say the skills are there — at least sometimes — but they aren't dependable across contexts. You probably already know which rooms feel right and which ones don't. The Foundation is built for exactly this gap: the skills exist, the practice that locks them in does not.
+
+**Primary CTA:** *See the Foundation*
+
+**Secondary CTA:** *Book a free 15-minute call*
+
+---
+
+### Band C — High (score in upper third)
+
+**Result headline:** *You already have it. Most of the time. {{Most}} isn't all of it.*
+
+**Body:** Your answers say presence isn't your bottleneck — but you wouldn't have taken this audit if nothing was missing. The gap is probably specific, not general: a room where it slips, a kind of conversation that loses you, a transition you haven't figured out yet. That's 1:1 territory, not curriculum territory.
+
+**Primary CTA:** *Book a Discovery Call*
+
+**Secondary CTA:** *Read the essays — The Lab*
+
+---
+
+## §4 — Foundation Starter Guide
+
+**Reuses Home §10 — referenced singleton.**
+
+---
+
+## Schema notes
+
+Quiz question text and scoring logic stay in `lib/auditData.ts` (decision locked in workstream 1). Migration to Sanity would couple two systems for marginal benefit; question phrasing is stable enough to live in code.
+
+Result band copy *does* live in Sanity. The three bands need their own document or referenced sub-document so they're editable without engineering.
+
+Schema fields needed on the audit page document:
+- `audit.hero.eyebrow`, `audit.hero.headline`, `audit.hero.subhead`, `audit.hero.microcopy`, `audit.hero.cta`
+- `audit.midQuizEncouragement`
+- `audit.bands.low.headline`, `audit.bands.low.body`, `audit.bands.low.primaryCta`, `audit.bands.low.secondaryCta` — repeat for `mid` and `high`
+- Foundation Starter Guide is a reference, not a duplicated field group
 
 ---
 
 # Globals — copy that appears on every page
 
+**Status:** ✅ Locked (Phase 5, workstream 1)
+
+Universal copy that lives in shared components rather than page-specific Sanity documents. Schema decisions in workstream 2 will determine whether these live in a `siteConfig` singleton, in component defaults, or in environment variables.
+
+---
+
 ## Navbar
 
-- Logo wordmark: `JONCHALANT`
-- Primary nav: Start Here · Programs · Lessons · About
-- Sign In link: *Sign In*
-- Mobile primary CTA: *Discover Your Ikigai* → `/ikigai`
+**Wordmark:** `JONCHALANT`
+
+**Desktop primary nav (in order):**
+- Start Here → `/`
+- Programs → `/programs`
+- Lessons → `/lessons`
+- About → `/about`
+
+**Right-side links:**
+- Sign In → `/sign-in`
+
+**Mobile menu (in order):**
+- Start Here · Programs · Lessons · About · Contact · Sign In
+
+**Mobile persistent CTA (in nav bar, always visible):** *Discover Your Ikigai* → `/ikigai`
+
+*Note: Contact appears on mobile menu but not desktop primary nav. Desktop relies on the Contact link in the footer.*
+
+---
 
 ## Footer
 
-- Brand line: *Find the work you were meant for — then learn to inhabit it.*
-- Column 1 — Essentials: Home · About · Contact
-- Column 2 — Coaching: Programs · The Foundation · Ikigai
-- Column 3 — Learn: The Blueprint · The Archives · The Breakdown · Presence Audit
-- Account: Sign In
+**Brand line (left, near wordmark):** *Find the work you were meant for — then learn to inhabit it.*
+
+**Column 1 — ESSENTIALS:**
+- Home → `/`
+- About → `/about`
+- Contact → `/contact`
+
+**Column 2 — COACHING:**
+- Programs → `/programs`
+- The Foundation → `/foundation`
+- Ikigai → `/ikigai`
+
+**Column 3 — LEARN:**
+- The Blueprint → `/lessons`
+- The Archives → `/blog`
+- Presence Audit → `/audit`
+
+**Account section:**
+- Sign In → `/sign-in`
+
+**Bottom row:**
 - Copyright: *© 2026 Jonchalant. All rights reserved.*
-- Privacy link: *Privacy*
+- Privacy link: *Privacy* → `/privacy`
 
-## Form microcopy (universal)
+**Removed in phase 5:** "The Breakdown" was previously listed in the Learn column as a placeholder for an unbuilt blog series. Removed since it has no destination. Restore if a Breakdown series ships later.
 
-- Submit success: *Got it. Check your inbox.*
-- Submit error: *Something went sideways. Try again, or email me directly: jon@jonchalant.com*
-- Email validation: *That doesn't look like an email.*
+---
+
+## Universal form microcopy
+
+### Submit success states
+
+- General form: *Got it. Check your inbox.*
+- Newsletter signup: *You're in. First Tuesday lands soon.*
+- Starter Guide: *Sent. Check your inbox in the next minute.*
+- Contact form: *Got it. I'll be in touch within 2–3 business days.*
+
+### Submit error
+
+*Something went sideways. Try again, or email me directly: hello@jonchalant.com*
+
+### Field validation
+
 - Required field: *Required.*
+- Invalid email: *That doesn't look like an email.*
+- Field too short: *A bit more.*
+- Field too long: *Less, please.*
+
+### Loading state on submit button
+
+*Sending...*
+
+### Tone notes
+
+- Error messages don't apologize. They name what happened and offer the next move.
+- Success messages don't celebrate. They confirm and tell you what comes next.
+- Validation messages are short. *Required* is enough.
+
+**Email reconciliation:** `hello@jonchalant.com` is the canonical contact email everywhere on the site. Earlier draft used `jon@jonchalant.com` in form errors — corrected to match Contact page.
+
+---
+
+## Universal CTA labels (style guide for consistency)
+
+### Primary CTAs in order of conversion weight
+
+- *Discover Your Ikigai* — top of funnel, default primary CTA
+- *Take the Presence Audit* — diagnostic alternative
+- *Start the Course* — Four Circles entry
+- *See the Foundation* — mid-funnel, paid offer awareness
+- *Get Started — $197* — direct purchase intent
+- *Book a Discovery Call* — high-touch / 1:1
+- *Book a Free Call* — same as above, less-warm framing
+
+### Secondary CTAs
+
+- *Read the essay* — blog/about reads
+- *Read Jon's story* — about page
+- *Send me Tuesdays* — newsletter
+- *Send me the guide* — Foundation Starter Guide
+- *Follow The Lab* — blog series subscription
+- *Explore Coaching Programs* — cross-link from Lessons
+
+### Microcopy under CTAs (consistent usage)
+
+- *Free.* — when something is
+- *No account needed.* — standard accountless offer (use this phrasing, not "No account required")
+- *No email required.* — audit-specific (no signup needed to see result)
+- *Free. No email required.* — combined for highest-trust offers
+
+---
+
+## 404 page
+
+**Headline:** *That page doesn't exist.*
+
+**Body:** Either the link's broken, or you typed something I haven't built yet. Either way — here are the places you probably wanted.
+
+**Three links:**
+- Home → `/`
+- About → `/about`
+- The Archives → `/blog`
+
+**Microcopy:** *If you got here from a link on this site, let me know — hello@jonchalant.com.*
+
+---
+
+## Sign-in / sign-up (auth pages)
+
+### Sign-in
+
+**Headline:** *Welcome back.*
+
+**Subhead:** *Pick up where you left off.*
+
+**Form CTAs:**
+- Primary: *Sign in*
+- Magic link option: *Email me a sign-in link*
+- Forgot password: *Forgot password?*
+
+### Sign-up
+
+**Headline:** *Make a free account.*
+
+**Subhead:** *Saves your audit results, lesson progress, and starter guide. No marketing emails — you control what you get.*
+
+**Form CTA:** *Create account*
 
 ---
 
@@ -813,10 +1335,62 @@ These get resolved in workstream 2 (schema redesign).
 
 | Workstream | Status |
 |---|---|
-| 1. Canonical copy doc | 🟡 In progress — Home, About, Ikigai, Foundation locked. Programs / Lessons / Blog / Contact / Audit / Globals still drafted/stubbed |
-| 2. Schema redesign | ⚪ Not started |
-| 3. Content population + code reconciliation | ⚪ Not started |
+| 1. Canonical copy doc | ✅ **COMPLETE** — all 10 content surfaces locked |
+| 2. Schema redesign | ⚪ Ready to start |
+| 3. Content population + code reconciliation | ⚪ Blocked on workstream 2 |
 
-Next session: pick up workstream 1 with Programs (currently partially refreshed from phase 4) and continue: Programs → Lessons → Blog → Contact → Audit → Globals.
+---
 
-The four highest-stakes pages on the site — front door (Home), narrative anchor (About), funnel entry (Ikigai), and primary offer (Foundation) — are now fully drafted in voice. The remaining pages are lower-stakes and should move faster, since the voice is set and the schema implications are increasingly clear.
+## Workstream 1 — final summary
+
+All content surfaces are now drafted in voice and locked:
+
+| Page | Sections | Status |
+|---|---|---|
+| Home | 10 | ✅ Locked |
+| About | 6 | ✅ Locked |
+| Ikigai | 6 | ✅ Locked |
+| Foundation | 9 | ✅ Locked |
+| Programs | 6 | ✅ Locked |
+| Lessons | 4 | ✅ Locked |
+| Blog index | 8 | ✅ Locked |
+| Contact | 5 | ✅ Locked |
+| Audit | 4 | ✅ Locked |
+| Globals | nav + footer + microcopy + 404 + auth | ✅ Locked |
+
+**Voice rules:** Two-register system (Direct/Honest + Warm/Present) with the bullshit clause for sparingly-used callouts. Banned words list locked. Italic-anchor convention via `{{double-braces}}`.
+
+**Brand markers established and reused across pages:**
+- *"Find the work you were meant for"* — home hero, footer brand line
+- *"Dance can't be faked"* — Foundation §3, Programs hero, Foundation FAQ
+- *"How to find your centre. How to read a room."* — About §4, echoed in Foundation §4 module 2
+- *"Eight weeks. One week at a time."* — Foundation curriculum framing (originally home §3)
+- *"Some of them will probably be wrong"* — Home §7, Blog hero (the warmth-admission move)
+- *"I don't do pressure"* — Contact §4 (the Jon principle line)
+
+**Schema decisions surfaced during workstream 1** (resolved in workstream 2):
+
+1. Foundation Starter Guide is one document referenced from Home §10, Ikigai §5, Foundation §9 — not three duplicated copies
+2. Tuesday newsletter capture is one document referenced from Home §8, Blog §6, possibly Audit
+3. Audit CTA is one document referenced from Home §9, Blog §7, Foundation §8
+4. Pillar definitions (Grounding/Energy/Flow/Command) are one document referenced from Home §4 and Foundation curriculum mentions
+5. Four Circles definitions (Passion/Mission/Vocation/Profession) are one document referenced from Home §3 and Ikigai §2
+6. Course descriptions (Four Circles, The Foundation) are one source — Lessons cards, Foundation page hero, Programs page card 1 all derive from the same fields
+7. Audit quiz logic stays in `lib/auditData.ts` (not migrated to Sanity)
+8. Audit result band copy moves *to* Sanity (it's marketing copy, not quiz logic)
+9. Pillar filter labels rename happens at display level, not slug level — slugs stay stable
+10. The italic-anchor convention `{{word}}` needs a description on every headline field in Studio
+
+---
+
+## Next session: workstream 2 — schema redesign
+
+Workstream 2 designs Sanity schemas to hold the canonical copy above. Key decisions to make first:
+
+1. **Schema rename strategy** — rename existing fields (clean, breaks runtime data shape, requires coordinated deploy) vs. add new fields and dual-write (safer, more moving parts, slower migration)
+2. **Singleton document type pattern** — establish a clear convention for page singletons (Home, About, Ikigai, Foundation, Programs, Lessons, Blog index, Contact, Audit) vs. listed types (blog posts, courses, case studies, testimonials)
+3. **Reusable section pattern** — establish a "section" object type (eyebrow, headline, subhead, body, primaryCta, secondaryCta) used as a building block across schemas, so every hero-shaped section uses the same field set
+4. **Reference pattern for shared content** — how Foundation Starter Guide / newsletter capture / pillar definitions get referenced from multiple page documents
+5. **Studio UI organization** — fieldsets, validation rules, field descriptions (especially around the `{{double-braces}}` italic-anchor convention)
+
+Once workstream 2 is done, workstream 3 populates Sanity with the locked copy from workstream 1 and reconciles any hardcoded component defaults.

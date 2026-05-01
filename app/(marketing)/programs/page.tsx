@@ -1,71 +1,52 @@
-import { PageHero } from "@/components/sections";
-import { PageTransition, SectionWrapper, SectionContent } from "@/components/layout";
-import { ScrollFade } from "@/components/animations";
-import { Button } from '@/components/ui/Button';
-import { ProgramTrackCard } from "@/components/utilities/cards";
-import { getProgramsPageContent, getCaseStudies, getCurriculumWeeks } from "@/lib/sanity";
-import { CurriculumBento } from "@/components/sections/programs/CurriculumBento";
-import type { CurriculumWeek, CaseStudy } from "@/lib/types";
-import type { ProgramsPageContent } from "@/lib/types";
-import { CaseStudyCard } from "@/components/utilities/cards";
-import Script from 'next/script';
-import { CourseSchema } from "@/lib/schema";
-import FAQ from "@/components/shared/faq/FAQ";
-import type { FAQItem } from "@/components/shared/faq/FAQ";
-
-import type { Metadata } from 'next';
+import type { Metadata } from 'next'
+import Script from 'next/script'
+import { PageHero } from '@/components/sections'
+import { PageTransition, SectionWrapper, SectionContent } from '@/components/layout'
+import { ScrollFade } from '@/components/animations'
+import { Button } from '@/components/ui/Button'
+import FAQ from '@/components/shared/faq/FAQ'
+import { CurriculumBento } from '@/components/sections/programs/CurriculumBento'
+import { CaseStudyCard } from '@/components/utilities/cards'
+import { StarterGuideForm } from '@/components/forms/StarterGuideForm'
+import { getPagePrograms, getCaseStudies, getCurriculumWeeks, getSiteConfig } from '@/lib/sanity'
+import { CourseSchema } from '@/lib/schema'
+import type { CurriculumWeek, CaseStudy } from '@/lib/types'
+import type { FAQItem } from '@/components/shared/faq/FAQ'
 
 export const metadata: Metadata = {
-  title: "Coaching Programs | Jonchalant",
-  description: "Three ways to build executive presence with Jon. Self-paced course, guided program, or 1-on-1 coaching — all rooted in physical presence and body-aware leadership.",
-  alternates: {
-    canonical: 'https://jonchalant.com/programs',
-  },
+  title: 'Coaching Programs | Jonchalant',
+  description: 'Three ways to build presence with Jon. Self-paced course, guided program, or 1-on-1 coaching — all rooted in physical presence and body-aware leadership.',
+  alternates: { canonical: 'https://jonchalant.com/programs' },
   openGraph: {
-    title: "Coaching Programs | Jonchalant",
-    description: "Three ways to build executive presence. Find the format that fits.",
-    type: "website",
-    url: "https://jonchalant.com/programs",
-    siteName: "Jonchalant",
-    locale: "en_US",
+    title: 'Coaching Programs | Jonchalant',
+    description: 'Three ways to build executive presence. Find the format that fits.',
+    type: 'website',
+    url: 'https://jonchalant.com/programs',
+    siteName: 'Jonchalant',
+    locale: 'en_US',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Coaching Programs | Jonchalant",
-    description: "Three ways to build executive presence. Find the format that fits.",
-    creator: "@jonchalant",
+    card: 'summary_large_image',
+    title: 'Coaching Programs | Jonchalant',
+    description: 'Three ways to build executive presence. Find the format that fits.',
+    creator: '@jonchalant',
   },
-};
-
-const PROGRAMS_FAQS: FAQItem[] = [
-  {
-    question: 'How is this different from a typical leadership course?',
-    answer: 'Most leadership training focuses on strategy, communication frameworks, or mindset. This coaching starts with the physical — how you hold yourself, how you move through a room, what your body communicates before you speak. Executive presence is mostly non-verbal. We work where the signal actually lives.',
-  },
-  {
-    question: 'Is this coaching for me if I\'m not an executive yet?',
-    answer: 'Yes. The clients who benefit most are high-performers who are ready to move into senior roles, recently promoted managers navigating a visibility shift, and professionals who consistently get overlooked despite strong output. You don\'t need a title for this work to matter.',
-  },
-  {
-    question: 'What results should I expect, and by when?',
-    answer: 'Most clients notice a shift in how rooms respond to them within 4–6 weeks — more attention held, less second-guessing, more decisive energy. Measurable outcomes (promotions, performance reviews, speaking invitations) typically follow 8–12 weeks in. The speed depends on how actively you apply the frameworks between sessions.',
-  },
-  {
-    question: 'Can I do this remotely?',
-    answer: 'All programs run remotely via video call. The movement-based work adapts well to remote delivery — in some ways it\'s more effective, because you\'re working in your actual environment rather than a coaching studio.',
-  },
-  {
-    question: 'What if I need to pause or reschedule?',
-    answer: 'Life happens. Sessions can be rescheduled with 24 hours\' notice. For extended pauses (travel, family, work crunch), we\'ll agree on a pause structure that protects your momentum without losing your spot.',
-  },
-]
+}
 
 export default async function Programs() {
-  const [page, caseStudies, curriculumWeeks] = await Promise.all([
-    getProgramsPageContent() as Promise<ProgramsPageContent | null>,
-    getCaseStudies(true).catch(() => []),
+  const [page, caseStudies, curriculumWeeks, siteConfig] = await Promise.all([
+    getPagePrograms().catch(() => null),
+    getCaseStudies(true).catch(() => [] as CaseStudy[]),
     getCurriculumWeeks().catch(() => [] as CurriculumWeek[]),
-  ]);
+    getSiteConfig().catch(() => null),
+  ])
+
+  const starterGuideSuccess = siteConfig?.successStates?.find((s) => s.key === 'starterGuide')?.message
+
+  const faqItems: FAQItem[] = (page?.faqItems ?? []).map((item) => ({
+    question: item.question,
+    answer: item.answer,
+  }))
 
   return (
     <>
@@ -74,163 +55,201 @@ export default async function Programs() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(CourseSchema({
-            name: page?.heroHeadline ?? 'Jonchalant Coaching Programs',
-            description: page?.heroSubheading ?? 'Executive presence coaching for introverts — self-paced course, guided program, and 1-on-1 coaching rooted in body-aware leadership.',
+            name: page?.hero?.headline ?? 'Jonchalant Coaching Programs',
+            description: page?.hero?.subhead ?? 'Coaching programs rooted in body-aware leadership.',
           })),
         }}
       />
-    <PageTransition animation="fade">
-      {/* HERO */}
-      <SectionWrapper variant="primary">
-        <SectionContent>
-          <PageHero
-            eyebrow={page?.heroEyebrow ?? ''}
-            headline={page?.heroHeadline ?? ''}
-            subheading={page?.heroSubheading ?? ''}
-            rightColumn={
-              (page?.whoForHeading || page?.whoForBody?.length) ? (
-                <div className="programs-hero-aside">
-                  {page.whoForHeading && (
-                    <h2 className="programs-hero-aside-heading">{page.whoForHeading}</h2>
+      <PageTransition animation="fade">
+
+        {/* ── Hero ─────────────────────────────────────────────────────────── */}
+        <SectionWrapper variant="primary">
+          <SectionContent>
+            <PageHero
+              eyebrow={page?.hero?.eyebrow ?? ''}
+              headline={page?.hero?.headline ?? ''}
+              subheading={page?.hero?.subhead ?? ''}
+              rightColumn={
+                page?.heroWhoForColumn ? (
+                  <div className="programs-hero-aside">
+                    {page.heroWhoForColumn.header && (
+                      <h2 className="programs-hero-aside-heading">{page.heroWhoForColumn.header}</h2>
+                    )}
+                    {page.heroWhoForColumn.bullets?.length > 0 && (
+                      <ul className="programs-hero-aside-list">
+                        {page.heroWhoForColumn.bullets.map((item, i) => (
+                          <li key={i} className="programs-hero-aside-list-item">{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : undefined
+              }
+            />
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* ── Case Studies ─────────────────────────────────────────────────── */}
+        {caseStudies.length > 0 && (
+          <SectionWrapper variant="secondary">
+            <SectionContent>
+              <section className="programs-case-studies">
+                <div className="programs-case-studies-header">
+                  {page?.caseStudiesHeader?.eyebrow && (
+                    <p className="programs-offers-eyebrow">{page.caseStudiesHeader.eyebrow}</p>
                   )}
-                  {page.whoForBody && page.whoForBody.length > 0 && (
-                    <ul className="programs-hero-aside-list">
-                      {page.whoForBody.map((item, i) => (
-                        <li key={i} className="programs-hero-aside-list-item">{item}</li>
-                      ))}
-                    </ul>
+                  {page?.caseStudiesHeader?.headline && (
+                    <h2 className="programs-case-studies-title">{page.caseStudiesHeader.headline}</h2>
+                  )}
+                  {page?.caseStudiesHeader?.subhead && (
+                    <p className="programs-case-studies-body">{page.caseStudiesHeader.subhead}</p>
                   )}
                 </div>
-              ) : undefined
-            }
-          />
-        </SectionContent>
-      </SectionWrapper>
+                <div className="programs-case-studies-grid">
+                  {caseStudies.map((cs: CaseStudy) => (
+                    <CaseStudyCard
+                      key={cs._id}
+                      title={cs.title}
+                      clientName={cs.clientName}
+                      industry={cs.industry}
+                      challenge={cs.challenge}
+                      solution={cs.solution}
+                      results={cs.results}
+                      image={cs.image}
+                      slug={cs.slug}
+                    />
+                  ))}
+                </div>
+              </section>
+            </SectionContent>
+          </SectionWrapper>
+        )}
 
-      {/* CASE STUDIES */}
-      {caseStudies.length > 0 && (
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <section className="programs-case-studies">
-              <div className="programs-case-studies-header">
-                <p className="programs-offers-eyebrow">Before &amp; After</p>
-                <h2 className="programs-case-studies-title">Real shifts. Actual situations.</h2>
-                <p className="programs-case-studies-body">
-                  The names and some details have been changed. The challenges and outcomes are accurate.
-                </p>
-              </div>
-              <div className="programs-case-studies-grid">
-                {caseStudies.map((cs: CaseStudy) => (
-                  <CaseStudyCard
-                    key={cs._id}
-                    title={cs.title}
-                    clientName={cs.clientName}
-                    industry={cs.industry}
-                    challenge={cs.challenge}
-                    solution={cs.solution}
-                    results={cs.results}
-                    image={cs.image}
-                    slug={cs.slug}
-                  />
-                ))}
-              </div>
-            </section>
-          </SectionContent>
-        </SectionWrapper>
-      )}
-
-      {/* CURRICULUM BENTO */}
-      {curriculumWeeks.length > 0 && (
-        <SectionWrapper variant="tertiary">
-          <SectionContent>
-            <ScrollFade>
-              <CurriculumBento
-                headline="8 weeks. One transformation."
-                weeks={curriculumWeeks}
-              />
-            </ScrollFade>
-          </SectionContent>
-        </SectionWrapper>
-      )}
-
-      {/* OFFER CARDS */}
-      <SectionWrapper variant="secondary">
-        <SectionContent>
-          {(page?.offersEyebrow || page?.offersHeading || page?.offersSubtext) && (
-            <ScrollFade>
-              <div className="programs-offers-header">
-                {page.offersEyebrow && (
-                  <p className="programs-offers-eyebrow">{page.offersEyebrow}</p>
-                )}
-                {page.offersHeading && (
-                  <h2 className="programs-offers-heading">{page.offersHeading}</h2>
-                )}
-                {page.offersSubtext && (
-                  <p className="programs-offers-subtext">{page.offersSubtext}</p>
-                )}
-              </div>
-            </ScrollFade>
-          )}
-          <div className="programs-tracks-grid">
-            {page?.offerCards?.map((card, idx) => (
-              <ScrollFade key={idx} delay={idx * 80}>
-                <ProgramTrackCard
-                  title={card.title}
-                  eyebrow={card.eyebrow}
-                  price={card.price}
-                  description={card.description}
-                  includes={card.includes ?? []}
-                  ctaText={card.ctaText}
-                  ctaHref={card.ctaHref}
-                  isFeatured={card.isFeatured ?? false}
+        {/* ── Curriculum Bento ─────────────────────────────────────────────── */}
+        {curriculumWeeks.length > 0 && (
+          <SectionWrapper variant="tertiary">
+            <SectionContent>
+              <ScrollFade>
+                <CurriculumBento
+                  headline="8 weeks. One transformation."
+                  weeks={curriculumWeeks}
                 />
               </ScrollFade>
-            ))}
-          </div>
-        </SectionContent>
-      </SectionWrapper>
+            </SectionContent>
+          </SectionWrapper>
+        )}
 
-      {/* FAQ */}
-      <SectionWrapper variant="primary">
-        <SectionContent>
-          <section className="programs-faq">
-            <div className="programs-faq-header">
-              <p className="programs-faq-eyebrow">Questions</p>
-              <h2 className="programs-faq-title">Common questions</h2>
-            </div>
-            <FAQ items={PROGRAMS_FAQS} />
-          </section>
-        </SectionContent>
-      </SectionWrapper>
+        {/* ── Program Cards ────────────────────────────────────────────────── */}
+        {page?.programCards?.length ? (
+          <SectionWrapper variant="secondary">
+            <SectionContent>
+              {page.programCardsHeader && (
+                <ScrollFade>
+                  <div className="programs-offers-header">
+                    {page.programCardsHeader.eyebrow && (
+                      <p className="programs-offers-eyebrow">{page.programCardsHeader.eyebrow}</p>
+                    )}
+                    {page.programCardsHeader.headline && (
+                      <h2 className="programs-offers-heading">{page.programCardsHeader.headline}</h2>
+                    )}
+                    {page.programCardsHeader.subhead && (
+                      <p className="programs-offers-subtext">{page.programCardsHeader.subhead}</p>
+                    )}
+                  </div>
+                </ScrollFade>
+              )}
+              <div className="programs-tracks-grid">
+                {page.programCards.map((card, idx) => (
+                  <ScrollFade key={idx} delay={idx * 80}>
+                    <article className={`program-track-card${card.badge ? ' program-track-card--featured' : ''}`}>
+                      <div className="program-track-card-header">
+                        {card.badge && <span className="program-track-card-badge">{card.badge}</span>}
+                        {!card.badge && card.eyebrow && (
+                          <p className="program-track-card-eyebrow">{card.eyebrow}</p>
+                        )}
+                      </div>
+                      <div className="program-track-card-body">
+                        {card.badge && card.eyebrow && (
+                          <p className="program-track-card-eyebrow">{card.eyebrow}</p>
+                        )}
+                        <h3 className="program-track-card-title">{card.title}</h3>
+                        <p className="program-track-card-price">{card.priceLine}</p>
+                        <p className="program-track-card-description">{card.description}</p>
+                        <ul className="program-track-card-includes">
+                          {card.inclusions.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="program-track-card-cta">
+                        {card.primaryCta.href.startsWith('http') ? (
+                          <Button as="a" href={card.primaryCta.href} target="_blank" rel="noopener noreferrer">
+                            {card.primaryCta.label}
+                          </Button>
+                        ) : (
+                          <Button as="link" href={card.primaryCta.href}>
+                            {card.primaryCta.label}
+                          </Button>
+                        )}
+                      </div>
+                    </article>
+                  </ScrollFade>
+                ))}
+              </div>
+            </SectionContent>
+          </SectionWrapper>
+        ) : null}
 
-      {/* CTA */}
-      {(page?.ctaHeading || page?.ctaButtonText) && (
-        <SectionWrapper variant="tertiary">
-          <SectionContent>
-            <ScrollFade>
-              <div className="cta-section">
-                <div className="cta-section-left">
-                  {page.ctaHeading && (
-                    <h2 className="cta-section-title">{page.ctaHeading}</h2>
-                  )}
-                  {page.ctaButtonText && page.ctaButtonHref && (
-                    <Button as="a" href={page.ctaButtonHref}>
-                      {page.ctaButtonText}
-                    </Button>
-                  )}
-                  {page.ctaMicrocopy && (
-                    <p className="programs-cta-microcopy">{page.ctaMicrocopy}</p>
+        {/* ── FAQ ──────────────────────────────────────────────────────────── */}
+        {faqItems.length > 0 && (
+          <SectionWrapper variant="primary">
+            <SectionContent>
+              <section className="programs-faq">
+                <div className="programs-faq-header">
+                  <p className="programs-faq-eyebrow">Questions</p>
+                  <h2 className="programs-faq-title">{page?.faqHeader ?? 'Common questions'}</h2>
+                </div>
+                <FAQ items={faqItems} />
+              </section>
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* ── Closing CTA ──────────────────────────────────────────────────── */}
+        {page?.closingCta && (
+          <SectionWrapper variant="tertiary">
+            <SectionContent>
+              <ScrollFade>
+                <div className="cta-section">
+                  <div className="cta-section-left">
+                    <h2 className="cta-section-title">{page.closingCta.headline}</h2>
+                    {page.closingCta.primaryCta && (
+                      <Button as="a" href={page.closingCta.primaryCta.href}>
+                        {page.closingCta.primaryCta.label}
+                      </Button>
+                    )}
+                    {page.closingCta.microcopy && (
+                      <p className="programs-cta-microcopy">{page.closingCta.microcopy}</p>
+                    )}
+                  </div>
+                  {page.closingCta.body && (
+                    <div className="cta-section-description">{page.closingCta.body}</div>
                   )}
                 </div>
-                {page.ctaDescription && (
-                  <div className="cta-section-description">{page.ctaDescription}</div>
-                )}
-              </div>
-            </ScrollFade>
-          </SectionContent>
+              </ScrollFade>
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* ── Foundation Starter Guide ─────────────────────────────────────── */}
+        <SectionWrapper variant="secondary" className="section-wrapper--flush">
+          <StarterGuideForm
+            guide={page?.starterGuide ?? null}
+            successMessage={starterGuideSuccess}
+          />
         </SectionWrapper>
-      )}
-    </PageTransition>
+
+      </PageTransition>
     </>
-  );
+  )
 }
