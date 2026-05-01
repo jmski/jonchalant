@@ -137,7 +137,60 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* 4. AUDIT CTA */}
+        {/* 4. MEET JON */}
+        <SectionWrapper variant="secondary">
+          <SectionContent>
+            <ScrollFade>
+              <MeetJon
+                header={pageHome?.meetJonHeader}
+                image={pageHome?.meetJonImage}
+                bodyParagraphs={pageHome?.meetJonBodyParagraphs}
+                primaryLink={pageHome?.meetJonPrimaryLink}
+                secondaryLink={pageHome?.meetJonSecondaryLink}
+              />
+            </ScrollFade>
+          </SectionContent>
+        </SectionWrapper>
+
+        {/* 5. TESTIMONIALS */}
+        {testimonials.length > 0 && (
+          <SectionWrapper variant="dark">
+            <SectionContent>
+              <ScrollFade>
+                <Testimonials
+                  testimonials={testimonials}
+                  eyebrow={pageHome?.testimonialsHeader?.eyebrow}
+                  heading={pageHome?.testimonialsHeader?.headline}
+                />
+              </ScrollFade>
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 6. BLOG PREVIEW */}
+        {recentPosts.length > 0 && (
+          <SectionWrapper variant="primary" className="blog-preview-wrapper">
+            <SectionContent>
+              <ScrollFade>
+                <BlogCards
+                  posts={recentPosts}
+                  heading={pageHome?.blogPreviewHeader?.headline}
+                  description={pageHome?.blogPreviewHeader?.subhead}
+                />
+              </ScrollFade>
+            </SectionContent>
+          </SectionWrapper>
+        )}
+
+        {/* 7. NEWSLETTER */}
+        <SectionWrapper variant="dark" className="section-wrapper--flush">
+          <EmailCapture
+            newsletter={pageHome?.newsletter}
+            successMessage={newsletterSuccess}
+          />
+        </SectionWrapper>
+
+        {/* 8. AUDIT CTA */}
         {pageHome?.auditCta && (
           <SectionWrapper variant="secondary">
             <SectionContent>
@@ -154,52 +207,7 @@ export default async function Home() {
           </SectionWrapper>
         )}
 
-        {/* 5. MEET JON */}
-        <SectionWrapper variant="secondary">
-          <SectionContent>
-            <ScrollFade>
-              <MeetJon
-                header={pageHome?.meetJonHeader}
-                image={pageHome?.meetJonImage}
-                bodyParagraphs={pageHome?.meetJonBodyParagraphs}
-                primaryLink={pageHome?.meetJonPrimaryLink}
-                secondaryLink={pageHome?.meetJonSecondaryLink}
-              />
-            </ScrollFade>
-          </SectionContent>
-        </SectionWrapper>
-
-        {/* 6. TESTIMONIALS */}
-        {testimonials.length > 0 && (
-          <SectionWrapper variant="dark">
-            <SectionContent>
-              <ScrollFade>
-                <Testimonials
-                  testimonials={testimonials}
-                  eyebrow={pageHome?.testimonialsHeader?.eyebrow}
-                  heading={pageHome?.testimonialsHeader?.headline}
-                />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
-
-        {/* 7. BLOG PREVIEW */}
-        {recentPosts.length > 0 && (
-          <SectionWrapper variant="primary" className="blog-preview-wrapper">
-            <SectionContent>
-              <ScrollFade>
-                <BlogCards
-                  posts={recentPosts}
-                  heading={pageHome?.blogPreviewHeader?.headline}
-                  description={pageHome?.blogPreviewHeader?.subhead}
-                />
-              </ScrollFade>
-            </SectionContent>
-          </SectionWrapper>
-        )}
-
-        {/* 8. STARTER GUIDE */}
+        {/* 9. STARTER GUIDE */}
         {pageHome?.starterGuide && (
           <SectionWrapper variant="secondary" className="section-wrapper--flush">
             <StarterGuideForm
@@ -208,14 +216,6 @@ export default async function Home() {
             />
           </SectionWrapper>
         )}
-
-        {/* 9. NEWSLETTER */}
-        <SectionWrapper variant="dark" className="section-wrapper--flush">
-          <EmailCapture
-            newsletter={pageHome?.newsletter}
-            successMessage={newsletterSuccess}
-          />
-        </SectionWrapper>
       </PageTransition>
     </div>
   );
